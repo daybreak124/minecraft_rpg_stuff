@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    "coldsmod:tempting_whispers_rare",
+    "coldsmod:tempting_whispers_epic",
+    "coldsmod:tempting_whispers_legendary",
+    "coldsmod:tempting_whispers_mythic",
+    "coldsmod:shrieks_of_unseeing_rare",
+    "coldsmod:shrieks_of_unseeing_epic",
+    "coldsmod:shrieks_of_unseeing_legendary",
+    "coldsmod:shrieks_of_unseeing_mythic",
+    "coldsmod:dragons_roar_rare",
+    "coldsmod:dragons_roar_epic",
+    "coldsmod:dragons_roar_legendary",
+    "coldsmod:dragons_roar_mythic",
+    "coldsmod:tear_of_the_forgotten_rare",
+    "coldsmod:tear_of_the_forgotten_epic",
+    "coldsmod:tear_of_the_forgotten_legendary",
+    "coldsmod:tear_of_the_forgotten_mythic",
+    "coldsmod:endless_waves_rare",
+    "coldsmod:endless_waves_epic",
+    "coldsmod:endless_waves_legendary",
+    "coldsmod:endless_waves_mythic",
+    "coldsmod:suns_gaze_rare",
+    "coldsmod:suns_gaze_epic",
+    "coldsmod:suns_gaze_legendary",
+    "coldsmod:suns_gaze_mythic"
+  ]
+}

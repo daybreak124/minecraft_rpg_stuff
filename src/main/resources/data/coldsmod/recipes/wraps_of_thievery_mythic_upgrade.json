@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": { "item": "coldsmod:wraps_of_thievery_legendary" },
+  "addition": { "item": "coldsmod:focused_gem_cluster" },
+  "template": { "item": "coldsmod:accessory_upgrade_smithing_template" },
+  "result": { "item": "coldsmod:wraps_of_thievery_mythic" }
+}

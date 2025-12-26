@@ -1,0 +1,15 @@
+{
+  "name": "Dexterity",
+  "category": "coldsmod:attributes",
+  "icon": "minecraft:bow",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "§1Per Point Bonuses<br>§0+0.12 Move Speed<br>§0+0.15 Projectile Damage<br>§0+0.125 Draw Speed<br>§0+0.125 Attack Speed<br>§0+0.2 Crit Chance<br>§0+0.175 Crit Chance"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "§1Milestones<br>§830: §0+6 Crit Chance<br>§840: §0+6 Crit Damage<br>§850: §0+8 Draw Speed<br>§860: §0+8 Move Speed<br>§870: §0+8% Attack Speed<br>§870: §0+15% Projectile Damage<br>§880: §0+9 Projectile Damage<br>§880: §0+9 Draw Speed<br>§880: §0+9 Crit Chance<br>§880: §0+9 Crit Damage"
+    }
+  ]
+}

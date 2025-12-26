@@ -1,0 +1,12 @@
+{
+  "type": "patchouli:shapeless_book_recipe",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "coldsmod:gem_cluster"
+    }
+  ],
+  "book": "coldsmod:colds_rpg_stuff"
+}

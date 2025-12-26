@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": { "item": "coldsmod:gluttony_signet_legendary" },
+  "addition": { "item": "coldsmod:perfect_gem_cluster" },
+  "template": { "item": "coldsmod:accessory_upgrade_smithing_template" },
+  "result": { "item": "coldsmod:gluttony_signet_mythic" }
+}

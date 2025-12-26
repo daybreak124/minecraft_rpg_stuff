@@ -1,0 +1,16 @@
+{
+  "name": "Stat System",
+  "category": "coldsmod:rarity_and_stats",
+  "icon": "coldsmod:orb_icon",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "There are 3 different stats. There are flat values, like '+3 Damage'. These are multiplied by things like '+10% Damage, which would make your Damage stat 3.3. And after that, the final increase is calculated with the formula below:<br><br>500*stat/(500+stat)<br><br>125 Damage ends up being a 100% damage increase, 109.76 Crit Chance ends up being 100%."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Damage Reduction formula is adjusted to:<br>armor/(120+armor-150toughness/(toughness+50))<br><br>Protection damage reduction is halved on top of this.<br><br>Jump Boost utility accessory reduces fall damage accordingly (100% Jump Boost = halved fall damage).<br><br>There are 3 different stats."
+    }
+  ]
+}
+

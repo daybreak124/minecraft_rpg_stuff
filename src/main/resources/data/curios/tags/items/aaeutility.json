@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    "coldsmod:cloudtreader_boots",
+    "coldsmod:reinforced_diamond_plating",
+    "coldsmod:monis_lucky_charm",
+    "coldsmod:enderman_fingers",
+    "coldsmod:antique_pocket_watch",
+    "coldsmod:cloudspire_gem",
+    "coldsmod:damage_item",
+    "coldsmod:crit_item",
+    "coldsmod:defense_item_1",
+    "coldsmod:defense_item_2",
+    "coldsmod:defense_item_3",
+    "coldsmod:projectile_item",
+    "coldsmod:str",
+    "coldsmod:dex",
+    "coldsmod:fort",
+    "coldsmod:con",
+    "coldsmod:perc",
+    "coldsmod:wis",
+    "coldsmod:crit_item_2",
+    "coldsmod:damage_item_2",
+    "coldsmod:projectile_item_2",
+    "coldsmod:defense_item_4",
+    "coldsmod:health_item",
+    "coldsmod:health_item_2",
+    "coldsmod:as_item",
+    "coldsmod:as_item_2",
+    "coldsmod:draw_speed",
+    "coldsmod:all"
+  ]
+}

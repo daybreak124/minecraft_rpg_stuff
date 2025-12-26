@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "coldsmod:epic_scrap_essence" },
+    { "item": "coldsmod:epic_scrap_essence" },
+    { "item": "coldsmod:epic_scrap_essence" }
+  ],
+  "result": { "item": "coldsmod:legendary_scrap_essence" }
+}

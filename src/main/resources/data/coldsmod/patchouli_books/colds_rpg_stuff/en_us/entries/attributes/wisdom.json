@@ -1,0 +1,15 @@
+{
+  "name": "Wisdom",
+  "category": "coldsmod:attributes",
+  "icon": "minecraft:book",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "§1Per Point Bonuses<br>§0+0.25 Mining Speed<br>§0+0.25 XP Gain<br>§0+0.05 Block Reach"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "§1Milestones<br>§810: §0+10 Mining Speed<br>§820: §0+10 XP Gain<br>§830: §0+0.5 Block Reach<br>§840: §0+25 Mining Speed & +25 XP Gain"
+    }
+  ]
+}

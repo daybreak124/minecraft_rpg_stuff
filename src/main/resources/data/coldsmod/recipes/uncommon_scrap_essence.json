@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "coldsmod:common_scrap_essence" },
+    { "item": "coldsmod:common_scrap_essence" },
+    { "item": "coldsmod:common_scrap_essence" },
+    { "item": "coldsmod:common_scrap_essence" },
+    { "item": "coldsmod:common_scrap_essence" },
+    { "item": "coldsmod:common_scrap_essence" },
+    { "item": "coldsmod:common_scrap_essence" },
+    { "item": "coldsmod:common_scrap_essence" }
+  ],
+  "result": { "item": "coldsmod:uncommon_scrap_essence" }
+}

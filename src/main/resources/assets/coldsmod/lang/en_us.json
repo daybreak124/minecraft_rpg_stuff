@@ -1,0 +1,94 @@
+{
+  "item.coldsmod.cobalt": "Cobalt",
+  "curios.identifier.aaaheads": "Mind",
+  "curios.identifier.aabnecklaces": "Necklace",
+  "curios.identifier.aacbracelets": "Bracelet",
+  "curios.identifier.aadrings": "Ring",
+  "curios.identifier.aaeutility": "Utility",
+  "curios.identifier.aafblessinghelm": "Head Blessing",
+  "curios.identifier.aagblessingchest": "Chest Blessing",
+  "curios.identifier.aahblessinglegs": "Legs Blessing",
+  "curios.identifier.aaiblessingfeet": "Feet Blessing",
+  "curios.identifier.aajblessingsword": "Sword Blessing",
+  "curios.identifier.aakblessingbow": "Bow Blessing",
+  "curios.identifier.aalblessingcrossbow": "Crossbow Blessing",
+  "curios.identifier.aamblessingshield": "Shield Blessing",
+  "curios.identifier.aanblessingtool": "Utility Blessing",
+  "curios.identifier.aaoblessingstatus": "General Blessing",
+  "creativetab.upgrade_item_tab": "Cold's RPG Stuff: Upgrades",
+  "creativetab.accessory_tab": "Cold's RPG Stuff: Accessories",
+  "creativetab.blessing_tab": "Cold's RPG Stuff: Blessings",
+  "creativetab.test_item_tab": "Cold's RPG Stuff: Test Items",
+
+  "effect.coldsmod.hawkeye_stack": "Hawkeye",
+
+  "effect.coldsmod.frenzy_stack": "Frenzy",
+
+  "effect.coldsmod.dfa_up": "Death From Above: Ready",
+  "effect.coldsmod.dfa_cd": "Death From Above: Cooldown",
+
+  "effect.coldsmod.bastion_active": "Bastion: Active",
+  "effect.coldsmod.bastion_up": "Bastion: Ready",
+  "effect.coldsmod.bastion_cd": "Bastion: Cooldown",
+
+  "effect.coldsmod.berserk_stack": "Rage",
+  "effect.coldsmod.berserk_timer": "Rage Timer",
+  "effect.coldsmod.berserk_up": "Berserk",
+
+  "effect.coldsmod.bronzewoods_curse": "Cursed",
+  "effect.coldsmod.bronzewood_up": "Bronzewood: Ready",
+  "effect.coldsmod.bronzewood_cooldown": "Bronzewood: Cooldown",
+
+  "effect.coldsmod.clairvoyance_up": "Clairvoyance: Ready",
+  "effect.coldsmod.clairvoyance_cd": "Clairvoyance: Cooldown",
+
+  "effect.coldsmod.daring_shout_up": "Daring Shout: Ready",
+  "effect.coldsmod.daring_shout_cd": "Daring Shout: Cooldown",
+
+  "effect.coldsmod.exploit_weakness_debuff": "Exploited",
+  "effect.coldsmod.exploit_weakness_up": "Exploit: Ready",
+  "effect.coldsmod.exploit_weakness_cd": "Exploit: Cooldown",
+
+  "effect.coldsmod.intimidated": "Intimidated",
+  "effect.coldsmod.intimidating_presence_up": "Intimidating Presence: Ready",
+  "effect.coldsmod.intimidating_presence_cd": "Intimidating Presence: Cooldown",
+
+  "effect.coldsmod.reckoning_active": "Reckoning: Active",
+  "effect.coldsmod.reckoning_up": "Reckoning: Ready",
+  "effect.coldsmod.reckoning_cd": "Reckoning: Cooldown",
+
+  "effect.coldsmod.retaliate_active": "Retaliate: Active",
+  "effect.coldsmod.retaliate_up": "Retaliate: Ready",
+  "effect.coldsmod.retaliate_cd": "Retaliate: Cooldown",
+
+  "effect.coldsmod.adrenaline_injection_cd": "Adrenaline Injection: Cooldown",
+  "effect.coldsmod.adrenaline_injection_up": "Adrenaline Injection: Active",
+
+  "effect.coldsmod.deceptive_heart_ready": "Deceptive Heart: Ready",
+  "effect.coldsmod.deceptive_heart_cd": "Deceptive Heart: Cooldown",
+
+  "effect.coldsmod.directed_hatred_up": "Directed Hatred: Ready",
+  "effect.coldsmod.directed_hatred_cd": "Directed Hatred: Cooldown",
+  "effect.coldsmod.blinded_by_hatred": "Blinded by Hatred",
+
+  "effect.coldsmod.soul_severance_ready": "Soul Severance: Ready",
+  "effect.coldsmod.soul_severance_cd": "Soul Severance: Cooldown",
+  "effect.coldsmod.soul_severance_up": "Soul Severance: Active",
+
+  "effect.coldsmod.itf_cd": "Into the Fray: Cooldown",
+  "effect.coldsmod.itf_stack": "Into the Fray",
+
+  "effect.coldsmod.spirit_forest_cd": "Spirit Forest: Cooldown",
+  "effect.coldsmod.spirit_forest_ready": "Spirit Forest: Ready",
+
+  "effect.coldsmod.quantum_leap_ready": "Quantum Leap: Ready",
+  "effect.coldsmod.quantum_leap_cd": "Quantum Leap: Cooldown",
+  "effect.coldsmod.quantum_leap_up": "Quantum Leap: Active",
+  "effect.coldsmod.enhanced_quantum_leap": "Enhanced Quantum Leap",
+
+  "effect.coldsmod.explosive_tendencies_stack": "Explosive Tendencies",
+  "effect.coldsmod.explosive_tendencies_timer": "Explosive Tendencies Timer",
+
+  "effect.coldsmod.solara": "Solara"
+
+}

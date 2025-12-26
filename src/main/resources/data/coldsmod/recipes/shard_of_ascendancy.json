@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "coldsmod:shard_of_empowerment" },
+    { "item": "coldsmod:shard_of_amplification" }
+  ],
+  "result": { "item": "coldsmod:shard_of_ascendancy" }
+}

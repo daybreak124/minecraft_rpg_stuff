@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": { "item": "coldsmod:endless_waves_legendary" },
+  "addition": { "item": "coldsmod:perfect_gem_cluster" },
+  "template": { "item": "coldsmod:accessory_upgrade_smithing_template" },
+  "result": { "item": "coldsmod:endless_waves_mythic" }
+}

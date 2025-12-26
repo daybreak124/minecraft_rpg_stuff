@@ -1,0 +1,56 @@
+{
+  "daring_shout": {
+    "subtitle": "sounds.coldsmod.daring_shout",
+    "sounds": [
+      "coldsmod:effects/daring_shout"
+    ]
+  },
+  "guardian_angel": {
+    "subtitle": "sounds.coldsmod.guardian_angel",
+    "sounds": [
+      "coldsmod:effects/guardian_angel"
+    ]
+  },
+  "clairvoyance": {
+    "subtitle": "sounds.coldsmod.clairvoyance",
+    "sounds": [
+      "coldsmod:effects/clairvoyance"
+    ]
+  },
+  "exploit_weakness": {
+    "subtitle": "sounds.coldsmod.exploit_weakness",
+    "sounds": [
+      "coldsmod:effects/exploit_weakness"
+    ]
+  },
+  "reckoning_active": {
+    "subtitle": "sounds.coldsmod.reckoning_active",
+    "sounds": [
+      "coldsmod:effects/reckoning_active"
+    ]
+  },
+  "reckoning_boom": {
+    "subtitle": "sounds.coldsmod.reckoning_boom",
+    "sounds": [
+      "coldsmod:effects/reckoning_boom"
+    ]
+  },
+  "retaliate_activate": {
+    "subtitle": "sounds.coldsmod.retaliate_activate",
+    "sounds": [
+      "coldsmod:effects/retaliate_activate"
+    ]
+  },
+  "intimidating_presence": {
+    "subtitle": "sounds.coldsmod.intimidating_presence",
+    "sounds": [
+      "coldsmod:effects/intimidating_presence"
+    ]
+  },
+  "retaliate": {
+    "subtitle": "sounds.coldsmod.retaliate",
+    "sounds": [
+      "coldsmod:effects/retaliate"
+    ]
+  }
+}

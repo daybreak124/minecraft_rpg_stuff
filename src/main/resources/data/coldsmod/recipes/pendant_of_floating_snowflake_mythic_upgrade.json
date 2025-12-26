@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": { "item": "coldsmod:pendant_of_floating_snowflake_legendary" },
+  "addition": { "item": "coldsmod:perfect_gem_cluster" },
+  "template": { "item": "coldsmod:accessory_upgrade_smithing_template" },
+  "result": { "item": "coldsmod:pendant_of_floating_snowflake_mythic" }
+}

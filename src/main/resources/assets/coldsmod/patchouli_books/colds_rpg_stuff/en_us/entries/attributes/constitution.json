@@ -1,0 +1,15 @@
+{
+  "name": "Constitution",
+  "category": "coldsmod:attributes",
+  "icon": "minecraft:iron_chestplate",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "§1Per Point Bonuses<br>§0+0.2 Armor<br>§0+0.3 Damage<br>§0+0.15 Armor Toughness<br>§0+0.12 Debuff Resistance"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "§1Milestones<br>§830: §0+5 Armor<br>§840: §0+5 Damage<br>§850: §0+12% Debuff Resistance<br>§850: §0+6 Armor Toughness<br>§860: §0+12.5% Toughness<br>§870: §0+12.5% Armor<br>§880: §0+10 Damage"
+    }
+  ]
+}

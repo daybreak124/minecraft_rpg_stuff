@@ -1,0 +1,15 @@
+{
+  "name": "Fortitude",
+  "category": "coldsmod:attributes",
+  "icon": "minecraft:shield",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "§1Per Point Bonuses<br>§0+0.2 Armor<br>§0+0.15 Armor Toughness<br>§0+0.2 Knockback Resist"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "§1Milestones<br>§830: §0+4 Armor<br>§840: §0+8% Armor<br>§850: §0+10 Knockback Resistance<br>§860: §0+10% Toughness<br>§870: §0+15 Debuff Resistance<br>§870: §0+10 Knockback Resistance<br>§880: §0+9 Armor Toughness<br>§880: §0+9 Armor"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    "coldsmod:collar_of_envy_rare",
+    "coldsmod:collar_of_envy_epic",
+    "coldsmod:collar_of_envy_legendary",
+    "coldsmod:collar_of_envy_mythic",
+    "coldsmod:key_of_the_unknown_rare",
+    "coldsmod:key_of_the_unknown_epic",
+    "coldsmod:key_of_the_unknown_legendary",
+    "coldsmod:key_of_the_unknown_mythic",
+    "coldsmod:dragon_teeth_necklace_rare",
+    "coldsmod:dragon_teeth_necklace_epic",
+    "coldsmod:dragon_teeth_necklace_legendary",
+    "coldsmod:dragon_teeth_necklace_mythic",
+    "coldsmod:hanging_tiger_tooth_rare",
+    "coldsmod:hanging_tiger_tooth_epic",
+    "coldsmod:hanging_tiger_tooth_legendary",
+    "coldsmod:hanging_tiger_tooth_mythic",
+    "coldsmod:bottled_tsunami_sea_rare",
+    "coldsmod:bottled_tsunami_sea_epic",
+    "coldsmod:bottled_tsunami_sea_legendary",
+    "coldsmod:bottled_tsunami_sea_mythic",
+    "coldsmod:pendant_of_floating_snowflake_rare",
+    "coldsmod:pendant_of_floating_snowflake_epic",
+    "coldsmod:pendant_of_floating_snowflake_legendary",
+    "coldsmod:pendant_of_floating_snowflake_mythic",
+    "coldsmod:stolen_legacies_choker_rare",
+    "coldsmod:stolen_legacies_choker_epic",
+    "coldsmod:stolen_legacies_choker_legendary",
+    "coldsmod:stolen_legacies_choker_mythic"
+  ]
+}

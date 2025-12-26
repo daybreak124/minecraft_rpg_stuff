@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "coldsmod:pearl_of_recharging" },
+    { "item": "coldsmod:pearl_of_recharging" }
+  ],
+  "result": { "item": "coldsmod:pearl_of_renewing" }
+}

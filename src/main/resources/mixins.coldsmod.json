@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.cold.coldsmod.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "mixins.coldsmod.refmap.json",
+  "mixins": [
+    "CombatRulesMixin",
+    "RangedAttributeMixin",
+    "ProtectionMixin",
+    "InfinityMendingMixin",
+    "CrossbowDrawSpeedMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

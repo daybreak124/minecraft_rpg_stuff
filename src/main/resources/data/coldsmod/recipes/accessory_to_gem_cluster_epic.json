@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "tag": "coldsmod:gem_sources_epic" }
+  ],
+  "result": {
+    "item": "coldsmod:gem_cluster",
+    "count": 2
+  }
+}

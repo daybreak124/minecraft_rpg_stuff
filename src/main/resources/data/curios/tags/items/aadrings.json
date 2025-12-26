@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    "coldsmod:coil_of_wrath_rare",
+    "coldsmod:coil_of_wrath_epic",
+    "coldsmod:coil_of_wrath_legendary",
+    "coldsmod:coil_of_wrath_mythic",
+    "coldsmod:gluttony_signet_rare",
+    "coldsmod:gluttony_signet_epic",
+    "coldsmod:gluttony_signet_legendary",
+    "coldsmod:gluttony_signet_mythic",
+    "coldsmod:band_of_the_unknown_rare",
+    "coldsmod:band_of_the_unknown_epic",
+    "coldsmod:band_of_the_unknown_legendary",
+    "coldsmod:band_of_the_unknown_mythic",
+    "coldsmod:dragon_eye_embedded_ring_rare",
+    "coldsmod:dragon_eye_embedded_ring_epic",
+    "coldsmod:dragon_eye_embedded_ring_legendary",
+    "coldsmod:dragon_eye_embedded_ring_mythic",
+    "coldsmod:corrupted_ring_of_the_lost_rare",
+    "coldsmod:corrupted_ring_of_the_lost_epic",
+    "coldsmod:corrupted_ring_of_the_lost_legendary",
+    "coldsmod:corrupted_ring_of_the_lost_mythic",
+    "coldsmod:coldys_cold_coil_of_cold_rare",
+    "coldsmod:coldys_cold_coil_of_cold_epic",
+    "coldsmod:coldys_cold_coil_of_cold_legendary",
+    "coldsmod:coldys_cold_coil_of_cold_mythic",
+    "coldsmod:sunstone_forged_ring_rare",
+    "coldsmod:sunstone_forged_ring_epic",
+    "coldsmod:sunstone_forged_ring_legendary",
+    "coldsmod:sunstone_forged_ring_mythic"
+  ]
+}

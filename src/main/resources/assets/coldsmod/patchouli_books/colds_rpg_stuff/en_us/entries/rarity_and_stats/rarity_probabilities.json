@@ -1,0 +1,16 @@
+{
+  "name": "Item Rarities",
+  "category": "coldsmod:rarity_and_stats",
+  "icon": "minecraft:iron_chestplate",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "§1Armors and weapons gain rarities, stats and attributes. Some items may not gain a rarity immediately, in this case, interact with any interactable block (anvil, crafting table etc) or open your Curios tab.<br><br> Legendary and Mythic items can only be obtained through upgrading.<br> Armor and weapon rarities are upgraded in anvils with Scrap Essence items and when upgraded, the stats and the attributes are rolled."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Accessories are upgraded in Smithing Tables with Accessory Upgrade Templates and Gem Clusters obtained from dissolving accessories.<br><br>Stats can be rolled with Pearls, and attributes can be rolled with Shards. Accessories do not have randomized stats.<br><br>Common: 40%<br>Uncommon: 30%<br>Rare: 20%<br>Epic: 10%<br><br> Items gain extra amounts of stats and higher stat rolls and smaller negative stat rolls depending on their rolls."
+    }
+
+  ]
+}

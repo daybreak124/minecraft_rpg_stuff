@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DSD",
+    "DGD",
+    "DDD"
+  ],
+  "key": {
+    "S": {
+      "item": "coldsmod:accessory_upgrade_smithing_template"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "G": {
+      "item": "coldsmod:gem_cluster"
+    }
+  },
+  "result": {
+    "item": "coldsmod:accessory_upgrade_smithing_template",
+    "count": 2
+  }
+}
