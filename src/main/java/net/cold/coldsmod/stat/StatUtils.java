@@ -11,7 +11,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -159,16 +158,6 @@ public class StatUtils {
         stack.setTag(tag);
     }
 
-    public static Map<String, Integer> readAttributesFromNBT(ItemStack stack) {
-        Map<String, Integer> map = new HashMap<>();
-        if (stack == null || stack.isEmpty() || stack.getTag() == null || !stack.getTag().contains("custom_attributes")) return map;
-        CompoundTag attrTag = stack.getTag().getCompound("custom_attributes");
-        for (String key : AttributeGeneration.ATTRIBUTES) {
-            map.put(key, attrTag.getInt(key));
-        }
-        return map;
-    }
-
     public static boolean hasAttributes(ItemStack stack) {
         return stack != null && !stack.isEmpty() && stack.getTag() != null && stack.getTag().contains("custom_attributes");
     }
@@ -186,18 +175,6 @@ public class StatUtils {
         stats.setIntelligence(rolled.getOrDefault("INT", stats.getIntelligence()));
         stats.setWis(rolled.getOrDefault("WIS", stats.getWis()));
         writeStatsToNBT(stack, stats);
-    }
-
-    public static Map<String, Integer> getPlayerAttributes(Player player) {
-        Map<String, Integer> attrs = new HashMap<>();
-        attrs.put("STR", player.getPersistentData().getInt("STR_points"));
-        attrs.put("DEX", player.getPersistentData().getInt("DEX_points"));
-        attrs.put("FORT", player.getPersistentData().getInt("FORT_points"));
-        attrs.put("CON", player.getPersistentData().getInt("CON_points"));
-        attrs.put("PERC", player.getPersistentData().getInt("PERC_points"));
-        attrs.put("INT", player.getPersistentData().getInt("INT_points"));
-        attrs.put("WIS", player.getPersistentData().getInt("WIS_points"));
-        return attrs;
     }
 
     @SubscribeEvent
@@ -382,46 +359,6 @@ public class StatUtils {
                             name, value > 0 ? "+" : "", formattedValue, percent ? "%" : ""))
                     .withStyle(ChatFormatting.DARK_GREEN));
         }
-    }
-
-    public static CustomStats getTotalStats(Player player) {
-        AttributeApplier applier = new AttributeApplier();
-        applier.recalcStats(player);
-
-        CustomStats stats = new CustomStats();
-
-        stats.setDamage(player.getPersistentData().getDouble("generalDamageIncrease"));
-        stats.setCritChance(player.getPersistentData().getDouble("generalCritChanceIncrease"));
-        stats.setCritDamage(player.getPersistentData().getDouble("generalCritDamageIncrease"));
-
-        stats.setMeleeDamage(player.getPersistentData().getDouble("meleeDamageIncrease"));
-        stats.setMeleeCritChance(player.getPersistentData().getDouble("meleeCritChanceIncrease"));
-        stats.setMeleeCritDamage(player.getPersistentData().getDouble("meleeCritDamageIncrease"));
-
-        stats.setProjectileDamage(player.getPersistentData().getDouble("projectileDamageIncrease"));
-        stats.setProjectileCritChance(player.getPersistentData().getDouble("projectileCritChanceIncrease"));
-        stats.setProjectileCritDamage(player.getPersistentData().getDouble("projectileCritDamageIncrease"));
-
-        stats.setAttackSpeed(player.getPersistentData().getDouble("attackSpeedIncrease"));
-        stats.setDrawSpeed(player.getPersistentData().getDouble("drawSpeedIncrease"));
-
-        stats.setStr(player.getPersistentData().getInt("totalStr"));
-        stats.setDex(player.getPersistentData().getInt("totalDex"));
-        stats.setFort(player.getPersistentData().getInt("totalFort"));
-        stats.setPerc(player.getPersistentData().getInt("totalPerc"));
-        stats.setCon(player.getPersistentData().getInt("totalCon"));
-        stats.setIntelligence(player.getPersistentData().getInt("totalInt"));
-        stats.setWis(player.getPersistentData().getInt("totalWis"));
-
-        stats.setMoveSpeed(player.getPersistentData().getDouble("totalMoveSpeed"));
-        stats.setKnockbackResist(player.getPersistentData().getDouble("totalKnockbackResist"));
-        stats.setSwimSpeed(player.getPersistentData().getDouble("totalSwimSpeed"));
-        stats.setDebuffResist(player.getPersistentData().getDouble("totalDebuffResist"));
-
-        stats.setXpGain(player.getPersistentData().getDouble("totalXpGain"));
-        stats.setJumpBoost(player.getPersistentData().getDouble("totalJumpBoost"));
-        stats.setMiningSpeed(player.getPersistentData().getDouble("totalMiningSpeed"));
-        return stats;
     }
 
     public static String formatValue(double value) {
