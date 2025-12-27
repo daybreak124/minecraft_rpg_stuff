@@ -432,7 +432,7 @@ public class StatUtils {
         int decimals = 0;
         double temp = value;
 
-        while (decimals < 2 && Math.floor(temp) != temp) {
+        while (decimals < 3 && Math.floor(temp) != temp) {
             temp *= 10;
             decimals++;
         }
@@ -440,6 +440,7 @@ public class StatUtils {
         switch (decimals) {
             case 0: return String.format("%.0f", value);
             case 1: return String.format("%.1f", value);
+            case 3: return String.format("%.3f", value);
             default: return String.format("%.2f", value);
         }
     }
