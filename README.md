@@ -5,6 +5,9 @@ and see how I could enhance them and introduce new systems while keeping the gam
 I picked Minecraft is because I was already familiar with Java at the time combined with the reasons above, essentially just
 learning about games without having to learn a new language.
 
+A lot of the code can be re-written for better readability, some parts are very bootleg, but it works and is not too
+performance heavy. I am overall happy with the outcome.
+
 How to run the mod
 Compile the project into a jar file using Gradle, add the mod to /mods folder in Minecraft.
 Requires Curios (5.14.1 and above) mod to be present in the mods folder
