@@ -90,7 +90,7 @@ public class BracerAccessories {
                     .withDisplayName("Fingers of Lust")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setDex(7).setPerc(-6).setAttackSpeed(4.5).setMeleeDamage(12).setSpeedMultiplier(10).setInsight(3).build())
+                    .withStats(new CustomStats.Builder().setDex(7).setPerc(-6).setAttackSpeed(4.5).setMeleeDamage(12).setSpeedMultiplier(7.5).setInsight(3).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Hell)
                     .build()
     );
@@ -101,7 +101,7 @@ public class BracerAccessories {
                     .withDisplayName("Fingers of Lust")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setDex(8).setPerc(-6).setAttackSpeed(6).setMeleeDamage(18).setSpeedMultiplier(20).setInsight(4).build())
+                    .withStats(new CustomStats.Builder().setDex(8).setPerc(-6).setAttackSpeed(6).setMeleeDamage(18).setSpeedMultiplier(15).setInsight(4).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Hell)
                     .build()
     );
@@ -206,7 +206,7 @@ public class BracerAccessories {
                     .withDisplayName("Dragon Claw Gloves")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setStr(7).setCritChance(18).setToughnessMultiplier(10).setInsight(3).build())
+                    .withStats(new CustomStats.Builder().setStr(7).setCritChance(18).setToughnessMultiplier(7.5).setInsight(3).build())
                     .withLocation(AccessoryItem.AccessoryLocation.End)
                     .build()
     );
@@ -217,7 +217,7 @@ public class BracerAccessories {
                     .withDisplayName("Dragon Claw Gloves")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setStr(9).setCritChance(24).setToughnessMultiplier(20).setInsight(4).build())
+                    .withStats(new CustomStats.Builder().setStr(9).setCritChance(24).setToughnessMultiplier(15).setInsight(4).build())
                     .withLocation(AccessoryItem.AccessoryLocation.End)
                     .build()
     );
@@ -241,7 +241,7 @@ public class BracerAccessories {
                     .withDisplayName("Warden Skin Forged Bracers")
                     .withRarity(ItemRarity.EPIC)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setFort(4).setArmor(2).setArmorToughness(2.5).setInsight(2).setPerc(2).setDebuffResist(8).build())
+                    .withStats(new CustomStats.Builder().setFort(4).setArmor(2).setArmorToughness(1.5).setInsight(2).setPerc(2).setDebuffResist(8).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Otherworlds)
                     .build()
     );
@@ -252,7 +252,7 @@ public class BracerAccessories {
                     .withDisplayName("Warden Skin Forged Bracers")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setFort(5).setArmor(4).setMaxHealth(2).setArmorToughness(3.5).setToughnessMultiplier(6).setInsight(3).setPerc(5).setDebuffResist(12).build())
+                    .withStats(new CustomStats.Builder().setFort(5).setArmor(3).setMaxHealth(1).setArmorToughness(2.5).setToughnessMultiplier(4).setInsight(3).setPerc(5).setDebuffResist(12).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Otherworlds)
                     .build()
     );
@@ -263,7 +263,7 @@ public class BracerAccessories {
                     .withDisplayName("Warden Skin Forged Bracers")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setFort(7).setArmor(6).setMaxHealth(4).setArmorToughness(4.5).setToughnessMultiplier(12).setInsight(4).setPerc(5).setDebuffResist(15).build())
+                    .withStats(new CustomStats.Builder().setFort(9).setArmor(4).setMaxHealth(2.5).setArmorToughness(3.5).setToughnessMultiplier(8).setInsight(4).setPerc(8).setDebuffResist(15).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Otherworlds)
                     .build()
     );
@@ -276,7 +276,7 @@ public class BracerAccessories {
                     .withDisplayName("Reinforced Steel Bracers")
                     .withRarity(ItemRarity.RARE)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setMeleeDamage(4).setArmor(2).setMaxHealth(2).setInsight(1).build())
+                    .withStats(new CustomStats.Builder().setMeleeDamage(4).setArmor(1.25).setMaxHealth(0.5).setInsight(1).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Undergrounds)
                     .build()
     );
@@ -287,7 +287,7 @@ public class BracerAccessories {
                     .withDisplayName("Reinforced Steel Bracers")
                     .withRarity(ItemRarity.EPIC)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setMeleeDamage(6.25).setArmor(3).setMaxHealth(3).setInsight(2).build())
+                    .withStats(new CustomStats.Builder().setMeleeDamage(7.5).setArmor(2).setMaxHealth(1.25).setInsight(2).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Undergrounds)
                     .build()
     );
@@ -298,7 +298,7 @@ public class BracerAccessories {
                     .withDisplayName("Reinforced Steel Bracers")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setMeleeDamage(10).setArmor(4).setMaxHealth(3.4).setCritChanceMultiplier(8).setInsight(3).build())
+                    .withStats(new CustomStats.Builder().setMeleeDamage(12).setArmor(3.5).setMaxHealth(2).setCritChanceMultiplier(6).setInsight(3).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Undergrounds)
                     .build()
     );
@@ -309,7 +309,7 @@ public class BracerAccessories {
                     .withDisplayName("Reinforced Steel Bracers")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setMeleeDamage(13.5).setArmor(5).setMaxHealth(4).setCritChanceMultiplier(15).setInsight(4).build())
+                    .withStats(new CustomStats.Builder().setMeleeDamage(16).setArmor(3.5).setMaxHealth(3).setCritChanceMultiplier(12).setInsight(4).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Undergrounds)
                     .build()
     );
@@ -344,7 +344,7 @@ public class BracerAccessories {
                     .withDisplayName("Serpent Skin Wrap")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setDrawSpeed(10).setProjectileDamage(20).setDrawSpeedMultiplier(5).setProjectileDamageMultiplier(7.5).setInsight(3).setDebuffResist(8).build())
+                    .withStats(new CustomStats.Builder().setDrawSpeed(10).setProjectileDamage(20).setDrawSpeedMultiplier(4).setProjectileDamageMultiplier(6.75).setInsight(3).setDebuffResist(8).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Jungle)
                     .build()
     );
@@ -355,7 +355,7 @@ public class BracerAccessories {
                     .withDisplayName("Serpent Skin Wrap")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setDrawSpeed(12.5).setProjectileDamage(25).setProjectileDamageMultiplier(7.5).setDrawSpeedMultiplier(12.5).setInsight(4).setDebuffResist(10).build())
+                    .withStats(new CustomStats.Builder().setDrawSpeed(12.5).setProjectileDamage(25).setProjectileDamageMultiplier(6.75).setDrawSpeedMultiplier(11.75).setInsight(4).setDebuffResist(10).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Jungle)
                     .build()
     );
@@ -366,7 +366,7 @@ public class BracerAccessories {
                     .withDisplayName("Wraps of Thievery")
                     .withRarity(ItemRarity.RARE)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setSpeedMultiplier(-8).setCritDamage(15).setMaxHealth(2).setInsight(1).build())
+                    .withStats(new CustomStats.Builder().setSpeedMultiplier(-6).setCritDamage(15).setMaxHealth(2).setInsight(1).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Pillage)
                     .build()
     );
@@ -377,7 +377,7 @@ public class BracerAccessories {
                     .withDisplayName("Wraps of Thievery")
                     .withRarity(ItemRarity.EPIC)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setSpeedMultiplier(-12).setCritDamage(20).setMaxHealth(3).setInsight(2).build())
+                    .withStats(new CustomStats.Builder().setSpeedMultiplier(-10).setCritDamage(20).setMaxHealth(3).setInsight(2).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Pillage)
                     .build()
     );
@@ -388,7 +388,7 @@ public class BracerAccessories {
                     .withDisplayName("Wraps of Thievery")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setSpeedMultiplier(-15).setCritDamage(27.5).setMaxHealth(6).setMeleeDamageMultiplier(5).setInsight(3).build())
+                    .withStats(new CustomStats.Builder().setSpeedMultiplier(-15).setCritDamage(27.5).setMaxHealth(4).setMeleeDamageMultiplier(8).setInsight(3).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Pillage)
                     .build()
     );
@@ -399,7 +399,7 @@ public class BracerAccessories {
                     .withDisplayName("Wraps of Thievery")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Bracer)
-                    .withStats(new CustomStats.Builder().setSpeedMultiplier(-20).setCritDamage(30).setMeleeDamageMultiplier(10).setMaxHealth(8).setInsight(4).build())
+                    .withStats(new CustomStats.Builder().setSpeedMultiplier(-20).setCritDamage(30).setMeleeDamageMultiplier(16).setMaxHealth(5).setInsight(4).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Pillage)
                     .build()
     );

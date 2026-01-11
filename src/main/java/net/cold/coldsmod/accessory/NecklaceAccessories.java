@@ -134,7 +134,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Dragon Teeth Necklace")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(3).setStr(6).setCritChance(12).setMaxHealth(2.5).setPerc(6).setMeleeCritDamageMultiplier(6).setProjectileCritDamageMultiplier(3).build())
+                    .withStats(new CustomStats.Builder().setInsight(3).setStr(6).setCritChance(12).setMaxHealth(2.5).setPerc(6).setMeleeCritDamageMultiplier(4).setProjectileCritDamageMultiplier(2).build())
                     .withLocation(AccessoryItem.AccessoryLocation.End)
                     .build()
     );
@@ -145,7 +145,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Dragon Teeth Necklace")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(4).setStr(8).setCritChance(15).setMaxHealth(3.5).setPerc(8).setMeleeCritDamageMultiplier(10).setProjectileCritDamageMultiplier(5).build())
+                    .withStats(new CustomStats.Builder().setInsight(4).setStr(8).setCritChance(15).setMaxHealth(3.5).setPerc(8).setMeleeCritDamageMultiplier(6.5).setProjectileCritDamageMultiplier(4).build())
                     .withLocation(AccessoryItem.AccessoryLocation.End)
                     .build()
     );
@@ -204,7 +204,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Bottled Tsunami Sea")
                     .withRarity(ItemRarity.RARE)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(1).setFort(5).setSwimSpeed(10).setMaxHealth(3).build())
+                    .withStats(new CustomStats.Builder().setInsight(1).setFort(5).setSwimSpeed(10).setMaxHealth(2.5).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Ocean)
                     .build()
     );
@@ -215,7 +215,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Bottled Tsunami Sea")
                     .withRarity(ItemRarity.EPIC)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(2).setFort(8).setSwimSpeed(20).setMaxHealth(5).build())
+                    .withStats(new CustomStats.Builder().setInsight(2).setFort(8).setSwimSpeed(20).setMaxHealth(4).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Ocean)
                     .build()
     );
@@ -226,7 +226,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Bottled Tsunami Sea")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(3).setFort(11).setSwimSpeed(30).setMaxHealth(6).build())
+                    .withStats(new CustomStats.Builder().setInsight(3).setFort(11).setSwimSpeed(30).setMaxHealth(5.5).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Ocean)
                     .build()
     );

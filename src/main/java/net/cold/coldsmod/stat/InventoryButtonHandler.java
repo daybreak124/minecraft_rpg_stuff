@@ -112,9 +112,9 @@ public class InventoryButtonHandler {
 
         // --- Armor and survivability ---
         double armorReduction = mc.player.getAttribute(Attributes.ARMOR).getValue() /
-                (120.0 + mc.player.getAttribute(Attributes.ARMOR).getValue() - 120.0 *
+                (80.0 + mc.player.getAttribute(Attributes.ARMOR).getValue() - 80.0 *
                         (mc.player.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue() /
-                                (mc.player.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue() + 80.0)));
+                                (mc.player.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue() + 50.0)));
 
         int totalProtLevel = 0;
         for (ItemStack armorPiece : mc.player.getArmorSlots()) {

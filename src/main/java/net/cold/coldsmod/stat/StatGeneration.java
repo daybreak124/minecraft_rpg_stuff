@@ -10,8 +10,8 @@ public class StatGeneration {
     static {
         // --- Armor ---
         Map<String, double[]> helmet = new HashMap<>();
-        helmet.put("armor", new double[]{-1.25, 2.75, 1.0});
-        helmet.put("armorToughness", new double[]{-0.85, 1.25, 1.0});
+        helmet.put("armor", new double[]{-1.25*0.667, 2.75*0.667, 1.0});
+        helmet.put("armorToughness", new double[]{-0.85*0.667, 1.25*0.667, 1.0});
         helmet.put("maxHealth", new double[]{-1.0, 1.7, 1.0});
         helmet.put("damage", new double[]{-1.5, 3, 1.0});
         helmet.put("critChance", new double[]{-2.0, 5.25, 1.0});
@@ -26,9 +26,9 @@ public class StatGeneration {
         STAT_CONFIG.put("helmet", helmet);
 
         Map<String, double[]> chestplate = new HashMap<>();
-        chestplate.put("armor", new double[]{-1.5, 3.75, 1.0});
-        chestplate.put("armorToughness", new double[]{-0.85, 1.7, 1.0});
-        chestplate.put("maxHealth", new double[]{-1.3, 2.1, 0.8});
+        chestplate.put("armor", new double[]{-1.5*0.667, 3.75*0.667, 1.0});
+        chestplate.put("armorToughness", new double[]{-0.85*0.667, 1.7*0.667, 1.0});
+        chestplate.put("maxHealth", new double[]{-0.75, 0.9, 0.8});
         chestplate.put("damage", new double[]{-3, 5.5, 0.8});
         chestplate.put("critChance", new double[]{-2.25, 4.5, 0.8});
         chestplate.put("critDamage", new double[]{-2.625, 6.0, 0.8});
@@ -41,9 +41,9 @@ public class StatGeneration {
         STAT_CONFIG.put("chestplate", chestplate);
 
         Map<String, double[]> leggings = new HashMap<>();
-        leggings.put("armor", new double[]{-1.7, 3.0, 1.0});
-        leggings.put("armorToughness", new double[]{-0.6, 1.0, 1.0});
-        leggings.put("maxHealth", new double[]{-1.0, 1.7, 0.8});
+        leggings.put("armor", new double[]{-1.7*0.667, 3.0*0.667, 1.0});
+        leggings.put("armorToughness", new double[]{-0.6*0.667, 0.667, 1.0});
+        leggings.put("maxHealth", new double[]{-0.25, 0.6, 0.8});
         leggings.put("damage", new double[]{-2.25, 3.3, 1.0});
         leggings.put("critChance", new double[]{-1.625, 4.75, 1.0});
         leggings.put("critDamage", new double[]{-2.25, 6.25, 1.0});
@@ -54,9 +54,9 @@ public class StatGeneration {
         STAT_CONFIG.put("leggings", leggings);
 
         Map<String, double[]> boots = new HashMap<>();
-        boots.put("armor", new double[]{-1.25, 1.9, 0.8});
-        boots.put("armorToughness", new double[]{-0.5, 0.85, 0.8});
-        boots.put("maxHealth", new double[]{-1.0, 1.55, 0.8});
+        boots.put("armor", new double[]{-1.25*0.667, 1.9*0.667, 0.8});
+        boots.put("armorToughness", new double[]{-0.5*0.667, 0.85*0.667, 0.8});
+        boots.put("maxHealth", new double[]{-0.5, 0.75, 0.8});
         boots.put("damage", new double[]{-1.35, 2.7, 0.7});
         boots.put("critDamage", new double[]{-2.0, 3.75, 0.6});
         boots.put("xpGain", new double[]{0, 7.5, 0.2});
@@ -95,8 +95,8 @@ public class StatGeneration {
         STAT_CONFIG.put("crossbow", crossbow);
 
         Map<String, double[]> shield = new HashMap<>();
-        shield.put("armor", new double[]{0.9, 1.8, 1.0});
-        shield.put("armorToughness", new double[]{1, 2, 1.0});
+        shield.put("armor", new double[]{0.9*0.667, 1.8*0.667, 1.0});
+        shield.put("armorToughness", new double[]{1*0.667, 2*0.667, 1.0});
         shield.put("debuffResist", new double[]{2, 6, 1.0});
         shield.put("knockbackResist", new double[]{3, 6, 1.0});
         shield.put("attackSpeed", new double[]{-12, -6, 0.4});

@@ -11,7 +11,7 @@ public class CombatRulesMixin {
         double armor = pTotalArmor;
         double toughness = pToughnessAttribute;
 
-        double armorReduction = armor / (120 + armor - 120 * (toughness / (toughness + 80.0)));
+        double armorReduction = armor / (80 + armor - 80 * (toughness / (toughness + 50.0)));
         double finalDamageDouble = pDamage * (1.0 - armorReduction);
 
         return (float) finalDamageDouble;
