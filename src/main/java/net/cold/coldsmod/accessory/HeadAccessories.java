@@ -68,7 +68,7 @@ public class HeadAccessories {
                     .withDisplayName("Shrieks of Unseeing")
                     .withRarity(ItemRarity.RARE)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setCon(3).setInsight(1).setArmor(2).setPerc(-3).setProjectileDamage(-15).setDebuffResist(5).build())
+                    .withStats(new CustomStats.Builder().setCon(8).setInsight(1).setArmor(2).setPerc(-3).setProjectileDamage(-15).setDebuffResist(5).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Otherworlds)
                     .build()
     );
@@ -79,7 +79,7 @@ public class HeadAccessories {
                     .withDisplayName("Shrieks of Unseeing")
                     .withRarity(ItemRarity.EPIC)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setCon(5).setInsight(2).setArmor(4).setPerc(-3).setProjectileDamage(-20).setDebuffResist(7.5).build())
+                    .withStats(new CustomStats.Builder().setCon(12).setInsight(2).setArmor(4).setPerc(-3).setProjectileDamage(-20).setDebuffResist(7.5).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Otherworlds)
                     .build()
     );
@@ -90,7 +90,7 @@ public class HeadAccessories {
                     .withDisplayName("Shrieks of Unseeing")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setCon(9).setInsight(3).setArmor(6).setArmorMultiplier(3).setPerc(-3).setProjectileDamage(-25).setDebuffResist(10).build())
+                    .withStats(new CustomStats.Builder().setCon(15).setInsight(3).setArmor(6).setArmorMultiplier(5).setPerc(-3).setProjectileDamage(-25).setDebuffResist(10).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Otherworlds)
                     .build()
     );
@@ -101,7 +101,7 @@ public class HeadAccessories {
                     .withDisplayName("Shrieks of Unseeing")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setCon(13).setInsight(4).setArmor(8).setArmorMultiplier(5).setPerc(-3).setProjectileDamage(-30).setDebuffResist(12.5).build())
+                    .withStats(new CustomStats.Builder().setCon(21).setInsight(4).setArmor(8).setArmorMultiplier(10).setPerc(-3).setProjectileDamage(-30).setDebuffResist(12.5).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Otherworlds)
                     .build()
     );
@@ -160,7 +160,7 @@ public class HeadAccessories {
                     .withDisplayName("Tear of the Forgotten")
                     .withRarity(ItemRarity.RARE)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setInsight(1).setArmorToughness(3).setMaxHealth(1.5).build())
+                    .withStats(new CustomStats.Builder().setInsight(1).setArmorToughness(4.5).setCon(3).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Undergrounds)
                     .build()
     );
@@ -171,7 +171,7 @@ public class HeadAccessories {
                     .withDisplayName("Tear of the Forgotten")
                     .withRarity(ItemRarity.EPIC)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setInsight(2).setArmorToughness(4).setMaxHealth(2.5).build())
+                    .withStats(new CustomStats.Builder().setInsight(2).setArmorToughness(6).setCon(5).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Undergrounds)
                     .build()
     );
@@ -182,7 +182,7 @@ public class HeadAccessories {
                     .withDisplayName("Tear of the Forgotten")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setInsight(3).setArmorToughness(8).setMaxHealth(4).setToughnessMultiplier(3).build())
+                    .withStats(new CustomStats.Builder().setInsight(3).setArmorToughness(8).setPerc(2).setCon(5).setToughnessMultiplier(5).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Undergrounds)
                     .build()
     );
@@ -193,7 +193,7 @@ public class HeadAccessories {
                     .withDisplayName("Tear of the Forgotten")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setInsight(4).setArmorToughness(10).setMaxHealth(6).setToughnessMultiplier(5).setKnockbackResist(15).build())
+                    .withStats(new CustomStats.Builder().setInsight(4).setArmorToughness(10).setPerc(5).setCon(5).setMaxHealth(4).setToughnessMultiplier(7.5).setKnockbackResist(15).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Undergrounds)
                     .build()
     );

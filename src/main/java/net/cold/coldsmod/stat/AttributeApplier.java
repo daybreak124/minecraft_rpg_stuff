@@ -80,6 +80,7 @@ public class AttributeApplier {
 
         checkGearBonus(player);
         recalcStats(player);
+        applyCrossbowTag(player);
     }
 
     @SubscribeEvent
@@ -114,6 +115,7 @@ public class AttributeApplier {
         }
 
         data.remove("death_from_above_eligible");
+        player.getPersistentData().remove("DFA_fall_damage_cancel");
         if (!player.level().isClientSide && player instanceof ServerPlayer serverPlayer) {
             NetworkHandler.sendToClient(new DFASync.DFAFlagPacket(false), serverPlayer);
         }
@@ -945,22 +947,23 @@ public class AttributeApplier {
             projectileChanged = true;
         }
 
-        ItemStack mainHand = player.getMainHandItem();
-        String mainType = ItemRarityUtils.getItemType(mainHand);
-        ItemStack offHand = player.getOffhandItem();
-        String offType = ItemRarityUtils.getItemType(offHand);
+//        ItemStack mainHand = player.getMainHandItem();
+//        String mainType = ItemRarityUtils.getItemType(mainHand);
+//        ItemStack offHand = player.getOffhandItem();
+//        String offType = ItemRarityUtils.getItemType(offHand);
 
-        if (player.hasEffect(ModEffects.ADRENALINE_INJECTION_UP.get())) {
 
-            boolean mainIsCrossbow = "crossbow".equals(mainType);
-            boolean offIsCrossbow = "crossbow".equals(offType);
-            boolean mainIsBow = "bow".equals(mainType);
-
-            if ((mainIsCrossbow || (offIsCrossbow && !mainIsBow))) {
-                draw *= 2;
-                drawChanged = true;
-            }
-        }
+//        if (player.hasEffect(ModEffects.ADRENALINE_INJECTION_UP.get())) {
+//
+//            boolean mainIsCrossbow = "crossbow".equals(mainType);
+//            boolean offIsCrossbow = "crossbow".equals(offType);
+//            boolean mainIsBow = "bow".equals(mainType);
+//
+//            if ((mainIsCrossbow || (offIsCrossbow && !mainIsBow))) {
+//                draw *= 2;
+//                drawChanged = true;
+//            }
+//        }
 
         if (player.hasEffect(ModEffects.INTO_THE_FRAY.get())) {
             int stacks = player.getEffect(ModEffects.INTO_THE_FRAY.get()).getAmplifier() + 1;
@@ -1221,8 +1224,18 @@ public class AttributeApplier {
 
         if ("crossbow".equals(mainType)) {
             mainHand.getOrCreateTag().putDouble("drawSpeedIncrease", player.getPersistentData().getDouble("drawSpeedIncrease"));
+            if (player.hasEffect(ModEffects.ADRENALINE_INJECTION_UP.get())) {
+                mainHand.getOrCreateTag().putBoolean("adrenalineInjection", true);
+            } else {
+                mainHand.getOrCreateTag().remove("adrenalineInjection");
+            }
         } else if ("crossbow".equals(offType) && !"bow".equals(mainType)) {
             offHand.getOrCreateTag().putDouble("drawSpeedIncrease", player.getPersistentData().getDouble("drawSpeedIncrease"));
+            if (player.hasEffect(ModEffects.ADRENALINE_INJECTION_UP.get())) {
+                offHand.getOrCreateTag().putBoolean("adrenalineInjection", true);
+            } else {
+                offHand.getOrCreateTag().remove("adrenalineInjection");
+            }
         }
     }
 
@@ -1435,6 +1448,7 @@ public class AttributeApplier {
             player.removeEffect(ModEffects.FRENZY.get());
             player.addEffect(new MobEffectInstance(ModEffects.FRENZY.get(), 120, frenzyStacks - 1, false, false));
         }
+        System.out.println(finalDamageAmount);
     }
 
     @SubscribeEvent
@@ -1484,6 +1498,7 @@ public class AttributeApplier {
         }
     }
 
+    // rewrite this and oneffectadded to use hashmaps
     @SubscribeEvent
     public static void onEffectExpired(MobEffectEvent.Expired event) {
         if (event.getEntity() instanceof Player player) {
@@ -1562,12 +1577,11 @@ public class AttributeApplier {
                 player.addEffect(new MobEffectInstance(ModEffects.EXPLOIT_WEAKNESS_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
             }
             else if (event.getEffectInstance().getEffect() == ModEffects.ADRENALINE_INJECTION_COOLDOWN.get() && data.getBoolean("adrenaline_applied")) {
-                    player.addEffect(new MobEffectInstance(ModEffects.ADRENALINE_INJECTION_UP.get(), 20*6, 0));
-                new AttributeApplier().applyBlessings(player);
+                    player.addEffect(new MobEffectInstance(ModEffects.ADRENALINE_INJECTION_UP.get(), 20*5, 0));
             }
             else if (event.getEffectInstance().getEffect() == ModEffects.ADRENALINE_INJECTION_UP.get()) {
-                player.addEffect(new MobEffectInstance(ModEffects.ADRENALINE_INJECTION_COOLDOWN.get(), 20*24, 0, false, false));
-                new AttributeApplier().applyBlessings(player);
+                player.addEffect(new MobEffectInstance(ModEffects.ADRENALINE_INJECTION_COOLDOWN.get(), 20*15, 0, false, false));
+                new AttributeApplier().applyCrossbowTag(player);
             }
             else if (event.getEffectInstance().getEffect() == ModEffects.LIFE_TOUCH_COOLDOWN.get() && data.getBoolean("life_touch_applied")) {
                 player.addEffect(new MobEffectInstance(ModEffects.LIFE_TOUCH_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
@@ -1613,7 +1627,9 @@ public class AttributeApplier {
                 player.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get(), 20 * 8, 0, false, false));
             }
         }
-
+        else if (event.getEffectInstance().getEffect() == ModEffects.ADRENALINE_INJECTION_UP.get() && player.getPersistentData().getBoolean("adrenaline_applied") ) {
+            new AttributeApplier().applyCrossbowTag(player);
+        }
         else if (event.getEffectInstance().getEffect() == ModEffects.QUANTUM_LEAP_ACTIVE.get())
             new AttributeApplier().applyBlessings(player);
     }

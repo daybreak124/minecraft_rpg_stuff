@@ -346,7 +346,7 @@ public class StatUtils {
 
             String formattedValue = formatValue(value);
             tooltip.add(Component.literal(String.format("%s: %s%s%%", name, value >= 0 ? "+" : "", formattedValue))
-                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x5FAF6E))));
+                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
         }
 
         Object[][] healingStats = new Object[][]{

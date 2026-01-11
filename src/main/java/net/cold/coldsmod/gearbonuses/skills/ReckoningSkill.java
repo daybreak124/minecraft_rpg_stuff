@@ -8,8 +8,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,6 +31,7 @@ public class ReckoningSkill {
         if (!player.getPersistentData().getBoolean("reckoning_eligible")) return;
 
         if (!player.hasEffect(ModEffects.RECKONING.get())) return;
+        if (event.getSource().is(DamageTypes.FALL)) return;
 
         player.removeEffect(ModEffects.RECKONING.get());
         player.addEffect(new MobEffectInstance(ModEffects.RECKONING_ACTIVE.get(), ACTIVE_DURATION, 0, false, false));
@@ -45,9 +49,11 @@ public class ReckoningSkill {
     }
 
     @SubscribeEvent
-    public static void onReckoningHeal(LivingHurtEvent event) {
+    public static void onReckoningHeal(LivingDamageEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
         if (player.level().isClientSide) return;
+        if (event.getSource().is(ModDamageTypes.RECKONING)) return;
+        if (event.getSource().is(DamageTypes.FALL)) return;
 
 
         if (player.hasEffect(ModEffects.RECKONING_ACTIVE.get())) {
@@ -75,11 +81,11 @@ public class ReckoningSkill {
 
         Holder<DamageType> reckoningType = player.level().registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolder(ModDamageTypes.RECKONING)
-                .orElseThrow();
+                .getHolderOrThrow(ModDamageTypes.RECKONING);
 
-        DamageSource reckoningSource = new DamageSource(reckoningType);
-        player.hurt(reckoningSource, (float) damageBack);
+        DamageSource reckoning = new DamageSource(reckoningType, (Entity) null);
+
+        player.hurt(reckoning, (float) damageBack);
 
 
         player.level().playSound(
@@ -91,6 +97,6 @@ public class ReckoningSkill {
                 1.0F
         );
 
-        player.getPersistentData().putDouble(HEALED_NBT, 0);
+        player.getPersistentData().remove(HEALED_NBT);
     }
 }

@@ -633,7 +633,7 @@ public class ModItems {
                     tooltip.add(Component.literal(" Attacking a target").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" increases your Attack").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" Damage by 1.25 and Melee").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" Potency stat by 7.5% but").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" Potency by 7.5% but").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" increases your damage").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" taken by 8% per stack").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" for 6 seconds").withStyle(ChatFormatting.GRAY));
@@ -1102,10 +1102,9 @@ public class ModItems {
                     tooltip.add(Component.literal("Applies to:").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" Crossbows").withStyle(ChatFormatting.BLUE));
                     tooltip.add(Component.literal("Blessing: Adrenaline Injection").withStyle(ChatFormatting.GOLD));
-                    tooltip.add(Component.literal(" Every 30 seconds, increase").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" your Nock Haste stat by 100%").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" for 6 seconds. Only applies").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" to Crossbows").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" Every 20 seconds, increase").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" your Crossbow draw time is").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" halved for 5 seconds.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );

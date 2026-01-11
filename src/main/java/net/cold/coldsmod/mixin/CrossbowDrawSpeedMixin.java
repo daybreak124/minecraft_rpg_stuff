@@ -22,6 +22,8 @@ public abstract class CrossbowDrawSpeedMixin {
         double multiplier = 1.0 / (1.0 + (drawSpeed / 100.0));
         int modifiedTime = (int) (baseTime * multiplier);
 
+        if (stack.getOrCreateTag().getBoolean("adrenalineInjection")) modifiedTime /= 2;
+
         cir.setReturnValue(modifiedTime);
     }
 }
