@@ -113,8 +113,8 @@ public class InventoryButtonHandler {
         // --- Armor and survivability ---
         double armorReduction = mc.player.getAttribute(Attributes.ARMOR).getValue() /
                 (80.0 + mc.player.getAttribute(Attributes.ARMOR).getValue() - 80.0 *
-                        (mc.player.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue() /
-                                (mc.player.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue() + 50.0)));
+                (mc.player.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue() /
+                (mc.player.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue() + 50.0)));
 
         int totalProtLevel = 0;
         for (ItemStack armorPiece : mc.player.getArmorSlots()) {
@@ -129,6 +129,7 @@ public class InventoryButtonHandler {
 
         double protReduction = totalProtLevel * 0.02;
         double totalReduction = (1.0 - (1.0 - armorReduction) * (1.0 - protReduction) * (1.0 - resistance)) * 100.0;
+        // 1 - ((1 - 100/(100 + value*3)) * 100) for modpacks where you can get a lot of prot
 
         double finalSpeed = 1000 * mc.player.getAttribute(Attributes.MOVEMENT_SPEED).getValue() - 100;
         double finalSwimSpeed = 100 * mc.player.getAttribute(ForgeMod.SWIM_SPEED.get()).getValue() - 100;

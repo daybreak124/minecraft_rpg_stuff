@@ -29,5 +29,8 @@ public class ProtectionMixin {
         }
 
         cir.setReturnValue(value / 2);
+
+        // For modpacks where you can get a lot of protection
+        // cir.setReturnValue((1 - 100/(100 + value*3)) * 100);
     }
 }
