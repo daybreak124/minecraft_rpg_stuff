@@ -76,7 +76,7 @@ public class ItemRarityUpgrade {
                 CompoundTag oldStats = tag.getCompound("custom_stats");
                 CompoundTag newStats = new CompoundTag();
 
-                for (String key : new String[]{"str", "fort", "dex", "con", "perc", "intelligence", "wis"}) {
+                for (String key : new String[]{"str", "fort", "dex", "con", "perc", "intelligence", "insight", "wisdom"}) {
                     if (oldStats.contains(key)) {
                         newStats.putInt(key, oldStats.getInt(key));
                     }
@@ -121,7 +121,8 @@ public class ItemRarityUpgrade {
                         "armorMultiplier", "armorToughnessMultiplier", "healthMultiplier", "damageMultiplier",
                         "meleeDamageMultiplier", "attackSpeedMultiplier", "projectileDamageMultiplier", "drawSpeedMultiplier",
                         "critChanceMultiplier", "critDamageMultiplier", "meleeCritChanceMultiplier", "meleeCritDamageMultiplier",
-                        "projectileCritChanceMultiplier", "projectileCritDamageMultiplier"
+                        "projectileCritChanceMultiplier", "projectileCritDamageMultiplier",
+                        "protection", "restoration", "amplification", "amplificationMultiplier", "protectionMultiplier", "restorationMultiplier"
                 }) {
                     if (oldStats.contains(key)) {
                         newStats.putDouble(key, oldStats.getDouble(key));
@@ -200,8 +201,9 @@ public class ItemRarityUpgrade {
             if (core.contains("dex")) generated.setDex(core.getInt("dex"));
             if (core.contains("con")) generated.setCon(core.getInt("con"));
             if (core.contains("perc")) generated.setPerc(core.getInt("perc"));
+            if (core.contains("wisdom")) generated.setWisdom(core.getInt("wisdom"));
             if (core.contains("intelligence")) generated.setIntelligence(core.getInt("intelligence"));
-            if (core.contains("wis")) generated.setWis(core.getInt("wis"));
+            if (core.contains("insight")) generated.setInsight(core.getInt("insight"));
 
 
             StatUtils.writeStatsToNBT(stack, generated);

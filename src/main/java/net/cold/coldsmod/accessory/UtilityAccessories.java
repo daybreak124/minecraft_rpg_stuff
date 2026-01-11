@@ -20,7 +20,7 @@ public class UtilityAccessories {
                     .withDisplayName("Cloudtreader Boots")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setWis(2).setStepHeight(1).build())
+                    .withStats(new CustomStats.Builder().setInsight(2).setStepHeight(1).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -31,7 +31,7 @@ public class UtilityAccessories {
                     .withDisplayName("Moni's Lucky Charm")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setWis(2).setLuck(3).build())
+                    .withStats(new CustomStats.Builder().setInsight(2).setLuck(3).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -42,7 +42,7 @@ public class UtilityAccessories {
                     .withDisplayName("Enderman's Fingers")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setWis(2).setBlockReach(3).build())
+                    .withStats(new CustomStats.Builder().setInsight(2).setBlockReach(3).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -53,7 +53,7 @@ public class UtilityAccessories {
                     .withDisplayName("Antique Pocket Watch")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setWis(2).setXpGain(30).build())
+                    .withStats(new CustomStats.Builder().setInsight(2).setXpGain(30).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -64,7 +64,7 @@ public class UtilityAccessories {
                     .withDisplayName("Reinforced Diamond Plating")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setWis(2).setMiningSpeed(30).build())
+                    .withStats(new CustomStats.Builder().setInsight(2).setMiningSpeed(30).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -75,7 +75,7 @@ public class UtilityAccessories {
                     .withDisplayName("Cloudspire Gem")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setWis(2).setJumpBoost(100).build())
+                    .withStats(new CustomStats.Builder().setInsight(2).setJumpBoost(100).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -207,7 +207,7 @@ public class UtilityAccessories {
                     .withDisplayName("WIS")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setWis(80).build())
+                    .withStats(new CustomStats.Builder().setInsight(80).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );

@@ -84,7 +84,8 @@ public class ItemModifier {
                     if (core.contains("con")) generated.setCon(core.getInt("con"));
                     if (core.contains("perc")) generated.setPerc(core.getInt("perc"));
                     if (core.contains("intelligence")) generated.setIntelligence(core.getInt("intelligence"));
-                    if (core.contains("wis")) generated.setWis(core.getInt("wis"));
+                    if (core.contains("insight")) generated.setInsight(core.getInt("insight"));
+                    if (core.contains("wisdom")) generated.setWisdom(core.getInt("wisdom"));
 
 
                     StatUtils.writeStatsToNBT(stack, generated);
@@ -106,7 +107,8 @@ public class ItemModifier {
                             "armorMultiplier", "armorToughnessMultiplier", "healthMultiplier", "damageMultiplier",
                             "meleeDamageMultiplier", "attackSpeedMultiplier", "projectileDamageMultiplier", "drawSpeedMultiplier",
                             "critChanceMultiplier", "critDamageMultiplier", "meleeCritChanceMultiplier", "meleeCritDamageMultiplier",
-                            "projectileCritChanceMultiplier", "projectileCritDamageMultiplier"
+                            "projectileCritChanceMultiplier", "projectileCritDamageMultiplier", "protection", "restoration",
+                            "amplification", "amplificationMultiplier", "protectionMultiplier", "restorationMultiplier"
                     }) {
                         if (oldStats.contains(key)) {
                             newStats.putDouble(key, oldStats.getDouble(key));
@@ -182,8 +184,9 @@ public class ItemModifier {
         stats.setFort(attributes.getOrDefault("FORT", stats.getFort()));
         stats.setCon(attributes.getOrDefault("CON", stats.getCon()));
         stats.setPerc(attributes.getOrDefault("PERC", stats.getPerc()));
-        stats.setWis(attributes.getOrDefault("WIS", stats.getWis()));
-        stats.setWis(attributes.getOrDefault("WIS", stats.getIntelligence()));
+        stats.setInsight(attributes.getOrDefault("INSIGHT", stats.getInsight()));
+        stats.setIntelligence(attributes.getOrDefault("INT", stats.getIntelligence()));
+        stats.setWisdom(attributes.getOrDefault("WIS", stats.getWisdom()));
 
         StatUtils.writeStatsToNBT(stack, stats);
         StatUtils.writeAttributesToNBT(stack, attributes);

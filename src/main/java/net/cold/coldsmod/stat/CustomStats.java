@@ -7,7 +7,8 @@ public class CustomStats {
     public int con;
     public int perc;
     public int intelligence;
-    public int wis;
+    public int wisdom;
+    public int insight;
     public double armor;
     public double armorToughness;
     public double maxHealth;
@@ -47,6 +48,13 @@ public class CustomStats {
     public double drawSpeedMultiplier;
     public double meleeDamage;
     public double meleeDamageMultiplier;
+    public double restoration;
+    public double restorationMultiplier;
+    public double protection;
+    public double protectionMultiplier;
+    public double amplification;
+    public double amplificationMultiplier;
+
 
     public CustomStats() {
         this.str = 0;
@@ -55,7 +63,8 @@ public class CustomStats {
         this.con = 0;
         this.perc = 0;
         this.intelligence = 0;
-        this.wis = 0;
+        this.wisdom = 0;
+        this.insight = 0;
         this.armor = 0.0;
         this.armorToughness = 0.0;
         this.maxHealth = 0.0;
@@ -95,9 +104,16 @@ public class CustomStats {
         this.projectileDamageMultiplier = 0.0;
         this.drawSpeedMultiplier = 0.0;
         this.meleeDamageMultiplier = 0.0;
+        this.meleeCritChanceMultiplier = 0.0;
+        this.protection = 0.0;
+        this.protectionMultiplier = 0.0;
+        this.restoration = 0.0;
+        this.restorationMultiplier = 0.0;
+        this.amplificationMultiplier = 0.0;
+        this.amplification = 0.0;
     }
 
-    public CustomStats(int str, int fort, int dex, int intelligence, int perc, int con, int wis,
+    public CustomStats(int str, int fort, int dex, int intelligence, int perc, int con, int insight, int wisdom,
                        double armor, double armorToughness, double maxHealth,
                        double knockbackResist, double damage, double debuffResist,
                        double attackSpeed, double critChance, double critDamage,
@@ -114,14 +130,17 @@ public class CustomStats {
                        double projectileCritChanceMultiplier, double projectileCritDamageMultiplier,
                        double projectileDamageMultiplier,
                        double drawSpeedMultiplier,
-                       double meleeDamage, double meleeDamageMultiplier) {
+                       double meleeDamage, double meleeDamageMultiplier,
+                       double protection, double protectionMultiplier, double restoration,
+                       double restorationMultiplier, double amplification, double amplificationMultiplier) {
         this.str = str;
         this.fort = fort;
         this.dex = dex;
         this.intelligence = intelligence;
+        this.wisdom = wisdom;
         this.con = con;
         this.perc = perc;
-        this.wis = wis;
+        this.insight = insight;
         this.armor = armor;
         this.armorToughness = armorToughness;
         this.maxHealth = maxHealth;
@@ -161,15 +180,22 @@ public class CustomStats {
         this.armorMultiplier = armorMultiplier;
         this.meleeDamage = meleeDamage;
         this.meleeDamageMultiplier = meleeDamageMultiplier;
+        this.protection = protection;
+        this.protectionMultiplier = protectionMultiplier;
+        this.restoration = restoration;
+        this.restorationMultiplier = restorationMultiplier;
+        this.amplificationMultiplier = amplificationMultiplier;
+        this.amplification = amplification;
     }
 
     public int getStr() { return str; }
     public int getFort() { return fort; }
     public int getDex() { return dex; }
     public int getPerc() { return perc; }
+    public int getWisdom() { return wisdom; }
     public int getCon() { return con; }
     public int getIntelligence() { return intelligence; }
-    public int getWis() { return wis; }
+    public int getInsight() { return insight; }
     public double getArmor() { return armor; }
     public double getArmorToughness() { return armorToughness; }
     public double getMaxHealth() { return maxHealth; }
@@ -209,7 +235,12 @@ public class CustomStats {
     public double getProjectileDamageMultiplier() { return projectileDamageMultiplier; }
     public double getDrawSpeedMultiplier() { return drawSpeedMultiplier; }
     public double getMeleeDamage() { return meleeDamage; }
-
+    public double getProtection() {return protection;}
+    public double getProtectionMultiplier() {return protectionMultiplier;}
+    public double getRestoration() {return restoration;}
+    public double getRestorationMultiplier() {return restorationMultiplier;}
+    public double getAmplification() {return amplification;}
+    public double getAmplificationMultiplier() {return amplificationMultiplier;}
 
 
     public void setStr(int str) { this.str = str; }
@@ -217,8 +248,9 @@ public class CustomStats {
     public void setDex(int dex) { this.dex = dex; }
     public void setCon(int con) { this.con = con; }
     public void setPerc(int perc) { this.perc = perc; }
+    public void setWisdom(int wisdom) { this.wisdom = wisdom; }
     public void setIntelligence(int intelligence) { this.intelligence = intelligence; }
-    public void setWis(int wis) { this.wis = wis; }
+    public void setInsight(int insight) { this.insight = insight; }
     public void setArmor(double armor) { this.armor = armor; }
     public void setArmorToughness(double armorToughness) { this.armorToughness = armorToughness; }
     public void setKnockbackResist(double knockbackResist) { this.knockbackResist = knockbackResist; }
@@ -258,6 +290,12 @@ public class CustomStats {
     public void setProjectileDamageMultiplier(double projectileDamageMultiplier) { this.projectileDamageMultiplier = projectileDamageMultiplier; }
     public void setDrawSpeedMultiplier(double drawSpeedMultiplier) { this.drawSpeedMultiplier = drawSpeedMultiplier; }
     public void setMeleeDamage(double meleeDamage) { this.meleeDamage = meleeDamage; }
+    public void setProtection(double protection) { this.protection = protection; }
+    public void setProtectionMultiplier(double protectionMultiplier) { this.protectionMultiplier = protectionMultiplier; }
+    public void setRestoration(double restoration) { this.restoration = restoration; }
+    public void setRestorationMultiplier(double restorationMultiplier) { this.restorationMultiplier = restorationMultiplier; }
+    public void setAmplification(double amplification) { this.amplification = amplification; }
+    public void setAmplificationMultiplier(double amplificationMultiplier) { this.amplificationMultiplier = amplificationMultiplier; }
 
 
     public void add(CustomStats other) {
@@ -267,7 +305,8 @@ public class CustomStats {
         this.perc += other.perc;
         this.con += other.con;
         this.intelligence += other.intelligence;
-        this.wis += other.wis;
+        this.insight += other.insight;
+        this.wisdom += other.wisdom;
 
         this.armor += other.armor;
         this.armorToughness += other.armorToughness;
@@ -315,6 +354,12 @@ public class CustomStats {
         this.projectileCritDamageMultiplier += other.projectileCritDamageMultiplier;
         this.projectileDamageMultiplier += other.projectileDamageMultiplier;
         this.drawSpeedMultiplier += other.drawSpeedMultiplier;
+        this.protection += other.protection;
+        this.protectionMultiplier += other.protectionMultiplier;
+        this.restoration += other.restoration;
+        this.restorationMultiplier += other.restorationMultiplier;
+        this.amplification += other.amplification;
+        this.amplificationMultiplier += other.amplificationMultiplier;
     }
 
     private CustomStats(Builder builder) {
@@ -330,12 +375,13 @@ public class CustomStats {
         this.attackSpeed = builder.attackSpeed;
         this.fort = builder.fort;
         this.perc = builder.perc;
+        this.wisdom = builder.wisdom;
         this.con = builder.con;
         this.armor = builder.armor;
         this.maxHealth = builder.maxHealth;
         this.str = builder.str;
         this.dex = builder.dex;
-        this.wis = builder.wis;
+        this.insight = builder.insight;
         this.knockbackResist = builder.knockbackResist;
         this.drawSpeed = builder.drawSpeed;
         this.armorToughness = builder.armorToughness;
@@ -363,6 +409,13 @@ public class CustomStats {
         this.projectileDamageMultiplier = builder.projectileDamageMultiplier;
         this.drawSpeedMultiplier = builder.drawSpeedMultiplier;
         this.meleeDamageMultiplier = builder.meleeDamageMultiplier;
+        this.protection += builder.protection;
+        this.protectionMultiplier += builder.protectionMultiplier;
+        this.restoration += builder.restoration;
+        this.restorationMultiplier += builder.restorationMultiplier;
+        this.amplification += builder.amplification;
+        this.amplificationMultiplier += builder.amplificationMultiplier;
+
     }
 
 
@@ -383,7 +436,8 @@ public class CustomStats {
         private double maxHealth = 0;
         private int str = 0;
         private int dex = 0;
-        private int wis = 0;
+        private int insight = 0;
+        private int wisdom = 0;
         private double knockbackResist = 0;
         private double armorToughness = 0;
         private double drawSpeed = 0;
@@ -412,6 +466,13 @@ public class CustomStats {
         public double drawSpeedMultiplier = 0;
         public double meleeDamage = 0;
         public double meleeDamageMultiplier = 0;
+        public double protection = 0;
+        public double protectionMultiplier = 0;
+        public double restoration = 0;
+        public double restorationMultiplier = 0;
+        public double amplification = 0;
+        public double amplificationMultiplier = 0;
+
 
         public Builder setDamage(double damage) {
             this.damage = damage;
@@ -462,6 +523,11 @@ public class CustomStats {
             return this;
         }
 
+        public Builder setWisdom(int wisdom) {
+            this.wisdom = wisdom;
+            return this;
+        }
+
         public Builder setPerc(int perc) {
             this.perc = perc;
             return this;
@@ -472,8 +538,8 @@ public class CustomStats {
             return this;
         }
 
-        public Builder setWis(int wis) {
-            this.wis = wis;
+        public Builder setInsight(int insight) {
+            this.insight = insight;
             return this;
         }
 
@@ -636,6 +702,37 @@ public class CustomStats {
             this.meleeDamage = meleeDamage;
             return this;
         }
+
+        public Builder setProtection(double protection) {
+            this.protection = protection;
+            return this;
+        }
+
+        public Builder setProtectionMultiplier(double protectionMultiplier) {
+            this.protectionMultiplier = protectionMultiplier;
+            return this;
+        }
+
+        public Builder setRestoration(double restoration) {
+            this.restoration = restoration;
+            return this;
+        }
+
+        public Builder setRestorationMultiplier(double restorationMultiplier) {
+            this.restorationMultiplier = restorationMultiplier;
+            return this;
+        }
+
+        public Builder setAmplification(double amplification) {
+            this.amplification = amplification;
+            return this;
+        }
+
+        public Builder setAmplificationMultiplier(double amplificationMultiplier) {
+            this.amplificationMultiplier = amplificationMultiplier;
+            return this;
+        }
+
 
         public CustomStats build() {
             return new CustomStats(this);

@@ -3,7 +3,6 @@ package net.cold.coldsmod.stat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -11,7 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +24,8 @@ public class StatUtils {
         statsTag.putInt("fort", stats.getFort());
         statsTag.putInt("con", stats.getCon());
         statsTag.putInt("perc", stats.getPerc());
-        statsTag.putInt("wis", stats.getWis());
+        statsTag.putInt("insight", stats.getInsight());
+        statsTag.putInt("wisdom", stats.getWisdom());
         statsTag.putDouble("intelligence", stats.getIntelligence());
         statsTag.putDouble("armor", stats.getArmor());
         statsTag.putDouble("armorToughness", stats.getArmorToughness());
@@ -67,6 +66,12 @@ public class StatUtils {
         statsTag.putDouble("drawSpeedMultiplier", stats.getDrawSpeedMultiplier());
         statsTag.putDouble("meleeDamage", stats.getMeleeDamage());
         statsTag.putDouble("meleeDamageMultiplier", stats.getMeleeDamageMultiplier());
+        statsTag.putDouble("restoration", stats.getRestoration());
+        statsTag.putDouble("restorationMultiplier", stats.getRestorationMultiplier());
+        statsTag.putDouble("protection", stats.getProtection());
+        statsTag.putDouble("protectionMultiplier", stats.getProtectionMultiplier());
+        statsTag.putDouble("amplification", stats.getAmplification());
+        statsTag.putDouble("amplificationMultiplier", stats.getAmplificationMultiplier());
 
         tag.put("custom_stats", statsTag);
         stack.setTag(tag);
@@ -84,7 +89,8 @@ public class StatUtils {
         stats.setCon(tag.getInt("con"));
         stats.setPerc(tag.getInt("perc"));
         stats.setIntelligence(tag.getInt("intelligence"));
-        stats.setWis(tag.getInt("wis"));
+        stats.setInsight(tag.getInt("insight"));
+        stats.setWisdom(tag.getInt("wisdom"));
         stats.setArmor(tag.getDouble("armor"));
         stats.setArmorToughness(tag.getDouble("armorToughness"));
         stats.setMaxHealth(tag.getDouble("maxHealth"));
@@ -124,6 +130,12 @@ public class StatUtils {
         stats.setProjectileDamageMultiplier(tag.getDouble("projectileDamageMultiplier"));
         stats.setDrawSpeedMultiplier(tag.getDouble("drawSpeedMultiplier"));
         stats.setMeleeDamage(tag.getDouble("meleeDamage"));
+        stats.setProtection(tag.getDouble("protection"));
+        stats.setProtectionMultiplier(tag.getDouble("protectionMultiplier"));
+        stats.setRestoration(tag.getDouble("restoration"));
+        stats.setRestorationMultiplier(tag.getDouble("restorationMultiplier"));
+        stats.setAmplification(tag.getDouble("amplification"));
+        stats.setAmplificationMultiplier(tag.getDouble("amplificationMultiplier"));
         return stats;
     }
 
@@ -173,7 +185,7 @@ public class StatUtils {
         stats.setCon(rolled.getOrDefault("CON", stats.getCon()));
         stats.setPerc(rolled.getOrDefault("PERC", stats.getPerc()));
         stats.setIntelligence(rolled.getOrDefault("INT", stats.getIntelligence()));
-        stats.setWis(rolled.getOrDefault("WIS", stats.getWis()));
+        stats.setInsight(rolled.getOrDefault("INSIGHT", stats.getInsight()));
         writeStatsToNBT(stack, stats);
     }
 
@@ -208,7 +220,8 @@ public class StatUtils {
                 {"Constitution", stats.getCon()},
                 {"Perception", stats.getPerc()},
                 {"Intelligence", stats.getIntelligence()},
-                {"Wisdom", stats.getWis()}
+                {"Wisdom", stats.getWisdom()},
+                {"Insight", stats.getInsight()},
         };
         for (Object[] pair : mainStats) {
             String name = (String) pair[0];
@@ -287,17 +300,17 @@ public class StatUtils {
         }
 
         Object[][] offensiveStats = new Object[][]{
-                {"Damage", stats.getDamage(), false},
-                {"Melee Damage", stats.getMeleeDamage(), false},
-                {"Attack Speed", stats.getAttackSpeed(), false},
-                {"Projectile Damage", stats.getProjectileDamage(), false},
-                {"Draw Speed", stats.getDrawSpeed(), false},
-                {"Crit Chance", stats.getCritChance(), false},
-                {"Crit Damage", stats.getCritDamage(), false},
-                {"Melee Crit Chance", stats.getMeleeCritChance(), false},
-                {"Melee Crit Damage", stats.getMeleeCritDamage(), false},
-                {"Projectile Crit Chance", stats.getProjectileCritChance(), false},
-                {"Projectile Crit Damage", stats.getProjectileCritDamage(), false}
+                {"Potency", stats.getDamage(), false},
+                {"Melee Potency", stats.getMeleeDamage(), false},
+                {"Haste", stats.getAttackSpeed(), false},
+                {"Projectile Potency", stats.getProjectileDamage(), false},
+                {"Nock Haste", stats.getDrawSpeed(), false},
+                {"Accuracy", stats.getCritChance(), false},
+                {"Precision", stats.getCritDamage(), false},
+                {"Melee Accuracy", stats.getMeleeCritChance(), false},
+                {"Melee Precision", stats.getMeleeCritDamage(), false},
+                {"Projectile Accuracy", stats.getProjectileCritChance(), false},
+                {"Projectile Precision", stats.getProjectileCritDamage(), false}
         };
 
         for (Object[] pair : offensiveStats) {
@@ -313,17 +326,17 @@ public class StatUtils {
         }
 
         Object[][] offensiveMultipliers = new Object[][]{
-                {"Damage", stats.getDamageMultiplier()},
-                {"Melee Damage", stats.getMeleeDamageMultiplier()},
-                {"Attack Speed", stats.getAttackSpeedMultiplier()},
-                {"Projectile Damage", stats.getProjectileDamageMultiplier()},
-                {"Draw Speed", stats.getDrawSpeedMultiplier()},
-                {"Crit Chance", stats.getCritChanceMultiplier()},
-                {"Crit Damage", stats.getCritDamageMultiplier()},
-                {"Melee Crit Chance", stats.getMeleeCritChanceMultiplier()},
-                {"Melee Crit Damage", stats.getMeleeCritDamageMultiplier()},
-                {"Projectile Crit Chance", stats.getProjectileCritChanceMultiplier()},
-                {"Projectile Crit Damage", stats.getProjectileCritDamageMultiplier()}
+                {"Potency", stats.getDamageMultiplier()},
+                {"Melee Potency", stats.getMeleeDamageMultiplier()},
+                {"Haste", stats.getAttackSpeedMultiplier()},
+                {"Projectile Potency", stats.getProjectileDamageMultiplier()},
+                {"Nock Haste", stats.getDrawSpeedMultiplier()},
+                {"Accuracy", stats.getCritChanceMultiplier()},
+                {"Precision", stats.getCritDamageMultiplier()},
+                {"Melee Accuracy", stats.getMeleeCritChanceMultiplier()},
+                {"Melee Precision", stats.getMeleeCritDamageMultiplier()},
+                {"Projectile Accuracy", stats.getProjectileCritChanceMultiplier()},
+                {"Projectile Precision", stats.getProjectileCritDamageMultiplier()}
         };
 
         for (Object[] pair : offensiveMultipliers) {
@@ -333,7 +346,42 @@ public class StatUtils {
 
             String formattedValue = formatValue(value);
             tooltip.add(Component.literal(String.format("%s: %s%s%%", name, value >= 0 ? "+" : "", formattedValue))
-                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x5FAF6E))));
+        }
+
+        Object[][] healingStats = new Object[][]{
+                {"Restoration", stats.getRestoration(), false},
+                {"Amplification", stats.getAmplification(), false},
+                {"Protection", stats.getProtection(), false}
+        };
+
+        for (Object[] pair : healingStats) {
+            String name = (String) pair[0];
+            double value = (double) pair[1];
+            boolean percent = (boolean) pair[2];
+            if (value == 0) continue;
+
+            String formattedValue = formatValue(value);
+            tooltip.add(Component.literal(String.format("%s: %s%s%s",
+                            name, value > 0 ? "+" : "", formattedValue, percent ? "%" : ""))
+                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x5bb450))));
+        }
+
+        Object[][] healingMultipliers = new Object[][]{
+                {"Restoration", stats.getRestorationMultiplier()},
+                {"Amplification", stats.getAmplificationMultiplier()},
+                {"Protection", stats.getProtectionMultiplier()}
+        };
+
+        for (Object[] pair : healingMultipliers) {
+            String name = (String) pair[0];
+            double value = (double) pair[1];
+            if (value == 0) continue;
+
+            String formattedValue = formatValue(value);
+            tooltip.add(Component.literal(String.format("%s: %s%s%%",
+                            name, value >= 0 ? "+" : "", formattedValue))
+                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x3b8132))));
         }
 
         Object[][] utilityStats = new Object[][]{
@@ -357,7 +405,7 @@ public class StatUtils {
 
             tooltip.add(Component.literal(String.format("%s: %s%s%s",
                             name, value > 0 ? "+" : "", formattedValue, percent ? "%" : ""))
-                    .withStyle(ChatFormatting.DARK_GREEN));
+                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
         }
     }
 
@@ -369,7 +417,7 @@ public class StatUtils {
         int decimals = 0;
         double temp = value;
 
-        while (decimals < 3 && Math.floor(temp) != temp) {
+        while (decimals < 2 && Math.floor(temp) != temp) {
             temp *= 10;
             decimals++;
         }
@@ -377,7 +425,7 @@ public class StatUtils {
         switch (decimals) {
             case 0: return String.format("%.0f", value);
             case 1: return String.format("%.1f", value);
-            case 3: return String.format("%.3f", value);
+            // case 3: return String.format("%.3f", value);
             default: return String.format("%.2f", value);
         }
     }

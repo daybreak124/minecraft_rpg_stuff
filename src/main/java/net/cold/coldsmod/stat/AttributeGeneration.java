@@ -7,7 +7,13 @@ public class AttributeGeneration {
     private static final Random rand = new Random();
 
     public static final List<String> ATTRIBUTES = Arrays.asList(
+            "STR", "DEX", "FORT", "CON", "PERC", "WIS"
+            // add int
+    );
+
+    public static final List<String> WEAPON_ATTRIBUTES = Arrays.asList(
             "STR", "DEX", "FORT", "CON", "PERC"
+            // add int
     );
 
     public static final List<String> SHIELD_ATTRIBUTES = Arrays.asList(
@@ -58,11 +64,15 @@ public class AttributeGeneration {
 
 
         if ("tools".equals(itemType)) {
-            selected = Collections.singletonList("WIS");
+            selected = Collections.singletonList("INSIGHT");
         } else if ("shield".equals(itemType)) {
             selected = new ArrayList<>(SHIELD_ATTRIBUTES);
             Collections.shuffle(selected, rand);
             selected = selected.subList(0, 2);
+        } else if ("sword".equals(itemType) || "bow".equals(itemType) || "crossbow".equals(itemType)) {
+            selected = new ArrayList<>(WEAPON_ATTRIBUTES);
+            Collections.shuffle(selected, rand);
+            selected = selected.subList(0, 3);
         } else {
             selected = new ArrayList<>(ATTRIBUTES);
             Collections.shuffle(selected, rand);

@@ -572,8 +572,8 @@ public class ModItems {
                     tooltip.add(Component.literal("Blessing: Hawkeye").withStyle(ChatFormatting.GOLD));
                     tooltip.add(Component.literal(" Critical hits with melee").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" weapons increase your").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" Projectile Damage by 5").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" and Draw Speed by 9").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" Projectile Potency by 5").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" and Nock Haste by 9").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" for 8 seconds. Stacks").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" consumed upon landing").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" a projectile shot.").withStyle(ChatFormatting.GRAY));
@@ -601,14 +601,14 @@ public class ModItems {
                     super.appendHoverText(stack, level, tooltip, flag);
                     tooltip.add(Component.literal(""));
                     tooltip.add(Component.literal("Blessing: Solara").withStyle(ChatFormatting.GOLD));
-                    tooltip.add(Component.literal(" Gain or lose Melee Damage").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" and Armor depending on ").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" the time of day.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" Gain or lose Melee Potency").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" and Armor depending on the ").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" time of day.").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(""));
-                    tooltip.add(Component.literal(" +25 Melee Damage and").withStyle(ChatFormatting.YELLOW));
+                    tooltip.add(Component.literal(" +25 Melee Potency and").withStyle(ChatFormatting.YELLOW));
                     tooltip.add(Component.literal(" +10 Armor at noon.").withStyle(ChatFormatting.YELLOW));
                     tooltip.add(Component.literal(""));
-                    tooltip.add(Component.literal(" -15 Melee Damage and").withStyle(ChatFormatting.DARK_GRAY));
+                    tooltip.add(Component.literal(" -15 Melee Potency and").withStyle(ChatFormatting.DARK_GRAY));
                     tooltip.add(Component.literal(" -15 Armor at midnight.").withStyle(ChatFormatting.DARK_GRAY));
                     tooltip.add(Component.literal("").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" Effect remains for at").withStyle(ChatFormatting.GRAY));
@@ -633,7 +633,7 @@ public class ModItems {
                     tooltip.add(Component.literal(" Attacking a target").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" increases your Attack").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" Damage by 1.25 and Melee").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" Damage stat by 7.5% but").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" Potency stat by 7.5% but").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" increases your damage").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" taken by 8% per stack").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" for 6 seconds").withStyle(ChatFormatting.GRAY));
@@ -763,7 +763,7 @@ public class ModItems {
                     tooltip.add(Component.literal(" Upon crouch jumping, perform").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" a leap and turn invisible for").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" 4 seconds after landing and gain").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" +15 Damage and +20% Movement").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" +15 Potency and +20% Movement").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" Speed for 8 seconds until you.").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" attack a target. Takes priority").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" over Death From Above.").withStyle(ChatFormatting.GRAY));
@@ -891,7 +891,7 @@ public class ModItems {
                     tooltip.add(Component.literal(" Berserk effect which causes").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" your next melee attack to be").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" increased again by 60% of").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" your Melee Damage stat.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" your Melee Potency stat.").withStyle(ChatFormatting.GRAY));
                     tooltip.add(
                             Component.literal("Stack Duration: ").withStyle(ChatFormatting.DARK_AQUA)
                                     .append(Component.literal("4s").withStyle(ChatFormatting.GRAY))
@@ -955,9 +955,9 @@ public class ModItems {
                     tooltip.add(Component.literal("Blessing: Clairvoyance").withStyle(ChatFormatting.GOLD));
                     tooltip.add(Component.literal(" Charging your bow over").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" 3 seconds (scales with").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" Draw Speed) causes your").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" Nock Haste) causes your").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" next shot to be increased").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" by Projectile Damage 4").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" by Projectile Potency 4").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" more times.").withStyle(ChatFormatting.GRAY));
                     tooltip.add(
                             Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
@@ -1103,7 +1103,7 @@ public class ModItems {
                     tooltip.add(Component.literal(" Crossbows").withStyle(ChatFormatting.BLUE));
                     tooltip.add(Component.literal("Blessing: Adrenaline Injection").withStyle(ChatFormatting.GOLD));
                     tooltip.add(Component.literal(" Every 30 seconds, increase").withStyle(ChatFormatting.GRAY));
-                    tooltip.add(Component.literal(" your Draw Speed stat by 100%").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal(" your Nock Haste stat by 100%").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" for 6 seconds. Only applies").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" to Crossbows").withStyle(ChatFormatting.GRAY));
                 }

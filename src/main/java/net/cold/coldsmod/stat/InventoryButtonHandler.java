@@ -24,7 +24,7 @@ public class InventoryButtonHandler {
 
     public static boolean showStats = false;
     private static int scrollOffset = 0;
-    private static final int MAX_SCROLL = 600;
+    private static final int MAX_SCROLL = 750;
     private static final int PANEL_HEIGHT = 196;
 
     private static Button statsButton;
@@ -152,7 +152,9 @@ public class InventoryButtonHandler {
         y += 10;
         guiGraphics.drawString(mc.font, "Intelligence: " + data.getInt("totalInt"), left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Wisdom: " + data.getInt("totalWis"), left + 182, y, 0xFFFFFF);
+        guiGraphics.drawString(mc.font, "Wisdom: " + data.getInt("totalWisdom"), left + 182, y, 0xFFFFFF);
+        y += 10;
+        guiGraphics.drawString(mc.font, "Insight: " + data.getInt("totalInsight"), left + 182, y, 0xFFFFFF);
         y += 15;
 
         // --- Survivability Panel ---
@@ -171,47 +173,63 @@ public class InventoryButtonHandler {
         guiGraphics.drawString(mc.font, "Debuff Resist: " + StatUtils.formatValue(data.getDouble("totalDebuffResist")) + "%", left + 182, y, 0xFFFFFF);
         y += 15;
 
-        // --- Melee Panel ---
+        // --- Melee ---
         guiGraphics.drawString(mc.font, "Melee", left + 182, y, 0xAAAAFF);
         y += 10;
         guiGraphics.drawString(mc.font, "Attack Damage: " + StatUtils.formatValue(mc.player.getAttribute(Attributes.ATTACK_DAMAGE).getValue()), left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Damage: " + StatUtils.formatValue(data.getDouble("totalMeleeDamage")) +
+        guiGraphics.drawString(mc.font, "Potency: " + StatUtils.formatValue(data.getDouble("totalMeleeDamage")) +
                 " | (" + StatUtils.formatValue(data.getDouble("meleeDamageIncrease")) + "%)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Attack Speed: " + StatUtils.formatValue(data.getDouble("totalAttackSpeed")) +
+        guiGraphics.drawString(mc.font, "Haste: " + StatUtils.formatValue(data.getDouble("totalAttackSpeed")) +
                 " | (" + StatUtils.formatValue(data.getDouble("attackSpeedIncrease")) + "%)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Crit Chance: " + StatUtils.formatValue(data.getDouble("totalMeleeCritChance")) +
+        guiGraphics.drawString(mc.font, "Accuracy: " + StatUtils.formatValue(data.getDouble("totalMeleeCritChance")) +
                 " | (" + StatUtils.formatValue(10 + data.getDouble("meleeCritChanceIncrease")) + "%)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Crit Damage: " + StatUtils.formatValue(data.getDouble("totalMeleeCritDamage")) +
+        guiGraphics.drawString(mc.font, "Precision: " + StatUtils.formatValue(data.getDouble("totalMeleeCritDamage")) +
                 " | (" + StatUtils.formatValue(50 + data.getDouble("meleeCritDamageIncrease")) + "%)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Avg Damage Increase: " + StatUtils.formatValue(avgMeleeDamage) + "x", left + 182, y, 0xFFFFFF);
+        guiGraphics.drawString(mc.font, "Avg Increase: " + StatUtils.formatValue(avgMeleeDamage) + "x", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Max Damage Increase: " + StatUtils.formatValue(maxMeleeDamage) + "x", left + 182, y, 0xFFFFFF);
+        guiGraphics.drawString(mc.font, "Max Increase: " + StatUtils.formatValue(maxMeleeDamage) + "x", left + 182, y, 0xFFFFFF);
         y += 15;
 
-        // --- Ranged Panel ---
+        // --- Ranged ---
         guiGraphics.drawString(mc.font, "Ranged", left + 182, y, 0xAAAAFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Projectile Damage: " + StatUtils.formatValue(data.getDouble("totalProjectileDamage")) +
+        guiGraphics.drawString(mc.font, "Potency: " + StatUtils.formatValue(data.getDouble("totalProjectileDamage")) +
                 " | (" + StatUtils.formatValue(data.getDouble("projectileDamageIncrease")) + "%)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Draw Speed: " + StatUtils.formatValue(data.getDouble("totalDrawSpeed")) +
+        guiGraphics.drawString(mc.font, "Nock Haste: " + StatUtils.formatValue(data.getDouble("totalDrawSpeed")) +
                 " | (" + StatUtils.formatValue(data.getDouble("drawSpeedIncrease")) + "%)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Crit Chance: " + StatUtils.formatValue(data.getDouble("totalProjectileCritChance")) +
+        guiGraphics.drawString(mc.font, "Accuracy: " + StatUtils.formatValue(data.getDouble("totalProjectileCritChance")) +
                 " | (" + StatUtils.formatValue(10 + data.getDouble("projectileCritChanceIncrease")) + "%)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Crit Damage: " + StatUtils.formatValue(data.getDouble("totalProjectileCritDamage")) +
+        guiGraphics.drawString(mc.font, "Precision: " + StatUtils.formatValue(data.getDouble("totalProjectileCritDamage")) +
                 " | (" + StatUtils.formatValue(50 + data.getDouble("projectileCritDamageIncrease")) + "%)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Damage Increase: " + StatUtils.formatValue(avgBowDamage) + "x", left + 182, y, 0xFFFFFF);
+        guiGraphics.drawString(mc.font, "Increase: " + StatUtils.formatValue(avgBowDamage) + "x", left + 182, y, 0xFFFFFF);
         y += 15;
 
-        // --- Movement Panel ---
+        // --- Healing ---
+        guiGraphics.drawString(mc.font, "Healing", left + 182, y, 0xAAAAFF);
+        y += 10;
+        guiGraphics.drawString(mc.font, "Restoration: " + StatUtils.formatValue(data.getDouble("totalRestoration")) +
+                " | (" + StatUtils.formatValue(data.getDouble("restorationIncrease")) + "%)", left + 182, y, 0xFFFFFF);
+        y += 10;
+
+        guiGraphics.drawString(mc.font, "Protection: " + StatUtils.formatValue(data.getDouble("totalProtection")) +
+                " | (" + StatUtils.formatValue(data.getDouble("protectionIncrease")) + "%)", left + 182, y, 0xFFFFFF);
+        y += 10;
+
+        guiGraphics.drawString(mc.font, "Amplification: " + StatUtils.formatValue(data.getDouble("totalAmplification")) +
+                " | (" + StatUtils.formatValue(data.getDouble("amplificationIncrease")) + "%)", left + 182, y, 0xFFFFFF);
+        y += 15;
+
+
+        // --- Movement ---
         guiGraphics.drawString(mc.font, "Movement", left + 182, y, 0xAAAAFF);
         y += 10;
         guiGraphics.drawString(mc.font, "Move Speed: " + StatUtils.formatValue(finalSpeed) + "%", left + 182, y, 0xFFFFFF);
@@ -223,7 +241,7 @@ public class InventoryButtonHandler {
         guiGraphics.drawString(mc.font, "Jump Boost: " + StatUtils.formatValue(data.getDouble("totalJumpBoost")) + "%", left + 182, y, 0xFFFFFF);
         y += 15;
 
-        // --- Miscellaneous Panel ---
+        // --- Miscellaneous ---
         guiGraphics.drawString(mc.font, "Miscellaneous", left + 182, y, 0xAAAAFF);
         y += 10;
         guiGraphics.drawString(mc.font, "Block Reach: " + StatUtils.formatValue(mc.player.getAttribute(ForgeMod.BLOCK_REACH.get()).getValue()), left + 182, y, 0xFFFFFF);
@@ -243,43 +261,56 @@ public class InventoryButtonHandler {
         y += 10;
 
         // Melee Base Stats & Multipliers
-        guiGraphics.drawString(mc.font, "Melee Damage: " + StatUtils.formatValue(data.getDouble("meleeDamageRating")) +
+        guiGraphics.drawString(mc.font, "Melee Potency: " + StatUtils.formatValue(data.getDouble("meleeDamageRating")) +
                 " | (" + StatUtils.formatValue(1 + data.getDouble("totalMeleeDamageMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Attack Speed: " + StatUtils.formatValue(data.getDouble("attackSpeedRating")) +
+        guiGraphics.drawString(mc.font, "Melee Haste: " + StatUtils.formatValue(data.getDouble("attackSpeedRating")) +
                 " | (" + StatUtils.formatValue(1 + data.getDouble("totalAttackSpeedMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Melee Crit Chance: " + StatUtils.formatValue(data.getDouble("meleeCritChanceRating")) +
+        guiGraphics.drawString(mc.font, "Melee Accuracy: " + StatUtils.formatValue(data.getDouble("meleeCritChanceRating")) +
                 " | (" + StatUtils.formatValue(1 + data.getDouble("totalMeleeCritChanceMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Melee Crit Damage: " + StatUtils.formatValue(data.getDouble("meleeCritDamageRating")) +
+        guiGraphics.drawString(mc.font, "Melee Precision: " + StatUtils.formatValue(data.getDouble("meleeCritDamageRating")) +
                 " | (" + StatUtils.formatValue(1 + data.getDouble("totalMeleeCritDamageMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
         y += 15;
 
         // Projectile Base Stats & Multipliers
-        guiGraphics.drawString(mc.font, "Projectile Damage: " + StatUtils.formatValue(data.getDouble("projectileDamageRating")) +
+        guiGraphics.drawString(mc.font, "Projectile Potency: " + StatUtils.formatValue(data.getDouble("projectileDamageRating")) +
                 " | (" + StatUtils.formatValue(1 + data.getDouble("totalProjectileDamageMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Draw Speed: " + StatUtils.formatValue(data.getDouble("drawSpeedRating")) +
+        guiGraphics.drawString(mc.font, "Nock Haste: " + StatUtils.formatValue(data.getDouble("drawSpeedRating")) +
                 " | (" + StatUtils.formatValue(1 + data.getDouble("totalDrawSpeedMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Projectile Crit Chance: " + StatUtils.formatValue(data.getDouble("projectileCritChanceRating")) +
+        guiGraphics.drawString(mc.font, "Projectile Accuracy: " + StatUtils.formatValue(data.getDouble("projectileCritChanceRating")) +
                 " | (" + StatUtils.formatValue(1 + data.getDouble("totalProjectileCritChanceMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Projectile Crit Damage: " + StatUtils.formatValue(data.getDouble("projectileCritDamageRating")) +
+        guiGraphics.drawString(mc.font, "Projectile Precision: " + StatUtils.formatValue(data.getDouble("projectileCritDamageRating")) +
                 " | (" + StatUtils.formatValue(1 + data.getDouble("totalProjectileCritDamageMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
         y += 15;
 
         // General Base Stats & Multipliers
-        guiGraphics.drawString(mc.font, "Damage: " + StatUtils.formatValue(data.getDouble("generalDamageRating")) +
+        guiGraphics.drawString(mc.font, "Potency: " + StatUtils.formatValue(data.getDouble("generalDamageRating")) +
                 " | (" + StatUtils.formatValue(1 + data.getDouble("totalGeneralDamageMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Crit Chance: " + StatUtils.formatValue(data.getDouble("generalCritChanceRating")) +
+        guiGraphics.drawString(mc.font, "Accuracy: " + StatUtils.formatValue(data.getDouble("generalCritChanceRating")) +
                 " | (" + StatUtils.formatValue(1 + data.getDouble("totalGeneralCritChanceMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Crit Damage: " + StatUtils.formatValue(data.getDouble("generalCritDamageRating")) +
+        guiGraphics.drawString(mc.font, "Precision: " + StatUtils.formatValue(data.getDouble("generalCritDamageRating")) +
                 " | (" + StatUtils.formatValue(1 + data.getDouble("totalGeneralCritDamageMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
         y += 15;
+
+        guiGraphics.drawString(mc.font, "Restoration: " + StatUtils.formatValue(data.getDouble("totalRestoration")) +
+                " | (" + StatUtils.formatValue(1 + data.getDouble("totalRestorationMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
+        y += 10;
+
+        guiGraphics.drawString(mc.font, "Protection: " + StatUtils.formatValue(data.getDouble("totalProtection")) +
+                " | (" + StatUtils.formatValue(1 + data.getDouble("totalProtectionMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
+        y += 10;
+
+        guiGraphics.drawString(mc.font, "Amplification: " + StatUtils.formatValue(data.getDouble("totalAmplification")) +
+                " | (" + StatUtils.formatValue(1 + data.getDouble("totalAmplificationMultiplier") / 100.0) + "x)", left + 182, y, 0xFFFFFF);
+        y += 15;
+
 
         guiGraphics.drawString(
                 mc.font,

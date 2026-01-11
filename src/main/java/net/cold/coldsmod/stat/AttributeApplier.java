@@ -507,8 +507,9 @@ public class AttributeApplier {
         int totalFort = 0;
         int totalPerc = 0;
         int totalCon = 0;
-        int totalInt = 0;
-        int totalWis = 0;
+        // int totalInt = 0;
+        int totalInsight = 0;
+        int totalWisdom = 0;
         double totalArmorMultiplier = 0.0;
         double totalToughnessMultiplier = 0.0;
         double totalHealthMultiplier = 0.0;
@@ -523,6 +524,14 @@ public class AttributeApplier {
         double totalMeleeCritDamageMultiplier = 0.0;
         double totalProjectileCritChanceMultiplier = 0.0;
         double totalProjectileCritDamageMultiplier = 0.0;
+        double totalProtection = 0.0;
+        double totalProtectionMultiplier = 0.0;
+        double totalRestoration = 0.0;
+        double totalRestorationMultiplier = 0.0;
+        double totalAmplification = 0.0;
+        double totalAmplificationMultiplier = 0.0;
+
+
 
         CustomStats totalStats = new CustomStats();
 
@@ -592,8 +601,9 @@ public class AttributeApplier {
         totalCon += totalStats.getCon();
         totalPerc += totalStats.getPerc();
         totalFort += totalStats.getFort();
-        totalInt += totalStats.getIntelligence();
-        totalWis += totalStats.getWis();
+        // totalInt += totalStats.getIntelligence();
+        totalInsight += totalStats.getInsight();
+        totalWisdom += totalStats.getWisdom();
 
         armorRating += totalStats.getArmor();
         toughnessRating += totalStats.getArmorToughness();
@@ -621,6 +631,11 @@ public class AttributeApplier {
         totalXpGain += totalStats.getXpGain();
         totalBlockReach += totalStats.getBlockReach();
         totalEntityReach += totalStats.getEntityReach();
+        totalRestoration += totalStats.getRestoration();
+        totalProtection += totalStats.getProtection();
+        totalAmplification += totalStats.getAmplification();
+
+
 
         // --- Multipliers ---
         totalArmorMultiplier += totalStats.getArmorMultiplier();
@@ -637,6 +652,9 @@ public class AttributeApplier {
         totalProjectileDamageMultiplier += totalStats.getProjectileDamageMultiplier();
         totalDrawSpeedMultiplier += totalStats.getDrawSpeedMultiplier();
         totalMeleeDamageMultiplier += totalStats.getMeleeDamageMultiplier();
+        totalRestorationMultiplier += totalStats.getRestorationMultiplier();
+        totalProtectionMultiplier += totalStats.getProtectionMultiplier();
+        totalAmplificationMultiplier += totalStats.getAmplificationMultiplier();
 
         // --- Per Point Stats ---
         applyModifier(player, Attributes.ATTACK_DAMAGE, totalStr * 0.025, STR_PER_POINT_UUID);
@@ -651,9 +669,9 @@ public class AttributeApplier {
         generalCritChanceRating += totalDex * 0.2 + totalPerc * 0.175;
         generalDamageRating += totalStr * 0.35 + totalCon * 0.125;
 
-        totalXpGain += totalWis * 0.25;
-        totalBlockReach += totalWis * 0.05;
-        totalMiningSpeed += totalWis * 0.25;
+        totalXpGain += totalInsight * 0.25;
+        totalBlockReach += totalInsight * 0.05;
+        totalMiningSpeed += totalInsight * 0.25;
 
         // --- Milestones ---
         // --- Strength milestone bonuses ---
@@ -728,11 +746,11 @@ public class AttributeApplier {
             totalGeneralCritDamageMultiplier += 25;
         }
 
-        // --- Wisdom milestone bonuses ---
-        if (totalWis >= 10) totalMiningSpeed += 10.0;
-        if (totalWis >= 20) totalXpGain += 10;
-        if (totalWis >= 30) totalBlockReach += 0.5;
-        if (totalWis >= 40) {
+        // --- Insight milestone bonuses ---
+        if (totalInsight >= 10) totalMiningSpeed += 10.0;
+        if (totalInsight >= 20) totalXpGain += 10;
+        if (totalInsight >= 30) totalBlockReach += 0.5;
+        if (totalInsight >= 40) {
             totalMiningSpeed += 25;
             totalXpGain += 25;
         }
@@ -836,13 +854,23 @@ public class AttributeApplier {
         data.putDouble("totalJumpBoost", totalJumpBoost);
         data.putDouble("totalMiningSpeed", totalMiningSpeed);
 
+        data.putDouble("totalRestoration", totalRestoration);
+        data.putDouble("totalProtection", totalProtection);
+        data.putDouble("totalAmplification", totalAmplification);
+
+        data.putDouble("totalRestorationMultiplier", totalRestorationMultiplier);
+        data.putDouble("totalProtectionMultiplier", totalProtectionMultiplier);
+        data.putDouble("totalAmplificationMultiplier", totalAmplificationMultiplier);
+
+
         data.putInt("totalStr", totalStr);
         data.putInt("totalDex", totalDex);
         data.putInt("totalFort", totalFort);
         data.putInt("totalPerc", totalPerc);
         data.putInt("totalCon", totalCon);
-        data.putInt("totalInt", totalInt);
-        data.putInt("totalWis", totalWis);
+        // data.putInt("totalInt", totalInt);
+        data.putInt("totalInsight", totalInsight);
+        data.putInt("totalWisdom", totalWisdom);
 
         player.getAttribute(Attributes.ARMOR).removeModifier(ARMOR_UUID);
         double baseArmor = player.getAttribute(Attributes.ARMOR).getValue();
@@ -1060,6 +1088,17 @@ public class AttributeApplier {
                 * (1 + data.getDouble("totalAttackSpeedMultiplier") / 100);
 
 
+        double totalRestoration = data.getDouble("totalRestoration")
+                * (1 + data.getDouble("totalRestorationMultiplier") / 100);
+
+        double totalProtection = data.getDouble("totalProtection")
+                * (1 + data.getDouble("totalProtectionMultiplier") / 100);
+
+        double totalAmplification = data.getDouble("totalAmplification")
+                * (1 + data.getDouble("totalAmplificationMultiplier") / 100);
+
+
+
         data.putDouble("totalGeneralDamage", totalGeneralDamage);
         data.putDouble("totalGeneralCritChance", totalGeneralCritChance);
         data.putDouble("totalGeneralCritDamage", totalGeneralCritDamage);
@@ -1075,6 +1114,11 @@ public class AttributeApplier {
         data.putDouble("totalProjectileCritDamage", totalProjectileCritDamage);
 
         data.putDouble("totalAttackSpeed", totalAttackSpeed);
+
+        data.putDouble("totalRestoration", totalRestoration);
+        data.putDouble("totalProtection", totalProtection);
+        data.putDouble("totalAmplification", totalAmplification);
+
 
         // --- Apply Diminishing Returns ---
         double generalDamageIncrease =
@@ -1123,6 +1167,23 @@ public class AttributeApplier {
         double attackSpeedIncrease =
                 500 * data.getDouble("totalAttackSpeed") /
                         (500 + data.getDouble("totalAttackSpeed"));
+
+        double protectionIncrease =
+                500 * data.getDouble("totalProtection") /
+                        (500 + data.getDouble("totalProtection"));
+
+        double restorationIncrease =
+                500 * data.getDouble("totalRestoration") /
+                        (500 + data.getDouble("totalRestoration"));
+
+        double amplificationIncrease =
+                500 * data.getDouble("totalAmplification") /
+                        (500 + data.getDouble("totalAmplification"));
+
+        data.putDouble("protectionIncrease", protectionIncrease);
+        data.putDouble("restorationIncrease", restorationIncrease);
+        data.putDouble("amplificationIncrease", amplificationIncrease);
+
 
         data.putDouble("generalDamageIncrease", generalDamageIncrease);
         data.putDouble("generalCritChanceIncrease", generalCritChanceIncrease);
@@ -1332,7 +1393,7 @@ public class AttributeApplier {
             player.removeEffect(ModEffects.HAWKEYE.get());
         } else {
             finalDamageAmount *= 1 + data.getDouble("generalDamageIncrease") / 100.0;
-            // Non-melee & non-projectile hits
+            // Non melee & non projectile hits
             if (player.getPersistentData().getBoolean("isVanillaCrit")) {
                 finalDamageAmount /= 1.5;
                 finalDamageAmount *= 1.5 + data.getDouble("generalCritDamageIncrease") / 100.0;
