@@ -59,7 +59,7 @@ public class AttributeApplier {
     private static final UUID STEP_HEIGHT_UUID = UUID.fromString("f3e2b6c0-1234-5678-9abc-000000000012");
     private static final UUID ARMOR_UUID = UUID.fromString("f3e2b6c0-1234-5678-9abc-000000000013");
     private static final UUID ARMOR_TOUGHNESS_UUID = UUID.fromString("f3e2b6c0-1234-5678-9abc-000000000014");
-    private static final UUID BLESSING_MOVE_SPEED_UUID = UUID.fromString("f3e2b6c0-1234-5678-9abc-000000000015");
+    public static final UUID BLESSING_MOVE_SPEED_UUID = UUID.fromString("f3e2b6c0-1234-5678-9abc-000000000015");
     private static final UUID FRENZY_ATTACK_DAMAGE_UUID = UUID.fromString("f3e2b6c0-1234-5678-9abc-000000000016");
 
 
@@ -1225,18 +1225,44 @@ public class AttributeApplier {
         if ("crossbow".equals(mainType)) {
             mainHand.getOrCreateTag().putDouble("drawSpeedIncrease", player.getPersistentData().getDouble("drawSpeedIncrease"));
             if (player.hasEffect(ModEffects.ADRENALINE_INJECTION_UP.get())) {
-                mainHand.getOrCreateTag().putBoolean("adrenalineInjection", true);
             } else {
                 mainHand.getOrCreateTag().remove("adrenalineInjection");
             }
-        } else if ("crossbow".equals(offType) && !"bow".equals(mainType)) {
+        }
+        if ("crossbow".equals(offType)) {
             offHand.getOrCreateTag().putDouble("drawSpeedIncrease", player.getPersistentData().getDouble("drawSpeedIncrease"));
             if (player.hasEffect(ModEffects.ADRENALINE_INJECTION_UP.get())) {
                 offHand.getOrCreateTag().putBoolean("adrenalineInjection", true);
             } else {
-                offHand.getOrCreateTag().remove("adrenalineInjection");
+                mainHand.getOrCreateTag().remove("adrenalineInjection");
             }
         }
+    }
+
+    public void removeCrossbowTag(Player player) {
+        // For draw speed mixin, remove draw speed tag
+
+        ItemStack mainHand = player.getMainHandItem();
+        String mainType = ItemRarityUtils.getItemType(mainHand);
+
+        ItemStack offHand = player.getOffhandItem();
+        String offType = ItemRarityUtils.getItemType(player.getOffhandItem());
+
+        if ("crossbow".equals(mainType)) {mainHand.getOrCreateTag().remove("adrenalineInjection");}
+        if ("crossbow".equals(offType)) {offHand.getOrCreateTag().remove("adrenalineInjection");}
+    }
+
+    public void addCrossbowTag(Player player) {
+        // For draw speed mixin, remove draw speed tag
+
+        ItemStack mainHand = player.getMainHandItem();
+        String mainType = ItemRarityUtils.getItemType(mainHand);
+
+        ItemStack offHand = player.getOffhandItem();
+        String offType = ItemRarityUtils.getItemType(player.getOffhandItem());
+
+        if ("crossbow".equals(mainType)) {mainHand.getOrCreateTag().putBoolean("adrenalineInjection", true);}
+        if ("crossbow".equals(offType)) {offHand.getOrCreateTag().putBoolean("adrenalineInjection", true);}
     }
 
     private void applyPercentModifier(Player player, Attribute attribute, double percent, UUID uuid) {
@@ -1498,142 +1524,6 @@ public class AttributeApplier {
         }
     }
 
-    // rewrite this and oneffectadded to use hashmaps
-    @SubscribeEvent
-    public static void onEffectExpired(MobEffectEvent.Expired event) {
-        if (event.getEntity() instanceof Player player) {
-
-            CompoundTag data = player.getPersistentData();
-
-            if (event.getEffectInstance().getEffect() == ModEffects.FRENZY.get()) {
-                data.putInt("frenzy", 0); // Reset Frenzy stacks
-                new AttributeApplier().applyBlessings(player);
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.HAWKEYE.get()) {
-                data.putInt("hawkeye", 0);
-                new AttributeApplier().applyBlessings(player);
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.INTO_THE_FRAY.get()) {
-                new AttributeApplier().applyBlessings(player);
-                removeModifier(player, Attributes.MOVEMENT_SPEED, BLESSING_MOVE_SPEED_UUID);
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.BERSERK.get() && !player.hasEffect(ModEffects.BERSERK_READY.get())) {
-                data.putInt("berserk", 0);
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.BERSERK_READY.get()) {
-                data.putInt("berserk", 0);
-                if (!(player.hasEffect(ModEffects.BERSERK_TIMER.get())) && data.getBoolean("berserk_applied")) player.addEffect(new MobEffectInstance(ModEffects.BERSERK_TIMER.get(), 20*15, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.BERSERK_TIMER.get() && data.getBoolean("berserk_applied")) {
-                if (player.hasEffect(ModEffects.BRONZEWOOD_COOLDOWN.get())) {
-                    player.addEffect(new MobEffectInstance(ModEffects.BERSERK_TIMER.get(), 20*15, 0, false, false));
-                } else {
-                    player.addEffect(new MobEffectInstance(ModEffects.BERSERK_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-                    data.putInt("berserk", 0);
-                }
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.BRONZEWOOD_COOLDOWN.get() && data.getBoolean("bronzewoods_curse_applied")) {
-                player.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.DEATH_FROM_ABOVE_COOLDOWN.get() && data.getBoolean("death_from_above_eligible")) {
-                player.addEffect(new MobEffectInstance(ModEffects.DEATH_FROM_ABOVE.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.BASTION_COOLDOWN.get() && data.getBoolean("bastion_applied")) {
-                player.addEffect(new MobEffectInstance(ModEffects.BASTION_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.BASTION_ACTIVE.get() && data.getBoolean("bastion_applied")) {
-                player.addEffect(new MobEffectInstance(ModEffects.BASTION_COOLDOWN.get(), 20*10, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.RETALIATE_COOLDOWN.get() && data.getBoolean("retaliate_applied")) {
-                player.addEffect(new MobEffectInstance(ModEffects.RETALIATE_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.INTIMIDATING_PRESENCE_COOLDOWN.get() && data.getBoolean("intimidating_presence_eligible")) {
-                player.addEffect(new MobEffectInstance(ModEffects.INTIMIDATING_PRESENCE.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.DARING_SHOUT_COOLDOWN.get() && data.getBoolean("daring_shout_eligible")) {
-                player.addEffect(new MobEffectInstance(ModEffects.DARING_SHOUT.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.RECKONING_COOLDOWN.get() && data.getBoolean("reckoning_eligible")) {
-                player.addEffect(new MobEffectInstance(ModEffects.RECKONING.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.RECKONING_ACTIVE.get() && data.getBoolean("reckoning_eligible")) {
-                player.addEffect(new MobEffectInstance(ModEffects.RECKONING_COOLDOWN.get(), 20*10, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.CLAIRVOYANCE_COOLDOWN.get() && data.getBoolean("clairvoyance_applied") ) {
-                player.addEffect(new MobEffectInstance(ModEffects.CLAIRVOYANCE_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.EXPLOSIVE_TENDENCY_TIMER.get()) {
-
-                MobEffectInstance currentStack = player.getEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get());
-                int currentAmp = (currentStack != null) ? currentStack.getAmplifier() : -1;
-                int newAmplifier = Math.min(currentAmp + 1, 2);
-
-                if (currentAmp < newAmplifier) {
-                    if (currentStack != null) player.removeEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get());
-                    player.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_STACK.get(), MobEffectInstance.INFINITE_DURATION, newAmplifier, false, false));
-                }
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.EXPLOIT_WEAKNESS_COOLDOWN.get() && data.getBoolean("exploit_weakness_applied")) {
-                player.addEffect(new MobEffectInstance(ModEffects.EXPLOIT_WEAKNESS_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.ADRENALINE_INJECTION_COOLDOWN.get() && data.getBoolean("adrenaline_applied")) {
-                    player.addEffect(new MobEffectInstance(ModEffects.ADRENALINE_INJECTION_UP.get(), 20*5, 0));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.ADRENALINE_INJECTION_UP.get()) {
-                player.addEffect(new MobEffectInstance(ModEffects.ADRENALINE_INJECTION_COOLDOWN.get(), 20*15, 0, false, false));
-                new AttributeApplier().applyCrossbowTag(player);
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.LIFE_TOUCH_COOLDOWN.get() && data.getBoolean("life_touch_applied")) {
-                player.addEffect(new MobEffectInstance(ModEffects.LIFE_TOUCH_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-                new AttributeApplier().applyBlessings(player);
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.SOUL_SEVERANCE_COOLDOWN.get() && data.getBoolean("soul_severance_eligible")) {
-                player.addEffect(new MobEffectInstance(ModEffects.SOUL_SEVERANCE_READY  .get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.DECEPTION_COOLDOWN.get() && data.getBoolean("deception_applied")) {
-                player.addEffect(new MobEffectInstance(ModEffects.DECEPTION_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.DIRECTED_HATRED_COOLDOWN.get() && data.getBoolean("directed_hatred_eligible")) {
-                player.addEffect(new MobEffectInstance(ModEffects.DIRECTED_HATRED_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.QUANTUM_LEAP_COOLDOWN.get() && data.getBoolean("quantum_leap_eligible")) {
-                player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
-                new AttributeApplier().applyBlessings(player);
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.QUANTUM_LEAP_ACTIVE.get()) {
-                new AttributeApplier().applyBlessings(player);
-            }
-            else if (event.getEffectInstance().getEffect() == ModEffects.SOLARA.get()) {
-                player.addEffect(new MobEffectInstance(ModEffects.SOLARA.get()));
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onEffectAdded(MobEffectEvent.Added event) {
-        if (!(event.getEntity() instanceof Player player)) return;
-
-        if (event.getEffectInstance().getEffect() == ModEffects.HAWKEYE.get()) {
-            new AttributeApplier().applyBlessings(player);
-            if (event.getEffectInstance().getAmplifier() >= 3) {
-                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.CROSSBOW_QUICK_CHARGE_3, SoundSource.PLAYERS, 1.3F, 1.0F
-                );
-            }
-        } else if (event.getEffectInstance().getEffect() == ModEffects.FRENZY.get())
-            new AttributeApplier().applyBlessings(player);
-
-        else if (event.getEffectInstance().getEffect() == ModEffects.EXPLOSIVE_TENDENCY_STACK.get()) {
-            if (event.getEffectInstance().getAmplifier() < 2) {
-                player.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get(), 20 * 8, 0, false, false));
-            }
-        }
-        else if (event.getEffectInstance().getEffect() == ModEffects.ADRENALINE_INJECTION_UP.get() && player.getPersistentData().getBoolean("adrenaline_applied") ) {
-            new AttributeApplier().applyCrossbowTag(player);
-        }
-        else if (event.getEffectInstance().getEffect() == ModEffects.QUANTUM_LEAP_ACTIVE.get())
-            new AttributeApplier().applyBlessings(player);
-    }
-
 
     private double getSharpnessBonus(Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
@@ -1684,4 +1574,139 @@ public class AttributeApplier {
             event.getEntity().getPersistentData().remove("spirit_grove_knockback_cancel");
         }
     }
+
+//    @SubscribeEvent
+//    public static void onEffectExpired(MobEffectEvent.Expired event) {
+//        if (event.getEntity() instanceof Player player) {
+//
+//            CompoundTag data = player.getPersistentData();
+//
+//            if (event.getEffectInstance().getEffect() == ModEffects.FRENZY.get()) {
+//                data.putInt("frenzy", 0); // Reset Frenzy stacks
+//                new AttributeApplier().applyBlessings(player);
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.HAWKEYE.get()) {
+//                data.putInt("hawkeye", 0);
+//                new AttributeApplier().applyBlessings(player);
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.INTO_THE_FRAY.get()) {
+//                new AttributeApplier().applyBlessings(player);
+//                removeModifier(player, Attributes.MOVEMENT_SPEED, BLESSING_MOVE_SPEED_UUID);
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.BERSERK.get() && !player.hasEffect(ModEffects.BERSERK_READY.get())) {
+//                data.putInt("berserk", 0);
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.BERSERK_READY.get()) {
+//                data.putInt("berserk", 0);
+//                if (!(player.hasEffect(ModEffects.BERSERK_TIMER.get())) && data.getBoolean("berserk_applied")) player.addEffect(new MobEffectInstance(ModEffects.BERSERK_TIMER.get(), 20*15, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.BERSERK_TIMER.get() && data.getBoolean("berserk_applied")) {
+//                if (player.hasEffect(ModEffects.BRONZEWOOD_COOLDOWN.get())) {
+//                    player.addEffect(new MobEffectInstance(ModEffects.BERSERK_TIMER.get(), 20*15, 0, false, false));
+//                } else {
+//                    player.addEffect(new MobEffectInstance(ModEffects.BERSERK_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//                    data.putInt("berserk", 0);
+//                }
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.BRONZEWOOD_COOLDOWN.get() && data.getBoolean("bronzewoods_curse_applied")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.DEATH_FROM_ABOVE_COOLDOWN.get() && data.getBoolean("death_from_above_eligible")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.DEATH_FROM_ABOVE.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.BASTION_COOLDOWN.get() && data.getBoolean("bastion_applied")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.BASTION_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.BASTION_ACTIVE.get() && data.getBoolean("bastion_applied")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.BASTION_COOLDOWN.get(), 20*10, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.RETALIATE_COOLDOWN.get() && data.getBoolean("retaliate_applied")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.RETALIATE_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.INTIMIDATING_PRESENCE_COOLDOWN.get() && data.getBoolean("intimidating_presence_eligible")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.INTIMIDATING_PRESENCE.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.DARING_SHOUT_COOLDOWN.get() && data.getBoolean("daring_shout_eligible")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.DARING_SHOUT.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.RECKONING_COOLDOWN.get() && data.getBoolean("reckoning_eligible")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.RECKONING.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.RECKONING_ACTIVE.get() && data.getBoolean("reckoning_eligible")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.RECKONING_COOLDOWN.get(), 20*10, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.CLAIRVOYANCE_COOLDOWN.get() && data.getBoolean("clairvoyance_applied") ) {
+//                player.addEffect(new MobEffectInstance(ModEffects.CLAIRVOYANCE_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.EXPLOSIVE_TENDENCY_TIMER.get()) {
+//
+//                MobEffectInstance currentStack = player.getEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get());
+//                int currentAmp = (currentStack != null) ? currentStack.getAmplifier() : -1;
+//                int newAmplifier = Math.min(currentAmp + 1, 2);
+//
+//                if (currentAmp < newAmplifier) {
+//                    if (currentStack != null) player.removeEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get());
+//                    player.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_STACK.get(), MobEffectInstance.INFINITE_DURATION, newAmplifier, false, false));
+//                }
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.EXPLOIT_WEAKNESS_COOLDOWN.get() && data.getBoolean("exploit_weakness_applied")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.EXPLOIT_WEAKNESS_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.ADRENALINE_INJECTION_COOLDOWN.get() && data.getBoolean("adrenaline_applied")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.ADRENALINE_INJECTION_UP.get(), 20*5, 0));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.ADRENALINE_INJECTION_UP.get()) {
+//                player.addEffect(new MobEffectInstance(ModEffects.ADRENALINE_INJECTION_COOLDOWN.get(), 20*15, 0, false, false));
+//                new AttributeApplier().applyCrossbowTag(player);
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.LIFE_TOUCH_COOLDOWN.get() && data.getBoolean("life_touch_applied")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.LIFE_TOUCH_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//                new AttributeApplier().applyBlessings(player);
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.SOUL_SEVERANCE_COOLDOWN.get() && data.getBoolean("soul_severance_eligible")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.SOUL_SEVERANCE_READY  .get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.DECEPTION_COOLDOWN.get() && data.getBoolean("deception_applied")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.DECEPTION_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.DIRECTED_HATRED_COOLDOWN.get() && data.getBoolean("directed_hatred_eligible")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.DIRECTED_HATRED_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.QUANTUM_LEAP_COOLDOWN.get() && data.getBoolean("quantum_leap_eligible")) {
+//                player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false));
+//                new AttributeApplier().applyBlessings(player);
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.QUANTUM_LEAP_ACTIVE.get()) {
+//                new AttributeApplier().applyBlessings(player);
+//            }
+//            else if (event.getEffectInstance().getEffect() == ModEffects.SOLARA.get()) {
+//                player.addEffect(new MobEffectInstance(ModEffects.SOLARA.get()));
+//            }
+//        }
+//    }
+//
+//    @SubscribeEvent
+//    public static void onEffectAdded(MobEffectEvent.Added event) {
+//        if (!(event.getEntity() instanceof Player player)) return;
+//
+//        if (event.getEffectInstance().getEffect() == ModEffects.HAWKEYE.get()) {
+//            new AttributeApplier().applyBlessings(player);
+//            if (event.getEffectInstance().getAmplifier() >= 3) {
+//                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.CROSSBOW_QUICK_CHARGE_3, SoundSource.PLAYERS, 1.3F, 1.0F
+//                );
+//            }
+//        } else if (event.getEffectInstance().getEffect() == ModEffects.FRENZY.get())
+//            new AttributeApplier().applyBlessings(player);
+//
+//        else if (event.getEffectInstance().getEffect() == ModEffects.EXPLOSIVE_TENDENCY_STACK.get()) {
+//            if (event.getEffectInstance().getAmplifier() < 2) {
+//                player.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get(), 20 * 8, 0, false, false));
+//            }
+//        }
+//        else if (event.getEffectInstance().getEffect() == ModEffects.ADRENALINE_INJECTION_UP.get() && player.getPersistentData().getBoolean("adrenaline_applied") ) {
+//            new AttributeApplier().applyCrossbowTag(player);
+//        }
+//        else if (event.getEffectInstance().getEffect() == ModEffects.QUANTUM_LEAP_ACTIVE.get())
+//            new AttributeApplier().applyBlessings(player);
+//    }
 }

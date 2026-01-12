@@ -108,6 +108,8 @@ public class ColdsMod {
         LOGGER.info("HELLO FROM COMMON SETUP");
 
         ItemRarityUtils.init();
+        CooldownCycle.init();
+
     }
 
     private void copyDefaultConfig(String fileName) {
