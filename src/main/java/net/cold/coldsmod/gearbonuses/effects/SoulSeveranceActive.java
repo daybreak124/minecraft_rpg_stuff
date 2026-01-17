@@ -30,7 +30,6 @@ public class SoulSeveranceActive extends MobEffect {
         Player player = event.player;
 
         if (player.level().isClientSide) return;
-        if (!player.getPersistentData().getBoolean("soul_severance_eligible")) return;
         if (!player.hasEffect(ModEffects.SOUL_SEVERANCE_READY.get())) return;
 
         int ticks = player.getPersistentData().getInt("pull_ticks");
@@ -86,12 +85,12 @@ public class SoulSeveranceActive extends MobEffect {
 
             if (ticks >= 80) {
                 player.removeEffect(ModEffects.SOUL_SEVERANCE_READY.get());
-                player.addEffect(new MobEffectInstance(ModEffects.SOUL_SEVERANCE_COOLDOWN.get(), 20*9, 0, false, false));
+                player.addEffect(new MobEffectInstance(ModEffects.SOUL_SEVERANCE_COOLDOWN.get(), 20*9, 0, false, false, true));
                 player.getPersistentData().remove("pull_ticks");
             }
         } else if (ticks > 0) {
             player.removeEffect(ModEffects.SOUL_SEVERANCE_READY.get());
-            player.addEffect(new MobEffectInstance(ModEffects.SOUL_SEVERANCE_COOLDOWN.get(), 20*9, 0, false, false));
+            player.addEffect(new MobEffectInstance(ModEffects.SOUL_SEVERANCE_COOLDOWN.get(), 20*9, 0, false, false, true));
             player.getPersistentData().remove("pull_ticks");
         }
     }

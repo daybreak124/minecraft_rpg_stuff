@@ -1,12 +1,12 @@
 package net.cold.coldsmod.LootModifiers;
 
 import com.mojang.serialization.Codec;
+import net.cold.coldsmod.stat.ArmorRarityModifier;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.cold.coldsmod.stat.ArmorRarityModifier;
 
 public class ModLootModifiers {
 

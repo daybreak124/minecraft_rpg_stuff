@@ -101,7 +101,7 @@ public class ItemRarityUtils {
 
         if (id.contains("bow")) return "bow";
         if (id.contains("crossbow")) return "crossbow";
-        if (id.contains("shield")) return "shield";
+        // if (id.contains("shield")) return "shield";
 
         if (id.contains("pickaxe") || id.contains("shovel") || id.contains("hoe")) return "tools";
 

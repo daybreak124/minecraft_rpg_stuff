@@ -1,12 +1,13 @@
 package net.cold.coldsmod.stat;
 
+import net.cold.coldsmod.accessory.AccessoryItem;
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -78,69 +79,80 @@ public class StatUtils {
     }
 
     public static CustomStats readStatsFromNBT(ItemStack stack) {
-        if (stack == null || stack.isEmpty() || stack.getTag() == null || !stack.getTag().contains("custom_stats")) {
+        if (stack == null || stack.isEmpty()) {
             return new CustomStats();
         }
-        CompoundTag tag = stack.getTag().getCompound("custom_stats");
-        CustomStats stats = new CustomStats();
-        stats.setStr(tag.getInt("str"));
-        stats.setDex(tag.getInt("dex"));
-        stats.setFort(tag.getInt("fort"));
-        stats.setCon(tag.getInt("con"));
-        stats.setPerc(tag.getInt("perc"));
-        stats.setIntelligence(tag.getInt("intelligence"));
-        stats.setInsight(tag.getInt("insight"));
-        stats.setWisdom(tag.getInt("wisdom"));
-        stats.setArmor(tag.getDouble("armor"));
-        stats.setArmorToughness(tag.getDouble("armorToughness"));
-        stats.setMaxHealth(tag.getDouble("maxHealth"));
-        stats.setDamage(tag.getDouble("damage"));
-        stats.setAttackSpeed(tag.getDouble("attackSpeed"));
-        stats.setCritChance(tag.getDouble("critChance"));
-        stats.setCritDamage(tag.getDouble("critDamage"));
-        stats.setMeleeCritChance(tag.getDouble("meleeCritChance"));
-        stats.setMeleeCritDamage(tag.getDouble("meleeCritDamage"));
-        stats.setProjectileCritChance(tag.getDouble("projectileCritChance"));
-        stats.setProjectileCritDamage(tag.getDouble("projectileCritDamage"));
-        stats.setMoveSpeed(tag.getDouble("moveSpeed"));
-        stats.setSwimSpeed(tag.getDouble("swimSpeed"));
-        stats.setXpGain(tag.getDouble("xpGain"));
-        stats.setKnockbackResist(tag.getDouble("knockbackResist"));
-        stats.setDebuffResist(tag.getDouble("debuffResist"));
-        stats.setProjectileDamage(tag.getDouble("projectileDamage"));
-        stats.setDrawSpeed(tag.getDouble("drawSpeed"));
-        stats.setBlockReach(tag.getDouble("blockReach"));
-        stats.setEntityReach(tag.getDouble("entityReach"));
-        stats.setJumpBoost(tag.getDouble("jumpBoost"));
-        stats.setStepHeight(tag.getDouble("stepHeight"));
-        stats.setMiningSpeed(tag.getDouble("miningSpeed"));
-        stats.setLuck(tag.getDouble("Luck"));
-        stats.setArmorMultiplier(tag.getDouble("armorMultiplier"));
-        stats.setToughnessMultiplier(tag.getDouble("toughnessMultiplier"));
-        stats.setHealthMultiplier(tag.getDouble("healthMultiplier"));
-        stats.setDamageMultiplier(tag.getDouble("damageMultiplier"));
-        stats.setMeleeDamageMultiplier(tag.getDouble("meleeDamageMultiplier"));
-        stats.setAttackSpeedMultiplier(tag.getDouble("speedMultiplier"));
-        stats.setCritChanceMultiplier(tag.getDouble("critChanceMultiplier"));
-        stats.setCritDamageMultiplier(tag.getDouble("critDamageMultiplier"));
-        stats.setMeleeCritChanceMultiplier(tag.getDouble("meleeCritChanceMultiplier"));
-        stats.setMeleeCritDamageMultiplier(tag.getDouble("meleeCritDamageMultiplier"));
-        stats.setProjectileCritChanceMultiplier(tag.getDouble("projectileCritChanceMultiplier"));
-        stats.setProjectileCritDamageMultiplier(tag.getDouble("projectileCritDamageMultiplier"));
-        stats.setProjectileDamageMultiplier(tag.getDouble("projectileDamageMultiplier"));
-        stats.setDrawSpeedMultiplier(tag.getDouble("drawSpeedMultiplier"));
-        stats.setMeleeDamage(tag.getDouble("meleeDamage"));
-        stats.setProtection(tag.getDouble("protection"));
-        stats.setProtectionMultiplier(tag.getDouble("protectionMultiplier"));
-        stats.setRestoration(tag.getDouble("restoration"));
-        stats.setRestorationMultiplier(tag.getDouble("restorationMultiplier"));
-        stats.setAmplification(tag.getDouble("amplification"));
-        stats.setAmplificationMultiplier(tag.getDouble("amplificationMultiplier"));
-        return stats;
+
+        if (stack.getTag() != null && stack.getTag().contains("custom_stats")) {
+            CompoundTag tag = stack.getTag().getCompound("custom_stats");
+            CustomStats stats = new CustomStats();
+
+            stats.setStr(tag.getInt("str"));
+            stats.setDex(tag.getInt("dex"));
+            stats.setFort(tag.getInt("fort"));
+            stats.setCon(tag.getInt("con"));
+            stats.setPerc(tag.getInt("perc"));
+            stats.setIntelligence(tag.getInt("intelligence"));
+            stats.setInsight(tag.getInt("insight"));
+            stats.setWisdom(tag.getInt("wisdom"));
+            stats.setArmor(tag.getDouble("armor"));
+            stats.setArmorToughness(tag.getDouble("armorToughness"));
+            stats.setMaxHealth(tag.getDouble("maxHealth"));
+            stats.setDamage(tag.getDouble("damage"));
+            stats.setAttackSpeed(tag.getDouble("attackSpeed"));
+            stats.setCritChance(tag.getDouble("critChance"));
+            stats.setCritDamage(tag.getDouble("critDamage"));
+            stats.setMeleeCritChance(tag.getDouble("meleeCritChance"));
+            stats.setMeleeCritDamage(tag.getDouble("meleeCritDamage"));
+            stats.setProjectileCritChance(tag.getDouble("projectileCritChance"));
+            stats.setProjectileCritDamage(tag.getDouble("projectileCritDamage"));
+            stats.setMoveSpeed(tag.getDouble("moveSpeed"));
+            stats.setSwimSpeed(tag.getDouble("swimSpeed"));
+            stats.setXpGain(tag.getDouble("xpGain"));
+            stats.setKnockbackResist(tag.getDouble("knockbackResist"));
+            stats.setDebuffResist(tag.getDouble("debuffResist"));
+            stats.setProjectileDamage(tag.getDouble("projectileDamage"));
+            stats.setDrawSpeed(tag.getDouble("drawSpeed"));
+            stats.setBlockReach(tag.getDouble("blockReach"));
+            stats.setEntityReach(tag.getDouble("entityReach"));
+            stats.setJumpBoost(tag.getDouble("jumpBoost"));
+            stats.setStepHeight(tag.getDouble("stepHeight"));
+            stats.setMiningSpeed(tag.getDouble("miningSpeed"));
+            stats.setLuck(tag.getDouble("Luck"));
+            stats.setArmorMultiplier(tag.getDouble("armorMultiplier"));
+            stats.setToughnessMultiplier(tag.getDouble("toughnessMultiplier"));
+            stats.setHealthMultiplier(tag.getDouble("healthMultiplier"));
+            stats.setDamageMultiplier(tag.getDouble("damageMultiplier"));
+            stats.setMeleeDamageMultiplier(tag.getDouble("meleeDamageMultiplier"));
+            stats.setAttackSpeedMultiplier(tag.getDouble("speedMultiplier"));
+            stats.setCritChanceMultiplier(tag.getDouble("critChanceMultiplier"));
+            stats.setCritDamageMultiplier(tag.getDouble("critDamageMultiplier"));
+            stats.setMeleeCritChanceMultiplier(tag.getDouble("meleeCritChanceMultiplier"));
+            stats.setMeleeCritDamageMultiplier(tag.getDouble("meleeCritDamageMultiplier"));
+            stats.setProjectileCritChanceMultiplier(tag.getDouble("projectileCritChanceMultiplier"));
+            stats.setProjectileCritDamageMultiplier(tag.getDouble("projectileCritDamageMultiplier"));
+            stats.setProjectileDamageMultiplier(tag.getDouble("projectileDamageMultiplier"));
+            stats.setDrawSpeedMultiplier(tag.getDouble("drawSpeedMultiplier"));
+            stats.setMeleeDamage(tag.getDouble("meleeDamage"));
+            stats.setProtection(tag.getDouble("protection"));
+            stats.setProtectionMultiplier(tag.getDouble("protectionMultiplier"));
+            stats.setRestoration(tag.getDouble("restoration"));
+            stats.setRestorationMultiplier(tag.getDouble("restorationMultiplier"));
+            stats.setAmplification(tag.getDouble("amplification"));
+            stats.setAmplificationMultiplier(tag.getDouble("amplificationMultiplier"));
+
+            return stats;
+        }
+
+        if (stack.getItem() instanceof AccessoryItem accessory) {
+            return accessory.getStats();
+        }
+
+        return new CustomStats();
     }
 
     public static boolean hasStats(ItemStack stack) {
-        return stack != null && !stack.isEmpty() && stack.getTag() != null && stack.getTag().contains("custom_stats");
+        return stack != null && !stack.isEmpty() && ((stack.getTag() != null && stack.getTag().contains("custom_stats")) || stack.getItem() instanceof AccessoryItem);
     }
 
     public static void writeRarityToNBT(ItemStack stack, ItemRarity rarity) {
@@ -294,7 +306,7 @@ public class StatUtils {
             double value = (double) pair[1];
             if (value == 0) continue;
 
-            String formattedValue = formatValue(value);
+            String formattedValue = formatValue(100 * value);
             tooltip.add(Component.literal(String.format("%s: %s%s%%", name, value >= 0 ? "+" : "", formattedValue))
                     .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
         }
@@ -344,7 +356,7 @@ public class StatUtils {
             double value = (double) pair[1];
             if (value == 0) continue;
 
-            String formattedValue = formatValue(value);
+            String formattedValue = formatValue(100 * value);
             tooltip.add(Component.literal(String.format("%s: %s%s%%", name, value >= 0 ? "+" : "", formattedValue))
                     .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
         }
@@ -378,7 +390,7 @@ public class StatUtils {
             double value = (double) pair[1];
             if (value == 0) continue;
 
-            String formattedValue = formatValue(value);
+            String formattedValue = formatValue(100 * value);
             tooltip.add(Component.literal(String.format("%s: %s%s%%",
                             name, value >= 0 ? "+" : "", formattedValue))
                     .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x3b8132))));

@@ -19,8 +19,7 @@ public class DirectedHatredSkill {
         if (!event.isVanillaCritical()) return;
 
         Player player = event.getEntity();
-        if (!player.getPersistentData().getBoolean("directed_hatred_eligible")) return;
-        if (!player.hasEffect(ModEffects.DIRECTED_HATRED_READY.get()) || player.hasEffect(ModEffects.RECKONING_COOLDOWN.get()))
+        if (!player.hasEffect(ModEffects.DIRECTED_HATRED_READY.get()))
             return;
         if (player.level().isClientSide) return;
         double range = 10.0;
@@ -34,7 +33,7 @@ public class DirectedHatredSkill {
         for (LivingEntity entity : nearby) {
             Monster monster = (Monster) entity;
             monster.setTarget(player);
-            monster.addEffect(new MobEffectInstance(ModEffects.BLINDED_BY_HATRED.get(), 20 * 6, 0, false, true));
+            monster.addEffect(new MobEffectInstance(ModEffects.BLINDED_BY_HATRED.get(), 20 * 6, 0, false, false, true));
         }
 
         player.level().playSound(
@@ -42,11 +41,11 @@ public class DirectedHatredSkill {
                 player.getX(), player.getY(), player.getZ(),
                 SoundEvents.ANVIL_PLACE,
                 SoundSource.PLAYERS,
-                0.4F,
+                0.35F,
                 1.0F
         );
 
         player.removeEffect(ModEffects.DIRECTED_HATRED_READY.get());
-        player.addEffect(new MobEffectInstance(ModEffects.DIRECTED_HATRED_COOLDOWN.get(), 20 * 10, 0, false, false));
+        player.addEffect(new MobEffectInstance(ModEffects.DIRECTED_HATRED_COOLDOWN.get(), 20 * 10, 0, false, false, true));
     }
 }

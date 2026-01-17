@@ -1,10 +1,11 @@
 package net.cold.coldsmod.stat;
 
 import net.cold.coldsmod.item.ModItems;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.world.item.*;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -215,22 +216,4 @@ public class ItemRarityUpgrade {
             tag.remove("needsOnlyAttributes");
         }
     }
-
-    // last resort
-//    @SubscribeEvent
-//    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-//        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide) return;
-//
-//        for (ItemStack stack : event.player.getInventory().items) {
-//            if (stack != null && !stack.isEmpty() && stack.hasTag() && stack.getTag().getBoolean("needsStats")) {
-//                ItemRarity rarity = ItemRarityUtils.readRarityFromNBT(stack);
-//                CustomStats stats = StatGeneration.generateStats(ItemRarityUpgrade.getItemType(stack), rarity);
-//                StatUtils.writeStatsToNBT(stack, stats);
-//                StatUtils.applyAttributes(stack, ItemRarityUpgrade.getItemType(stack), rarity);
-//
-//                // Remove the flag
-//                stack.getTag().remove("needsStats");
-//            }
-//        }
-//    }
 }

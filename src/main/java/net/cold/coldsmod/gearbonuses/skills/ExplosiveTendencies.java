@@ -2,8 +2,8 @@ package net.cold.coldsmod.gearbonuses.skills;
 
 import net.cold.coldsmod.gearbonuses.effects.ModEffects;
 import net.cold.coldsmod.stat.ItemRarityUtils;
+import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -28,6 +28,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.UUID;
 
+import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
+
 public class ExplosiveTendencies {
 
     @SubscribeEvent
@@ -35,16 +37,15 @@ public class ExplosiveTendencies {
         if (!(event.getEntity() instanceof AbstractArrow arrow)) return;
         if (!(arrow.getOwner() instanceof Player player)) return;
 
-        if (!player.getPersistentData().getBoolean("explosive_tendencies_applied")) return;
 
         if (!player.hasEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get())) return;
 
         ItemStack main = player.getMainHandItem();
         ItemStack off  = player.getOffhandItem();
 
-        boolean mainIsBow      = "bow".equals(ItemRarityUtils.getItemType(main));
+        boolean mainIsBow = "bow".equals(ItemRarityUtils.getItemType(main));
         boolean mainIsCrossbow = "crossbow".equals(ItemRarityUtils.getItemType(main));
-        boolean offIsCrossbow  = "crossbow".equals(ItemRarityUtils.getItemType(off));
+        boolean offIsCrossbow = "crossbow".equals(ItemRarityUtils.getItemType(off));
 
         boolean isCrossbow = mainIsCrossbow || (offIsCrossbow && !mainIsBow);
         if (!isCrossbow) return;
@@ -68,7 +69,9 @@ public class ExplosiveTendencies {
         Vec3 targetPos = target.position();
         Vec3 direction = shooter.position().subtract(targetPos).normalize();
         Vec3 spawnVec = targetPos.add(direction.scale(3));
+
         BlockPos spawnPos = BlockPos.containing(spawnVec);
+
         Creeper creeper = EntityType.CREEPER.spawn(server, spawnPos, MobSpawnType.TRIGGERED);
         if (creeper == null) { return; }
 
@@ -83,6 +86,7 @@ public class ExplosiveTendencies {
         creeper.setAggressive(true);
 
         creeper.setTarget(target);
+
         double x = target.getX();
         double y = target.getY();
         double z = target.getZ();
@@ -113,6 +117,7 @@ public class ExplosiveTendencies {
                     false
             ));
         }
+        proj.getPersistentData().putBoolean("explosive_tendency_tagged", false);
     }
 
     @SubscribeEvent
@@ -156,15 +161,25 @@ public class ExplosiveTendencies {
         Player owner = server.getPlayerList().getPlayer(ownerUUID);
         if (owner == null) return;
 
-        CompoundTag data = owner.getPersistentData();
-
         double finalDamage = event.getAmount();
 
-        if (owner.getRandom().nextDouble() < (data.getDouble("projectileCritChanceIncrease") + 10) / 100.0) {
-            finalDamage *= 1.5 + data.getDouble("projectileCritDamageIncrease") / 100.0;
+        double totalProjDamage = getScaledValue(owner,
+                ModAttributes.PROJECTILE_POTENCY.get(),
+                ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
+
+        double totalCritChance = getScaledValue(owner,
+                ModAttributes.PROJECTILE_ACCURACY.get(),
+                ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get()) + 10.0;
+
+        double totalCritDamage = getScaledValue(owner,
+                ModAttributes.PROJECTILE_PRECISION.get(),
+                ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get());
+
+        if (owner.getRandom().nextDouble() < (totalCritChance / 100.0)) {
+            finalDamage *= (1.0 + (totalCritDamage / 100.0));
         }
 
-        finalDamage *= 1 + data.getDouble("projectileDamageIncrease") / 100.0;
+        finalDamage *= (1.5 + (totalProjDamage / 100.0));
 
         event.setAmount((float) finalDamage);
     }

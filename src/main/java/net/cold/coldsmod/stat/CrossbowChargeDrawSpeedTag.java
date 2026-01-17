@@ -15,7 +15,6 @@ public class CrossbowChargeDrawSpeedTag {
         ItemStack stack = event.getItem();
         if (!"crossbow".equals(ItemRarityUtils.getItemType(stack))) return;
         CompoundTag data = player.getPersistentData();
-        new AttributeApplier().applyBlessings(player);
 
         double baseDrawSpeedIncrease = data.getDouble("drawSpeedIncrease");
             stack.getOrCreateTag().putDouble("drawSpeedIncrease", (baseDrawSpeedIncrease));

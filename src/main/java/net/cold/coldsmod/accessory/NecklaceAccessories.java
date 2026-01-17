@@ -1,13 +1,13 @@
 package net.cold.coldsmod.accessory;
 
 import net.cold.coldsmod.ColdsMod;
+import net.cold.coldsmod.stat.CustomStats;
+import net.cold.coldsmod.stat.ItemRarity;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.cold.coldsmod.stat.CustomStats;
-import net.cold.coldsmod.stat.ItemRarity;
 
 public class NecklaceAccessories {
 
@@ -43,7 +43,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Collar of Envy")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(3).setDex(5).setMeleeDamage(9).setFort(4).setArmorToughness(4).setMeleeDamageMultiplier(5).build())
+                    .withStats(new CustomStats.Builder().setInsight(3).setDex(5).setMeleeDamage(9).setFort(4).setArmorToughness(4).setMeleeDamageMultiplier(0.05).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Hell)
                     .build()
     );
@@ -54,7 +54,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Collar of Envy")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(4).setDex(6).setMeleeDamage(12).setFort(6).setArmorToughness(6).setMeleeDamageMultiplier(10).build())
+                    .withStats(new CustomStats.Builder().setInsight(4).setDex(6).setMeleeDamage(12).setFort(6).setArmorToughness(6).setMeleeDamageMultiplier(0.1).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Hell)
                     .build()
     );
@@ -88,7 +88,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Key of the Unknown")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(3).setFort(8).setKnockbackResist(15).setArmor(4).setCon(3).setArmorMultiplier(3.75).setDebuffResist(5).build())
+                    .withStats(new CustomStats.Builder().setInsight(3).setFort(8).setKnockbackResist(15).setArmor(4).setCon(3).setArmorMultiplier(0.0375).setDebuffResist(5).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Otherworlds)
                     .build()
     );
@@ -99,7 +99,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Key of the Unknown")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(4).setFort(10).setKnockbackResist(15).setArmor(5).setArmorMultiplier(7.5).setCon(6).setDebuffResist(12).build())
+                    .withStats(new CustomStats.Builder().setInsight(4).setFort(10).setKnockbackResist(15).setArmor(5).setArmorMultiplier(0.075).setCon(6).setDebuffResist(12).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Otherworlds)
                     .build()
     );
@@ -134,7 +134,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Dragon Teeth Necklace")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(3).setStr(6).setCritChance(15).setMaxHealth(1).setPerc(6).setCritDamageMultiplier(4).build())
+                    .withStats(new CustomStats.Builder().setInsight(3).setStr(6).setCritChance(15).setMaxHealth(1).setPerc(6).setCritDamageMultiplier(0.04).build())
                     .withLocation(AccessoryItem.AccessoryLocation.End)
                     .build()
     );
@@ -145,7 +145,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Dragon Teeth Necklace")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(4).setStr(8).setCritChance(18).setMaxHealth(1.5).setPerc(8).setCritDamageMultiplier(8).build())
+                    .withStats(new CustomStats.Builder().setInsight(4).setStr(8).setCritChance(18).setMaxHealth(1.5).setPerc(8).setCritDamageMultiplier(0.08).build())
                     .withLocation(AccessoryItem.AccessoryLocation.End)
                     .build()
     );
@@ -180,7 +180,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Hanging Tiger Tooth")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(3).setDex(9).setProjectileDamage(7.5).setDrawSpeed(7.5).setAttackSpeed(6).setDebuffResist(10).setDrawSpeedMultiplier(5).build())
+                    .withStats(new CustomStats.Builder().setInsight(3).setDex(9).setProjectileDamage(7.5).setDrawSpeed(7.5).setAttackSpeed(6).setDebuffResist(10).setDrawSpeedMultiplier(0.05).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Jungle)
                     .build()
     );
@@ -191,7 +191,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Hanging Tiger Tooth")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(4).setDex(12).setProjectileDamage(12.5).setDrawSpeed(13.5).setAttackSpeed(10).setDrawSpeedMultiplier(10).setDebuffResist(12.5).build())
+                    .withStats(new CustomStats.Builder().setInsight(4).setDex(12).setProjectileDamage(12.5).setDrawSpeed(13.5).setAttackSpeed(10).setDrawSpeedMultiplier(0.10).setDebuffResist(12.5).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Jungle)
                     .build()
     );
@@ -316,7 +316,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Stolen Legacies Choker")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(3).setXpGain(25).setProjectileDamage(16).setCritDamage(12).setCritDamageMultiplier(5).build())
+                    .withStats(new CustomStats.Builder().setInsight(3).setXpGain(25).setProjectileDamage(16).setCritDamage(12).setCritDamageMultiplier(0.05).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Pillage)
                     .build()
     );
@@ -327,7 +327,7 @@ public class NecklaceAccessories {
                     .withDisplayName("Stolen Legacies Choker")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Necklace)
-                    .withStats(new CustomStats.Builder().setInsight(4).setXpGain(30).setProjectileDamage(20).setCritDamage(16).setCritDamageMultiplier(10).build())
+                    .withStats(new CustomStats.Builder().setInsight(4).setXpGain(30).setProjectileDamage(20).setCritDamage(16).setCritDamageMultiplier(0.1).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Pillage)
                     .build()
     );

@@ -7,17 +7,21 @@ import net.cold.coldsmod.bow.BowAnimHandler;
 import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.cold.coldsmod.damage.CustomMeleeDamageNoProcs;
 import net.cold.coldsmod.formulas.DebuffResistHandler;
+import net.cold.coldsmod.gearbonuses.CooldownCycle;
 import net.cold.coldsmod.gearbonuses.effects.ModEffects;
 import net.cold.coldsmod.gearbonuses.effects.PickaxeTorch;
 import net.cold.coldsmod.gearbonuses.effects.SoulSeveranceActive;
+import net.cold.coldsmod.gearbonuses.neweffects.*;
 import net.cold.coldsmod.gearbonuses.skills.*;
 import net.cold.coldsmod.item.ModItems;
+import net.cold.coldsmod.mob.SbeveRenderer;
 import net.cold.coldsmod.network.NetworkHandler;
 import net.cold.coldsmod.stat.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -46,6 +50,7 @@ public class ColdsMod {
     public ColdsMod(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
 
+        ModAttributes.ATTRIBUTES.register(modEventBus);
         ModItems.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(new ItemModifier());
         modEventBus.addListener(this::commonSetup);
@@ -54,7 +59,6 @@ public class ColdsMod {
         modEventBus.addListener(this::addCreative);
         modEventBus.addListener(this::enqueueIMC);
         ModLootModifiers.register();
-        MinecraftForge.EVENT_BUS.register(new AttributeApplier());
         MinecraftForge.EVENT_BUS.register(new DebuffResistHandler());
         NetworkHandler.register();
         ModEffects.EFFECTS.register(modEventBus);
@@ -76,13 +80,26 @@ public class ColdsMod {
         MinecraftForge.EVENT_BUS.register(SoulSeveranceActive.class);
         MinecraftForge.EVENT_BUS.register(Vitalization.class);
         MinecraftForge.EVENT_BUS.register(ExplosiveTendencies.class);
-
+        MinecraftForge.EVENT_BUS.register(CombatantsAidReady.class);
+        MinecraftForge.EVENT_BUS.register(EntwinedOfferingActive.class);
+        MinecraftForge.EVENT_BUS.register(OverconfidenceActive.class);
+        MinecraftForge.EVENT_BUS.register(PulsatingLove.class);
+        MinecraftForge.EVENT_BUS.register(RadiatingWarmthEffect.class);
+        MinecraftForge.EVENT_BUS.register(Sanctuary.class);
+        MinecraftForge.EVENT_BUS.register(SummoningStone.class);
+        MinecraftForge.EVENT_BUS.register(VortexReady.class);
+        MinecraftForge.EVENT_BUS.register(BlackenedHeart.class);
         MinecraftForge.EVENT_BUS.register(StatUtils.class);
+        MinecraftForge.EVENT_BUS.register(EffectUtils.class);
+        MinecraftForge.EVENT_BUS.register(FocusedEnergyReady.class);
+        MinecraftForge.EVENT_BUS.register(ThornedParryReady.class);
 
         MinecraftForge.EVENT_BUS.register(CustomMeleeDamageNoProcs.class);
         MinecraftForge.EVENT_BUS.register(CustomMeleeDamage.class);
 
         MinecraftForge.EVENT_BUS.register(CrossbowChargeDrawSpeedTag.class);
+
+        MinecraftForge.EVENT_BUS.register(new Formulas());
 
 
         RingAccessories.register(modEventBus);
@@ -96,7 +113,8 @@ public class ColdsMod {
         CreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
 
         ModSounds.SOUND_EVENTS.register(modEventBus);
-
+        modEventBus.addListener(ModAttributes::onModifyEntityAttributes);
+        ModEntities.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -109,7 +127,7 @@ public class ColdsMod {
 
         ItemRarityUtils.init();
         CooldownCycle.init();
-
+        MinecraftForge.EVENT_BUS.register(ModAttributes.class);
     }
 
     private void copyDefaultConfig(String fileName) {
@@ -144,6 +162,14 @@ public class ColdsMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        }
+
+        @SubscribeEvent
+        public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerEntityRenderer(
+                    ModEntities.SBEVE.get(),
+                    SbeveRenderer::new
+            );
         }
     }
 
@@ -185,30 +211,16 @@ public class ColdsMod {
         );
 
         InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aafblessinghelm")
-                        .size(1)
+                () -> new SlotTypeMessage.Builder("aafblessingcombat")
+                        .size(4)
                         .icon(new ResourceLocation("coldsmod", "item/slot1"))
                         .build()
         );
 
         InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aagblessingchest")
+                () -> new SlotTypeMessage.Builder("aafblessingpresence")
                         .size(1)
-                        .icon(new ResourceLocation("coldsmod", "item/slot2"))
-                        .build()
-        );
-
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aahblessinglegs")
-                        .size(1)
-                        .icon(new ResourceLocation("coldsmod", "item/slot3"))
-                        .build()
-        );
-
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aaiblessingfeet")
-                        .size(1)
-                        .icon(new ResourceLocation("coldsmod", "item/slot4"))
+                        .icon(new ResourceLocation("coldsmod", "item/slot10"))
                         .build()
         );
 
@@ -234,13 +246,6 @@ public class ColdsMod {
                 () -> new SlotTypeMessage.Builder("aamblessingshield")
                         .size(1)
                         .icon(new ResourceLocation("coldsmod", "item/slot8"))
-                        .build()
-        );
-
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aaoblessingstatus")
-                        .size(1)
-                        .icon(new ResourceLocation("coldsmod", "item/slot10"))
                         .build()
         );
 

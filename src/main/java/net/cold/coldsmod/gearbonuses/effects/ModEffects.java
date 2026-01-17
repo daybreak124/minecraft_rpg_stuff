@@ -1,5 +1,6 @@
 package net.cold.coldsmod.gearbonuses.effects;
 
+import net.cold.coldsmod.gearbonuses.neweffects.*;
 import net.cold.coldsmod.gearbonuses.skills.BastionActive;
 import net.cold.coldsmod.gearbonuses.skills.BronzewoodCooldown;
 import net.cold.coldsmod.gearbonuses.skills.RetaliateActive;
@@ -168,4 +169,61 @@ public class ModEffects {
 
     public static final RegistryObject<MobEffect> SOLARA =
             EFFECTS.register("solara", Solara::new);
+
+    public static final RegistryObject<MobEffect> OVERCONFIDENCE_READY =
+            EFFECTS.register("overconfidence_ready", OverconfidenceReady::new);
+
+    public static final RegistryObject<MobEffect> OVERCONFIDENCE_COOLDOWN =
+            EFFECTS.register("overconfidence_cd", OverconfidenceCD::new);
+
+    public static final RegistryObject<MobEffect> OVERCONFIDENCE_ACTIVE =
+            EFFECTS.register("overconfidence_active", OverconfidenceActive::new);
+
+    public static final RegistryObject<MobEffect> ENTWINED_OFFERING_ACTIVE =
+            EFFECTS.register("entwined_offering_active", EntwinedOfferingActive::new);
+
+    public static final RegistryObject<MobEffect> NIMBLE_GETAWAY_COOLDOWN =
+            EFFECTS.register("nimble_getaway_cd", NimbleGetawayCD::new);
+
+    public static final RegistryObject<MobEffect> NIMBLE_GETAWAY_ACTIVE =
+            EFFECTS.register("nimble_getaway_active", NimbleGetawayActive::new);
+
+    public static final RegistryObject<MobEffect> BlACKENED_HEART =
+            EFFECTS.register("blackened_heart", BlackenedHeart::new);
+
+    public static final RegistryObject<MobEffect> COMBATANTS_AID_CD =
+            EFFECTS.register("combatants_aid_cd", CombatantsAidCD::new);
+
+    public static final RegistryObject<MobEffect> COMBATANTS_AID_READY =
+            EFFECTS.register("combatants_aid_ready", CombatantsAidReady::new);
+
+    public static final RegistryObject<MobEffect> SANCTUARY_FATIGUE =
+            EFFECTS.register("sanctuary_fatigue", SanctuaryFatigue::new);
+
+    public static final RegistryObject<MobEffect> SANCTUARY_SHARED =
+            EFFECTS.register("sanctuary_shared", SanctuaryShared::new);
+
+    public static final RegistryObject<MobEffect> VORTEX_CD =
+            EFFECTS.register("vortex_cd", VortexCD::new);
+
+    public static final RegistryObject<MobEffect> VORTEX_READY =
+            EFFECTS.register("vortex_ready", VortexReady::new);
+
+    public static final RegistryObject<MobEffect> RADIATING_WARMTH =
+            EFFECTS.register("radiating_warmth", RadiatingWarmthTimer::new);
+
+    public static final RegistryObject<MobEffect> SBEVE_CD =
+            EFFECTS.register("sbeve_cd", SbeveCD::new);
+
+    public static final RegistryObject<MobEffect> FOCUSED_ENERGY_READY =
+            EFFECTS.register("focused_energy_ready", FocusedEnergyReady::new);
+
+    public static final RegistryObject<MobEffect> FOCUSED_ENERGY_CD =
+            EFFECTS.register("focused_energy_cd", FocusedEnergyCD::new);
+
+    public static final RegistryObject<MobEffect> THORNED_PARRY_READY =
+            EFFECTS.register("thorned_parry_ready", ThornedParryReady::new);
+
+    public static final RegistryObject<MobEffect> THORNED_PARRY_CD =
+            EFFECTS.register("thorned_parry_cd", ThornedParryCD::new);
 }

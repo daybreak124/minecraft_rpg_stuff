@@ -1,0 +1,63 @@
+package net.cold.coldsmod.gearbonuses.neweffects;
+
+import net.cold.coldsmod.gearbonuses.effects.ModEffects;
+import net.cold.coldsmod.stat.ModAttributes;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+
+import java.util.List;
+
+import static net.cold.coldsmod.gearbonuses.neweffects.EffectUtils.spawnParticleRing;
+import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
+
+public class RadiatingWarmthTimer extends MobEffect {
+
+    public RadiatingWarmthTimer() {
+        super(MobEffectCategory.NEUTRAL, 0xFF0000); // category + color
+    }
+
+    @Override
+    public boolean isDurationEffectTick(int duration, int amplifier) {
+        return false; // only trigger via events
+    }
+
+
+    public static void radiate(Player player) {
+        if (player.level().isClientSide) return;
+
+        double healIncrease = getScaledValue(player,
+                ModAttributes.RESTORATION.get(),
+                ModAttributes.RESTORATION_MULTIPLIER.get());
+
+        Level level = player.level();
+
+        if (level instanceof ServerLevel serverLevel) {
+            spawnParticleRing(serverLevel, player, ParticleTypes.COMPOSTER, 8, 8*20);
+        }
+
+        List<LivingEntity> entities = level.getEntitiesOfClass(
+                LivingEntity.class,
+                player.getBoundingBox().inflate(8),
+                e -> (e instanceof Player || e instanceof TamableAnimal tamable && tamable.isTame())
+        );
+
+        player.heal((float) (1.25 * (1.0 + (healIncrease / 100.0))));
+
+        EffectUtils.spawnComposterBurst(player);
+
+        for (LivingEntity target : entities) {
+            if (target.getHealth() < target.getMaxHealth() && !(target.hasEffect(ModEffects.BlACKENED_HEART.get()))) {
+                target.heal((float) (1.25 * (1.0 + (healIncrease / 100.0))));
+
+                EffectUtils.playHealSound(target);
+                EffectUtils.spawnComposterBurst((Player) target);
+            }
+        }
+    }
+}

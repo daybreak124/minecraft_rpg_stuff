@@ -1,5 +1,8 @@
 package net.cold.coldsmod.accessory;
 
+import net.cold.coldsmod.stat.CustomStats;
+import net.cold.coldsmod.stat.ItemRarity;
+import net.cold.coldsmod.stat.StatUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -9,12 +12,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.cold.coldsmod.stat.ItemRarity;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
+
 import java.util.List;
-import net.cold.coldsmod.stat.CustomStats;
-import net.cold.coldsmod.stat.StatUtils;
 
 public class AccessoryItem extends Item implements ICurioItem {
 
@@ -127,13 +128,6 @@ public class AccessoryItem extends Item implements ICurioItem {
     }
 
     @Override
-    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        if (!slotContext.getWearer().level().isClientSide) {
-            StatUtils.writeStatsToNBT(stack, this.stats);
-        }
-    }
-
-    @Override
     public boolean canEquip(SlotContext slotContext, ItemStack stack) {
         if (slotContext.entity() instanceof Player player) {
             var handler = top.theillusivec4.curios.api.CuriosApi.getCuriosInventory(player).orElse(null);
@@ -168,4 +162,6 @@ public class AccessoryItem extends Item implements ICurioItem {
         tooltip.add(location.getColoredName());
         tooltip.add(Component.literal(rarity.displayName).withStyle(rarity.color));
     }
+
+    public CustomStats getStats() { return this.stats; }
 }

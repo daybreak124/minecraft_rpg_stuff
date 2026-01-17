@@ -3,11 +3,11 @@ package net.cold.coldsmod;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.File;
 import java.io.FileReader;

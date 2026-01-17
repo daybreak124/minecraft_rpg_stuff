@@ -5,16 +5,13 @@
   "curios.identifier.aacbracelets": "Bracelet",
   "curios.identifier.aadrings": "Ring",
   "curios.identifier.aaeutility": "Utility",
-  "curios.identifier.aafblessinghelm": "Head Blessing",
-  "curios.identifier.aagblessingchest": "Chest Blessing",
-  "curios.identifier.aahblessinglegs": "Legs Blessing",
-  "curios.identifier.aaiblessingfeet": "Feet Blessing",
-  "curios.identifier.aajblessingsword": "Sword Blessing",
+  "curios.identifier.aafblessingcombat": "Combat Blessing",
+  "curios.identifier.aafblessingpresence": "Presence Blessing",
+  "curios.identifier.aajblessingsword": "Melee Blessing",
   "curios.identifier.aakblessingbow": "Bow Blessing",
   "curios.identifier.aalblessingcrossbow": "Crossbow Blessing",
   "curios.identifier.aamblessingshield": "Shield Blessing",
   "curios.identifier.aanblessingtool": "Utility Blessing",
-  "curios.identifier.aaoblessingstatus": "General Blessing",
   "creativetab.upgrade_item_tab": "Cold's RPG Stuff: Upgrades",
   "creativetab.accessory_tab": "Cold's RPG Stuff: Accessories",
   "creativetab.blessing_tab": "Cold's RPG Stuff: Blessings",
@@ -27,7 +24,7 @@
   "effect.coldsmod.dfa_up": "Death From Above: Ready",
   "effect.coldsmod.dfa_cd": "Death From Above: Cooldown",
 
-  "effect.coldsmod.bastion_active": "Bastion: Active",
+  "effect.coldsmod.bastion_active": "Bastion",
   "effect.coldsmod.bastion_up": "Bastion: Ready",
   "effect.coldsmod.bastion_cd": "Bastion: Cooldown",
 
@@ -53,16 +50,16 @@
   "effect.coldsmod.intimidating_presence_up": "Intimidating Presence: Ready",
   "effect.coldsmod.intimidating_presence_cd": "Intimidating Presence: Cooldown",
 
-  "effect.coldsmod.reckoning_active": "Reckoning: Active",
+  "effect.coldsmod.reckoning_active": "Reckoning",
   "effect.coldsmod.reckoning_up": "Reckoning: Ready",
   "effect.coldsmod.reckoning_cd": "Reckoning: Cooldown",
 
-  "effect.coldsmod.retaliate_active": "Retaliate: Active",
+  "effect.coldsmod.retaliate_active": "Retaliate",
   "effect.coldsmod.retaliate_up": "Retaliate: Ready",
   "effect.coldsmod.retaliate_cd": "Retaliate: Cooldown",
 
   "effect.coldsmod.adrenaline_injection_cd": "Adrenaline Injection: Cooldown",
-  "effect.coldsmod.adrenaline_injection_up": "Adrenaline Injection: Active",
+  "effect.coldsmod.adrenaline_injection_up": "Injected",
 
   "effect.coldsmod.deceptive_heart_ready": "Deceptive Heart: Ready",
   "effect.coldsmod.deceptive_heart_cd": "Deceptive Heart: Cooldown",
@@ -73,7 +70,7 @@
 
   "effect.coldsmod.soul_severance_ready": "Soul Severance: Ready",
   "effect.coldsmod.soul_severance_cd": "Soul Severance: Cooldown",
-  "effect.coldsmod.soul_severance_up": "Soul Severance: Active",
+  "effect.coldsmod.soul_severance_up": "Soul Siphon",
 
   "effect.coldsmod.itf_cd": "Into the Fray: Cooldown",
   "effect.coldsmod.itf_stack": "Into the Fray",
@@ -83,12 +80,40 @@
 
   "effect.coldsmod.quantum_leap_ready": "Quantum Leap: Ready",
   "effect.coldsmod.quantum_leap_cd": "Quantum Leap: Cooldown",
-  "effect.coldsmod.quantum_leap_up": "Quantum Leap: Active",
-  "effect.coldsmod.enhanced_quantum_leap": "Enhanced Quantum Leap",
+  "effect.coldsmod.quantum_leap_up": "Quantum Leap",
+  "effect.coldsmod.enhanced_quantum_leap": "Enhanced Leap",
 
   "effect.coldsmod.explosive_tendencies_stack": "Explosive Tendencies",
   "effect.coldsmod.explosive_tendencies_timer": "Explosive Tendencies Timer",
 
-  "effect.coldsmod.solara": "Solara"
+  "effect.coldsmod.solara": "Solara",
 
+  "effect.coldsmod.overconfidence_active": "Overconfident",
+  "effect.coldsmod.overconfidence_cd": "Overconfidence: Cooldown",
+  "effect.coldsmod.overconfidence_ready": "Overconfidence: Ready",
+  "effect.coldsmod.blackened_heart": "Blackened Heart",
+
+  "effect.coldsmod.entwined_offering_active": "Offering",
+
+  "effect.coldsmod.nimble_getaway_cd": "Nimble Getaway: Cooldown",
+  "effect.coldsmod.nimble_getaway_active": "Nimble Getaway",
+
+  "effect.coldsmod.combatants_aid_cd": "Combatant's Aid: Cooldown",
+  "effect.coldsmod.combatants_aid_ready": "Combatant's Aid: Ready",
+
+  "effect.coldsmod.radiating_warmth": "Radiating Warmth",
+
+  "effect.coldsmod.vortex_cd": "Vortex: Cooldown",
+  "effect.coldsmod.vortex_ready": "Vortex: Ready",
+
+  "effect.coldsmod.sanctuary_shared": "Shared Divinity",
+  "effect.coldsmod.sanctuary_fatigue": "Sanctuary Fatigue",
+
+  "effect.coldsmod.sbeve_cd": "Sbeve: Cooldown",
+
+  "effect.coldsmod.focused_energy_cd": "Focused Energy: Cooldown",
+  "effect.coldsmod.focused_energy_ready": "Focused Energy: Ready",
+
+  "effect.coldsmod.thorned_parry_cd": "Thorned Parry: Cooldown",
+  "effect.coldsmod.thorned_parry_ready": "Thorned Parry: Ready"
 }

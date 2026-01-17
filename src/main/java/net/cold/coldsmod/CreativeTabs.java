@@ -180,16 +180,21 @@ public class CreativeTabs {
                                 output.accept(ModItems.WARLORDS_GAZE.get());
                                 output.accept(ModItems.HORN_OF_FEARMONGERING.get());
                                 output.accept(ModItems.HANKS_EYE.get());
+                                output.accept(ModItems.PRIDE_INFUSED_AIGRETTE.get());
 
                                 output.accept(ModItems.RAGE_AMPLIFIER.get());
                                 output.accept(ModItems.DROP_OF_SACRIFICIAL_BLOOD.get());
                                 output.accept(ModItems.HELL_ON_EARTH.get());
+                                output.accept(ModItems.IMMOLATION_OF_HEART.get());
 
                                 output.accept(ModItems.BANNER_OF_DETERMINATION.get());
                                 output.accept(ModItems.WORMHOLE.get());
+                                output.accept(ModItems.FOX_EYE.get());
+                                output.accept(ModItems.RESTORING_AURA.get());
 
                                 output.accept(ModItems.ORB_OF_WORLD_DESTRUCTION.get());
                                 output.accept(ModItems.SOUL_MAGNET.get());
+                                output.accept(ModItems.BROKEN_HEALTH_POTION.get());
 
                                 output.accept(ModItems.LIGHTNING_INFUSION.get());
                                 output.accept(ModItems.BLOODTHIRST.get());
@@ -198,15 +203,21 @@ public class CreativeTabs {
                                 output.accept(ModItems.HANKS_OTHER_EYE.get());
                                 output.accept(ModItems.CUPIDS_ARROW.get());
                                 output.accept(ModItems.LIFE_TOUCH.get());
+                                output.accept(ModItems.WIND_WALKER_ARROW.get());
 
                                 output.accept(ModItems.WEAK_POINT_STUDIES.get());
                                 output.accept(ModItems.ENDLESS_ADRENALINE_SYRINGE.get());
                                 output.accept(ModItems.IGNITION_MARK.get());
+                                output.accept(ModItems.VIAL_OF_BURSTING_ENERGY.get());
 
                                 output.accept(ModItems.FORTRESS_OF_SOLITUDE.get());
                                 output.accept(ModItems.GUARDIAN_ANGEL.get());
+                                output.accept(ModItems.DIVINE_SHIELD.get());
+                                output.accept(ModItems.THORN_COVERED_FORCEFIELD.get());
 
                                 output.accept(ModItems.SUNSTONE_GEM.get());
+                                output.accept(ModItems.NATURES_BLESSING.get());
+                                output.accept(ModItems.SUMMONING_STONE.get());
 
                                 output.accept(ModItems.BOTTLED_LIGHT.get());
 
@@ -260,6 +271,7 @@ public class CreativeTabs {
                             .icon(() -> new ItemStack(ModItems.PEARL_ICON.get()))
                             .displayItems((parameters, output) -> {
                                 output.accept(UtilityAccessories.CRIT_ITEM.get());
+                                output.accept(UtilityAccessories.CRIT_ITEM2.get());
                                 output.accept(UtilityAccessories.DAMAGE_ITEM.get());
                                 output.accept(UtilityAccessories.DEFENSE.get());
                                 output.accept(UtilityAccessories.DEFENSE2.get());
@@ -279,7 +291,7 @@ public class CreativeTabs {
                                 output.accept(UtilityAccessories.FORT.get());
                                 output.accept(UtilityAccessories.CON.get());
                                 output.accept(UtilityAccessories.PERC.get());
-                                output.accept(UtilityAccessories.WIS.get());
+                                output.accept(UtilityAccessories.INS.get());
                                 output.accept(UtilityAccessories.ALL.get());
                             })
                             .build()

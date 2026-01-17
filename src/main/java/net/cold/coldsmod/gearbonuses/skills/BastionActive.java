@@ -2,7 +2,7 @@ package net.cold.coldsmod.gearbonuses.skills;
 
 import net.cold.coldsmod.ModSounds;
 import net.cold.coldsmod.gearbonuses.effects.ModEffects;
-import net.minecraft.sounds.SoundSource;
+import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -25,7 +25,6 @@ public class BastionActive extends MobEffect {
         Player player = event.player;
         if (player.level().isClientSide) return;
         if (event.phase != TickEvent.Phase.END) return;
-        if (!player.getPersistentData().getBoolean("bastion_applied")) return;
         if (!player.hasEffect(ModEffects.BASTION_READY.get())) return;
 
         boolean isBlocking = player.isBlocking();
@@ -34,23 +33,16 @@ public class BastionActive extends MobEffect {
 
         if (isBlocking || !wasBlocking) return;
 
-        int fort = player.getPersistentData().getInt("totalFort");
-        int perc = player.getPersistentData().getInt("totalPerc");
-        int con = player.getPersistentData().getInt("totalCon");
+        double fort = player.getAttributeValue(ModAttributes.FORT.get());
+        double perc = player.getAttributeValue(ModAttributes.PERC.get());
+        double con = player.getAttributeValue(ModAttributes.CON.get());
 
-        double seconds = 0.75 + 0.0075 * fort + 0.005 * perc + 0.0033 * con;
+        double seconds = 1 + 0.01 * fort + 0.0066 * perc + 0.0066 * con;
         int ticks = (int)(seconds * 20);
 
-        player.addEffect(new MobEffectInstance(ModEffects.BASTION_ACTIVE.get(), ticks, 0, false, false));
+        player.addEffect(new MobEffectInstance(ModEffects.BASTION_ACTIVE.get(), ticks, 0, false, false, true));
         player.removeEffect(ModEffects.BASTION_READY.get());
 
-        player.level().playSound(
-                null,                                  // Player = global sound
-                player.getX(), player.getY(), player.getZ(),
-                ModSounds.GUARDIAN_ANGEL.get(),        // Your sound event
-                SoundSource.PLAYERS,                   // Category
-                0.6F,                                  // Volume
-                1.0F                                   // Pitch
-        );
+        player.playSound(ModSounds.GUARDIAN_ANGEL.get(), 0.6F, 1.0F);
     }
 }

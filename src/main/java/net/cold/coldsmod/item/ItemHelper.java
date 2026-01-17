@@ -1,7 +1,7 @@
 package net.cold.coldsmod.item;
 
-import net.minecraft.world.item.Item;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class ItemHelper extends Item {

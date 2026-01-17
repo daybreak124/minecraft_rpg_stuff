@@ -1,6 +1,8 @@
 package net.cold.coldsmod.bow;
 
+import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.ItemRarityUtils;
+import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -26,7 +28,8 @@ public class BowAnimHandler {
                         if (!(entity instanceof Player player)) return 0.0F;
                         if (entity.getUseItem().getItem() != item) return 0.0F;
 
-                        float drawSpeed = (float) player.getPersistentData().getDouble("drawSpeedIncrease");
+                        float drawSpeed = (float) AttributeApplier.getScaledValue(player, ModAttributes.NOCK_HASTE.get(), ModAttributes.NOCK_HASTE_MULTIPLIER.get());
+
                         float speedMultiplier = 1.0F + (drawSpeed / 100.0F);
                         if (speedMultiplier < 0.01F) speedMultiplier = 0.01F;
 

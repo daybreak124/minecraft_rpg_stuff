@@ -1,10 +1,12 @@
 package net.cold.coldsmod.stat;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
+
+import static net.cold.coldsmod.stat.AttributeApplier.rebuildAll;
 
 public class InventoryStatsTabScreen extends Screen {
     private final InventoryScreen parent;
@@ -31,12 +33,13 @@ public class InventoryStatsTabScreen extends Screen {
 
     @Override
     public void tick() {
+
         super.tick();
 
         if (mc.player != null) {
             tickCounter++;
-            if (tickCounter >= 20) {
-                new AttributeApplier().recalcStats(mc.player);
+            if (tickCounter >= 60) {
+                rebuildAll(mc.player);
                 tickCounter = 0;
             }
         }

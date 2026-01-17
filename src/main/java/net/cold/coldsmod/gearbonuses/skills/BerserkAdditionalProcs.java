@@ -12,7 +12,7 @@ public class BerserkAdditionalProcs {
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
         if (!(event.getSource().getEntity() instanceof Player player)) return;
-        if (player.level().isClientSide) return; // server only
+        if (player.level().isClientSide) return;
 
         if (!player.getPersistentData().getBoolean("berserk_applied")) return;
 
@@ -20,7 +20,7 @@ public class BerserkAdditionalProcs {
         if (dead instanceof Player) return;
 
         player.removeEffect(ModEffects.BERSERK_READY.get());
-        player.addEffect(new MobEffectInstance(ModEffects.BERSERK_READY.get(), 20*6, 0, false, false));
+        player.addEffect(new MobEffectInstance(ModEffects.BERSERK_READY.get(), 20*6, 0, false, false,true));
         player.removeEffect(ModEffects.BERSERK.get());
         player.getPersistentData().putInt("berserk", 0);
     }

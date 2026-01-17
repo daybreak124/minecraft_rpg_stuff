@@ -1,13 +1,13 @@
 package net.cold.coldsmod.accessory;
 
 import net.cold.coldsmod.ColdsMod;
+import net.cold.coldsmod.stat.CustomStats;
+import net.cold.coldsmod.stat.ItemRarity;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.cold.coldsmod.stat.CustomStats;
-import net.cold.coldsmod.stat.ItemRarity;
 
 public class UtilityAccessories {
 
@@ -91,13 +91,24 @@ public class UtilityAccessories {
                     .build()
     );
 
+    public static final RegistryObject<AccessoryItem> CRIT_ITEM2 = ITEMS.register(
+            "crit_item2",
+            () -> AccessoryItem.builder(new Item.Properties())
+                    .withDisplayName("Crit 2")
+                    .withRarity(ItemRarity.DISTINCT)
+                    .withType(AccessoryItem.AccessoryType.Utility)
+                    .withStats(new CustomStats.Builder().setCritChance(43.47826).build())
+                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
+                    .build()
+    );
+
     public static final RegistryObject<AccessoryItem> DAMAGE_ITEM = ITEMS.register(
             "damage_item",
             () -> AccessoryItem.builder(new Item.Properties())
                     .withDisplayName("Damage")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setDamage(12500).build())
+                    .withStats(new CustomStats.Builder().setDamage(125).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -201,10 +212,10 @@ public class UtilityAccessories {
                     .build()
     );
 
-    public static final RegistryObject<AccessoryItem> WIS = ITEMS.register(
-            "wis",
+    public static final RegistryObject<AccessoryItem> INS = ITEMS.register(
+            "ins",
             () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("WIS")
+                    .withDisplayName("INS")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
                     .withStats(new CustomStats.Builder().setInsight(80).build())
@@ -218,7 +229,7 @@ public class UtilityAccessories {
                     .withDisplayName("Crit Multiplier")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setCritDamageMultiplier(100).setCritChanceMultiplier(100).build())
+                    .withStats(new CustomStats.Builder().setCritDamageMultiplier(1).setCritChanceMultiplier(1).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -229,7 +240,7 @@ public class UtilityAccessories {
                     .withDisplayName("Damage Multiplier")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setDamageMultiplier(100).build())
+                    .withStats(new CustomStats.Builder().setDamageMultiplier(1).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -240,7 +251,7 @@ public class UtilityAccessories {
                     .withDisplayName("Projectile & Draw Speed 2")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setProjectileDamageMultiplier(100).setDrawSpeedMultiplier(100).build())
+                    .withStats(new CustomStats.Builder().setProjectileDamageMultiplier(1).setDrawSpeedMultiplier(1).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -251,7 +262,7 @@ public class UtilityAccessories {
                     .withDisplayName("Defense Multiplier")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setArmorMultiplier(100).setToughnessMultiplier(100).build())
+                    .withStats(new CustomStats.Builder().setArmorMultiplier(1).setToughnessMultiplier(1).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -273,7 +284,7 @@ public class UtilityAccessories {
                     .withDisplayName("Health Multiplier")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setHealthMultiplier(100).build())
+                    .withStats(new CustomStats.Builder().setHealthMultiplier(1).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -284,7 +295,7 @@ public class UtilityAccessories {
                     .withDisplayName("Attack Speed Multiplier")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setSpeedMultiplier(100).build())
+                    .withStats(new CustomStats.Builder().setSpeedMultiplier(1).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -323,11 +334,11 @@ public class UtilityAccessories {
                     .setMeleeCritChance(125).setMeleeCritDamage(125).setProjectileDamage(125)
                     .setProjectileCritChance(125).setProjectileCritDamage(125).setMoveSpeed(100).setSwimSpeed(100)
                     .setXpGain(100).setBlockReach(5).setEntityReach(5).setLuck(5).setStepHeight(100)
-                    .setJumpBoost(100).setMiningSpeed(100).setArmorMultiplier(100).setToughnessMultiplier(100)
-                    .setHealthMultiplier(100).setDamageMultiplier(100).setSpeedMultiplier(100).setCritChanceMultiplier(100)
-                    .setCritDamageMultiplier(100).setMeleeDamageMultiplier(100).setMeleeCritChanceMultiplier(100)
-                    .setMeleeCritDamageMultiplier(100).setProjectileDamageMultiplier(100).setProjectileCritChanceMultiplier(100)
-                    .setProjectileCritDamageMultiplier(100).setDrawSpeedMultiplier(100).setDrawSpeed(125).build())
+                    .setJumpBoost(100).setMiningSpeed(100).setArmorMultiplier(1).setToughnessMultiplier(1)
+                    .setHealthMultiplier(1).setDamageMultiplier(1).setSpeedMultiplier(1).setCritChanceMultiplier(1)
+                    .setCritDamageMultiplier(1).setMeleeDamageMultiplier(1).setMeleeCritChanceMultiplier(1)
+                    .setMeleeCritDamageMultiplier(1).setProjectileDamageMultiplier(1).setProjectileCritChanceMultiplier(1)
+                    .setProjectileCritDamageMultiplier(1).setDrawSpeedMultiplier(1).setDrawSpeed(125).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );

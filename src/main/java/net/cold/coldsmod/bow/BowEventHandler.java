@@ -1,12 +1,15 @@
 package net.cold.coldsmod.bow;
 
 import net.cold.coldsmod.stat.ItemRarityUtils;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.BowItem;
+import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
 
 @Mod.EventBusSubscriber
 public class BowEventHandler {
@@ -18,7 +21,9 @@ public class BowEventHandler {
 
         if (!"bow".equals(ItemRarityUtils.getItemType(bow))) return;
 
-        float drawSpeed = (float) (player.getPersistentData().getDouble("drawSpeedIncrease") + player.getPersistentData().getDouble("drawSpeedIncreaseFromHawkeye"));
+        float drawSpeed = (float) getScaledValue(player,
+                ModAttributes.NOCK_HASTE.get(),
+                ModAttributes.NOCK_HASTE_MULTIPLIER.get());
 
         float speedMultiplier = 1.0F + (drawSpeed / 100.0F);
 

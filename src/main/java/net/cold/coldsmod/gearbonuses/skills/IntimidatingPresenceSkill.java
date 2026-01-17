@@ -2,6 +2,7 @@ package net.cold.coldsmod.gearbonuses.skills;
 
 import net.cold.coldsmod.ModSounds;
 import net.cold.coldsmod.gearbonuses.effects.ModEffects;
+import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,7 +19,6 @@ public class IntimidatingPresenceSkill {
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         Player player = event.player;
         if (player.level().isClientSide) return;
-        if (!player.getPersistentData().getBoolean("intimidating_presence_eligible")) return;
 
         int crouchTicks = player.getPersistentData().getInt("crouchTicks");
 
@@ -27,7 +27,7 @@ public class IntimidatingPresenceSkill {
             player.getPersistentData().putInt("crouchTicks", crouchTicks);
 
             if (crouchTicks >= 20) {
-                player.addEffect(new MobEffectInstance(ModEffects.INTIMIDATING_PRESENCE_COOLDOWN.get(), 20 * 15, 0, false, false));
+                player.addEffect(new MobEffectInstance(ModEffects.INTIMIDATING_PRESENCE_COOLDOWN.get(), 20 * 15, 0, false, false, true));
                 player.getPersistentData().putInt("crouchTicks", 0);
                 player.removeEffect(ModEffects.INTIMIDATING_PRESENCE.get());
                 player.level().playSound(
@@ -48,26 +48,19 @@ public class IntimidatingPresenceSkill {
     private static void applyIntimidated(Player player) {
         Level level = player.level();
 
-        double str = player.getPersistentData().getDouble("totalStr");
-        double con = player.getPersistentData().getDouble("totalCon");
+        double str = player.getAttributeValue(ModAttributes.STR.get());
+        double con = player.getAttributeValue(ModAttributes.CON.get());
 
-        double debuffPercent = 20.0 + str * 0.1 + con * 0.05; // e.g., 10 STR, 0 CON = 21%
+        double debuffPercent = 20.0 + str * 0.1 + con * 0.05;
         int amplifier = (int)Math.min(255, Math.floor(debuffPercent));
 
         List<LivingEntity> entities = level.getEntitiesOfClass(
                 LivingEntity.class,
-                player.getBoundingBox().inflate(10), // 10 block radius
+                player.getBoundingBox().inflate(10),
                 e -> !(e instanceof Player) && e.isAlive() && !e.isInvulnerable()
         );
 
-        for (LivingEntity target : entities) {
-            target.addEffect(new MobEffectInstance(
-                    ModEffects.INTIMIDATED.get(),
-                    8 * 20,
-                    amplifier - 1,
-                    false,
-                    true
-            ));
+        for (LivingEntity target : entities) {target.addEffect(new MobEffectInstance(ModEffects.INTIMIDATED.get(), 8 * 20, amplifier - 1, false, false, true));
         }
     }
 }

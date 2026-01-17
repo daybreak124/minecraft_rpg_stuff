@@ -34,23 +34,23 @@ public class QuantumLeapActive extends MobEffect {
         if (!player.isShiftKeyDown()) return;
         if (!(QuantumLeapSync.QuantumLeapClientData.quantumLeapEligible)) return;
 
-        Vec3 look = player.getLookAngle();
-        double dashDistance = 2.5;
-        player.setDeltaMovement(look.x * dashDistance, 0.75, look.z * dashDistance);
-        player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_COOLDOWN.get(), 20*35, 0, false, false));
+        Vec3 look = player.getLookAngle().normalize();
+        Vec3 dashTarget = player.position().add(look.scale(4));
+
+        player.teleportTo(dashTarget.x, dashTarget.y, dashTarget.z);
+        player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_COOLDOWN.get(), 20*35, 0, false, false, true));
 
 
         if (player.hasEffect(ModEffects.ENHANCED_QUANTUM_LEAP.get())) {
-            player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), 120, 0, false, false));
-            player.addEffect(new MobEffectInstance(ModEffects.ENHANCED_QUANTUM_LEAP.get(), 20*4, 0, false, false));
+            player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), 120, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(ModEffects.ENHANCED_QUANTUM_LEAP.get(), 20*4, 0, false, false, true));
         } else {
-            player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), 80, 0, false, false));
+            player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), 80, 0, false, false, true));
         }
 
         player.removeEffect(ModEffects.QUANTUM_LEAP_READY.get());
         player.getPersistentData().putBoolean("quantum_leaped", true);
 
-        // Play sound once
         player.level().playSound(
                 null,
                 player.getX(), player.getY(), player.getZ(),
@@ -61,12 +61,10 @@ public class QuantumLeapActive extends MobEffect {
         );
     }
 
-
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         Player player = event.player;
 
-        if (!player.getPersistentData().getBoolean("quantum_leap_eligible")) return;
         if (!player.getPersistentData().getBoolean("quantum_leaped")) return;
 
         int invisDuration = 20*4;
@@ -75,10 +73,10 @@ public class QuantumLeapActive extends MobEffect {
         if (player.hasEffect(ModEffects.ENHANCED_QUANTUM_LEAP.get())) { invisDuration = 20*6; leapActiveDuration = 20*9; }
 
         if (player.onGround() && player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get()) && !player.hasEffect(MobEffects.INVISIBILITY)) {
-            player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), leapActiveDuration, 0, false, true));
-            player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, invisDuration, 0, false, true));
+            player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), leapActiveDuration, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, invisDuration, 0, false, false, true));
 
-            player.getPersistentData().remove("quantum_leaped");
+            player.getPersistentData().putBoolean("quantum_leaped", false);
 
             List<LivingEntity> nearby = player.level().getEntitiesOfClass(
                     LivingEntity.class,
@@ -97,7 +95,6 @@ public class QuantumLeapActive extends MobEffect {
     @SubscribeEvent
     public static void onPlayerAttack(LivingAttackEvent event) {
         if (!(event.getSource().getEntity() instanceof Player player)) return;
-        if (!player.getPersistentData().getBoolean("quantum_leap_eligible")) return;
         if (!player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())) return;
 
         player.removeEffect(MobEffects.INVISIBILITY);

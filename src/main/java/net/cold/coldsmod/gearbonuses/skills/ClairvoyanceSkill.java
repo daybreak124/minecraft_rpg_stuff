@@ -2,8 +2,9 @@ package net.cold.coldsmod.gearbonuses.skills;
 
 import net.cold.coldsmod.ModSounds;
 import net.cold.coldsmod.gearbonuses.effects.ModEffects;
+import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.ItemRarityUtils;
-import net.minecraft.sounds.SoundSource;
+import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
@@ -26,9 +27,9 @@ public class ClairvoyanceSkill {
         String type = ItemRarityUtils.getItemType(stack);
         if (!"bow".equals(type)) return;
 
-        if (!player.getPersistentData().getBoolean("clairvoyance_applied")) return;
 
-        double drawSpeed = player.getPersistentData().getDouble("drawSpeedIncrease");
+        double drawSpeed = AttributeApplier.getScaledValue(player, ModAttributes.NOCK_HASTE.get(), ModAttributes.NOCK_HASTE_MULTIPLIER.get());
+
         double chargeReductionMultiplier = 1 - (drawSpeed / 100.0);
         int adjustedChargeTicks = (int) (CHARGE_TICKS_REQUIRED * chargeReductionMultiplier);
 
@@ -39,20 +40,11 @@ public class ClairvoyanceSkill {
         if (chargeTime >= adjustedChargeTicks && !soundPlayed) {
             player.getPersistentData().putBoolean("Clairvoyance", true);
 
-            // Play sound once
-            player.level().playSound(
-                    null,
-                    player.getX(), player.getY(), player.getZ(),
-                    ModSounds.CLAIRVOYANCE.get(),
-                    SoundSource.PLAYERS,
-                    1.2F,
-                    1.0F
-            );
+            player.playSound(ModSounds.CLAIRVOYANCE.get(), 1.2F, 1.0F);
 
             player.getPersistentData().putBoolean("clairvoyance_sound_played", true);
         }
 
-        // So on misses and cancels, it plays again
         if (chargeTime == 0) {
             player.getPersistentData().putBoolean("clairvoyance_sound_played", false);
         }

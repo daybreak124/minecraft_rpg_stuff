@@ -28,7 +28,6 @@ public class BronzewoodApply {
         if (!(event.getSource().getEntity() instanceof Player player)) return;
 
         if (target.level().isClientSide) return;
-        if (!player.getPersistentData().getBoolean("bronzewoods_curse_applied")) return;
 
         InteractionHand hand = player.swingingArm;
         String mainType = ItemRarityUtils.getItemType(player.getMainHandItem());
@@ -50,17 +49,9 @@ public class BronzewoodApply {
 
         if (player == null) return;
 
-
-
         if (player.hasEffect(ModEffects.BRONZEWOOD_READY.get())) {
 
-            target.addEffect(new MobEffectInstance(
-                    ModEffects.BRONZEWOOD_CURSE.get(),
-                    20 * 10,
-                    0,
-                    false,
-                    true
-            ));
+            target.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_CURSE.get(), 20 * 10, 0, false, false, true));
 
             player.level().playSound(
                     null,
@@ -73,13 +64,8 @@ public class BronzewoodApply {
 
             curseSources.put(target, player.getUUID());
 
-            player.addEffect(new MobEffectInstance(
-                    ModEffects.BRONZEWOOD_COOLDOWN.get(),
-                    20 * 20,
-                    0,
-                    false,
-                    false
-            ));
+            player.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_COOLDOWN.get(), 20 * 20, 0, false, false, true));
+            player.getPersistentData().putBoolean("bronzewood_proc", true);
             player.removeEffect(ModEffects.BRONZEWOOD_READY.get());
         }
     }
@@ -103,14 +89,9 @@ public class BronzewoodApply {
             if (player.level().isClientSide) return;
 
             if (player.hasEffect(ModEffects.BRONZEWOOD_COOLDOWN.get())) {
-                player.removeEffect(ModEffects.BRONZEWOOD_COOLDOWN.get());
 
-                // Optionally re-enable ready state immediately
-                player.addEffect(new MobEffectInstance(
-                        ModEffects.BRONZEWOOD_READY.get(),
-                        MobEffectInstance.INFINITE_DURATION,
-                        0, false, false
-                ));
+                player.removeEffect(ModEffects.BRONZEWOOD_COOLDOWN.get());
+                player.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
             }
         }
     }

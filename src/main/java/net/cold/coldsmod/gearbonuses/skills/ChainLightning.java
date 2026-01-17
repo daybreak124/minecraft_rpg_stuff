@@ -1,7 +1,6 @@
 package net.cold.coldsmod.gearbonuses.skills;
 
 import net.cold.coldsmod.damage.ModDamageTypes;
-import net.cold.coldsmod.gearbonuses.effects.ModEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;
@@ -20,15 +19,9 @@ public class ChainLightning {
     public static void onChainLightning(LivingDamageEvent event) {
         if (!(event.getSource().getEntity() instanceof Player player)) return;
         if (player.level().isClientSide) return;
-        if (!(player.getPersistentData().getBoolean("chain_lightning_applied"))) return;
-        if (player.hasEffect(ModEffects.BRONZEWOOD_COOLDOWN.get())) return;
+        if (!(player.getPersistentData().getBoolean("procChainLightning"))) return;
 
-        if (!player.getPersistentData().getBoolean("procChainLightning") &&
-                !player.getPersistentData().getBoolean("isCustomCrit"))
-            return;
-
-
-        player.getPersistentData().remove("procChainLightning");
+        player.getPersistentData().putBoolean("procChainLightning", false);
 
 
         Level level = player.level();

@@ -1,5 +1,6 @@
 package net.cold.coldsmod.formulas;
 
+import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -43,7 +44,7 @@ public class DebuffResistHandler {
         Level world = player.getCommandSenderWorld();
         if (world.isClientSide) return; // server only
 
-        double debuffResist = Math.min(player.getPersistentData().getDouble("totalDebuffResist"), 100);
+        double debuffResist = Math.min(player.getAttributeValue(ModAttributes.DEBUFF_RESIST.get()), 100);
         if (debuffResist <= 0) {
             REDUCED.remove(player.getUUID()); // cleanup if player has no resist
             return;

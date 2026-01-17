@@ -1,13 +1,13 @@
 package net.cold.coldsmod.accessory;
 
 import net.cold.coldsmod.ColdsMod;
+import net.cold.coldsmod.stat.CustomStats;
+import net.cold.coldsmod.stat.ItemRarity;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.cold.coldsmod.stat.CustomStats;
-import net.cold.coldsmod.stat.ItemRarity;
 
 public class RingAccessories {
 
@@ -102,8 +102,8 @@ public class RingAccessories {
                             .setFort(3).setArmor(2).setArmorToughness(2)
                             .setAttackSpeed(3.25).setDrawSpeed(3.25).setDamage(3.25)
                             .setCon(3).setPerc(3)
-                            .setArmorMultiplier(2).setToughnessMultiplier(2)
-                            .setSpeedMultiplier(3).setDamageMultiplier(3).setDrawSpeedMultiplier(3)
+                            .setArmorMultiplier(0.02).setToughnessMultiplier(0.02)
+                            .setSpeedMultiplier(0.03).setDamageMultiplier(0.03).setDrawSpeedMultiplier(0.03)
                             .build())
                     .withLocation(AccessoryItem.AccessoryLocation.Hell)
                     .build()
@@ -119,8 +119,8 @@ public class RingAccessories {
                     .withStats(new CustomStats.Builder().setInsight(4).setStr(4).setDex(4).setMoveSpeed(-15)
                             .setDebuffResist(-20).setFort(4).setArmor(2.5).setArmorToughness(2.5)
                             .setDamage(4).setAttackSpeed(4).setDrawSpeed(4).setCon(4).setPerc(4)
-                            .setArmorMultiplier(4).setToughnessMultiplier(4).setSpeedMultiplier(6)
-                            .setDamageMultiplier(6).setDrawSpeedMultiplier(6).build())
+                            .setArmorMultiplier(0.04).setToughnessMultiplier(0.04).setSpeedMultiplier(0.06)
+                            .setDamageMultiplier(0.06).setDrawSpeedMultiplier(0.06).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Hell)
                     .build()
     );
@@ -202,7 +202,7 @@ public class RingAccessories {
                     .withDisplayName("Dragon Eye Embedded Ring")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Ring)
-                    .withStats(new CustomStats.Builder().setInsight(3).setStr(8).setMeleeDamage(16).setProjectileDamage(9).setMeleeDamageMultiplier(4).setProjectileDamageMultiplier(2.25).setPerc(4).build())
+                    .withStats(new CustomStats.Builder().setInsight(3).setStr(8).setMeleeDamage(16).setProjectileDamage(9).setMeleeDamageMultiplier(0.04).setProjectileDamageMultiplier(0.0225).setPerc(4).build())
                     .withLocation(AccessoryItem.AccessoryLocation.End)
                     .build()
     );
@@ -213,7 +213,7 @@ public class RingAccessories {
                     .withDisplayName("Dragon Eye Embedded Ring")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Ring)
-                    .withStats(new CustomStats.Builder().setInsight(4).setStr(9).setMeleeDamage(20).setProjectileDamage(12.5).setPerc(6).setMeleeDamageMultiplier(8).setProjectileDamageMultiplier(4.5).build())
+                    .withStats(new CustomStats.Builder().setInsight(4).setStr(9).setMeleeDamage(20).setProjectileDamage(12.5).setPerc(6).setMeleeDamageMultiplier(0.08).setProjectileDamageMultiplier(0.045).build())
                     .withLocation(AccessoryItem.AccessoryLocation.End)
                     .build()
     );
@@ -245,7 +245,7 @@ public class RingAccessories {
                     .withDisplayName("Corrupted Ring of the Lost")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Ring)
-                    .withStats(new CustomStats.Builder().setInsight(3).setFort(6).setKnockbackResist(15).setArmor(5.5).setArmorToughness(3).setArmorMultiplier(4).build())
+                    .withStats(new CustomStats.Builder().setInsight(3).setFort(6).setKnockbackResist(15).setArmor(5.5).setArmorToughness(3).setArmorMultiplier(0.04).build())
                     .withLocation(AccessoryItem.AccessoryLocation.End)
                     .build()
     );
@@ -255,7 +255,7 @@ public class RingAccessories {
                     .withDisplayName("Corrupted Ring of the Lost")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Ring)
-                    .withStats(new CustomStats.Builder().setInsight(4).setFort(7).setKnockbackResist(20).setArmor(7).setArmorToughness(5).setArmorMultiplier(8).build())
+                    .withStats(new CustomStats.Builder().setInsight(4).setFort(7).setKnockbackResist(20).setArmor(7).setArmorToughness(5).setArmorMultiplier(0.08).build())
                     .withLocation(AccessoryItem.AccessoryLocation.End)
                     .build()
     );
@@ -287,7 +287,7 @@ public class RingAccessories {
                     .withDisplayName("Coldy's Colder Coil of Cold")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Ring)
-                    .withStats(new CustomStats.Builder().setInsight(3).setMoveSpeed(15).setDrawSpeed(15).setAttackSpeed(12).setDrawSpeedMultiplier(5).setCon(9).build())
+                    .withStats(new CustomStats.Builder().setInsight(3).setMoveSpeed(15).setDrawSpeed(15).setAttackSpeed(12).setDrawSpeedMultiplier(0.05).setCon(9).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Cold)
                     .build()
     );
@@ -297,7 +297,7 @@ public class RingAccessories {
                     .withDisplayName("Coldy's Coldest Coil of Cold")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Ring)
-                    .withStats(new CustomStats.Builder().setInsight(4).setMoveSpeed(15).setDrawSpeed(20).setAttackSpeed(15).setDrawSpeedMultiplier(5).setSpeedMultiplier(5).setCon(13).build())
+                    .withStats(new CustomStats.Builder().setInsight(4).setMoveSpeed(15).setDrawSpeed(20).setAttackSpeed(15).setDrawSpeedMultiplier(0.05).setSpeedMultiplier(0.05).setCon(13).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Cold)
                     .build()
     );

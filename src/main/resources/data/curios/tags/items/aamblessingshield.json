@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "coldsmod:fortress_of_solitude",
-    "coldsmod:guardian_angel"
+    "coldsmod:guardian_angel",
+    "coldsmod:divine_shield",
+    "coldsmod:thorn_covered_forcefield"
   ]
 }

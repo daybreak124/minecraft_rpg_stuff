@@ -6,13 +6,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.inventory.SmithingMenu;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
 import java.util.List;
 import java.util.Map;

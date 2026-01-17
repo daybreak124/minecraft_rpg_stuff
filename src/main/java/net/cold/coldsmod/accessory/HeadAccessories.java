@@ -1,13 +1,13 @@
 package net.cold.coldsmod.accessory;
 
 import net.cold.coldsmod.ColdsMod;
+import net.cold.coldsmod.stat.CustomStats;
+import net.cold.coldsmod.stat.ItemRarity;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.cold.coldsmod.stat.CustomStats;
-import net.cold.coldsmod.stat.ItemRarity;
 
 public class HeadAccessories {
 
@@ -22,7 +22,7 @@ public class HeadAccessories {
                     .withDisplayName("Tempting Whispers")
                     .withRarity(ItemRarity.RARE)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setFort(3).setInsight(1).setMeleeCritDamageMultiplier(30).setHealthMultiplier(-25).setPerc(-4).build())
+                    .withStats(new CustomStats.Builder().setFort(3).setInsight(1).setMeleeCritDamageMultiplier(0.3).setHealthMultiplier(-0.25).setPerc(-4).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Hell)
                     .build()
     );
@@ -33,7 +33,7 @@ public class HeadAccessories {
                     .withDisplayName("Tempting Whispers")
                     .withRarity(ItemRarity.EPIC)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setFort(5).setInsight(2).setMeleeCritDamageMultiplier(60).setHealthMultiplier(-40).setPerc(-4).build())
+                    .withStats(new CustomStats.Builder().setFort(5).setInsight(2).setMeleeCritDamageMultiplier(0.6).setHealthMultiplier(-0.40).setPerc(-4).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Hell)
                     .build()
     );
@@ -44,7 +44,7 @@ public class HeadAccessories {
                     .withDisplayName("Tempting Whispers")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setFort(7).setInsight(3).setMeleeCritDamageMultiplier(120).setHealthMultiplier(-50).setPerc(-4).build())
+                    .withStats(new CustomStats.Builder().setFort(7).setInsight(3).setMeleeCritDamageMultiplier(1.2).setHealthMultiplier(-0.5).setPerc(-4).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Hell)
                     .build()
     );
@@ -55,7 +55,7 @@ public class HeadAccessories {
                     .withDisplayName("Tempting Whispers")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setFort(9).setInsight(4).setMeleeCritDamageMultiplier(150).setHealthMultiplier(-50).setPerc(-4).build())
+                    .withStats(new CustomStats.Builder().setFort(9).setInsight(4).setMeleeCritDamageMultiplier(1.5).setHealthMultiplier(-0.5).setPerc(-4).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Hell)
                     .build()
     );
@@ -90,7 +90,7 @@ public class HeadAccessories {
                     .withDisplayName("Shrieks of Unseeing")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setCon(15).setInsight(3).setArmor(6).setArmorMultiplier(5).setPerc(-3).setProjectileDamage(-25).setDebuffResist(10).build())
+                    .withStats(new CustomStats.Builder().setCon(15).setInsight(3).setArmor(6).setArmorMultiplier(0.05).setPerc(-3).setProjectileDamage(-25).setDebuffResist(10).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Otherworlds)
                     .build()
     );
@@ -101,7 +101,7 @@ public class HeadAccessories {
                     .withDisplayName("Shrieks of Unseeing")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setCon(21).setInsight(4).setArmor(8).setArmorMultiplier(10).setPerc(-3).setProjectileDamage(-30).setDebuffResist(12.5).build())
+                    .withStats(new CustomStats.Builder().setCon(21).setInsight(4).setArmor(8).setArmorMultiplier(0.1).setPerc(-3).setProjectileDamage(-30).setDebuffResist(12.5).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Otherworlds)
                     .build()
     );
@@ -136,7 +136,7 @@ public class HeadAccessories {
                     .withDisplayName("Dragon's Roar")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setStr(-6).setInsight(3).setToughnessMultiplier(20).build())
+                    .withStats(new CustomStats.Builder().setStr(-6).setInsight(3).setToughnessMultiplier(0.2).build())
                     .withLocation(AccessoryItem.AccessoryLocation.End)
                     .build()
     );
@@ -147,7 +147,7 @@ public class HeadAccessories {
                     .withDisplayName("Dragon's Roar")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setStr(-8).setInsight(4).setToughnessMultiplier(27).build())
+                    .withStats(new CustomStats.Builder().setStr(-8).setInsight(4).setToughnessMultiplier(0.27).build())
                     .withLocation(AccessoryItem.AccessoryLocation.End)
                     .build()
     );
@@ -182,7 +182,7 @@ public class HeadAccessories {
                     .withDisplayName("Tear of the Forgotten")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setInsight(3).setArmorToughness(8).setPerc(2).setCon(5).setToughnessMultiplier(5).build())
+                    .withStats(new CustomStats.Builder().setInsight(3).setArmorToughness(8).setPerc(2).setCon(5).setToughnessMultiplier(0.05).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Undergrounds)
                     .build()
     );
@@ -193,7 +193,7 @@ public class HeadAccessories {
                     .withDisplayName("Tear of the Forgotten")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setInsight(4).setArmorToughness(10).setPerc(5).setCon(5).setMaxHealth(4).setToughnessMultiplier(7.5).setKnockbackResist(15).build())
+                    .withStats(new CustomStats.Builder().setInsight(4).setArmorToughness(10).setPerc(5).setCon(5).setMaxHealth(4).setToughnessMultiplier(0.075).setKnockbackResist(15).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Undergrounds)
                     .build()
     );
@@ -228,7 +228,7 @@ public class HeadAccessories {
                     .withDisplayName("Endless Waves")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setInsight(3).setCon(9).setFort(5).setAttackSpeed(7.5).setSpeedMultiplier(8).setMoveSpeed(10).build())
+                    .withStats(new CustomStats.Builder().setInsight(3).setCon(9).setFort(5).setAttackSpeed(7.5).setSpeedMultiplier(0.08).setMoveSpeed(10).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Ocean)
                     .build()
     );
@@ -239,7 +239,7 @@ public class HeadAccessories {
                     .withDisplayName("Endless Waves")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setInsight(4).setCon(12).setFort(8).setAttackSpeed(12.5).setSpeedMultiplier(17.5).setMoveSpeed(12.5).build())
+                    .withStats(new CustomStats.Builder().setInsight(4).setCon(12).setFort(8).setAttackSpeed(12.5).setSpeedMultiplier(0.0175).setMoveSpeed(12.5).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Ocean)
                     .build()
     );
@@ -274,7 +274,7 @@ public class HeadAccessories {
                     .withDisplayName("Sun's Gaze")
                     .withRarity(ItemRarity.LEGENDARY)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setDex(6).setInsight(3).setMeleeDamage(12).setProjectileDamage(9).setSwimSpeed(-15).setMeleeDamageMultiplier(2.5).setDebuffResist(10).build())
+                    .withStats(new CustomStats.Builder().setDex(6).setInsight(3).setMeleeDamage(12).setProjectileDamage(9).setSwimSpeed(-15).setMeleeDamageMultiplier(0.025).setDebuffResist(10).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Desert)
                     .build()
     );
@@ -285,7 +285,7 @@ public class HeadAccessories {
                     .withDisplayName("Sun's Gaze")
                     .withRarity(ItemRarity.MYTHIC)
                     .withType(AccessoryItem.AccessoryType.Mind)
-                    .withStats(new CustomStats.Builder().setDex(9).setInsight(4).setMeleeDamage(16).setProjectileDamage(9).setMeleeDamageMultiplier(12.5).setSwimSpeed(-20).setDebuffResist(15).build())
+                    .withStats(new CustomStats.Builder().setDex(9).setInsight(4).setMeleeDamage(16).setProjectileDamage(9).setMeleeDamageMultiplier(0.0125).setSwimSpeed(-20).setDebuffResist(15).build())
                     .withLocation(AccessoryItem.AccessoryLocation.Desert)
                     .build()
     );
