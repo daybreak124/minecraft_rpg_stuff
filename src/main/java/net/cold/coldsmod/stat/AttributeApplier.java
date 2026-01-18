@@ -1,6 +1,6 @@
 package net.cold.coldsmod.stat;
 
-import net.cold.coldsmod.gearbonuses.effects.ModEffects;
+import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundUpdateAttributesPacket;
 import net.minecraft.server.level.ServerPlayer;

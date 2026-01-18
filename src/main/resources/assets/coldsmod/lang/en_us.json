@@ -115,5 +115,8 @@
   "effect.coldsmod.focused_energy_ready": "Focused Energy: Ready",
 
   "effect.coldsmod.thorned_parry_cd": "Thorned Parry: Cooldown",
-  "effect.coldsmod.thorned_parry_ready": "Thorned Parry: Ready"
+  "effect.coldsmod.thorned_parry_ready": "Thorned Parry: Ready",
+
+  "effect.coldsmod.blessed_land_cd": "Blessed Land: Cooldown",
+  "effect.coldsmod.blessed_land_ready": "Blessed Land: Ready"
 }

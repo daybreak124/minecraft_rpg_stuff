@@ -199,6 +199,7 @@ public class CreativeTabs {
                                 output.accept(ModItems.LIGHTNING_INFUSION.get());
                                 output.accept(ModItems.BLOODTHIRST.get());
                                 output.accept(ModItems.BRANCH_OF_THE_WORLD_TREE.get());
+                                output.accept(ModItems.DIVINITY_EXTRACTION.get());
 
                                 output.accept(ModItems.HANKS_OTHER_EYE.get());
                                 output.accept(ModItems.CUPIDS_ARROW.get());

@@ -3,7 +3,7 @@ package net.cold.coldsmod.stat;
 import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.cold.coldsmod.damage.CustomMeleeDamageNoProcs;
 import net.cold.coldsmod.damage.CustomRangedDamage;
-import net.cold.coldsmod.gearbonuses.effects.ModEffects;
+import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,7 +23,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import static net.cold.coldsmod.gearbonuses.CooldownCycle.HAWKEYE_UUID;
+import static net.cold.coldsmod.blessingbonuses.CooldownCycle.HAWKEYE_UUID;
 import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
 import static net.cold.coldsmod.stat.AttributeApplier.removeModifier;
 
@@ -135,12 +135,21 @@ public class Formulas {
             }
             handleFrenzy(player, data);
         }
+        event.setAmount(finalDamage);
+    }
 
-        double incomingMult = calculateIncomingDebuffs(victim);
-        if (player.hasEffect(ModEffects.OVERCONFIDENCE_ACTIVE.get())) finalDamage *= 2;
+    @SubscribeEvent
+    public void onLivingDamage(LivingDamageEvent event) {
 
-        event.setAmount((float) (finalDamage * incomingMult));
-        // System.out.println(event.getAmount());
+        LivingEntity victim = event.getEntity();
+        double incDamageMultiplier = victim.getAttributeValue(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get());
+        double attackerDamageMultiplier = 1.0;
+
+        if (event.getSource().getEntity() instanceof LivingEntity attacker) {
+            attackerDamageMultiplier = attacker.getAttributeValue(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
+        }
+        event.setAmount((float) (event.getAmount() * incDamageMultiplier * attackerDamageMultiplier));
+        System.out.println(event.getAmount());
     }
 
     private boolean rollCrit(Player player, double chance) {
@@ -150,15 +159,6 @@ public class Formulas {
     private void playCritSound(Player player) {
         player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                 SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.0F);
-    }
-
-    private double calculateIncomingDebuffs(LivingEntity victim) {
-        double mult = 1;
-        if (victim.hasEffect(ModEffects.BRONZEWOOD_CURSE.get())) mult += 0.1;
-        if (victim.hasEffect(ModEffects.BLINDED_BY_HATRED.get())) mult += 0.06;
-        MobEffectInstance intimidated = victim.getEffect(ModEffects.INTIMIDATED.get());
-        if (intimidated != null) mult += (intimidated.getAmplifier() + 1) / 100.0;
-        return mult;
     }
 
     private void handleBerserkReset(Player player, CompoundTag data) {
@@ -267,23 +267,6 @@ public class Formulas {
 
             event.setDamageMultiplier(damageMultiplier);
         }
-    }
-
-    @SubscribeEvent
-    public void onLivingDamage(LivingDamageEvent event) {
-
-        if (!(event.getEntity() instanceof Player player)) return;
-
-        double incDamageMultiplier = 1;
-
-        if (player.hasEffect(ModEffects.SANCTUARY_SHARED.get())) incDamageMultiplier -= 0.1;
-
-        MobEffectInstance frenzyEffect = player.getEffect(ModEffects.FRENZY.get());
-        if (frenzyEffect != null) {
-            int stacks = frenzyEffect.getAmplifier() + 1;
-            incDamageMultiplier += 0.05 + (stacks * 0.01);
-        }
-        event.setAmount(event.getAmount() * (float) incDamageMultiplier);
     }
 
     @SubscribeEvent

@@ -1,6 +1,6 @@
 package net.cold.coldsmod.stat;
 
-import net.cold.coldsmod.gearbonuses.effects.ModEffects;
+import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -136,17 +136,7 @@ public class InventoryButtonHandler {
 
         double armorReduction = armorVal / (80.0 + armorVal - 80.0 * (toughnessVal / (toughnessVal + 50.0)));
 
-        double incDamageMultiplier = 1.0;
-
-        if (mc.player.hasEffect(ModEffects.SANCTUARY_SHARED.get())) {
-            incDamageMultiplier -= 0.1;
-        }
-
-        MobEffectInstance frenzyEffect = mc.player.getEffect(ModEffects.FRENZY.get());
-        if (frenzyEffect != null) {
-            int stacks = frenzyEffect.getAmplifier() + 1;
-            incDamageMultiplier += 0.05 + (stacks * 0.01);
-        }
+        double incDamageMultiplier = mc.player.getAttributeValue(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get());
 
         double resistance = 0.0;
         if (mc.player.hasEffect(MobEffects.DAMAGE_RESISTANCE)) {
@@ -197,7 +187,11 @@ public class InventoryButtonHandler {
         y += 10;
         guiGraphics.drawString(mc.font, "Toughness: " + StatUtils.formatValue(mc.player.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()), left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Damage Resist: " + StatUtils.formatValue(totalReduction) + "%", left + 182, y, 0xFFFFFF);
+        guiGraphics.drawString(mc.font, "Damage Received Multiplier: " +
+                StatUtils.formatValue(attr(mc.player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER)) +
+                "x", left + 182, y, 0xFFFFFF);
+        y += 10;
+        guiGraphics.drawString(mc.font, "Final Damage Resist: " + StatUtils.formatValue(totalReduction) + "%", left + 182, y, 0xFFFFFF);
         y += 10;
         guiGraphics.drawString(mc.font, "Health: " + StatUtils.formatValue(mc.player.getAttribute(Attributes.MAX_HEALTH).getValue()), left + 182, y, 0xFFFFFF);
         y += 10;
@@ -261,6 +255,17 @@ public class InventoryButtonHandler {
         // --- General ---
         guiGraphics.drawString(mc.font, "General", left + 182, y, 0xAAAAFF);
         y += 10;
+
+        guiGraphics.drawString(mc.font, "Final Damage Multiplier: " +
+                StatUtils.formatValue(attr(mc.player, ModAttributes.OUTGOING_DAMAGE_MULTIPLIER)) +
+                "x", left + 182, y, 0xFFFFFF);
+        y += 10;
+
+        guiGraphics.drawString(mc.font, "Potency: " +
+                StatUtils.formatValue(attr(mc.player, ModAttributes.POTENCY) * attr(mc.player, ModAttributes.POTENCY_MULTIPLIER)) +
+                " | (" + StatUtils.formatValue(projPot) + "%)", left + 182, y, 0xFFFFFF);
+        y += 10;
+
         guiGraphics.drawString(mc.font, "Potency: " +
                 StatUtils.formatValue(attr(mc.player, ModAttributes.POTENCY) * attr(mc.player, ModAttributes.POTENCY_MULTIPLIER)) +
                 " | (" + StatUtils.formatValue(projPot) + "%)", left + 182, y, 0xFFFFFF);

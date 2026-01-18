@@ -20,7 +20,7 @@ public class StatGeneration {
         helmet.put("xpGain", new double[]{0, 10, 0.2});
         helmet.put("debuffResist", new double[]{0, 6.75, 1.0});
         helmet.put("knockbackResist", new double[]{-0.85, 2.25, 0.2});
-        helmet.put("protection", new double[]{-3, 6, 0.5});
+        // helmet.put("protection", new double[]{-3, 6, 0.5});
         helmet.put("restoration", new double[]{-1.5, 3, 0.5});
         helmet.put("amplification", new double[]{-2, 7, 0.5});
         STAT_CONFIG.put("helmet", helmet);
@@ -35,7 +35,7 @@ public class StatGeneration {
         chestplate.put("xpGain", new double[]{0, 10, 0.2});
         chestplate.put("knockbackResist", new double[]{0, 1.7, 1.0});
         chestplate.put("debuffResist", new double[]{0, 5.1, 0.6});
-        chestplate.put("protection", new double[]{-6, 11, 0.5});
+        // chestplate.put("protection", new double[]{-6, 11, 0.5});
         chestplate.put("restoration", new double[]{-3, 5.5, 0.5});
         chestplate.put("amplification", new double[]{0, 4, 0.5});
         STAT_CONFIG.put("chestplate", chestplate);
@@ -63,7 +63,7 @@ public class StatGeneration {
         boots.put("knockbackResist", new double[]{-1.7, 2.55, 0.7});
         boots.put("speed", new double[]{0, 7.5, 1.0});
         boots.put("swimSpeed", new double[]{0, 9.25, 0.8});
-        chestplate.put("protection", new double[]{-2.7, 5.4, 0.5});
+        // chestplate.put("protection", new double[]{-2.7, 5.4, 0.5});
         chestplate.put("restoration", new double[]{-1.35, 2.7, 0.5});
         STAT_CONFIG.put("boots", boots);
 

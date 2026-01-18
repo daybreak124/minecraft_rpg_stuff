@@ -2,6 +2,7 @@ package net.cold.coldsmod.stat;
 
 import net.cold.coldsmod.ColdsMod;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
@@ -115,6 +116,15 @@ public class ModAttributes {
     public static final RegistryObject<Attribute> HEALTH_MULTIPLIER = ATTRIBUTES.register("health_multiplier",
             () -> new RangedAttribute("health_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
 
+    public static final RegistryObject<Attribute> OUTGOING_DAMAGE_MULTIPLIER = ATTRIBUTES.register("damage_multiplier",
+            () -> new RangedAttribute("damage_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
+
+    public static final RegistryObject<Attribute> INCOMING_DAMAGE_MULTIPLIER = ATTRIBUTES.register("incoming_damage_multiplier",
+            () -> new RangedAttribute("incoming_damage_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
+
+    public static final RegistryObject<Attribute> INCOMING_HEALING_MULTIPLIER = ATTRIBUTES.register("incoming_healing_multiplier",
+            () -> new RangedAttribute("incoming_healing_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
+
 
     @SubscribeEvent
     public static void onModifyEntityAttributes(EntityAttributeModificationEvent event) {
@@ -171,5 +181,12 @@ public class ModAttributes {
         event.add(EntityType.PLAYER, ModAttributes.ARMOR_MULTIPLIER.get());
         event.add(EntityType.PLAYER, ModAttributes.TOUGHNESS_MULTIPLIER.get());
         event.add(EntityType.PLAYER, ModAttributes.HEALTH_MULTIPLIER.get());
+
+        event.add(EntityType.PLAYER, ModAttributes.INCOMING_HEALING_MULTIPLIER.get());
+
+        for (EntityType<? extends LivingEntity> type : event.getTypes()) {
+            event.add(type, ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
+            event.add(type, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get());
+        }
     }
 }

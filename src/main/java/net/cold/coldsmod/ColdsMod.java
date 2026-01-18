@@ -7,12 +7,12 @@ import net.cold.coldsmod.bow.BowAnimHandler;
 import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.cold.coldsmod.damage.CustomMeleeDamageNoProcs;
 import net.cold.coldsmod.formulas.DebuffResistHandler;
-import net.cold.coldsmod.gearbonuses.CooldownCycle;
-import net.cold.coldsmod.gearbonuses.effects.ModEffects;
-import net.cold.coldsmod.gearbonuses.effects.PickaxeTorch;
-import net.cold.coldsmod.gearbonuses.effects.SoulSeveranceActive;
-import net.cold.coldsmod.gearbonuses.neweffects.*;
-import net.cold.coldsmod.gearbonuses.skills.*;
+import net.cold.coldsmod.blessingbonuses.CooldownCycle;
+import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
+import net.cold.coldsmod.blessingbonuses.effects.PickaxeTorch;
+import net.cold.coldsmod.blessingbonuses.effects.SoulSeveranceActive;
+import net.cold.coldsmod.blessingbonuses.neweffects.*;
+import net.cold.coldsmod.blessingbonuses.skills.*;
 import net.cold.coldsmod.item.ModItems;
 import net.cold.coldsmod.mob.SbeveRenderer;
 import net.cold.coldsmod.network.NetworkHandler;
@@ -93,6 +93,7 @@ public class ColdsMod {
         MinecraftForge.EVENT_BUS.register(EffectUtils.class);
         MinecraftForge.EVENT_BUS.register(FocusedEnergyReady.class);
         MinecraftForge.EVENT_BUS.register(ThornedParryReady.class);
+        MinecraftForge.EVENT_BUS.register(BlessedLandReady.class);
 
         MinecraftForge.EVENT_BUS.register(CustomMeleeDamageNoProcs.class);
         MinecraftForge.EVENT_BUS.register(CustomMeleeDamage.class);

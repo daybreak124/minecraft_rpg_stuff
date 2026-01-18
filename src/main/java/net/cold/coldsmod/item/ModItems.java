@@ -2,8 +2,8 @@ package net.cold.coldsmod.item;
 
 import com.mojang.serialization.Codec;
 import net.cold.coldsmod.ColdsMod;
-import net.cold.coldsmod.gearbonuses.effects.ModEffects;
-import net.cold.coldsmod.gearbonuses.neweffects.SummoningStone;
+import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
+import net.cold.coldsmod.blessingbonuses.neweffects.SummoningStone;
 import net.cold.coldsmod.network.DFASync;
 import net.cold.coldsmod.network.NetworkHandler;
 import net.cold.coldsmod.network.QuantumLeapSync;
@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-import static net.cold.coldsmod.gearbonuses.CooldownCycle.HAWKEYE_UUID;
+import static net.cold.coldsmod.blessingbonuses.CooldownCycle.HAWKEYE_UUID;
 import static net.cold.coldsmod.stat.AttributeApplier.removeModifier;
 
 public class ModItems {
@@ -757,6 +757,7 @@ public class ModItems {
             if (slotContext.entity() instanceof Player player) {
                 player.getPersistentData().putBoolean("frenzy_eligible", true);
                 AttributeApplier.applyModifier(player, Attributes.ATTACK_DAMAGE, 1.0, FRENZY_ATTACK_DAMAGE);
+                AttributeApplier.applyModifier(player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), 0.05, FRENZY_ATTACK_DAMAGE);
             }
         }
 
@@ -767,6 +768,7 @@ public class ModItems {
                 player.getPersistentData().remove("frenzy_eligible");
                 player.getPersistentData().remove("frenzy");
                 AttributeApplier.removeModifier(player, Attributes.ATTACK_DAMAGE, FRENZY_ATTACK_DAMAGE);
+                AttributeApplier.removeModifier(player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), FRENZY_ATTACK_DAMAGE);
             }
         }
 
@@ -2458,6 +2460,70 @@ public class ModItems {
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
                             .append(Component.literal("7s").withStyle(ChatFormatting.GRAY))
             );
+        }
+    }
+
+    public static final RegistryObject<Item> DIVINITY_EXTRACTION = ITEMS.register(
+            "divinity_extraction",
+            () -> new DivineExtractionItem(new Item.Properties().stacksTo(64))
+    );
+
+    private static class DivineExtractionItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public DivineExtractionItem(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
+            if (!(slotContext.entity() instanceof Player player)) return true;
+            return !player.hasEffect(ModEffects.BLESSED_LAND_CD.get());
+        }
+
+        @Override
+        public Component getName(ItemStack stack) {
+            return Component.literal("Divinity Extraction").withStyle(ChatFormatting.GOLD);
+        }
+
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                if (!player.hasEffect(ModEffects.BLESSED_LAND_CD.get())) {
+                    player.addEffect(new MobEffectInstance(ModEffects.BLESSED_LAND_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
+                }
+            }
+        }
+
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                player.removeEffect(ModEffects.BLESSED_LAND_READY.get());
+                player.removeEffect(ModEffects.BLESSED_LAND_CD.get());
+            }
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            super.appendHoverText(stack, level, tooltip, flag);
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("Applies to:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Shields").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("Blessing: Blessed Land").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal(" After hitting a target,").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" summon an area 5 blocks").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" within the target which").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" heals a player for 2").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" when stepped into and").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" disappears.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(
+                    Component.literal("Blessed Land Duration: ").withStyle(ChatFormatting.DARK_AQUA)
+                            .append(Component.literal("5s").withStyle(ChatFormatting.GRAY))
+            );
+            tooltip.add(
+                    Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
+                            .append(Component.literal("15s").withStyle(ChatFormatting.GRAY))
+            );
+            tooltip.add(Component.literal(" Cooldown speed increased").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" by Amplification.").withStyle(ChatFormatting.GRAY));
         }
     }
 
