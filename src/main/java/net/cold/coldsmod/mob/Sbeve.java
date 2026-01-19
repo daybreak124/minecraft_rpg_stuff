@@ -1,10 +1,8 @@
 package net.cold.coldsmod.mob;
 
 import net.cold.coldsmod.stat.ModAttributes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -76,8 +74,6 @@ public class Sbeve extends TamableAnimal {
         Player owner = (Player) this.getOwner();
         if (owner == null) return false;
 
-        CompoundTag data = owner.getPersistentData();
-
         double scaledPotency = getScaledValue(owner,
                 ModAttributes.POTENCY.get(),
                 ModAttributes.POTENCY_MULTIPLIER.get());
@@ -93,14 +89,7 @@ public class Sbeve extends TamableAnimal {
             applyGigaKnockback(creeper);
         }
 
-        this.level().playSound(
-                null,
-                this.blockPosition(),
-                SoundEvents.SLIME_BLOCK_BREAK,
-                SoundSource.NEUTRAL,
-                1.5f,
-                0.8f
-        );
+        this.playSound(SoundEvents.BEEHIVE_DRIP, 1.5F, 1F);
 
 
         return living.hurt(damageSources().mobAttack(this), finalDamage);

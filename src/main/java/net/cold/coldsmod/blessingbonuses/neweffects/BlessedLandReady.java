@@ -4,17 +4,18 @@ import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.AreaEffectCloud;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -43,11 +44,11 @@ public class BlessedLandReady extends MobEffect {
                 ModAttributes.RESTORATION.get(),
                 ModAttributes.RESTORATION_MULTIPLIER.get());
 
-        float finalHeal = (float) (2.0 * (1 + healIncrease/100));
+        float finalHeal = (float) (3.0 * (1 + healIncrease/100));
 
         AreaEffectCloud cloud = new AreaEffectCloud(owner.level(), pos.x, pos.y, pos.z);
         cloud.setRadius(1.0f);
-        cloud.setDuration(100);
+        cloud.setDuration(150);
         cloud.setWaitTime(0);
         cloud.setParticle(ParticleTypes.TOTEM_OF_UNDYING);
         cloud.addTag("blessed_land");
@@ -57,32 +58,52 @@ public class BlessedLandReady extends MobEffect {
         owner.level().addFreshEntity(cloud);
     }
 
+
     @SubscribeEvent
     public static void onHit(LivingHurtEvent event) {
-        if (event.getSource().getEntity() instanceof Player player) {
-            if (player.hasEffect(ModEffects.BLESSED_LAND_READY.get())) {
+        if (!(event.getSource().getEntity() instanceof Player player) || player.level().isClientSide()) return;
+        if (!player.hasEffect(ModEffects.BLESSED_LAND_READY.get())) return;
 
-                Vec3 targetPos = event.getEntity().position();
+        LivingEntity target = event.getEntity();
+        Level level = player.level();
+        Vec3 targetPos = target.position();
 
-                double randomX = targetPos.x + (player.getRandom().nextDouble() * 10 - 5);
-                double randomZ = targetPos.z + (player.getRandom().nextDouble() * 10 - 5);
+        double randomX = targetPos.x + (player.getRandom().nextDouble() * 10 - 5);
+        double randomZ = targetPos.z + (player.getRandom().nextDouble() * 10 - 5);
 
-                BlockPos topBlock = player.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, BlockPos.containing(randomX, targetPos.y, randomZ));
-                Vec3 spawnPos = new Vec3(randomX, topBlock.getY(), randomZ);
+        Vec3 finalSpawnPos = null;
 
-                spawnBlessedLand(player, spawnPos);
+        BlockPos.MutableBlockPos checkPos = new BlockPos.MutableBlockPos(randomX, targetPos.y + 1, randomZ);
 
-                int cd = (int) (20*15 / (1.0 + (AttributeApplier.getScaledValue(player, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get()) / 100.0)));
+        for (int i = 0; i <= 3; i++) {
+            BlockState stateAt = level.getBlockState(checkPos);
+            BlockState stateBelow = level.getBlockState(checkPos.below());
 
-                player.removeEffect(ModEffects.BLESSED_LAND_READY.get());
-                player.addEffect(new MobEffectInstance(ModEffects.BLESSED_LAND_CD.get(), cd, 0, false, false, true));
+            if (stateAt.canBeReplaced() && stateBelow.isFaceSturdy(level, checkPos.below(), Direction.UP)) {
+                finalSpawnPos = new Vec3(randomX, checkPos.getY() + 0.1, randomZ);
+                break;
             }
+            checkPos.move(Direction.DOWN);
         }
+
+        if (finalSpawnPos == null) {
+            finalSpawnPos = targetPos.add(0, 0.1, 0);
+        }
+
+        spawnBlessedLand(player, finalSpawnPos);
+        level.playSound(null, finalSpawnPos.x, finalSpawnPos.y, finalSpawnPos.z,
+                SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 0.3F, 1.0F);
+
+        double ampValue = AttributeApplier.getScaledValue(player, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get());
+        int cd = (int) (300 / (1.0 + (ampValue / 100.0)));
+        player.removeEffect(ModEffects.BLESSED_LAND_READY.get());
+        player.addEffect(new MobEffectInstance(ModEffects.BLESSED_LAND_CD.get(), cd, 0, false, false, true));
     }
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide) return;
+        if (event.phase != TickEvent.Phase.END) return;
+        if (event.player.level().isClientSide()) return;
 
         Player player = event.player;
         Level level = player.level();

@@ -1,11 +1,10 @@
 package net.cold.coldsmod.blessingbonuses.skills;
 
+import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
+import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.cold.coldsmod.damage.ModDamageTypes;
-import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -28,10 +27,11 @@ public class IntoTheFraySkill {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        Player player = event.player;
+        if (event.phase != TickEvent.Phase.END) return;
+        if (!event.player.getPersistentData().getBoolean("into_the_fray_eligible")) return;
+        if (event.player.level().isClientSide()) return;
 
-        if (player.level().isClientSide) return;
-        if (!player.getPersistentData().getBoolean("into_the_fray_eligible")) return;
+        Player player = event.player;
 
         boolean sprinting = player.isSprinting();
         int sprintTicks = player.getPersistentData().getInt("sprintTicks");
@@ -114,8 +114,8 @@ public class IntoTheFraySkill {
                 player.getPersistentData().putInt("sprintTicks", 0);
                 player.getPersistentData().putInt("itfStacks", 0);
 
-                level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                        SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 0.6f, 1.0f);
+                EffectUtils.playExplosionSound(player, 0.5F);
+                EffectUtils.spawnExplosionOnFeet(player);
             }
         } else {
             player.getPersistentData().putInt("sprintTicks", 0);

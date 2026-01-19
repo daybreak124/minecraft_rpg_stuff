@@ -5,7 +5,6 @@ import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -38,7 +37,8 @@ public class CombatantsAidReady extends MobEffect {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide) return;
+        if (event.phase != TickEvent.Phase.END) return;
+        if (event.player.level().isClientSide()) return;
 
         Player player = event.player;
         CompoundTag tag = player.getPersistentData();
@@ -78,15 +78,7 @@ public class CombatantsAidReady extends MobEffect {
         player.setDeltaMovement(look.x * dashPower, -0.1, look.z * dashPower);
         player.hurtMarked = true;
 
-        player.level().playSound(
-                player,
-                player.getX(), player.getY(), player.getZ(),
-                SoundEvents.ELYTRA_FLYING,
-                SoundSource.PLAYERS,
-                0.5F,
-                1.0F
-        );
-
+        EffectUtils.playSound(player, SoundEvents.ARMOR_EQUIP_ELYTRA, 0.5F, 1.0F);
         applyDashSupport(player, look);
     }
 
@@ -138,13 +130,10 @@ public class CombatantsAidReady extends MobEffect {
         float healAmount = (float) (4f * (1.0 + (healIncrease / 100.0)));
 
         for (LivingEntity ally : allies) {
-            if (!ally.hasEffect(ModEffects.BlACKENED_HEART.get())) {
-                ally.heal(healAmount);
-                ally.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20 * 5, 0, false, false, true));
-
-                EffectUtils.playHealSound(ally);
-                EffectUtils.spawnComposterBurst((Player) ally);
-            }
+            ally.heal(healAmount);
+            ally.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20 * 5, 0, false, false, true));
+            EffectUtils.playHealSound(ally);
+            EffectUtils.spawnComposterBurst((Player) ally);
         }
     }
 
@@ -156,6 +145,9 @@ public class CombatantsAidReady extends MobEffect {
                 tag.getDouble("dash_y"),
                 tag.getDouble("dash_z")
         );
+
+        EffectUtils.playSound(player, SoundEvents.ARMOR_EQUIP_ELYTRA, 0.5F, 1.0F);
+
 
         tag.putBoolean("dash_active", false);
         tag.remove("dash_timer");

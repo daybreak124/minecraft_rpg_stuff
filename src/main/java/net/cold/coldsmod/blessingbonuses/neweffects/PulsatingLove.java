@@ -25,11 +25,10 @@ public class PulsatingLove {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
+        if (event.player.hasEffect(ModEffects.SOLARA.get())) return;
+        if (event.player.level().isClientSide()) return;
 
         Player player = event.player;
-        if (player.level().isClientSide) return;
-
-        if (player.hasEffect(ModEffects.SOLARA.get())) return;
 
         if (player.getPersistentData().getBoolean("pulsating_love_eligible")) {
 

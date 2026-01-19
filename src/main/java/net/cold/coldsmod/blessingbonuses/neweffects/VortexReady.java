@@ -1,7 +1,7 @@
 package net.cold.coldsmod.blessingbonuses.neweffects;
 
-import net.cold.coldsmod.damage.CustomRangedDamage;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
+import net.cold.coldsmod.damage.CustomRangedDamage;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
@@ -51,8 +51,10 @@ public class VortexReady extends MobEffect {
 
     @SubscribeEvent
     public static void onProjectileImpact(ProjectileImpactEvent event) {
-        if (!(event.getProjectile() instanceof Arrow arrow) || arrow.level().isClientSide) return;
-        if (!(arrow.getOwner() instanceof Player player) || !player.hasEffect(ModEffects.VORTEX_READY.get())) return;
+        if (!(event.getProjectile() instanceof Arrow arrow)) return;
+        if (!(arrow.getOwner() instanceof Player player)) return;
+        if (!player.hasEffect(ModEffects.VORTEX_READY.get())) return;
+        if (arrow.level().isClientSide()) return;
 
         if (event.getRayTraceResult() != null) {
             Vec3 hitPos = event.getRayTraceResult().getLocation();
@@ -65,7 +67,8 @@ public class VortexReady extends MobEffect {
 
     @SubscribeEvent
     public static void onLevelTick(TickEvent.LevelTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.level.isClientSide) return;
+        if (event.phase != TickEvent.Phase.END) return;
+        if (event.level.isClientSide()) return;
 
         String currentDim = event.level.dimension().location().toString();
 
@@ -121,7 +124,7 @@ public class VortexReady extends MobEffect {
         }
 
         if (vortex.ticks % 20 == 0) {
-            level.playSound(null, vPos.x, vPos.y, vPos.z, SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 0.6f, 1.2f);
+            level.playSound(null, vPos.x, vPos.y, vPos.z, SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 7f, 1.0f);
         }
     }
 }

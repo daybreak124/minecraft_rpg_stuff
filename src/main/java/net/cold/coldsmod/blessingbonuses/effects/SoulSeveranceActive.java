@@ -27,10 +27,11 @@ public class SoulSeveranceActive extends MobEffect {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        Player player = event.player;
+        if (event.phase != TickEvent.Phase.END) return;
+        if (!event.player.hasEffect(ModEffects.SOUL_SEVERANCE_READY.get())) return;
+        if (event.player.level().isClientSide()) return;
 
-        if (player.level().isClientSide) return;
-        if (!player.hasEffect(ModEffects.SOUL_SEVERANCE_READY.get())) return;
+        Player player = event.player;
 
         int ticks = player.getPersistentData().getInt("pull_ticks");
 

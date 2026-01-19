@@ -10,7 +10,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AreaEffectCloud;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
@@ -34,8 +33,10 @@ public class Vitalization {
     public static void onArrowSpawn(EntityJoinLevelEvent event) {
         if (!(event.getEntity() instanceof AbstractArrow arrow)) return;
         if (!(arrow.getOwner() instanceof Player player)) return;
-
         if (!player.getPersistentData().getBoolean("life_touch_applied")) return;
+
+
+        if (player.level().isClientSide()) return;
 
         ItemStack main = player.getMainHandItem();
         ItemStack off  = player.getOffhandItem();
@@ -52,12 +53,14 @@ public class Vitalization {
 
     @SubscribeEvent
     public static void onArrowHit(LivingHurtEvent event) {
-        if (!(event.getSource().getEntity() instanceof Player player)) return;
-        if (!(event.getEntity() instanceof Player  || (event.getEntity() instanceof TamableAnimal t && t.isTame()))) return;
         if (!(event.getSource().getDirectEntity() instanceof Projectile proj)) return;
         if (!proj.getPersistentData().getBoolean("life_touch_tagged")) return;
+        if (!(event.getSource().getEntity() instanceof Player player)) return;
 
         LivingEntity target = event.getEntity();
+        if (!(target instanceof Player || (target instanceof TamableAnimal t && t.isTame()))) return;
+
+        if (player.level().isClientSide()) return;
 
         double finalDamage = event.getAmount();
         if (!proj.getPersistentData().contains("ScaledDamage")) {
@@ -83,7 +86,7 @@ public class Vitalization {
         player.getPersistentData().putInt("hawkeye", 0);
         player.removeEffect(ModEffects.HAWKEYE.get());
 
-        float healAmount = (float) (finalDamage * 0.4);
+        float healAmount = (float) (finalDamage * 0.35);
 
         EffectUtils.playHealSound(target);
         EffectUtils.spawnComposterBurst((Player) target);
@@ -93,26 +96,18 @@ public class Vitalization {
                 ModAttributes.RESTORATION_MULTIPLIER.get());
 
         target.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20*5, 0));
-        if (!(target.hasEffect(ModEffects.BlACKENED_HEART.get()))) {
-            target.heal((float) (healAmount * (1.0 + (healIncrease / 100.0))));
-        }
+        target.heal((float) (healAmount * (1.0 + (healIncrease / 100.0))));
         event.setCanceled(true);
     }
 
     @SubscribeEvent
     public static void onProjectileImpact(ProjectileImpactEvent event) {
-        if (event.getProjectile() == null) return;
-
+        if (event.getEntity().level().isClientSide()) return;
         if (!(event.getProjectile() instanceof Arrow arrow)) return;
+        if (!arrow.getPersistentData().getBoolean("life_touch_tagged")) return;
+        if (!(arrow.getOwner() instanceof Player player) || !player.getPersistentData().getBoolean("life_touch_applied")) return;
 
         Level level = arrow.level();
-        if (level.isClientSide) return;
-
-        Entity owner = arrow.getOwner();
-        if (!(owner instanceof Player player)) return;
-
-        if (!player.getPersistentData().getBoolean("life_touch_applied")) return;
-        if (!arrow.getPersistentData().getBoolean("life_touch_tagged")) return;
 
 
         if (!(player.hasEffect(ModEffects.LIFE_TOUCH_READY.get()))) return;
@@ -140,16 +135,15 @@ public class Vitalization {
 
         level.addFreshEntity(cloud);
 
-        arrow.discard();
-
-        arrow.level().playSound(
+        player.level().playSound(
                 null,
-                player.getX(), player.getY(), player.getZ(),
-                SoundEvents.LINGERING_POTION_THROW,
+                hitVec.x, hitVec.y, hitVec.z,
+                SoundEvents.SPLASH_POTION_BREAK,
                 SoundSource.PLAYERS,
                 0.6F,
                 1.0F
         );
+        arrow.discard();
 
         arrow.getPersistentData().putBoolean("life_touch_tagged", false);
         player.removeEffect(ModEffects.LIFE_TOUCH_READY.get());

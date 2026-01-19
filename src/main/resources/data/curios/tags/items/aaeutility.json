@@ -29,6 +29,9 @@
     "coldsmod:as_item",
     "coldsmod:as_item_2",
     "coldsmod:draw_speed",
-    "coldsmod:all"
+    "coldsmod:all",
+    "coldsmod:armor_item_1",
+    "coldsmod:armor_item_2",
+    "coldsmod:armor_item_3"
   ]
 }

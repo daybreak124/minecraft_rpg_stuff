@@ -3,6 +3,8 @@ package net.cold.coldsmod.blessingbonuses.skills;
 import net.cold.coldsmod.ModSounds;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.stat.ModAttributes;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -22,10 +24,11 @@ public class BastionActive extends MobEffect {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        Player player = event.player;
-        if (player.level().isClientSide) return;
         if (event.phase != TickEvent.Phase.END) return;
-        if (!player.hasEffect(ModEffects.BASTION_READY.get())) return;
+        if (!event.player.hasEffect(ModEffects.BASTION_READY.get())) return;
+        if (event.player.level().isClientSide()) return;
+
+        Player player = event.player;
 
         boolean isBlocking = player.isBlocking();
         boolean wasBlocking = player.getPersistentData().getBoolean("wasBlocking");
@@ -43,6 +46,12 @@ public class BastionActive extends MobEffect {
         player.addEffect(new MobEffectInstance(ModEffects.BASTION_ACTIVE.get(), ticks, 0, false, false, true));
         player.removeEffect(ModEffects.BASTION_READY.get());
 
-        player.playSound(ModSounds.GUARDIAN_ANGEL.get(), 0.6F, 1.0F);
+        if (player instanceof ServerPlayer serverPlayer) {
+            serverPlayer.playNotifySound(
+                    ModSounds.GUARDIAN_ANGEL.get(),
+                    SoundSource.PLAYERS,
+                    0.6F,
+                    1.0F);
+        }
     }
 }

@@ -29,9 +29,9 @@ public class EntwinedOfferingActive extends MobEffect {
     @SubscribeEvent
     public void onHeal(LivingHealEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
-        if (player.level().isClientSide) return;
-        if (player.getHealth() == player.getMaxHealth()) return;
+        if (player.getHealth() >= player.getMaxHealth()) return;
         if (!player.getPersistentData().getBoolean("entwined_offering_eligible")) return;
+        if (player.level().isClientSide()) return;
 
         Level level = player.level();
 
@@ -45,7 +45,7 @@ public class EntwinedOfferingActive extends MobEffect {
         );
 
         for (LivingEntity target : entities) {
-            if (target.getHealth() < target.getMaxHealth() && !(target.hasEffect(ModEffects.BlACKENED_HEART.get()))) {
+            if (target.getHealth() < target.getMaxHealth()) {
                 target.heal((float) (event.getAmount() * 0.3));
                 target.addEffect(new MobEffectInstance(ModEffects.ENTWINED_OFFERING_ACTIVE.get(), armorDuration, 0, false, false, true));
             }

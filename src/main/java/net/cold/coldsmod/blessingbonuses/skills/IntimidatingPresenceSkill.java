@@ -17,8 +17,10 @@ public class IntimidatingPresenceSkill {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) return;
+        if (event.player.level().isClientSide()) return;
+
         Player player = event.player;
-        if (player.level().isClientSide) return;
 
         int crouchTicks = player.getPersistentData().getInt("crouchTicks");
 
@@ -31,12 +33,9 @@ public class IntimidatingPresenceSkill {
                 player.getPersistentData().putInt("crouchTicks", 0);
                 player.removeEffect(ModEffects.INTIMIDATING_PRESENCE.get());
                 player.level().playSound(
-                        null,
-                        player.getX(), player.getY(), player.getZ(),
-                        ModSounds.INTIMIDATING_PRESENCE.get(),
-                        SoundSource.PLAYERS,
-                        0.6F,
-                        1.0F
+                        null, player.getX(), player.getY(), player.getZ(),
+                        ModSounds.INTIMIDATING_PRESENCE.get(), SoundSource.PLAYERS,
+                        0.6F, 1.0F
                 );
                 applyIntimidated(player);
             }
@@ -46,6 +45,8 @@ public class IntimidatingPresenceSkill {
     }
 
     private static void applyIntimidated(Player player) {
+        if (player.level().isClientSide()) return;
+
         Level level = player.level();
 
         double str = player.getAttributeValue(ModAttributes.STR.get());

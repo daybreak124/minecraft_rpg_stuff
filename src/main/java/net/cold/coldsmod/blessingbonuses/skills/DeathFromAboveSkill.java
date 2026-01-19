@@ -1,8 +1,9 @@
 package net.cold.coldsmod.blessingbonuses.skills;
 
+import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
+import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.cold.coldsmod.damage.ModDamageTypes;
-import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.network.DFASync;
 import net.cold.coldsmod.network.QuantumLeapSync;
 import net.minecraft.core.Holder;
@@ -35,7 +36,7 @@ public class DeathFromAboveSkill {
         if (!(event.getEntity() instanceof Player player)) return;
         if (!player.hasEffect(ModEffects.DEATH_FROM_ABOVE.get())) return;
         if (player.isInWater()) return;
-        if (player.isShiftKeyDown() && player.hasEffect(ModEffects.QUANTUM_LEAP_READY.get())) return;
+        if (player.isShiftKeyDown()) return;
         if (!(DFASync.DFAClientData.DFAEligible)) return;
 
         Level level = player.level();
@@ -75,8 +76,9 @@ public class DeathFromAboveSkill {
             }
         }
 
-        level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 0.5f, 1.0f);
+        EffectUtils.playExplosionSound(player, 0.5F);
+        EffectUtils.spawnExplosionOnFeet(player);
+
 
         player.removeEffect(ModEffects.DEATH_FROM_ABOVE.get());
         player.addEffect(new MobEffectInstance(ModEffects.DEATH_FROM_ABOVE_COOLDOWN.get(), 20 * 15, 0, false, false, true));
@@ -86,12 +88,9 @@ public class DeathFromAboveSkill {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
+        if (event.player.level().isClientSide()) return;
 
         Player player = event.player;
-
-        Level world = player.getCommandSenderWorld();
-        if (world.isClientSide) return;
-
 
         if (!player.getPersistentData().getBoolean("DFA_Airborne")) return;
 

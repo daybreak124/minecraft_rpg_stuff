@@ -38,11 +38,11 @@ public class DebuffResistHandler {
 
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent event) {
-        // run once per tick, at END phase
         if (event.phase != TickEvent.Phase.END) return;
+        if (event.player.level().isClientSide()) return;
+
         Player player = event.player;
         Level world = player.getCommandSenderWorld();
-        if (world.isClientSide) return; // server only
 
         double debuffResist = Math.min(player.getAttributeValue(ModAttributes.DEBUFF_RESIST.get()), 100);
         if (debuffResist <= 0) {

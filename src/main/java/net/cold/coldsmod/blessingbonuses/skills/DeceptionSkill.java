@@ -26,6 +26,7 @@ public class DeceptionSkill {
     public static void onArrowSpawn(EntityJoinLevelEvent event) {
         if (!(event.getEntity() instanceof AbstractArrow arrow)) return;
         if (!(arrow.getOwner() instanceof Player player)) return;
+        if (player.level().isClientSide) return;
 
         ItemStack main = player.getMainHandItem();
         ItemStack off = player.getOffhandItem();
@@ -41,10 +42,10 @@ public class DeceptionSkill {
 
     @SubscribeEvent
     public static void onArrowHit(LivingDamageEvent event) {
-        if (!(event.getSource().getEntity() instanceof Player)) return;
-        Player player = (Player) event.getSource().getEntity();
         if (!(event.getSource().getDirectEntity() instanceof Projectile proj)) return;
         if (!proj.getPersistentData().getBoolean("deception_tagged")) return;
+        if (!(event.getSource().getEntity() instanceof Player player)) return;
+        if (player.level().isClientSide()) return;
 
         if (!(event.getEntity() instanceof LivingEntity)) return;
         LivingEntity target = event.getEntity();
@@ -69,7 +70,7 @@ public class DeceptionSkill {
 
         player.level().playSound(
                 null,
-                player.getX(), player.getY(), player.getZ(),
+                target.getX(), target.getY(), target.getZ(),
                 SoundEvents.AMETHYST_BLOCK_RESONATE,
                 SoundSource.PLAYERS,
                 3.0F,

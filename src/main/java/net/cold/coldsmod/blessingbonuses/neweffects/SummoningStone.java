@@ -5,6 +5,8 @@ import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.mob.Sbeve;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
@@ -18,7 +20,8 @@ public class SummoningStone {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide) return;
+        if (event.phase != TickEvent.Phase.END) return;
+        if (event.player.level().isClientSide()) return;
 
         Player player = event.player;
 
@@ -75,6 +78,12 @@ public class SummoningStone {
 
         player.getPersistentData().putUUID("active_sbeve_uuid", sbeve.getUUID());
         player.addEffect(new MobEffectInstance(ModEffects.SBEVE_CD.get(), 20*60*5, 0, false, false, false));
+
+        level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.PLAYERS,
+                1.0F, 0.8F
+        );
+
     }
 
     public static void killSbeve(ServerLevel level, Player player) {

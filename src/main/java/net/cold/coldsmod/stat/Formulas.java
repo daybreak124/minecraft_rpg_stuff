@@ -1,10 +1,11 @@
 package net.cold.coldsmod.stat;
 
+import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.cold.coldsmod.damage.CustomMeleeDamageNoProcs;
 import net.cold.coldsmod.damage.CustomRangedDamage;
-import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -22,11 +23,13 @@ import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import static net.cold.coldsmod.blessingbonuses.CooldownCycle.HAWKEYE_UUID;
 import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
 import static net.cold.coldsmod.stat.AttributeApplier.removeModifier;
 
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class Formulas {
 
     public static void register() {
@@ -43,9 +46,9 @@ public class Formulas {
 
     @SubscribeEvent
     public void onLivingHurt(LivingHurtEvent event) {
-        if (!(event.getSource().getEntity() instanceof Player player) || player.level().isClientSide) return;
+        if (!(event.getSource().getEntity() instanceof Player player)) return;
+        if (player.level().isClientSide()) return;
 
-        LivingEntity victim = event.getEntity();
         CompoundTag data = player.getPersistentData();
         float finalDamage = event.getAmount();
 
@@ -68,13 +71,40 @@ public class Formulas {
                 finalDamage *= (1.5 + melCritDmg / 100.0);
             }
         }
-        else if (isMelee || event.getSource() instanceof CustomMeleeDamage) {
+        else if (isProjectile || event.getSource() instanceof CustomRangedDamage) {
+            double projDmg = getScaledValue(player, ModAttributes.PROJECTILE_POTENCY.get(), ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
+            double projCritCh = getScaledValue(player, ModAttributes.PROJECTILE_ACCURACY.get(), ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get());
+            double projCritDmg = getScaledValue(player, ModAttributes.PROJECTILE_PRECISION.get(), ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get());
+
+            if (event.getSource().getDirectEntity() instanceof Projectile proj) {
+
+                if (proj.getPersistentData().getBoolean("clairvoyance_tagged")) {
+                    finalDamage *= 3;
+                    resetClairvoyance(player, data);
+                }
+
+                if (!proj.getPersistentData().contains("ScaledDamage")) {
+                    proj.getPersistentData().putDouble("ScaledDamage", finalDamage * (1.0 + projDmg / 100.0));
+                }
+                finalDamage = (float) proj.getPersistentData().getDouble("ScaledDamage");
+            } else {
+                finalDamage *= (1.0 + projDmg / 100.0);
+            }
+
+            if (rollCrit(player, projCritCh)) {
+                finalDamage *= (1.5 + projCritDmg / 100.0);
+                playCritSound(player);
+            }
+            resetHawkeye(player, data);
+            handleFrenzy(player, data);
+            finalDamage *= 0.7;
+        } else if (isMelee || event.getSource() instanceof CustomMeleeDamage) {
             double melDmg = getScaledValue(player, ModAttributes.MELEE_POTENCY.get(), ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
             double melCritDmg = getScaledValue(player, ModAttributes.MELEE_PRECISION.get(), ModAttributes.MELEE_PRECISION_MULTIPLIER.get());
             double melCritCh = getScaledValue(player, ModAttributes.MELEE_ACCURACY.get(), ModAttributes.MELEE_ACCURACY_MULTIPLIER.get());
 
             if (player.hasEffect(ModEffects.BERSERK_READY.get()) && data.getBoolean("berserk_applied")) {
-                finalDamage *= (1.0 + melDmg * 0.6 / 100.0);
+                finalDamage *= (1.0 + melDmg * 0.006);
                 handleBerserkReset(player, data);
             } else if (data.getBoolean("berserk_applied")) {
                 handleBerserkStacking(player, data);
@@ -97,32 +127,6 @@ public class Formulas {
             finalDamage *= (float) (1.0 + melDmg / 100.0);
             handleFrenzy(player, data);
         }
-        else if (isProjectile || event.getSource() instanceof CustomRangedDamage) {
-            double projDmg = getScaledValue(player, ModAttributes.PROJECTILE_POTENCY.get(), ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
-            double projCritCh = getScaledValue(player, ModAttributes.PROJECTILE_ACCURACY.get(), ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get());
-            double projCritDmg = getScaledValue(player, ModAttributes.PROJECTILE_PRECISION.get(), ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get());
-
-            if (event.getSource().getDirectEntity() instanceof Projectile proj) {
-                if (!proj.getPersistentData().contains("ScaledDamage")) {
-                    proj.getPersistentData().putDouble("ScaledDamage", finalDamage * (1.0 + projDmg / 100.0));
-                }
-                finalDamage = (float) proj.getPersistentData().getDouble("ScaledDamage");
-            } else {
-                finalDamage *= (1.0 + projDmg / 100.0);
-            }
-
-            if (data.getBoolean("Clairvoyance")) {
-                finalDamage *= Math.pow((1.0 + projDmg / 100.0), 4);
-                resetClairvoyance(player, data);
-            }
-
-            if (rollCrit(player, projCritCh)) {
-                finalDamage *= (1.5 + projCritDmg / 100.0);
-                playCritSound(player);
-            }
-            resetHawkeye(player, data);
-            handleFrenzy(player, data);
-        }
         else {
             double genDmg = getScaledValue(player, ModAttributes.POTENCY.get(), ModAttributes.POTENCY_MULTIPLIER.get());
             double genCritDmg = getScaledValue(player, ModAttributes.PRECISION.get(), ModAttributes.PRECISION_MULTIPLIER.get());
@@ -140,6 +144,7 @@ public class Formulas {
 
     @SubscribeEvent
     public void onLivingDamage(LivingDamageEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
 
         LivingEntity victim = event.getEntity();
         double incDamageMultiplier = victim.getAttributeValue(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get());
@@ -149,7 +154,7 @@ public class Formulas {
             attackerDamageMultiplier = attacker.getAttributeValue(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
         }
         event.setAmount((float) (event.getAmount() * incDamageMultiplier * attackerDamageMultiplier));
-        System.out.println(event.getAmount());
+        // System.out.println(event.getAmount());
     }
 
     private boolean rollCrit(Player player, double chance) {
@@ -162,8 +167,14 @@ public class Formulas {
     }
 
     private void handleBerserkReset(Player player, CompoundTag data) {
-        player.playSound(SoundEvents.ZOMBIE_ATTACK_WOODEN_DOOR, 0.3F, 1.0F);
-        player.removeEffect(ModEffects.BERSERK_READY.get());
+        if (player instanceof ServerPlayer serverPlayer) {
+            serverPlayer.playNotifySound(
+                    SoundEvents.ZOMBIE_ATTACK_WOODEN_DOOR,
+                    SoundSource.PLAYERS,
+                    0.3F,
+                    1.0F
+            );
+        }        player.removeEffect(ModEffects.BERSERK_READY.get());
         data.putInt("berserk", 0);
         if (!player.hasEffect(ModEffects.BERSERK_TIMER.get())) {
             player.addEffect(new MobEffectInstance(ModEffects.BERSERK_TIMER.get(), 300, 0, false, false, true));
@@ -204,6 +215,7 @@ public class Formulas {
 
     private void resetClairvoyance(Player player, CompoundTag data) {
         data.putBoolean("Clairvoyance", false);
+        player.getPersistentData().putBoolean("clairvoyance_sound_played", false);
         player.removeEffect(ModEffects.CLAIRVOYANCE_READY.get());
         player.addEffect(new MobEffectInstance(ModEffects.CLAIRVOYANCE_COOLDOWN.get(), 400, 0, false, false, true));
     }
@@ -234,47 +246,32 @@ public class Formulas {
     }
 
     @SubscribeEvent
-    public static void onLivingJump(LivingEvent.LivingJumpEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
-
-        double jumpBonus = player.getAttributeValue(ModAttributes.JUMP_BOOST.get());
-        if (jumpBonus != 0) {
-            double baseJumpHeight = 1.252;
-            double gravity = 0.08;
-
-            double newHeight = baseJumpHeight * (1.0 + (jumpBonus / 100.0));
-
-            double requiredMotionY = Math.sqrt(2 * gravity * newHeight);
-
-            player.setDeltaMovement(player.getDeltaMovement().x, requiredMotionY, player.getDeltaMovement().z);
-        }
-    }
-
-    @SubscribeEvent
     public void onLivingFall(LivingFallEvent event) {
-        if (event.getEntity() instanceof Player player) {
+        if (!(event.getEntity() instanceof Player player)) return;
+        if (player.level().isClientSide()) return;
 
-            float jumpBoost = (float) player.getAttributeValue(ModAttributes.JUMP_BOOST.get());
-            float fallThreshold = 3.0f * (1.0f + jumpBoost / 100.0f);
-            float fallDistance = event.getDistance();
+        float jumpBoost = (float) player.getAttributeValue(ModAttributes.JUMP_BOOST.get());
+        float fallThreshold = 3.0f * (1.0f + jumpBoost / 100.0f);
+        float fallDistance = event.getDistance();
 
-            if (fallDistance <= fallThreshold) {
-                event.setCanceled(true);
-                return;
-            }
-            float damageMultiplier = 100.0f / (100.0f + jumpBoost);
-            damageMultiplier = Math.max(0.0f, Math.min(1.0f, damageMultiplier));
-
-            event.setDamageMultiplier(damageMultiplier);
+        if (fallDistance <= fallThreshold) {
+            event.setCanceled(true);
+            return;
         }
+        float damageMultiplier = 100.0f / (100.0f + jumpBoost);
+        damageMultiplier = Math.max(0.0f, Math.min(1.0f, damageMultiplier));
+
+        event.setDamageMultiplier(damageMultiplier);
     }
 
     @SubscribeEvent
     public void onLivingAttack(LivingAttackEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
+        if (player.level().isClientSide()) return;
 
         if (player.hasEffect(ModEffects.BASTION_ACTIVE.get())) {
             event.setCanceled(true);
+            if (player instanceof ServerPlayer serverPlayer) {serverPlayer.playNotifySound(SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75F, 1.5F);}
             return;
         }
 
@@ -284,7 +281,8 @@ public class Formulas {
             player.removeEffect(ModEffects.NIMBLE_GETAWAY_ACTIVE.get());
             player.addEffect(new MobEffectInstance(ModEffects.NIMBLE_GETAWAY_COOLDOWN.get(), 20*30, 0, false, false, true));
 
-            player.playSound(SoundEvents.PLAYER_ATTACK_SWEEP, 1.0F, 1.5F);
+            if (player instanceof ServerPlayer serverPlayer) {serverPlayer.playNotifySound(SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75F, 1.5F);}
+            return;
         }
 
         if (event.getSource().getDirectEntity() instanceof AbstractArrow arrow) {
@@ -313,13 +311,15 @@ public class Formulas {
     public void onHeal(LivingHealEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
         if (player.level().isClientSide) return;
-        if (player.hasEffect(ModEffects.BlACKENED_HEART.get())) {
-            event.setCanceled(true);
-        }
+
+        double incHeal = player.getAttributeValue(ModAttributes.INCOMING_HEALING_MULTIPLIER.get());
+        event.setAmount((float) (event.getAmount() * incHeal));
+        // System.out.println(event.getAmount());
     }
 
     @SubscribeEvent
     public void onCrit(CriticalHitEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
         Player player = event.getEntity();
 
         double scaledChance = getScaledValue(player,
@@ -346,6 +346,23 @@ public class Formulas {
             if (player.getPersistentData().getBoolean("chain_lightning_applied")) {
                 player.getPersistentData().putBoolean("procChainLightning", true);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingJump(LivingEvent.LivingJumpEvent event) {
+        if (!(event.getEntity() instanceof Player player)) return;
+
+        double jumpBonus = player.getAttributeValue(ModAttributes.JUMP_BOOST.get());
+        if (jumpBonus != 0) {
+            double baseJumpHeight = 1.252;
+            double gravity = 0.08;
+
+            double newHeight = baseJumpHeight * (1.0 + (jumpBonus / 100.0));
+
+            double requiredMotionY = Math.sqrt(2 * gravity * newHeight);
+
+            player.setDeltaMovement(player.getDeltaMovement().x, requiredMotionY, player.getDeltaMovement().z);
         }
     }
 }

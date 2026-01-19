@@ -1,15 +1,17 @@
 package net.cold.coldsmod.blessingbonuses;
 
 import net.cold.coldsmod.ModSounds;
+import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
+import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
+import net.cold.coldsmod.blessingbonuses.neweffects.RadiatingWarmthTimer;
 import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.cold.coldsmod.damage.ModDamageTypes;
-import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
-import net.cold.coldsmod.blessingbonuses.neweffects.RadiatingWarmthTimer;
 import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -47,6 +49,8 @@ public class CooldownCycle {
     public static final UUID HAWKEYE_UUID = UUID.fromString("d5553476-1234-5254-5454-113215411111");
     private static final UUID OVERCONFIDENCE_UUID = UUID.fromString("f3e2b6c0-1934-5338-9abc-002222000084");
     private static final UUID SANCTUARY_UUID = UUID.fromString("f3e2b3c0-1738-5123-ab23-024031060446");
+    private static final UUID NO_HEAL_UUID = UUID.fromString("f3e2b3c0-1138-5123-a223-024033360446");
+    private static final UUID EXPLOITED_UUID = UUID.fromString("f3e113c0-1138-5123-2223-024035550446");
 
 
     private static final HashMap<MobEffect, BiConsumer<LivingEntity, MobEffectInstance>> EXPIRE_HANDLERS_MOB = new HashMap<>();
@@ -58,44 +62,45 @@ public class CooldownCycle {
 
     @SubscribeEvent
     public static void onEffectExpired(MobEffectEvent.Expired event) {
+
+        var handler = EXPIRE_HANDLERS.get(event.getEffectInstance().getEffect());
+        if (handler == null) return;
+
         if (event.getEntity() instanceof Player player) {
-            var handler = EXPIRE_HANDLERS.get(event.getEffectInstance().getEffect());
-            if (handler != null) {
-                handler.accept(player, event.getEffectInstance());
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onEffectAdded(MobEffectEvent.Added event) {
-        if (!(event.getEntity() instanceof Player player)) return;
-
-        var handler = APPLY_HANDLERS.get(event.getEffectInstance().getEffect());
-        if (handler != null) {
             handler.accept(player, event.getEffectInstance());
         }
     }
 
     @SubscribeEvent
-    public static void onMobEffectExpired(MobEffectEvent.Expired event) {
-        if (event.getEntity() instanceof Player) return;
-        LivingEntity victim = event.getEntity();
+    public static void onEffectAdded(MobEffectEvent.Added event) {
+        var handler = APPLY_HANDLERS.get(event.getEffectInstance().getEffect());
+        if (handler == null) return;
 
+        if (!(event.getEntity() instanceof Player player)) return;
+
+        handler.accept(player, event.getEffectInstance());
+    }
+
+    @SubscribeEvent
+    public static void onMobEffectExpired(MobEffectEvent.Expired event) {
         var handler = EXPIRE_HANDLERS_MOB.get(event.getEffectInstance().getEffect());
-            if (handler != null) {
-                handler.accept(victim, event.getEffectInstance());
-        }
+        if (handler == null) return;
+
+        LivingEntity victim = event.getEntity();
+        if (victim instanceof Player || victim.level().isClientSide()) return;
+
+        handler.accept(victim, event.getEffectInstance());
     }
 
     @SubscribeEvent
     public static void onMobEffectAdded(MobEffectEvent.Added event) {
-        if (event.getEntity() instanceof Player) return;
-        LivingEntity victim = event.getEntity();
-
         var handler = APPLY_HANDLERS_MOB.get(event.getEffectInstance().getEffect());
-        if (handler != null) {
-            handler.accept(victim, event.getEffectInstance());
-        }
+        if (handler == null) return;
+
+        LivingEntity victim = event.getEntity();
+        if (victim instanceof Player || victim.level().isClientSide()) return;
+
+        handler.accept(victim, event.getEffectInstance());
     }
 
     public static void init() {
@@ -104,7 +109,10 @@ public class CooldownCycle {
             CompoundTag data = player.getPersistentData();
 
             int hits = data.getInt("retaliateHits");
-            if (hits <= 0) return;
+            if (hits <= 0) {
+                player.addEffect(new MobEffectInstance(ModEffects.RETALIATE_COOLDOWN.get(), 20 * 11, 0, false, false, true));
+                return;
+            }
 
             double fort = player.getAttributeValue(ModAttributes.FORT.get());
             double damage = hits * 3.0 * (1 + fort / 100.0);
@@ -124,6 +132,7 @@ public class CooldownCycle {
             level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.RETALIATE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
 
             data.putInt("retaliateHits", 0);
+            EffectUtils.spawnExplosionEffect(player);
 
             player.addEffect(new MobEffectInstance(ModEffects.RETALIATE_COOLDOWN.get(), 20 * 11, 0, false, false, true));
         });
@@ -333,8 +342,14 @@ public class CooldownCycle {
         APPLY_HANDLERS.put(ModEffects.HAWKEYE.get(), (player, effect) -> {
 
             if (effect.getAmplifier() >= 3) {
-                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.CROSSBOW_QUICK_CHARGE_3, SoundSource.PLAYERS, 1.3F, 1.0F);
-            }
+                if (player instanceof ServerPlayer serverPlayer) {
+                    serverPlayer.playNotifySound(
+                            SoundEvents.CROSSBOW_QUICK_CHARGE_3,
+                            SoundSource.PLAYERS,
+                            1.3F,
+                            1.0F
+                    );
+                }            }
 
             double dex = player.getAttributeValue(ModAttributes.DEX.get());
             double perc = player.getAttributeValue(ModAttributes.PERC.get());
@@ -423,8 +438,14 @@ public class CooldownCycle {
 
             player.hurt(reckoning, (float) damageBack);
 
-            player.playSound(ModSounds.RECKONING_BOOM.get(), 0.6F, 1.0F);
-
+            if (player instanceof ServerPlayer serverPlayer) {
+                serverPlayer.playNotifySound(
+                        ModSounds.RECKONING_BOOM.get(),
+                        SoundSource.PLAYERS,
+                        0.6F,
+                        1.0F
+                );
+            }
             data.remove(HEALED_NBT);
         });
 
@@ -454,6 +475,25 @@ public class CooldownCycle {
         APPLY_HANDLERS_MOB.put(ModEffects.INTIMIDATED.get(), (victim, effect) -> {
             double stacks = (double) (effect.getAmplifier() + 1) / 100;
             applyModifier(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), stacks, INTIMIDATED_UUID);
+        });
+
+        EXPIRE_HANDLERS.put(ModEffects.BlACKENED_HEART.get(), (victim, instance) ->
+        {
+            removeModifier(victim, ModAttributes.INCOMING_HEALING_MULTIPLIER.get(), NO_HEAL_UUID);
+        });
+
+        APPLY_HANDLERS.put(ModEffects.BlACKENED_HEART.get(), (victim, effect) -> {
+            applyModifier(victim, ModAttributes.INCOMING_HEALING_MULTIPLIER.get(), -1, NO_HEAL_UUID);
+        });
+
+        EXPIRE_HANDLERS_MOB.put(ModEffects.EXPLOIT_WEAKNESS_DEBUFF.get(), (victim, instance) ->
+        {
+            removeModifier(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), EXPLOITED_UUID);
+        });
+
+        APPLY_HANDLERS_MOB.put(ModEffects.EXPLOIT_WEAKNESS_DEBUFF.get(), (victim, effect) -> {
+            double stacks = (double) (effect.getAmplifier() + 1) / 100;
+            applyModifier(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), stacks, EXPLOITED_UUID);
         });
     }
 
@@ -487,7 +527,7 @@ public class CooldownCycle {
                 player.addEffect(new MobEffectInstance(ModEffects.SOLARA.get(), 23990, 0, false, false, true));
             }
         }
-        if (player.tickCount % 20*15 == 0) {
+        if (player.tickCount % 300 == 0) {
             if (player.hasEffect(ModEffects.SOLARA.get())) {
                 long time = player.level().getDayTime() % 24000;
                 int phase = (int) (time / 6000);

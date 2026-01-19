@@ -12,9 +12,8 @@ public class BerserkAdditionalProcs {
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
         if (!(event.getSource().getEntity() instanceof Player player)) return;
-        if (player.level().isClientSide) return;
-
         if (!player.getPersistentData().getBoolean("berserk_applied")) return;
+        if (player.level().isClientSide()) return;
 
         LivingEntity dead = event.getEntity();
         if (dead instanceof Player) return;

@@ -62,7 +62,7 @@ public class EffectUtils {
         );
     }
 
-    public static void playExplosionSound(LivingEntity player) {
+    public static void playExplosionSound(LivingEntity player, float volume) {
         player.level().playSound(
                 null,
                 player.getX(),
@@ -70,7 +70,7 @@ public class EffectUtils {
                 player.getZ(),
                 SoundEvents.GENERIC_EXPLODE,
                 SoundSource.PLAYERS,
-                0.5F,
+                volume,
                 1.0F
         );
     }
@@ -85,6 +85,7 @@ public class EffectUtils {
         );
     }
 
+
     public static void spawnParticleBurst(Player player, ParticleOptions particleType) {
         if (player.level() instanceof ServerLevel serverLevel) {
             serverLevel.sendParticles(particleType,
@@ -95,7 +96,9 @@ public class EffectUtils {
 
     @SubscribeEvent
     public static void onMobTick(LivingEvent.LivingTickEvent event) {
-        if (event.getEntity().level().isClientSide || !(event.getEntity() instanceof Monster monster)) return;
+        if (!(event.getEntity() instanceof Monster monster)) return;
+        if (monster.level().isClientSide()) return;
+
         int freezeTimer = monster.getPersistentData().getInt("freeze_timer");
 
         if (freezeTimer > 0) {

@@ -1,13 +1,11 @@
 package net.cold.coldsmod.stat;
 
-import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -187,11 +185,11 @@ public class InventoryButtonHandler {
         y += 10;
         guiGraphics.drawString(mc.font, "Toughness: " + StatUtils.formatValue(mc.player.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()), left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Damage Received Multiplier: " +
-                StatUtils.formatValue(attr(mc.player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER)) +
-                "x", left + 182, y, 0xFFFFFF);
+        guiGraphics.drawString(mc.font, "Damage Multiplier: " +
+                        StatUtils.formatValue((mc.player.getAttributeValue(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get()))) + "x",
+                left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Final Damage Resist: " + StatUtils.formatValue(totalReduction) + "%", left + 182, y, 0xFFFFFF);
+        guiGraphics.drawString(mc.font, "Total Damage Resist: " + StatUtils.formatValue(totalReduction) + "%", left + 182, y, 0xFFFFFF);
         y += 10;
         guiGraphics.drawString(mc.font, "Health: " + StatUtils.formatValue(mc.player.getAttribute(Attributes.MAX_HEALTH).getValue()), left + 182, y, 0xFFFFFF);
         y += 10;
@@ -200,6 +198,10 @@ public class InventoryButtonHandler {
         y += 10;
         guiGraphics.drawString(mc.font, "Debuff Resist: " +
                 StatUtils.formatValue(attr(mc.player, ModAttributes.DEBUFF_RESIST)) + "%", left + 182, y, 0xFFFFFF);
+        y += 10;
+        guiGraphics.drawString(mc.font, "Incoming Healing: " +
+                        StatUtils.formatValue(mc.player.getAttributeValue(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get())) + "x",
+                left + 182, y, 0xFFFFFF);
         y += 15;
 
         // --- Melee ---
@@ -286,10 +288,10 @@ public class InventoryButtonHandler {
                 StatUtils.formatValue(attr(mc.player, ModAttributes.RESTORATION) * attr(mc.player, ModAttributes.RESTORATION_MULTIPLIER)) +
                 " | (" + StatUtils.formatValue(getScaledValue(mc.player, ModAttributes.RESTORATION.get(), ModAttributes.RESTORATION_MULTIPLIER.get())) + "%)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Protection: " +
-                StatUtils.formatValue(attr(mc.player, ModAttributes.PROTECTION) * attr(mc.player, ModAttributes.PROTECTION_MULTIPLIER)) +
-                " | (" + StatUtils.formatValue(getScaledValue(mc.player, ModAttributes.PROTECTION.get(), ModAttributes.PROTECTION_MULTIPLIER.get())) + "%)", left + 182, y, 0xFFFFFF);
-        y += 10;
+//        guiGraphics.drawString(mc.font, "Protection: " +
+//                StatUtils.formatValue(attr(mc.player, ModAttributes.PROTECTION) * attr(mc.player, ModAttributes.PROTECTION_MULTIPLIER)) +
+//                " | (" + StatUtils.formatValue(getScaledValue(mc.player, ModAttributes.PROTECTION.get(), ModAttributes.PROTECTION_MULTIPLIER.get())) + "%)", left + 182, y, 0xFFFFFF);
+//        y += 10;
         guiGraphics.drawString(mc.font, "Amplification: " +
                 StatUtils.formatValue(attr(mc.player, ModAttributes.AMPLIFICATION) * attr(mc.player, ModAttributes.AMPLIFICATION_MULTIPLIER)) +
                 " | (" + StatUtils.formatValue(getScaledValue(mc.player, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get())) + "%)", left + 182, y, 0xFFFFFF);
@@ -394,16 +396,16 @@ public class InventoryButtonHandler {
                 StatUtils.formatValue(attr(mc.player, ModAttributes.RESTORATION)) +
                 " | (" + StatUtils.formatValue(attr(mc.player, ModAttributes.RESTORATION_MULTIPLIER)) + "x)", left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Protection: " +
-                StatUtils.formatValue(attr(mc.player, ModAttributes.PROTECTION)) +
-                " | (" + StatUtils.formatValue(attr(mc.player, ModAttributes.PROTECTION_MULTIPLIER)) + "x)", left + 182, y, 0xFFFFFF);
-        y += 10;
+//        guiGraphics.drawString(mc.font, "Protection: " +
+//                StatUtils.formatValue(attr(mc.player, ModAttributes.PROTECTION)) +
+//                " | (" + StatUtils.formatValue(attr(mc.player, ModAttributes.PROTECTION_MULTIPLIER)) + "x)", left + 182, y, 0xFFFFFF);
+//        y += 10;
         guiGraphics.drawString(mc.font, "Amplification: " +
                 StatUtils.formatValue(attr(mc.player, ModAttributes.AMPLIFICATION)) +
                 " | (" + StatUtils.formatValue(attr(mc.player, ModAttributes.AMPLIFICATION_MULTIPLIER)) + "x)", left + 182, y, 0xFFFFFF);
         y += 15;
         int barHeight = 30;
-        int barY = top + (int) ((double) scrollOffset / MAX_SCROLL * (PANEL_HEIGHT - barHeight));
+        int barY = top + (scrollOffset / MAX_SCROLL * (PANEL_HEIGHT - barHeight));
         guiGraphics.fill(left + 177, top, left + 179, top + PANEL_HEIGHT, 0xFF555555); // track
         guiGraphics.fill(left + 177, barY, left + 179, barY + barHeight, 0xFFAAAAAA); // handle
     }

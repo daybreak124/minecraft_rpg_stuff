@@ -17,11 +17,11 @@ public class DirectedHatredSkill {
     @SubscribeEvent
     public static void onCritHit(CriticalHitEvent event) {
         if (!event.isVanillaCritical()) return;
+        if (!event.getEntity().hasEffect(ModEffects.DIRECTED_HATRED_READY.get())) return;
+        if (event.getEntity().level().isClientSide()) return;
 
         Player player = event.getEntity();
-        if (!player.hasEffect(ModEffects.DIRECTED_HATRED_READY.get()))
-            return;
-        if (player.level().isClientSide) return;
+
         double range = 10.0;
 
         List<LivingEntity> nearby = player.level().getEntitiesOfClass(

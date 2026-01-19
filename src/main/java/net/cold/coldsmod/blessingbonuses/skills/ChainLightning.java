@@ -18,8 +18,8 @@ public class ChainLightning {
     @SubscribeEvent
     public static void onChainLightning(LivingDamageEvent event) {
         if (!(event.getSource().getEntity() instanceof Player player)) return;
-        if (player.level().isClientSide) return;
-        if (!(player.getPersistentData().getBoolean("procChainLightning"))) return;
+        if (!player.getPersistentData().getBoolean("procChainLightning")) return;
+        if (player.level().isClientSide()) return;
 
         player.getPersistentData().putBoolean("procChainLightning", false);
 

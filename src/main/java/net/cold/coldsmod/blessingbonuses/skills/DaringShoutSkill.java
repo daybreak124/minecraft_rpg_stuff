@@ -2,8 +2,8 @@ package net.cold.coldsmod.blessingbonuses.skills;
 
 import net.cold.coldsmod.ModSounds;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
+import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.stat.ModAttributes;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -20,9 +20,11 @@ public class DaringShoutSkill {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) return;
+        if (!event.player.hasEffect(ModEffects.DARING_SHOUT.get())) return;
+        if (event.player.level().isClientSide()) return;
+
         Player player = event.player;
-        if (player.level().isClientSide) return;
-        if (!player.hasEffect(ModEffects.DARING_SHOUT.get())) return;
 
         int crouchTicks = player.getPersistentData().getInt("daringShoutCrouchTicks");
 
@@ -37,14 +39,7 @@ public class DaringShoutSkill {
                 applyNoAi(player);
                 player.removeEffect(ModEffects.DARING_SHOUT.get());
 
-                player.level().playSound(
-                        null,
-                        player.getX(), player.getY(), player.getZ(),
-                        ModSounds.DARING_SHOUT.get(),
-                        SoundSource.PLAYERS,
-                        0.6F,
-                        1.0F
-                );
+                EffectUtils.playSound(player, ModSounds.DARING_SHOUT.get(), 0.6F, 1.0F);
             }
         } else {
             player.getPersistentData().putInt("daringShoutCrouchTicks", 0);

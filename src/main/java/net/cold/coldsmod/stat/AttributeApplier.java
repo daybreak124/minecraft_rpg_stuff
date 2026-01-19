@@ -174,7 +174,8 @@ public class AttributeApplier {
                 apply(player, Attributes.LUCK, s.getLuck(), itemUUID);
                 apply(player, ForgeMod.BLOCK_REACH.get(), s.getBlockReach(), itemUUID);
                 apply(player, ForgeMod.ENTITY_REACH.get(), s.getEntityReach(), itemUUID);
-                apply(player, ForgeMod.SWIM_SPEED.get(), s.getSwimSpeed() / 1000, itemUUID);
+                apply(player, ForgeMod.STEP_HEIGHT_ADDITION.get(), s.getStepHeight(), itemUUID);
+                apply(player, ForgeMod.SWIM_SPEED.get(), s.getSwimSpeed() / 100, itemUUID);
                 apply(player, Attributes.MOVEMENT_SPEED, s.getMoveSpeed() / 1000, itemUUID);
 
                 apply(player, ModAttributes.JUMP_BOOST.get(), s.getJumpBoost(), itemUUID);
@@ -189,34 +190,34 @@ public class AttributeApplier {
 
     public static void applyAttributeScaling(Player player) {
 
-        player.getAttribute(ModAttributes.POTENCY.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ModAttributes.ACCURACY.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ModAttributes.PRECISION.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ModAttributes.HASTE.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ModAttributes.PROJECTILE_POTENCY.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ModAttributes.NOCK_HASTE.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ModAttributes.DEBUFF_RESIST.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ModAttributes.XP_GAIN.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ModAttributes.MINING_SPEED.get()).removeModifier(SCALING_UUID);
-
-        player.getAttribute(ModAttributes.POTENCY_MULTIPLIER.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ModAttributes.PRECISION_MULTIPLIER.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ModAttributes.ARMOR_MULTIPLIER.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ModAttributes.TOUGHNESS_MULTIPLIER.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ModAttributes.HASTE_MULTIPLIER.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get()).removeModifier(SCALING_UUID);
-
-        player.getAttribute(Attributes.ARMOR).removeModifier(SCALING_UUID);
-        player.getAttribute(Attributes.ARMOR_TOUGHNESS).removeModifier(SCALING_UUID);
-        player.getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifier(SCALING_UUID);
-        player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(SCALING_UUID);
-        player.getAttribute(ForgeMod.BLOCK_REACH.get()).removeModifier(SCALING_UUID);
-        player.getAttribute(ForgeMod.ENTITY_REACH.get()).removeModifier(SCALING_UUID);
-
-        player.getAttribute(Attributes.ATTACK_SPEED).removeModifier(UUID.fromString("e2225476-1234-5352-5454-113215411111"));
-        player.getAttribute(Attributes.ARMOR).removeModifier(UUID.fromString("e1125476-1234-5454-5454-113215411111"));
-        player.getAttribute(Attributes.ARMOR_TOUGHNESS).removeModifier(UUID.fromString("e2225476-1234-5454-5454-113215411111"));
-        player.getAttribute(Attributes.MAX_HEALTH).removeModifier(UUID.fromString("e3325476-1234-5454-5454-113215411111"));
+//        player.getAttribute(ModAttributes.POTENCY.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ModAttributes.ACCURACY.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ModAttributes.PRECISION.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ModAttributes.HASTE.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ModAttributes.PROJECTILE_POTENCY.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ModAttributes.NOCK_HASTE.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ModAttributes.DEBUFF_RESIST.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ModAttributes.XP_GAIN.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ModAttributes.MINING_SPEED.get()).removeModifier(SCALING_UUID);
+//
+//        player.getAttribute(ModAttributes.POTENCY_MULTIPLIER.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ModAttributes.PRECISION_MULTIPLIER.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ModAttributes.ARMOR_MULTIPLIER.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ModAttributes.TOUGHNESS_MULTIPLIER.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ModAttributes.HASTE_MULTIPLIER.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get()).removeModifier(SCALING_UUID);
+//
+//        player.getAttribute(Attributes.ARMOR).removeModifier(SCALING_UUID);
+//        player.getAttribute(Attributes.ARMOR_TOUGHNESS).removeModifier(SCALING_UUID);
+//        player.getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifier(SCALING_UUID);
+//        player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(SCALING_UUID);
+//        player.getAttribute(ForgeMod.BLOCK_REACH.get()).removeModifier(SCALING_UUID);
+//        player.getAttribute(ForgeMod.ENTITY_REACH.get()).removeModifier(SCALING_UUID);
+//
+//        player.getAttribute(Attributes.ATTACK_SPEED).removeModifier(UUID.fromString("e2225476-1234-5352-5454-113215411111"));
+//        player.getAttribute(Attributes.ARMOR).removeModifier(UUID.fromString("e1125476-1234-5454-5454-113215411111"));
+//        player.getAttribute(Attributes.ARMOR_TOUGHNESS).removeModifier(UUID.fromString("e2225476-1234-5454-5454-113215411111"));
+//        player.getAttribute(Attributes.MAX_HEALTH).removeModifier(UUID.fromString("e3325476-1234-5454-5454-113215411111"));
 
         double totalStr = player.getAttributeValue(ModAttributes.STR.get());
         double totalFort = player.getAttributeValue(ModAttributes.FORT.get());
@@ -224,11 +225,12 @@ public class AttributeApplier {
         double totalCon = player.getAttributeValue(ModAttributes.CON.get());
         double totalPerc = player.getAttributeValue(ModAttributes.PERC.get());
         double totalInsight = player.getAttributeValue(ModAttributes.INSIGHT.get());
+        double totalWisdom = player.getAttributeValue(ModAttributes.WISDOM.get());
 
         double generalDamageRating = totalStr * 0.35 + totalCon * 0.125;
         double armorRating = totalCon * 0.15 + totalPerc * 0.1 + totalFort * 0.2;
         double toughnessRating = totalFort * 0.15;
-        double totalDebuffResist = totalCon * 0.2;
+        double totalDebuffResist = totalCon * 0.2 + totalWisdom * 0.125;
         double totalKnockbackResist = totalFort * 0.2;
         double totalMoveSpeed = totalDex * 0.12;
 
@@ -250,6 +252,13 @@ public class AttributeApplier {
         double totalToughnessMultiplier = 0;
         double totalAttackSpeedMultiplier = 0;
         double totalProjectileDamageMultiplier = 0;
+
+        double totalRestorationMultiplier = 0;
+        double totalAmplificationMultiplier = 0;
+
+        double restorationRating = totalWisdom * 0.15;
+        double amplificationRating = totalWisdom * 0.2;
+
 
         // --- Strength ---
         if (totalStr >= 30) generalDamageRating += 7.5;
@@ -298,6 +307,19 @@ public class AttributeApplier {
         if (totalInsight >= 30) totalBlockReach += 0.5;
         if (totalInsight >= 40) { totalMiningSpeed += 25; totalXpGain += 25; }
 
+        // --- Wisdom ---
+        if (totalWisdom >= 10) restorationRating += 8;
+        if (totalWisdom >= 20) amplificationRating += 10;
+        if (totalWisdom >= 30) totalDebuffResist += 10.0;
+        if (totalWisdom >= 40) totalRestorationMultiplier += 0.10;
+        if (totalWisdom >= 50) { armorRating += 7.0; amplificationRating += 10; }
+        if (totalWisdom >= 60) { restorationRating += 7.0; totalAmplificationMultiplier += 0.1; }
+
+        applyModifier(player, ModAttributes.RESTORATION.get(), restorationRating, SCALING_UUID);
+        applyModifier(player, ModAttributes.AMPLIFICATION.get(), amplificationRating, SCALING_UUID);
+        applyModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), totalRestorationMultiplier, SCALING_UUID);
+        applyModifier(player, ModAttributes.AMPLIFICATION_MULTIPLIER.get(), totalAmplificationMultiplier, SCALING_UUID);
+
         // Ratings
         applyModifier(player, ModAttributes.POTENCY.get(), generalDamageRating, SCALING_UUID);
         applyModifier(player, ModAttributes.ACCURACY.get(), generalCritChanceRating, SCALING_UUID);
@@ -338,7 +360,7 @@ public class AttributeApplier {
         applyModifier(player, Attributes.ARMOR, armorRating, SCALING_UUID);
         applyModifier(player, Attributes.ARMOR_TOUGHNESS, toughnessRating, SCALING_UUID);
         applyModifier(player, Attributes.KNOCKBACK_RESISTANCE, totalKnockbackResist * 0.01, SCALING_UUID);
-        applyModifier(player, Attributes.MOVEMENT_SPEED, totalMoveSpeed * 0.0001, SCALING_UUID);
+        applyModifier(player, Attributes.MOVEMENT_SPEED, totalMoveSpeed * 0.001, SCALING_UUID);
         applyModifier(player, ForgeMod.BLOCK_REACH.get(), totalBlockReach, SCALING_UUID);
         applyModifier(player, ForgeMod.ENTITY_REACH.get(), totalEntityReach, SCALING_UUID);
 
@@ -522,4 +544,22 @@ public class AttributeApplier {
             }
         }
     }
+
+    // Randomized mobs
+//    @SubscribeEvent
+//    public static void onMonsterSpawn(EntityJoinLevelEvent event) {
+//        if (event.getLevel().isClientSide()) return;
+//
+//        if (event.getEntity() instanceof Enemy && event.getEntity() instanceof LivingEntity living) {
+//            RandomSource random = living.getRandom();
+//
+//            double outgoingVal = Math.max(0.75, Math.min(1.5, 1.0 + (random.nextGaussian() * 0.15)));
+//            AttributeInstance outgoing = living.getAttribute(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
+//            if (outgoing != null) outgoing.setBaseValue(outgoingVal);
+//
+//            double incomingVal = Math.max(0.75, Math.min(1.5, 1.0 + (random.nextGaussian() * 0.15)));
+//            AttributeInstance incoming = living.getAttribute(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get());
+//            if (incoming != null) incoming.setBaseValue(incomingVal);
+//        }
+//    }
 }

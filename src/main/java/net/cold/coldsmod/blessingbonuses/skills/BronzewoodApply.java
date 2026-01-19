@@ -1,7 +1,7 @@
 package net.cold.coldsmod.blessingbonuses.skills;
 
-import net.cold.coldsmod.damage.CustomMeleeDamageNoProcs;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
+import net.cold.coldsmod.damage.CustomMeleeDamageNoProcs;
 import net.cold.coldsmod.stat.ItemRarityUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,11 +23,12 @@ public class BronzewoodApply {
 
     @SubscribeEvent
     public static void onHitApplyBronzewoodCurse(LivingHurtEvent event) {
-        LivingEntity target = event.getEntity();
-        if (target instanceof Player) return;
         if (!(event.getSource().getEntity() instanceof Player player)) return;
+        if (event.getEntity() instanceof Player) return;
+        if (player.level().isClientSide()) return;
 
-        if (target.level().isClientSide) return;
+        LivingEntity target = event.getEntity();
+
 
         InteractionHand hand = player.swingingArm;
         String mainType = ItemRarityUtils.getItemType(player.getMainHandItem());
@@ -82,17 +83,12 @@ public class BronzewoodApply {
 
     @SubscribeEvent
     public static void onKillRemoveBronzewoodCooldown(LivingDeathEvent event) {
-        if (event.getEntity() == null) return;
+        if (!(event.getSource().getEntity() instanceof Player player)) return;
+        if (player.hasEffect(ModEffects.BRONZEWOOD_COOLDOWN.get())) {
+            if (player.level().isClientSide()) return;
 
-        if (event.getSource().getEntity() instanceof Player player) {
-
-            if (player.level().isClientSide) return;
-
-            if (player.hasEffect(ModEffects.BRONZEWOOD_COOLDOWN.get())) {
-
-                player.removeEffect(ModEffects.BRONZEWOOD_COOLDOWN.get());
-                player.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
+            player.removeEffect(ModEffects.BRONZEWOOD_COOLDOWN.get());
+            player.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
         }
     }
 }

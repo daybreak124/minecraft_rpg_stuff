@@ -108,7 +108,7 @@ public class UtilityAccessories {
                     .withDisplayName("Damage")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setDamage(125).build())
+                    .withStats(new CustomStats.Builder().setMeleeDamage(1250).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -339,6 +339,39 @@ public class UtilityAccessories {
                     .setCritDamageMultiplier(1).setMeleeDamageMultiplier(1).setMeleeCritChanceMultiplier(1)
                     .setMeleeCritDamageMultiplier(1).setProjectileDamageMultiplier(1).setProjectileCritChanceMultiplier(1)
                     .setProjectileCritDamageMultiplier(1).setDrawSpeedMultiplier(1).setDrawSpeed(125).build())
+                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
+                    .build()
+    );
+
+    public static final RegistryObject<AccessoryItem> ARMOR1 = ITEMS.register(
+            "armor_item_1",
+            () -> AccessoryItem.builder(new Item.Properties())
+                    .withDisplayName("Armor")
+                    .withRarity(ItemRarity.DISTINCT)
+                    .withType(AccessoryItem.AccessoryType.Utility)
+                    .withStats(new CustomStats.Builder().setArmor(10).setArmorToughness(10).setArmorMultiplier(0.1).setArmorMultiplier(0.1).build())
+                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
+                    .build()
+    );
+
+    public static final RegistryObject<AccessoryItem> ARMOR2 = ITEMS.register(
+            "armor_item_2",
+            () -> AccessoryItem.builder(new Item.Properties())
+                    .withDisplayName("Armoooor")
+                    .withRarity(ItemRarity.DISTINCT)
+                    .withType(AccessoryItem.AccessoryType.Utility)
+                    .withStats(new CustomStats.Builder().setArmor(20).setArmorToughness(20).setArmorMultiplier(0.2).setArmorMultiplier(0.2).build())
+                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
+                    .build()
+    );
+
+    public static final RegistryObject<AccessoryItem> ARMOR3 = ITEMS.register(
+            "armor_item_3",
+            () -> AccessoryItem.builder(new Item.Properties())
+                    .withDisplayName("ARMOOOOOOOOR")
+                    .withRarity(ItemRarity.DISTINCT)
+                    .withType(AccessoryItem.AccessoryType.Utility)
+                    .withStats(new CustomStats.Builder().setArmor(30).setArmorToughness(30).setArmorMultiplier(0.3).setArmorMultiplier(0.3).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );

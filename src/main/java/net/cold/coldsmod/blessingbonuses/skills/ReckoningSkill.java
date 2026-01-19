@@ -1,8 +1,10 @@
 package net.cold.coldsmod.blessingbonuses.skills;
 
 import net.cold.coldsmod.ModSounds;
-import net.cold.coldsmod.damage.ModDamageTypes;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
+import net.cold.coldsmod.damage.ModDamageTypes;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
@@ -20,15 +22,19 @@ public class ReckoningSkill {
     @SubscribeEvent
     public static void onPlayerDamage(LivingHurtEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
-        if (player.level().isClientSide) return;
-
-        if (!player.hasEffect(ModEffects.RECKONING.get())) return;
         if (event.getSource().is(DamageTypes.FALL)) return;
+        if (!player.hasEffect(ModEffects.RECKONING.get())) return;
+        if (player.level().isClientSide()) return;
 
         player.removeEffect(ModEffects.RECKONING.get());
         player.addEffect(new MobEffectInstance(ModEffects.RECKONING_ACTIVE.get(), ACTIVE_DURATION, 0, false, false, true));
 
-        player.playSound(ModSounds.RECKONING_ACTIVE.get(), 0.3F, 1.0F);
+        if (player instanceof ServerPlayer serverPlayer) {
+            serverPlayer.playNotifySound(
+                    ModSounds.RECKONING_ACTIVE.get(), SoundSource.PLAYERS,
+                    0.3F, 1.0F
+            );
+        }
 
         player.getPersistentData().putDouble(HEALED_NBT, 0);
     }
@@ -36,9 +42,9 @@ public class ReckoningSkill {
     @SubscribeEvent
     public static void onReckoningHeal(LivingDamageEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
-        if (player.level().isClientSide) return;
         if (event.getSource().is(ModDamageTypes.RECKONING)) return;
         if (event.getSource().is(DamageTypes.FALL)) return;
+        if (player.level().isClientSide()) return;
 
 
         if (player.hasEffect(ModEffects.RECKONING_ACTIVE.get())) {

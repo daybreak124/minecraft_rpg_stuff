@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -32,8 +31,8 @@ public class FocusedEnergyReady extends MobEffect {
     public static void onArrowSpawn(EntityJoinLevelEvent event) {
         if (!(event.getEntity() instanceof AbstractArrow arrow)) return;
         if (!(arrow.getOwner() instanceof Player player)) return;
-
-         if (!player.hasEffect(ModEffects.FOCUSED_ENERGY_READY.get())) return;
+        if (!player.hasEffect(ModEffects.FOCUSED_ENERGY_READY.get())) return;
+        if (player.level().isClientSide()) return;
 
         ItemStack main = player.getMainHandItem();
         ItemStack off  = player.getOffhandItem();
@@ -50,17 +49,12 @@ public class FocusedEnergyReady extends MobEffect {
 
     @SubscribeEvent
     public static void onProjectileImpact(ProjectileImpactEvent event) {
-        if (event.getProjectile() == null) return;
-
         if (!(event.getProjectile() instanceof AbstractArrow arrow)) return;
+        if (!arrow.getPersistentData().getBoolean("focused_energy_arrow")) return;
+        if (!(arrow.getOwner() instanceof Player player)) return;
+        if (player.level().isClientSide()) return;
 
         Level level = arrow.level();
-        if (level.isClientSide) return;
-
-        Entity owner = arrow.getOwner();
-        if (!(owner instanceof Player player)) return;
-
-        if (!arrow.getPersistentData().getBoolean("focused_energy_arrow")) return;
 
         HitResult hit = event.getRayTraceResult();
         if (hit == null) return;
@@ -80,7 +74,7 @@ public class FocusedEnergyReady extends MobEffect {
 
         if (level instanceof ServerLevel) {
            EffectUtils.spawnExplosionOnFeet(player);
-           EffectUtils.playExplosionSound(player);
+           EffectUtils.playExplosionSound(player, 0.5F);
         }
 
         player.removeEffect(ModEffects.FOCUSED_ENERGY_READY.get());

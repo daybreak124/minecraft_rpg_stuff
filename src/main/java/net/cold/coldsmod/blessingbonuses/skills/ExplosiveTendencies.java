@@ -37,8 +37,9 @@ public class ExplosiveTendencies {
         if (!(event.getEntity() instanceof AbstractArrow arrow)) return;
         if (!(arrow.getOwner() instanceof Player player)) return;
 
-
         if (!player.hasEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get())) return;
+
+        if (player.level().isClientSide()) return;
 
         ItemStack main = player.getMainHandItem();
         ItemStack off  = player.getOffhandItem();
@@ -58,7 +59,9 @@ public class ExplosiveTendencies {
         if (!(event.getSource().getDirectEntity() instanceof Projectile proj)) return;
         if (!proj.getPersistentData().getBoolean("explosive_tendency_tagged")) return;
         Entity shooter = proj.getOwner();
+        if (shooter.level().isClientSide) return;
         if (!(proj instanceof AbstractArrow)) return;
+
         Player player = (Player) shooter;
         LivingEntity target = event.getEntity();
 
@@ -134,7 +137,7 @@ public class ExplosiveTendencies {
     public static void onLivingDamage(LivingDamageEvent event) {
         if (!(event.getSource().getEntity() instanceof Creeper creeper)) return;
         if (!creeper.getPersistentData().getBoolean("noBlockDamage")) return;
-        if ((event.getEntity() instanceof Monster)) return;
+        if (event.getEntity() instanceof Monster) return;
         event.setCanceled(true);
     }
 
@@ -176,11 +179,11 @@ public class ExplosiveTendencies {
                 ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get());
 
         if (owner.getRandom().nextDouble() < (totalCritChance / 100.0)) {
-            finalDamage *= (1.0 + (totalCritDamage / 100.0));
+            finalDamage *= (1.5 + (totalCritDamage / 100.0));
         }
 
-        finalDamage *= (1.5 + (totalProjDamage / 100.0));
+        finalDamage *= (1.0 + (totalProjDamage / 100.0));
 
-        event.setAmount((float) finalDamage);
+        event.setAmount((float) finalDamage/5);
     }
 }

@@ -29,9 +29,10 @@ public class RetaliateActive extends MobEffect {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        Player player = event.player;
-        if (player.level().isClientSide) return;
         if (event.phase != TickEvent.Phase.END) return;
+        if (event.player.level().isClientSide()) return;
+
+        Player player = event.player;
 
         ItemStack main = player.getMainHandItem();
         ItemStack off = player.getOffhandItem();
@@ -59,8 +60,8 @@ public class RetaliateActive extends MobEffect {
     @SubscribeEvent
     public static void onPlayerHurt(LivingHurtEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
-        if (player.level().isClientSide) return;
         if (event.getSource().getEntity() instanceof Player) return;
+        if (player.level().isClientSide()) return;
 
         if (player.hasEffect(ModEffects.RETALIATE_ACTIVE.get()) && player.isBlocking()) {
             int hits = player.getPersistentData().getInt("retaliateHits");

@@ -1,8 +1,8 @@
 package net.cold.coldsmod.blessingbonuses.neweffects;
 
+import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.cold.coldsmod.damage.ModDamageTypes;
-import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -39,7 +39,8 @@ public class ThornedParryReady extends MobEffect {
     @SubscribeEvent
     public static void onShieldHit(LivingHurtEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
-        if (!(player.hasEffect(ModEffects.THORNED_PARRY_READY.get()))) return;
+        if (!player.hasEffect(ModEffects.THORNED_PARRY_READY.get())) return;
+        if (player.level().isClientSide()) return;
 
         if (player.isBlocking() && event.getSource().getEntity() instanceof Monster monster) {
             player.getPersistentData().putInt("parry_time", 8);
@@ -49,9 +50,11 @@ public class ThornedParryReady extends MobEffect {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide) return;
+        if (event.phase != TickEvent.Phase.END) return;
+        if (event.player.level().isClientSide()) return;
 
         Player player = event.player;
+
         if (!(player.getPersistentData().getBoolean("thorn_eligible"))) return;
 
         int parryTimer = player.getPersistentData().getInt("parry_time");
@@ -100,7 +103,7 @@ public class ThornedParryReady extends MobEffect {
         player.removeEffect(ModEffects.THORNED_PARRY_READY.get());
         player.addEffect(new MobEffectInstance(ModEffects.THORNED_PARRY_CD.get(), 20*7, 0, false, false, true));
 
-        EffectUtils.spawnParticleBurst(player, ParticleTypes.ANGRY_VILLAGER);
+        EffectUtils.spawnParticleBurst(player, ParticleTypes.CRIMSON_SPORE);
         EffectUtils.playSound(player, SoundEvents.TRIDENT_HIT_GROUND, 1F, 1F);
     }
 }

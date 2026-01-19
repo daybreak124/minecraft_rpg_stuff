@@ -20,6 +20,14 @@ public class CreativeTabs {
                             .title(Component.translatable("creativetab.accessory_tab"))
                             .icon(() -> new ItemStack(UtilityAccessories.ANTIQUE_POCKET_WATCH.get()))
                             .displayItems((parameters, output) -> {
+
+                                output.accept(UtilityAccessories.CLOUDTREADER_BOOTS.get());
+                                output.accept(UtilityAccessories.ENDERMAN_FINGERS.get());
+                                output.accept(UtilityAccessories.REINFORCED_DIAMOND_PLATING.get());
+                                output.accept(UtilityAccessories.MONIS_LUCKY_CHARM.get());
+                                output.accept(UtilityAccessories.ANTIQUE_POCKET_WATCH.get());
+                                output.accept(UtilityAccessories.CLOUDSPIRE_GEM.get());
+
                                 output.accept(RingAccessories.COIL_OF_WRATH_RARE.get());
                                 output.accept(RingAccessories.COIL_OF_WRATH_EPIC.get());
                                 output.accept(RingAccessories.COIL_OF_WRATH_LEGENDARY.get());
@@ -160,13 +168,6 @@ public class CreativeTabs {
                                 output.accept(HeadAccessories.SUNS_GAZE_EPIC.get());
                                 output.accept(HeadAccessories.SUNS_GAZE_LEGENDARY.get());
                                 output.accept(HeadAccessories.SUNS_GAZE_MYTHIC.get());
-
-                                output.accept(UtilityAccessories.CLOUDTREADER_BOOTS.get());
-                                output.accept(UtilityAccessories.ENDERMAN_FINGERS.get());
-                                output.accept(UtilityAccessories.REINFORCED_DIAMOND_PLATING.get());
-                                output.accept(UtilityAccessories.MONIS_LUCKY_CHARM.get());
-                                output.accept(UtilityAccessories.ANTIQUE_POCKET_WATCH.get());
-                                output.accept(UtilityAccessories.CLOUDSPIRE_GEM.get());
                             })
                             .build()
             );
@@ -294,6 +295,10 @@ public class CreativeTabs {
                                 output.accept(UtilityAccessories.PERC.get());
                                 output.accept(UtilityAccessories.INS.get());
                                 output.accept(UtilityAccessories.ALL.get());
+
+                                output.accept(UtilityAccessories.ARMOR1.get());
+                                output.accept(UtilityAccessories.ARMOR2.get());
+                                output.accept(UtilityAccessories.ARMOR3.get());
                             })
                             .build()
             );

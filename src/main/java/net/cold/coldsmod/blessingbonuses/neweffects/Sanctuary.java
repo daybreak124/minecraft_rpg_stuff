@@ -33,7 +33,8 @@ public class Sanctuary {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide) return;
+        if (event.phase != TickEvent.Phase.END) return;
+        if (event.player.level().isClientSide()) return;
 
         Player player = event.player;
         CompoundTag tag = player.getPersistentData();
@@ -100,10 +101,7 @@ public class Sanctuary {
         reduction = Math.min(reduction, 0.9f);
         float finalHeal = (float) (BASE_HEAL * ((1 + (healIncrease/100))) * (1f - reduction));
 
-
-        if (!(target.hasEffect(ModEffects.BlACKENED_HEART.get()))) {
-            target.heal(finalHeal);
-        }
+        target.heal(finalHeal);
 
         target.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_FATIGUE.get(), 20 * 10, stacks, false, false, true));
         target.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_SHARED.get(), 20 * 5, 0, false, false, true));

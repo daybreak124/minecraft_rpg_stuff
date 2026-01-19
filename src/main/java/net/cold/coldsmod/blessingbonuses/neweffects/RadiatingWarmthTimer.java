@@ -1,6 +1,5 @@
 package net.cold.coldsmod.blessingbonuses.neweffects;
 
-import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -52,7 +51,7 @@ public class RadiatingWarmthTimer extends MobEffect {
         EffectUtils.spawnComposterBurst(player);
 
         for (LivingEntity target : entities) {
-            if (target.getHealth() < target.getMaxHealth() && !(target.hasEffect(ModEffects.BlACKENED_HEART.get()))) {
+            if (target.getHealth() < target.getMaxHealth()) {
                 target.heal((float) (1.25 * (1.0 + (healIncrease / 100.0))));
 
                 EffectUtils.playHealSound(target);

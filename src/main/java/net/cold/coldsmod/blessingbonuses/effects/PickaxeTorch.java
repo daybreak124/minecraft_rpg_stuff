@@ -33,7 +33,7 @@ public class PickaxeTorch {
         if (player.getHealth() <= 3f) return;
 
         var pos = event.getPos().relative(event.getFace());
-        if (world.getBlockState(pos).isAir()) {
+        if (world.getBlockState(pos).canBeReplaced()) {
             world.setBlockAndUpdate(pos, Blocks.TORCH.defaultBlockState());
 
             // Change this to a custom damage source that wont get mitigated by armor/enchants, or not
