@@ -12,7 +12,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -66,7 +66,7 @@ public class SoulSeveranceActive extends MobEffect {
 
                 DamageSource source = new CustomMeleeDamage(meleeType, player);
 
-                if (ticks % 20 == 0 && mob instanceof Monster) {
+                if (ticks % 20 == 0 && mob instanceof Enemy) {
                     player.level().playSound(
                             null,
                             player.getX(), player.getY(), player.getZ(),

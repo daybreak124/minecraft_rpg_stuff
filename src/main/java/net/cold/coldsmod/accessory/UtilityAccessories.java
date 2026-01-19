@@ -349,7 +349,7 @@ public class UtilityAccessories {
                     .withDisplayName("Armor")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setArmor(10).setArmorToughness(10).setArmorMultiplier(0.1).setArmorMultiplier(0.1).build())
+                    .withStats(new CustomStats.Builder().setArmor(10).setArmorToughness(10).setArmorMultiplier(0.1).setToughnessMultiplier(0.1).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -360,7 +360,7 @@ public class UtilityAccessories {
                     .withDisplayName("Armoooor")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setArmor(20).setArmorToughness(20).setArmorMultiplier(0.2).setArmorMultiplier(0.2).build())
+                    .withStats(new CustomStats.Builder().setArmor(20).setArmorToughness(20).setArmorMultiplier(0.2).setToughnessMultiplier(0.2).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );
@@ -371,7 +371,7 @@ public class UtilityAccessories {
                     .withDisplayName("ARMOOOOOOOOR")
                     .withRarity(ItemRarity.DISTINCT)
                     .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setArmor(30).setArmorToughness(30).setArmorMultiplier(0.3).setArmorMultiplier(0.3).build())
+                    .withStats(new CustomStats.Builder().setArmor(30).setArmorToughness(30).setArmorMultiplier(0.3).setToughnessMultiplier(0.3).build())
                     .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
                     .build()
     );

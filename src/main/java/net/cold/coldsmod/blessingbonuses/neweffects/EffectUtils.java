@@ -7,7 +7,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -96,18 +97,18 @@ public class EffectUtils {
 
     @SubscribeEvent
     public static void onMobTick(LivingEvent.LivingTickEvent event) {
-        if (!(event.getEntity() instanceof Monster monster)) return;
-        if (monster.level().isClientSide()) return;
+        if (!(event.getEntity() instanceof Enemy enemy) || !(event.getEntity() instanceof Mob mob)) return;
+        if (mob.level().isClientSide()) return;
 
-        int freezeTimer = monster.getPersistentData().getInt("freeze_timer");
+        int freezeTimer = mob.getPersistentData().getInt("freeze_timer");
 
         if (freezeTimer > 0) {
             freezeTimer--;
 
             if (freezeTimer <= 0) {
-                monster.setNoAi(false);
+                mob.setNoAi(false);
             }
-            monster.getPersistentData().putInt("freeze_timer", freezeTimer);
+            mob.getPersistentData().putInt("freeze_timer", freezeTimer);
         }
     }
 }

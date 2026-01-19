@@ -12,6 +12,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -130,7 +131,7 @@ public class ExplosiveTendencies {
         if (!creeper.getPersistentData().getBoolean("noBlockDamage")) return;
 
         event.getAffectedBlocks().clear();
-        event.getAffectedEntities().removeIf(e -> !(e instanceof Monster));
+        event.getAffectedEntities().removeIf(e -> !(e instanceof Enemy));
     }
 
     @SubscribeEvent

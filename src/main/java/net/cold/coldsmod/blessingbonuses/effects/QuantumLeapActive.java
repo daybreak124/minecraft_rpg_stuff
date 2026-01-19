@@ -9,7 +9,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
@@ -83,12 +83,12 @@ public class QuantumLeapActive extends MobEffect {
             List<LivingEntity> nearby = player.level().getEntitiesOfClass(
                     LivingEntity.class,
                     player.getBoundingBox().inflate(10),
-                    e -> (e instanceof Monster)
+                    e -> e instanceof Enemy
             );
 
             for (LivingEntity entity : nearby) {
-                if (entity instanceof Mob) {
-                    ((Mob) entity).setTarget(null);
+                if (entity instanceof Mob mob) {
+                    mob.setTarget(null);
                 }
             }
         }

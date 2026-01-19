@@ -10,7 +10,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
@@ -79,7 +79,7 @@ public class IntoTheFraySkill {
             List<LivingEntity> targetsHit = level.getEntitiesOfClass(
                     LivingEntity.class,
                     player.getBoundingBox().inflate(0.6),
-                    e -> e instanceof Monster && e.isAlive() && !e.isInvulnerable()
+                    e -> e instanceof Enemy && e.isAlive() && !e.isInvulnerable()
             );
 
             if (!targetsHit.isEmpty()) {
@@ -99,7 +99,7 @@ public class IntoTheFraySkill {
                 List<LivingEntity> nearbyEntities = level.getEntitiesOfClass(
                         LivingEntity.class,
                         player.getBoundingBox().inflate(4.0),
-                        e -> e instanceof Monster && e.isAlive() && !e.isInvulnerable()
+                        e -> e instanceof Enemy && e.isAlive() && !e.isInvulnerable()
                 );
 
                 for (LivingEntity aoeTarget : nearbyEntities) {

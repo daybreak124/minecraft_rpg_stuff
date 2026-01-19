@@ -51,12 +51,10 @@ public class RadiatingWarmthTimer extends MobEffect {
         EffectUtils.spawnComposterBurst(player);
 
         for (LivingEntity target : entities) {
-            if (target.getHealth() < target.getMaxHealth()) {
-                target.heal((float) (1.25 * (1.0 + (healIncrease / 100.0))));
 
-                EffectUtils.playHealSound(target);
-                EffectUtils.spawnComposterBurst((Player) target);
-            }
+            target.heal((float) (1.25 * (1.0 + (healIncrease / 100.0))));
+            EffectUtils.playHealSound(target);
+            EffectUtils.spawnComposterBurst((Player) target);
         }
     }
 }

@@ -5,7 +5,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,14 +28,13 @@ public class DirectedHatredSkill {
         List<LivingEntity> nearby = player.level().getEntitiesOfClass(
                 LivingEntity.class,
                 player.getBoundingBox().inflate(range),
-                e -> e instanceof Monster
+                e -> e instanceof Enemy
         );
 
         for (LivingEntity entity : nearby) {
-            Monster monster = (Monster) entity;
-            monster.setTarget(player);
-            monster.addEffect(new MobEffectInstance(ModEffects.BLINDED_BY_HATRED.get(), 20 * 6, 0, true, true, true));
-        }
+            if (entity instanceof Mob mob) {
+                mob.setTarget(player);
+            }
 
         player.level().playSound(
                 null,
@@ -47,5 +47,6 @@ public class DirectedHatredSkill {
 
         player.removeEffect(ModEffects.DIRECTED_HATRED_READY.get());
         player.addEffect(new MobEffectInstance(ModEffects.DIRECTED_HATRED_COOLDOWN.get(), 20 * 10, 0, false, false, true));
+        }
     }
 }

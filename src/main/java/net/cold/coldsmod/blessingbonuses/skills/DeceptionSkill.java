@@ -7,7 +7,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -59,12 +59,12 @@ public class DeceptionSkill {
         List<LivingEntity> nearby = target.level().getEntitiesOfClass(
                 LivingEntity.class,
                 target.getBoundingBox().inflate(range),
-                e -> (e instanceof Monster) && e != target && !(e.getType().is(Tags.EntityTypes.BOSSES)) && (!(e instanceof Warden))
+                e -> e instanceof Enemy && e != target && !e.getType().is(Tags.EntityTypes.BOSSES) && !(e instanceof Warden)
         );
 
         for (LivingEntity entity : nearby) {
-            if (entity instanceof Mob) {
-                ((Mob) entity).setTarget(target);
+            if (entity instanceof Mob mob) {
+                mob.setTarget(target);
             }
         }
 

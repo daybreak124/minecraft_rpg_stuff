@@ -5,7 +5,10 @@ import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
@@ -55,19 +58,21 @@ public class DaringShoutSkill {
         double durationMultiplier = 1 + (fort * 0.02 + perc * 0.01);
         int durationTicks = (int) (3 * 20 * durationMultiplier);
 
-        List<Monster> entities = level.getEntitiesOfClass(
-                Monster.class,
+        List<LivingEntity> entities = level.getEntitiesOfClass(
+                LivingEntity.class,
                 player.getBoundingBox().inflate(5),
-                e -> e.isAlive() && !e.isInvulnerable()
+                e -> e instanceof Enemy && e.isAlive() && !e.isInvulnerable()
         );
 
-        for (Monster target : entities) {
-            int finalDuration = target.getType().is(Tags.EntityTypes.BOSSES)
+        for (LivingEntity entity : entities) {
+            int finalDuration = entity.getType().is(Tags.EntityTypes.BOSSES) || entity instanceof Warden
                     ? durationTicks / 3
                     : durationTicks;
 
-            target.setNoAi(true);
-            target.getPersistentData().putInt("freeze_timer", finalDuration);
+            if (entity instanceof Mob mob) {
+                mob.setNoAi(true);
+                mob.getPersistentData().putInt("freeze_timer", finalDuration);
+            }
         }
     }
 }
