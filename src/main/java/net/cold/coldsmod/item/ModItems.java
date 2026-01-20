@@ -2175,7 +2175,7 @@ public class ModItems {
             tooltip.add(Component.literal(" Shields").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("Blessing: Sanctuary").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" After blocking for 1").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" second and heal allies ").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" second, heal allies").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" within 6 blocks for 1.25").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" every second and reduce").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" their damage taken by 10%").withStyle(ChatFormatting.GRAY));

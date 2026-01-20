@@ -3,6 +3,10 @@ package net.cold.coldsmod;
 import com.mojang.logging.LogUtils;
 import net.cold.coldsmod.LootModifiers.ModLootModifiers;
 import net.cold.coldsmod.accessory.*;
+import net.cold.coldsmod.accessory.bracers.*;
+import net.cold.coldsmod.accessory.mind.*;
+import net.cold.coldsmod.accessory.necklace.*;
+import net.cold.coldsmod.accessory.ring.*;
 import net.cold.coldsmod.blessingbonuses.CooldownCycle;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.effects.PickaxeTorch;
@@ -103,11 +107,41 @@ public class ColdsMod {
         MinecraftForge.EVENT_BUS.register(new Formulas());
 
 
-        RingAccessories.register(modEventBus);
-        BracerAccessories.register(modEventBus);
-        HeadAccessories.register(modEventBus);
-        NecklaceAccessories.register(modEventBus);
+        BraceletOfPride.register(modEventBus);
+        DragonClaw.register(modEventBus);
+        Enderman.register(modEventBus);
+        FingersOfLust.register(modEventBus);
+        ReinforcedSteel.register(modEventBus);
+        SerpentSkin.register(modEventBus);
+        ThieveryWraps.register(modEventBus);
+        WardenSkin.register(modEventBus);
+
+        DragonRoar.register(modEventBus);
+        EndlessWaves.register(modEventBus);
+        Shrieks.register(modEventBus);
+        SunsGaze.register(modEventBus);
+        Tear.register(modEventBus);
+        TemptingWhispers.register(modEventBus);
+
+        BottledTsunami.register(modEventBus);
+        DragonTeethNecklace.register(modEventBus);
+        EnvyCollar.register(modEventBus);
+        HangingTigerTooth.register(modEventBus);
+        KeyOfTheUnknown.register(modEventBus);
+        PendantOfSnowflake.register(modEventBus);
+        StolenLegacies.register(modEventBus);
+
+        BandOfUnknown.register(modEventBus);
+        CoilOfWrath.register(modEventBus);
+        ColdCoil.register(modEventBus);
+        CorruptedLostRing.register(modEventBus);
+        DragonEyeEmbeddedRing.register(modEventBus);
+        GluttonySignet.register(modEventBus);
+        SunstoneForged.register(modEventBus);
+
         UtilityAccessories.register(modEventBus);
+        net.cold.coldsmod.accessory.TestItems.register(modEventBus);
+
 
         MinecraftForge.EVENT_BUS.register(BowAnimHandler.class);
 

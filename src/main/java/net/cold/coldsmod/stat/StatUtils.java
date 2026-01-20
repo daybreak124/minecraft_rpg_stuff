@@ -1,6 +1,5 @@
 package net.cold.coldsmod.stat;
 
-import net.cold.coldsmod.accessory.AccessoryItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -144,15 +143,11 @@ public class StatUtils {
             return stats;
         }
 
-        if (stack.getItem() instanceof AccessoryItem accessory) {
-            return accessory.getStats();
-        }
-
         return new CustomStats();
     }
 
     public static boolean hasStats(ItemStack stack) {
-        return stack != null && !stack.isEmpty() && ((stack.getTag() != null && stack.getTag().contains("custom_stats")) || stack.getItem() instanceof AccessoryItem);
+        return stack != null && !stack.isEmpty() && ((stack.getTag() != null && stack.getTag().contains("custom_stats")));
     }
 
     public static void writeRarityToNBT(ItemStack stack, ItemRarity rarity) {
@@ -239,36 +234,42 @@ public class StatUtils {
             String name = (String) pair[0];
             int value = (int) pair[1];
             if (value == 0) continue;
-            tooltip.add(Component.literal(String.format("%s: %d", name, value)).withStyle(ChatFormatting.DARK_AQUA));
+            String prefix = value > 0 ? "+" : "";
+
+            tooltip.add(Component.literal(String.format("%s%d %s", prefix, value, name)).withStyle(ChatFormatting.DARK_AQUA));
         }
 
         if (isArmorItem) {
             if (vanillaArmor != 0 || stats.getArmor() != 0) {
-                String text = "Armor: " + formatValue(vanillaArmor);
+                String text = (vanillaArmor > 0 ? "+" : "") + formatValue(vanillaArmor);
 
                 if (stats.getArmor() != 0) {
                     text += String.format(" (%s%s)", stats.getArmor() > 0 ? "+" : "", formatValue(stats.getArmor()));
                 }
-
+                text += " Armor";
                 tooltip.add(Component.literal(text).withStyle(ChatFormatting.BLUE));
             }
 
             if (vanillaToughness != 0 || stats.getArmorToughness() != 0) {
-                String text = "Armor Toughness: " + formatValue(vanillaToughness);
+                String text = (vanillaToughness > 0 ? "+" : "") + formatValue(vanillaToughness) + " Armor Toughness";
 
                 if (stats.getArmorToughness() != 0) {
+                    text = (vanillaToughness > 0 ? "+" : "") + formatValue(vanillaToughness);
                     text += String.format(" (%s%s)", stats.getArmorToughness() > 0 ? "+" : "", formatValue(stats.getArmorToughness()));
+                    text += " Armor Toughness";
                 }
-
                 tooltip.add(Component.literal(text).withStyle(ChatFormatting.BLUE));
             }
+
             if (vanillaKnockbackResist != 0 || stats.getKnockbackResist() != 0) {
-                String text = "Knockback Resist: " + formatValue(vanillaKnockbackResist) + "%";
+                String text = (vanillaKnockbackResist > 0 ? "+" : "") + formatValue(vanillaKnockbackResist) + "%";
 
                 if (stats.getKnockbackResist() != 0) {
-                    text += String.format(" (%s%s)", stats.getKnockbackResist() > 0 ? "+" : "", formatValue(stats.getKnockbackResist()) + "%");
+                    text += String.format(" (%s%s%%)",
+                            stats.getKnockbackResist() > 0 ? "+" : "",
+                            formatValue(stats.getKnockbackResist()));
                 }
-
+                text += " Knockback Resist";
                 tooltip.add(Component.literal(text).withStyle(ChatFormatting.BLUE));
             }
         }
@@ -290,9 +291,9 @@ public class StatUtils {
             if (isArmorItem && (name.equals("Armor") || name.equals("Armor Toughness") || name.equals("Knockback Resist"))) continue;
 
             String formattedValue = formatValue(value);
-            tooltip.add(Component.literal(String.format("%s: %s%s%s",
-                            name, value > 0 ? "+" : "", formattedValue, percent ? "%" : ""))
-                    .withStyle(ChatFormatting.BLUE));
+
+            tooltip.add(Component.literal(String.format("%s%s%s %s", value > 0 ? "+" : "", formattedValue,
+                            percent ? "%" : "", name)).withStyle(ChatFormatting.BLUE));
         }
 
         Object[][] defensiveMultipliers = new Object[][]{
@@ -307,8 +308,11 @@ public class StatUtils {
             if (value == 0) continue;
 
             String formattedValue = formatValue(100 * value);
-            tooltip.add(Component.literal(String.format("%s: %s%s%%", name, value >= 0 ? "+" : "", formattedValue))
-                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
+
+            tooltip.add(Component.literal(String.format("%s%s%% %s",
+                            value >= 0 ? "+" : "",
+                            formattedValue,
+                            name)).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
         }
 
         Object[][] offensiveStats = new Object[][]{
@@ -332,8 +336,11 @@ public class StatUtils {
             if (value == 0) continue;
 
             String formattedValue = formatValue(value);
-            tooltip.add(Component.literal(String.format("%s: %s%s%s",
-                            name, value > 0 ? "+" : "", formattedValue, percent ? "%" : ""))
+            tooltip.add(Component.literal(String.format("%s%s%s %s",
+                            value > 0 ? "+" : "",
+                            formattedValue,
+                            percent ? "%" : "",
+                            name))
                     .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
         }
 
@@ -357,8 +364,11 @@ public class StatUtils {
             if (value == 0) continue;
 
             String formattedValue = formatValue(100 * value);
-            tooltip.add(Component.literal(String.format("%s: %s%s%%", name, value >= 0 ? "+" : "", formattedValue))
-                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal(String.format("%s%s%% %s",
+                            value >= 0 ? "+" : "",
+                            formattedValue,
+                            name))
+                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xEC3700))));
         }
 
         Object[][] healingStats = new Object[][]{
@@ -374,9 +384,12 @@ public class StatUtils {
             if (value == 0) continue;
 
             String formattedValue = formatValue(value);
-            tooltip.add(Component.literal(String.format("%s: %s%s%s",
-                            name, value > 0 ? "+" : "", formattedValue, percent ? "%" : ""))
-                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x5bb450))));
+            tooltip.add(Component.literal(String.format("%s%s%s %s",
+                            value > 0 ? "+" : "",
+                            formattedValue,
+                            percent ? "%" : "",
+                            name))
+                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x5BB450))));
         }
 
         Object[][] healingMultipliers = new Object[][]{
@@ -391,9 +404,11 @@ public class StatUtils {
             if (value == 0) continue;
 
             String formattedValue = formatValue(100 * value);
-            tooltip.add(Component.literal(String.format("%s: %s%s%%",
-                            name, value >= 0 ? "+" : "", formattedValue))
-                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x3b8132))));
+            tooltip.add(Component.literal(String.format("%s%s%% %s",
+                            value >= 0 ? "+" : "",
+                            formattedValue,
+                            name))
+                    .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x3B8132))));
         }
 
         Object[][] utilityStats = new Object[][]{
@@ -415,8 +430,11 @@ public class StatUtils {
 
             String formattedValue = formatValue(value);
 
-            tooltip.add(Component.literal(String.format("%s: %s%s%s",
-                            name, value > 0 ? "+" : "", formattedValue, percent ? "%" : ""))
+            tooltip.add(Component.literal(String.format("%s%s%s %s",
+                            value > 0 ? "+" : "",
+                            formattedValue,
+                            percent ? "%" : "",
+                            name))
                     .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
         }
     }

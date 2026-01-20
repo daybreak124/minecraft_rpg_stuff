@@ -1,6 +1,10 @@
 package net.cold.coldsmod;
 
 import net.cold.coldsmod.accessory.*;
+import net.cold.coldsmod.accessory.bracers.*;
+import net.cold.coldsmod.accessory.mind.*;
+import net.cold.coldsmod.accessory.necklace.*;
+import net.cold.coldsmod.accessory.ring.*;
 import net.cold.coldsmod.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -28,146 +32,146 @@ public class CreativeTabs {
                                 output.accept(UtilityAccessories.ANTIQUE_POCKET_WATCH.get());
                                 output.accept(UtilityAccessories.CLOUDSPIRE_GEM.get());
 
-                                output.accept(RingAccessories.COIL_OF_WRATH_RARE.get());
-                                output.accept(RingAccessories.COIL_OF_WRATH_EPIC.get());
-                                output.accept(RingAccessories.COIL_OF_WRATH_LEGENDARY.get());
-                                output.accept(RingAccessories.COIL_OF_WRATH_MYTHIC.get());
+                                output.accept(CoilOfWrath.COIL_OF_WRATH_RARE.get());
+                                output.accept(CoilOfWrath.COIL_OF_WRATH_EPIC.get());
+                                output.accept(CoilOfWrath.COIL_OF_WRATH_LEGENDARY.get());
+                                output.accept(CoilOfWrath.COIL_OF_WRATH_MYTHIC.get());
 
-                                output.accept(RingAccessories.GLUTTONY_SIGNET_RARE.get());
-                                output.accept(RingAccessories.GLUTTONY_SIGNET_EPIC.get());
-                                output.accept(RingAccessories.GLUTTONY_SIGNET_LEGENDARY.get());
-                                output.accept(RingAccessories.GLUTTONY_SIGNET_MYTHIC.get());
+                                output.accept(GluttonySignet.GLUTTONY_SIGNET_RARE.get());
+                                output.accept(GluttonySignet.GLUTTONY_SIGNET_EPIC.get());
+                                output.accept(GluttonySignet.GLUTTONY_SIGNET_LEGENDARY.get());
+                                output.accept(GluttonySignet.GLUTTONY_SIGNET_MYTHIC.get());
 
-                                output.accept(RingAccessories.BAND_OF_THE_UNKNOWN_RARE.get());
-                                output.accept(RingAccessories.BAND_OF_THE_UNKNOWN_EPIC.get());
-                                output.accept(RingAccessories.BAND_OF_THE_UNKNOWN_LEGENDARY.get());
-                                output.accept(RingAccessories.BAND_OF_THE_UNKNOWN_MYTHIC.get());
+                                output.accept(BandOfUnknown.BAND_OF_THE_UNKNOWN_RARE.get());
+                                output.accept(BandOfUnknown.BAND_OF_THE_UNKNOWN_EPIC.get());
+                                output.accept(BandOfUnknown.BAND_OF_THE_UNKNOWN_LEGENDARY.get());
+                                output.accept(BandOfUnknown.BAND_OF_THE_UNKNOWN_MYTHIC.get());
 
-                                output.accept(RingAccessories.DRAGON_EYE_EMBEDDED_RING_RARE.get());
-                                output.accept(RingAccessories.DRAGON_EYE_EMBEDDED_RING_EPIC.get());
-                                output.accept(RingAccessories.DRAGON_EYE_EMBEDDED_RING_LEGENDARY.get());
-                                output.accept(RingAccessories.DRAGON_EYE_EMBEDDED_RING_MYTHIC.get());
+                                output.accept(DragonEyeEmbeddedRing.DRAGON_EYE_EMBEDDED_RING_RARE.get());
+                                output.accept(DragonEyeEmbeddedRing.DRAGON_EYE_EMBEDDED_RING_EPIC.get());
+                                output.accept(DragonEyeEmbeddedRing.DRAGON_EYE_EMBEDDED_RING_LEGENDARY.get());
+                                output.accept(DragonEyeEmbeddedRing.DRAGON_EYE_EMBEDDED_RING_MYTHIC.get());
 
-                                output.accept(RingAccessories.CORRUPTED_RING_OF_THE_LOST_RARE.get());
-                                output.accept(RingAccessories.CORRUPTED_RING_OF_THE_LOST_EPIC.get());
-                                output.accept(RingAccessories.CORRUPTED_RING_OF_THE_LOST_LEGENDARY.get());
-                                output.accept(RingAccessories.CORRUPTED_RING_OF_THE_LOST_MYTHIC.get());
+                                output.accept(CorruptedLostRing.CORRUPTED_RING_OF_THE_LOST_RARE.get());
+                                output.accept(CorruptedLostRing.CORRUPTED_RING_OF_THE_LOST_EPIC.get());
+                                output.accept(CorruptedLostRing.CORRUPTED_RING_OF_THE_LOST_LEGENDARY.get());
+                                output.accept(CorruptedLostRing.CORRUPTED_RING_OF_THE_LOST_MYTHIC.get());
 
-                                output.accept(RingAccessories.COLDYS_COLD_COIL_OF_COLD_RARE.get());
-                                output.accept(RingAccessories.COLDYS_COLD_COIL_OF_COLD_EPIC.get());
-                                output.accept(RingAccessories.COLDYS_COLD_COIL_OF_COLD_LEGENDARY.get());
-                                output.accept(RingAccessories.COLDYS_COLD_COIL_OF_COLD_MYTHIC.get());
+                                output.accept(ColdCoil.COLDYS_COLD_COIL_OF_COLD_RARE.get());
+                                output.accept(ColdCoil.COLDYS_COLD_COIL_OF_COLD_EPIC.get());
+                                output.accept(ColdCoil.COLDYS_COLD_COIL_OF_COLD_LEGENDARY.get());
+                                output.accept(ColdCoil.COLDYS_COLD_COIL_OF_COLD_MYTHIC.get());
 
-                                output.accept(RingAccessories.SUNSTONE_FORGED_RING_RARE.get());
-                                output.accept(RingAccessories.SUNSTONE_FORGED_RING_EPIC.get());
-                                output.accept(RingAccessories.SUNSTONE_FORGED_RING_LEGENDARY.get());
-                                output.accept(RingAccessories.SUNSTONE_FORGED_RING_MYTHIC.get());
+                                output.accept(SunstoneForged.SUNSTONE_FORGED_RING_RARE.get());
+                                output.accept(SunstoneForged.SUNSTONE_FORGED_RING_EPIC.get());
+                                output.accept(SunstoneForged.SUNSTONE_FORGED_RING_LEGENDARY.get());
+                                output.accept(SunstoneForged.SUNSTONE_FORGED_RING_MYTHIC.get());
 
-                                output.accept(NecklaceAccessories.COLLAR_OF_ENVY_RARE.get());
-                                output.accept(NecklaceAccessories.COLLAR_OF_ENVY_EPIC.get());
-                                output.accept(NecklaceAccessories.COLLAR_OF_ENVY_LEGENDARY.get());
-                                output.accept(NecklaceAccessories.COLLAR_OF_ENVY_MYTHIC.get());
+                                output.accept(EnvyCollar.COLLAR_OF_ENVY_RARE.get());
+                                output.accept(EnvyCollar.COLLAR_OF_ENVY_EPIC.get());
+                                output.accept(EnvyCollar.COLLAR_OF_ENVY_LEGENDARY.get());
+                                output.accept(EnvyCollar.COLLAR_OF_ENVY_MYTHIC.get());
 
-                                output.accept(NecklaceAccessories.KEY_OF_THE_UNKNOWN_RARE.get());
-                                output.accept(NecklaceAccessories.KEY_OF_THE_UNKNOWN_EPIC.get());
-                                output.accept(NecklaceAccessories.KEY_OF_THE_UNKNOWN_LEGENDARY.get());
-                                output.accept(NecklaceAccessories.KEY_OF_THE_UNKNOWN_MYTHIC.get());
+                                output.accept(KeyOfTheUnknown.KEY_OF_THE_UNKNOWN_RARE.get());
+                                output.accept(KeyOfTheUnknown.KEY_OF_THE_UNKNOWN_EPIC.get());
+                                output.accept(KeyOfTheUnknown.KEY_OF_THE_UNKNOWN_LEGENDARY.get());
+                                output.accept(KeyOfTheUnknown.KEY_OF_THE_UNKNOWN_MYTHIC.get());
 
-                                output.accept(NecklaceAccessories.DRAGON_TEETH_NECKLACE_RARE.get());
-                                output.accept(NecklaceAccessories.DRAGON_TEETH_NECKLACE_EPIC.get());
-                                output.accept(NecklaceAccessories.DRAGON_TEETH_NECKLACE_LEGENDARY.get());
-                                output.accept(NecklaceAccessories.DRAGON_TEETH_NECKLACE_MYTHIC.get());
+                                output.accept(DragonTeethNecklace.DRAGON_TEETH_NECKLACE_RARE.get());
+                                output.accept(DragonTeethNecklace.DRAGON_TEETH_NECKLACE_EPIC.get());
+                                output.accept(DragonTeethNecklace.DRAGON_TEETH_NECKLACE_LEGENDARY.get());
+                                output.accept(DragonTeethNecklace.DRAGON_TEETH_NECKLACE_MYTHIC.get());
 
-                                output.accept(NecklaceAccessories.HANGING_TIGER_TOOTH_RARE.get());
-                                output.accept(NecklaceAccessories.HANGING_TIGER_TOOTH_EPIC.get());
-                                output.accept(NecklaceAccessories.HANGING_TIGER_TOOTH_LEGENDARY.get());
-                                output.accept(NecklaceAccessories.HANGING_TIGER_TOOTH_MYTHIC.get());
+                                output.accept(HangingTigerTooth.HANGING_TIGER_TOOTH_RARE.get());
+                                output.accept(HangingTigerTooth.HANGING_TIGER_TOOTH_EPIC.get());
+                                output.accept(HangingTigerTooth.HANGING_TIGER_TOOTH_LEGENDARY.get());
+                                output.accept(HangingTigerTooth.HANGING_TIGER_TOOTH_MYTHIC.get());
 
-                                output.accept(NecklaceAccessories.BOTTLED_TSUNAMI_SEA_RARE.get());
-                                output.accept(NecklaceAccessories.BOTTLED_TSUNAMI_SEA_EPIC.get());
-                                output.accept(NecklaceAccessories.BOTTLED_TSUNAMI_SEA_LEGENDARY.get());
-                                output.accept(NecklaceAccessories.BOTTLED_TSUNAMI_SEA_MYTHIC.get());
+                                output.accept(BottledTsunami.BOTTLED_TSUNAMI_SEA_RARE.get());
+                                output.accept(BottledTsunami.BOTTLED_TSUNAMI_SEA_EPIC.get());
+                                output.accept(BottledTsunami.BOTTLED_TSUNAMI_SEA_LEGENDARY.get());
+                                output.accept(BottledTsunami.BOTTLED_TSUNAMI_SEA_MYTHIC.get());
 
-                                output.accept(NecklaceAccessories.PENDANT_OF_FLOATING_SNOWFLAKE_RARE.get());
-                                output.accept(NecklaceAccessories.PENDANT_OF_FLOATING_SNOWFLAKE_EPIC.get());
-                                output.accept(NecklaceAccessories.PENDANT_OF_FLOATING_SNOWFLAKE_LEGENDARY.get());
-                                output.accept(NecklaceAccessories.PENDANT_OF_FLOATING_SNOWFLAKE_MYTHIC.get());
+                                output.accept(PendantOfSnowflake.PENDANT_OF_FLOATING_SNOWFLAKE_RARE.get());
+                                output.accept(PendantOfSnowflake.PENDANT_OF_FLOATING_SNOWFLAKE_EPIC.get());
+                                output.accept(PendantOfSnowflake.PENDANT_OF_FLOATING_SNOWFLAKE_LEGENDARY.get());
+                                output.accept(PendantOfSnowflake.PENDANT_OF_FLOATING_SNOWFLAKE_MYTHIC.get());
 
-                                output.accept(NecklaceAccessories.STOLEN_LEGACIES_CHOKER_RARE.get());
-                                output.accept(NecklaceAccessories.STOLEN_LEGACIES_CHOKER_EPIC.get());
-                                output.accept(NecklaceAccessories.STOLEN_LEGACIES_CHOKER_LEGENDARY.get());
-                                output.accept(NecklaceAccessories.STOLEN_LEGACIES_CHOKER_MYTHIC.get());
+                                output.accept(StolenLegacies.STOLEN_LEGACIES_CHOKER_RARE.get());
+                                output.accept(StolenLegacies.STOLEN_LEGACIES_CHOKER_EPIC.get());
+                                output.accept(StolenLegacies.STOLEN_LEGACIES_CHOKER_LEGENDARY.get());
+                                output.accept(StolenLegacies.STOLEN_LEGACIES_CHOKER_MYTHIC.get());
 
-                                output.accept(BracerAccessories.BRACELET_OF_PRIDE_RARE.get());
-                                output.accept(BracerAccessories.BRACELET_OF_PRIDE_EPIC.get());
-                                output.accept(BracerAccessories.BRACELET_OF_PRIDE_LEGENDARY.get());
-                                output.accept(BracerAccessories.BRACELET_OF_PRIDE_MYTHIC.get());
+                                output.accept(BraceletOfPride.BRACELET_OF_PRIDE_RARE.get());
+                                output.accept(BraceletOfPride.BRACELET_OF_PRIDE_EPIC.get());
+                                output.accept(BraceletOfPride.BRACELET_OF_PRIDE_LEGENDARY.get());
+                                output.accept(BraceletOfPride.BRACELET_OF_PRIDE_MYTHIC.get());
 
-                                output.accept(BracerAccessories.FINGERS_OF_LUST_RARE.get());
-                                output.accept(BracerAccessories.FINGERS_OF_LUST_EPIC.get());
-                                output.accept(BracerAccessories.FINGERS_OF_LUST_LEGENDARY.get());
-                                output.accept(BracerAccessories.FINGERS_OF_LUST_MYTHIC.get());
+                                output.accept(FingersOfLust.FINGERS_OF_LUST_RARE.get());
+                                output.accept(FingersOfLust.FINGERS_OF_LUST_EPIC.get());
+                                output.accept(FingersOfLust.FINGERS_OF_LUST_LEGENDARY.get());
+                                output.accept(FingersOfLust.FINGERS_OF_LUST_MYTHIC.get());
 
-                                output.accept(BracerAccessories.ENDERMANS_SEVERED_ARM_RARE.get());
-                                output.accept(BracerAccessories.ENDERMANS_SEVERED_ARM_EPIC.get());
-                                output.accept(BracerAccessories.ENDERMANS_SEVERED_ARM_LEGENDARY.get());
-                                output.accept(BracerAccessories.ENDERMANS_SEVERED_ARM_MYTHIC.get());
+                                output.accept(Enderman.ENDERMANS_SEVERED_ARM_RARE.get());
+                                output.accept(Enderman.ENDERMANS_SEVERED_ARM_EPIC.get());
+                                output.accept(Enderman.ENDERMANS_SEVERED_ARM_LEGENDARY.get());
+                                output.accept(Enderman.ENDERMANS_SEVERED_ARM_MYTHIC.get());
 
-                                output.accept(BracerAccessories.DRAGON_CLAW_GLOVES_RARE.get());
-                                output.accept(BracerAccessories.DRAGON_CLAW_GLOVES_EPIC.get());
-                                output.accept(BracerAccessories.DRAGON_CLAW_GLOVES_LEGENDARY.get());
-                                output.accept(BracerAccessories.DRAGON_CLAW_GLOVES_MYTHIC.get());
+                                output.accept(DragonClaw.DRAGON_CLAW_GLOVES_RARE.get());
+                                output.accept(DragonClaw.DRAGON_CLAW_GLOVES_EPIC.get());
+                                output.accept(DragonClaw.DRAGON_CLAW_GLOVES_LEGENDARY.get());
+                                output.accept(DragonClaw.DRAGON_CLAW_GLOVES_MYTHIC.get());
 
-                                output.accept(BracerAccessories.WARDEN_SKIN_FORGED_BRACERS_RARE.get());
-                                output.accept(BracerAccessories.WARDEN_SKIN_FORGED_BRACERS_EPIC.get());
-                                output.accept(BracerAccessories.WARDEN_SKIN_FORGED_BRACERS_LEGENDARY.get());
-                                output.accept(BracerAccessories.WARDEN_SKIN_FORGED_BRACERS_MYTHIC.get());
+                                output.accept(WardenSkin.WARDEN_SKIN_FORGED_BRACERS_RARE.get());
+                                output.accept(WardenSkin.WARDEN_SKIN_FORGED_BRACERS_EPIC.get());
+                                output.accept(WardenSkin.WARDEN_SKIN_FORGED_BRACERS_LEGENDARY.get());
+                                output.accept(WardenSkin.WARDEN_SKIN_FORGED_BRACERS_MYTHIC.get());
 
-                                output.accept(BracerAccessories.REINFORCED_STEEL_BRACERS_RARE.get());
-                                output.accept(BracerAccessories.REINFORCED_STEEL_BRACERS_EPIC.get());
-                                output.accept(BracerAccessories.REINFORCED_STEEL_BRACERS_LEGENDARY.get());
-                                output.accept(BracerAccessories.REINFORCED_STEEL_BRACERS_MYTHIC.get());
+                                output.accept(ReinforcedSteel.REINFORCED_STEEL_BRACERS_RARE.get());
+                                output.accept(ReinforcedSteel.REINFORCED_STEEL_BRACERS_EPIC.get());
+                                output.accept(ReinforcedSteel.REINFORCED_STEEL_BRACERS_LEGENDARY.get());
+                                output.accept(ReinforcedSteel.REINFORCED_STEEL_BRACERS_MYTHIC.get());
 
-                                output.accept(BracerAccessories.SERPENT_SKIN_WRAP_RARE.get());
-                                output.accept(BracerAccessories.SERPENT_SKIN_WRAP_EPIC.get());
-                                output.accept(BracerAccessories.SERPENT_SKIN_WRAP_LEGENDARY.get());
-                                output.accept(BracerAccessories.SERPENT_SKIN_WRAP_MYTHIC.get());
+                                output.accept(SerpentSkin.SERPENT_SKIN_WRAP_RARE.get());
+                                output.accept(SerpentSkin.SERPENT_SKIN_WRAP_EPIC.get());
+                                output.accept(SerpentSkin.SERPENT_SKIN_WRAP_LEGENDARY.get());
+                                output.accept(SerpentSkin.SERPENT_SKIN_WRAP_MYTHIC.get());
 
-                                output.accept(BracerAccessories.WRAPS_OF_THIEVERY_RARE.get());
-                                output.accept(BracerAccessories.WRAPS_OF_THIEVERY_EPIC.get());
-                                output.accept(BracerAccessories.WRAPS_OF_THIEVERY_LEGENDARY.get());
-                                output.accept(BracerAccessories.WRAPS_OF_THIEVERY_MYTHIC.get());
+                                output.accept(ThieveryWraps.WRAPS_OF_THIEVERY_RARE.get());
+                                output.accept(ThieveryWraps.WRAPS_OF_THIEVERY_EPIC.get());
+                                output.accept(ThieveryWraps.WRAPS_OF_THIEVERY_LEGENDARY.get());
+                                output.accept(ThieveryWraps.WRAPS_OF_THIEVERY_MYTHIC.get());
 
 
-                                output.accept(HeadAccessories.TEMPTING_WHISPERS_RARE.get());
-                                output.accept(HeadAccessories.TEMPTING_WHISPERS_EPIC.get());
-                                output.accept(HeadAccessories.TEMPTING_WHISPERS_LEGENDARY.get());
-                                output.accept(HeadAccessories.TEMPTING_WHISPERS_MYTHIC.get());
+                                output.accept(TemptingWhispers.TEMPTING_WHISPERS_RARE.get());
+                                output.accept(TemptingWhispers.TEMPTING_WHISPERS_EPIC.get());
+                                output.accept(TemptingWhispers.TEMPTING_WHISPERS_LEGENDARY.get());
+                                output.accept(TemptingWhispers.TEMPTING_WHISPERS_MYTHIC.get());
 
-                                output.accept(HeadAccessories.SHRIEKS_OF_UNSEEING_RARE.get());
-                                output.accept(HeadAccessories.SHRIEKS_OF_UNSEEING_EPIC.get());
-                                output.accept(HeadAccessories.SHRIEKS_OF_UNSEEING_LEGENDARY.get());
-                                output.accept(HeadAccessories.SHRIEKS_OF_UNSEEING_MYTHIC.get());
+                                output.accept(Shrieks.SHRIEKS_OF_UNSEEING_RARE.get());
+                                output.accept(Shrieks.SHRIEKS_OF_UNSEEING_EPIC.get());
+                                output.accept(Shrieks.SHRIEKS_OF_UNSEEING_LEGENDARY.get());
+                                output.accept(Shrieks.SHRIEKS_OF_UNSEEING_MYTHIC.get());
 
-                                output.accept(HeadAccessories.DRAGONS_ROAR_RARE.get());
-                                output.accept(HeadAccessories.DRAGONS_ROAR_EPIC.get());
-                                output.accept(HeadAccessories.DRAGONS_ROAR_LEGENDARY.get());
-                                output.accept(HeadAccessories.DRAGONS_ROAR_MYTHIC.get());
+                                output.accept(DragonRoar.DRAGONS_ROAR_RARE.get());
+                                output.accept(DragonRoar.DRAGONS_ROAR_EPIC.get());
+                                output.accept(DragonRoar.DRAGONS_ROAR_LEGENDARY.get());
+                                output.accept(DragonRoar.DRAGONS_ROAR_MYTHIC.get());
 
-                                output.accept(HeadAccessories.TEAR_OF_THE_FORGOTTEN_RARE.get());
-                                output.accept(HeadAccessories.TEAR_OF_THE_FORGOTTEN_EPIC.get());
-                                output.accept(HeadAccessories.TEAR_OF_THE_FORGOTTEN_LEGENDARY.get());
-                                output.accept(HeadAccessories.TEAR_OF_THE_FORGOTTEN_MYTHIC.get());
+                                output.accept(Tear.TEAR_OF_THE_FORGOTTEN_RARE.get());
+                                output.accept(Tear.TEAR_OF_THE_FORGOTTEN_EPIC.get());
+                                output.accept(Tear.TEAR_OF_THE_FORGOTTEN_LEGENDARY.get());
+                                output.accept(Tear.TEAR_OF_THE_FORGOTTEN_MYTHIC.get());
 
-                                output.accept(HeadAccessories.ENDLESS_WAVES_RARE.get());
-                                output.accept(HeadAccessories.ENDLESS_WAVES_EPIC.get());
-                                output.accept(HeadAccessories.ENDLESS_WAVES_LEGENDARY.get());
-                                output.accept(HeadAccessories.ENDLESS_WAVES_MYTHIC.get());
+                                output.accept(EndlessWaves.ENDLESS_WAVES_RARE.get());
+                                output.accept(EndlessWaves.ENDLESS_WAVES_EPIC.get());
+                                output.accept(EndlessWaves.ENDLESS_WAVES_LEGENDARY.get());
+                                output.accept(EndlessWaves.ENDLESS_WAVES_MYTHIC.get());
 
-                                output.accept(HeadAccessories.SUNS_GAZE_RARE.get());
-                                output.accept(HeadAccessories.SUNS_GAZE_EPIC.get());
-                                output.accept(HeadAccessories.SUNS_GAZE_LEGENDARY.get());
-                                output.accept(HeadAccessories.SUNS_GAZE_MYTHIC.get());
+                                output.accept(SunsGaze.SUNS_GAZE_RARE.get());
+                                output.accept(SunsGaze.SUNS_GAZE_EPIC.get());
+                                output.accept(SunsGaze.SUNS_GAZE_LEGENDARY.get());
+                                output.accept(SunsGaze.SUNS_GAZE_MYTHIC.get());
                             })
                             .build()
             );
@@ -272,33 +276,17 @@ public class CreativeTabs {
                             .title(Component.translatable("creativetab.test_item_tab"))
                             .icon(() -> new ItemStack(ModItems.PEARL_ICON.get()))
                             .displayItems((parameters, output) -> {
-                                output.accept(UtilityAccessories.CRIT_ITEM.get());
-                                output.accept(UtilityAccessories.CRIT_ITEM2.get());
-                                output.accept(UtilityAccessories.DAMAGE_ITEM.get());
-                                output.accept(UtilityAccessories.DEFENSE.get());
-                                output.accept(UtilityAccessories.DEFENSE2.get());
-                                output.accept(UtilityAccessories.DEFENSE3.get());
-                                output.accept(UtilityAccessories.PROJ.get());
-                                output.accept(UtilityAccessories.CRIT_ITEM_2.get());
-                                output.accept(UtilityAccessories.DAMAGE_ITEM_2.get());
-                                output.accept(UtilityAccessories.PROJ_2.get());
-                                output.accept(UtilityAccessories.AS.get());
-                                output.accept(UtilityAccessories.AS2.get());
-                                output.accept(UtilityAccessories.DRAW_SPEED.get());
-                                output.accept(UtilityAccessories.DEFENSE4.get());
-                                output.accept(UtilityAccessories.HEALTH.get());
-                                output.accept(UtilityAccessories.HEALTH2.get());
-                                output.accept(UtilityAccessories.STR.get());
-                                output.accept(UtilityAccessories.DEX.get());
-                                output.accept(UtilityAccessories.FORT.get());
-                                output.accept(UtilityAccessories.CON.get());
-                                output.accept(UtilityAccessories.PERC.get());
-                                output.accept(UtilityAccessories.INS.get());
-                                output.accept(UtilityAccessories.ALL.get());
+                                output.accept(TestItems.ALL.get());
+                                output.accept(TestItems.STR.get());
+                                output.accept(TestItems.DEX.get());
+                                output.accept(TestItems.FORT.get());
+                                output.accept(TestItems.CON.get());
+                                output.accept(TestItems.INSIGHT.get());
+                                output.accept(TestItems.WISDOM.get());
 
-                                output.accept(UtilityAccessories.ARMOR1.get());
-                                output.accept(UtilityAccessories.ARMOR2.get());
-                                output.accept(UtilityAccessories.ARMOR3.get());
+                                output.accept(TestItems.DEFENSE_1.get());
+                                output.accept(TestItems.DEFENSE_2.get());
+                                output.accept(TestItems.DEFENSE_3.get());
                             })
                             .build()
             );

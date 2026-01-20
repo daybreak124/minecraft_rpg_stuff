@@ -171,8 +171,8 @@ public class InventoryButtonHandler {
         y += 10;
         guiGraphics.drawString(mc.font, "Perception: " + StatUtils.formatValue(attr(mc.player, ModAttributes.PERC)), left + 182, y, 0xFFFFFF);
         y += 10;
-        guiGraphics.drawString(mc.font, "Intelligence: " + StatUtils.formatValue(attr(mc.player, ModAttributes.INTELLIGENCE)), left + 182, y, 0xFFFFFF);
-        y += 10;
+//        guiGraphics.drawString(mc.font, "Intelligence: " + StatUtils.formatValue(attr(mc.player, ModAttributes.INTELLIGENCE)), left + 182, y, 0xFFFFFF);
+//        y += 10;
         guiGraphics.drawString(mc.font, "Wisdom: " + StatUtils.formatValue(attr(mc.player, ModAttributes.WISDOM)), left + 182, y, 0xFFFFFF);
         y += 10;
         guiGraphics.drawString(mc.font, "Insight: " + StatUtils.formatValue(attr(mc.player, ModAttributes.INSIGHT)), left + 182, y, 0xFFFFFF);
@@ -233,7 +233,7 @@ public class InventoryButtonHandler {
         y += 15;
 
         // --- Ranged ---
-        guiGraphics.drawString(mc.font, "Ranged", left + 182, y, 0xAAAAFF);
+        guiGraphics.drawString(mc.font, "Projectile", left + 182, y, 0xAAAAFF);
         y += 10;
         guiGraphics.drawString(mc.font, "Potency: " +
                 StatUtils.formatValue(attr(mc.player, ModAttributes.PROJECTILE_POTENCY) * attr(mc.player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER)) +
@@ -354,7 +354,7 @@ public class InventoryButtonHandler {
         y += 15;
 
         // --- Ranged ---
-        guiGraphics.drawString(mc.font, "Ranged", left + 182, y, 0xAAAAFF);
+        guiGraphics.drawString(mc.font, "Projectile", left + 182, y, 0xAAAAFF);
         y += 10;
         guiGraphics.drawString(mc.font, "Potency: " +
                 StatUtils.formatValue(attr(mc.player, ModAttributes.PROJECTILE_POTENCY)) +

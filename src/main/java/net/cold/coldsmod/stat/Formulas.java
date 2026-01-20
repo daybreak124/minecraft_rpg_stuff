@@ -19,6 +19,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -51,14 +52,10 @@ public class Formulas {
 
         CompoundTag data = player.getPersistentData();
         float finalDamage = event.getAmount();
+        boolean isDirectMelee = event.getSource().getDirectEntity() == player;
 
         boolean isProjectile = event.getSource().getDirectEntity() instanceof Projectile;
         InteractionHand hand = player.swingingArm;
-        String mainType = ItemRarityUtils.getItemType(player.getMainHandItem());
-        String offType = ItemRarityUtils.getItemType(player.getOffhandItem());
-
-        boolean isMelee = (hand == InteractionHand.MAIN_HAND && (mainType.equals("sword") || mainType.isEmpty())) ||
-                (hand == InteractionHand.OFF_HAND && (offType.equals("sword") || offType.isEmpty()));
 
         if (event.getSource() instanceof CustomMeleeDamageNoProcs) {
             double meleeDmg = getScaledValue(player, ModAttributes.MELEE_POTENCY.get(), ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
@@ -98,7 +95,7 @@ public class Formulas {
             resetHawkeye(player, data);
             handleFrenzy(player, data);
             finalDamage *= 0.7;
-        } else if (isMelee || event.getSource() instanceof CustomMeleeDamage) {
+        } else if (isDirectMelee || event.getSource() instanceof CustomMeleeDamage) {
             double melDmg = getScaledValue(player, ModAttributes.MELEE_POTENCY.get(), ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
             double melCritDmg = getScaledValue(player, ModAttributes.MELEE_PRECISION.get(), ModAttributes.MELEE_PRECISION_MULTIPLIER.get());
             double melCritCh = getScaledValue(player, ModAttributes.MELEE_ACCURACY.get(), ModAttributes.MELEE_ACCURACY_MULTIPLIER.get());
@@ -119,11 +116,9 @@ public class Formulas {
                 finalDamage *= (1.5 + melCritDmg / 100.0);
                 playCritSound(player);
             }
-            if (isMelee && (player.getPersistentData().getBoolean("adjustSharpness"))) {
-                player.getPersistentData().putBoolean("adjustSharpness", false);
-                finalDamage += getSharpnessBonus(player, hand) * (0.5 + melCritDmg / 100.0);
 
-            }
+            if (!(event.getSource() instanceof CustomMeleeDamage)) finalDamage += getSharpnessBonus(player, hand) * (0.5 + melCritDmg / 100.0);
+
             finalDamage *= (float) (1.0 + melDmg / 100.0);
             handleFrenzy(player, data);
         }
@@ -154,7 +149,6 @@ public class Formulas {
             attackerDamageMultiplier = attacker.getAttributeValue(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
         }
         event.setAmount((float) (event.getAmount() * incDamageMultiplier * attackerDamageMultiplier));
-        // System.out.println(event.getAmount());
     }
 
     private boolean rollCrit(Player player, double chance) {
@@ -338,8 +332,6 @@ public class Formulas {
 
             float critBonus = (float) (1.5 + (scaledDamage / 100.0));
             event.setDamageModifier(critBonus);
-
-            player.getPersistentData().putBoolean("adjustSharpness", true);
 
             handleHawkeyeStacking(player, player.getPersistentData());
 

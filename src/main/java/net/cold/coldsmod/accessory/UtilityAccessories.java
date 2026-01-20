@@ -1,380 +1,334 @@
 package net.cold.coldsmod.accessory;
 
 import net.cold.coldsmod.ColdsMod;
+import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.CustomStats;
 import net.cold.coldsmod.stat.ItemRarity;
+import net.cold.coldsmod.stat.ModAttributes;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import top.theillusivec4.curios.api.SlotContext;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.UUID;
 
 public class UtilityAccessories {
 
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, ColdsMod.MODID);
 
-    public static final RegistryObject<AccessoryItem> CLOUDTREADER_BOOTS = ITEMS.register(
+    // UUIDs
+    private static final UUID CLOUDTREADER_UUID = UUID.fromString("11111111-2222-3333-4444-555555555555");
+    private static final UUID MONIS_LUCKY_UUID = UUID.fromString("22222222-3333-4444-5555-666666666666");
+    private static final UUID ENDERMAN_FINGERS_UUID = UUID.fromString("33333333-4444-5555-6666-777777777777");
+    private static final UUID ANTIQUE_WATCH_UUID = UUID.fromString("44444444-5555-6666-7777-888888888888");
+    private static final UUID REINFORCED_DIAMOND_UUID = UUID.fromString("55555555-6666-7777-8888-999999999999");
+    private static final UUID CLOUDSPIRE_GEM_UUID = UUID.fromString("66666666-7777-8888-9999-aaaaaaaaaaaa");
+
+    // --- Registry ---
+
+    public static final RegistryObject<Item> CLOUDTREADER_BOOTS = ITEMS.register(
             "cloudtreader_boots",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Cloudtreader Boots")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setInsight(2).setStepHeight(1).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
+            () -> new CloudtreaderBoots(new Item.Properties().stacksTo(64))
     );
 
-    public static final RegistryObject<AccessoryItem> MONIS_LUCKY_CHARM = ITEMS.register(
+    public static final RegistryObject<Item> MONIS_LUCKY_CHARM = ITEMS.register(
             "monis_lucky_charm",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Moni's Lucky Charm")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setInsight(2).setLuck(3).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
+            () -> new MonisLuckyCharm(new Item.Properties().stacksTo(64))
     );
 
-    public static final RegistryObject<AccessoryItem> ENDERMAN_FINGERS = ITEMS.register(
+    public static final RegistryObject<Item> ENDERMAN_FINGERS = ITEMS.register(
             "enderman_fingers",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Enderman's Fingers")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setInsight(2).setBlockReach(3).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
+            () -> new EndermanFingers(new Item.Properties().stacksTo(64))
     );
 
-    public static final RegistryObject<AccessoryItem> ANTIQUE_POCKET_WATCH = ITEMS.register(
+    public static final RegistryObject<Item> ANTIQUE_POCKET_WATCH = ITEMS.register(
             "antique_pocket_watch",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Antique Pocket Watch")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setInsight(2).setXpGain(30).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
+            () -> new AntiquePocketWatch(new Item.Properties().stacksTo(64))
     );
 
-    public static final RegistryObject<AccessoryItem> REINFORCED_DIAMOND_PLATING = ITEMS.register(
+    public static final RegistryObject<Item> REINFORCED_DIAMOND_PLATING = ITEMS.register(
             "reinforced_diamond_plating",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Reinforced Diamond Plating")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setInsight(2).setMiningSpeed(30).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
+            () -> new ReinforcedDiamondPlating(new Item.Properties().stacksTo(64))
     );
 
-    public static final RegistryObject<AccessoryItem> CLOUDSPIRE_GEM = ITEMS.register(
+    public static final RegistryObject<Item> CLOUDSPIRE_GEM = ITEMS.register(
             "cloudspire_gem",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Cloudspire Gem")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setInsight(2).setJumpBoost(100).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
+            () -> new CloudspireGem(new Item.Properties().stacksTo(64))
     );
 
-    public static final RegistryObject<AccessoryItem> CRIT_ITEM = ITEMS.register(
-            "crit_item",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Crit")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setCritDamage(125).setCritChance(109.75609).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+    // -----------------------------
+    // --- Cloudtreader Boots -----
+    // -----------------------------
 
-    public static final RegistryObject<AccessoryItem> CRIT_ITEM2 = ITEMS.register(
-            "crit_item2",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Crit 2")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setCritChance(43.47826).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+    private static class CloudtreaderBoots extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public CloudtreaderBoots(Properties properties) { super(properties); }
 
-    public static final RegistryObject<AccessoryItem> DAMAGE_ITEM = ITEMS.register(
-            "damage_item",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Damage")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setMeleeDamage(1250).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, CLOUDTREADER_UUID);
+                AttributeApplier.applyModifier(player, ForgeMod.STEP_HEIGHT_ADDITION.get(), 1.0, CLOUDTREADER_UUID);
+            }
+        }
 
-    public static final RegistryObject<AccessoryItem> DEFENSE = ITEMS.register(
-            "defense_item_1",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Armor")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setArmor(100).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                return !AttributeApplier.isDuplicateAccessory(player, stack, "cloudtreader_boots");
+            }
+            return true;
+        }
 
-    public static final RegistryObject<AccessoryItem> DEFENSE2 = ITEMS.register(
-            "defense_item_2",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("ARMOR")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setArmor(400).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), CLOUDTREADER_UUID);
+                AttributeApplier.removeModifier(player, ForgeMod.STEP_HEIGHT_ADDITION.get(), CLOUDTREADER_UUID);
+            }
+        }
 
-    public static final RegistryObject<AccessoryItem> DEFENSE3 = ITEMS.register(
-            "defense_item_3",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Toughness")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setArmorToughness(150).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public Component getName(ItemStack stack) { return Component.literal("Cloudtreader Boots").withStyle(style -> style.withColor(0xD6C97A)); }
 
-    public static final RegistryObject<AccessoryItem> PROJ = ITEMS.register(
-            "projectile_item",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Projectile & Draw Speed")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setProjectileDamage(125).setDrawSpeed(125).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Step Height").withStyle(style -> style.withColor(0xD6C97A)));
+        }
+    }
 
-    public static final RegistryObject<AccessoryItem> STR = ITEMS.register(
-            "str",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("STR")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setStr(80).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+    // -----------------------------
+    // --- Moni's Lucky Charm -----
+    // -----------------------------
 
-    public static final RegistryObject<AccessoryItem> DEX = ITEMS.register(
-            "dex",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("DEX")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setDex(80).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+    private static class MonisLuckyCharm extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public MonisLuckyCharm(Properties properties) { super(properties); }
 
-    public static final RegistryObject<AccessoryItem> FORT = ITEMS.register(
-            "fort",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("FORT")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setFort(80).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, MONIS_LUCKY_UUID);
+                AttributeApplier.applyModifier(player, Attributes.LUCK, 3.0, MONIS_LUCKY_UUID);
+            }
+        }
 
-    public static final RegistryObject<AccessoryItem> CON = ITEMS.register(
-            "con",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("CON")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setCon(80).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                return !AttributeApplier.isDuplicateAccessory(player, stack, "monis_lucky_charm");
+            }
+            return true;
+        }
 
-    public static final RegistryObject<AccessoryItem> PERC = ITEMS.register(
-            "perc",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("PERC")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setPerc(80).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), MONIS_LUCKY_UUID);
+                AttributeApplier.removeModifier(player, Attributes.LUCK, MONIS_LUCKY_UUID);
+            }
+        }
 
-    public static final RegistryObject<AccessoryItem> INS = ITEMS.register(
-            "ins",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("INS")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setInsight(80).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public Component getName(ItemStack stack) { return Component.literal("Moni's Lucky Charm").withStyle(style -> style.withColor(0xD6C97A)); }
 
-    public static final RegistryObject<AccessoryItem> CRIT_ITEM_2 = ITEMS.register(
-            "crit_item_2",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Crit Multiplier")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setCritDamageMultiplier(1).setCritChanceMultiplier(1).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Luck").withStyle(style -> style.withColor(0xD6C97A)));
+        }
+    }
 
-    public static final RegistryObject<AccessoryItem> DAMAGE_ITEM_2 = ITEMS.register(
-            "damage_item_2",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Damage Multiplier")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setDamageMultiplier(1).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+    // -----------------------------
+    // --- Enderman's Fingers -----
+    // -----------------------------
 
-    public static final RegistryObject<AccessoryItem> PROJ_2 = ITEMS.register(
-            "projectile_item_2",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Projectile & Draw Speed 2")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setProjectileDamageMultiplier(1).setDrawSpeedMultiplier(1).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+    private static class EndermanFingers extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public EndermanFingers(Properties properties) { super(properties); }
 
-    public static final RegistryObject<AccessoryItem> DEFENSE4 = ITEMS.register(
-            "defense_item_4",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Defense Multiplier")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setArmorMultiplier(1).setToughnessMultiplier(1).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, ENDERMAN_FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ForgeMod.BLOCK_REACH.get(), 3.0, ENDERMAN_FINGERS_UUID);
+            }
+        }
 
-    public static final RegistryObject<AccessoryItem> HEALTH = ITEMS.register(
-            "health_item",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Health")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setMaxHealth(20).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                return !AttributeApplier.isDuplicateAccessory(player, stack, "enderman_fingers");
+            }
+            return true;
+        }
 
-    public static final RegistryObject<AccessoryItem> HEALTH2 = ITEMS.register(
-            "health_item_2",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Health Multiplier")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setHealthMultiplier(1).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), ENDERMAN_FINGERS_UUID);
+                AttributeApplier.removeModifier(player, ForgeMod.BLOCK_REACH.get(), ENDERMAN_FINGERS_UUID);
+            }
+        }
 
-    public static final RegistryObject<AccessoryItem> AS = ITEMS.register(
-            "as_item",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Attack Speed Multiplier")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setSpeedMultiplier(1).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public Component getName(ItemStack stack) { return Component.literal("Enderman's Fingers").withStyle(style -> style.withColor(0xD6C97A)); }
 
-    public static final RegistryObject<AccessoryItem> AS2 = ITEMS.register(
-            "as_item_2",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Attack Speed")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setAttackSpeed(125).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Block Reach").withStyle(style -> style.withColor(0xD6C97A)));
+        }
+    }
 
-    public static final RegistryObject<AccessoryItem> DRAW_SPEED = ITEMS.register(
-            "draw_speed",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Draw Speed")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setDrawSpeed(125).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+    // -----------------------------
+    // --- Antique Pocket Watch -----
+    // -----------------------------
 
-    public static final RegistryObject<AccessoryItem> ALL = ITEMS.register(
-            "all",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("ALL")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setArmor(100).setArmorToughness(100).setMaxHealth(100)
-                    .setKnockbackResist(100).setDebuffResist(100).setDamage(125).setAttackSpeed(125)
-                    .setCritChance(125).setCritDamage(125).setMeleeDamage(125)
-                    .setMeleeCritChance(125).setMeleeCritDamage(125).setProjectileDamage(125)
-                    .setProjectileCritChance(125).setProjectileCritDamage(125).setMoveSpeed(100).setSwimSpeed(100)
-                    .setXpGain(100).setBlockReach(5).setEntityReach(5).setLuck(5).setStepHeight(100)
-                    .setJumpBoost(100).setMiningSpeed(100).setArmorMultiplier(1).setToughnessMultiplier(1)
-                    .setHealthMultiplier(1).setDamageMultiplier(1).setSpeedMultiplier(1).setCritChanceMultiplier(1)
-                    .setCritDamageMultiplier(1).setMeleeDamageMultiplier(1).setMeleeCritChanceMultiplier(1)
-                    .setMeleeCritDamageMultiplier(1).setProjectileDamageMultiplier(1).setProjectileCritChanceMultiplier(1)
-                    .setProjectileCritDamageMultiplier(1).setDrawSpeedMultiplier(1).setDrawSpeed(125).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+    private static class AntiquePocketWatch extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public AntiquePocketWatch(Properties properties) { super(properties); }
 
-    public static final RegistryObject<AccessoryItem> ARMOR1 = ITEMS.register(
-            "armor_item_1",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Armor")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setArmor(10).setArmorToughness(10).setArmorMultiplier(0.1).setToughnessMultiplier(0.1).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, ANTIQUE_WATCH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 30.0, ANTIQUE_WATCH_UUID);
+            }
+        }
 
-    public static final RegistryObject<AccessoryItem> ARMOR2 = ITEMS.register(
-            "armor_item_2",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("Armoooor")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setArmor(20).setArmorToughness(20).setArmorMultiplier(0.2).setToughnessMultiplier(0.2).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                return !AttributeApplier.isDuplicateAccessory(player, stack, "antique_pocket_watch");
+            }
+            return true;
+        }
 
-    public static final RegistryObject<AccessoryItem> ARMOR3 = ITEMS.register(
-            "armor_item_3",
-            () -> AccessoryItem.builder(new Item.Properties())
-                    .withDisplayName("ARMOOOOOOOOR")
-                    .withRarity(ItemRarity.DISTINCT)
-                    .withType(AccessoryItem.AccessoryType.Utility)
-                    .withStats(new CustomStats.Builder().setArmor(30).setArmorToughness(30).setArmorMultiplier(0.3).setToughnessMultiplier(0.3).build())
-                    .withLocation(AccessoryItem.AccessoryLocation.LostArtifact)
-                    .build()
-    );
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), ANTIQUE_WATCH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.XP_GAIN.get(), ANTIQUE_WATCH_UUID);
+            }
+        }
+
+        @Override
+        public Component getName(ItemStack stack) { return Component.literal("Antique Pocket Watch").withStyle(style -> style.withColor(0xD6C97A)); }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+30% XP Gain").withStyle(style -> style.withColor(0xD6C97A)));
+        }
+    }
+
+    // -----------------------------
+    // --- Reinforced Diamond Plating -----
+    // -----------------------------
+
+    private static class ReinforcedDiamondPlating extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public ReinforcedDiamondPlating(Properties properties) { super(properties); }
+
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, REINFORCED_DIAMOND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 30.0, REINFORCED_DIAMOND_UUID);
+            }
+        }
+
+        @Override
+        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                return !AttributeApplier.isDuplicateAccessory(player, stack, "reinforced_diamond_plating");
+            }
+            return true;
+        }
+
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), REINFORCED_DIAMOND_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MINING_SPEED.get(), REINFORCED_DIAMOND_UUID);
+            }
+        }
+
+        @Override
+        public Component getName(ItemStack stack) { return Component.literal("Reinforced Diamond Plating").withStyle(style -> style.withColor(0xD6C97A)); }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+30% Mining Speed").withStyle(style -> style.withColor(0xD6C97A)));
+        }
+    }
+
+    // -----------------------------
+    // --- Cloudspire Gem -----
+    // -----------------------------
+
+    private static class CloudspireGem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public CloudspireGem(Properties properties) { super(properties); }
+
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, CLOUDSPIRE_GEM_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.JUMP_BOOST.get(), 100.0, CLOUDSPIRE_GEM_UUID);
+            }
+        }
+
+        @Override
+        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                return !AttributeApplier.isDuplicateAccessory(player, stack, "cloudspire_gem");
+            }
+            return true;
+        }
+
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), CLOUDSPIRE_GEM_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.JUMP_BOOST.get(), CLOUDSPIRE_GEM_UUID);
+            }
+        }
+
+        @Override
+        public Component getName(ItemStack stack) { return Component.literal("Cloudspire Gem").withStyle(style -> style.withColor(0xD6C97A)); }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+100% Jump Boost").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("-50% Fall Damage").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+100% Fall Damage Distance").withStyle(style -> style.withColor(0xD6C97A)));
+
+        }
+    }
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

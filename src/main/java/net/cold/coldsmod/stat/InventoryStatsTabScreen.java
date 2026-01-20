@@ -6,8 +6,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 
-import static net.cold.coldsmod.stat.AttributeApplier.rebuildAll;
-
 public class InventoryStatsTabScreen extends Screen {
     private final InventoryScreen parent;
     private final Minecraft mc = Minecraft.getInstance();
@@ -31,17 +29,17 @@ public class InventoryStatsTabScreen extends Screen {
         );
     }
 
-    @Override
-    public void tick() {
-
-        super.tick();
-
-        if (mc.player != null) {
-            tickCounter++;
-            if (tickCounter >= 60) {
-                rebuildAll(mc.player);
-                tickCounter = 0;
-            }
-        }
-    }
+//    @Override
+//    public void tick() {
+//
+//        super.tick();
+//
+//        if (mc.player != null) {
+//            tickCounter++;
+//            if (tickCounter >= 60) {
+//                rebuildAll(mc.player);
+//                tickCounter = 0;
+//            }
+//        }
+//    }
 }
