@@ -46,7 +46,6 @@ public class AttributeApplier {
 
     private static final Multimap<String, Supplier<Attribute>> ATTRIBUTE_LOOKUP =
             ImmutableListMultimap.<String, Supplier<Attribute>>builder()
-                    // --- Base Attributes ---
                     .put("str", ModAttributes.STR)
                     .put("dex", ModAttributes.DEX)
                     .put("fort", ModAttributes.FORT)
@@ -219,7 +218,6 @@ public class AttributeApplier {
             AttributeInstance instance = player.getAttribute(targetAttr);
 
             if (instance != null) {
-                // Consistent UUID for per-point scaling per attribute
                 UUID uuid = UUID.nameUUIDFromBytes(("per_point_" + targetAttr.getDescriptionId()).getBytes(StandardCharsets.UTF_8));
 
                 instance.removeModifier(uuid);
@@ -286,12 +284,11 @@ public class AttributeApplier {
 
             Map.entry(ModAttributes.HASTE, s -> s.dex * 0.125),
             Map.entry(ModAttributes.NOCK_HASTE, s -> s.dex * 0.125),
-            Map.entry(() -> Attributes.MOVEMENT_SPEED, s -> s.dex * 0.00012), // MC uses 0.1 as base, so 0.12% per point is 0.00012
-
+            Map.entry(() -> Attributes.MOVEMENT_SPEED, s -> s.dex * 0.00012),
             Map.entry(() -> Attributes.ARMOR, s -> s.con * 0.15 + s.perc * 0.1 + s.fort * 0.2 + s.str * 0.1),
             Map.entry(() -> Attributes.ARMOR_TOUGHNESS, s -> s.fort * 0.15),
             Map.entry(ModAttributes.DEBUFF_RESIST, s -> s.con * 0.2 + s.wisdom * 0.125),
-            Map.entry(() -> Attributes.KNOCKBACK_RESISTANCE, s -> s.fort * 0.002), // 0.2 per point = 20% at 100 points
+            Map.entry(() -> Attributes.KNOCKBACK_RESISTANCE, s -> s.fort * 0.002),
 
             Map.entry(ModAttributes.XP_GAIN, s -> s.insight * 0.25),
             Map.entry(ModAttributes.MINING_SPEED, s -> s.insight * 0.25),
