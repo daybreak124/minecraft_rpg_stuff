@@ -121,7 +121,7 @@ public class Shrieks {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR, 4.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -3.0, SHRIEKS_UNSEEING_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), -20.0, SHRIEKS_UNSEEING_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), -15.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 7.5, SHRIEKS_UNSEEING_UUID);
             }
         }
@@ -158,7 +158,7 @@ public class Shrieks {
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+7.5% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("-20 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("-15 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }
@@ -177,7 +177,7 @@ public class Shrieks {
                 AttributeApplier.applyModifier(player, Attributes.ARMOR, 6.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.05, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -3.0, SHRIEKS_UNSEEING_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), -25.0, SHRIEKS_UNSEEING_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), -15.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 10.0, SHRIEKS_UNSEEING_UUID);
             }
         }
@@ -216,7 +216,7 @@ public class Shrieks {
             tooltip.add(Component.literal("+6 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+10% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+5% Armor").withStyle(style -> style.withColor(0x0F52BA)));
-            tooltip.add(Component.literal("-25 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("-15 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }
@@ -235,7 +235,7 @@ public class Shrieks {
                 AttributeApplier.applyModifier(player, Attributes.ARMOR, 8.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.1, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -3.0, SHRIEKS_UNSEEING_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), -30.0, SHRIEKS_UNSEEING_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), -15.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 12.5, SHRIEKS_UNSEEING_UUID);
             }
         }
@@ -274,7 +274,7 @@ public class Shrieks {
             tooltip.add(Component.literal("+8 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+12.5% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+10% Armor").withStyle(style -> style.withColor(0x0F52BA)));
-            tooltip.add(Component.literal("-30 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("-15 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }

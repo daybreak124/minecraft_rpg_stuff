@@ -59,6 +59,9 @@ public class ModAttributes {
     public static final RegistryObject<Attribute> PROJECTILE_PRECISION = ATTRIBUTES.register("projectile_precision",
             () -> new RangedAttribute("projectile_precision", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
 
+    public static final RegistryObject<Attribute> REJUVENATION = ATTRIBUTES.register("incoming_healing",
+            () -> new RangedAttribute("incoming_healing", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
+
     public static final RegistryObject<Attribute> PROTECTION = ATTRIBUTES.register("protection",
             () -> new RangedAttribute("protection", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> RESTORATION = ATTRIBUTES.register("restoration",
@@ -122,7 +125,7 @@ public class ModAttributes {
     public static final RegistryObject<Attribute> INCOMING_DAMAGE_MULTIPLIER = ATTRIBUTES.register("incoming_damage_multiplier",
             () -> new RangedAttribute("incoming_damage_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
 
-    public static final RegistryObject<Attribute> INCOMING_HEALING_MULTIPLIER = ATTRIBUTES.register("incoming_healing_multiplier",
+    public static final RegistryObject<Attribute> REJUVENATION_MULTIPLIER = ATTRIBUTES.register("incoming_healing_multiplier",
             () -> new RangedAttribute("incoming_healing_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
 
 
@@ -182,7 +185,8 @@ public class ModAttributes {
         event.add(EntityType.PLAYER, ModAttributes.TOUGHNESS_MULTIPLIER.get());
         event.add(EntityType.PLAYER, ModAttributes.HEALTH_MULTIPLIER.get());
 
-        event.add(EntityType.PLAYER, ModAttributes.INCOMING_HEALING_MULTIPLIER.get());
+        event.add(EntityType.PLAYER, ModAttributes.REJUVENATION_MULTIPLIER.get());
+        event.add(EntityType.PLAYER, ModAttributes.REJUVENATION.get());
 
         for (EntityType<? extends LivingEntity> type : event.getTypes()) {
             event.add(type, ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());

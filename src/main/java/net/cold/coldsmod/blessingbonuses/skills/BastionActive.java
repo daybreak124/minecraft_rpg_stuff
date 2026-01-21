@@ -50,7 +50,7 @@ public class BastionActive extends MobEffect {
             serverPlayer.playNotifySound(
                     ModSounds.GUARDIAN_ANGEL.get(),
                     SoundSource.PLAYERS,
-                    0.6F,
+                    0.4F,
                     1.0F);
         }
     }

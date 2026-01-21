@@ -1,6 +1,7 @@
 package net.cold.coldsmod;
 
-import net.cold.coldsmod.accessory.*;
+import net.cold.coldsmod.accessory.TestItems;
+import net.cold.coldsmod.accessory.UtilityAccessories;
 import net.cold.coldsmod.accessory.bracers.*;
 import net.cold.coldsmod.accessory.mind.*;
 import net.cold.coldsmod.accessory.necklace.*;
@@ -10,6 +11,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -274,7 +276,7 @@ public class CreativeTabs {
             CREATIVE_MODE_TABS.register("cold_test_item_tab", () ->
                     CreativeModeTab.builder()
                             .title(Component.translatable("creativetab.test_item_tab"))
-                            .icon(() -> new ItemStack(ModItems.PEARL_ICON.get()))
+                            .icon(() -> new ItemStack(Items.DIAMOND_AXE))
                             .displayItems((parameters, output) -> {
                                 output.accept(TestItems.ALL.get());
                                 output.accept(TestItems.STR.get());

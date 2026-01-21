@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -15,10 +16,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class EffectUtils {
 
-    public static void spawnComposterBurst(Player player) {
-        if (player.level() instanceof ServerLevel serverLevel) {
+    public static void spawnComposterBurst(LivingEntity ally) {
+        if (ally.level() instanceof ServerLevel serverLevel) {
             serverLevel.sendParticles(ParticleTypes.COMPOSTER,
-                    player.getX(), player.getY() + 1.0, player.getZ(),
+                    ally.getX(), ally.getY() + 1.0, ally.getZ(),
                     25, 0.4, 0.5, 0.4, 0.05);
         }
     }
@@ -50,12 +51,12 @@ public class EffectUtils {
         }
     }
 
-    public static void playHealSound(LivingEntity player) {
-        player.level().playSound(
+    public static void playHealSound(LivingEntity ally) {
+        ally.level().playSound(
                 null,
-                player.getX(),
-                player.getY(),
-                player.getZ(),
+                ally.getX(),
+                ally.getY(),
+                ally.getZ(),
                 SoundEvents.EXPERIENCE_ORB_PICKUP,
                 SoundSource.PLAYERS,
                 0.5F,
@@ -110,5 +111,10 @@ public class EffectUtils {
             }
             mob.getPersistentData().putInt("freeze_timer", freezeTimer);
         }
+    }
+
+    public static boolean isAlly(LivingEntity target) {
+        if (target instanceof Player) return true;
+        return target instanceof TamableAnimal t && t.isTame();
     }
 }

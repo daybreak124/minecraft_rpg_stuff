@@ -6,7 +6,6 @@ import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundUpdateAttributesPacket;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -18,11 +17,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.event.CurioChangeEvent;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
@@ -86,7 +83,7 @@ public class AttributeApplier {
 
 
                     .put("restoration", ModAttributes.RESTORATION)
-                    // .put("protection", ModAttributes.PROTECTION)
+                    .put("rejuvenation", ModAttributes.REJUVENATION)
                     .put("amplification", ModAttributes.AMPLIFICATION)
 
 
@@ -120,7 +117,7 @@ public class AttributeApplier {
                     .put("debuffResist", ModAttributes.DEBUFF_RESIST)
 
                     .put("restorationMultiplier", ModAttributes.RESTORATION_MULTIPLIER)
-                    // .put("protectionMultiplier", ModAttributes.PROTECTION_MULTIPLIER)
+                    .put("rejuvenationMultiplier", ModAttributes.REJUVENATION_MULTIPLIER)
                     .put("amplificationMultiplier", ModAttributes.AMPLIFICATION_MULTIPLIER)
 
 
@@ -183,13 +180,13 @@ public class AttributeApplier {
         MinecraftForge.EVENT_BUS.register(new AttributeApplier());
     }
 
-    @SubscribeEvent
-    public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-    }
-
-    @SubscribeEvent
-    public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
-    }
+//    @SubscribeEvent
+//    public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+//    }
+//
+//    @SubscribeEvent
+//    public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+//    }
 
     public static void refreshMilestones(Player player) {
         MILESTONES.forEach((attrReg, map) -> {
@@ -269,26 +266,30 @@ public class AttributeApplier {
     public record BaseStatSnapshot(double str, double dex, double fort, double con, double perc, double insight, double wisdom) {}
 
     private static final Map<Supplier<Attribute>, Function<BaseStatSnapshot, Double>> PER_POINT_FORMULAS = Map.ofEntries(
-            Map.entry(ModAttributes.POTENCY, s -> s.str * 0.30 + s.con * 0.125),
-            Map.entry(ModAttributes.MELEE_POTENCY, s -> s.str * 0.30 + s.con * 0.125),
-            Map.entry(ModAttributes.PROJECTILE_POTENCY, s -> (s.str * 0.30 + s.con * 0.125) + (s.dex * 0.15)),
-            Map.entry(() -> Attributes.ATTACK_DAMAGE, s -> s.str * 0.025),
+            Map.entry(ModAttributes.POTENCY, s -> s.str * 0.25 + s.con * 0.125),
+            Map.entry(ModAttributes.MELEE_POTENCY, s -> s.str * 0.25 + s.con * 0.125),
+            Map.entry(ModAttributes.PROJECTILE_POTENCY, s -> (s.str * 0.25 + s.con * 0.125 + s.dex * 0.175)),
+            Map.entry(() -> Attributes.ATTACK_DAMAGE, s -> s.str * 0.020),
 
             Map.entry(ModAttributes.ACCURACY, s -> s.dex * 0.2),
             Map.entry(ModAttributes.MELEE_ACCURACY, s -> s.dex * 0.2),
             Map.entry(ModAttributes.PROJECTILE_ACCURACY, s -> s.dex * 0.2),
 
-            Map.entry(ModAttributes.PRECISION, s -> s.perc * 0.175),
-            Map.entry(ModAttributes.MELEE_PRECISION, s -> s.perc * 0.175),
-            Map.entry(ModAttributes.PROJECTILE_PRECISION, s -> s.perc * 0.175),
+            Map.entry(ModAttributes.PRECISION, s -> s.perc * 0.15),
+            Map.entry(ModAttributes.MELEE_PRECISION, s -> s.perc * 0.15),
+            Map.entry(ModAttributes.PROJECTILE_PRECISION, s -> s.perc * 0.15),
 
             Map.entry(ModAttributes.HASTE, s -> s.dex * 0.125),
-            Map.entry(ModAttributes.NOCK_HASTE, s -> s.dex * 0.125),
+            Map.entry(ModAttributes.NOCK_HASTE, s -> s.dex * 0.15),
             Map.entry(() -> Attributes.MOVEMENT_SPEED, s -> s.dex * 0.00012),
             Map.entry(() -> Attributes.ARMOR, s -> s.con * 0.15 + s.perc * 0.1 + s.fort * 0.2 + s.str * 0.1),
             Map.entry(() -> Attributes.ARMOR_TOUGHNESS, s -> s.fort * 0.15),
-            Map.entry(ModAttributes.DEBUFF_RESIST, s -> s.con * 0.2 + s.wisdom * 0.125),
+            Map.entry(ModAttributes.DEBUFF_RESIST, s -> s.con * 0.05 + s.wisdom * 0.125),
             Map.entry(() -> Attributes.KNOCKBACK_RESISTANCE, s -> s.fort * 0.002),
+
+            Map.entry(ModAttributes.RESTORATION, s -> s.wisdom * 0.15),
+            Map.entry(ModAttributes.AMPLIFICATION, s -> s.wisdom * 0.2),
+            Map.entry(ModAttributes.REJUVENATION, s -> s.con * 0.125),
 
             Map.entry(ModAttributes.XP_GAIN, s -> s.insight * 0.25),
             Map.entry(ModAttributes.MINING_SPEED, s -> s.insight * 0.25),
@@ -370,7 +371,7 @@ public class AttributeApplier {
 
         if (500 + effectiveRating == 0) return 0;
 
-        return (500 * effectiveRating) / (500 + effectiveRating);
+        return (500 * effectiveRating) / (500 + Math.abs(effectiveRating));
     }
 
     public void removeCrossbowTag(Player player) {

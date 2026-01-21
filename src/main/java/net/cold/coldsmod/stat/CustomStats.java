@@ -50,8 +50,8 @@ public class CustomStats {
     public double meleeDamageMultiplier;
     public double restoration;
     public double restorationMultiplier;
-    public double protection;
-    public double protectionMultiplier;
+    public double rejuvenation;
+    public double rejuvenationMultiplier;
     public double amplification;
     public double amplificationMultiplier;
 
@@ -105,87 +105,12 @@ public class CustomStats {
         this.drawSpeedMultiplier = 0.0;
         this.meleeDamageMultiplier = 0.0;
         this.meleeCritChanceMultiplier = 0.0;
-        this.protection = 0.0;
-        this.protectionMultiplier = 0.0;
+        this.rejuvenation = 0.0;
+        this.rejuvenationMultiplier = 0.0;
         this.restoration = 0.0;
         this.restorationMultiplier = 0.0;
         this.amplificationMultiplier = 0.0;
         this.amplification = 0.0;
-    }
-
-    public CustomStats(int str, int fort, int dex, int intelligence, int perc, int con, int insight, int wisdom,
-                       double armor, double armorToughness, double maxHealth,
-                       double knockbackResist, double damage, double debuffResist,
-                       double attackSpeed, double critChance, double critDamage,
-                       double meleeCritChance, double meleeCritDamage,
-                       double projectileCritChance, double projectileCritDamage,
-                       double moveSpeed, double swimSpeed, double xpGain,
-                       double projectileDamage, double drawSpeed,
-                       double blockReach, double entityReach, double luck,
-                       double stepHeight, double jumpBoost, double miningSpeed,
-                       double armorMultiplier, double toughnessMultiplier,
-                       double healthMultiplier, double damageMultiplier, double attackSpeedMultiplier,
-                       double critChanceMultiplier, double critDamageMultiplier,
-                       double meleeCritChanceMultiplier, double meleeCritDamageMultiplier,
-                       double projectileCritChanceMultiplier, double projectileCritDamageMultiplier,
-                       double projectileDamageMultiplier,
-                       double drawSpeedMultiplier,
-                       double meleeDamage, double meleeDamageMultiplier,
-                       double protection, double protectionMultiplier, double restoration,
-                       double restorationMultiplier, double amplification, double amplificationMultiplier) {
-        this.str = str;
-        this.fort = fort;
-        this.dex = dex;
-        this.intelligence = intelligence;
-        this.wisdom = wisdom;
-        this.con = con;
-        this.perc = perc;
-        this.insight = insight;
-        this.armor = armor;
-        this.armorToughness = armorToughness;
-        this.maxHealth = maxHealth;
-        this.knockbackResist = knockbackResist;
-        this.debuffResist = debuffResist;
-        this.damage = damage;
-        this.attackSpeed = attackSpeed;
-        this.critChance = critChance;
-        this.critDamage = critDamage;
-        this.meleeCritChance = meleeCritChance;
-        this.meleeCritDamage = meleeCritDamage;
-        this.projectileCritChance = projectileCritChance;
-        this.projectileCritDamage = projectileCritDamage;
-        this.moveSpeed = moveSpeed;
-        this.swimSpeed = swimSpeed;
-        this.xpGain = xpGain;
-        this.projectileDamage = projectileDamage;
-        this.drawSpeed = drawSpeed;
-        this.blockReach = blockReach;
-        this.entityReach = entityReach;
-        this.luck = luck;
-        this.stepHeight = stepHeight;
-        this.jumpBoost = jumpBoost;
-        this.miningSpeed = miningSpeed;
-        this.toughnessMultiplier = toughnessMultiplier;
-        this.healthMultiplier = healthMultiplier;
-        this.damageMultiplier = damageMultiplier;
-        this.attackSpeedMultiplier = attackSpeedMultiplier;
-        this.critChanceMultiplier = critChanceMultiplier;
-        this.critDamageMultiplier = critDamageMultiplier;
-        this.meleeCritChanceMultiplier = meleeCritChanceMultiplier;
-        this.meleeCritDamageMultiplier = meleeCritDamageMultiplier;
-        this.projectileCritChanceMultiplier = projectileCritChanceMultiplier;
-        this.projectileCritDamageMultiplier = projectileCritDamageMultiplier;
-        this.projectileDamageMultiplier = projectileDamageMultiplier;
-        this.drawSpeedMultiplier = drawSpeedMultiplier;
-        this.armorMultiplier = armorMultiplier;
-        this.meleeDamage = meleeDamage;
-        this.meleeDamageMultiplier = meleeDamageMultiplier;
-        this.protection = protection;
-        this.protectionMultiplier = protectionMultiplier;
-        this.restoration = restoration;
-        this.restorationMultiplier = restorationMultiplier;
-        this.amplificationMultiplier = amplificationMultiplier;
-        this.amplification = amplification;
     }
 
     public int getStr() { return str; }
@@ -235,8 +160,8 @@ public class CustomStats {
     public double getProjectileDamageMultiplier() { return projectileDamageMultiplier; }
     public double getDrawSpeedMultiplier() { return drawSpeedMultiplier; }
     public double getMeleeDamage() { return meleeDamage; }
-    public double getProtection() {return protection;}
-    public double getProtectionMultiplier() {return protectionMultiplier;}
+    public double getRejuvenation() {return rejuvenation;}
+    public double getRejuvenationMultiplier() {return rejuvenationMultiplier;}
     public double getRestoration() {return restoration;}
     public double getRestorationMultiplier() {return restorationMultiplier;}
     public double getAmplification() {return amplification;}
@@ -290,8 +215,8 @@ public class CustomStats {
     public void setProjectileDamageMultiplier(double projectileDamageMultiplier) { this.projectileDamageMultiplier = projectileDamageMultiplier; }
     public void setDrawSpeedMultiplier(double drawSpeedMultiplier) { this.drawSpeedMultiplier = drawSpeedMultiplier; }
     public void setMeleeDamage(double meleeDamage) { this.meleeDamage = meleeDamage; }
-    public void setProtection(double protection) { this.protection = protection; }
-    public void setProtectionMultiplier(double protectionMultiplier) { this.protectionMultiplier = protectionMultiplier; }
+    public void setRejuvenation(double rejuvenation) { this.rejuvenation = rejuvenation; }
+    public void setRejuvenationMultiplier(double rejuvenationMultiplier) { this.rejuvenationMultiplier = rejuvenationMultiplier; }
     public void setRestoration(double restoration) { this.restoration = restoration; }
     public void setRestorationMultiplier(double restorationMultiplier) { this.restorationMultiplier = restorationMultiplier; }
     public void setAmplification(double amplification) { this.amplification = amplification; }
@@ -354,388 +279,11 @@ public class CustomStats {
         this.projectileCritDamageMultiplier += other.projectileCritDamageMultiplier;
         this.projectileDamageMultiplier += other.projectileDamageMultiplier;
         this.drawSpeedMultiplier += other.drawSpeedMultiplier;
-        this.protection += other.protection;
-        this.protectionMultiplier += other.protectionMultiplier;
+        this.rejuvenation += other.rejuvenation;
+        this.rejuvenationMultiplier += other.rejuvenationMultiplier;
         this.restoration += other.restoration;
         this.restorationMultiplier += other.restorationMultiplier;
         this.amplification += other.amplification;
         this.amplificationMultiplier += other.amplificationMultiplier;
-    }
-
-    private CustomStats(Builder builder) {
-        this.damage = builder.damage;
-        this.meleeDamage = builder.meleeDamage;
-        this.critChance = builder.critChance;
-        this.critDamage = builder.critDamage;
-        this.meleeCritChance = builder.meleeCritChance;
-        this.meleeCritDamage = builder.meleeCritDamage;
-        this.projectileCritChance = builder.projectileCritChance;
-        this.projectileCritDamage = builder.projectileCritDamage;
-        this.moveSpeed = builder.moveSpeed;
-        this.attackSpeed = builder.attackSpeed;
-        this.fort = builder.fort;
-        this.perc = builder.perc;
-        this.wisdom = builder.wisdom;
-        this.con = builder.con;
-        this.armor = builder.armor;
-        this.maxHealth = builder.maxHealth;
-        this.str = builder.str;
-        this.dex = builder.dex;
-        this.insight = builder.insight;
-        this.knockbackResist = builder.knockbackResist;
-        this.drawSpeed = builder.drawSpeed;
-        this.armorToughness = builder.armorToughness;
-        this.projectileDamage = builder.projectileDamage;
-        this.swimSpeed = builder.swimSpeed;
-        this.blockReach = builder.blockReach;
-        this.entityReach = builder.entityReach;
-        this.debuffResist = builder.debuffResist;
-        this.luck = builder.luck;
-        this.stepHeight = builder.stepHeight;
-        this.jumpBoost = builder.jumpBoost;
-        this.xpGain = builder.xpGain;
-        this.miningSpeed = builder.miningSpeed;
-        this.armorMultiplier = builder.armorMultiplier;
-        this.toughnessMultiplier = builder.toughnessMultiplier;
-        this.healthMultiplier = builder.healthMultiplier;
-        this.damageMultiplier = builder.damageMultiplier;
-        this.attackSpeedMultiplier = builder.speedMultiplier;
-        this.critChanceMultiplier = builder.critChanceMultiplier;
-        this.critDamageMultiplier = builder.critDamageMultiplier;
-        this.meleeCritChanceMultiplier = builder.meleeCritChanceMultiplier;
-        this.meleeCritDamageMultiplier = builder.meleeCritDamageMultiplier;
-        this.projectileCritChanceMultiplier = builder.projectileCritChanceMultiplier;
-        this.projectileCritDamageMultiplier = builder.projectileCritDamageMultiplier;
-        this.projectileDamageMultiplier = builder.projectileDamageMultiplier;
-        this.drawSpeedMultiplier = builder.drawSpeedMultiplier;
-        this.meleeDamageMultiplier = builder.meleeDamageMultiplier;
-        this.protection += builder.protection;
-        this.protectionMultiplier += builder.protectionMultiplier;
-        this.restoration += builder.restoration;
-        this.restorationMultiplier += builder.restorationMultiplier;
-        this.amplification += builder.amplification;
-        this.amplificationMultiplier += builder.amplificationMultiplier;
-
-    }
-
-
-    public static class Builder {
-        private double damage = 0;
-        private double critChance = 0;
-        private double critDamage = 0;
-        private double meleeCritChance = 0;
-        private double meleeCritDamage = 0;
-        private double projectileCritChance = 0;
-        private double projectileCritDamage = 0;
-        private double moveSpeed = 0;
-        private double attackSpeed = 0;
-        private int fort = 0;
-        private int perc = 0;
-        private int con = 0;
-        private double armor = 0;
-        private double maxHealth = 0;
-        private int str = 0;
-        private int dex = 0;
-        private int insight = 0;
-        private int wisdom = 0;
-        private double knockbackResist = 0;
-        private double armorToughness = 0;
-        private double drawSpeed = 0;
-        private double projectileDamage = 0;
-        private double swimSpeed = 0;
-        private double blockReach = 0;
-        private double entityReach = 0;
-        private double debuffResist = 0;
-        private double luck = 0;
-        private double stepHeight = 0;
-        private double jumpBoost = 0;
-        private double xpGain = 0;
-        private double miningSpeed = 0;
-        public double armorMultiplier = 0;
-        public double toughnessMultiplier = 0;
-        public double healthMultiplier = 0;
-        public double damageMultiplier = 0;
-        public double speedMultiplier = 0;
-        public double critChanceMultiplier = 0;
-        public double critDamageMultiplier = 0;
-        public double meleeCritChanceMultiplier = 0;
-        public double meleeCritDamageMultiplier = 0;
-        public double projectileCritChanceMultiplier = 0;
-        public double projectileCritDamageMultiplier = 0;
-        public double projectileDamageMultiplier = 0;
-        public double drawSpeedMultiplier = 0;
-        public double meleeDamage = 0;
-        public double meleeDamageMultiplier = 0;
-        public double protection = 0;
-        public double protectionMultiplier = 0;
-        public double restoration = 0;
-        public double restorationMultiplier = 0;
-        public double amplification = 0;
-        public double amplificationMultiplier = 0;
-
-
-        public Builder setDamage(double damage) {
-            this.damage = damage;
-            return this;
-        }
-
-        public Builder setCritChance(double critChance) {
-            this.critChance = critChance;
-            return this;
-        }
-
-        public Builder setCritDamage(double critDamage) {
-            this.critDamage = critDamage;
-            return this;
-        }
-        public Builder setMeleeCritChance(double meleeCritChance) {
-            this.meleeCritChance = meleeCritChance;
-            return this;
-        }
-
-        public Builder setMeleeCritDamage(double meleeCritDamage) {
-            this.meleeCritDamage = meleeCritDamage;
-            return this;
-        }
-
-        public Builder setProjectileCritChance(double projectileCritChance) {
-            this.projectileCritChance = projectileCritChance;
-            return this;
-        }
-
-        public Builder setProjectileCritDamage(double projectileCritDamage) {
-            this.projectileCritDamage = projectileCritDamage;
-            return this;
-        }
-
-        public Builder setMoveSpeed(double moveSpeed) {
-            this.moveSpeed = moveSpeed;
-            return this;
-        }
-
-        public Builder setAttackSpeed(double attackSpeed) {
-            this.attackSpeed = attackSpeed;
-            return this;
-        }
-
-        public Builder setFort(int fort) {
-            this.fort = fort;
-            return this;
-        }
-
-        public Builder setWisdom(int wisdom) {
-            this.wisdom = wisdom;
-            return this;
-        }
-
-        public Builder setPerc(int perc) {
-            this.perc = perc;
-            return this;
-        }
-
-        public Builder setCon(int con) {
-            this.con = con;
-            return this;
-        }
-
-        public Builder setInsight(int insight) {
-            this.insight = insight;
-            return this;
-        }
-
-        public Builder setArmor(double armor) {
-            this.armor = armor;
-            return this;
-        }
-
-        public Builder setMaxHealth(double maxHealth) {
-            this.maxHealth = maxHealth;
-            return this;
-        }
-
-        public Builder setStr(int str) {
-            this.str = str;
-            return this;
-        }
-
-        public Builder setDex(int dex) {
-            this.dex = dex;
-            return this;
-        }
-
-        public Builder setKnockbackResist(double knockbackResist) {
-            this.knockbackResist = knockbackResist;
-            return this;
-        }
-
-        public Builder setArmorToughness(double armorToughness) {
-            this.armorToughness = armorToughness;
-            return this;
-        }
-
-        public Builder setDrawSpeed(double drawSpeed) {
-            this.drawSpeed = drawSpeed;
-            return this;
-        }
-
-        public Builder setProjectileDamage(double projectileDamage) {
-            this.projectileDamage = projectileDamage;
-            return this;
-        }
-
-        public Builder setSwimSpeed(double swimSpeed) {
-            this.swimSpeed = swimSpeed;
-            return this;
-        }
-
-        public Builder setEntityReach(double entityReach) {
-            this.entityReach = entityReach;
-            return this;
-        }
-
-        public Builder setBlockReach(double blockReach) {
-            this.blockReach = blockReach;
-            return this;
-        }
-
-        public Builder setDebuffResist(double debuffResist) {
-            this.debuffResist = debuffResist;
-            return this;
-        }
-
-        public Builder setLuck(double luck) {
-            this.luck = luck;
-            return this;
-        }
-
-        public Builder setStepHeight(double stepHeight) {
-            this.stepHeight = stepHeight;
-            return this;
-        }
-
-        public Builder setJumpBoost(double jumpBoost) {
-            this.jumpBoost = jumpBoost;
-            return this;
-        }
-
-        public Builder setXpGain(double xpGain) {
-            this.xpGain = xpGain;
-            return this;
-        }
-
-        public Builder setMiningSpeed(double miningSpeed) {
-            this.miningSpeed = miningSpeed;
-            return this;
-        }
-
-        public Builder setToughnessMultiplier(double toughnessMultiplier) {
-            this.toughnessMultiplier = toughnessMultiplier;
-            return this;
-        }
-
-        public Builder setHealthMultiplier(double healthMultiplier) {
-            this.healthMultiplier = healthMultiplier;
-            return this;
-        }
-
-        public Builder setDamageMultiplier(double damageMultiplier) {
-            this.damageMultiplier = damageMultiplier;
-            return this;
-        }
-
-        public Builder setMeleeDamageMultiplier(double meleeDamageMultiplier) {
-            this.meleeDamageMultiplier = meleeDamageMultiplier;
-            return this;
-        }
-
-        public Builder setSpeedMultiplier(double speedMultiplier) {
-            this.speedMultiplier = speedMultiplier;
-            return this;
-        }
-
-        public Builder setCritChanceMultiplier(double critChanceMultiplier) {
-            this.critChanceMultiplier = critChanceMultiplier;
-            return this;
-        }
-
-        public Builder setCritDamageMultiplier(double critDamageMultiplier) {
-            this.critDamageMultiplier = critDamageMultiplier;
-            return this;
-        }
-
-        public Builder setMeleeCritChanceMultiplier(double meleeCritChanceMultiplier) {
-            this.meleeCritChanceMultiplier = meleeCritChanceMultiplier;
-            return this;
-        }
-
-        public Builder setMeleeCritDamageMultiplier(double meleeCritDamageMultiplier) {
-            this.meleeCritDamageMultiplier = meleeCritDamageMultiplier;
-            return this;
-        }
-
-        public Builder setProjectileCritChanceMultiplier(double projectileCritChanceMultiplier) {
-            this.projectileCritChanceMultiplier = projectileCritChanceMultiplier;
-            return this;
-        }
-
-        public Builder setProjectileCritDamageMultiplier(double projectileCritDamageMultiplier) {
-            this.projectileCritDamageMultiplier = projectileCritDamageMultiplier;
-            return this;
-        }
-
-        public Builder setProjectileDamageMultiplier(double projectileDamageMultiplier) {
-            this.projectileDamageMultiplier = projectileDamageMultiplier;
-            return this;
-        }
-
-        public Builder setArmorMultiplier(double armorMultiplier) {
-            this.armorMultiplier = armorMultiplier;
-            return this;
-        }
-
-        public Builder setDrawSpeedMultiplier(double drawSpeedMultiplier) {
-            this.drawSpeedMultiplier = drawSpeedMultiplier;
-            return this;
-        }
-
-        public Builder setMeleeDamage(double meleeDamage) {
-            this.meleeDamage = meleeDamage;
-            return this;
-        }
-
-        public Builder setProtection(double protection) {
-            this.protection = protection;
-            return this;
-        }
-
-        public Builder setProtectionMultiplier(double protectionMultiplier) {
-            this.protectionMultiplier = protectionMultiplier;
-            return this;
-        }
-
-        public Builder setRestoration(double restoration) {
-            this.restoration = restoration;
-            return this;
-        }
-
-        public Builder setRestorationMultiplier(double restorationMultiplier) {
-            this.restorationMultiplier = restorationMultiplier;
-            return this;
-        }
-
-        public Builder setAmplification(double amplification) {
-            this.amplification = amplification;
-            return this;
-        }
-
-        public Builder setAmplificationMultiplier(double amplificationMultiplier) {
-            this.amplificationMultiplier = amplificationMultiplier;
-            return this;
-        }
-
-
-        public CustomStats build() {
-            return new CustomStats(this);
-        }
     }
 }

@@ -62,7 +62,7 @@ public class DragonRoar {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), -2.0, DRAGONS_ROAR_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 2.0, DRAGONS_ROAR_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, DRAGONS_ROAR_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 4.0, DRAGONS_ROAR_UUID);
             }
@@ -92,7 +92,7 @@ public class DragonRoar {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("-2 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal(""));
@@ -108,7 +108,7 @@ public class DragonRoar {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), -4.0, DRAGONS_ROAR_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 4.0, DRAGONS_ROAR_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, DRAGONS_ROAR_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 6.75, DRAGONS_ROAR_UUID);
             }
@@ -138,7 +138,7 @@ public class DragonRoar {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("-4 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+6.75 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal(""));
@@ -154,7 +154,7 @@ public class DragonRoar {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), -6.0, DRAGONS_ROAR_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 6.0, DRAGONS_ROAR_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, DRAGONS_ROAR_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.2, DRAGONS_ROAR_UUID);
             }
@@ -184,7 +184,7 @@ public class DragonRoar {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("-6 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+20% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal(""));
@@ -200,7 +200,7 @@ public class DragonRoar {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), -8.0, DRAGONS_ROAR_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 8.0, DRAGONS_ROAR_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, DRAGONS_ROAR_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.27, DRAGONS_ROAR_UUID);
             }
@@ -230,7 +230,7 @@ public class DragonRoar {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("-8 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+27% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal(""));

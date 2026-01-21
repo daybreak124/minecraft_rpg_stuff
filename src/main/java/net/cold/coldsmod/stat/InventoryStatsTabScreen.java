@@ -15,11 +15,13 @@ public class InventoryStatsTabScreen extends Screen {
         this.parent = parent;
     }
 
-    private int tickCounter = 0;
-
     @Override
     protected void init() {
         super.init();
+
+        if (mc.player != null) {
+            InventoryStatsCache.rebuildCache(mc);
+        }
 
         addRenderableWidget(
                 Button.builder(Component.literal("X"), btn -> mc.setScreen(parent))

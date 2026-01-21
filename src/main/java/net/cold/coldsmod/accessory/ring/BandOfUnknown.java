@@ -63,6 +63,7 @@ public class BandOfUnknown {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, UNKNOWN_BAND_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 4.0, UNKNOWN_BAND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 4.0, UNKNOWN_BAND_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 2.0, UNKNOWN_BAND_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 2.0, UNKNOWN_BAND_UUID);
             }
@@ -81,6 +82,7 @@ public class BandOfUnknown {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), UNKNOWN_BAND_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.STR.get(), UNKNOWN_BAND_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.WISDOM.get(), UNKNOWN_BAND_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), UNKNOWN_BAND_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.CON.get(), UNKNOWN_BAND_UUID);
             }
@@ -97,6 +99,7 @@ public class BandOfUnknown {
             tooltip.add(Component.literal("+4 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal(""));
@@ -114,6 +117,7 @@ public class BandOfUnknown {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, UNKNOWN_BAND_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 7.0, UNKNOWN_BAND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 7.0, UNKNOWN_BAND_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 3.0, UNKNOWN_BAND_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 3.0, UNKNOWN_BAND_UUID);
             }
@@ -132,6 +136,7 @@ public class BandOfUnknown {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), UNKNOWN_BAND_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.STR.get(), UNKNOWN_BAND_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.WISDOM.get(), UNKNOWN_BAND_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), UNKNOWN_BAND_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.CON.get(), UNKNOWN_BAND_UUID);
             }
@@ -148,6 +153,7 @@ public class BandOfUnknown {
             tooltip.add(Component.literal("+7 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+7 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal(""));
@@ -166,6 +172,7 @@ public class BandOfUnknown {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, UNKNOWN_BAND_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 10.0, UNKNOWN_BAND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 10.0, UNKNOWN_BAND_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 5.0, UNKNOWN_BAND_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 5.0, UNKNOWN_BAND_UUID);
             }
@@ -184,6 +191,7 @@ public class BandOfUnknown {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), UNKNOWN_BAND_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.STR.get(), UNKNOWN_BAND_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.WISDOM.get(), UNKNOWN_BAND_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), UNKNOWN_BAND_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.CON.get(), UNKNOWN_BAND_UUID);
             }
@@ -200,6 +208,7 @@ public class BandOfUnknown {
             tooltip.add(Component.literal("+10 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+5 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+5 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+10 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal(""));
@@ -217,6 +226,7 @@ public class BandOfUnknown {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, UNKNOWN_BAND_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 15.0, UNKNOWN_BAND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 15.0, UNKNOWN_BAND_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 7.0, UNKNOWN_BAND_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 7.0, UNKNOWN_BAND_UUID);
             }
@@ -235,6 +245,7 @@ public class BandOfUnknown {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), UNKNOWN_BAND_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.STR.get(), UNKNOWN_BAND_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.WISDOM.get(), UNKNOWN_BAND_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), UNKNOWN_BAND_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.CON.get(), UNKNOWN_BAND_UUID);
             }
@@ -251,6 +262,7 @@ public class BandOfUnknown {
             tooltip.add(Component.literal("+15 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+7 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+7 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+15 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal(""));

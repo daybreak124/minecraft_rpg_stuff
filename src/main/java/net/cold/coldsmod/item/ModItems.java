@@ -1180,7 +1180,7 @@ public class ModItems {
             tooltip.add(Component.literal(" within 6 blocks to you").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" as long as you are").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" crouching, up to 4 seconds.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Deal 3 Melee Damage per").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Deal 4 Melee Damage per").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" second to monsters pulled.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
@@ -1911,7 +1911,7 @@ public class ModItems {
             );
             tooltip.add(
                     Component.literal("Heal Disable Duration: ").withStyle(ChatFormatting.DARK_RED)
-                            .append(Component.literal("24s").withStyle(ChatFormatting.GRAY))
+                            .append(Component.literal("15s").withStyle(ChatFormatting.GRAY))
             );
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
@@ -1940,6 +1940,14 @@ public class ModItems {
                 player.getPersistentData().putBoolean("entwined_offering_eligible", true);
 
             }
+        }
+
+        @Override
+        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                return !AttributeApplier.isDuplicateAccessory(player, stack, "immolation_of_heart");
+            }
+            return true;
         }
 
         @Override
@@ -1974,7 +1982,7 @@ public class ModItems {
 
             tooltip.add(
                     Component.literal("Armor Buff Duration: ").withStyle(ChatFormatting.DARK_AQUA)
-                            .append(Component.literal("5s").withStyle(ChatFormatting.GRAY))
+                            .append(Component.literal("3s").withStyle(ChatFormatting.GRAY))
             );
         }
     }
@@ -2340,7 +2348,7 @@ public class ModItems {
             tooltip.add(Component.literal(" Upon shooting the ground,").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" pull monsters within 4").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" blocks to the arrow for").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 4 seconds and deal 3").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" 4 seconds and deal 4").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Ranged Damage per second.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
@@ -2396,7 +2404,7 @@ public class ModItems {
             tooltip.add(Component.literal(" shooting the ground.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
-                            .append(Component.literal("10s").withStyle(ChatFormatting.GRAY))
+                            .append(Component.literal("6s").withStyle(ChatFormatting.GRAY))
             );
         }
     }

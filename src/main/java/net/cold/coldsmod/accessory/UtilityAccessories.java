@@ -2,8 +2,6 @@ package net.cold.coldsmod.accessory;
 
 import net.cold.coldsmod.ColdsMod;
 import net.cold.coldsmod.stat.AttributeApplier;
-import net.cold.coldsmod.stat.CustomStats;
-import net.cold.coldsmod.stat.ItemRarity;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -295,7 +293,7 @@ public class UtilityAccessories {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, CLOUDSPIRE_GEM_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.JUMP_BOOST.get(), 100.0, CLOUDSPIRE_GEM_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.JUMP_BOOST.get(), 1.0, CLOUDSPIRE_GEM_UUID);
             }
         }
 

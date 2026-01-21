@@ -381,7 +381,7 @@ public class TestItems {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+80 Wisdom").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal("+50 Wisdom").withStyle(ChatFormatting.GOLD));
         }
     }
 
@@ -411,7 +411,7 @@ public class TestItems {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+80 Insight").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal("+50 Insight").withStyle(ChatFormatting.GOLD));
         }
     }
 

@@ -2,7 +2,7 @@ package net.cold.coldsmod;
 
 import com.mojang.logging.LogUtils;
 import net.cold.coldsmod.LootModifiers.ModLootModifiers;
-import net.cold.coldsmod.accessory.*;
+import net.cold.coldsmod.accessory.UtilityAccessories;
 import net.cold.coldsmod.accessory.bracers.*;
 import net.cold.coldsmod.accessory.mind.*;
 import net.cold.coldsmod.accessory.necklace.*;

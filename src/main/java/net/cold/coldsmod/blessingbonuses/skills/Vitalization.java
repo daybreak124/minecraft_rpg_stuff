@@ -11,7 +11,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
@@ -25,6 +24,7 @@ import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.isAlly;
 import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
 
 public class Vitalization {
@@ -58,7 +58,7 @@ public class Vitalization {
         if (!(event.getSource().getEntity() instanceof Player player)) return;
 
         LivingEntity target = event.getEntity();
-        if (!(target instanceof Player || (target instanceof TamableAnimal t && t.isTame()))) return;
+        if (!isAlly(target)) return;
 
         if (player.level().isClientSide()) return;
 
@@ -89,7 +89,7 @@ public class Vitalization {
         float healAmount = (float) (finalDamage * 0.35);
 
         EffectUtils.playHealSound(target);
-        EffectUtils.spawnComposterBurst((Player) target);
+        EffectUtils.spawnComposterBurst(target);
 
         double healIncrease = getScaledValue(player,
                 ModAttributes.RESTORATION.get(),

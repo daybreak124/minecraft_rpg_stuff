@@ -10,7 +10,6 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -120,7 +119,7 @@ public class CombatantsAidReady extends MobEffect {
         List<LivingEntity> allies = level.getEntitiesOfClass(
                 LivingEntity.class,
                 dashBox,
-                e -> isAlly(player, e)
+                EffectUtils::isAlly
         );
 
         double healIncrease = getScaledValue(player,
@@ -133,7 +132,7 @@ public class CombatantsAidReady extends MobEffect {
             ally.heal(healAmount);
             ally.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20 * 5, 0, false, false, true));
             EffectUtils.playHealSound(ally);
-            EffectUtils.spawnComposterBurst((Player) ally);
+            EffectUtils.spawnComposterBurst(ally);
         }
     }
 
@@ -152,11 +151,5 @@ public class CombatantsAidReady extends MobEffect {
         tag.putBoolean("dash_active", false);
         tag.remove("dash_timer");
         tag.remove("dash_crouch_ticks");
-    }
-
-    public static boolean isAlly(Player source, LivingEntity target) {
-        if (target == source) return false;
-        if (target instanceof Player) return true;
-        return target instanceof TamableAnimal t && t.isTame();
     }
 }

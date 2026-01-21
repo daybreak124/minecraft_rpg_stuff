@@ -49,7 +49,7 @@ public class RetaliateActive extends MobEffect {
                     player.getX(), player.getY(), player.getZ(),
                     ModSounds.RETALIATE_ACTIVATE.get(),
                     SoundSource.PLAYERS,
-                    0.6F,
+                    0.4F,
                     1.0F
             );
             player.getPersistentData().putInt("retaliateHits", 0);

@@ -7,13 +7,14 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
+
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.isAlly;
 
 public class EntwinedOfferingActive extends MobEffect {
 
@@ -36,12 +37,12 @@ public class EntwinedOfferingActive extends MobEffect {
         Level level = player.level();
 
         float range = (float) (8.0f * (1.0f + (AttributeApplier.getScaledValue(player, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get()) / 100.0f)));
-        int armorDuration = (int) (20 * 5 * (1.0f + (AttributeApplier.getScaledValue(player, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get()) / 100.0f)));
+        int armorDuration = (int) (20 * 3 * (1.0f + (AttributeApplier.getScaledValue(player, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get()) / 100.0f)));
 
         List<LivingEntity> entities = level.getEntitiesOfClass(
                 LivingEntity.class,
                 player.getBoundingBox().inflate(range),
-                e -> ((e != player) && e instanceof Player || e instanceof TamableAnimal tamable && tamable.isTame())
+                e -> ((e != player) && isAlly(e))
         );
 
         for (LivingEntity target : entities) {

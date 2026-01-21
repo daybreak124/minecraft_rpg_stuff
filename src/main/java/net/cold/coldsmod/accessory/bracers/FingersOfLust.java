@@ -63,8 +63,10 @@ public class FingersOfLust {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 5.0, FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 3.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -6.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 2.0, FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 2.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 4.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, FINGERS_UUID);
             }
@@ -82,8 +84,10 @@ public class FingersOfLust {
         public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), FINGERS_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.WISDOM.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE.get(), FINGERS_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), FINGERS_UUID);
             }
@@ -98,9 +102,11 @@ public class FingersOfLust {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+5 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-6 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+2 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+2 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -115,8 +121,10 @@ public class FingersOfLust {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 6.0, FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 4.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -6.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 3.75, FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 3.75, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 6.75, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, FINGERS_UUID);
             }
@@ -134,8 +142,10 @@ public class FingersOfLust {
         public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), FINGERS_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.WISDOM.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE.get(), FINGERS_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), FINGERS_UUID);
             }
@@ -150,9 +160,11 @@ public class FingersOfLust {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-6 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+6.75 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+3.75 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+3.75 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -167,8 +179,10 @@ public class FingersOfLust {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 7.0, FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 5.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -6.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 4.5, FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 6, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 12.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 0.075, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, FINGERS_UUID);
@@ -187,7 +201,9 @@ public class FingersOfLust {
         public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), FINGERS_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.WISDOM.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), FINGERS_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), FINGERS_UUID);
@@ -204,10 +220,12 @@ public class FingersOfLust {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+7 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-6 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+5 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+12 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+4.5 Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+7.5% Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+6 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -222,8 +240,10 @@ public class FingersOfLust {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 8.0, FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 6.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -6.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 6.0, FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 10, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 18.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 0.15, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, FINGERS_UUID);
@@ -243,7 +263,9 @@ public class FingersOfLust {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), FINGERS_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.WISDOM.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE.get(), FINGERS_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), FINGERS_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), FINGERS_UUID);
@@ -259,10 +281,12 @@ public class FingersOfLust {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+8 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-6 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+18 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+6 Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+15% Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+10 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }

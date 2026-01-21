@@ -65,6 +65,7 @@ public class StolenLegacies {
                 AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 15.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 6.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 6.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 4, STOLEN_LEGACIES_UUID);
             }
         }
 
@@ -83,6 +84,7 @@ public class StolenLegacies {
                 AttributeApplier.removeModifier(player, ModAttributes.XP_GAIN.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), STOLEN_LEGACIES_UUID);
             }
         }
 
@@ -96,6 +98,7 @@ public class StolenLegacies {
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+6 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+6 Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+4 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal("+15% XP Gain").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
@@ -114,6 +117,7 @@ public class StolenLegacies {
                 AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 20.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 10.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 10.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 7, STOLEN_LEGACIES_UUID);
             }
         }
 
@@ -132,6 +136,7 @@ public class StolenLegacies {
                 AttributeApplier.removeModifier(player, ModAttributes.XP_GAIN.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), STOLEN_LEGACIES_UUID);
             }
         }
 
@@ -145,6 +150,7 @@ public class StolenLegacies {
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+10 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+10 Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal("+20% XP Gain").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
@@ -164,6 +170,8 @@ public class StolenLegacies {
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 16.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 12.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.05, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 12.5, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), 0.0375, STOLEN_LEGACIES_UUID);
             }
         }
 
@@ -183,6 +191,8 @@ public class StolenLegacies {
                 AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
             }
         }
 
@@ -197,6 +207,8 @@ public class StolenLegacies {
             tooltip.add(Component.literal("+16 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+12 Precision").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+5% Precision").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+12.5 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+3.75% Restoration").withStyle(style -> style.withColor(0x3B8132)));
             tooltip.add(Component.literal("+25% XP Gain").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
@@ -216,6 +228,8 @@ public class StolenLegacies {
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 20.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 16.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.1, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 15, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), 0.075, STOLEN_LEGACIES_UUID);
             }
         }
 
@@ -235,6 +249,8 @@ public class StolenLegacies {
                 AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
             }
         }
 
@@ -249,6 +265,8 @@ public class StolenLegacies {
             tooltip.add(Component.literal("+20 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+16 Precision").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+10% Precision").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+15 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+7.5% Restoration").withStyle(style -> style.withColor(0x3B8132)));
             tooltip.add(Component.literal("+30% XP Gain").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));

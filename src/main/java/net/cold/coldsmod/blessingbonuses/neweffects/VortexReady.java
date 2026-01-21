@@ -119,7 +119,7 @@ public class VortexReady extends MobEffect {
             }
 
             if (vortex.ticks % 20 == 0) {
-                mob.hurt(source, 3.0f);
+                mob.hurt(source, 4.0f);
             }
         }
 

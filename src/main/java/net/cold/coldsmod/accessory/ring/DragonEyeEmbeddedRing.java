@@ -66,7 +66,8 @@ public class DragonEyeEmbeddedRing {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 4.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 12.0, DRAGON_EYE_UUID); // 7 Melee + 5 Projectile
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 7.0, DRAGON_EYE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 5.0, DRAGON_EYE_UUID);
             }
         }
 
@@ -83,7 +84,8 @@ public class DragonEyeEmbeddedRing {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_EYE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.POTENCY.get(), DRAGON_EYE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), DRAGON_EYE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), DRAGON_EYE_UUID);
             }
         }
 
@@ -116,7 +118,8 @@ public class DragonEyeEmbeddedRing {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 6.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 19.5, DRAGON_EYE_UUID); // 12 + 7.5
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 12.0, DRAGON_EYE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 7.5, DRAGON_EYE_UUID);
             }
         }
 
@@ -134,6 +137,8 @@ public class DragonEyeEmbeddedRing {
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_EYE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_EYE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.POTENCY.get(), DRAGON_EYE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), DRAGON_EYE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), DRAGON_EYE_UUID);
             }
         }
 
@@ -166,10 +171,11 @@ public class DragonEyeEmbeddedRing {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 8.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 25.0, DRAGON_EYE_UUID); // 16 + 9
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 4.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.POTENCY_MULTIPLIER.get(), 0.0625, DRAGON_EYE_UUID); // 0.04 + 0.0225
-            }
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 16, DRAGON_EYE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 9, DRAGON_EYE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.04, DRAGON_EYE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.025, DRAGON_EYE_UUID);            }
         }
 
         @Override
@@ -185,9 +191,11 @@ public class DragonEyeEmbeddedRing {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_EYE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.POTENCY.get(), DRAGON_EYE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), DRAGON_EYE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.POTENCY_MULTIPLIER.get(), DRAGON_EYE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), DRAGON_EYE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), DRAGON_EYE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), DRAGON_EYE_UUID);
             }
         }
 
@@ -224,11 +232,12 @@ public class DragonEyeEmbeddedRing {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 9.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 32.5, DRAGON_EYE_UUID); // 20 + 12.5
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 6.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.POTENCY_MULTIPLIER.get(), 0.125, DRAGON_EYE_UUID); // 0.08 + 0.045
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 20, DRAGON_EYE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 12.5, DRAGON_EYE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.08, DRAGON_EYE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.045, DRAGON_EYE_UUID);            }
             }
-        }
 
         @Override
         public boolean canEquip(SlotContext slotContext, ItemStack stack) {
@@ -243,9 +252,11 @@ public class DragonEyeEmbeddedRing {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_EYE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.POTENCY.get(), DRAGON_EYE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), DRAGON_EYE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.POTENCY_MULTIPLIER.get(), DRAGON_EYE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), DRAGON_EYE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), DRAGON_EYE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), DRAGON_EYE_UUID);
             }
         }
 

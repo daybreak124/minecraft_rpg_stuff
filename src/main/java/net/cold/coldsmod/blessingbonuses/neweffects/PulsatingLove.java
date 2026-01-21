@@ -55,9 +55,8 @@ public class PulsatingLove {
         );
 
         for (TamableAnimal animal : animals) {
-
-            animal.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, EFFECT_DURATION, 4,true, true));
-            animal.addEffect(new MobEffectInstance(MobEffects.REGENERATION, EFFECT_DURATION, 5, true, true));
+            animal.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, EFFECT_DURATION, 1,true, true));
+            animal.addEffect(new MobEffectInstance(MobEffects.REGENERATION, EFFECT_DURATION, 1, true, true));
         }
     }
 

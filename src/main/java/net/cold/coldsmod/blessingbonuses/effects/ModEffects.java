@@ -5,8 +5,11 @@ import net.cold.coldsmod.blessingbonuses.skills.BastionActive;
 import net.cold.coldsmod.blessingbonuses.skills.BronzewoodCooldown;
 import net.cold.coldsmod.blessingbonuses.skills.RetaliateActive;
 import net.cold.coldsmod.stat.ItemModifier;
+import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
@@ -180,7 +183,8 @@ public class ModEffects {
             EFFECTS.register("overconfidence_active", OverconfidenceActive::new);
 
     public static final RegistryObject<MobEffect> ENTWINED_OFFERING_ACTIVE =
-            EFFECTS.register("entwined_offering_active", EntwinedOfferingActive::new);
+            EFFECTS.register("entwined_offering_active", () -> new EntwinedOfferingActive()
+                    .addAttributeModifier(Attributes.ARMOR, "f3e2b6c0-1934-5678-9abc-000600770084", 8.0, AttributeModifier.Operation.ADDITION));
 
     public static final RegistryObject<MobEffect> NIMBLE_GETAWAY_COOLDOWN =
             EFFECTS.register("nimble_getaway_cd", NimbleGetawayCD::new);
@@ -188,8 +192,9 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> NIMBLE_GETAWAY_ACTIVE =
             EFFECTS.register("nimble_getaway_active", NimbleGetawayActive::new);
 
-    public static final RegistryObject<MobEffect> BlACKENED_HEART =
-            EFFECTS.register("blackened_heart", BlackenedHeart::new);
+    public static final RegistryObject<MobEffect> BLACKENED_HEART =
+            EFFECTS.register("blackened_heart", () -> new BlackenedHeart()
+                    .addAttributeModifier(ModAttributes.REJUVENATION.get(), "f3e2b5c0-1138-5123-a223-024233360446", -2000.0, AttributeModifier.Operation.ADDITION));
 
     public static final RegistryObject<MobEffect> COMBATANTS_AID_CD =
             EFFECTS.register("combatants_aid_cd", CombatantsAidCD::new);

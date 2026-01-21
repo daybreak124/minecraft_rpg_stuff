@@ -16,7 +16,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
 
-import static net.cold.coldsmod.blessingbonuses.neweffects.CombatantsAidReady.isAlly;
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.isAlly;
 import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleRing;
 import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
 
@@ -76,16 +76,14 @@ public class Sanctuary {
         List<LivingEntity> allies = level.getEntitiesOfClass(
                 LivingEntity.class,
                 area,
-                e -> isAlly(source, e) && e != source
+                e -> isAlly(e)
         );
 
-        EffectUtils.playHealSound(source);
-        applyDivinityHealing(source, source);
-        EffectUtils.spawnComposterBurst(source);
 
         for (LivingEntity ally : allies) {
             applyDivinityHealing(source, ally);
-            EffectUtils.spawnComposterBurst((Player) allies);
+            EffectUtils.spawnComposterBurst(ally);
+            EffectUtils.playHealSound(ally);
         }
     }
 

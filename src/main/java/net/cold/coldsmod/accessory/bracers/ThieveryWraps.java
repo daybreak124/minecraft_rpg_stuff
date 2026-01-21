@@ -250,7 +250,7 @@ public class ThieveryWraps {
             tooltip.add(Component.literal("+15% Melee Potency").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal("-15% Haste").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
-            tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GRAY));
+            tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
         }
     }
 

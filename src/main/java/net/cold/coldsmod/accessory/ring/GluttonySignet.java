@@ -74,6 +74,8 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 1.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 0.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 2.0, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 2.0, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), -2.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 2, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 2.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 1.0, GLUTTONY_UUID);
@@ -108,6 +110,8 @@ public class GluttonySignet {
                 AttributeApplier.removeModifier(player, ModAttributes.CON.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.WISDOM.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.REJUVENATION.get(), GLUTTONY_UUID);
             }
         }
 
@@ -126,6 +130,8 @@ public class GluttonySignet {
             tooltip.add(Component.literal("+2 Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+2 Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+2 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("-2 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+2 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal("-15% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
@@ -152,6 +158,8 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 2.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 2.5, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 2.5, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), -2.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 2.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 2.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 2.0, GLUTTONY_UUID);
@@ -185,6 +193,8 @@ public class GluttonySignet {
                 AttributeApplier.removeModifier(player, ModAttributes.CON.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.WISDOM.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.REJUVENATION.get(), GLUTTONY_UUID);
             }
         }
 
@@ -201,8 +211,10 @@ public class GluttonySignet {
             tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("-20% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+2.5 Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+2.5% Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+2.5 Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+2.5 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("-2.5 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+2.5 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal("-15% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
@@ -238,6 +250,10 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 3, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY_MULTIPLIER.get(), 0.03, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), 0.03, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 3.25, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), -3.25, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION_MULTIPLIER.get(), 0.03, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), -0.03, GLUTTONY_UUID);
             }
         }
 
@@ -271,6 +287,11 @@ public class GluttonySignet {
                 AttributeApplier.removeModifier(player, ModAttributes.POTENCY_MULTIPLIER.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.REJUVENATION.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.REJUVENATION_MULTIPLIER.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), GLUTTONY_UUID);
+
             }
         }
 
@@ -300,6 +321,13 @@ public class GluttonySignet {
             tooltip.add(Component.literal("+3% Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
             tooltip.add(Component.literal("+3% Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
             tooltip.add(Component.literal("+3% Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+
+            tooltip.add(Component.literal("-3.25 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+3.25 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+
+            tooltip.add(Component.literal("-3% Restoration").withStyle(style -> style.withColor(0x3B8132)));
+            tooltip.add(Component.literal("+3% Rejuvenation").withStyle(style -> style.withColor(0x3B8132)));
+
 
             tooltip.add(Component.literal("-15% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
 
@@ -335,6 +363,10 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 6, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY_MULTIPLIER.get(), 0.06, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), 0.06, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 4, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), -4, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION_MULTIPLIER.get(), 0.04, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), -0.04, GLUTTONY_UUID);
             }
         }
 
@@ -368,6 +400,10 @@ public class GluttonySignet {
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.POTENCY_MULTIPLIER.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.REJUVENATION.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.REJUVENATION_MULTIPLIER.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), GLUTTONY_UUID);
             }
         }
 
@@ -395,6 +431,12 @@ public class GluttonySignet {
             tooltip.add(Component.literal("+6% Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
             tooltip.add(Component.literal("+6% Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
             tooltip.add(Component.literal("+6% Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+
+            tooltip.add(Component.literal("-4 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+4 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+
+            tooltip.add(Component.literal("-4% Restoration").withStyle(style -> style.withColor(0x3B8132)));
+            tooltip.add(Component.literal("+4% Rejuvenation").withStyle(style -> style.withColor(0x3B8132)));
 
             tooltip.add(Component.literal("-15% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
 

@@ -41,7 +41,6 @@ public class CooldownCycle {
     private static final HashMap<MobEffect, BiConsumer<Player, MobEffectInstance>> EXPIRE_HANDLERS = new HashMap<>();
     private static final HashMap<MobEffect, BiConsumer<Player, MobEffectInstance>> APPLY_HANDLERS = new HashMap<>();
     private static final String HEALED_NBT = "reckoningHealed";
-    private static final UUID OFFERING_ARMOR_UUID = UUID.fromString("f3e2b6c0-1934-5678-9abc-000000000084");
     private static final UUID FRENZY_ATTACK_DAMAGE_UUID = UUID.fromString("f3e2b3c0-1728-5123-ab33-000008060446");
     public static final UUID FRAY_SPEED_UUID = UUID.fromString("f3e2b6c0-1234-5178-9abc-000032602016");
     private static final UUID QUANTUM_SPEED_UUID = UUID.fromString("f3e2b6c0-1734-5678-9abc-002032502016");
@@ -49,7 +48,6 @@ public class CooldownCycle {
     public static final UUID HAWKEYE_UUID = UUID.fromString("d5553476-1234-5254-5454-113215411111");
     private static final UUID OVERCONFIDENCE_UUID = UUID.fromString("f3e2b6c0-1934-5338-9abc-002222000084");
     private static final UUID SANCTUARY_UUID = UUID.fromString("f3e2b3c0-1738-5123-ab23-024031060446");
-    private static final UUID NO_HEAL_UUID = UUID.fromString("f3e2b3c0-1138-5123-a223-024033360446");
     private static final UUID EXPLOITED_UUID = UUID.fromString("f3e113c0-1138-5123-2223-024035550446");
 
 
@@ -295,11 +293,6 @@ public class CooldownCycle {
             player.addEffect(new MobEffectInstance(ModEffects.COMBATANTS_AID_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
         });
 
-
-        EXPIRE_HANDLERS.put(ModEffects.ENTWINED_OFFERING_ACTIVE.get(), (player, inst) -> {
-            removeModifier(player, Attributes.ARMOR, OFFERING_ARMOR_UUID);
-        });
-
         EXPIRE_HANDLERS.put(ModEffects.OVERCONFIDENCE_COOLDOWN.get(), (player, inst) -> {
             player.addEffect(new MobEffectInstance(ModEffects.OVERCONFIDENCE_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
         });
@@ -317,10 +310,6 @@ public class CooldownCycle {
             player.removeEffect(ModEffects.RADIATING_WARMTH.get());
             player.getPersistentData().putBoolean("refresh_rw", true);
             RadiatingWarmthTimer.radiate(player);
-        });
-
-        APPLY_HANDLERS.put(ModEffects.ENTWINED_OFFERING_ACTIVE.get(), (player, effect) -> {
-            applyModifier(player, Attributes.ARMOR, 8.0, OFFERING_ARMOR_UUID);
         });
 
         EXPIRE_HANDLERS.put(ModEffects.VORTEX_CD.get(), (player, inst) -> {
@@ -475,15 +464,6 @@ public class CooldownCycle {
         APPLY_HANDLERS_MOB.put(ModEffects.INTIMIDATED.get(), (victim, effect) -> {
             double stacks = (double) (effect.getAmplifier() + 1) / 100;
             applyModifier(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), stacks, INTIMIDATED_UUID);
-        });
-
-        EXPIRE_HANDLERS.put(ModEffects.BlACKENED_HEART.get(), (victim, instance) ->
-        {
-            removeModifier(victim, ModAttributes.INCOMING_HEALING_MULTIPLIER.get(), NO_HEAL_UUID);
-        });
-
-        APPLY_HANDLERS.put(ModEffects.BlACKENED_HEART.get(), (victim, effect) -> {
-            applyModifier(victim, ModAttributes.INCOMING_HEALING_MULTIPLIER.get(), -1, NO_HEAL_UUID);
         });
 
         EXPIRE_HANDLERS_MOB.put(ModEffects.EXPLOIT_WEAKNESS_DEBUFF.get(), (victim, instance) ->

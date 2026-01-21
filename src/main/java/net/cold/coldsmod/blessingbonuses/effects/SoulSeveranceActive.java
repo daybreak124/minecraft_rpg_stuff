@@ -76,7 +76,7 @@ public class SoulSeveranceActive extends MobEffect {
                             1.0F
                     );
                     mob.hurtMarked = true;
-                    mob.hurt(source, 3.0f);
+                    mob.hurt(source, 4.0f);
                 }
             }
 

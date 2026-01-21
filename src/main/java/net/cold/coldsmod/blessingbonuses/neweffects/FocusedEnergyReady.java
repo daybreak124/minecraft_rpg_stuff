@@ -78,6 +78,6 @@ public class FocusedEnergyReady extends MobEffect {
         }
 
         player.removeEffect(ModEffects.FOCUSED_ENERGY_READY.get());
-        player.addEffect(new MobEffectInstance(ModEffects.FOCUSED_ENERGY_CD.get(), 20*10, 0, false, false, true));
+        player.addEffect(new MobEffectInstance(ModEffects.FOCUSED_ENERGY_CD.get(), 20*6, 0, false, false, true));
     }
 }

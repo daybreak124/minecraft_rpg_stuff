@@ -68,8 +68,8 @@ public class StatUtils {
         statsTag.putDouble("meleeDamageMultiplier", stats.getMeleeDamageMultiplier());
         statsTag.putDouble("restoration", stats.getRestoration());
         statsTag.putDouble("restorationMultiplier", stats.getRestorationMultiplier());
-        statsTag.putDouble("protection", stats.getProtection());
-        statsTag.putDouble("protectionMultiplier", stats.getProtectionMultiplier());
+        statsTag.putDouble("rejuvenation", stats.getRejuvenation());
+        statsTag.putDouble("rejuvenationMultiplier", stats.getRejuvenationMultiplier());
         statsTag.putDouble("amplification", stats.getAmplification());
         statsTag.putDouble("amplificationMultiplier", stats.getAmplificationMultiplier());
 
@@ -133,8 +133,8 @@ public class StatUtils {
             stats.setProjectileDamageMultiplier(tag.getDouble("projectileDamageMultiplier"));
             stats.setDrawSpeedMultiplier(tag.getDouble("drawSpeedMultiplier"));
             stats.setMeleeDamage(tag.getDouble("meleeDamage"));
-            stats.setProtection(tag.getDouble("protection"));
-            stats.setProtectionMultiplier(tag.getDouble("protectionMultiplier"));
+            stats.setRejuvenation(tag.getDouble("rejuvenation"));
+            stats.setRejuvenationMultiplier(tag.getDouble("rejuvenationMultiplier"));
             stats.setRestoration(tag.getDouble("restoration"));
             stats.setRestorationMultiplier(tag.getDouble("restorationMultiplier"));
             stats.setAmplification(tag.getDouble("amplification"));
@@ -374,7 +374,7 @@ public class StatUtils {
         Object[][] healingStats = new Object[][]{
                 {"Restoration", stats.getRestoration(), false},
                 {"Amplification", stats.getAmplification(), false},
-                {"Protection", stats.getProtection(), false}
+                {"Rejuvenation", stats.getRejuvenation(), false}
         };
 
         for (Object[] pair : healingStats) {
@@ -395,7 +395,7 @@ public class StatUtils {
         Object[][] healingMultipliers = new Object[][]{
                 {"Restoration", stats.getRestorationMultiplier()},
                 {"Amplification", stats.getAmplificationMultiplier()},
-                {"Protection", stats.getProtectionMultiplier()}
+                {"Rejuvenation", stats.getRejuvenationMultiplier()}
         };
 
         for (Object[] pair : healingMultipliers) {

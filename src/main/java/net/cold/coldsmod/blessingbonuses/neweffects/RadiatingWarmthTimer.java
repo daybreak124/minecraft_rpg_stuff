@@ -6,12 +6,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
 
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.isAlly;
 import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleRing;
 import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
 
@@ -43,18 +43,18 @@ public class RadiatingWarmthTimer extends MobEffect {
         List<LivingEntity> entities = level.getEntitiesOfClass(
                 LivingEntity.class,
                 player.getBoundingBox().inflate(8),
-                e -> (e instanceof Player || e instanceof TamableAnimal tamable && tamable.isTame())
+                e -> isAlly(e)
         );
 
-        player.heal((float) (1.25 * (1.0 + (healIncrease / 100.0))));
+        // player.heal((float) (1.25 * (1.0 + (healIncrease / 100.0))));
 
-        EffectUtils.spawnComposterBurst(player);
+        // EffectUtils.spawnComposterBurst(player);
 
         for (LivingEntity target : entities) {
 
             target.heal((float) (1.25 * (1.0 + (healIncrease / 100.0))));
             EffectUtils.playHealSound(target);
-            EffectUtils.spawnComposterBurst((Player) target);
+            EffectUtils.spawnComposterBurst(target);
         }
     }
 }

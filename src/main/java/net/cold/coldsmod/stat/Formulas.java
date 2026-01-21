@@ -19,7 +19,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -306,8 +305,8 @@ public class Formulas {
         if (!(event.getEntity() instanceof Player player)) return;
         if (player.level().isClientSide) return;
 
-        double incHeal = player.getAttributeValue(ModAttributes.INCOMING_HEALING_MULTIPLIER.get());
-        event.setAmount((float) (event.getAmount() * incHeal));
+        double incHeal = getScaledValue(player, ModAttributes.REJUVENATION.get(), ModAttributes.REJUVENATION_MULTIPLIER.get());
+        event.setAmount((float) (event.getAmount() * (1 + incHeal/100)));
         // System.out.println(event.getAmount());
     }
 
@@ -350,7 +349,7 @@ public class Formulas {
             double baseJumpHeight = 1.252;
             double gravity = 0.08;
 
-            double newHeight = baseJumpHeight * (1.0 + (jumpBonus / 100.0));
+            double newHeight = baseJumpHeight * jumpBonus;
 
             double requiredMotionY = Math.sqrt(2 * gravity * newHeight);
 

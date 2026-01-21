@@ -34,7 +34,7 @@ public class OverconfidenceActive extends MobEffect {
         if (player instanceof ServerPlayer serverPlayer) {serverPlayer.playNotifySound(SoundEvents.ARMOR_EQUIP_CHAIN, SoundSource.PLAYERS, 4F, 1.0F);}
 
         player.removeEffect(ModEffects.OVERCONFIDENCE_READY.get());
-        player.addEffect(new MobEffectInstance(ModEffects.BlACKENED_HEART.get(), 20 * 22, 0, false, false, true));
+        player.addEffect(new MobEffectInstance(ModEffects.BLACKENED_HEART.get(), 20 * 15, 0, false, false, true));
         player.addEffect(new MobEffectInstance(ModEffects.OVERCONFIDENCE_ACTIVE.get(), 20 * 8, 0, false, false, true));
     }
 }
