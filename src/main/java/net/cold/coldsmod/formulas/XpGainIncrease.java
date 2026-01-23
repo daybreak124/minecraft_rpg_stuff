@@ -11,12 +11,15 @@ public class XpGainIncrease {
 
     @SubscribeEvent
     public static void onXpGain(PlayerXpEvent.XpChange event) {
+        if (event.getEntity().level().isClientSide()) return;
         Player player = event.getEntity();
-        int baseXp = event.getAmount();
 
         double xpMultiplier = player.getAttributeValue(ModAttributes.XP_GAIN.get());
+        if (xpMultiplier == 0) return;
 
-        int finalXp = (int) Math.round(baseXp * (1.0 + (xpMultiplier / 100.0)));
+        int baseXp = event.getAmount();
+
+        int finalXp = (int) Math.round(baseXp * ((xpMultiplier)));
         event.setAmount(finalXp);
     }
 }

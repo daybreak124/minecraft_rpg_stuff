@@ -9,8 +9,10 @@ import net.cold.coldsmod.damage.ModDamageTypes;
 import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -21,6 +23,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
@@ -32,6 +35,7 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.*;
 import static net.cold.coldsmod.stat.AttributeApplier.applyModifier;
 import static net.cold.coldsmod.stat.AttributeApplier.removeModifier;
 
@@ -123,14 +127,26 @@ public class CooldownCycle {
 
             DamageSource source = new CustomMeleeDamage(explosionType, player);
 
-            level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(5.0),
-                    e -> e != player && e.isAlive() && !e.isInvulnerable()
+            double radiusSq = 25.0;
+            level.getEntitiesOfClass(
+                    LivingEntity.class,
+                    player.getBoundingBox().inflate(5.0),
+                    e -> {
+                        if (!(e instanceof Enemy) || e.isInvulnerable() || !player.hasLineOfSight(e)) return false;
+                        double dx = e.getX() - player.getX();
+                        double dz = e.getZ() - player.getZ();
+                        return (dx * dx + dz * dz) <= radiusSq;
+                    }
             ).forEach(target -> target.hurt(source, (float) damage));
 
             level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.RETALIATE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
 
             data.putInt("retaliateHits", 0);
             EffectUtils.spawnExplosionEffect(player);
+
+            if (level instanceof ServerLevel serverLevel) {
+                spawnParticleRing(serverLevel, player, ParticleTypes.POOF, 5.0, 100);
+            }
 
             player.addEffect(new MobEffectInstance(ModEffects.RETALIATE_COOLDOWN.get(), 20 * 11, 0, false, false, true));
         });
@@ -149,6 +165,7 @@ public class CooldownCycle {
         EXPIRE_HANDLERS.put(ModEffects.BERSERK.get(), (player, inst) -> {
             if (!player.hasEffect(ModEffects.BERSERK_READY.get())) {
                 player.getPersistentData().putInt("berserk", 0);
+                spawnParticleBurst(player, ParticleTypes.SOUL_FIRE_FLAME);
             }
         });
 
@@ -338,7 +355,10 @@ public class CooldownCycle {
                             1.3F,
                             1.0F
                     );
-                }            }
+                }
+                EffectUtils.spawnParticleBurst(player, ParticleTypes.FALLING_HONEY);
+
+            }
 
             double dex = player.getAttributeValue(ModAttributes.DEX.get());
             double perc = player.getAttributeValue(ModAttributes.PERC.get());
@@ -391,14 +411,15 @@ public class CooldownCycle {
 
         APPLY_HANDLERS.put(ModEffects.ADRENALINE_INJECTION_UP.get(), (player, effect) -> {
             new AttributeApplier().addCrossbowTag(player);
+            spawnParticleBurstHigh(player, ParticleTypes.ELECTRIC_SPARK);
         });
 
         APPLY_HANDLERS.put(ModEffects.QUANTUM_LEAP_ACTIVE.get(), (player, effect) -> {
             double speedBonus = 0.02;
-            double damageBonus = 15;
+            double damageBonus = 30;
             if (player.hasEffect(ModEffects.ENHANCED_QUANTUM_LEAP.get())) {
                 speedBonus += 0.01;
-                damageBonus += 7.5;
+                damageBonus += 15;
             }
             applyModifier(player, ModAttributes.POTENCY.get(), damageBonus, QUANTUM_DAMAGE_UUID);
             applyModifier(player, ModAttributes.MELEE_POTENCY.get(), damageBonus, QUANTUM_DAMAGE_UUID);
@@ -426,6 +447,7 @@ public class CooldownCycle {
             DamageSource reckoning = new DamageSource(reckoningType, (Entity) null);
 
             player.hurt(reckoning, (float) damageBack);
+            EffectUtils.spawnParticleBurst(player, ParticleTypes.DAMAGE_INDICATOR);
 
             if (player instanceof ServerPlayer serverPlayer) {
                 serverPlayer.playNotifySound(

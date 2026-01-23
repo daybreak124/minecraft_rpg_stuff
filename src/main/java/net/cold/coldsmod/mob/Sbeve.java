@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
 import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -27,8 +28,8 @@ public class Sbeve extends TamableAnimal {
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 40.0)
-                .add(Attributes.ATTACK_DAMAGE, 2.5)
-                .add(Attributes.MOVEMENT_SPEED, 0.30)
+                .add(Attributes.ATTACK_DAMAGE, 1.5)
+                .add(Attributes.MOVEMENT_SPEED, 0.4)
                 .add(Attributes.FOLLOW_RANGE, 32.0);
     }
 
@@ -40,11 +41,9 @@ public class Sbeve extends TamableAnimal {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.5, true));
+        this.goalSelector.addGoal(2, new SbeveAttackGoal(this, 1.1, true));
 
-        this.goalSelector.addGoal(3,
-                new FollowOwnerGoal(this, 1.1, 5f, 2f, true)
-        );
+        this.goalSelector.addGoal(3, new FollowOwnerGoal(this, 1.0, 5f, 2f, true));
 
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
@@ -53,8 +52,10 @@ public class Sbeve extends TamableAnimal {
                 new NearestAttackableTargetGoal<>(
                         this,
                         Monster.class,
+                        20,
                         true,
-                        e -> !(e instanceof Player || e instanceof TamableAnimal t && t.isTame())
+                        false,
+                        e -> e instanceof Enemy && this.distanceToSqr(e) <= 100.0
                 )
         );
     }
@@ -62,7 +63,7 @@ public class Sbeve extends TamableAnimal {
     @Override
     public double getMeleeAttackRangeSqr(LivingEntity target) {
         // default: (this.getBbWidth() * 2.0F * this.getBbWidth() * 2.0F + target.getBbWidth())
-        float extraReach = 1.0F;
+        float extraReach = 1.5F;
         return this.getBbWidth() * 2.0F * this.getBbWidth() * 2.0F + target.getBbWidth() + extraReach;
     }
 
@@ -87,11 +88,10 @@ public class Sbeve extends TamableAnimal {
 
         if (living instanceof Creeper creeper) {
             applyGigaKnockback(creeper);
+            creeper.setSwellDir(-1);
         }
 
-        this.playSound(SoundEvents.BEEHIVE_DRIP, 1.5F, 1F);
-
-
+        target.playSound(SoundEvents.BEEHIVE_DRIP, 15F, 1F);
         return living.hurt(damageSources().mobAttack(this), finalDamage);
     }
 
@@ -116,12 +116,16 @@ public class Sbeve extends TamableAnimal {
 
 
     public void applyOwnerScaling(Player owner) {
-        double guardianHp = owner.getMaxHealth() * 3;
+        double guardianHp = owner.getMaxHealth() * 2;
 
-        this.getAttribute(Attributes.MAX_HEALTH)
-                .setBaseValue(guardianHp);
-
+        this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(guardianHp);
         this.setHealth((float) guardianHp);
+
+        double playerArmor = owner.getAttributeValue(Attributes.ARMOR);
+        this.getAttribute(Attributes.ARMOR).setBaseValue(playerArmor);
+
+        double playerToughness = owner.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
+        this.getAttribute(Attributes.ARMOR_TOUGHNESS).setBaseValue(playerToughness);
     }
 
     private static final double TP_DISTANCE_SQR = 30 * 30;
@@ -129,15 +133,10 @@ public class Sbeve extends TamableAnimal {
     private void applyGigaKnockback(LivingEntity target) {
         Vec3 dir = target.position().subtract(this.position()).normalize();
 
-        double horizontal = 2.5;
+        double horizontal = 15;
         double vertical = 0.6;
 
-        target.push(
-                dir.x * horizontal,
-                vertical,
-                dir.z * horizontal
-        );
-
+        target.push(dir.x * horizontal, vertical, dir.z * horizontal);
         target.hurtMarked = true;
     }
 
@@ -174,11 +173,66 @@ public class Sbeve extends TamableAnimal {
 
     @Override
     public float getScale() {
-        return 0.55f;
+        return 1f;
     }
 
     @Override
     public EntityDimensions getDimensions(Pose pose) {
         return super.getDimensions(pose).scale(0.55f);
+    }
+
+    private static class SbeveAttackGoal extends MeleeAttackGoal {
+        private int customCooldown = 0;
+        private final Sbeve sbeve;
+
+        public SbeveAttackGoal(Sbeve mob, double speed, boolean followingTargetEvenIfNotSeen) {
+            super(mob, speed, followingTargetEvenIfNotSeen);
+            this.sbeve = mob;
+        }
+
+        @Override
+        public void tick() {
+            super.tick();
+
+            LivingEntity target = this.mob.getTarget();
+            if (target != null) {
+                this.mob.getLookControl().setLookAt(target, 30.0F, 30.0F);
+
+                double distSq = this.mob.distanceToSqr(target.getX(), target.getY(), target.getZ());
+
+                if (this.customCooldown > 0) {
+                    this.customCooldown--;
+                }
+                this.checkAndPerformCustomAttack(target, distSq);
+            }
+        }
+
+        @Override
+        protected double getAttackReachSqr(LivingEntity attackTarget) {
+            return this.sbeve.getMeleeAttackRangeSqr(attackTarget);
+        }
+
+        protected void checkAndPerformCustomAttack(LivingEntity enemy, double distToEnemySqr) {
+            double reach = this.getAttackReachSqr(enemy);
+
+            if (distToEnemySqr <= reach && this.customCooldown <= 0) {
+                if (this.sbeve.getOwner() instanceof Player owner) {
+
+                    double scaledHaste = getScaledValue(owner,
+                            ModAttributes.HASTE.get(),
+                            ModAttributes.HASTE_MULTIPLIER.get());
+
+                    double cooldownBase = 30.0;
+                    double divisor = 1.0 + (scaledHaste / 100.0);
+
+                    this.customCooldown = (int) Math.max(4, cooldownBase / divisor);
+                } else {
+                    this.customCooldown = 40;
+                }
+
+                this.mob.swing(net.minecraft.world.InteractionHand.MAIN_HAND);
+                this.mob.doHurtTarget(enemy);
+            }
+        }
     }
 }

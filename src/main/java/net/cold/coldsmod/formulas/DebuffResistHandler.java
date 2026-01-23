@@ -1,145 +1,102 @@
 package net.cold.coldsmod.formulas;
 
 import net.cold.coldsmod.stat.ModAttributes;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-// I dont even know
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class DebuffResistHandler {
 
-    private static final String SEP = ":";
+    // Use MobEffect directly as key to avoid String overhead
+    private static final ConcurrentHashMap<UUID, Map<MobEffect, ReducedInfo>> REDUCED = new ConcurrentHashMap<>();
 
-    // per-player map: player UUID -> (effectKey -> ReducedInfo)
-    private static final ConcurrentHashMap<UUID, ConcurrentHashMap<String, ReducedInfo>> REDUCED = new ConcurrentHashMap<>();
-
-    // small holder for what we reduced to and when
     private static class ReducedInfo {
-        int remainingAfterReduction; // ticks remaining we set when we reduced
-        long tickWhenReduced;        // world game time when we reduced
+        int lastDuration;
+        int amplifier;
 
-        ReducedInfo(int remainingAfterReduction, long tickWhenReduced) {
-            this.remainingAfterReduction = remainingAfterReduction;
-            this.tickWhenReduced = tickWhenReduced;
+        ReducedInfo(int lastDuration, int amplifier) {
+            this.lastDuration = lastDuration;
+            this.amplifier = amplifier;
         }
     }
 
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (event.player.level().isClientSide()) return;
+        // High-level gates (Keep these exactly as you had them)
+        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide()) return;
 
         Player player = event.player;
-        Level world = player.getCommandSenderWorld();
+        double resist = player.getAttributeValue(ModAttributes.DEBUFF_RESIST.get());
 
-        double debuffResist = Math.min(player.getAttributeValue(ModAttributes.DEBUFF_RESIST.get()), 100);
-        if (debuffResist <= 0) {
-            REDUCED.remove(player.getUUID()); // cleanup if player has no resist
+        // 1. Exit early if no resist is present
+        if (resist <= 0) {
+            if (!REDUCED.isEmpty()) REDUCED.remove(player.getUUID());
             return;
         }
 
         UUID pu = player.getUUID();
-        ConcurrentHashMap<String, ReducedInfo> playerMap = REDUCED.computeIfAbsent(pu, k -> new ConcurrentHashMap<>());
+        Map<MobEffect, ReducedInfo> playerMap = REDUCED.computeIfAbsent(pu, k -> new HashMap<>());
+        Collection<MobEffectInstance> activeEffects = player.getActiveEffects();
 
-        // collect currently-present keys for cleanup
-        Set<String> currentKeys = new HashSet<>();
+        // 2. Identify effects to modify (To avoid ConcurrentModificationException)
+        List<MobEffectInstance> toReduce = new ArrayList<>();
 
-        // iterate over a copy (safe when we remove/add effects below)
-        for (MobEffectInstance inst : new ArrayList<>(player.getActiveEffects())) {
-            MobEffectCategory category = inst.getEffect().getCategory();
-            if (category == MobEffectCategory.BENEFICIAL || category == MobEffectCategory.NEUTRAL) continue;
+        for (MobEffectInstance inst : activeEffects) {
+            MobEffect effect = inst.getEffect();
 
+            // Fast Category Check
+            if (effect.getCategory() != MobEffectCategory.HARMFUL) continue;
 
-            ResourceLocation id = ForgeRegistries.MOB_EFFECTS.getKey(inst.getEffect());
-            if (id == null) continue;
-            String key = id.toString() + SEP + inst.getAmplifier();
-            currentKeys.add(key);
+            int currentDur = inst.getDuration();
+            int currentAmp = inst.getAmplifier();
+            ReducedInfo prev = playerMap.get(effect);
 
-            int currentDuration = inst.getDuration();
-
-            ReducedInfo prev = playerMap.get(key);
-
-            // compute desired one-time reduced duration
-            int reduced = (int) Math.max(1, Math.round(currentDuration * (1.0 - debuffResist / 100.0)));
-
-            if (prev != null) {
-                // If currentDuration <= prev.remainingAfterReduction => same instance we already handled
-                if (currentDuration <= prev.remainingAfterReduction) {
-                    continue; // same instance, skip
-                }
-
-                // Otherwise currentDuration > prev.remainingAfterReduction -> likely a fresh reapplication
-                // Extra check: if tick advanced since prev reduction, it's probably a new application too.
-                long now = world.getGameTime();
-                boolean isNewApplication = currentDuration > prev.remainingAfterReduction
-                        || (now - prev.tickWhenReduced) > 1L;
-
-                if (!isNewApplication) {
-                    continue;
-                }
-
-                // If reduced would not actually shorten, just update stored info and skip
-                if (reduced >= currentDuration) {
-                    playerMap.put(key, new ReducedInfo(currentDuration, world.getGameTime()));
-                    continue;
-                }
-
-                // Mark BEFORE reapply so we don't process the new instance in the same tick
-                playerMap.put(key, new ReducedInfo(reduced, world.getGameTime()));
-
-                // Reapply shortened effect (we are on server thread in PlayerTickEvent)
-                player.removeEffect(inst.getEffect());
-                player.addEffect(new MobEffectInstance(
-                        inst.getEffect(),
-                        reduced,
-                        inst.getAmplifier(),
-                        inst.isAmbient(),
-                        inst.isVisible(),
-                        inst.showIcon()
-                ));
+            // Logic: Reduce if it's a new effect OR the duration increased (re-applied) OR amplifier changed
+            if (prev == null || currentDur > prev.lastDuration || currentAmp != prev.amplifier) {
+                toReduce.add(inst);
             } else {
-                // first time seeing this effect for this player (no previous reduced info)
-                if (reduced >= currentDuration) {
-                    // nothing to shorten — do not mark so future reapplication can be reduced
-                    continue;
+                // Just update the duration to track the countdown
+                prev.lastDuration = currentDur;
+            }
+        }
+
+        // 3. Apply Reductions
+        if (!toReduce.isEmpty()) {
+            double multiplier = 1.0 - (Math.min(resist, 100) / 100.0);
+
+            for (MobEffectInstance inst : toReduce) {
+                MobEffect effect = inst.getEffect();
+                int reducedDur = (int) Math.max(1, Math.round(inst.getDuration() * multiplier));
+
+                // Only re-apply if the reduction is significant
+                if (reducedDur < inst.getDuration()) {
+                    playerMap.put(effect, new ReducedInfo(reducedDur, inst.getAmplifier()));
+
+                    // Note: removeEffect and addEffect trigger internal updates, so we do this last
+                    player.removeEffect(effect);
+                    player.addEffect(new MobEffectInstance(
+                            effect, reducedDur, inst.getAmplifier(),
+                            inst.isAmbient(), inst.isVisible(), inst.showIcon()
+                    ));
+                } else {
+                    playerMap.put(effect, new ReducedInfo(inst.getDuration(), inst.getAmplifier()));
                 }
-
-                // mark and reapply
-                playerMap.put(key, new ReducedInfo(reduced, world.getGameTime()));
-                player.removeEffect(inst.getEffect());
-                player.addEffect(new MobEffectInstance(
-                        inst.getEffect(),
-                        reduced,
-                        inst.getAmplifier(),
-                        inst.isAmbient(),
-                        inst.isVisible(),
-                        inst.showIcon()
-                ));
             }
         }
 
-        // cleanup: remove entries for effects no longer present
-        Iterator<Map.Entry<String, ReducedInfo>> it = playerMap.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, ReducedInfo> e = it.next();
-            if (!currentKeys.contains(e.getKey())) {
-                it.remove();
-            }
+        // 4. Efficient Cleanup
+        if (playerMap.size() > activeEffects.size()) {
+            playerMap.keySet().removeIf(effect -> !player.hasEffect(effect));
         }
-
-        // final cleanup: remove player map if empty
-        if (playerMap.isEmpty()) REDUCED.remove(pu);
     }
 }

@@ -16,11 +16,12 @@ public class PickaxeTorch {
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         Player player = event.getEntity();
         Level world = event.getLevel();
+        if (event.getLevel().isClientSide()) return;
+        if (event.getEntity().level().isClientSide()) return;
         ItemStack stack = event.getItemStack();
 
-        if (world.isClientSide) return;
-
         if (!player.getPersistentData().getBoolean("lightbringer_applied")) return;
+        if (player.getHealth() <= 3f) return;
 
         ItemStack main = player.getMainHandItem();
 
@@ -29,8 +30,6 @@ public class PickaxeTorch {
                 "shield".equals(ItemRarityUtils.getItemType(off));
 
         if ((!(stack.getItem() instanceof PickaxeItem)) || isShield) return;
-
-        if (player.getHealth() <= 3f) return;
 
         var pos = event.getPos().relative(event.getFace());
         if (world.getBlockState(pos).canBeReplaced()) {

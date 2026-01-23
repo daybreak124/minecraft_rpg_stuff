@@ -207,7 +207,7 @@ public class UtilityAccessories {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, ANTIQUE_WATCH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 30.0, ANTIQUE_WATCH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.3, ANTIQUE_WATCH_UUID);
             }
         }
 
@@ -250,7 +250,7 @@ public class UtilityAccessories {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, REINFORCED_DIAMOND_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 30.0, REINFORCED_DIAMOND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 0.3, REINFORCED_DIAMOND_UUID);
             }
         }
 

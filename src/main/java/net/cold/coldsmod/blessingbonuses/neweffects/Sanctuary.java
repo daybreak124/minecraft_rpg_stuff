@@ -73,10 +73,16 @@ public class Sanctuary {
             spawnParticleRing(serverLevel, source, ParticleTypes.COMPOSTER, radius, (int) (radius*20));
         }
 
+        double radiusSq = radius * radius;
         List<LivingEntity> allies = level.getEntitiesOfClass(
                 LivingEntity.class,
                 area,
-                e -> isAlly(e)
+                e -> {
+                    if (!isAlly(e) || !source.hasLineOfSight(e)) return false;
+                    double dx = e.getX() - source.getX();
+                    double dz = e.getZ() - source.getZ();
+                    return (dx * dx + dz * dz) <= radiusSq;
+                }
         );
 
 

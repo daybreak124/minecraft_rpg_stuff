@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "coldsmod:bottled_light"
+    "coldsmod:bottled_light",
+    "coldsmod:hellforged_plating",
+    "coldsmod:hook_of_the_depths",
+    "coldsmod:fairy_teardrop"
   ]
 }

@@ -62,7 +62,7 @@ public class StolenLegacies {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 15.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.15, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 6.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 6.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 4, STOLEN_LEGACIES_UUID);
@@ -114,7 +114,7 @@ public class StolenLegacies {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 20.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.20, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 10.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 10.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 7, STOLEN_LEGACIES_UUID);
@@ -166,7 +166,7 @@ public class StolenLegacies {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 25.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.25, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 16.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 12.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.05, STOLEN_LEGACIES_UUID);
@@ -224,7 +224,7 @@ public class StolenLegacies {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 30.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.3, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 20.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 16.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.1, STOLEN_LEGACIES_UUID);

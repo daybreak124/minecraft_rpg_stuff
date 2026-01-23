@@ -64,11 +64,11 @@ public class Enderman {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 1.0, ENDERMAN_ARM_UUID);
-                AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), -25.0, ENDERMAN_ARM_UUID);
+                AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), -0.25, ENDERMAN_ARM_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.ENTITY_REACH.get(), 0.125, ENDERMAN_ARM_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.BLOCK_REACH.get(), 0.5, ENDERMAN_ARM_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, ENDERMAN_ARM_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 3.0, ENDERMAN_ARM_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 0.03, ENDERMAN_ARM_UUID);
             }
         }
 
@@ -119,11 +119,11 @@ public class Enderman {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 4.0, ENDERMAN_ARM_UUID);
-                AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), -25.0, ENDERMAN_ARM_UUID);
+                AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), -0.25, ENDERMAN_ARM_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.ENTITY_REACH.get(), 0.25, ENDERMAN_ARM_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.BLOCK_REACH.get(), 1.0, ENDERMAN_ARM_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, ENDERMAN_ARM_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 6.0, ENDERMAN_ARM_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 0.06, ENDERMAN_ARM_UUID);
             }
         }
 
@@ -174,11 +174,11 @@ public class Enderman {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 8.0, ENDERMAN_ARM_UUID);
-                AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), -25.0, ENDERMAN_ARM_UUID);
+                AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), -0.25, ENDERMAN_ARM_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.ENTITY_REACH.get(), 0.375, ENDERMAN_ARM_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.BLOCK_REACH.get(), 1.5, ENDERMAN_ARM_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 6.0, ENDERMAN_ARM_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 9.0, ENDERMAN_ARM_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 0.09, ENDERMAN_ARM_UUID);
             }
         }
 
@@ -229,11 +229,11 @@ public class Enderman {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 10.0, ENDERMAN_ARM_UUID);
-                AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), -25.0, ENDERMAN_ARM_UUID);
+                AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), -0.25, ENDERMAN_ARM_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.ENTITY_REACH.get(), 0.5, ENDERMAN_ARM_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.BLOCK_REACH.get(), 2.0, ENDERMAN_ARM_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 8.0, ENDERMAN_ARM_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 12.0, ENDERMAN_ARM_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 0.12, ENDERMAN_ARM_UUID);
             }
         }
 

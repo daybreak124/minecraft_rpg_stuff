@@ -7,7 +7,10 @@ import net.cold.coldsmod.accessory.bracers.*;
 import net.cold.coldsmod.accessory.mind.*;
 import net.cold.coldsmod.accessory.necklace.*;
 import net.cold.coldsmod.accessory.ring.*;
+import net.cold.coldsmod.blessingbonuses.BowProcHandler;
 import net.cold.coldsmod.blessingbonuses.CooldownCycle;
+import net.cold.coldsmod.blessingbonuses.CrossbowProcHandler;
+import net.cold.coldsmod.blessingbonuses.JumpCritHandler;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.effects.PickaxeTorch;
 import net.cold.coldsmod.blessingbonuses.effects.SoulSeveranceActive;
@@ -80,13 +83,11 @@ public class ColdsMod {
         MinecraftForge.EVENT_BUS.register(PickaxeTorch.class);
         MinecraftForge.EVENT_BUS.register(BastionActive.class);
         MinecraftForge.EVENT_BUS.register(DeceptionSkill.class);
-        MinecraftForge.EVENT_BUS.register(DirectedHatredSkill.class);
         MinecraftForge.EVENT_BUS.register(SoulSeveranceActive.class);
         MinecraftForge.EVENT_BUS.register(Vitalization.class);
         MinecraftForge.EVENT_BUS.register(ExplosiveTendencies.class);
         MinecraftForge.EVENT_BUS.register(CombatantsAidReady.class);
         MinecraftForge.EVENT_BUS.register(EntwinedOfferingActive.class);
-        MinecraftForge.EVENT_BUS.register(OverconfidenceActive.class);
         MinecraftForge.EVENT_BUS.register(PulsatingLove.class);
         MinecraftForge.EVENT_BUS.register(RadiatingWarmthEffect.class);
         MinecraftForge.EVENT_BUS.register(Sanctuary.class);
@@ -98,6 +99,14 @@ public class ColdsMod {
         MinecraftForge.EVENT_BUS.register(FocusedEnergyReady.class);
         MinecraftForge.EVENT_BUS.register(ThornedParryReady.class);
         MinecraftForge.EVENT_BUS.register(BlessedLandReady.class);
+        MinecraftForge.EVENT_BUS.register(Rod.class);
+        MinecraftForge.EVENT_BUS.register(Regrowth.class);
+        MinecraftForge.EVENT_BUS.register(Flameheart.class);
+
+        MinecraftForge.EVENT_BUS.register(BowProcHandler.class);
+        MinecraftForge.EVENT_BUS.register(CrossbowProcHandler.class);
+        MinecraftForge.EVENT_BUS.register(JumpCritHandler.class);
+
 
         MinecraftForge.EVENT_BUS.register(CustomMeleeDamageNoProcs.class);
         MinecraftForge.EVENT_BUS.register(CustomMeleeDamage.class);
@@ -286,7 +295,7 @@ public class ColdsMod {
 
         InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
                 () -> new SlotTypeMessage.Builder("aanblessingtool")
-                        .size(1)
+                        .size(3)
                         .icon(new ResourceLocation("coldsmod", "item/slot9"))
                         .build()
         );

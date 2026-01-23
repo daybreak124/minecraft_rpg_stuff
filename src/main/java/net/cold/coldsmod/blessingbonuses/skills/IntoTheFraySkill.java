@@ -4,7 +4,9 @@ import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.cold.coldsmod.damage.ModDamageTypes;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -23,13 +25,14 @@ import static net.cold.coldsmod.stat.AttributeApplier.removeModifier;
 
 public class IntoTheFraySkill {
 
-    private static final float DAMAGE_PER_STACK = 4f;
+    private static final float DAMAGE_PER_STACK = 5f;
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
-        if (!event.player.getPersistentData().getBoolean("into_the_fray_eligible")) return;
         if (event.player.level().isClientSide()) return;
+        if (!event.player.isSprinting()) return;
+        if (!event.player.getPersistentData().getBoolean("into_the_fray_eligible")) return;
 
         Player player = event.player;
 
@@ -76,10 +79,16 @@ public class IntoTheFraySkill {
             }
 
             Level level = player.level();
+            double radiusSq = 0.36;
             List<LivingEntity> targetsHit = level.getEntitiesOfClass(
                     LivingEntity.class,
                     player.getBoundingBox().inflate(0.6),
-                    e -> e instanceof Enemy && e.isAlive() && !e.isInvulnerable()
+                    e -> {
+                        if (!(e instanceof Enemy) || !e.isAlive() || e.isInvulnerable() || !player.hasLineOfSight(e)) return false;
+                        double dx = e.getX() - player.getX();
+                        double dz = e.getZ() - player.getZ();
+                        return (dx * dx + dz * dz) <= radiusSq;
+                    }
             );
 
             if (!targetsHit.isEmpty()) {
@@ -96,14 +105,22 @@ public class IntoTheFraySkill {
                     target.knockback(0.5f * stackCount, dx, dz);
                 }
 
+                double explosionRadius = 16.0;
                 List<LivingEntity> nearbyEntities = level.getEntitiesOfClass(
                         LivingEntity.class,
                         player.getBoundingBox().inflate(4.0),
-                        e -> e instanceof Enemy && e.isAlive() && !e.isInvulnerable()
+                        e -> {
+                            if (!(e instanceof Enemy) || !e.isAlive() || e.isInvulnerable()) return false;
+                            double dx = e.getX() - player.getX();
+                            double dz = e.getZ() - player.getZ();
+                            return (dx * dx + dz * dz) <= explosionRadius;
+                        }
                 );
 
                 for (LivingEntity aoeTarget : nearbyEntities) {
                     aoeTarget.hurt(source, DAMAGE_PER_STACK * stackCount);
+                    EffectUtils.spawnExplosionEffect(player);
+                    EffectUtils.spawnParticleRing((ServerLevel) level, player, ParticleTypes.POOF, 4, 80);
                 }
 
                 player.addEffect(new MobEffectInstance(ModEffects.INTO_THE_FRAY_COOLDOWN.get(), 180, 0, false, false, true));

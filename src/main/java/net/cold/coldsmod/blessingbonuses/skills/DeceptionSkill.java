@@ -2,6 +2,8 @@ package net.cold.coldsmod.blessingbonuses.skills;
 
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.stat.ItemRarityUtils;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,6 +21,8 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
+
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.*;
 
 public class DeceptionSkill {
 
@@ -43,28 +47,36 @@ public class DeceptionSkill {
     @SubscribeEvent
     public static void onArrowHit(LivingDamageEvent event) {
         if (!(event.getSource().getDirectEntity() instanceof Projectile proj)) return;
-        if (!proj.getPersistentData().getBoolean("deception_tagged")) return;
         if (!(event.getSource().getEntity() instanceof Player player)) return;
         if (player.level().isClientSide()) return;
-
-        if (!(event.getEntity() instanceof LivingEntity)) return;
-        LivingEntity target = event.getEntity();
-
-        if (!(event.getSource().getDirectEntity() instanceof Projectile)) return;
-
+        if (!(event.getEntity() instanceof Enemy)) return;
+        if (!proj.getPersistentData().getBoolean("deception_tagged")) return;
         if (!player.hasEffect(ModEffects.DECEPTION_READY.get())) return;
 
-        double range = 9.0;
+        spawnParticleBurstLow(player, ParticleTypes.DAMAGE_INDICATOR);
+
+        LivingEntity target = event.getEntity();
+
+        spawnParticleRingHigh((ServerLevel) event.getEntity().level(), target , ParticleTypes.DAMAGE_INDICATOR, 9.0, 180);
+
+
+        double rangeSq = 81.0;
 
         List<LivingEntity> nearby = target.level().getEntitiesOfClass(
                 LivingEntity.class,
-                target.getBoundingBox().inflate(range),
-                e -> e instanceof Enemy && e != target && !e.getType().is(Tags.EntityTypes.BOSSES) && !(e instanceof Warden)
+                target.getBoundingBox().inflate(9.0),
+                e -> {
+                    if (!(e instanceof Enemy) || e == target || e.getType().is(Tags.EntityTypes.BOSSES) || e instanceof Warden || !player.hasLineOfSight(e)) return false;
+                    double dx = e.getX() - target.getX();
+                    double dz = e.getZ() - target.getZ();
+                    return (dx * dx + dz * dz) <= rangeSq;
+                }
         );
 
         for (LivingEntity entity : nearby) {
             if (entity instanceof Mob mob) {
                 mob.setTarget(target);
+                spawnParticleBurst(entity, ParticleTypes.HEART);
             }
         }
 

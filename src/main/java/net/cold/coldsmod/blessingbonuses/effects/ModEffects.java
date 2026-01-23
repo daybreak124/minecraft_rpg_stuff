@@ -237,4 +237,7 @@ public class ModEffects {
 
     public static final RegistryObject<MobEffect> BLESSED_LAND_CD =
             EFFECTS.register("blessed_land_cd", BlessedLandCD::new);
+
+    public static final RegistryObject<MobEffect> ENHANCED_POISON =
+            EFFECTS.register("enhanced_poison", EnhancedPoison::new);
 }

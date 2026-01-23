@@ -11,6 +11,7 @@ public class CrossbowChargeDrawSpeedTag {
     @SubscribeEvent
     public static void onStartChargingCrossbow(LivingEntityUseItemEvent.Start event) {
         if (!(event.getEntity() instanceof Player player)) return;
+        if (player.level().isClientSide()) return;
 
         ItemStack stack = event.getItem();
         if (!"crossbow".equals(ItemRarityUtils.getItemType(stack))) return;

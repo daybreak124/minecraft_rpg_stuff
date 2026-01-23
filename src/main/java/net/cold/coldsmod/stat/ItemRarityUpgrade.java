@@ -181,6 +181,7 @@ public class ItemRarityUpgrade {
     public static void onAnvilTake(AnvilRepairEvent event) {
         ItemStack stack = event.getOutput();
         if (stack == null || stack.isEmpty()) return;
+        if (event.getEntity().level().isClientSide()) return;
 
         CompoundTag tag = stack.getOrCreateTag();
         ItemRarity rarity = ItemRarityUtils.readRarityFromNBT(stack);

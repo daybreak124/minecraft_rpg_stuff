@@ -1,6 +1,8 @@
 package net.cold.coldsmod.blessingbonuses.effects;
 
+import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.network.QuantumLeapSync;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
@@ -30,15 +32,17 @@ public class QuantumLeapActive extends MobEffect {
     @SubscribeEvent
     public static void onPlayerJump(LivingEvent.LivingJumpEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
+        if (event.getEntity().level().isClientSide()) return;
         if (!player.isShiftKeyDown()) return;
         if (!QuantumLeapSync.QuantumLeapClientData.quantumLeapEligible) return;
         if (!player.hasEffect(ModEffects.QUANTUM_LEAP_READY.get())) return;
-        if (player.level().isClientSide()) return;
 
         Vec3 look = player.getLookAngle().normalize();
         Vec3 dashTarget = player.position().add(look.scale(4));
 
-        player.teleportTo(dashTarget.x, dashTarget.y, dashTarget.z);
+        EffectUtils.spawnParticleBurst(player, ParticleTypes.FISHING);
+
+        player.teleportTo(dashTarget.x, dashTarget.y+1.2, dashTarget.z);
         player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_COOLDOWN.get(), 20*35, 0, false, false, true));
 
 
@@ -61,8 +65,8 @@ public class QuantumLeapActive extends MobEffect {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
-        if (!event.player.getPersistentData().getBoolean("quantum_leaped")) return;
         if (event.player.level().isClientSide()) return;
+        if (!event.player.getPersistentData().getBoolean("quantum_leaped")) return;
 
         Player player = event.player;
 

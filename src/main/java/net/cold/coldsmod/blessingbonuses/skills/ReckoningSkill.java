@@ -2,7 +2,9 @@ package net.cold.coldsmod.blessingbonuses.skills;
 
 import net.cold.coldsmod.ModSounds;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
+import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.damage.ModDamageTypes;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -22,9 +24,9 @@ public class ReckoningSkill {
     @SubscribeEvent
     public static void onPlayerDamage(LivingHurtEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
+        if (player.level().isClientSide()) return;
         if (event.getSource().is(DamageTypes.FALL)) return;
         if (!player.hasEffect(ModEffects.RECKONING.get())) return;
-        if (player.level().isClientSide()) return;
 
         player.removeEffect(ModEffects.RECKONING.get());
         player.addEffect(new MobEffectInstance(ModEffects.RECKONING_ACTIVE.get(), ACTIVE_DURATION, 0, false, false, true));
@@ -42,9 +44,9 @@ public class ReckoningSkill {
     @SubscribeEvent
     public static void onReckoningHeal(LivingDamageEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
+        if (player.level().isClientSide()) return;
         if (event.getSource().is(ModDamageTypes.RECKONING)) return;
         if (event.getSource().is(DamageTypes.FALL)) return;
-        if (player.level().isClientSide()) return;
 
 
         if (player.hasEffect(ModEffects.RECKONING_ACTIVE.get())) {
@@ -55,6 +57,7 @@ public class ReckoningSkill {
             double totalHealed = player.getPersistentData().getDouble(HEALED_NBT);
             totalHealed += healed;
             player.getPersistentData().putDouble(HEALED_NBT, totalHealed);
+            EffectUtils.spawnParticleBurst(player, ParticleTypes.DAMAGE_INDICATOR);
         }
     }
 }

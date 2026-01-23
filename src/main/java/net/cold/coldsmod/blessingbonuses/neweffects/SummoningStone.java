@@ -10,36 +10,36 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.UUID;
 
 public class SummoningStone {
 
-    private static final int SBEVE_INTERVAL = 599;
+    private static final int SBEVE_INTERVAL = 5995;
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (event.player.level().isClientSide()) return;
+        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide()) return;
 
         Player player = event.player;
+        if (player.tickCount % 1200 != 0) return;
 
-        if (player.tickCount % 20 * 60 != 0) return;
 
-        CompoundTag tag = player.getPersistentData();
-        if (!tag.getBoolean("summoning_stone_eligible")
-                || player.hasEffect(ModEffects.SOLARA.get())
-                || player.hasEffect(ModEffects.SBEVE_CD.get())) return;
+        if (!player.getPersistentData().getBoolean("summoning_stone_eligible")) return;
+        runSbeveUpdateLogic(player);
+    }
 
-        int timer = tag.getInt("sbeve_timer") + 20;
+    private static void runSbeveUpdateLogic(Player player) {
+        if (player.hasEffect(ModEffects.SOLARA.get()) || player.hasEffect(ModEffects.SBEVE_CD.get())) return;
 
+        int timer = player.getPersistentData().getInt("sbeve_timer") + 1200;
         if (timer >= SBEVE_INTERVAL) {
             timer = 0;
             handleSbeveLogic((ServerLevel) player.level(), player);
         }
-
-        tag.putInt("sbeve_timer", timer);
+        player.getPersistentData().putInt("sbeve_timer", timer);
     }
 
     private static void handleSbeveLogic(ServerLevel level, Player player) {
@@ -47,9 +47,12 @@ public class SummoningStone {
 
         if (sbeve == null) {
             summonSbeve(level, player);
+            player.addEffect(new MobEffectInstance(ModEffects.SBEVE_CD.get(), 5995, 0, false, false, false));
         } else {
             sbeve.applyOwnerScaling(player);
             sbeve.setHealth(sbeve.getMaxHealth());
+            player.addEffect(new MobEffectInstance(ModEffects.SBEVE_CD.get(), 5995, 0, false, false, false));
+
         }
     }
 
@@ -77,7 +80,7 @@ public class SummoningStone {
         level.addFreshEntity(sbeve);
 
         player.getPersistentData().putUUID("active_sbeve_uuid", sbeve.getUUID());
-        player.addEffect(new MobEffectInstance(ModEffects.SBEVE_CD.get(), 20*60*5, 0, false, false, false));
+        player.addEffect(new MobEffectInstance(ModEffects.SBEVE_CD.get(), 5995, 0, false, false, false));
 
         level.playSound(null, player.getX(), player.getY(), player.getZ(),
                 SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.PLAYERS,
@@ -94,6 +97,21 @@ public class SummoningStone {
                 sbeve.discard();
             }
             tag.remove("active_sbeve_uuid");
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerDeath(LivingDeathEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
+        if (event.getEntity() instanceof Player player) {
+            if (player.level() instanceof ServerLevel serverLevel) {
+                Sbeve activeSbeve = getPlayerSbeve(serverLevel, player);
+                if (activeSbeve != null) {
+                    activeSbeve.discard();
+                    player.getPersistentData().remove("active_sbeve_uuid");
+                    player.getPersistentData().putBoolean("summoning_stone_eligible", false);
+                }
+            }
         }
     }
 }

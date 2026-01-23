@@ -40,10 +40,16 @@ public class RadiatingWarmthTimer extends MobEffect {
             spawnParticleRing(serverLevel, player, ParticleTypes.COMPOSTER, 8, 8*20);
         }
 
+        double radiusSq = 64.0;
         List<LivingEntity> entities = level.getEntitiesOfClass(
                 LivingEntity.class,
-                player.getBoundingBox().inflate(8),
-                e -> isAlly(e)
+                player.getBoundingBox().inflate(8.0),
+                e -> {
+                    if (!isAlly(e) || !player.hasLineOfSight(e)) return false;
+                    double dx = e.getX() - player.getX();
+                    double dz = e.getZ() - player.getZ();
+                    return (dx * dx + dz * dz) <= radiusSq;
+                }
         );
 
         // player.heal((float) (1.25 * (1.0 + (healIncrease / 100.0))));

@@ -103,8 +103,11 @@ public class LootInjector {
                     new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f)
-                    );
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f)
+            );
             injectLoot(event.getTable(), netherLoot);
         }
 
@@ -182,7 +185,10 @@ public class LootInjector {
                     new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f)
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f)
                     );
             injectLoot(event.getTable(), bastionLoot);
         }
@@ -256,7 +262,10 @@ public class LootInjector {
                     new LootEntry(ModItems.SOUL_MAGNET.get(), 1, 0.00214285f),
                     new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.00214285f),
                     new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.00214285f),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0218570f)
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0218570f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0218570f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0218570f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0218570f)
             );
             injectLoot(event.getTable(), ruinedPortalLoot);
         }
@@ -314,7 +323,10 @@ public class LootInjector {
                     new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.001071425f),
                     new LootEntry(ModItems.RESTORING_AURA.get(), 1, 0.001071425f),
                     new LootEntry(ModItems.DIVINITY_EXTRACTION.get(), 1, 0.001071425f),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.01071425f)
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.01071425f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.01071425f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.01071425f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.01071425f)
             );
             injectLoot(event.getTable(), ruinedPortalLoot);
         }
@@ -383,7 +395,10 @@ public class LootInjector {
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.DIVINE_SHIELD.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f)
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f)
             );
             injectLoot(event.getTable(), ancientCityLoot);
         }
@@ -461,7 +476,10 @@ public class LootInjector {
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.DIVINE_SHIELD.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f),
-                    new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f)
+                    new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f)
             );
             injectLoot(event.getTable(), endCityLoot);
         }
@@ -523,7 +541,10 @@ public class LootInjector {
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.00214285f),
                     new LootEntry(ModItems.DIVINE_SHIELD.get(), 1, 0.00214285f),
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.00214285f),
-                    new LootEntry(ModItems.CUPIDS_ARROW.get(), 1, 0.00214285f)
+                    new LootEntry(ModItems.CUPIDS_ARROW.get(), 1, 0.00214285f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.02144285f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.02144285f)
 
             );
             injectLoot(event.getTable(), strongholdLoot);
@@ -585,7 +606,10 @@ public class LootInjector {
                     new LootEntry(ModItems.RESTORING_AURA.get(), 1, 0.0085714f),
                     new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0085714f),
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0085714f),
-                    new LootEntry(ModItems.HORN_OF_FEARMONGERING.get(), 1, 0.0085714f)
+                    new LootEntry(ModItems.HORN_OF_FEARMONGERING.get(), 1, 0.0085714f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.085714f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.085714f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.085714f)
             );
             injectLoot(event.getTable(), iglooLoot);
         }
@@ -649,7 +673,10 @@ public class LootInjector {
                     new LootEntry(ModItems.RESTORING_AURA.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.NATURES_BLESSING.get(), 1, 0.0042857f),
-                    new LootEntry(ModItems.IGNITION_MARK.get(), 1, 0.0042857f)
+                    new LootEntry(ModItems.IGNITION_MARK.get(), 1, 0.0042857f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f)
             );
             injectLoot(event.getTable(), desertLoot);
         }
@@ -711,7 +738,10 @@ public class LootInjector {
                     new LootEntry(ModItems.DIVINITY_EXTRACTION.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.NATURES_BLESSING.get(), 1, 0.0042857f),
-                    new LootEntry(ModItems.ENDLESS_ADRENALINE_SYRINGE.get(), 1, 0.0042857f)
+                    new LootEntry(ModItems.ENDLESS_ADRENALINE_SYRINGE.get(), 1, 0.0042857f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f)
             );
             injectLoot(event.getTable(), jungleLoot);
         }
@@ -757,9 +787,11 @@ public class LootInjector {
                     new LootEntry(ModItems.DIVINITY_EXTRACTION.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.NATURES_BLESSING.get(), 1, 0.0042857f),
-                    new LootEntry(ModItems.ENDLESS_ADRENALINE_SYRINGE.get(), 1, 0.0042857f)
+                    new LootEntry(ModItems.ENDLESS_ADRENALINE_SYRINGE.get(), 1, 0.0042857f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f)
             );
-
             injectLoot(event.getTable(), archeologyLoot);
         }
 
@@ -826,7 +858,10 @@ public class LootInjector {
                     new LootEntry(ModItems.NATURES_BLESSING.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.BRANCH_OF_THE_WORLD_TREE.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.CUPIDS_ARROW.get(), 1, 0.0042857f),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f)
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f)
             );
             injectLoot(event.getTable(), waterLoot);
         }
@@ -865,7 +900,10 @@ public class LootInjector {
                     new LootEntry(ModItems.DIVINE_SHIELD.get(), 1, 0.0005357f),
                     new LootEntry(ModItems.NATURES_BLESSING.get(), 1, 0.0005357f),
                     new LootEntry(ModItems.BRANCH_OF_THE_WORLD_TREE.get(), 1, 0.0005357f),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0053570f)
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0053570f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0053570f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0053570f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0053570f)
             );
             injectLoot(event.getTable(), waterLoot);
         }
@@ -926,7 +964,10 @@ public class LootInjector {
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f)
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f)
             );
             injectLoot(event.getTable(), dungeonLoot);
         }
@@ -1047,7 +1088,10 @@ public class LootInjector {
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0042857f),
                     new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0042857f),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f)
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f)
             );
             injectLoot(event.getTable(), outpostLoot);
         }
@@ -1108,7 +1152,10 @@ public class LootInjector {
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0085714f),
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0085714f),
                     new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0085714f),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0855714f)
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0855714f),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0855714f),
+                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0855714f),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0855714f)
             );
 
             injectLoot(event.getTable(), mansionLoot);

@@ -3,7 +3,9 @@ package net.cold.coldsmod.blessingbonuses.neweffects;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.damage.CustomRangedDamage;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -13,17 +15,24 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleBurst;
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleRing;
 
 public class VortexReady extends MobEffect {
 
@@ -53,8 +62,9 @@ public class VortexReady extends MobEffect {
     public static void onProjectileImpact(ProjectileImpactEvent event) {
         if (!(event.getProjectile() instanceof Arrow arrow)) return;
         if (!(arrow.getOwner() instanceof Player player)) return;
-        if (!player.hasEffect(ModEffects.VORTEX_READY.get())) return;
         if (arrow.level().isClientSide()) return;
+        if (!arrow.getPersistentData().getBoolean("vortex_tagged")) return;
+        if (!player.hasEffect(ModEffects.VORTEX_READY.get())) return;
 
         if (event.getRayTraceResult() != null) {
             Vec3 hitPos = event.getRayTraceResult().getLocation();
@@ -95,8 +105,28 @@ public class VortexReady extends MobEffect {
             return;
         }
 
-        AABB area = new AABB(vPos, vPos).inflate(range);
-        var nearby = level.getEntitiesOfClass(LivingEntity.class, area, e -> e instanceof Monster && e.isAlive());
+        double rangeSq = range * range;
+        List<LivingEntity> nearby = level.getEntitiesOfClass(
+                LivingEntity.class,
+                new AABB(vPos, vPos).inflate(range),
+                e -> {
+                    if (!(e instanceof Enemy) || !e.isAlive()) return false;
+
+                    double dx = e.getX() - vPos.x;
+                    double dz = e.getZ() - vPos.z;
+                    if ((dx * dx + dz * dz) > rangeSq) return false;
+
+                    Vec3 start = vPos;
+                    Vec3 end = e.getEyePosition();
+                    BlockHitResult result = level.clip(new ClipContext(
+                            start, end,
+                            ClipContext.Block.COLLIDER,
+                            ClipContext.Fluid.NONE,
+                            e));
+
+                    return result.getType() == HitResult.Type.MISS;
+                }
+        );
 
         Holder<DamageType> rangedType = level.registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
@@ -120,11 +150,13 @@ public class VortexReady extends MobEffect {
 
             if (vortex.ticks % 20 == 0) {
                 mob.hurt(source, 4.0f);
+                spawnParticleBurst(mob, ParticleTypes.SOUL);
             }
         }
 
         if (vortex.ticks % 20 == 0) {
             level.playSound(null, vPos.x, vPos.y, vPos.z, SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 7f, 1.0f);
+            spawnParticleRing((ServerLevel) level, vPos, ParticleTypes.SOUL_FIRE_FLAME, 6.0, 120);
         }
     }
 }

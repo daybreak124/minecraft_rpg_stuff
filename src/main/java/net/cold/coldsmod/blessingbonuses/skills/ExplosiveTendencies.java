@@ -16,7 +16,6 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -34,36 +33,13 @@ import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
 public class ExplosiveTendencies {
 
     @SubscribeEvent
-    public static void onArrowSpawn(EntityJoinLevelEvent event) {
-        if (!(event.getEntity() instanceof AbstractArrow arrow)) return;
-        if (!(arrow.getOwner() instanceof Player player)) return;
-
-        if (!player.hasEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get())) return;
-
-        if (player.level().isClientSide()) return;
-
-        ItemStack main = player.getMainHandItem();
-        ItemStack off  = player.getOffhandItem();
-
-        boolean mainIsBow = "bow".equals(ItemRarityUtils.getItemType(main));
-        boolean mainIsCrossbow = "crossbow".equals(ItemRarityUtils.getItemType(main));
-        boolean offIsCrossbow = "crossbow".equals(ItemRarityUtils.getItemType(off));
-
-        boolean isCrossbow = mainIsCrossbow || (offIsCrossbow && !mainIsBow);
-        if (!isCrossbow) return;
-
-        arrow.getPersistentData().putBoolean("explosive_tendency_tagged", true);
-    }
-
-    @SubscribeEvent
     public static void onArrowHitSpawnCreeper(LivingHurtEvent event) {
-        if (!(event.getSource().getDirectEntity() instanceof Projectile proj)) return;
-        if (!proj.getPersistentData().getBoolean("explosive_tendency_tagged")) return;
-        Entity shooter = proj.getOwner();
-        if (shooter.level().isClientSide) return;
-        if (!(proj instanceof AbstractArrow)) return;
+        if (!(event.getSource().getDirectEntity() instanceof AbstractArrow arrow)) return;
+        Entity shooter = arrow.getOwner();
+        if (!(shooter instanceof Player player)) return;
+        if (player.level().isClientSide()) return;
+        if (!arrow.getPersistentData().getBoolean("explosive_tendency_tagged")) return;
 
-        Player player = (Player) shooter;
         LivingEntity target = event.getEntity();
 
         Level level = player.level();
@@ -121,7 +97,7 @@ public class ExplosiveTendencies {
                     false
             ));
         }
-        proj.getPersistentData().putBoolean("explosive_tendency_tagged", false);
+        arrow.getPersistentData().putBoolean("explosive_tendency_tagged", false);
     }
 
     @SubscribeEvent

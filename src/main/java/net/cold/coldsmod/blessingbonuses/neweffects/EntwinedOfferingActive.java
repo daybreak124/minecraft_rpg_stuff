@@ -29,20 +29,26 @@ public class EntwinedOfferingActive extends MobEffect {
 
     @SubscribeEvent
     public void onHeal(LivingHealEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
         if (!(event.getEntity() instanceof Player player)) return;
         if (player.getHealth() >= player.getMaxHealth()) return;
         if (!player.getPersistentData().getBoolean("entwined_offering_eligible")) return;
-        if (player.level().isClientSide()) return;
 
         Level level = player.level();
 
         float range = (float) (8.0f * (1.0f + (AttributeApplier.getScaledValue(player, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get()) / 100.0f)));
         int armorDuration = (int) (20 * 3 * (1.0f + (AttributeApplier.getScaledValue(player, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get()) / 100.0f)));
 
+        double rangeSq = range * range;
         List<LivingEntity> entities = level.getEntitiesOfClass(
                 LivingEntity.class,
                 player.getBoundingBox().inflate(range),
-                e -> ((e != player) && isAlly(e))
+                e -> {
+                    if (e == player || !isAlly(e) || !player.hasLineOfSight(e)) return false;
+                    double dx = e.getX() - player.getX();
+                    double dz = e.getZ() - player.getZ();
+                    return (dx * dx + dz * dz) <= rangeSq;
+                }
         );
 
         for (LivingEntity target : entities) {

@@ -291,14 +291,15 @@ public class AttributeApplier {
             Map.entry(ModAttributes.AMPLIFICATION, s -> s.wisdom * 0.2),
             Map.entry(ModAttributes.REJUVENATION, s -> s.con * 0.125),
 
-            Map.entry(ModAttributes.XP_GAIN, s -> s.insight * 0.25),
-            Map.entry(ModAttributes.MINING_SPEED, s -> s.insight * 0.25),
+            Map.entry(ModAttributes.XP_GAIN, s -> s.insight * 0.0025),
+            Map.entry(ModAttributes.MINING_SPEED, s -> s.insight * 0.0025),
             Map.entry(() -> ForgeMod.BLOCK_REACH.get(), s -> s.insight * 0.05)
     );
 
     @SubscribeEvent
     public static void onEquipmentChange(LivingEquipmentChangeEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
+        if (player.level().isClientSide()) return;
         handleItemStats(player, event.getFrom(), event.getSlot(), false);
         handleItemStats(player, event.getTo(), event.getSlot(), true);
 
@@ -318,17 +319,19 @@ public class AttributeApplier {
     @SubscribeEvent
     public static void onCurioChange(CurioChangeEvent event) {
         if (event.getEntity() instanceof Player player) {
-            player.level().getServer().tell(new net.minecraft.server.TickTask(
-                    player.level().getServer().getTickCount() + 1,
-                    () -> {
-                        if (player.isAlive()) {
-                            refreshPerPointStats(player);
-                            recalculateDynamicBonuses(player);
-                            refreshMilestones(player);
-                            applyCrossbowTag(player);
-                        }
-                    }
-            ));
+            if (player.level().isClientSide()) {
+                    player.level().getServer().tell(new net.minecraft.server.TickTask(
+                            player.level().getServer().getTickCount() + 1,
+                            () -> {
+                                if (player.isAlive()) {
+                                    refreshPerPointStats(player);
+                                    refreshMilestones(player);
+                                    recalculateDynamicBonuses(player);
+                                    applyCrossbowTag(player);
+                                }
+                            }
+                    ));
+            }
         }
     }
 

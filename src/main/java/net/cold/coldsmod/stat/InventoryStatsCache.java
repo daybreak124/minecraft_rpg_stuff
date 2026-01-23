@@ -160,11 +160,11 @@ public class InventoryStatsCache {
         CACHE.moveSpeed = 1000 * p.getAttributeValue(Attributes.MOVEMENT_SPEED) - 100;
         CACHE.swimSpeed = 100 * p.getAttributeValue(ForgeMod.SWIM_SPEED.get()) - 100;
         CACHE.stepHeight = p.getAttributeValue(ForgeMod.STEP_HEIGHT_ADDITION.get());
-        CACHE.jumpBoost = 100 * p.getAttributeValue(ModAttributes.JUMP_BOOST.get());
+        CACHE.jumpBoost = 100 * p.getAttributeValue(ModAttributes.JUMP_BOOST.get()) -100;
         CACHE.blockReach = p.getAttributeValue(ForgeMod.BLOCK_REACH.get());
         CACHE.entityReach = p.getAttributeValue(ForgeMod.ENTITY_REACH.get());
-        CACHE.mineSpeed = p.getAttributeValue(ModAttributes.MINING_SPEED.get());
-        CACHE.xpGain = p.getAttributeValue(ModAttributes.XP_GAIN.get());
+        CACHE.mineSpeed = 100 * p.getAttributeValue(ModAttributes.MINING_SPEED.get()) -100;
+        CACHE.xpGain = 100 * p.getAttributeValue(ModAttributes.XP_GAIN.get()) -100;
         CACHE.luck = p.getAttributeValue(Attributes.LUCK);
 
         CACHE.lastUpdateTick = p.tickCount;

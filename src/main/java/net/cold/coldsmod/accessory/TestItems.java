@@ -125,12 +125,12 @@ public class TestItems {
                 // --- Utility ---
                 AttributeApplier.applyModifier(player, Attributes.MOVEMENT_SPEED, 0.1, ALL_ARTIFACT_UUID);
                 AttributeApplier.applyModifier(player, net.minecraftforge.common.ForgeMod.SWIM_SPEED.get(), 1.0, ALL_ARTIFACT_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 100.0, ALL_ARTIFACT_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 1.0, ALL_ARTIFACT_UUID);
                 AttributeApplier.applyModifier(player, net.minecraftforge.common.ForgeMod.BLOCK_REACH.get(), 5.0, ALL_ARTIFACT_UUID);
                 AttributeApplier.applyModifier(player, net.minecraftforge.common.ForgeMod.ENTITY_REACH.get(), 5.0, ALL_ARTIFACT_UUID);
                 AttributeApplier.applyModifier(player, Attributes.LUCK, 5.0, ALL_ARTIFACT_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 100.0, ALL_ARTIFACT_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.JUMP_BOOST.get(), 100.0, ALL_ARTIFACT_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 1.0, ALL_ARTIFACT_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.JUMP_BOOST.get(), 1.0, ALL_ARTIFACT_UUID);
             }
         }
 

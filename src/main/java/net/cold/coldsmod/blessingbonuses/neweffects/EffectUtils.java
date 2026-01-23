@@ -11,6 +11,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -26,17 +27,17 @@ public class EffectUtils {
 
     public static void spawnExplosionEffect(Player player) {
         if (player.level() instanceof ServerLevel serverLevel) {
-            serverLevel.sendParticles(ParticleTypes.EXPLOSION,
+            serverLevel.sendParticles(ParticleTypes.POOF,
                     player.getX(), player.getY() + 1.0, player.getZ(),
-                    25, 0.4, 0.5, 0.4, 0.05);
+                    12, 0.4, 0.5, 0.4, 0.05);
         }
     }
 
     public static void spawnExplosionOnFeet(Player player) {
         if (player.level() instanceof ServerLevel serverLevel) {
-            serverLevel.sendParticles(ParticleTypes.EXPLOSION,
+            serverLevel.sendParticles(ParticleTypes.POOF,
                     player.getX(), player.getY(), player.getZ(),
-                    25, 0.4, 0.5, 0.4, 0.05);
+                    6, 0.4, 0.5, 0.4, 0.05);
         }
     }
 
@@ -88,17 +89,66 @@ public class EffectUtils {
     }
 
 
-    public static void spawnParticleBurst(Player player, ParticleOptions particleType) {
-        if (player.level() instanceof ServerLevel serverLevel) {
+    public static void spawnParticleBurst(LivingEntity entity, ParticleOptions particleType) {
+        if (entity.level() instanceof ServerLevel serverLevel) {
             serverLevel.sendParticles(particleType,
-                    player.getX(), player.getY() + 1.0, player.getZ(),
-                    25, 0.4, 0.5, 0.4, 0.05);
+                    entity.getX(), entity.getY() + 0.25, entity.getZ(),
+                    10, 0.4, 0.5, 0.4, 0.05);
+        }
+    }
+
+    public static void spawnParticleBurstLow(LivingEntity entity, ParticleOptions particleType) {
+        if (entity.level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(particleType,
+                    entity.getX(), entity.getY()-0.4, entity.getZ(),
+                    10, 0.4, 0.5, 0.4, 0.05);
+        }
+    }
+
+    public static void spawnParticleBurstHigh(LivingEntity entity, ParticleOptions particleType) {
+        if (entity.level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(particleType,
+                    entity.getX(), entity.getY() + 0.5, entity.getZ(),
+                    10, 0.4, 0.5, 0.4, 0.05);
+        }
+    }
+
+    public static void spawnParticleRing(ServerLevel level, Vec3 pos, ParticleOptions particle, double radius, int count) {
+        for (int i = 0; i < count; i++) {
+            double angle = 2 * Math.PI * i / count;
+            double x = pos.x + (radius * Math.cos(angle));
+            double z = pos.z + (radius * Math.sin(angle));
+            double y = pos.y + 0.1;
+
+            level.sendParticles(particle, x, y, z, 1, 0, 0, 0, 0.0);
+        }
+    }
+
+    public static void spawnParticleRingLow(ServerLevel level, LivingEntity center, ParticleOptions particle, double radius, int count) {
+        for (int i = 0; i < count*0.8; i++) {
+            double angle = 2 * Math.PI * i / count*0.8;
+            double x = center.getX() + (radius * Math.cos(angle));
+            double z = center.getZ() + (radius * Math.sin(angle));
+            double y = center.getY() - 1.45;
+
+            level.sendParticles(particle, x, y, z, 1, 0, 0, 0, 0.0);
+        }
+    }
+
+    public static void spawnParticleRingHigh(ServerLevel level, LivingEntity center, ParticleOptions particle, double radius, int count) {
+        for (int i = 0; i < count; i++) {
+            double angle = 2 * Math.PI * i / count;
+            double x = center.getX() + (radius * Math.cos(angle));
+            double z = center.getZ() + (radius * Math.sin(angle));
+            double y = center.getY() + 0.45;
+
+            level.sendParticles(particle, x, y, z, 1, 0, 0, 0, 0.0);
         }
     }
 
     @SubscribeEvent
     public static void onMobTick(LivingEvent.LivingTickEvent event) {
-        if (!(event.getEntity() instanceof Enemy enemy) || !(event.getEntity() instanceof Mob mob)) return;
+        if (!(event.getEntity() instanceof Enemy) || !(event.getEntity() instanceof Mob mob)) return;
         if (mob.level().isClientSide()) return;
 
         int freezeTimer = mob.getPersistentData().getInt("freeze_timer");
@@ -114,7 +164,6 @@ public class EffectUtils {
     }
 
     public static boolean isAlly(LivingEntity target) {
-        if (target instanceof Player) return true;
-        return target instanceof TamableAnimal t && t.isTame();
+        return (target instanceof TamableAnimal t && t.isTame()) || (target instanceof Player);
     }
 }

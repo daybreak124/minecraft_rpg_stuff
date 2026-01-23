@@ -561,7 +561,7 @@ public class ModItems {
             tooltip.add(Component.literal("Blessing: Intimidating Presence").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Crouching for a second").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" marks monsters within a").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 10 block radius, increasing").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" 10 block area, increasing").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" their damage taken by 20%").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" for 8 seconds.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Debuff amount increased by").withStyle(ChatFormatting.GRAY));
@@ -615,8 +615,8 @@ public class ModItems {
             super.appendHoverText(stack, level, tooltip, flag);
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Blessing: Daring Shout").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal(" Crouching roots targets").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" within a 5 block radius").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Crouching stuns targets").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" within a 5 block area").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" for 3 seconds.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Stun duration increased by").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 0.06s per Fortitude and").withStyle(ChatFormatting.GRAY));
@@ -923,7 +923,7 @@ public class ModItems {
         @Override
         public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
             if (!(slotContext.entity() instanceof Player player)) return true;
-                return !(player.hasEffect(ModEffects.INTO_THE_FRAY.get()) || player.hasEffect(ModEffects.INTO_THE_FRAY_COOLDOWN.get()));
+            return !(player.hasEffect(ModEffects.INTO_THE_FRAY.get()) || player.hasEffect(ModEffects.INTO_THE_FRAY_COOLDOWN.get()));
         }
 
         @Override
@@ -958,9 +958,9 @@ public class ModItems {
             tooltip.add(Component.literal(" Activated upon sprinting").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" for 3 seconds. Increase").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" movement speed by 8% per").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" stack and deal 4 Melee").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" stack and deal 5 Melee").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Damage per stack in a 4 block").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" radius when colliding with a").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" area when colliding with a").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" monster. Stack count increased").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" every 2 seconds and gain").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Absorption 1 when reaching").withStyle(ChatFormatting.GRAY));
@@ -1040,7 +1040,7 @@ public class ModItems {
             tooltip.add(Component.literal(" Upon crouch jumping, perform").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" a teleport and turn invisible for").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 4 seconds after landing and gain").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" +15 Potency and +20% Movement").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" +30 Potency and +20% Movement").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Speed for 8 seconds until you.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" attack a target. Takes priority").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" over Death From Above.").withStyle(ChatFormatting.GRAY));
@@ -1114,15 +1114,17 @@ public class ModItems {
             tooltip.add(Component.literal("Blessing: Death From Above").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Upon jumping, shoot").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" yourself up and deal").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 5 Melee damage within").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" a 5 block radius and").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 15 Melee damage on landing").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" within a 7 block radius.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" 7.5 Melee damage within").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" a 5 block area and").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" 20 Melee damage on landing").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" within a 7 block area.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Reduces Quantum Leap").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" cooldown by 5 seconds and").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" enhances it for 4 seconds.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Disabled while swimming.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Cancels fall damage.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Holding shift cancels.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" the jump.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
                             .append(Component.literal("15s").withStyle(ChatFormatting.GRAY))
@@ -1231,11 +1233,11 @@ public class ModItems {
             tooltip.add(Component.literal(" On crits, the damage").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" bounces to the closest").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" monster within a 4 block").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" radius of the target for").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" area of the target for").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" half the main damage.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" The damage keeps bouncing").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" until the damage is less").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" than 1 and the range doesn't").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" than 1. The range doesn't").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" expand upon bounce.").withStyle(ChatFormatting.GRAY));
         }
     }
@@ -1285,7 +1287,7 @@ public class ModItems {
             tooltip.add(Component.literal(" On kills, every 2nd hit,").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" and every 15 seconds, gain").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Berserk effect which causes").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" your next melee attack to be").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" your next melee damage to be").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" increased again by 60% of").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" your Melee Potency stat.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
@@ -1473,7 +1475,7 @@ public class ModItems {
             tooltip.add(Component.literal(" a block, spawn Spirit Forest,").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" which applies Regeneration I").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" to targets within a 3 block").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" radius. Spirit Forest range").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" area. Spirit Forest range").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" increased by Amplification.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Initial heal is increased by").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Restoration stat.").withStyle(ChatFormatting.GRAY));
@@ -1641,15 +1643,29 @@ public class ModItems {
             tooltip.add(Component.literal("Applies to:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Crossbows").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("Blessing: Exploit Weakness").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal(" Shooting a target with").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" a Crossbow increases").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" their damage taken by").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 20% for 10s.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Debuff amount increased").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" by 0.2% per Dexterity.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Your Crossbow shots inflict").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" targets with a random").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" debuff effect.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" ").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Exploited: Target takes").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" 20% + 0.2% per Dex more").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" damage for 4s").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Enhanced Poison II for 5s").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" + 0.05s per Dex.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Wither II for 3s + 0.03s").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" per Dex.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Weakness I for 2s + 0.02s").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" per Dex.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" The effects spread to").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" monsters within 4 blocks").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" with halved duration.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" ").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Instant Damage (Heal if").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Undead).").withStyle(ChatFormatting.GRAY));
+
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
-                            .append(Component.literal("20s").withStyle(ChatFormatting.GRAY))
+                            .append(Component.literal("5s").withStyle(ChatFormatting.GRAY))
             );
         }
     }
@@ -1691,8 +1707,8 @@ public class ModItems {
             tooltip.add(Component.literal("Applies to:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Crossbows").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("Blessing: Adrenaline Injection").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal(" Every 20 seconds, increase").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" your Crossbow draw time is").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Every 20 seconds, your").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Crossbow draw time is").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" halved for 5 seconds.").withStyle(ChatFormatting.GRAY));
         }
     }
@@ -1745,8 +1761,8 @@ public class ModItems {
             tooltip.add(Component.literal(" On raising a shield, apply").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Retaliate effect for 4 seconds.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" When the effect ends, deal").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 2 Melee Damage within a 5 block").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" radius for every time you block").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" 3 Melee Damage within a 5 block").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" area for every time you block").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" an attack. Damage increased by").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 1% per Fortitude ").withStyle(ChatFormatting.GRAY));
             tooltip.add(
@@ -2028,7 +2044,7 @@ public class ModItems {
             super.appendHoverText(stack, level, tooltip, flag);
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Blessing: Nimble Getaway").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal(" Every 30 seconds, gain an").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Every 20 seconds, gain an").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" effect that allows you to").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" dodge the next attack.").withStyle(ChatFormatting.GRAY));
         }
@@ -2135,8 +2151,8 @@ public class ModItems {
             tooltip.add(Component.literal(" Every 20 seconds, heal").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" allies within 8 blocks").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" for 2.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Interval reduced by").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Amplification.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Interval speeds up by").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Amplification stat.").withStyle(ChatFormatting.GRAY));
         }
     }
 
@@ -2233,10 +2249,12 @@ public class ModItems {
             super.appendHoverText(stack, level, tooltip, flag);
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Blessing: Pulsating Love").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal(" Every 5s, apply").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Every 10s, apply").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Regeneration 2 and").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Resistance 2 for 30s to").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" tamed pets within 10 blocks.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Pls don't abuse this ty").withStyle(ChatFormatting.GRAY));
+
         }
     }
 
@@ -2255,11 +2273,11 @@ public class ModItems {
             if (slotContext.entity() instanceof Player player) {
                 player.getPersistentData().putBoolean("summoning_stone_eligible", true);
 
-                if (player.level() instanceof ServerLevel serverLevel
-                        && !player.hasEffect(ModEffects.SOLARA.get())
-                        && !player.hasEffect(ModEffects.SBEVE_CD.get())) {
-                    SummoningStone.summonSbeve(serverLevel, player);
-                }
+//                if (player.level() instanceof ServerLevel serverLevel
+//                        && !player.hasEffect(ModEffects.SOLARA.get())
+//                        && !player.hasEffect(ModEffects.SBEVE_CD.get())) {
+//                    SummoningStone.runSbeveUpdateLogic(player);
+//                }
             }
         }
 
@@ -2286,19 +2304,31 @@ public class ModItems {
             tooltip.add(Component.literal("Blessing: Sbeve").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Every 5 minutes, summon").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" a companion to fight for you.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Sbeve's damage scales with").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" owner's Potency, Accuracy").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" and Precision stats and").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" HP scales with owner's HP.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Sbeve scales with its owner's").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Potency, Accuracy, Precision,").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Haste, HP, Armor and Toughness").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" stats.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Base Damage: ").withStyle(ChatFormatting.DARK_AQUA)
-                            .append(Component.literal("2.5").withStyle(ChatFormatting.GRAY))
+                            .append(Component.literal("1.5").withStyle(ChatFormatting.GRAY))
+            );
+            tooltip.add(
+                    Component.literal("Base Attack Cooldown: ").withStyle(ChatFormatting.DARK_AQUA)
+                            .append(Component.literal("1.5s").withStyle(ChatFormatting.GRAY))
+            );
+            tooltip.add(
+                    Component.literal("Attack Range: ").withStyle(ChatFormatting.DARK_AQUA)
+                            .append(Component.literal("1.6 Blocks").withStyle(ChatFormatting.GRAY))
             );
             tooltip.add(
                     Component.literal("HP: ").withStyle(ChatFormatting.DARK_AQUA)
-                            .append(Component.literal("3x").withStyle(ChatFormatting.GRAY))
+                            .append(Component.literal("2x").withStyle(ChatFormatting.GRAY))
             );
-            tooltip.add(Component.literal("Note: He is a little dumb").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+            tooltip.add(
+                    Component.literal("Detection Range: ").withStyle(ChatFormatting.DARK_AQUA)
+                            .append(Component.literal("10 Blocks").withStyle(ChatFormatting.GRAY))
+            );
+            tooltip.add(Component.literal("Note: He is very smart.").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
         }
     }
 
@@ -2402,6 +2432,8 @@ public class ModItems {
             tooltip.add(Component.literal("Blessing: Focused Energy").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Launch yourself when").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" shooting the ground.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Targets within 5 blocks").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" are rooted for a second.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
                             .append(Component.literal("6s").withStyle(ChatFormatting.GRAY))
@@ -2459,9 +2491,9 @@ public class ModItems {
             tooltip.add(Component.literal("Blessing: Thorned Parry").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" When releasing your shield").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 0.4s within a block, deal").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 3 Melee Damage around you").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" and stun your target for").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 2 seconds.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" 5 Melee Damage 3 blocks").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" around you and stun your").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" target for 2 seconds.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
                             .append(Component.literal("7s").withStyle(ChatFormatting.GRAY))
@@ -2531,6 +2563,143 @@ public class ModItems {
             );
             tooltip.add(Component.literal(" Cooldown speed increased").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" by Amplification.").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+    public static final RegistryObject<Item> FAIRY_TEARDROP = ITEMS.register(
+            "fairy_teardrop",
+            () -> new FairyTeardropItem(new Item.Properties().stacksTo(64))
+    );
+
+    private static class FairyTeardropItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public FairyTeardropItem(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Component getName(ItemStack stack) {
+            return Component.literal("Fairy's Teardrop").withStyle(ChatFormatting.GOLD);
+        }
+
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                player.getPersistentData().putBoolean("regrowth_eligible", true);
+            }
+        }
+
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                player.getPersistentData().remove("regrowth_eligible");
+            }
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            super.appendHoverText(stack, level, tooltip, flag);
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("Applies to:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Hoes").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("Blessing: Regrowth").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal(" Right clicking a grown").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" seed harvests the seed").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" and re-plants it.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Loot is granted to").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" player's inventory.").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+    public static final RegistryObject<Item> HOOK_OF_THE_DEPTHS = ITEMS.register(
+            "hook_of_the_depths",
+            () -> new HookOfTheDepthsItem(new Item.Properties().stacksTo(64))
+    );
+
+    private static class HookOfTheDepthsItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public HookOfTheDepthsItem(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Component getName(ItemStack stack) {
+            return Component.literal("Hook of the Depths").withStyle(ChatFormatting.GOLD);
+        }
+
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                player.getPersistentData().putBoolean("grapple_eligible", true);
+            }
+        }
+
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                player.getPersistentData().remove("grapple_eligible");
+                player.getPersistentData().remove("grapple_target_x");
+                player.getPersistentData().remove("grapple_target_y");
+                player.getPersistentData().remove("grapple_target_z");
+                player.getPersistentData().remove("is_grappling");
+                player.getPersistentData().remove("last_y");
+
+            }
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            super.appendHoverText(stack, level, tooltip, flag);
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("Applies to:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Fishing Rods").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("Blessing: Diver Down").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal(" Fishing Rods act").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" as grappling hooks.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Take 6 Magic Damage").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Only works for").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" moving upwards.").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+    public static final RegistryObject<Item> HELLFORGED_PLATING = ITEMS.register(
+            "hellforged_plating",
+            () -> new HellforgedPlatingItem(new Item.Properties().stacksTo(64))
+    );
+
+    private static class HellforgedPlatingItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public HellforgedPlatingItem(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Component getName(ItemStack stack) {
+            return Component.literal("Hell Forged Plating").withStyle(ChatFormatting.GOLD);
+        }
+
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                player.getPersistentData().putBoolean("smelt_eligible", true);
+            }
+        }
+
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                player.getPersistentData().remove("smelt_eligible");
+            }
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            super.appendHoverText(stack, level, tooltip, flag);
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("Applies to:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Tools").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("Blessing: Flameheart").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal(" Broken blocks are smelt").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" automatically.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Loot is granted to").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" player's inventory.").withStyle(ChatFormatting.GRAY));
         }
     }
 

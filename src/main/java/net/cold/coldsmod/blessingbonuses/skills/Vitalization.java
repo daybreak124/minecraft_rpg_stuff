@@ -30,37 +30,13 @@ import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
 public class Vitalization {
 
     @SubscribeEvent
-    public static void onArrowSpawn(EntityJoinLevelEvent event) {
-        if (!(event.getEntity() instanceof AbstractArrow arrow)) return;
-        if (!(arrow.getOwner() instanceof Player player)) return;
-        if (!player.getPersistentData().getBoolean("life_touch_applied")) return;
-
-
-        if (player.level().isClientSide()) return;
-
-        ItemStack main = player.getMainHandItem();
-        ItemStack off  = player.getOffhandItem();
-
-        boolean mainIsBow = "bow".equals(ItemRarityUtils.getItemType(main));
-        boolean mainIsCrossbow = "crossbow".equals(ItemRarityUtils.getItemType(main));
-        boolean offIsBow = "bow".equals(ItemRarityUtils.getItemType(off));
-        boolean isBow = mainIsBow || (offIsBow && !mainIsCrossbow); if (!isBow) return;
-
-
-        arrow.getPersistentData().putBoolean("life_touch_tagged", true);
-    }
-
-
-    @SubscribeEvent
     public static void onArrowHit(LivingHurtEvent event) {
         if (!(event.getSource().getDirectEntity() instanceof Projectile proj)) return;
-        if (!proj.getPersistentData().getBoolean("life_touch_tagged")) return;
         if (!(event.getSource().getEntity() instanceof Player player)) return;
-
+        if (player.level().isClientSide()) return;
+        if (!proj.getPersistentData().getBoolean("life_touch_tagged")) return;
         LivingEntity target = event.getEntity();
         if (!isAlly(target)) return;
-
-        if (player.level().isClientSide()) return;
 
         double finalDamage = event.getAmount();
         if (!proj.getPersistentData().contains("ScaledDamage")) {

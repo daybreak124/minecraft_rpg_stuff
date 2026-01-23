@@ -1,8 +1,10 @@
 package net.cold.coldsmod.blessingbonuses.skills;
 
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
+import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.damage.CustomMeleeDamageNoProcs;
 import net.cold.coldsmod.stat.ItemRarityUtils;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -23,9 +25,9 @@ public class BronzewoodApply {
 
     @SubscribeEvent
     public static void onHitApplyBronzewoodCurse(LivingHurtEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
         if (!(event.getSource().getEntity() instanceof Player player)) return;
         if (event.getEntity() instanceof Player) return;
-        if (player.level().isClientSide()) return;
 
         LivingEntity target = event.getEntity();
 
@@ -62,6 +64,8 @@ public class BronzewoodApply {
                     7F,
                     1.0F
             );
+
+            EffectUtils.spawnParticleBurst(target, ParticleTypes.SCULK_SOUL);
 
             curseSources.put(target, player.getUUID());
 

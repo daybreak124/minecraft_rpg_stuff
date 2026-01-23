@@ -1,8 +1,11 @@
 package net.cold.coldsmod.blessingbonuses.effects;
 
+import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -14,10 +17,14 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
+
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleBurst;
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleRing;
 
 public class SoulSeveranceActive extends MobEffect {
 
@@ -28,10 +35,12 @@ public class SoulSeveranceActive extends MobEffect {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
-        if (!event.player.hasEffect(ModEffects.SOUL_SEVERANCE_READY.get())) return;
         if (event.player.level().isClientSide()) return;
 
+        if (!event.player.hasEffect(ModEffects.SOUL_SEVERANCE_READY.get())) return;
+
         Player player = event.player;
+        Level level = player.level();
 
         int ticks = player.getPersistentData().getInt("pull_ticks");
 
@@ -39,10 +48,16 @@ public class SoulSeveranceActive extends MobEffect {
             double range = 6.0;
             double pullStrength = 0.05;
 
+            double radiusSq = 36.0;
             List<LivingEntity> nearby = player.level().getEntitiesOfClass(
                     LivingEntity.class,
                     player.getBoundingBox().inflate(range),
-                    e -> !(e instanceof Player)
+                    e -> {
+                        if (e instanceof Player || !player.hasLineOfSight(e)) return false;
+                        double dx = e.getX() - player.getX();
+                        double dz = e.getZ() - player.getZ();
+                        return (dx * dx + dz * dz) <= radiusSq;
+                    }
             );
 
             for (LivingEntity mob : nearby) {
@@ -66,17 +81,14 @@ public class SoulSeveranceActive extends MobEffect {
 
                 DamageSource source = new CustomMeleeDamage(meleeType, player);
 
-                if (ticks % 20 == 0 && mob instanceof Enemy) {
-                    player.level().playSound(
-                            null,
-                            player.getX(), player.getY(), player.getZ(),
-                            SoundEvents.SOUL_ESCAPE,
-                            SoundSource.PLAYERS,
-                            7F,
-                            1.0F
-                    );
-                    mob.hurtMarked = true;
-                    mob.hurt(source, 4.0f);
+                if (ticks % 20 == 0) {
+                    EffectUtils.playSound(player, SoundEvents.SOUL_ESCAPE, 7.0F, 1.0F);
+                    spawnParticleRing((ServerLevel) level, player, ParticleTypes.SOUL_FIRE_FLAME, 6.0, 120);
+                    if (mob instanceof Enemy) {
+                        mob.hurtMarked = true;
+                        mob.hurt(source, 4.0f);
+                        spawnParticleBurst(mob, ParticleTypes.SOUL);
+                    }
                 }
             }
 

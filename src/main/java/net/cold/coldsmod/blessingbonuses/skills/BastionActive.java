@@ -25,8 +25,8 @@ public class BastionActive extends MobEffect {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
-        if (!event.player.hasEffect(ModEffects.BASTION_READY.get())) return;
         if (event.player.level().isClientSide()) return;
+        if (!event.player.hasEffect(ModEffects.BASTION_READY.get())) return;
 
         Player player = event.player;
 

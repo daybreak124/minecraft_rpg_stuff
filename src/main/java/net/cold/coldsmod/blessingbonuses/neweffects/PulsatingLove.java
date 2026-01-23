@@ -16,8 +16,8 @@ import java.util.List;
 
 public class PulsatingLove {
 
-    private static final int TICK_INTERVAL = 20 * 5; // 5 seconds
-    private static final int EFFECT_DURATION = 20 * 30; // 20 seconds
+    private static final int TICK_INTERVAL = 200; // 10s
+    private static final int EFFECT_DURATION = 20 * 30; // 30s
     private static final double RADIUS = 10.0;
     private static final String AURA_TICK = "tamed_aura_tick";
 
@@ -25,8 +25,8 @@ public class PulsatingLove {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
-        if (event.player.hasEffect(ModEffects.SOLARA.get())) return;
         if (event.player.level().isClientSide()) return;
+        if (event.player.hasEffect(ModEffects.SOLARA.get())) return;
 
         Player player = event.player;
 

@@ -15,6 +15,8 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
@@ -23,6 +25,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
 import java.util.UUID;
+
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleRing;
 
 public class ThornedParryReady extends MobEffect {
 
@@ -39,8 +43,8 @@ public class ThornedParryReady extends MobEffect {
     @SubscribeEvent
     public static void onShieldHit(LivingHurtEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
+        if (event.getEntity().level().isClientSide()) return;
         if (!player.hasEffect(ModEffects.THORNED_PARRY_READY.get())) return;
-        if (player.level().isClientSide()) return;
 
         if (player.isBlocking() && event.getSource().getEntity() instanceof Monster monster) {
             player.getPersistentData().putInt("parry_time", 8);
@@ -79,9 +83,9 @@ public class ThornedParryReady extends MobEffect {
             UUID attackerUUID = player.getPersistentData().getUUID("last_attacker_uuid");
             Entity entity = level.getEntity(attackerUUID);
 
-            if (entity instanceof Monster monster) {
-                monster.setNoAi(true);
-                monster.getPersistentData().putInt("freeze_timer", 40);
+            if (entity instanceof Mob enemy) {
+                enemy.setNoAi(true);
+                enemy.getPersistentData().putInt("freeze_timer", 40);
             }
         }
 
@@ -90,20 +94,29 @@ public class ThornedParryReady extends MobEffect {
                 .getHolderOrThrow(ModDamageTypes.EXPLOSION_DAMAGE);
         DamageSource source = new CustomMeleeDamage(explosionType, player);
 
-        double radius = 3.0;
-        List<LivingEntity> targets = level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(radius));
+        double radiusSq = 9.0;
+        List<LivingEntity> enemies = level.getEntitiesOfClass(
+                LivingEntity.class,
+                player.getBoundingBox().inflate(3.0),
+                e -> {
+                    if (!(e instanceof Enemy) || !e.isAlive() || !player.hasLineOfSight(e)) return false;
+                    double dx = e.getX() - player.getX();
+                    double dz = e.getZ() - player.getZ();
+                    return (dx * dx + dz * dz) <= radiusSq;
+                }
+        );
 
-        for (LivingEntity target : targets) {
-            if (target != player) {
-                target.hurt(source, 5.0f);
-                target.hurtMarked = true;
-            }
+        for (LivingEntity target : enemies) {
+            target.hurt(source, 5.0f);
+            target.hurtMarked = true;
         }
+
+        spawnParticleRing(level, player, ParticleTypes.SNEEZE, 3.0, 60);
 
         player.removeEffect(ModEffects.THORNED_PARRY_READY.get());
         player.addEffect(new MobEffectInstance(ModEffects.THORNED_PARRY_CD.get(), 20*7, 0, false, false, true));
 
-        EffectUtils.spawnParticleBurst(player, ParticleTypes.CRIMSON_SPORE);
+        EffectUtils.spawnParticleBurst(player, ParticleTypes.CRIT);
         EffectUtils.playSound(player, SoundEvents.TRIDENT_HIT_GROUND, 1F, 1F);
     }
 }

@@ -1,9 +1,11 @@
 package net.cold.coldsmod.stat;
 
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
+import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.cold.coldsmod.damage.CustomMeleeDamageNoProcs;
 import net.cold.coldsmod.damage.CustomRangedDamage;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -26,6 +28,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import static net.cold.coldsmod.blessingbonuses.CooldownCycle.HAWKEYE_UUID;
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleBurst;
 import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
 import static net.cold.coldsmod.stat.AttributeApplier.removeModifier;
 
@@ -37,7 +40,9 @@ public class Formulas {
     }
 
     private double getSharpnessBonus(Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
+        InteractionHand actualHand = (hand == null) ? InteractionHand.MAIN_HAND : hand;
+        ItemStack stack = player.getItemInHand(actualHand);
+        if (stack.isEmpty()) return 0.0;
         if (!stack.isEmpty() && "sword".equals(ItemRarityUtils.getItemType(stack))) {
             return getSharpnessLevel(stack);
         }
@@ -77,6 +82,7 @@ public class Formulas {
                 if (proj.getPersistentData().getBoolean("clairvoyance_tagged")) {
                     finalDamage *= 3;
                     resetClairvoyance(player, data);
+                    spawnParticleBurst(event.getEntity(), ParticleTypes.SONIC_BOOM);
                 }
 
                 if (!proj.getPersistentData().contains("ScaledDamage")) {
@@ -148,6 +154,7 @@ public class Formulas {
             attackerDamageMultiplier = attacker.getAttributeValue(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
         }
         event.setAmount((float) (event.getAmount() * incDamageMultiplier * attackerDamageMultiplier));
+        // System.out.println(event.getAmount());
     }
 
     private boolean rollCrit(Player player, double chance) {
@@ -169,6 +176,7 @@ public class Formulas {
             );
         }        player.removeEffect(ModEffects.BERSERK_READY.get());
         data.putInt("berserk", 0);
+        spawnParticleBurst(player, ParticleTypes.SMALL_FLAME);
         if (!player.hasEffect(ModEffects.BERSERK_TIMER.get())) {
             player.addEffect(new MobEffectInstance(ModEffects.BERSERK_TIMER.get(), 300, 0, false, false, true));
         }
@@ -181,6 +189,7 @@ public class Formulas {
             data.putInt("berserk", stacks);
             player.removeEffect(ModEffects.BERSERK.get());
             player.addEffect(new MobEffectInstance(ModEffects.BERSERK.get(), 80, stacks - 1, false, false, true));
+            spawnParticleBurst(player, ParticleTypes.FLAME);
         } else {
             data.putInt("berserk", 0);
             player.removeEffect(ModEffects.BERSERK.get());
@@ -231,11 +240,9 @@ public class Formulas {
     @SubscribeEvent
     public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
         double miningSpeedBonus = event.getEntity().getAttributeValue(ModAttributes.MINING_SPEED.get());
-        if (miningSpeedBonus != 0) {
-            float original = event.getNewSpeed();
-            float boosted = (float) (original * (1.0 + (miningSpeedBonus / 100.0)));
-            event.setNewSpeed(boosted);
-        }
+        float original = event.getNewSpeed();
+        float boosted = (float) (original * ((miningSpeedBonus)));
+        event.setNewSpeed(boosted);
     }
 
     @SubscribeEvent
@@ -244,17 +251,17 @@ public class Formulas {
         if (player.level().isClientSide()) return;
 
         float jumpBoost = (float) player.getAttributeValue(ModAttributes.JUMP_BOOST.get());
-        float fallThreshold = 3.0f * (1.0f + jumpBoost / 100.0f);
+        if (jumpBoost <= 0) return;
+        float fallThreshold = 3.0f * jumpBoost;
         float fallDistance = event.getDistance();
-
         if (fallDistance <= fallThreshold) {
+            event.setDistance(0);
             event.setCanceled(true);
             return;
         }
-        float damageMultiplier = 100.0f / (100.0f + jumpBoost);
-        damageMultiplier = Math.max(0.0f, Math.min(1.0f, damageMultiplier));
 
-        event.setDamageMultiplier(damageMultiplier);
+        float damageMultiplier = 1.0f / jumpBoost;
+        event.setDamageMultiplier(Math.max(0.0f, damageMultiplier));
     }
 
     @SubscribeEvent
@@ -264,15 +271,18 @@ public class Formulas {
 
         if (player.hasEffect(ModEffects.BASTION_ACTIVE.get())) {
             event.setCanceled(true);
+            EffectUtils.spawnParticleBurst(player, ParticleTypes.SNEEZE);
             if (player instanceof ServerPlayer serverPlayer) {serverPlayer.playNotifySound(SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75F, 1.5F);}
             return;
         }
 
         if (player.hasEffect(ModEffects.NIMBLE_GETAWAY_ACTIVE.get())) {
             event.setCanceled(true);
+            EffectUtils.spawnParticleBurst(player, ParticleTypes.SNEEZE);
+
 
             player.removeEffect(ModEffects.NIMBLE_GETAWAY_ACTIVE.get());
-            player.addEffect(new MobEffectInstance(ModEffects.NIMBLE_GETAWAY_COOLDOWN.get(), 20*30, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(ModEffects.NIMBLE_GETAWAY_COOLDOWN.get(), 20*20, 0, false, false, true));
 
             if (player instanceof ServerPlayer serverPlayer) {serverPlayer.playNotifySound(SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75F, 1.5F);}
             return;

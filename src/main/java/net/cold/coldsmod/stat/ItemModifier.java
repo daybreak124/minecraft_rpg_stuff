@@ -25,6 +25,7 @@ public class ItemModifier {
 
     @SubscribeEvent
     public void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
         ItemStack result = event.getCrafting();
 
         if (event.getInventory() instanceof SmithingMenu smithingMenu) {
@@ -43,6 +44,7 @@ public class ItemModifier {
 
     @SubscribeEvent
     public void onEntityItemPickup(EntityItemPickupEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
         ItemStack pickedUp = event.getItem().getItem();
         applyRarityAndStats(pickedUp);
         applyAttributes(pickedUp);
@@ -194,8 +196,12 @@ public class ItemModifier {
 
     @SubscribeEvent
     public void onItemTooltip(ItemTooltipEvent event) {
-        ItemRarityUtils utils = new ItemRarityUtils();
         ItemStack stack = event.getItemStack();
+        if (stack.isEmpty()) return;
+        CompoundTag tag = stack.getTag();
+        if (tag == null || !tag.contains("custom_stats")) return;
+        if (!ItemRarityUtils.hasRarity(stack)) return;
+
         List<Component> tooltip = event.getToolTip();
 
         if (!ItemRarityUtils.hasRarity(stack) || !StatUtils.hasStats(stack)) return;

@@ -3,7 +3,10 @@ package net.cold.coldsmod.blessingbonuses.neweffects;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.ModAttributes;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -12,6 +15,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
@@ -113,14 +117,34 @@ public class CombatantsAidReady extends MobEffect {
 
     private static void applyDashSupport(Player player, Vec3 direction) {
         Level level = player.level();
+        ServerLevel serverLevel = (ServerLevel) level;
 
         AABB dashBox = player.getBoundingBox().inflate(4);
 
         List<LivingEntity> allies = level.getEntitiesOfClass(
                 LivingEntity.class,
                 dashBox,
-                EffectUtils::isAlly
+                e -> EffectUtils.isAlly(e) && player.hasLineOfSight(e)
         );
+
+        double radius = 4.0;
+        int points = 80;
+
+        for (int i = 0; i < points; i++) {
+            double angle = 2 * Math.PI * i / points;
+            double x = player.getX() + (radius * Math.cos(angle));
+            double z = player.getZ() + (radius * Math.sin(angle));
+
+            BlockPos groundPos = serverLevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, BlockPos.containing(x, player.getY(), z));
+            double y = groundPos.getY() + 0.1;
+
+            serverLevel.sendParticles(ParticleTypes.COMPOSTER,
+                    x, y, z,
+                    1,
+                    0, 0, 0,
+                    0.0
+            );
+        }
 
         double healIncrease = getScaledValue(player,
                 ModAttributes.RESTORATION.get(),
@@ -146,7 +170,6 @@ public class CombatantsAidReady extends MobEffect {
         );
 
         EffectUtils.playSound(player, SoundEvents.ARMOR_EQUIP_ELYTRA, 0.5F, 1.0F);
-
 
         tag.putBoolean("dash_active", false);
         tag.remove("dash_timer");

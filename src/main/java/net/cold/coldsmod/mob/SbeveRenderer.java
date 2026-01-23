@@ -25,7 +25,7 @@ public class SbeveRenderer extends MobRenderer<Sbeve, PlayerModel<Sbeve>> {
 
     @Override
     protected void scale(Sbeve entity, PoseStack poseStack, float partialTick) {
-        poseStack.scale(0.75f, 0.75f, 0.75f);
+        poseStack.scale(1.5f, 0.75f, 1.5f);
     }
 
 }

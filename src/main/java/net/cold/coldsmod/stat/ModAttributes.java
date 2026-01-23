@@ -104,11 +104,11 @@ public class ModAttributes {
             () -> new RangedAttribute("amplification_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> JUMP_BOOST = ATTRIBUTES.register("jump_boost",
-            () -> new RangedAttribute("jump_boost", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
+            () -> new RangedAttribute("jump_boost", 1.0D, 0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> MINING_SPEED = ATTRIBUTES.register("mining_speed",
-            () -> new RangedAttribute("mining_speed", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
+            () -> new RangedAttribute("mining_speed", 1.0D, 0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> XP_GAIN = ATTRIBUTES.register("xp_gain",
-            () -> new RangedAttribute("xp_gain", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
+            () -> new RangedAttribute("xp_gain", 1.0D, 0D, 2048.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> ARMOR_MULTIPLIER = ATTRIBUTES.register("armor_multiplier",
             () -> new RangedAttribute("armor_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));

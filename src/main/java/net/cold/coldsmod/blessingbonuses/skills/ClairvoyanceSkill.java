@@ -21,8 +21,8 @@ public class ClairvoyanceSkill {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
-        if (!event.player.hasEffect(ModEffects.CLAIRVOYANCE_READY.get())) return;
         if (event.player.level().isClientSide()) return;
+        if (!event.player.hasEffect(ModEffects.CLAIRVOYANCE_READY.get())) return;
 
         Player player = event.player;
 
@@ -57,10 +57,10 @@ public class ClairvoyanceSkill {
     public static void onArrowSpawn(EntityJoinLevelEvent event) {
         if (!(event.getEntity() instanceof AbstractArrow arrow)) return;
         if (!(arrow.getOwner() instanceof Player player)) return;
+        if (player.level().isClientSide()) return;
 
         if (!player.getPersistentData().getBoolean("Clairvoyance")) return;
 
-        if (player.level().isClientSide()) return;
 
         ItemStack main = player.getMainHandItem();
         ItemStack off  = player.getOffhandItem();

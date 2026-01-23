@@ -4,6 +4,9 @@ import net.cold.coldsmod.ModSounds;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.stat.ModAttributes;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -17,6 +20,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
 
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleRing;
+
 public class DaringShoutSkill {
 
     private static final int COOLDOWN_TICKS = 20 * 15;
@@ -24,8 +29,8 @@ public class DaringShoutSkill {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
-        if (!event.player.hasEffect(ModEffects.DARING_SHOUT.get())) return;
         if (event.player.level().isClientSide()) return;
+        if (!event.player.hasEffect(ModEffects.DARING_SHOUT.get())) return;
 
         Player player = event.player;
 
@@ -58,10 +63,16 @@ public class DaringShoutSkill {
         double durationMultiplier = 1 + (fort * 0.02 + perc * 0.01);
         int durationTicks = (int) (3 * 20 * durationMultiplier);
 
+        double radiusSq = 25.0;
         List<LivingEntity> entities = level.getEntitiesOfClass(
                 LivingEntity.class,
                 player.getBoundingBox().inflate(5),
-                e -> e instanceof Enemy && e.isAlive() && !e.isInvulnerable()
+                e -> {
+                    if (!(e instanceof Enemy) || !e.isAlive() || e.isInvulnerable() || !player.hasLineOfSight(e)) return false;
+                    double dx = e.getX() - player.getX();
+                    double dz = e.getZ() - player.getZ();
+                    return (dx * dx + dz * dz) <= radiusSq;
+                }
         );
 
         for (LivingEntity entity : entities) {
@@ -72,7 +83,11 @@ public class DaringShoutSkill {
             if (entity instanceof Mob mob) {
                 mob.setNoAi(true);
                 mob.getPersistentData().putInt("freeze_timer", finalDuration);
+                EffectUtils.spawnParticleBurst(entity, ParticleTypes.ASH);
             }
         }
+
+        spawnParticleRing((ServerLevel) level, player, ParticleTypes.LARGE_SMOKE, 5.0, 100);
+        EffectUtils.spawnParticleBurst(player, ParticleTypes.LARGE_SMOKE);
     }
 }

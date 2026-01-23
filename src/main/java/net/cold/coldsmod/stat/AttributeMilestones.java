@@ -129,12 +129,12 @@ public class AttributeMilestones {
         });
 
         // --- INS ---
-        register(ModAttributes.INSIGHT, 10, (p, id, add) -> applyBonus(p, id, ModAttributes.MINING_SPEED.get(), 10.0, add));
-        register(ModAttributes.INSIGHT, 20, (p, id, add) -> applyBonus(p, id, ModAttributes.XP_GAIN.get(), 10.0, add));
+        register(ModAttributes.INSIGHT, 10, (p, id, add) -> applyBonus(p, id, ModAttributes.MINING_SPEED.get(), 0.1, add));
+        register(ModAttributes.INSIGHT, 20, (p, id, add) -> applyBonus(p, id, ModAttributes.XP_GAIN.get(), 0.1, add));
         register(ModAttributes.INSIGHT, 30, (p, id, add) -> applyBonus(p, id, ForgeMod.BLOCK_REACH.get(), 0.5, add));
         register(ModAttributes.INSIGHT, 40, (p, id, add) -> {
-            applyBonus(p, id + "_mine", ModAttributes.MINING_SPEED.get(), 25.0, add);
-            applyBonus(p, id + "_xp", ModAttributes.XP_GAIN.get(), 25.0, add);
+            applyBonus(p, id + "_mine", ModAttributes.MINING_SPEED.get(), 0.25, add);
+            applyBonus(p, id + "_xp", ModAttributes.XP_GAIN.get(), 0.25, add);
         });
 
         // --- WIS ---
