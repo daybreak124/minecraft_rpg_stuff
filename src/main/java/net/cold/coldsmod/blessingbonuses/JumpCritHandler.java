@@ -30,9 +30,6 @@ public class JumpCritHandler {
         Player player = event.getEntity();
 
         if (player.hasEffect(ModEffects.DIRECTED_HATRED_READY.get())) {
-
-            double range = 10.0;
-
             double rangeSq = 100.0;
             List<LivingEntity> nearby = player.level().getEntitiesOfClass(
                     LivingEntity.class,

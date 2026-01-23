@@ -60,6 +60,11 @@ public class SoulSeveranceActive extends MobEffect {
                     }
             );
 
+            if (ticks%20 == 0) {
+                EffectUtils.playSound(player, SoundEvents.SOUL_ESCAPE, 7.0F, 1.0F);
+                spawnParticleRing((ServerLevel) level, player, ParticleTypes.SOUL_FIRE_FLAME, 6.0, 120);
+            }
+
             for (LivingEntity mob : nearby) {
                 double dx = player.getX() - mob.getX();
                 double dy = player.getY() - mob.getY();
@@ -82,8 +87,6 @@ public class SoulSeveranceActive extends MobEffect {
                 DamageSource source = new CustomMeleeDamage(meleeType, player);
 
                 if (ticks % 20 == 0) {
-                    EffectUtils.playSound(player, SoundEvents.SOUL_ESCAPE, 7.0F, 1.0F);
-                    spawnParticleRing((ServerLevel) level, player, ParticleTypes.SOUL_FIRE_FLAME, 6.0, 120);
                     if (mob instanceof Enemy) {
                         mob.hurtMarked = true;
                         mob.hurt(source, 4.0f);

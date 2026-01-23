@@ -561,7 +561,7 @@ public class ModItems {
             tooltip.add(Component.literal("Blessing: Intimidating Presence").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Crouching for a second").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" marks monsters within a").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 10 block area, increasing").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" 10 block radius, increasing").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" their damage taken by 20%").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" for 8 seconds.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Debuff amount increased by").withStyle(ChatFormatting.GRAY));
@@ -616,7 +616,7 @@ public class ModItems {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Blessing: Daring Shout").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Crouching stuns targets").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" within a 5 block area").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" within a 5 block radius").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" for 3 seconds.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Stun duration increased by").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 0.06s per Fortitude and").withStyle(ChatFormatting.GRAY));
@@ -960,7 +960,7 @@ public class ModItems {
             tooltip.add(Component.literal(" movement speed by 8% per").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" stack and deal 5 Melee").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Damage per stack in a 4 block").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" area when colliding with a").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" radius when colliding with a").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" monster. Stack count increased").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" every 2 seconds and gain").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Absorption 1 when reaching").withStyle(ChatFormatting.GRAY));
@@ -1115,9 +1115,9 @@ public class ModItems {
             tooltip.add(Component.literal(" Upon jumping, shoot").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" yourself up and deal").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 7.5 Melee damage within").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" a 5 block area and").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" a 5 block radius and").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 20 Melee damage on landing").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" within a 7 block area.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" within a 7 block radius.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Reduces Quantum Leap").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" cooldown by 5 seconds and").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" enhances it for 4 seconds.").withStyle(ChatFormatting.GRAY));
@@ -1233,7 +1233,7 @@ public class ModItems {
             tooltip.add(Component.literal(" On crits, the damage").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" bounces to the closest").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" monster within a 4 block").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" area of the target for").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" radius of the target for").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" half the main damage.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" The damage keeps bouncing").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" until the damage is less").withStyle(ChatFormatting.GRAY));
@@ -1475,7 +1475,7 @@ public class ModItems {
             tooltip.add(Component.literal(" a block, spawn Spirit Forest,").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" which applies Regeneration I").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" to targets within a 3 block").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" area. Spirit Forest range").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" radius. Spirit Forest range").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" increased by Amplification.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Initial heal is increased by").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Restoration stat.").withStyle(ChatFormatting.GRAY));
@@ -1762,7 +1762,7 @@ public class ModItems {
             tooltip.add(Component.literal(" Retaliate effect for 4 seconds.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" When the effect ends, deal").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 3 Melee Damage within a 5 block").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" area for every time you block").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" radius for every time you block").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" an attack. Damage increased by").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 1% per Fortitude ").withStyle(ChatFormatting.GRAY));
             tooltip.add(
@@ -2094,7 +2094,7 @@ public class ModItems {
             tooltip.add(Component.literal(" When you crouch while").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" sprinting, perform an 8").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" block dash and heal allies").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" within 4 blocks by 4 and").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" within 3 blocks by 4 and").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" apply Resistance I.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Crouch for a second within").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 4 seconds of the dash to").withStyle(ChatFormatting.GRAY));
@@ -2546,13 +2546,12 @@ public class ModItems {
             tooltip.add(Component.literal("Applies to:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Swords").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("Blessing: Blessed Land").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal(" After hitting a target").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" with a melee weapon,").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" summon an area 5 blocks").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" within the target which").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" heals a player for 3").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" when stepped into and").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" disappears.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Melee hits spawn a zone").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" within 5 blocks of the").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" target that heals nearby").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" players for 3.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" The area disappears").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" when stepped on.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Blessed Land Duration: ").withStyle(ChatFormatting.DARK_AQUA)
                             .append(Component.literal("7.5s").withStyle(ChatFormatting.GRAY))

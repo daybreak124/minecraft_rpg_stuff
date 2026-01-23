@@ -119,42 +119,56 @@ public class CombatantsAidReady extends MobEffect {
         Level level = player.level();
         ServerLevel serverLevel = (ServerLevel) level;
 
-        AABB dashBox = player.getBoundingBox().inflate(4);
+        AABB startBox = player.getBoundingBox().inflate(3.0);
+
+        double dashDist = 11.0;
+        AABB dashLane = startBox.expandTowards(
+                direction.x * dashDist,
+                direction.y * dashDist,
+                direction.z * dashDist
+        );
 
         List<LivingEntity> allies = level.getEntitiesOfClass(
                 LivingEntity.class,
-                dashBox,
+                dashLane,
                 e -> EffectUtils.isAlly(e) && player.hasLineOfSight(e)
         );
 
-        double radius = 4.0;
-        int points = 80;
+        double minX = dashLane.minX;
+        double maxX = dashLane.maxX;
+        double minZ = dashLane.minZ;
+        double maxZ = dashLane.maxZ;
 
-        for (int i = 0; i < points; i++) {
-            double angle = 2 * Math.PI * i / points;
-            double x = player.getX() + (radius * Math.cos(angle));
-            double z = player.getZ() + (radius * Math.sin(angle));
+        // side lengths to keep particle density consistent
+        double lenX = maxX - minX;
+        double lenZ = maxZ - minZ;
 
-            BlockPos groundPos = serverLevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, BlockPos.containing(x, player.getY(), z));
-            double y = groundPos.getY() + 0.1;
+        // roughly 1 particle every 0.5 blocks along the perimeter
+        int particlesX = (int) (lenX * 2);
+        int particlesZ = (int) (lenZ * 2);
 
-            serverLevel.sendParticles(ParticleTypes.COMPOSTER,
-                    x, y, z,
-                    1,
-                    0, 0, 0,
-                    0.0
-            );
+        // X
+        for (int i = 0; i <= particlesX; i++) {
+            double pct = (double) i / particlesX;
+            spawnBorderParticle(serverLevel, player, minX + (lenX * pct), minZ);
+            spawnBorderParticle(serverLevel, player, minX + (lenX * pct), maxZ);
+        }
+        // Z
+        for (int i = 0; i <= particlesZ; i++) {
+            double pct = (double) i / particlesZ;
+            spawnBorderParticle(serverLevel, player, minX, minZ + (lenZ * pct));
+            spawnBorderParticle(serverLevel, player, maxX, minZ + (lenZ * pct));
         }
 
-        double healIncrease = getScaledValue(player,
+        double healIncrease = AttributeApplier.getScaledValue(player,
                 ModAttributes.RESTORATION.get(),
                 ModAttributes.RESTORATION_MULTIPLIER.get());
 
-        float healAmount = (float) (4f * (1.0 + (healIncrease / 100.0)));
+        float healAmount = (float) (4.0f * (1.0 + (healIncrease / 100.0)));
 
         for (LivingEntity ally : allies) {
             ally.heal(healAmount);
-            ally.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20 * 5, 0, false, false, true));
+            ally.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, 0, false, false, true));
             EffectUtils.playHealSound(ally);
             EffectUtils.spawnComposterBurst(ally);
         }
@@ -174,5 +188,10 @@ public class CombatantsAidReady extends MobEffect {
         tag.putBoolean("dash_active", false);
         tag.remove("dash_timer");
         tag.remove("dash_crouch_ticks");
+    }
+
+    private static void spawnBorderParticle(ServerLevel level, Player player, double x, double z) {
+        BlockPos groundPos = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, BlockPos.containing(x, player.getY(), z));
+        level.sendParticles(ParticleTypes.COMPOSTER, x, groundPos.getY() + 0.1, z, 1, 0, 0, 0, 0.0);
     }
 }

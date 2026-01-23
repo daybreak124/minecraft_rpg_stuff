@@ -105,7 +105,7 @@ public class VortexReady extends MobEffect {
             return;
         }
 
-        double rangeSq = range * range;
+        double rangeSq = 16;
         List<LivingEntity> nearby = level.getEntitiesOfClass(
                 LivingEntity.class,
                 new AABB(vPos, vPos).inflate(range),
