@@ -63,8 +63,8 @@ public class StatGeneration {
         boots.put("knockbackResist", new double[]{-1.7, 2.55, 0.7});
         boots.put("speed", new double[]{0, 7.5, 1.0});
         boots.put("swimSpeed", new double[]{0, 9.25, 0.8});
-        chestplate.put("rejuvenation", new double[]{-2.7, 5.4, 0.35});
-        chestplate.put("restoration", new double[]{-1.35, 2.7, 0.5});
+        boots.put("rejuvenation", new double[]{-2.7, 5.4, 0.35});
+        boots.put("restoration", new double[]{-1.35, 2.7, 0.5});
         STAT_CONFIG.put("boots", boots);
 
         // --- Weapons ---
@@ -203,7 +203,7 @@ public class StatGeneration {
             case "drawSpeed" -> stats.setDrawSpeed(value);
             case "blockReach" -> stats.setBlockReach(value);
             case "miningSpeed" -> stats.setMiningSpeed(value);
-            case "protection" -> stats.setRejuvenation(value);
+            case "rejuvenation" -> stats.setRejuvenation(value);
             case "restoration" -> stats.setRestoration(value);
             case "amplification" -> stats.setAmplification(value);
 
@@ -221,7 +221,7 @@ public class StatGeneration {
             case "projectileCritChanceMultiplier" -> stats.setProjectileCritChanceMultiplier(value);
             case "projectileCritDamageMultiplier" -> stats.setProjectileCritDamageMultiplier(value);
             case "drawSpeedMultiplier" -> stats.setDrawSpeedMultiplier(value);
-            case "protectionMultiplier" -> stats.setRejuvenationMultiplier(value);
+            case "rejuvenationMultiplier" -> stats.setRejuvenationMultiplier(value);
             case "restorationMultiplier" -> stats.setRestorationMultiplier(value);
             case "amplificationMultiplier" -> stats.setAmplificationMultiplier(value);
         }

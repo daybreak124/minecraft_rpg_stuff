@@ -109,8 +109,8 @@ public class ItemModifier {
                             "armorMultiplier", "armorToughnessMultiplier", "healthMultiplier", "damageMultiplier",
                             "meleeDamageMultiplier", "attackSpeedMultiplier", "projectileDamageMultiplier", "drawSpeedMultiplier",
                             "critChanceMultiplier", "critDamageMultiplier", "meleeCritChanceMultiplier", "meleeCritDamageMultiplier",
-                            "projectileCritChanceMultiplier", "projectileCritDamageMultiplier", "protection", "restoration",
-                            "amplification", "amplificationMultiplier", "protectionMultiplier", "restorationMultiplier"
+                            "projectileCritChanceMultiplier", "projectileCritDamageMultiplier", "rejuvenation", "restoration",
+                            "amplification", "amplificationMultiplier", "rejuvenationMultiplier", "restorationMultiplier"
                     }) {
                         if (oldStats.contains(key)) {
                             newStats.putDouble(key, oldStats.getDouble(key));

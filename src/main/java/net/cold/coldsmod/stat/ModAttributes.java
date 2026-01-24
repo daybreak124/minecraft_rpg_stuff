@@ -62,8 +62,6 @@ public class ModAttributes {
     public static final RegistryObject<Attribute> REJUVENATION = ATTRIBUTES.register("incoming_healing",
             () -> new RangedAttribute("incoming_healing", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
 
-    public static final RegistryObject<Attribute> PROTECTION = ATTRIBUTES.register("protection",
-            () -> new RangedAttribute("protection", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> RESTORATION = ATTRIBUTES.register("restoration",
             () -> new RangedAttribute("restoration", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> AMPLIFICATION = ATTRIBUTES.register("amplification",
@@ -96,8 +94,6 @@ public class ModAttributes {
     public static final RegistryObject<Attribute> NOCK_HASTE_MULTIPLIER = ATTRIBUTES.register("nock_haste_multiplier",
             () -> new RangedAttribute("name.nock_haste_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
 
-    public static final RegistryObject<Attribute> PROTECTION_MULTIPLIER = ATTRIBUTES.register("protection_multiplier",
-            () -> new RangedAttribute("protection_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> RESTORATION_MULTIPLIER = ATTRIBUTES.register("restoration_multiplier",
             () -> new RangedAttribute("restoration_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> AMPLIFICATION_MULTIPLIER = ATTRIBUTES.register("amplification_multiplier",
@@ -154,7 +150,6 @@ public class ModAttributes {
         event.add(EntityType.PLAYER, ModAttributes.PROJECTILE_ACCURACY.get());
         event.add(EntityType.PLAYER, ModAttributes.PROJECTILE_PRECISION.get());
 
-        event.add(EntityType.PLAYER, ModAttributes.PROTECTION.get());
         event.add(EntityType.PLAYER, ModAttributes.RESTORATION.get());
         event.add(EntityType.PLAYER, ModAttributes.AMPLIFICATION.get());
         event.add(EntityType.PLAYER, ModAttributes.DEBUFF_RESIST.get());
@@ -173,7 +168,6 @@ public class ModAttributes {
         event.add(EntityType.PLAYER, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get());
         event.add(EntityType.PLAYER, ModAttributes.NOCK_HASTE_MULTIPLIER.get());
 
-        event.add(EntityType.PLAYER, ModAttributes.PROTECTION_MULTIPLIER.get());
         event.add(EntityType.PLAYER, ModAttributes.RESTORATION_MULTIPLIER.get());
         event.add(EntityType.PLAYER, ModAttributes.AMPLIFICATION_MULTIPLIER.get());
 

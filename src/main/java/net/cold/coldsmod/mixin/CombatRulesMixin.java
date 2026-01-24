@@ -9,7 +9,7 @@ public class CombatRulesMixin {
     @Overwrite
     public static float getDamageAfterAbsorb(float pDamage, float pTotalArmor, float pToughnessAttribute) {
 
-        double armorReduction = (double) pTotalArmor / (80 + (double) pTotalArmor - 80 * ((double) pToughnessAttribute / ((double) pToughnessAttribute + 50.0)));
+        double armorReduction = pTotalArmor / (80 + pTotalArmor - 80 * (pToughnessAttribute / (pToughnessAttribute + 50.0)));
         double finalDamageDouble = pDamage * (1.0 - armorReduction);
 
         return (float) finalDamageDouble;
