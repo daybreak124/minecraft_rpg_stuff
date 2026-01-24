@@ -8,10 +8,8 @@ import org.spongepowered.asm.mixin.Overwrite;
 public class CombatRulesMixin {
     @Overwrite
     public static float getDamageAfterAbsorb(float pDamage, float pTotalArmor, float pToughnessAttribute) {
-        double armor = pTotalArmor;
-        double toughness = pToughnessAttribute;
 
-        double armorReduction = armor / (80 + armor - 80 * (toughness / (toughness + 50.0)));
+        double armorReduction = (double) pTotalArmor / (80 + (double) pTotalArmor - 80 * ((double) pToughnessAttribute / ((double) pToughnessAttribute + 50.0)));
         double finalDamageDouble = pDamage * (1.0 - armorReduction);
 
         return (float) finalDamageDouble;

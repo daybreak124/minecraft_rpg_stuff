@@ -1038,8 +1038,8 @@ public class ModItems {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Blessing: Quantum Leap").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Upon crouch jumping, perform").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" a teleport and turn invisible for").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 4 seconds after landing and gain").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" a 10 block teleport and turn").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" invisible for 4 seconds. Gain").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" +30 Potency and +20% Movement").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Speed for 8 seconds until you.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" attack a target. Takes priority").withStyle(ChatFormatting.GRAY));
@@ -2430,10 +2430,11 @@ public class ModItems {
             tooltip.add(Component.literal("Applies to:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Crossbows").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("Blessing: Focused Energy").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal(" Launch yourself when").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" shooting the ground.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Targets within 5 blocks").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" are rooted for a second.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Launch yourself up to").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" 10 blocks when shooting").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" the ground.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Targets within a 5 block").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" radius are rooted for 1s.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
                             .append(Component.literal("6s").withStyle(ChatFormatting.GRAY))
@@ -2548,8 +2549,8 @@ public class ModItems {
             tooltip.add(Component.literal("Blessing: Blessed Land").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Melee hits spawn a zone").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" within 5 blocks of the").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" target that heals nearby").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" players for 3.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" target that heals a player").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" for 3 when stepped on.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" The area disappears").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" when stepped on.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
@@ -2653,7 +2654,8 @@ public class ModItems {
             tooltip.add(Component.literal("Blessing: Diver Down").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Fishing Rods act").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" as grappling hooks.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Take 6 Magic Damage").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Take 4 Magic Damage").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" on use.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Only works for").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" moving upwards.").withStyle(ChatFormatting.GRAY));
         }

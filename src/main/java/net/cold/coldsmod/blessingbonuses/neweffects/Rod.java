@@ -87,7 +87,7 @@ public class Rod {
         double distance = player.position().distanceTo(target);
         if (distance < 1.4 || currentY >= target.y) {
             data.putBoolean("is_grappling", false);
-            player.hurt(player.damageSources().magic(), 6f);
+            player.hurt(player.damageSources().magic(), 4f);
             data.remove("last_y");
 
             player.push(0, 0.1, 0);

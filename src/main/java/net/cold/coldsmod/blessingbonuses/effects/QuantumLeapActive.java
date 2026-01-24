@@ -38,7 +38,7 @@ public class QuantumLeapActive extends MobEffect {
         if (!player.hasEffect(ModEffects.QUANTUM_LEAP_READY.get())) return;
 
         Vec3 look = player.getLookAngle().normalize();
-        Vec3 dashTarget = player.position().add(look.scale(4));
+        Vec3 dashTarget = player.position().add(look.scale(10));
 
         EffectUtils.spawnParticleBurst(player, ParticleTypes.FISHING);
 
