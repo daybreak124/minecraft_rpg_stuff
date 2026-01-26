@@ -81,12 +81,9 @@ public class DeceptionSkill {
         }
 
         player.level().playSound(
-                null,
-                target.getX(), target.getY(), target.getZ(),
-                SoundEvents.AMETHYST_BLOCK_RESONATE,
-                SoundSource.PLAYERS,
-                3.0F,
-                1.0F
+                null, target.getX(), target.getY(), target.getZ(),
+                SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS,
+                3.0F, 1.0F
         );
 
         player.removeEffect(ModEffects.DECEPTION_READY.get());
