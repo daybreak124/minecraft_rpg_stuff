@@ -1,7 +1,6 @@
 package net.cold.coldsmod.blessingbonuses.skills;
 
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
-import net.cold.coldsmod.stat.ItemRarityUtils;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
@@ -13,13 +12,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -34,10 +30,10 @@ public class ExplosiveTendencies {
 
     @SubscribeEvent
     public static void onArrowHitSpawnCreeper(LivingHurtEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
         if (!(event.getSource().getDirectEntity() instanceof AbstractArrow arrow)) return;
         Entity shooter = arrow.getOwner();
         if (!(shooter instanceof Player player)) return;
-        if (player.level().isClientSide()) return;
         if (!arrow.getPersistentData().getBoolean("explosive_tendency_tagged")) return;
 
         LivingEntity target = event.getEntity();
@@ -79,23 +75,11 @@ public class ExplosiveTendencies {
                 player.removeEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get());
             } else {
                 player.removeEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get());
-                player.addEffect(new MobEffectInstance(
-                        ModEffects.EXPLOSIVE_TENDENCY_STACK.get(),
-                        MobEffectInstance.INFINITE_DURATION,
-                        currentStacks - 1,
-                        false,
-                        false
-                ));
+                player.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_STACK.get(), MobEffectInstance.INFINITE_DURATION, currentStacks - 1, false, false, true));
             }
         }
         if (!player.hasEffect(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get())) {
-            player.addEffect(new MobEffectInstance(
-                    ModEffects.EXPLOSIVE_TENDENCY_TIMER.get(),
-                    20*8,
-                    0,
-                    false,
-                    false
-            ));
+            player.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get(), 20*8, 0, false, false));
         }
         arrow.getPersistentData().putBoolean("explosive_tendency_tagged", false);
     }
@@ -112,14 +96,16 @@ public class ExplosiveTendencies {
 
     @SubscribeEvent
     public static void onLivingDamage(LivingDamageEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
         if (!(event.getSource().getEntity() instanceof Creeper creeper)) return;
         if (!creeper.getPersistentData().getBoolean("noBlockDamage")) return;
-        if (event.getEntity() instanceof Monster) return;
+        if (event.getEntity() instanceof Enemy) return;
         event.setCanceled(true);
     }
 
     @SubscribeEvent
     public static void onCreeperDrops(LivingDropsEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
         if (!(event.getEntity() instanceof Creeper creeper)) return;
         if (!creeper.getPersistentData().getBoolean("noBlockDamage")) return;
 
@@ -128,6 +114,7 @@ public class ExplosiveTendencies {
 
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
         if (!(event.getSource().getEntity() instanceof Creeper creeper)) return;
 
         if (!creeper.getPersistentData().getBoolean("noBlockDamage")) return;
@@ -141,7 +128,7 @@ public class ExplosiveTendencies {
         Player owner = server.getPlayerList().getPlayer(ownerUUID);
         if (owner == null) return;
 
-        double finalDamage = event.getAmount();
+        double finalDamage = 5;
 
         double totalProjDamage = getScaledValue(owner,
                 ModAttributes.PROJECTILE_POTENCY.get(),
@@ -161,6 +148,6 @@ public class ExplosiveTendencies {
 
         finalDamage *= (1.0 + (totalProjDamage / 100.0));
 
-        event.setAmount((float) finalDamage/5);
+        event.setAmount((float) finalDamage);
     }
 }

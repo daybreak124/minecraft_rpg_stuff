@@ -1,5 +1,5 @@
 {
-  "message_id": "curse_damage",
+  "message_id": "melee_dot_damage",
   "scaling": "never",
   "exhaustion": 0.0
 }

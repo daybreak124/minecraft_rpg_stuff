@@ -1,7 +1,6 @@
 package net.cold.coldsmod.blessingbonuses.effects;
 
 import net.cold.coldsmod.blessingbonuses.skills.BronzewoodApply;
-import net.cold.coldsmod.damage.CustomMeleeDamageNoProcs;
 import net.cold.coldsmod.damage.ModDamageTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -28,19 +27,18 @@ public class BronzewoodCurse extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
+        if (entity.level().isClientSide()) return;
         MobEffectInstance effect = entity.getEffect(this);
         if (effect == null) return;
 
         Player sourcePlayer = BronzewoodApply.getCurseSource(entity);
         if (sourcePlayer == null) return;
 
-        if (entity.level().isClientSide()) return;
 
-        Holder<DamageType> curseType = entity.level().registryAccess()
+        Holder<DamageType> meleeType = entity.level().registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ModDamageTypes.CURSE_DAMAGE);
-
-        DamageSource source = new CustomMeleeDamageNoProcs(curseType, sourcePlayer);
+                .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
+        DamageSource source = new DamageSource(meleeType, sourcePlayer);
 
         entity.hurt(source, 1f);
         entity.setDeltaMovement(entity.getDeltaMovement().scale(0));
@@ -54,3 +52,5 @@ public class BronzewoodCurse extends MobEffect {
         );
     }
 }
+
+

@@ -12,7 +12,7 @@ public class EnhancedPoison extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity target, int amplifier) {
-        float totalDamage = 1.0f + (float) amplifier;
+        float totalDamage = 1.25f + (float) amplifier;
         target.hurt(target.level().damageSources().magic(), totalDamage);
     }
 

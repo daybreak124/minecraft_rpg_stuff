@@ -4,7 +4,6 @@ import net.cold.coldsmod.ModSounds;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.blessingbonuses.neweffects.RadiatingWarmthTimer;
-import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.cold.coldsmod.damage.ModDamageTypes;
 import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.ModAttributes;
@@ -59,7 +58,6 @@ public class CooldownCycle {
     private static final HashMap<MobEffect, BiConsumer<LivingEntity, MobEffectInstance>> APPLY_HANDLERS_MOB = new HashMap<>();
 
     private static final UUID CURSE_UUID = UUID.fromString("f3e2b3c2-1738-5123-ab23-024331062146");
-    private static final UUID INTIMIDATED_UUID = UUID.fromString("f3e232c0-1738-5123-ab2a-024031330446");
     private static final UUID HATRED_UUID = UUID.fromString("f3e2b310-1738-5123-ab23-024331050446");
 
     @SubscribeEvent
@@ -121,11 +119,11 @@ public class CooldownCycle {
 
             Level level = player.level();
 
-            Holder<DamageType> explosionType = level.registryAccess()
+            Holder<DamageType> meleeType = level.registryAccess()
                     .registryOrThrow(Registries.DAMAGE_TYPE)
-                    .getHolderOrThrow(ModDamageTypes.EXPLOSION_DAMAGE);
+                    .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
 
-            DamageSource source = new CustomMeleeDamage(explosionType, player);
+            DamageSource source = new DamageSource(meleeType, player);
 
             double radiusSq = 25.0;
             level.getEntitiesOfClass(
@@ -201,7 +199,7 @@ public class CooldownCycle {
         });
 
         EXPIRE_HANDLERS.put(ModEffects.BASTION_ACTIVE.get(), (player, inst) -> {
-            player.addEffect(new MobEffectInstance(ModEffects.BASTION_COOLDOWN.get(), 20 * 10, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(ModEffects.BASTION_COOLDOWN.get(), 160, 0, false, false, true));
         });
 
         EXPIRE_HANDLERS.put(ModEffects.RETALIATE_COOLDOWN.get(), (player, inst) -> {
@@ -319,7 +317,7 @@ public class CooldownCycle {
         });
 
         EXPIRE_HANDLERS.put(ModEffects.OVERCONFIDENCE_ACTIVE.get(), (player, inst) -> {
-            player.addEffect(new MobEffectInstance(ModEffects.OVERCONFIDENCE_COOLDOWN.get(), 20*7, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(ModEffects.OVERCONFIDENCE_COOLDOWN.get(), 140, 0, false, false, true));
             removeModifier(player, ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get(), OVERCONFIDENCE_UUID);
         });
 
@@ -350,10 +348,8 @@ public class CooldownCycle {
             if (effect.getAmplifier() >= 3) {
                 if (player instanceof ServerPlayer serverPlayer) {
                     serverPlayer.playNotifySound(
-                            SoundEvents.CROSSBOW_QUICK_CHARGE_3,
-                            SoundSource.PLAYERS,
-                            1.3F,
-                            1.0F
+                            SoundEvents.CROSSBOW_QUICK_CHARGE_3, SoundSource.PLAYERS,
+                            1.3F, 1.0F
                     );
                 }
                 EffectUtils.spawnParticleBurst(player, ParticleTypes.FALLING_HONEY);
@@ -362,11 +358,11 @@ public class CooldownCycle {
 
             double dex = player.getAttributeValue(ModAttributes.DEX.get());
             double perc = player.getAttributeValue(ModAttributes.PERC.get());
-            double scalingMultiplier = 1.0 + ((dex * 0.75 + perc * 0.4) / 100.0);
+            double scalingMultiplier = 1.0 + ((dex + perc * 0.5) / 100.0);
             int stacks = effect.getAmplifier() + 1;
 
             double finalPotency = (5.0 * stacks) * scalingMultiplier;
-            double finalNockHaste = (9.0 * stacks) * scalingMultiplier;
+            double finalNockHaste = (11.0 * stacks) * scalingMultiplier;
 
             applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), finalPotency, HAWKEYE_UUID);
             applyModifier(player, ModAttributes.NOCK_HASTE.get(), finalNockHaste, HAWKEYE_UUID);
@@ -442,7 +438,7 @@ public class CooldownCycle {
 
             Holder<DamageType> reckoningType = level.registryAccess()
                     .registryOrThrow(Registries.DAMAGE_TYPE)
-                    .getHolderOrThrow(ModDamageTypes.RECKONING);
+                    .getHolderOrThrow(ModDamageTypes.RECKONING_DAMAGE);
 
             DamageSource reckoning = new DamageSource(reckoningType, (Entity) null);
 
@@ -478,14 +474,8 @@ public class CooldownCycle {
             applyModifier(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), 0.06, HATRED_UUID);
         });
 
-        EXPIRE_HANDLERS_MOB.put(ModEffects.INTIMIDATED.get(), (victim, instance) ->
-        {
-            removeModifier(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), INTIMIDATED_UUID);
-        });
-
-        APPLY_HANDLERS_MOB.put(ModEffects.INTIMIDATED.get(), (victim, effect) -> {
-            double stacks = (double) (effect.getAmplifier() + 1) / 100;
-            applyModifier(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), stacks, INTIMIDATED_UUID);
+        EXPIRE_HANDLERS_MOB.put(ModEffects.INTIMIDATED.get(), (victim, instance) -> {
+            triggerSnapCD(victim, instance.getAmplifier());
         });
 
         EXPIRE_HANDLERS_MOB.put(ModEffects.EXPLOIT_WEAKNESS_DEBUFF.get(), (victim, instance) ->
@@ -529,7 +519,7 @@ public class CooldownCycle {
                 player.addEffect(new MobEffectInstance(ModEffects.SOLARA.get(), 23990, 0, false, false, true));
             }
         }
-        if (player.tickCount % 300 == 0) {
+        if (player.tickCount % 400 == 0) {
             if (player.hasEffect(ModEffects.SOLARA.get())) {
                 long time = player.level().getDayTime() % 24000;
                 int phase = (int) (time / 6000);
@@ -564,5 +554,50 @@ public class CooldownCycle {
                 applyModifier(player, Attributes.ARMOR, armor, SOLARA_UUID);
             }
         }
+    }
+
+    public static void triggerSnapKill(LivingEntity victim, int amplifier) {
+        CompoundTag data = victim.getPersistentData();
+        if (!data.contains("stored_temporal_damage")) return;
+
+        float storedDamage = data.getFloat("stored_temporal_damage");
+        float bonusPercent = 1 + amplifier / 100f;
+        float snapDamage = storedDamage * bonusPercent;
+
+        DamageSource reckoning = new DamageSource(victim.level()
+                        .registryAccess()
+                        .registryOrThrow(Registries.DAMAGE_TYPE)
+                        .getHolderOrThrow(ModDamageTypes.TRUE_DAMAGE));
+
+        victim.removeEffect(ModEffects.INTIMIDATED.get());
+        victim.hurt(reckoning, snapDamage);
+
+        EffectUtils.spawnParticleBurst(victim, ParticleTypes.PORTAL);
+        victim.level().playSound(null, victim.getX(), victim.getY(), victim.getZ(),
+                SoundEvents.GLASS_BREAK, SoundSource.HOSTILE, 1.0F, 0.6F);
+
+        data.remove("stored_temporal_damage");
+    }
+
+    public static void triggerSnapCD(LivingEntity victim, int amplifier) {
+        CompoundTag data = victim.getPersistentData();
+        if (!data.contains("stored_temporal_damage")) return;
+
+        float storedDamage = data.getFloat("stored_temporal_damage");
+        float bonusPercent = 1 + amplifier / 100f;
+        float snapDamage = storedDamage * bonusPercent;
+
+        DamageSource reckoning = new DamageSource(victim.level()
+                .registryAccess()
+                .registryOrThrow(Registries.DAMAGE_TYPE)
+                .getHolderOrThrow(ModDamageTypes.RECKONING_DAMAGE));
+
+        victim.hurt(reckoning, snapDamage);
+
+        EffectUtils.spawnParticleBurst(victim, ParticleTypes.PORTAL);
+        victim.level().playSound(null, victim.getX(), victim.getY(), victim.getZ(),
+                SoundEvents.GLASS_BREAK, SoundSource.HOSTILE, 1.0F, 0.6F);
+
+        data.remove("stored_temporal_damage");
     }
 }

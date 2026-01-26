@@ -60,11 +60,11 @@ public class DeceptionSkill {
         spawnParticleRingHigh((ServerLevel) event.getEntity().level(), target , ParticleTypes.DAMAGE_INDICATOR, 9.0, 180);
 
 
-        double rangeSq = 81.0;
+        double rangeSq = 36.0;
 
         List<LivingEntity> nearby = target.level().getEntitiesOfClass(
                 LivingEntity.class,
-                target.getBoundingBox().inflate(9.0),
+                target.getBoundingBox().inflate(6.0),
                 e -> {
                     if (!(e instanceof Enemy) || e == target || e.getType().is(Tags.EntityTypes.BOSSES) || e instanceof Warden || !player.hasLineOfSight(e)) return false;
                     double dx = e.getX() - target.getX();
@@ -90,6 +90,6 @@ public class DeceptionSkill {
         );
 
         player.removeEffect(ModEffects.DECEPTION_READY.get());
-        player.addEffect(new MobEffectInstance(ModEffects.DECEPTION_COOLDOWN.get(), 20 * 14, 0, false, false, true));
+        player.addEffect(new MobEffectInstance(ModEffects.DECEPTION_COOLDOWN.get(), 400, 0, false, false, true));
     }
 }

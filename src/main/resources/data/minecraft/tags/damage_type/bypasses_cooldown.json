@@ -1,7 +1,8 @@
 {
   "replace": false,
   "values": [
-    "coldsmod:reckoning",
-    "coldsmod:lightning_damage"
+    "coldsmod:true_damage",
+    "coldsmod:custom_melee_damage",
+    "coldsmod:melee_dot_damage"
   ]
 }

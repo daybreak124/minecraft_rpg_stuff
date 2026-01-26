@@ -1,7 +1,7 @@
 package net.cold.coldsmod.blessingbonuses.neweffects;
 
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
-import net.cold.coldsmod.damage.CustomRangedDamage;
+import net.cold.coldsmod.damage.ModDamageTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -10,7 +10,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -130,8 +129,9 @@ public class VortexReady extends MobEffect {
 
         Holder<DamageType> rangedType = level.registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(DamageTypes.PLAYER_ATTACK);
-        DamageSource source = new CustomRangedDamage(rangedType, player);
+                .getHolderOrThrow(ModDamageTypes.LIGHTNING_DAMAGE);
+
+        DamageSource source = new DamageSource(rangedType, player);
 
         for (LivingEntity mob : nearby) {
             double dx = vPos.x - mob.getX();

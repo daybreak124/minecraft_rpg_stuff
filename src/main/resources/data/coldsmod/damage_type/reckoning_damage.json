@@ -1,9 +1,8 @@
 {
-  "message_id": "explosion",
+  "message_id": "reckoning_damage",
   "scaling": "never",
   "exhaustion": 0.0,
   "bypasses_armor": false,
   "no_immunity": true,
-  "no_self_damage": true,
   "explosion": true
 }

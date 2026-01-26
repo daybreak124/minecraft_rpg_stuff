@@ -41,6 +41,11 @@ public class TestItems {
     private static final UUID DEFENSE_TIER_1_UUID = UUID.fromString("e1a1b1c1-d1e1-4121-a1b1-c1d132f1a1b1");
     private static final UUID DEFENSE_TIER_2_UUID = UUID.fromString("e2a2b2c2-d2e2-4222-a2b2-c2d2e322a2b2");
     private static final UUID DEFENSE_TIER_3_UUID = UUID.fromString("e3a3b3c3-d3e3-4323-a3b3-c3d3e332a3b3");
+    private static final UUID RESTORATION_UUID = UUID.fromString("e3a3b3c3-d3e3-4323-a3b3-c3d3e313a3b3");
+    private static final UUID MELEE1_UUID = UUID.fromString("e323b3c3-d1e3-4323-a3b3-c3d3e313a3b3");
+    private static final UUID RANGED1_UUID = UUID.fromString("e355b3c3-d3e3-4323-a3b3-c3d55313a3b3");
+    private static final UUID MELEE2_UUID = UUID.fromString("e3a663c3-d3e3-4323-a3b3-c3d66313a363");
+
 
 
     public static final RegistryObject<Item> ALL = ITEMS.register("all",
@@ -75,6 +80,18 @@ public class TestItems {
 
     public static final RegistryObject<Item> DEFENSE_3 = ITEMS.register("defense_ring_3",
             () -> new DefenseItem3(new Item.Properties().stacksTo(64)));
+
+    public static final RegistryObject<Item> RESTORATION_1 = ITEMS.register("restoration_1",
+            () -> new Restoration1(new Item.Properties().stacksTo(64)));
+
+    public static final RegistryObject<Item> MELEE_1 = ITEMS.register("melee_1",
+            () -> new Melee1(new Item.Properties().stacksTo(64)));
+
+    public static final RegistryObject<Item> MELEE_2 = ITEMS.register("melee_2",
+            () -> new Melee2(new Item.Properties().stacksTo(64)));
+
+    public static final RegistryObject<Item> RANGED_1 = ITEMS.register("ranged_1",
+            () -> new Ranged1(new Item.Properties().stacksTo(64)));
 
     private static class AllArtifact extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
         public AllArtifact(Properties properties) { super(properties); }
@@ -198,7 +215,7 @@ public class TestItems {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+100 to all stats.").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal("+100 to +125 to all stats.").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal("+100% to all stats").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal("Except resto and ampl cos im lazy").withStyle(ChatFormatting.GRAY));
         }
@@ -527,6 +544,125 @@ public class TestItems {
             tooltip.add(Component.literal("+30% Toughness Multiplier").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Equip if the game is way too unbalanced").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+    private static class Restoration1 extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public Restoration1(Properties properties) { super(properties); }
+
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 1000, RESTORATION_UUID);
+                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1000, RESTORATION_UUID);
+            }
+        }
+
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, RESTORATION_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), RESTORATION_UUID);
+            }
+        }
+
+        @Override
+        public Component getName(ItemStack stack) { return Component.literal("Restoration").withStyle(ChatFormatting.GOLD); }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+1000 Max Health").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal("+1000 Restoration").withStyle(ChatFormatting.GOLD));
+        }
+    }
+
+    private static class Melee1 extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public Melee1(Properties properties) { super(properties); }
+
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 125, MELEE1_UUID);
+            }
+        }
+
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), MELEE1_UUID);
+            }
+        }
+
+        @Override
+        public Component getName(ItemStack stack) { return Component.literal("Melee Potency").withStyle(ChatFormatting.GOLD); }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+125 Melee Potency").withStyle(ChatFormatting.GOLD));
+        }
+    }
+
+    private static class Ranged1 extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public Ranged1(Properties properties) { super(properties); }
+
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 125, RANGED1_UUID);
+            }
+        }
+
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), RANGED1_UUID);
+            }
+        }
+
+        @Override
+        public Component getName(ItemStack stack) { return Component.literal("Projectile Potency").withStyle(ChatFormatting.GOLD); }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+125 Projectile Potency").withStyle(ChatFormatting.GOLD));
+        }
+    }
+
+    private static class Melee2 extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public Melee2(Properties properties) { super(properties); }
+
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 125, MELEE2_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 50, MELEE2_UUID);
+            }
+        }
+
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), MELEE2_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), MELEE2_UUID);
+
+            }
+        }
+
+        @Override
+        public Component getName(ItemStack stack) { return Component.literal("Melee Crit").withStyle(ChatFormatting.GOLD); }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+50 Melee Accuracy").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal("+125 Melee Precision").withStyle(ChatFormatting.GOLD));
         }
     }
 }

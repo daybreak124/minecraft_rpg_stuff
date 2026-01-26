@@ -1,10 +1,9 @@
 package net.cold.coldsmod.stat;
 
+import net.cold.coldsmod.blessingbonuses.CooldownCycle;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
-import net.cold.coldsmod.damage.CustomMeleeDamage;
-import net.cold.coldsmod.damage.CustomMeleeDamageNoProcs;
-import net.cold.coldsmod.damage.CustomRangedDamage;
+import net.cold.coldsmod.damage.ModDamageTypes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -53,6 +52,7 @@ public class Formulas {
     public void onLivingHurt(LivingHurtEvent event) {
         if (!(event.getSource().getEntity() instanceof Player player)) return;
         if (player.level().isClientSide()) return;
+        if (event.getSource().is(ModDamageTypes.LIGHTNING_DAMAGE)) return;
 
         CompoundTag data = player.getPersistentData();
         float finalDamage = event.getAmount();
@@ -61,7 +61,7 @@ public class Formulas {
         boolean isProjectile = event.getSource().getDirectEntity() instanceof Projectile;
         InteractionHand hand = player.swingingArm;
 
-        if (event.getSource() instanceof CustomMeleeDamageNoProcs) {
+        if (event.getSource().is(ModDamageTypes.CUSTOM_MELEE_DAMAGE)) {
             double meleeDmg = getScaledValue(player, ModAttributes.MELEE_POTENCY.get(), ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
             finalDamage *= (1.0 + meleeDmg / 100.0);
 
@@ -72,7 +72,7 @@ public class Formulas {
                 finalDamage *= (1.5 + melCritDmg / 100.0);
             }
         }
-        else if (isProjectile || event.getSource() instanceof CustomRangedDamage) {
+        else if (isProjectile || event.getSource().is(ModDamageTypes.CUSTOM_RANGED_DAMAGE)) {
             double projDmg = getScaledValue(player, ModAttributes.PROJECTILE_POTENCY.get(), ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
             double projCritCh = getScaledValue(player, ModAttributes.PROJECTILE_ACCURACY.get(), ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get());
             double projCritDmg = getScaledValue(player, ModAttributes.PROJECTILE_PRECISION.get(), ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get());
@@ -100,7 +100,7 @@ public class Formulas {
             resetHawkeye(player, data);
             handleFrenzy(player, data);
             finalDamage *= 0.7;
-        } else if (isDirectMelee || event.getSource() instanceof CustomMeleeDamage) {
+        } else if (isDirectMelee || event.getSource().is(ModDamageTypes.CUSTOM_MELEE_DAMAGE)) {
             double melDmg = getScaledValue(player, ModAttributes.MELEE_POTENCY.get(), ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
             double melCritDmg = getScaledValue(player, ModAttributes.MELEE_PRECISION.get(), ModAttributes.MELEE_PRECISION_MULTIPLIER.get());
             double melCritCh = getScaledValue(player, ModAttributes.MELEE_ACCURACY.get(), ModAttributes.MELEE_ACCURACY_MULTIPLIER.get());
@@ -117,12 +117,13 @@ public class Formulas {
                 data.putBoolean("bronzewood_proc", false);
             }
 
-            if (event.getSource() instanceof CustomMeleeDamage && rollCrit(player, melCritCh)) {
+            if (event.getSource().is(ModDamageTypes.CUSTOM_MELEE_DAMAGE) && rollCrit(player, melCritCh)) {
                 finalDamage *= (1.5 + melCritDmg / 100.0);
                 playCritSound(player);
+            } else if (!event.getSource().is(ModDamageTypes.CUSTOM_MELEE_DAMAGE) && player.getPersistentData().getBoolean("adjustSharpness")) {
+                finalDamage += getSharpnessBonus(player, hand) * (0.5 + melCritDmg / 100.0);
+                player.getPersistentData().putBoolean("adjustSharpness", false);
             }
-
-            if (!(event.getSource() instanceof CustomMeleeDamage)) finalDamage += getSharpnessBonus(player, hand) * (0.5 + melCritDmg / 100.0);
 
             finalDamage *= (float) (1.0 + melDmg / 100.0);
             handleFrenzy(player, data);
@@ -145,15 +146,44 @@ public class Formulas {
     @SubscribeEvent
     public void onLivingDamage(LivingDamageEvent event) {
         if (event.getEntity().level().isClientSide()) return;
+        if (event.getSource().is(ModDamageTypes.RECKONING_DAMAGE)) {
+            return;
+        }
 
         LivingEntity victim = event.getEntity();
-        double incDamageMultiplier = victim.getAttributeValue(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get());
-        double attackerDamageMultiplier = 1.0;
+        boolean isIntimidating = event.getSource().is(ModDamageTypes.TRUE_DAMAGE);
 
-        if (event.getSource().getEntity() instanceof LivingEntity attacker) {
-            attackerDamageMultiplier = attacker.getAttributeValue(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
+        if (!isIntimidating) {
+            double incDamageMultiplier = 1.0;
+            var incAttr = victim.getAttribute(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get());
+            if (incAttr != null) incDamageMultiplier = incAttr.getValue();
+
+            double attackerDamageMultiplier = 1.0;
+            if (event.getSource().getEntity() instanceof LivingEntity attacker) {
+                attackerDamageMultiplier = attacker.getAttributeValue(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
+            }
+
+            event.setAmount((float) (event.getAmount() * incDamageMultiplier * attackerDamageMultiplier));
         }
-        event.setAmount((float) (event.getAmount() * incDamageMultiplier * attackerDamageMultiplier));
+
+        MobEffectInstance intimidated = victim.getEffect(ModEffects.INTIMIDATED.get());
+        if (intimidated != null && !isIntimidating) {
+            CompoundTag data = victim.getPersistentData();
+            float scaledAmount = event.getAmount();
+
+            float currentStored = data.getFloat("stored_temporal_damage");
+            float newTotal = currentStored + scaledAmount;
+            data.putFloat("stored_temporal_damage", newTotal);
+
+            float multiplier = (intimidated.getAmplifier() + 1) / 100f;
+            float executeThreshold = victim.getMaxHealth() * multiplier;
+
+            if ((victim.getHealth() - newTotal) <= executeThreshold) {
+                CooldownCycle.triggerSnapKill(victim, intimidated.getAmplifier());
+            }
+
+            event.setCanceled(true);
+        }
         // System.out.println(event.getAmount());
     }
 
@@ -341,6 +371,8 @@ public class Formulas {
 
             float critBonus = (float) (1.5 + (scaledDamage / 100.0));
             event.setDamageModifier(critBonus);
+
+            player.getPersistentData().putBoolean("adjustSharpness", true);
 
             handleHawkeyeStacking(player, player.getPersistentData());
 

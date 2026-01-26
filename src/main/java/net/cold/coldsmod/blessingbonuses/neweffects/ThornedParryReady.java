@@ -1,7 +1,6 @@
 package net.cold.coldsmod.blessingbonuses.neweffects;
 
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
-import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.cold.coldsmod.damage.ModDamageTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
@@ -89,10 +88,10 @@ public class ThornedParryReady extends MobEffect {
             }
         }
 
-        Holder<DamageType> explosionType = level.registryAccess()
+        Holder<DamageType> meleeType = level.registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ModDamageTypes.EXPLOSION_DAMAGE);
-        DamageSource source = new CustomMeleeDamage(explosionType, player);
+                .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
+        DamageSource source = new DamageSource(meleeType, player);
 
         double radiusSq = 9.0;
         List<LivingEntity> enemies = level.getEntitiesOfClass(

@@ -293,6 +293,13 @@ public class CreativeTabs {
                                 output.accept(TestItems.DEFENSE_1.get());
                                 output.accept(TestItems.DEFENSE_2.get());
                                 output.accept(TestItems.DEFENSE_3.get());
+
+                                output.accept(TestItems.RESTORATION_1.get());
+
+                                output.accept(TestItems.MELEE_1.get());
+                                output.accept(TestItems.MELEE_2.get());
+                                output.accept(TestItems.RANGED_1.get());
+
                             })
                             .build()
             );

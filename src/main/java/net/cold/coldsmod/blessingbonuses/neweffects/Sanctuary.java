@@ -25,7 +25,7 @@ public class Sanctuary {
     private static final int CHANNEL_DELAY = 20; // 1s
     private static final int PULSE_INTERVAL = 20; // 1s
     private static final float BASE_HEAL = 1.25f;
-    private static final float FATIGUE_REDUCTION_PER_STACK = 0.10f;
+    private static final float FATIGUE_REDUCTION_PER_STACK = 0.2f;
 
     private static final String BLOCK_TICKS = "divinity_block_ticks";
     private static final String PULSE_TICKS = "divinity_pulse_ticks";
@@ -102,14 +102,14 @@ public class Sanctuary {
                 ModAttributes.RESTORATION_MULTIPLIER.get());
 
         float reduction = stacks * FATIGUE_REDUCTION_PER_STACK;
-        reduction = Math.min(reduction, 0.9f);
+        reduction = Math.min(reduction, 0.8f);
         float finalHeal = (float) (BASE_HEAL * ((1 + (healIncrease/100))) * (1f - reduction));
 
         target.heal(finalHeal);
 
-        target.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_FATIGUE.get(), 20 * 10, stacks, false, false, true));
-        target.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_SHARED.get(), 20 * 5, 0, false, false, true));
-        source.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_FATIGUE.get(), 20 * 10, stacks, false, false, true));
-        source.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_SHARED.get(), 20 * 5, 0, false, false, true));
+        target.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_FATIGUE.get(), 240, stacks, false, false, true));
+        target.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_SHARED.get(), 100, 0, false, false, true));
+        source.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_FATIGUE.get(), 200, stacks, false, false, true));
+        source.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_SHARED.get(), 100, 0, false, false, true));
     }
 }

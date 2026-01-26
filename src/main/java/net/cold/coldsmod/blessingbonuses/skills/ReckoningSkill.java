@@ -12,6 +12,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ReckoningSkill {
@@ -41,11 +42,11 @@ public class ReckoningSkill {
         player.getPersistentData().putDouble(HEALED_NBT, 0);
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOW)
     public static void onReckoningHeal(LivingDamageEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
         if (player.level().isClientSide()) return;
-        if (event.getSource().is(ModDamageTypes.RECKONING)) return;
+        if (event.getSource().is(ModDamageTypes.TRUE_DAMAGE)) return;
         if (event.getSource().is(DamageTypes.FALL)) return;
 
 
@@ -54,8 +55,14 @@ public class ReckoningSkill {
 
             player.heal((float) healed);
 
+//            double attackerDamageMultiplier = 1.0;
+//            if (event.getSource().getEntity() instanceof LivingEntity attacker) {
+//                attackerDamageMultiplier = attacker.getAttributeValue(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
+//            }
+
             double totalHealed = player.getPersistentData().getDouble(HEALED_NBT);
             totalHealed += healed;
+            // totalHealed *= attackerDamageMultiplier;
             player.getPersistentData().putDouble(HEALED_NBT, totalHealed);
             EffectUtils.spawnParticleBurst(player, ParticleTypes.DAMAGE_INDICATOR);
         }

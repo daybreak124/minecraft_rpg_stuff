@@ -16,7 +16,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ClairvoyanceSkill {
 
-    private static final int CHARGE_TICKS_REQUIRED = 20 * 6;
+    private static final int CHARGE_TICKS_REQUIRED = 80;
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {

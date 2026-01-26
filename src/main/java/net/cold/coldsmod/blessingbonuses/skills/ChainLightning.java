@@ -10,7 +10,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
@@ -19,10 +20,10 @@ import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnPart
 
 public class ChainLightning {
 
-    @SubscribeEvent
-    public static void onChainLightning(LivingDamageEvent event) {
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public static void onChainLightning(LivingHurtEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
         if (!(event.getSource().getEntity() instanceof Player player)) return;
-        if (player.level().isClientSide()) return;
         if (!player.getPersistentData().getBoolean("procChainLightning")) return;
         player.getPersistentData().putBoolean("procChainLightning", false);
 
@@ -35,22 +36,16 @@ public class ChainLightning {
                 .registryOrThrow(Registries.DAMAGE_TYPE)
                 .getHolderOrThrow(ModDamageTypes.LIGHTNING_DAMAGE);
 
-        double radiusSq = 16.0;
         List<LivingEntity> nearby = level.getEntitiesOfClass(
                 LivingEntity.class,
                 originalTarget.getBoundingBox().inflate(4.0),
-                e -> {
-                    if (!(e instanceof Enemy) || e == originalTarget || !e.isAlive()) return false;
-                    double dx = e.getX() - originalTarget.getX();
-                    double dz = e.getZ() - originalTarget.getZ();
-                    return (dx * dx + dz * dz) <= radiusSq;
-                }
+                e -> (e instanceof Enemy && e != originalTarget && e.isAlive())
         );
 
         for (LivingEntity next : nearby) {
             if (bounceDamage < 1) break;
 
-            DamageSource source = new DamageSource(lightningType, null, null);
+            DamageSource source = new DamageSource(lightningType, player);
 
             next.hurt(source, (float) bounceDamage);
             spawnParticleBurst(next, ParticleTypes.ELECTRIC_SPARK);

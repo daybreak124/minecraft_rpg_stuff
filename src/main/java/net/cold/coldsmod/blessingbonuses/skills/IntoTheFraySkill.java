@@ -2,12 +2,13 @@ package net.cold.coldsmod.blessingbonuses.skills;
 
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
-import net.cold.coldsmod.damage.CustomMeleeDamage;
 import net.cold.coldsmod.damage.ModDamageTypes;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -92,11 +93,10 @@ public class IntoTheFraySkill {
             );
 
             if (!targetsHit.isEmpty()) {
-                DamageSource source = new CustomMeleeDamage(
-                        level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE)
-                                .getHolderOrThrow(ModDamageTypes.EXPLOSION_DAMAGE),
-                        player
-                );
+                Holder<DamageType> meleeType = level.registryAccess()
+                        .registryOrThrow(Registries.DAMAGE_TYPE)
+                        .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
+                DamageSource source = new DamageSource(meleeType, player);
 
                 for (LivingEntity target : targetsHit) {
                     target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 8 * stackCount, 3));

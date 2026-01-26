@@ -23,8 +23,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
 
-import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
-
 public class CombatantsAidReady extends MobEffect {
     private static final int RECALL_WINDOW_TICKS = 20 * 4;
     private static final int CROUCH_FOR_RECALL_TICKS = 20;

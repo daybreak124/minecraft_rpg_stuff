@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "coldsmod:reckoning",
-    "coldsmod:lightning_damage"
+    "coldsmod:true_damage"
   ]
 }

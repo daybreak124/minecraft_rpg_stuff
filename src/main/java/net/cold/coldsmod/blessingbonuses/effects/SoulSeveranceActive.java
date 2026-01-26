@@ -1,16 +1,14 @@
 package net.cold.coldsmod.blessingbonuses.effects;
 
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
-import net.cold.coldsmod.damage.CustomMeleeDamage;
+import net.cold.coldsmod.damage.ModDamageTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -80,11 +78,11 @@ public class SoulSeveranceActive extends MobEffect {
                         )
                 );
 
-                Holder<DamageType> meleeType = player.level().registryAccess()
+                Holder<DamageType> meleeType = level.registryAccess()
                         .registryOrThrow(Registries.DAMAGE_TYPE)
-                        .getHolderOrThrow(DamageTypes.PLAYER_ATTACK);
+                        .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
 
-                DamageSource source = new CustomMeleeDamage(meleeType, player);
+                DamageSource source = new DamageSource(meleeType, player);
 
                 if (ticks % 20 == 0) {
                     if (mob instanceof Enemy) {

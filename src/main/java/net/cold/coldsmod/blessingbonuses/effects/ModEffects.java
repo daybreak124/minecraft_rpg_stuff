@@ -50,6 +50,9 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> INTIMIDATED =
             EFFECTS.register("intimidated", Intimidated::new);
 
+    public static final RegistryObject<MobEffect> INTIMIDATED_COOLDOWN =
+            EFFECTS.register("intimidated_cd", IntimidatedCooldown::new);
+
     public static final RegistryObject<MobEffect> DARING_SHOUT =
             EFFECTS.register("daring_shout_up", DaringShout::new);
 

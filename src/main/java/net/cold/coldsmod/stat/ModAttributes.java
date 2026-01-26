@@ -119,7 +119,7 @@ public class ModAttributes {
             () -> new RangedAttribute("damage_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> INCOMING_DAMAGE_MULTIPLIER = ATTRIBUTES.register("incoming_damage_multiplier",
-            () -> new RangedAttribute("incoming_damage_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
+            () -> new RangedAttribute("incoming_damage_multiplier", 1.0D,   0.0D, 2048.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> REJUVENATION_MULTIPLIER = ATTRIBUTES.register("incoming_healing_multiplier",
             () -> new RangedAttribute("incoming_healing_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));

@@ -17,7 +17,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
 
-import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleRing;
 import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleRingLow;
 
 public class JumpCritHandler {
@@ -70,8 +69,8 @@ public class JumpCritHandler {
             }
 
             player.removeEffect(ModEffects.OVERCONFIDENCE_READY.get());
-            player.addEffect(new MobEffectInstance(ModEffects.BLACKENED_HEART.get(), 20 * 15, 0, false, false, true));
-            player.addEffect(new MobEffectInstance(ModEffects.OVERCONFIDENCE_ACTIVE.get(), 20 * 8, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(ModEffects.BLACKENED_HEART.get(), 300, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(ModEffects.OVERCONFIDENCE_ACTIVE.get(), 160, 0, false, false, true));
         }
     }
 

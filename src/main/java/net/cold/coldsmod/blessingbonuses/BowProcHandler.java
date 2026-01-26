@@ -2,16 +2,11 @@ package net.cold.coldsmod.blessingbonuses;
 
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.stat.ItemRarityUtils;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-
-import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleRing;
 
 public class BowProcHandler {
 

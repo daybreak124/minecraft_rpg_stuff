@@ -17,8 +17,6 @@ import net.cold.coldsmod.blessingbonuses.effects.SoulSeveranceActive;
 import net.cold.coldsmod.blessingbonuses.neweffects.*;
 import net.cold.coldsmod.blessingbonuses.skills.*;
 import net.cold.coldsmod.bow.BowAnimHandler;
-import net.cold.coldsmod.damage.CustomMeleeDamage;
-import net.cold.coldsmod.damage.CustomMeleeDamageNoProcs;
 import net.cold.coldsmod.formulas.DebuffResistHandler;
 import net.cold.coldsmod.item.ModItems;
 import net.cold.coldsmod.mob.SbeveRenderer;
@@ -108,8 +106,6 @@ public class ColdsMod {
         MinecraftForge.EVENT_BUS.register(JumpCritHandler.class);
 
 
-        MinecraftForge.EVENT_BUS.register(CustomMeleeDamageNoProcs.class);
-        MinecraftForge.EVENT_BUS.register(CustomMeleeDamage.class);
 
         MinecraftForge.EVENT_BUS.register(CrossbowChargeDrawSpeedTag.class);
 

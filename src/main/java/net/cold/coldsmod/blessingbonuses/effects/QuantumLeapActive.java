@@ -3,6 +3,7 @@ package net.cold.coldsmod.blessingbonuses.effects;
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.network.QuantumLeapSync;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -36,13 +38,27 @@ public class QuantumLeapActive extends MobEffect {
         if (!player.isShiftKeyDown()) return;
         if (!QuantumLeapSync.QuantumLeapClientData.quantumLeapEligible) return;
         if (!player.hasEffect(ModEffects.QUANTUM_LEAP_READY.get())) return;
+        if (!(player instanceof ServerPlayer serverPlayer)) return;
 
         Vec3 look = player.getLookAngle().normalize();
         Vec3 dashTarget = player.position().add(look.scale(10));
 
+        double yOffset = 1.0;
+
         EffectUtils.spawnParticleBurst(player, ParticleTypes.FISHING);
 
-        player.teleportTo(dashTarget.x, dashTarget.y+1.2, dashTarget.z);
+        AABB targetBox = player.getBoundingBox().move(
+                dashTarget.x - player.getX(),
+                dashTarget.y - player.getY(),
+                dashTarget.z - player.getZ()
+        );
+
+        if (!player.level().noCollision(player, targetBox)) {
+            yOffset += 1;
+        }
+
+        serverPlayer.teleportTo(dashTarget.x, dashTarget.y + yOffset, dashTarget.z);
+
         player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_COOLDOWN.get(), 20*35, 0, false, false, true));
 
 

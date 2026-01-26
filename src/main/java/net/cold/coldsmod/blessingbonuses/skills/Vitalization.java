@@ -3,7 +3,6 @@ package net.cold.coldsmod.blessingbonuses.skills;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.stat.AttributeApplier;
-import net.cold.coldsmod.stat.ItemRarityUtils;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -12,14 +11,11 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -62,7 +58,7 @@ public class Vitalization {
         player.getPersistentData().putInt("hawkeye", 0);
         player.removeEffect(ModEffects.HAWKEYE.get());
 
-        float healAmount = (float) (finalDamage * 0.35);
+        float healAmount = (float) (finalDamage * 0.25);
 
         EffectUtils.playHealSound(target);
         EffectUtils.spawnComposterBurst(target);

@@ -2,7 +2,7 @@ package net.cold.coldsmod.blessingbonuses.skills;
 
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
-import net.cold.coldsmod.damage.CustomMeleeDamageNoProcs;
+import net.cold.coldsmod.damage.ModDamageTypes;
 import net.cold.coldsmod.stat.ItemRarityUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -42,7 +42,7 @@ public class BronzewoodApply {
         if (!isMelee) return;
 
 
-        if (event.getSource() instanceof CustomMeleeDamageNoProcs) return;
+        if (event.getSource().is(ModDamageTypes.DOT_DAMAGE)) return;
 
         if (event.getSource().getEntity() instanceof Player p) {
             player = p;
@@ -69,7 +69,7 @@ public class BronzewoodApply {
 
             curseSources.put(target, player.getUUID());
 
-            player.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_COOLDOWN.get(), 20 * 20, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_COOLDOWN.get(), 260, 0, false, false, true));
             player.getPersistentData().putBoolean("bronzewood_proc", true);
             player.removeEffect(ModEffects.BRONZEWOOD_READY.get());
         }
@@ -81,9 +81,9 @@ public class BronzewoodApply {
         return target.level().getPlayerByUUID(uuid);
     }
 
-    public static void removeCurseSource(LivingEntity target) {
-        curseSources.remove(target);
-    }
+//    public static void removeCurseSource(LivingEntity target) {
+//        curseSources.remove(target);
+//    }
 
     @SubscribeEvent
     public static void onKillRemoveBronzewoodCooldown(LivingDeathEvent event) {
