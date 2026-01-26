@@ -87,6 +87,6 @@ public class DeceptionSkill {
         );
 
         player.removeEffect(ModEffects.DECEPTION_READY.get());
-        player.addEffect(new MobEffectInstance(ModEffects.DECEPTION_COOLDOWN.get(), 400, 0, false, false, true));
+        player.addEffect(new MobEffectInstance(ModEffects.DECEPTION_COOLDOWN.get(), 600, 0, false, false, true));
     }
 }

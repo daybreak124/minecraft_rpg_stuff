@@ -1550,7 +1550,7 @@ public class ModItems {
             tooltip.add(Component.literal(" not be deceived.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
-                            .append(Component.literal("20s").withStyle(ChatFormatting.GRAY))
+                            .append(Component.literal("30s").withStyle(ChatFormatting.GRAY))
             );
         }
     }
