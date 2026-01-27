@@ -2,6 +2,7 @@ package net.cold.coldsmod.blessingbonuses.effects;
 
 import net.cold.coldsmod.stat.ItemRarityUtils;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
@@ -32,16 +33,17 @@ public class PickaxeTorch {
         if ((!(stack.getItem() instanceof PickaxeItem)) || isShield) return;
 
         var pos = event.getPos().relative(event.getFace());
-        if (world.getBlockState(pos).canBeReplaced()) {
+        if (world.getBlockState(pos).canBeReplaced() && Blocks.TORCH.canSurvive(Blocks.TORCH.defaultBlockState(), world, pos)) {
             world.setBlockAndUpdate(pos, Blocks.TORCH.defaultBlockState());
 
-            // Change this to a custom damage source that wont get mitigated by armor/enchants, or not
             player.hurt(player.damageSources().magic(), 3f);
 
             world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
                     SoundEvents.WOOD_PLACE, player.getSoundSource(), 1.0f, 1.0f);
 
+            player.swing(event.getHand(), true);
             event.setCanceled(true);
+            event.setCancellationResult(InteractionResult.SUCCESS);
         }
     }
 }

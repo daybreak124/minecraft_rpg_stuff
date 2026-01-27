@@ -82,7 +82,7 @@ public class ItemRarity {
                 default -> 0;
             };
 
-            case "tool" -> switch (this.displayName) {
+            case "tools" -> switch (this.displayName) {
                 case "Common" -> 2;
                 case "Uncommon" -> 2;
                 case "Rare" -> 2;

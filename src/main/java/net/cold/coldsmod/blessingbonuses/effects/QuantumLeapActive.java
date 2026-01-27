@@ -41,7 +41,7 @@ public class QuantumLeapActive extends MobEffect {
         if (!(player instanceof ServerPlayer serverPlayer)) return;
 
         Vec3 look = player.getLookAngle().normalize();
-        Vec3 dashTarget = player.position().add(look.scale(10));
+        Vec3 dashTarget = player.position().add(look.scale(6));
 
         double yOffset = 1.0;
 

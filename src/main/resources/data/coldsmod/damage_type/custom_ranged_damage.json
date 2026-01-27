@@ -1,5 +1,5 @@
 {
-  "message_id": "custom_melee_damage",
+  "message_id": "custom_ranged_damage",
   "scaling": "never",
   "exhaustion": 0.0
 }

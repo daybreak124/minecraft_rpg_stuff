@@ -5,6 +5,7 @@
     "coldsmod:custom_melee_damage",
     "coldsmod:custom_ranged_damage",
     "coldsmod:melee_dot_damage",
-    "coldsmod:reckoning_damage"
+    "coldsmod:reckoning_damage",
+    "coldsmod:lightning_damage"
   ]
 }
