@@ -590,7 +590,7 @@ public class CooldownCycle {
         DamageSource reckoning = new DamageSource(victim.level()
                 .registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ModDamageTypes.RECKONING_DAMAGE));
+                .getHolderOrThrow(ModDamageTypes.TRUE_DAMAGE));
 
         victim.hurt(reckoning, snapDamage);
 

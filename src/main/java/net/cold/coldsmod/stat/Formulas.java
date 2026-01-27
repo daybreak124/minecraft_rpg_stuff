@@ -147,6 +147,7 @@ public class Formulas {
     public void onLivingDamage(LivingDamageEvent event) {
         if (event.getEntity().level().isClientSide()) return;
         if (event.getSource().is(ModDamageTypes.RECKONING_DAMAGE)) {
+            System.out.println(event.getAmount());
             return;
         }
 
@@ -176,15 +177,14 @@ public class Formulas {
             data.putFloat("stored_temporal_damage", newTotal);
 
             float multiplier = (intimidated.getAmplifier() + 1) / 100f;
-            float executeThreshold = victim.getMaxHealth() * multiplier;
 
-            if ((victim.getHealth() - newTotal) <= executeThreshold) {
+            if ((victim.getHealth()) <= newTotal * (1.0f + multiplier)) {
                 CooldownCycle.triggerSnapKill(victim, intimidated.getAmplifier());
             }
 
             event.setCanceled(true);
         }
-        // System.out.println(event.getAmount());
+        System.out.println(event.getAmount());
     }
 
     private boolean rollCrit(Player player, double chance) {

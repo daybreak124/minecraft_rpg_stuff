@@ -129,7 +129,7 @@ public class VortexReady extends MobEffect {
 
         Holder<DamageType> rangedType = level.registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ModDamageTypes.LIGHTNING_DAMAGE);
+                .getHolderOrThrow(ModDamageTypes.CUSTOM_RANGED_DAMAGE);
 
         DamageSource source = new DamageSource(rangedType, player);
 

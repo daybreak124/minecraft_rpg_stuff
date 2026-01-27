@@ -57,7 +57,7 @@ public class IntimidatingPresenceSkill {
         double str = player.getAttributeValue(ModAttributes.STR.get());
         double con = player.getAttributeValue(ModAttributes.CON.get());
 
-        double debuffPercent = 31.0 + str * 0.4 + con * 0.2;
+        double debuffPercent = 30.0 + str * 0.4 + con * 0.2;
         int amplifier = (int)Math.min(255, Math.floor(debuffPercent));
 
         double radiusSq = 100.0;
