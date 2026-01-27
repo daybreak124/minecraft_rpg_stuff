@@ -783,8 +783,7 @@ public class ModItems {
             if (slotContext.entity() instanceof Player player) {
                 player.getPersistentData().putBoolean("frenzy_eligible", true);
                 AttributeApplier.applyModifier(player, Attributes.ATTACK_DAMAGE, 1.0, FRENZY_ATTACK_DAMAGE);
-                AttributeApplier.applyModifier(player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), 0.05, FRENZY_ATTACK_DAMAGE);
-            }
+                AttributeApplier.applyPercentModifierAdditive(player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), 0.05, FRENZY_ATTACK_DAMAGE);            }
         }
 
         @Override
@@ -845,6 +844,7 @@ public class ModItems {
                 player.removeEffect(ModEffects.RECKONING.get());
                 player.removeEffect(ModEffects.RECKONING_COOLDOWN.get());
                 player.removeEffect(ModEffects.RECKONING_ACTIVE.get());
+                player.getPersistentData().remove("IgnoreRejuvenation");
             }
         }
 

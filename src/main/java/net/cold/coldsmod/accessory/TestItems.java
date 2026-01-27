@@ -42,6 +42,7 @@ public class TestItems {
     private static final UUID DEFENSE_TIER_2_UUID = UUID.fromString("e2a2b2c2-d2e2-4222-a2b2-c2d2e322a2b2");
     private static final UUID DEFENSE_TIER_3_UUID = UUID.fromString("e3a3b3c3-d3e3-4323-a3b3-c3d3e332a3b3");
     private static final UUID RESTORATION_UUID = UUID.fromString("e3a3b3c3-d3e3-4323-a3b3-c3d3e313a3b3");
+    private static final UUID REJUVENATION_UUID = UUID.fromString("e3a3b3c3-21e3-4323-a3b3-c3d5e313a3b3");
     private static final UUID MELEE1_UUID = UUID.fromString("e323b3c3-d1e3-4323-a3b3-c3d3e313a3b3");
     private static final UUID RANGED1_UUID = UUID.fromString("e355b3c3-d3e3-4323-a3b3-c3d55313a3b3");
     private static final UUID MELEE2_UUID = UUID.fromString("e3a663c3-d3e3-4323-a3b3-c3d66313a363");
@@ -83,6 +84,9 @@ public class TestItems {
 
     public static final RegistryObject<Item> RESTORATION_1 = ITEMS.register("restoration_1",
             () -> new Restoration1(new Item.Properties().stacksTo(64)));
+
+    public static final RegistryObject<Item> REJUVENATION_1 = ITEMS.register("rejuvenation_1",
+            () -> new Rejuvenation1(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> MELEE_1 = ITEMS.register("melee_1",
             () -> new Melee1(new Item.Properties().stacksTo(64)));
@@ -575,6 +579,37 @@ public class TestItems {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+1000 Max Health").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal("+1000 Restoration").withStyle(ChatFormatting.GOLD));
+        }
+    }
+
+    private static class Rejuvenation1 extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public Rejuvenation1(Properties properties) { super(properties); }
+
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 1000, REJUVENATION_UUID);
+                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1000, REJUVENATION_UUID);
+            }
+        }
+
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, REJUVENATION_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.REJUVENATION.get(), REJUVENATION_UUID);
+            }
+        }
+
+        @Override
+        public Component getName(ItemStack stack) { return Component.literal("Rejuvenation").withStyle(ChatFormatting.GOLD); }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+1000 Max Health").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal("+1000 Rejuvenation").withStyle(ChatFormatting.GOLD));
         }
     }
 

@@ -235,28 +235,18 @@ public class AttributeApplier {
         removeModifier(player, Attributes.ATTACK_SPEED, AS_UUID);
 
 
-        if (player.isAlive()) {
-            double baseArmor = player.getAttributeValue(Attributes.ARMOR);
-            double baseToughness = player.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
-            double baseMaxHealth = player.getAttributeValue(Attributes.MAX_HEALTH);
-            double ASBonus = getScaledValue(player, ModAttributes.HASTE.get(), ModAttributes.HASTE_MULTIPLIER.get());
+        double healthPercent = player.getAttributeValue(ModAttributes.HEALTH_MULTIPLIER.get());
+        double armorPercent = player.getAttributeValue(ModAttributes.ARMOR_MULTIPLIER.get());
+        double toughnessPercent = player.getAttributeValue(ModAttributes.TOUGHNESS_MULTIPLIER.get());
+        double ASBonus = getScaledValue(player, ModAttributes.HASTE.get(), ModAttributes.HASTE_MULTIPLIER.get());
 
-            double totalHealthMult = player.getAttributeValue(ModAttributes.HEALTH_MULTIPLIER.get());
-            double healthBonus = baseMaxHealth * (totalHealthMult - 1);
-            applyModifier(player, Attributes.MAX_HEALTH, healthBonus, HP_UUID);
+        applyPercentModifier(player, Attributes.MAX_HEALTH, healthPercent, HP_UUID);
+        applyPercentModifier(player, Attributes.ARMOR, armorPercent, ARMOR_UUID);
+        applyPercentModifier(player, Attributes.ARMOR_TOUGHNESS, toughnessPercent, TOUGHNESS_UUID);
+        applyPercentModifier(player, Attributes.ATTACK_SPEED, ASBonus / 100.0, AS_UUID);
 
-            double totalArmorMult = player.getAttributeValue(ModAttributes.ARMOR_MULTIPLIER.get());
-            double armorBonus = baseArmor * (totalArmorMult - 1);
-            applyModifier(player, Attributes.ARMOR, armorBonus, ARMOR_UUID);
-
-            double totalToughnessMult = player.getAttributeValue(ModAttributes.TOUGHNESS_MULTIPLIER.get());
-            double toughnessBonus = baseToughness * (totalToughnessMult - 1);
-            applyModifier(player, Attributes.ARMOR_TOUGHNESS, toughnessBonus, TOUGHNESS_UUID);
-            applyPercentModifier(player, Attributes.ATTACK_SPEED, ASBonus / 100.0, AS_UUID);
-
-            if (player.getHealth() > player.getMaxHealth()) {
-                player.setHealth(player.getMaxHealth());
-            }
+        if (player.getHealth() > player.getMaxHealth()) {
+            player.setHealth(player.getMaxHealth());
         }
     }
 
@@ -398,7 +388,7 @@ public class AttributeApplier {
         if ("crossbow".equals(offType)) {offHand.getOrCreateTag().putBoolean("adrenalineInjection", true);}
     }
 
-    private static void applyPercentModifier(Player player, Attribute attribute, double percent, UUID uuid) {
+    public static void applyPercentModifier(Player player, Attribute attribute, double percent, UUID uuid) {
         AttributeInstance inst = player.getAttribute(attribute);
         if (inst == null) return;
 
@@ -408,6 +398,19 @@ public class AttributeApplier {
         if (existing != null) inst.removeModifier(uuid);
         if (percent != 0) {
             inst.addTransientModifier(new AttributeModifier(uuid, attribute.getDescriptionId() + "_percent", percent, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        }
+    }
+
+    public static void applyPercentModifierAdditive(LivingEntity entity, Attribute attribute, double percent, UUID uuid) {
+        AttributeInstance inst = entity.getAttribute(attribute);
+        if (inst == null) return;
+
+        AttributeModifier existing = inst.getModifier(uuid);
+        if (existing != null && existing.getAmount() == percent) return;
+
+        if (existing != null) inst.removeModifier(uuid);
+        if (percent != 0) {
+            inst.addTransientModifier(new AttributeModifier(uuid, attribute.getDescriptionId() + "_percent", percent, AttributeModifier.Operation.MULTIPLY_BASE));
         }
     }
 

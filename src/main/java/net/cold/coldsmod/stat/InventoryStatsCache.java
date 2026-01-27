@@ -146,12 +146,12 @@ public class InventoryStatsCache {
         CACHE.totalResist = (1.0 - ((1.0 - armorRed) * (1.0 - protRed) * (1.0 - res) * CACHE.incDmg)) * 100.0;
 
         // --- Base/Mult splits ---
-        CACHE.multArmor = p.getAttributeValue(ModAttributes.ARMOR_MULTIPLIER.get());
+        CACHE.multArmor = 1 + p.getAttributeValue(ModAttributes.ARMOR_MULTIPLIER.get());
         CACHE.baseArmor  = CACHE.multArmor  == 0 ? 0 : CACHE.armor  / CACHE.multArmor;
         CACHE.multTough = p.getAttributeValue(ModAttributes.TOUGHNESS_MULTIPLIER.get());
-        CACHE.baseTough  = CACHE.multTough  == 0 ? 0 : CACHE.tough  / CACHE.multTough;
+        CACHE.baseTough  = 1 + CACHE.multTough  == 0 ? 0 : CACHE.tough  / CACHE.multTough;
         CACHE.multHealth = p.getAttributeValue(ModAttributes.HEALTH_MULTIPLIER.get());
-        CACHE.baseHealth = CACHE.multHealth == 0 ? 0 : CACHE.health / CACHE.multHealth;
+        CACHE.baseHealth = 1 + CACHE.multHealth == 0 ? 0 : CACHE.health / CACHE.multHealth;
 
         // --- Misc ---
         CACHE.restoration = getScaledValue(p, ModAttributes.RESTORATION.get(), ModAttributes.RESTORATION_MULTIPLIER.get());

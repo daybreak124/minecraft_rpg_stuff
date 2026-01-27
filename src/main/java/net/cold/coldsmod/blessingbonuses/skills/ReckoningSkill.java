@@ -46,23 +46,20 @@ public class ReckoningSkill {
     public static void onReckoningHeal(LivingDamageEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
         if (player.level().isClientSide()) return;
-        if (event.getSource().is(ModDamageTypes.TRUE_DAMAGE)) return;
+        if (event.getSource().is(ModDamageTypes.RECKONING_DAMAGE)) return;
         if (event.getSource().is(DamageTypes.FALL)) return;
 
 
         if (player.hasEffect(ModEffects.RECKONING_ACTIVE.get())) {
             double healed = event.getAmount() * HEAL_PERCENT;
 
+            player.getPersistentData().putBoolean("IgnoreRejuvenation", true);
             player.heal((float) healed);
+            player.getPersistentData().remove("IgnoreRejuvenation");
 
-//            double attackerDamageMultiplier = 1.0;
-//            if (event.getSource().getEntity() instanceof LivingEntity attacker) {
-//                attackerDamageMultiplier = attacker.getAttributeValue(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
-//            }
 
             double totalHealed = player.getPersistentData().getDouble(HEALED_NBT);
             totalHealed += healed;
-            // totalHealed *= attackerDamageMultiplier;
             player.getPersistentData().putDouble(HEALED_NBT, totalHealed);
             EffectUtils.spawnParticleBurst(player, ParticleTypes.DAMAGE_INDICATOR);
         }

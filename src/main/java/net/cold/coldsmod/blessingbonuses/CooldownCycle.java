@@ -35,8 +35,7 @@ import java.util.UUID;
 import java.util.function.BiConsumer;
 
 import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.*;
-import static net.cold.coldsmod.stat.AttributeApplier.applyModifier;
-import static net.cold.coldsmod.stat.AttributeApplier.removeModifier;
+import static net.cold.coldsmod.stat.AttributeApplier.*;
 
 @Mod.EventBusSubscriber(modid = "coldsmod", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CooldownCycle {
@@ -168,7 +167,7 @@ public class CooldownCycle {
         });
 
         EXPIRE_HANDLERS.put(ModEffects.BERSERK_READY.get(), (player, inst) -> {
-            var data = player.getPersistentData();
+            CompoundTag data = player.getPersistentData();
             data.putInt("berserk", 0);
 
             if (!player.hasEffect(ModEffects.BERSERK_TIMER.get()) && data.getBoolean("berserk_applied")) {
@@ -177,7 +176,7 @@ public class CooldownCycle {
         });
 
         EXPIRE_HANDLERS.put(ModEffects.BERSERK_TIMER.get(), (player, inst) -> {
-            var data = player.getPersistentData();
+            CompoundTag data = player.getPersistentData();
             if (!data.getBoolean("berserk_applied")) return;
 
             player.addEffect(new MobEffectInstance(ModEffects.BERSERK_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
@@ -313,7 +312,7 @@ public class CooldownCycle {
         });
 
         APPLY_HANDLERS.put(ModEffects.OVERCONFIDENCE_ACTIVE.get(), (player, effect) -> {
-            applyModifier(player, ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get(), 1.0, OVERCONFIDENCE_UUID);
+            applyPercentModifier(player, ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get(), 1.0, OVERCONFIDENCE_UUID);
         });
 
         EXPIRE_HANDLERS.put(ModEffects.OVERCONFIDENCE_ACTIVE.get(), (player, inst) -> {
@@ -369,13 +368,14 @@ public class CooldownCycle {
         });
 
         APPLY_HANDLERS.put(ModEffects.FRENZY.get(), (player, effect) -> {
-
             int frenzyStacks = effect.getAmplifier() + 1;
+
             removeModifier(player, Attributes.ATTACK_DAMAGE, FRENZY_ATTACK_DAMAGE_UUID);
             double damageAmount = frenzyStacks * 0.1;
-            double incDamageAmount = frenzyStacks * 0.01;
             applyModifier(player, Attributes.ATTACK_DAMAGE, damageAmount, FRENZY_ATTACK_DAMAGE_UUID);
-            applyModifier(player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), incDamageAmount, FRENZY_ATTACK_DAMAGE_UUID);
+
+            double incDamagePercent = frenzyStacks * 0.01;
+            applyPercentModifierAdditive(player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), incDamagePercent, FRENZY_ATTACK_DAMAGE_UUID);
         });
 
         EXPIRE_HANDLERS.put(ModEffects.SANCTUARY_SHARED.get(), (player, instance) ->
@@ -384,7 +384,7 @@ public class CooldownCycle {
         });
 
         APPLY_HANDLERS.put(ModEffects.SANCTUARY_SHARED.get(), (player, effect) -> {
-            applyModifier(player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), -0.1, SANCTUARY_UUID);
+            applyPercentModifierAdditive(player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), -0.1, SANCTUARY_UUID);
         });
 
         EXPIRE_HANDLERS.put(ModEffects.FRENZY.get(), (player, instance) ->
@@ -447,10 +447,8 @@ public class CooldownCycle {
 
             if (player instanceof ServerPlayer serverPlayer) {
                 serverPlayer.playNotifySound(
-                        ModSounds.RECKONING_BOOM.get(),
-                        SoundSource.PLAYERS,
-                        0.6F,
-                        1.0F
+                        ModSounds.RECKONING_BOOM.get(), SoundSource.PLAYERS,
+                        0.6F, 1.0F
                 );
             }
             data.remove(HEALED_NBT);
@@ -462,7 +460,7 @@ public class CooldownCycle {
         });
 
         APPLY_HANDLERS_MOB.put(ModEffects.BRONZEWOOD_CURSE.get(), (victim, effect) -> {
-            applyModifier(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), 0.1, CURSE_UUID);
+            applyPercentModifierAdditive(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), 0.1, CURSE_UUID);
         });
 
         EXPIRE_HANDLERS_MOB.put(ModEffects.BLINDED_BY_HATRED.get(), (victim, instance) ->
@@ -471,7 +469,7 @@ public class CooldownCycle {
         });
 
         APPLY_HANDLERS_MOB.put(ModEffects.BLINDED_BY_HATRED.get(), (victim, effect) -> {
-            applyModifier(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), 0.06, HATRED_UUID);
+            applyPercentModifierAdditive(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), 0.06, HATRED_UUID);
         });
 
         EXPIRE_HANDLERS_MOB.put(ModEffects.INTIMIDATED.get(), (victim, instance) -> {
@@ -485,7 +483,7 @@ public class CooldownCycle {
 
         APPLY_HANDLERS_MOB.put(ModEffects.EXPLOIT_WEAKNESS_DEBUFF.get(), (victim, effect) -> {
             double stacks = (double) (effect.getAmplifier() + 1) / 100;
-            applyModifier(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), stacks, EXPLOITED_UUID);
+            applyPercentModifierAdditive(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), stacks, EXPLOITED_UUID);
         });
     }
 

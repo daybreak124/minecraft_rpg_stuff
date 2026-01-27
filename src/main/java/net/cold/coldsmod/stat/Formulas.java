@@ -147,6 +147,7 @@ public class Formulas {
     public void onLivingDamage(LivingDamageEvent event) {
         if (event.getEntity().level().isClientSide()) return;
         if (event.getSource().is(ModDamageTypes.RECKONING_DAMAGE)) {
+            System.out.println(event.getAmount());
             return;
         }
 
@@ -180,9 +181,9 @@ public class Formulas {
             if ((victim.getHealth()) <= newTotal * (1.0f + multiplier)) {
                 CooldownCycle.triggerSnapKill(victim, intimidated.getAmplifier());
             }
-
             event.setCanceled(true);
         }
+        System.out.println(event.getAmount());
     }
 
     private boolean rollCrit(Player player, double chance) {
@@ -323,6 +324,7 @@ public class Formulas {
     public void onHeal(LivingHealEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
         if (player.level().isClientSide) return;
+        if (player.getPersistentData().contains("IgnoreRejuvenation")) return;
 
         double incHeal = getScaledValue(player, ModAttributes.REJUVENATION.get(), ModAttributes.REJUVENATION_MULTIPLIER.get());
         event.setAmount((float) (event.getAmount() * (1 + incHeal/100)));

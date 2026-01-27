@@ -107,13 +107,13 @@ public class ModAttributes {
             () -> new RangedAttribute("xp_gain", 1.0D, 0D, 2048.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> ARMOR_MULTIPLIER = ATTRIBUTES.register("armor_multiplier",
-            () -> new RangedAttribute("armor_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
+            () -> new RangedAttribute("armor_multiplier", 0.0D, -0.99D, 2048.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> TOUGHNESS_MULTIPLIER = ATTRIBUTES.register("toughness_multiplier",
-            () -> new RangedAttribute("toughness_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
+            () -> new RangedAttribute("toughness_multiplier", 0.0D, -0.99D, 2048.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> HEALTH_MULTIPLIER = ATTRIBUTES.register("health_multiplier",
-            () -> new RangedAttribute("health_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
+            () -> new RangedAttribute("health_multiplier", 0.0D, -0.99D, 2048.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> OUTGOING_DAMAGE_MULTIPLIER = ATTRIBUTES.register("damage_multiplier",
             () -> new RangedAttribute("damage_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));

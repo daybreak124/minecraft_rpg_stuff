@@ -295,6 +295,7 @@ public class CreativeTabs {
                                 output.accept(TestItems.DEFENSE_3.get());
 
                                 output.accept(TestItems.RESTORATION_1.get());
+                                output.accept(TestItems.REJUVENATION_1.get());
 
                                 output.accept(TestItems.MELEE_1.get());
                                 output.accept(TestItems.MELEE_2.get());

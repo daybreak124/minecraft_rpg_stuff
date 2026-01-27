@@ -44,6 +44,7 @@ public class JumpCritHandler {
             for (LivingEntity entity : nearby) {
                 if (entity instanceof Mob mob) {
                     mob.setTarget(player);
+                    mob.addEffect(new MobEffectInstance(ModEffects.BLINDED_BY_HATRED.get(), 120, 0, false, true, false));
                 }
             }
 
