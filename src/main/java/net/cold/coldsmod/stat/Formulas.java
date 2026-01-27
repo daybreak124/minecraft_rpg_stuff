@@ -147,7 +147,6 @@ public class Formulas {
     public void onLivingDamage(LivingDamageEvent event) {
         if (event.getEntity().level().isClientSide()) return;
         if (event.getSource().is(ModDamageTypes.RECKONING_DAMAGE)) {
-            System.out.println(event.getAmount());
             return;
         }
 
@@ -184,7 +183,6 @@ public class Formulas {
 
             event.setCanceled(true);
         }
-        System.out.println(event.getAmount());
     }
 
     private boolean rollCrit(Player player, double chance) {
