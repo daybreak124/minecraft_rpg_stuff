@@ -144,7 +144,7 @@ public class ItemRarity {
                 case "Mythic" -> 7;
                 default -> 0;
             };
-            case "tool" -> switch (this.displayName) {
+            case "tools" -> switch (this.displayName) {
                 case "Common" -> 2;
                 case "Uncommon" -> 2;
                 case "Rare" -> 2;
@@ -207,7 +207,7 @@ public class ItemRarity {
             };
 
 
-            case "tool" -> switch (this.displayName) {
+            case "tools" -> switch (this.displayName) {
                 case "Common" -> 1.0;
                 case "Uncommon" -> 1.2;
                 case "Rare" -> 1.5;
@@ -222,7 +222,7 @@ public class ItemRarity {
 
 //    public double getBias(String itemType) {
 //        return switch (itemType.toLowerCase()) {
-//            case "sword", "bow", "crossbow", "shield", "tool" -> 0;
+//            case "sword", "bow", "crossbow", "shield", "tools" -> 0;
 //            default -> 0;
 //        };
 //    }

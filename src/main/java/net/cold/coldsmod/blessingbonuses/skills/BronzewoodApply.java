@@ -42,7 +42,7 @@ public class BronzewoodApply {
         if (!isMelee) return;
 
 
-        if (event.getSource().is(ModDamageTypes.DOT_DAMAGE)) return;
+        if (event.getSource().is(ModDamageTypes.MELEE_DOT_DAMAGE)) return;
 
         if (event.getSource().getEntity() instanceof Player p) {
             player = p;

@@ -35,19 +35,17 @@ public class BronzewoodCurse extends MobEffect {
         if (sourcePlayer == null) return;
 
 
-        Holder<DamageType> meleeType = entity.level().registryAccess()
+        Holder<DamageType> meleeDOT = entity.level().registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
-        DamageSource source = new DamageSource(meleeType, sourcePlayer);
+                .getHolderOrThrow(ModDamageTypes.MELEE_DOT_DAMAGE);
+        DamageSource source = new DamageSource(meleeDOT, sourcePlayer);
 
         entity.hurt(source, 1f);
         entity.setDeltaMovement(entity.getDeltaMovement().scale(0));
 
         entity.level().playSound(
-                null,
-                entity.getX(), entity.getY(), entity.getZ(),
-                SoundEvents.SOUL_ESCAPE,
-                SoundSource.PLAYERS,
+                null, entity.getX(), entity.getY(), entity.getZ(),
+                SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS,
                 4F, 1.0F
         );
     }

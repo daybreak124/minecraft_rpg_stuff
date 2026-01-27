@@ -61,7 +61,7 @@ public class Formulas {
         boolean isProjectile = event.getSource().getDirectEntity() instanceof Projectile;
         InteractionHand hand = player.swingingArm;
 
-        if (event.getSource().is(ModDamageTypes.CUSTOM_MELEE_DAMAGE)) {
+        if (event.getSource().is(ModDamageTypes.MELEE_DOT_DAMAGE)) {
             double meleeDmg = getScaledValue(player, ModAttributes.MELEE_POTENCY.get(), ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
             finalDamage *= (1.0 + meleeDmg / 100.0);
 
@@ -71,8 +71,7 @@ public class Formulas {
             if (rollCrit(player, melCritCh)) {
                 finalDamage *= (1.5 + melCritDmg / 100.0);
             }
-        }
-        else if (isProjectile || event.getSource().is(ModDamageTypes.CUSTOM_RANGED_DAMAGE)) {
+        } else if (isProjectile || event.getSource().is(ModDamageTypes.CUSTOM_RANGED_DAMAGE)) {
             double projDmg = getScaledValue(player, ModAttributes.PROJECTILE_POTENCY.get(), ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
             double projCritCh = getScaledValue(player, ModAttributes.PROJECTILE_ACCURACY.get(), ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get());
             double projCritDmg = getScaledValue(player, ModAttributes.PROJECTILE_PRECISION.get(), ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get());

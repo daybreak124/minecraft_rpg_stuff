@@ -18,7 +18,7 @@ public class ModDamageTypes {
     public static final ResourceKey<DamageType> LIGHTNING_DAMAGE =
             ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation("coldsmod", "lightning_damage"));
 
-    public static final ResourceKey<DamageType> DOT_DAMAGE =
+    public static final ResourceKey<DamageType> MELEE_DOT_DAMAGE =
             ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation("coldsmod", "melee_dot_damage"));
 
     public static final ResourceKey<DamageType> RECKONING_DAMAGE =
