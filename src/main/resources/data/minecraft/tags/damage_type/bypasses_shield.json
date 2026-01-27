@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "coldsmod:true_damage",
+    "coldsmod:reckoning_damage"
+  ]
+}
