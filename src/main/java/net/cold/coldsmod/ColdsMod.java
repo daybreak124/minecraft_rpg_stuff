@@ -33,7 +33,9 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
@@ -51,6 +53,7 @@ import java.nio.file.Files;
 public class ColdsMod {
     public static final String MODID = "coldsmod";
     public static final Logger LOGGER = LogUtils.getLogger();
+
 
     public ColdsMod(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
@@ -155,6 +158,8 @@ public class ColdsMod {
         ModSounds.SOUND_EVENTS.register(modEventBus);
         modEventBus.addListener(ModAttributes::onModifyEntityAttributes);
         ModEntities.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC, "coldsmod-drop_rates.toml");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
