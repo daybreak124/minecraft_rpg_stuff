@@ -26,6 +26,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import static net.cold.coldsmod.blessingbonuses.CooldownCycle.HAWKEYE_UUID;
+import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnExplosionOnFeet;
 import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleBurst;
 import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
 import static net.cold.coldsmod.stat.AttributeApplier.removeModifier;
@@ -275,7 +276,6 @@ public class Formulas {
     @SubscribeEvent
     public void onLivingFall(LivingFallEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
-        if (player.level().isClientSide()) return;
 
         float jumpBoost = (float) player.getAttributeValue(ModAttributes.JUMP_BOOST.get());
         if (jumpBoost <= 0) return;
@@ -284,11 +284,15 @@ public class Formulas {
         if (fallDistance <= fallThreshold) {
             event.setDistance(0);
             event.setCanceled(true);
+            player.fallDistance = 0;
+            if (jumpBoost > 1.5) { spawnExplosionOnFeet(player); }
             return;
         }
 
-        float damageMultiplier = 1.0f / jumpBoost;
-        event.setDamageMultiplier(Math.max(0.0f, damageMultiplier));
+        if (!player.level().isClientSide()) {
+            float damageMultiplier = 1.0f / jumpBoost;
+            event.setDamageMultiplier(Math.max(0.0f, damageMultiplier));
+        }
     }
 
     @SubscribeEvent
