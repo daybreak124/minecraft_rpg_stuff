@@ -120,7 +120,6 @@ public class AttributeApplier {
                     .put("rejuvenationMultiplier", ModAttributes.REJUVENATION_MULTIPLIER)
                     .put("amplificationMultiplier", ModAttributes.AMPLIFICATION_MULTIPLIER)
 
-
                     .put("moveSpeed", () -> Attributes.MOVEMENT_SPEED)
                     .put("swimSpeed", () -> ForgeMod.SWIM_SPEED.get())
                     .put("stepHeight", () -> ForgeMod.STEP_HEIGHT_ADDITION.get())
@@ -242,8 +241,6 @@ public class AttributeApplier {
             double baseMaxHealth = player.getAttributeValue(Attributes.MAX_HEALTH);
             double ASBonus = getScaledValue(player, ModAttributes.HASTE.get(), ModAttributes.HASTE_MULTIPLIER.get());
 
-
-
             double totalHealthMult = player.getAttributeValue(ModAttributes.HEALTH_MULTIPLIER.get());
             double healthBonus = baseMaxHealth * (totalHealthMult - 1);
             applyModifier(player, Attributes.MAX_HEALTH, healthBonus, HP_UUID);
@@ -318,21 +315,19 @@ public class AttributeApplier {
 
     @SubscribeEvent
     public static void onCurioChange(CurioChangeEvent event) {
-        if (event.getEntity() instanceof Player player) {
-            if (player.level().isClientSide()) {
-                    player.level().getServer().tell(new net.minecraft.server.TickTask(
-                            player.level().getServer().getTickCount() + 1,
-                            () -> {
-                                if (player.isAlive()) {
-                                    refreshPerPointStats(player);
-                                    refreshMilestones(player);
-                                    recalculateDynamicBonuses(player);
-                                    applyCrossbowTag(player);
-                                }
-                            }
-                    ));
-            }
-        }
+        if (!(event.getEntity() instanceof Player player)) return;
+        if (player.level().isClientSide()) return;
+        player.level().getServer().tell(new net.minecraft.server.TickTask(
+                player.level().getServer().getTickCount() + 1,
+                () -> {
+                    if (player.isAlive()) {
+                        refreshPerPointStats(player);
+                        refreshMilestones(player);
+                        recalculateDynamicBonuses(player);
+                        applyCrossbowTag(player);
+                    }
+                }
+        ));
     }
 
     public static void applyCrossbowTag(Player player) {

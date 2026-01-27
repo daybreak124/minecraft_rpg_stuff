@@ -38,44 +38,57 @@ public class QuantumLeapActive extends MobEffect {
         if (!player.isShiftKeyDown()) return;
         if (!QuantumLeapSync.QuantumLeapClientData.quantumLeapEligible) return;
         if (!player.hasEffect(ModEffects.QUANTUM_LEAP_READY.get())) return;
-        if (!(player instanceof ServerPlayer serverPlayer)) return;
+        if (!(player instanceof ServerPlayer)) return;
 
-        Vec3 look = player.getLookAngle().normalize();
-        Vec3 dashTarget = player.position().add(look.scale(6));
+        player.getServer().execute(() -> {
+            if (!player.isAlive()) return;
 
-        double yOffset = 1.0;
+            Vec3 look = player.getLookAngle().normalize();
+            Vec3 dashTarget = player.position().add(look.scale(10));
 
-        EffectUtils.spawnParticleBurst(player, ParticleTypes.FISHING);
+            double yOffset = 1.0;
 
-        AABB targetBox = player.getBoundingBox().move(
-                dashTarget.x - player.getX(),
-                dashTarget.y - player.getY(),
-                dashTarget.z - player.getZ()
-        );
+            AABB targetBox = player.getBoundingBox().move(
+                    dashTarget.x - player.getX(),
+                    dashTarget.y - player.getY(),
+                    dashTarget.z - player.getZ()
+            );
 
-        if (!player.level().noCollision(player, targetBox)) {
-            yOffset += 1;
-        }
+            if (!player.level().noCollision(player, targetBox)) {
+                yOffset += 1.0;
+            }
 
-        serverPlayer.teleportTo(dashTarget.x, dashTarget.y + yOffset, dashTarget.z);
+            player.teleportTo(
+                    dashTarget.x,
+                    dashTarget.y + yOffset,
+                    dashTarget.z
+            );
 
-        player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_COOLDOWN.get(), 20*35, 0, false, false, true));
+            // 🔑 ABSOLUTELY REQUIRED
+            player.setDeltaMovement(Vec3.ZERO);
+            player.hurtMarked = true;
 
+            EffectUtils.spawnParticleBurst(player, ParticleTypes.FISHING);
 
-        if (player.hasEffect(ModEffects.ENHANCED_QUANTUM_LEAP.get())) {
-            player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), 120, 0, false, false, true));
-            player.addEffect(new MobEffectInstance(ModEffects.ENHANCED_QUANTUM_LEAP.get(), 20*4, 0, false, false, true));
-        } else {
-            player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), 80, 0, false, false, true));
-        }
+            player.addEffect(new MobEffectInstance(
+                    ModEffects.QUANTUM_LEAP_COOLDOWN.get(), 20 * 35, 0, false, false, true
+            ));
 
-        player.removeEffect(ModEffects.QUANTUM_LEAP_READY.get());
-        player.getPersistentData().putBoolean("quantum_leaped", true);
+            player.addEffect(new MobEffectInstance(
+                    ModEffects.QUANTUM_LEAP_ACTIVE.get(), 80, 0, false, false, true
+            ));
 
-        player.level().playSound(null,
-                player.getX(), player.getY(), player.getZ(),
-                SoundEvents.PLAYER_SPLASH_HIGH_SPEED, SoundSource.PLAYERS,
-                0.6F, 1.0F);
+            player.removeEffect(ModEffects.QUANTUM_LEAP_READY.get());
+            player.getPersistentData().putBoolean("quantum_leaped", true);
+
+            player.level().playSound(
+                    null,
+                    player.getX(), player.getY(), player.getZ(),
+                    SoundEvents.PLAYER_SPLASH_HIGH_SPEED,
+                    SoundSource.PLAYERS,
+                    0.6F, 1.0F
+            );
+        });
     }
 
     @SubscribeEvent

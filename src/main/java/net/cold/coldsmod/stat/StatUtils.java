@@ -261,7 +261,18 @@ public class StatUtils {
                 tooltip.add(Component.literal(text).withStyle(ChatFormatting.BLUE));
             }
 
-            if (vanillaKnockbackResist != 0 || stats.getKnockbackResist() != 0) {
+
+            if (vanillaKnockbackResist == 0) {
+
+                if (stats.getKnockbackResist() != 0) {
+                    String text = "";
+                    text += String.format("%s%s%%",
+                            stats.getKnockbackResist() > 0 ? "+" : "",
+                            formatValue(stats.getKnockbackResist()));
+                    text += " Knockback Resist";
+                    tooltip.add(Component.literal(text).withStyle(ChatFormatting.BLUE));
+                }
+            } else {
                 String text = (vanillaKnockbackResist > 0 ? "+" : "") + formatValue(vanillaKnockbackResist) + "%";
 
                 if (stats.getKnockbackResist() != 0) {
@@ -412,8 +423,8 @@ public class StatUtils {
         }
 
         Object[][] utilityStats = new Object[][]{
-                {"Speed", stats.getMoveSpeed(), true},
-                {"Swim Speed", stats.getSwimSpeed(), true},
+                {"Speed", stats.getMoveSpeed() * 1000, true},
+                {"Swim Speed", stats.getSwimSpeed() * 100, true},
                 {"Block Reach", stats.getBlockReach(), false},
                 {"Entity Reach", stats.getEntityReach(), false},
                 {"Step Height", stats.getStepHeight(), false},

@@ -11,12 +11,15 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -26,7 +29,7 @@ import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
 public class Vitalization {
 
     @SubscribeEvent
-    public static void onArrowHit(LivingHurtEvent event) {
+    public static void onArrowHit(LivingAttackEvent event) {
         if (!(event.getSource().getDirectEntity() instanceof Projectile proj)) return;
         if (!(event.getSource().getEntity() instanceof Player player)) return;
         if (player.level().isClientSide()) return;
@@ -52,13 +55,16 @@ public class Vitalization {
             finalDamage *= (1.5 + (totalCritDamage / 100.0));
 
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
-                    SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.0F);
+                    SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 0.5F, 1.0F);
         }
+
+        double incDamageMultiplier = target.getAttributeValue(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get());
+        double attackerDamageMultiplier = player.getAttributeValue(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
 
         player.getPersistentData().putInt("hawkeye", 0);
         player.removeEffect(ModEffects.HAWKEYE.get());
 
-        float healAmount = (float) (finalDamage * 0.25);
+        float healAmount = (float) (finalDamage * 0.175 * incDamageMultiplier * attackerDamageMultiplier);
 
         EffectUtils.playHealSound(target);
         EffectUtils.spawnComposterBurst(target);
@@ -69,23 +75,23 @@ public class Vitalization {
 
         target.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20*5, 0));
         target.heal((float) (healAmount * (1.0 + (healIncrease / 100.0))));
+
         event.setCanceled(true);
+        proj.discard();
     }
 
     @SubscribeEvent
     public static void onProjectileImpact(ProjectileImpactEvent event) {
         if (event.getEntity().level().isClientSide()) return;
-        if (!(event.getProjectile() instanceof Arrow arrow)) return;
+        if (!(event.getProjectile() instanceof AbstractArrow arrow)) return;
         if (!arrow.getPersistentData().getBoolean("life_touch_tagged")) return;
         if (!(arrow.getOwner() instanceof Player player) || !player.getPersistentData().getBoolean("life_touch_applied")) return;
-
-        Level level = arrow.level();
-
-
         if (!(player.hasEffect(ModEffects.LIFE_TOUCH_READY.get()))) return;
 
         HitResult hit = event.getRayTraceResult();
         if (hit == null || hit.getType() != HitResult.Type.BLOCK) return;
+
+        Level level = arrow.level();
 
         Vec3 hitVec = hit.getLocation();
 
@@ -108,16 +114,13 @@ public class Vitalization {
         level.addFreshEntity(cloud);
 
         player.level().playSound(
-                null,
-                hitVec.x, hitVec.y, hitVec.z,
-                SoundEvents.SPLASH_POTION_BREAK,
-                SoundSource.PLAYERS,
-                0.6F,
-                1.0F
+                null, hitVec.x, hitVec.y, hitVec.z,
+                SoundEvents.SPLASH_POTION_BREAK, SoundSource.PLAYERS,
+                0.6F, 1.0F
         );
+
         arrow.discard();
 
-        arrow.getPersistentData().putBoolean("life_touch_tagged", false);
         player.removeEffect(ModEffects.LIFE_TOUCH_READY.get());
         player.addEffect(new MobEffectInstance(ModEffects.LIFE_TOUCH_COOLDOWN.get(), 20*22, 0, false, false, true));
     }

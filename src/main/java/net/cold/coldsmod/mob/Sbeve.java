@@ -29,7 +29,7 @@ public class Sbeve extends TamableAnimal {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 40.0)
                 .add(Attributes.ATTACK_DAMAGE, 1.25)
-                .add(Attributes.MOVEMENT_SPEED, 0.4)
+                .add(Attributes.MOVEMENT_SPEED, 0.55)
                 .add(Attributes.FOLLOW_RANGE, 32.0);
     }
 

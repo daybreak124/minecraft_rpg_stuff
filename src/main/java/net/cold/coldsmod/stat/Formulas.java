@@ -78,6 +78,8 @@ public class Formulas {
 
             if (event.getSource().getDirectEntity() instanceof Projectile proj) {
 
+                finalDamage *= 0.7f;
+
                 if (proj.getPersistentData().getBoolean("clairvoyance_tagged")) {
                     finalDamage *= 3;
                     resetClairvoyance(player, data);
@@ -98,7 +100,6 @@ public class Formulas {
             }
             resetHawkeye(player, data);
             handleFrenzy(player, data);
-            finalDamage *= 0.7;
         } else if (isDirectMelee || event.getSource().is(ModDamageTypes.CUSTOM_MELEE_DAMAGE)) {
             double melDmg = getScaledValue(player, ModAttributes.MELEE_POTENCY.get(), ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
             double melCritDmg = getScaledValue(player, ModAttributes.MELEE_PRECISION.get(), ModAttributes.MELEE_PRECISION_MULTIPLIER.get());
@@ -312,28 +313,6 @@ public class Formulas {
             player.addEffect(new MobEffectInstance(ModEffects.NIMBLE_GETAWAY_COOLDOWN.get(), 20*20, 0, false, false, true));
 
             if (player instanceof ServerPlayer serverPlayer) {serverPlayer.playNotifySound(SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75F, 1.5F);}
-            return;
-        }
-
-        if (event.getSource().getDirectEntity() instanceof AbstractArrow arrow) {
-            CompoundTag nbt = arrow.getPersistentData();
-
-            if (nbt.getBoolean("spirit_grove_knockback_cancel")) {
-                event.setCanceled(true);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onKnockback(LivingKnockBackEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
-        if (player.getLastDamageSource() != null &&
-                player.getLastDamageSource().getDirectEntity() instanceof AbstractArrow arrow) {
-
-            if (arrow.getPersistentData().getBoolean("spirit_grove_knockback_cancel")) {
-                event.setStrength(0);
-                event.setCanceled(true);
-            }
         }
     }
 
@@ -344,7 +323,6 @@ public class Formulas {
 
         double incHeal = getScaledValue(player, ModAttributes.REJUVENATION.get(), ModAttributes.REJUVENATION_MULTIPLIER.get());
         event.setAmount((float) (event.getAmount() * (1 + incHeal/100)));
-        // System.out.println(event.getAmount());
     }
 
     @SubscribeEvent

@@ -195,8 +195,8 @@ public class StatGeneration {
             case "maxHealth" -> stats.setMaxHealth(value);
             case "xpGain" -> stats.setXpGain(value);
             case "knockbackResist" -> stats.setKnockbackResist(value);
-            case "speed" -> stats.setMoveSpeed(value);
-            case "swimSpeed" -> stats.setSwimSpeed(value);
+            case "speed" -> stats.setMoveSpeed(value/1000);
+            case "swimSpeed" -> stats.setSwimSpeed(value/100);
             case "debuffResist" -> stats.setDebuffResist(value);
             case "attackSpeed" -> stats.setAttackSpeed(value);
             case "projectileDamage" -> stats.setProjectileDamage(value);

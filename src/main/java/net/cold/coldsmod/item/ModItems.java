@@ -1042,7 +1042,7 @@ public class ModItems {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Blessing: Quantum Leap").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Upon crouch jumping, perform").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" a 6 block teleport and turn").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" a 10 block teleport and turn").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" invisible for 4 seconds. Gain").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" +30 Potency and +20% Movement").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Speed for 8 seconds until you.").withStyle(ChatFormatting.GRAY));
@@ -1478,7 +1478,7 @@ public class ModItems {
             tooltip.add(Component.literal(" Bows").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("Blessing: Spirit Grove").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Your arrows now heal").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" other players for 25% of").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" other players for 17.5% of").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" the Damage done and apply").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Regeneration I for 5 seconds.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Additionally, when shooting.").withStyle(ChatFormatting.GRAY));
@@ -2304,6 +2304,8 @@ public class ModItems {
 
                 if (player.level() instanceof ServerLevel serverLevel) {
                     SummoningStone.killSbeve(serverLevel, player);
+                    player.getPersistentData().remove("active_sbeve_uuid");
+                    player.getPersistentData().putInt("sbeve_timer", 0);
                 }
             }
         }
@@ -2395,7 +2397,8 @@ public class ModItems {
             tooltip.add(Component.literal(" pull monsters within 4").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" blocks to the arrow for").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 4 seconds and deal 4").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Ranged Damage per second.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Projectile Damage every").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" second.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
                             .append(Component.literal("18s").withStyle(ChatFormatting.GRAY))

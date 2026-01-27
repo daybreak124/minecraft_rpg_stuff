@@ -11,6 +11,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.UUID;
@@ -31,7 +32,7 @@ public class SummoningStone {
         runSbeveUpdateLogic(player);
     }
 
-    private static void runSbeveUpdateLogic(Player player) {
+    public static void runSbeveUpdateLogic(Player player) {
         if (player.hasEffect(ModEffects.SOLARA.get()) || player.hasEffect(ModEffects.SBEVE_CD.get())) return;
 
         int timer = player.getPersistentData().getInt("sbeve_timer") + 1200;
@@ -112,6 +113,18 @@ public class SummoningStone {
                     player.getPersistentData().putBoolean("summoning_stone_eligible", false);
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
+
+        Player player = event.getEntity();
+
+        if (player.level() instanceof ServerLevel serverLevel) {
+            killSbeve(serverLevel, player);
+            player.getPersistentData().remove("active_sbeve_uuid");
         }
     }
 }
