@@ -1,9 +1,5 @@
 {
   "message_id": "custom_melee_damage",
   "scaling": "never",
-  "exhaustion": 0.0,
-  "bypasses_armor": false,
-  "no_immunity": true,
-  "no_self_damage": true,
-  "explosion": true
+  "exhaustion": 0.0
 }
