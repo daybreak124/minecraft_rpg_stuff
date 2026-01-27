@@ -108,8 +108,6 @@ public class Sanctuary {
         target.heal(finalHeal);
 
         target.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_FATIGUE.get(), 240, stacks, false, false, true));
-        target.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_SHARED.get(), 100, 0, false, false, true));
-        source.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_FATIGUE.get(), 200, stacks, false, false, true));
-        source.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_SHARED.get(), 100, 0, false, false, true));
+        target.addEffect(new MobEffectInstance(ModEffects.SANCTUARY_SHARED.get(), 20, 0, false, false, true));
     }
 }

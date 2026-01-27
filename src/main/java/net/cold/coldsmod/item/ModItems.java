@@ -2225,7 +2225,7 @@ public class ModItems {
             tooltip.add(Component.literal(" Range increased by").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Amplification.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
-                    Component.literal("Heal Fatigue Duration: ").withStyle(ChatFormatting.DARK_RED)
+                    Component.literal("Heal Fatigue Duration: ").withStyle(ChatFormatting.RED)
                             .append(Component.literal("12s").withStyle(ChatFormatting.GRAY))
             );
         }

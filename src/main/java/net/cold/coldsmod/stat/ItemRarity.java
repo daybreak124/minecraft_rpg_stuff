@@ -91,6 +91,7 @@ public class ItemRarity {
                 case "Mythic" -> 2;
                 default -> 2;
             };
+
             default -> 0;
         };
     }
@@ -153,6 +154,7 @@ public class ItemRarity {
                 case "Mythic" -> 2;
                 default -> 0;
             };
+
             default -> 0;
         };
     }
@@ -209,13 +211,14 @@ public class ItemRarity {
 
             case "tools" -> switch (this.displayName) {
                 case "Common" -> 1.0;
-                case "Uncommon" -> 1.2;
-                case "Rare" -> 1.5;
-                case "Epic" -> 2.0;
-                case "Legendary" -> 3.0;
-                case "Mythic" -> 4.0;
+                case "Uncommon" -> 1.25;
+                case "Rare" -> 1.75;
+                case "Epic" -> 2.5;
+                case "Legendary" -> 3.5;
+                case "Mythic" -> 4.5;
                 default -> 1.0;
             };
+
             default -> 1.0;
         };
     }
