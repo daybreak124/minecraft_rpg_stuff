@@ -67,7 +67,7 @@ public class ModAttributes {
     public static final RegistryObject<Attribute> AMPLIFICATION = ATTRIBUTES.register("amplification",
             () -> new RangedAttribute("amplification", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> DEBUFF_RESIST = ATTRIBUTES.register("debuff_resist",
-            () -> new RangedAttribute("debuff_resist", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
+            () -> new RangedAttribute("debuff_resist", 0.0D, -2048.0D, 100.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> POTENCY_MULTIPLIER = ATTRIBUTES.register("potency_multiplier",
             () -> new RangedAttribute("potency_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));

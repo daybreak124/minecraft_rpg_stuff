@@ -72,7 +72,7 @@ public class DebuffResistHandler {
 
         // 3. Apply Reductions
         if (!toReduce.isEmpty()) {
-            double multiplier = 1.0 - (Math.min(resist, 100) / 100.0);
+            double multiplier = 1.0 - (resist / 100.0);
 
             for (MobEffectInstance inst : toReduce) {
                 MobEffect effect = inst.getEffect();
