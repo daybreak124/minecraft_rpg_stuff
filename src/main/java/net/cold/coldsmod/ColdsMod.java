@@ -158,8 +158,6 @@ public class ColdsMod {
         ModSounds.SOUND_EVENTS.register(modEventBus);
         modEventBus.addListener(ModAttributes::onModifyEntityAttributes);
         ModEntities.register(FMLJavaModLoadingContext.get().getModEventBus());
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC, "coldsmod-drop_rates.toml");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -168,6 +166,8 @@ public class ColdsMod {
         copyDefaultConfig("crossbows.json");
         copyDefaultConfig("shields.json");
         copyDefaultConfig("tools.json");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC, "coldsmod-drop_rates.toml");
+
         LOGGER.info("HELLO FROM COMMON SETUP");
 
         ItemRarityUtils.init();

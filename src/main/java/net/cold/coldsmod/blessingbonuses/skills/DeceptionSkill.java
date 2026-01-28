@@ -79,6 +79,7 @@ public class DeceptionSkill {
                 spawnParticleBurst(entity, ParticleTypes.HEART);
             }
         }
+        spawnParticleBurst(target, ParticleTypes.DAMAGE_INDICATOR);
 
         player.level().playSound(
                 null, target.getX(), target.getY(), target.getZ(),
