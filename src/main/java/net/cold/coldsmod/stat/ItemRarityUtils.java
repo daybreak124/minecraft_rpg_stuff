@@ -6,15 +6,16 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class ItemRarityUtils {
 
-    public static Set<Item> MELEE_WEAPONS;
-    public static Set<Item> BOWS;
-    public static Set<Item> CROSSBOWS;
-    public static Set<Item> SHIELDS;
-    public static Set<Item> TOOLS;
+    public static Set<Item> MELEE_WEAPONS = new HashSet<>();
+    public static Set<Item> BOWS = new HashSet<>();
+    public static Set<Item> CROSSBOWS = new HashSet<>();
+    public static Set<Item> SHIELDS = new HashSet<>();
+    public static Set<Item> TOOLS = new HashSet<>();
     private static final String NBT_KEY = "custom_rarity";
 
     private static final TagKey<Item> SWORDS = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "swords"));
@@ -23,14 +24,6 @@ public class ItemRarityUtils {
     private static final TagKey<Item> FORGE_BOWS = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "bows"));
     private static final TagKey<Item> CROSSBOWS_TAG = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "crossbows"));
     private static final TagKey<Item> SHIELDS_TAG = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "shields"));
-
-    static {
-        MELEE_WEAPONS = TagLoader.loadItemsFromConfig("melee_weapons.json");
-        BOWS = TagLoader.loadItemsFromConfig("bows.json");
-        CROSSBOWS = TagLoader.loadItemsFromConfig("crossbows.json");
-        SHIELDS = TagLoader.loadItemsFromConfig("shields.json");
-        TOOLS = TagLoader.loadItemsFromConfig("tools.json");
-    }
 
     public static boolean hasRarity(ItemStack stack) {
         return stack != null && stack.hasTag() && stack.getTag().contains(NBT_KEY);

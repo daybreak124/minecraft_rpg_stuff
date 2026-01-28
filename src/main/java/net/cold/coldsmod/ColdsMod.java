@@ -23,12 +23,15 @@ import net.cold.coldsmod.mob.SbeveRenderer;
 import net.cold.coldsmod.network.NetworkHandler;
 import net.cold.coldsmod.stat.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -58,13 +61,20 @@ public class ColdsMod {
     public ColdsMod(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
 
+        copyDefaultConfig("melee_weapons.json");
+        copyDefaultConfig("bows.json");
+        copyDefaultConfig("crossbows.json");
+        copyDefaultConfig("shields.json");
+        copyDefaultConfig("tools.json");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC, "coldsmod-drop_rates.toml");
+
+
         ModAttributes.ATTRIBUTES.register(modEventBus);
         ModItems.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(new ItemModifier());
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
 
-        modEventBus.addListener(this::addCreative);
         modEventBus.addListener(this::enqueueIMC);
         ModLootModifiers.register();
         MinecraftForge.EVENT_BUS.register(new DebuffResistHandler());
@@ -161,16 +171,10 @@ public class ColdsMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        copyDefaultConfig("melee_weapons.json");
-        copyDefaultConfig("bows.json");
-        copyDefaultConfig("crossbows.json");
-        copyDefaultConfig("shields.json");
-        copyDefaultConfig("tools.json");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC, "coldsmod-drop_rates.toml");
-
         LOGGER.info("HELLO FROM COMMON SETUP");
 
-        ItemRarityUtils.init();
+        event.enqueueWork(ItemRarityUtils::init);
+
         CooldownCycle.init();
         MinecraftForge.EVENT_BUS.register(ModAttributes.class);
     }
@@ -190,12 +194,6 @@ public class ColdsMod {
         }
     }
 
-
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-        }
-    }
-
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         LOGGER.info("HELLO from server starting");
@@ -211,11 +209,25 @@ public class ColdsMod {
 
         @SubscribeEvent
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerEntityRenderer(
-                    ModEntities.SBEVE.get(),
-                    SbeveRenderer::new
-            );
+            event.registerEntityRenderer(ModEntities.SBEVE.get(), SbeveRenderer::new);
         }
+    }
+
+    @SubscribeEvent
+    public void onRegisterCommands(RegisterCommandsEvent event) {
+        event.getDispatcher().register(Commands.literal("coldsmod")
+                .then(Commands.literal("reload")
+                        .requires(source -> source.hasPermission(2))
+                        .executes(context -> {
+                            ItemRarityUtils.init();
+                            context.getSource().sendSuccess(
+                                    () -> Component.literal("§6Weapon tags have been reloaded"),
+                                    true
+                            );
+                            return 1;
+                        })
+                )
+        );
     }
 
     public void enqueueIMC(final InterModEnqueueEvent event) {

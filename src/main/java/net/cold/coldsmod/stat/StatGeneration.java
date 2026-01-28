@@ -193,7 +193,7 @@ public class StatGeneration {
             case "projectileCritChance" -> stats.setProjectileCritChance(value);
             case "projectileCritDamage" -> stats.setProjectileCritDamage(value);
             case "maxHealth" -> stats.setMaxHealth(value);
-            case "xpGain" -> stats.setXpGain(value);
+            case "xpGain" -> stats.setXpGain(value/100);
             case "knockbackResist" -> stats.setKnockbackResist(value);
             case "speed" -> stats.setMoveSpeed(value/1000);
             case "swimSpeed" -> stats.setSwimSpeed(value/100);
@@ -202,7 +202,7 @@ public class StatGeneration {
             case "projectileDamage" -> stats.setProjectileDamage(value);
             case "drawSpeed" -> stats.setDrawSpeed(value);
             case "blockReach" -> stats.setBlockReach(value);
-            case "miningSpeed" -> stats.setMiningSpeed(value);
+            case "miningSpeed" -> stats.setMiningSpeed(value/100);
             case "rejuvenation" -> stats.setRejuvenation(value);
             case "restoration" -> stats.setRestoration(value);
             case "amplification" -> stats.setAmplification(value);

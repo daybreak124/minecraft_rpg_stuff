@@ -157,6 +157,7 @@ public class InventoryStatsCache {
         CACHE.restoration = getScaledValue(p, ModAttributes.RESTORATION.get(), ModAttributes.RESTORATION_MULTIPLIER.get());
         CACHE.amplification = getScaledValue(p, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get());
         CACHE.rejuvenation = getScaledValue(p, ModAttributes.REJUVENATION.get(), ModAttributes.REJUVENATION_MULTIPLIER.get());
+
         CACHE.moveSpeed = 1000 * p.getAttributeValue(Attributes.MOVEMENT_SPEED) - 100;
         CACHE.swimSpeed = 100 * p.getAttributeValue(ForgeMod.SWIM_SPEED.get()) - 100;
         CACHE.stepHeight = p.getAttributeValue(ForgeMod.STEP_HEIGHT_ADDITION.get());

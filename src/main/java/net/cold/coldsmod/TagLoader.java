@@ -39,7 +39,6 @@ public class TagLoader {
             e.printStackTrace();
         }
 
-        // System.out.println("[TagLoader] Loaded " + items.size() + " items from " + fileName);
         return items;
     }
 }
