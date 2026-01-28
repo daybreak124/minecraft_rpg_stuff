@@ -428,7 +428,7 @@ public class StatUtils {
                 {"Block Reach", stats.getBlockReach(), false},
                 {"Entity Reach", stats.getEntityReach(), false},
                 {"Step Height", stats.getStepHeight(), false},
-                {"Mining Speed", stats.getMiningSpeed(), true},
+                {"Mining Speed", stats.getMiningSpeed() * 100, true},
                 {"Jump Boost", stats.getJumpBoost(), true},
                 {"XP Gain", stats.getXpGain() * 100, true},
                 {"Luck", stats.getLuck(), false}
