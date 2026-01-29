@@ -85,14 +85,14 @@ public class ItemRarityUtils {
         if (item instanceof HoeItem || item instanceof ShovelItem || item instanceof PickaxeItem) return "tools";
 
 
-        if (id.contains("sword") || id.contains("axe") || id.contains("trident") ||
+        if (id.contains("sword") || (id.contains("axe") && !id.contains("waxed")) || id.contains("trident") ||
                 id.contains("hammer") || id.contains("mace") ||
                 id.contains("rapier") || id.contains("longsword") || id.contains("katana") ||
-                id.contains("saber") || id.contains("club") || id.contains("pike") ||
+                id.contains("saber") || id.contains("club")  ||
                 id.contains("lance") || id.contains("warhammer") || id.contains("staff") ||
                 id.contains("glaive") || id.contains("spear") || id.contains("gauntlet")) return "sword";
 
-        if (id.contains("bow")) return "bow";
+        if (id.contains("bow") && !id.contains("bowl")) return "bow";
         if (id.contains("crossbow")) return "crossbow";
         // if (id.contains("shield")) return "shield";
 

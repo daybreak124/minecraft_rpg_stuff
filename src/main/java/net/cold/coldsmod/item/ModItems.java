@@ -59,7 +59,7 @@ public class ModItems {
                                     .append(Component.literal("Gem Clusters").withStyle(ChatFormatting.GREEN))
                                     .append(Component.literal(" to upgrade accessories.").withStyle(ChatFormatting.GRAY))
                     );
-                    tooltip.add(Component.literal(" Used in Smithing Tables.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Smithing Tables.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -82,7 +82,7 @@ public class ModItems {
                                     .append(Component.literal(" accessories to").withStyle(ChatFormatting.GRAY))
                                     .append(Component.literal(" EPIC").withStyle(ChatFormatting.DARK_PURPLE))
                     );
-                    tooltip.add(Component.literal(" Used in Smithing Tables.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Smithing Tables.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -105,7 +105,7 @@ public class ModItems {
                                     .append(Component.literal(" accessories to").withStyle(ChatFormatting.GRAY))
                                     .append(Component.literal(" LEGENDARY").withStyle(ChatFormatting.GOLD))
                     );
-                    tooltip.add(Component.literal(" Used in Smithing Tables.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Smithing Tables.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -128,7 +128,7 @@ public class ModItems {
                                     .append(Component.literal(" accessories to").withStyle(ChatFormatting.GRAY))
                                     .append(Component.literal(" MYTHIC").withStyle(ChatFormatting.AQUA))
                     );
-                    tooltip.add(Component.literal(" Used in Smithing Tables.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Smithing Tables.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -151,7 +151,7 @@ public class ModItems {
                                     .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
                                     .append(Component.literal("UNCOMMON").withStyle(ChatFormatting.GREEN))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -174,7 +174,7 @@ public class ModItems {
                                     .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
                                     .append(Component.literal("RARE").withStyle(ChatFormatting.BLUE))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -197,7 +197,7 @@ public class ModItems {
                                     .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
                                     .append(Component.literal("EPIC").withStyle(ChatFormatting.DARK_PURPLE))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -220,7 +220,7 @@ public class ModItems {
                                     .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
                                     .append(Component.literal("LEGENDARY").withStyle(ChatFormatting.GOLD))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -243,7 +243,7 @@ public class ModItems {
                                     .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
                                     .append(Component.literal("MYTHIC").withStyle(ChatFormatting.AQUA))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -265,7 +265,7 @@ public class ModItems {
                                     .append(Component.literal("COMMON").withStyle(ChatFormatting.GRAY))
                                     .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -287,7 +287,7 @@ public class ModItems {
                                     .append(Component.literal("UNCOMMON").withStyle(ChatFormatting.GREEN))
                                     .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -309,7 +309,7 @@ public class ModItems {
                                     .append(Component.literal("RARE").withStyle(ChatFormatting.BLUE))
                                     .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -331,7 +331,7 @@ public class ModItems {
                                     .append(Component.literal("EPIC").withStyle(ChatFormatting.DARK_PURPLE))
                                     .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -353,7 +353,7 @@ public class ModItems {
                                     .append(Component.literal("LEGENDARY").withStyle(ChatFormatting.GOLD))
                                     .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -375,7 +375,7 @@ public class ModItems {
                                     .append(Component.literal("MYTHIC").withStyle(ChatFormatting.AQUA))
                                     .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -397,7 +397,7 @@ public class ModItems {
                                     .append(Component.literal("COMMON").withStyle(ChatFormatting.GRAY))
                                     .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -419,7 +419,7 @@ public class ModItems {
                                     .append(Component.literal("UNCOMMON").withStyle(ChatFormatting.GREEN))
                                     .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -441,7 +441,7 @@ public class ModItems {
                                     .append(Component.literal("RARE").withStyle(ChatFormatting.BLUE))
                                     .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -463,7 +463,7 @@ public class ModItems {
                                     .append(Component.literal("EPIC").withStyle(ChatFormatting.DARK_PURPLE))
                                     .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -485,7 +485,7 @@ public class ModItems {
                                     .append(Component.literal("LEGENDARY").withStyle(ChatFormatting.GOLD))
                                     .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -513,7 +513,7 @@ public class ModItems {
                                     .append(Component.literal("MYTHIC").withStyle(ChatFormatting.AQUA))
                                     .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
                     );
-                    tooltip.add(Component.literal(" Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -535,7 +535,7 @@ public class ModItems {
                     tooltip.add(Component.literal(" Accessories").withStyle(ChatFormatting.BLUE));
                     tooltip.add(Component.literal("Ingredients:").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal(" Gem Clusters").withStyle(ChatFormatting.BLUE));
-                    tooltip.add(Component.literal(" Used in Smithing Tables.").withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Component.literal("Used in Smithing Tables.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );

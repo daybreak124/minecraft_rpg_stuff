@@ -15,7 +15,7 @@ public class ModConfigs {
         BUILDER.push("Drop rate multipliers");
 
         ACCESSORY_MULTIPLIER = BUILDER
-                .comment("Multiplier for accessories (Default: 1.0, Recommended: 1.5-2.0)")
+                .comment("Multiplier for accessories (Default: 1.0, Recommended: 1.0-1.5)")
                 .defineInRange("accessoryMultiplier", 1.0, 0.0, 100.0);
 
         BLESSING_MULTIPLIER = BUILDER
@@ -23,7 +23,7 @@ public class ModConfigs {
                 .defineInRange("blessingMultiplier", 1.0, 0.0, 100.0);
 
         MATERIAL_MULTIPLIER = BUILDER
-                .comment("Multiplier for materials (Default: 1.0, Recommended: 1.5-2.0)")
+                .comment("Multiplier for materials (Default: 1.0, Recommended: 1.0-2.0)")
                 .defineInRange("materialMultiplier", 1.0, 0.0, 100.0);
 
         BUILDER.pop();

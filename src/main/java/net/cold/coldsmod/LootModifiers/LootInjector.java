@@ -31,9 +31,9 @@ public class LootInjector {
     public static void onLootTableLoad(LootTableLoadEvent event) {
         ResourceLocation name = event.getName();
 
-        float accessoryMultiplier = ModConfigs.ACCESSORY_MULTIPLIER.get().floatValue();
+        float accessoryMultiplier = 6 * ModConfigs.ACCESSORY_MULTIPLIER.get().floatValue();
         float blessingMultiplier = ModConfigs.BLESSING_MULTIPLIER.get().floatValue();
-        float materialMultiplier = ModConfigs.MATERIAL_MULTIPLIER.get().floatValue();
+        float materialMultiplier = 12 * ModConfigs.MATERIAL_MULTIPLIER.get().floatValue();
 
         if (name.equals(new ResourceLocation("minecraft", "chests/nether_bridge"))) {
 
