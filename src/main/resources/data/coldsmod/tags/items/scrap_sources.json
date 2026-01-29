@@ -9,6 +9,7 @@
     "#minecraft:chestplates",
     "#minecraft:leggings",
     "#minecraft:boots",
-    "#forge:armors"
+    "#forge:armors",
+    "#c:armors"
   ]
 }
