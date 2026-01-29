@@ -96,7 +96,7 @@ public class ItemRarityUpgrade {
             ));
 
             event.setOutput(output);
-            event.setCost(5);
+            event.setCost(3);
             event.setMaterialCost(1);
             return;
         }
@@ -144,7 +144,7 @@ public class ItemRarityUpgrade {
             ));
 
             event.setOutput(output);
-            event.setCost(5);
+            event.setCost(3);
             event.setMaterialCost(1);
             return;
         }
