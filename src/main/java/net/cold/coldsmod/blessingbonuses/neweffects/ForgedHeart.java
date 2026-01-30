@@ -18,16 +18,19 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Flameheart {
+public class ForgedHeart {
 
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         if (event.getPlayer().level().isClientSide) return;
         Player player = event.getPlayer();
         if (player.isShiftKeyDown() || player.isCreative()) return;
-        if (!player.getPersistentData().getBoolean("smelt_eligible")) return;
+        if (player.getPersistentData().getBoolean("smelt_eligible")) return;
+        if (!player.getPersistentData().getBoolean("smelt2_eligible")) return;
+
 
         BlockState state = event.getState();
+        if (!state.is(net.minecraftforge.common.Tags.Blocks.ORES)) return;
 
         if (!player.hasCorrectToolForDrops(state)) return;
 

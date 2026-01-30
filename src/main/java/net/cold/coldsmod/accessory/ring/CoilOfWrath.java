@@ -65,6 +65,8 @@ public class CoilOfWrath {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 4.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 6.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 6.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 6.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), -3.0, COIL_OF_WRATH_UUID);
             }
         }
@@ -83,6 +85,8 @@ public class CoilOfWrath {
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), COIL_OF_WRATH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), COIL_OF_WRATH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), COIL_OF_WRATH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), COIL_OF_WRATH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), COIL_OF_WRATH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), COIL_OF_WRATH_UUID);
             }
         }
@@ -114,6 +118,9 @@ public class CoilOfWrath {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 7.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 12.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 12.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 12.0, COIL_OF_WRATH_UUID);
+
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), -3.0, COIL_OF_WRATH_UUID);
             }
         }
@@ -132,6 +139,8 @@ public class CoilOfWrath {
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), COIL_OF_WRATH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), COIL_OF_WRATH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), COIL_OF_WRATH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), COIL_OF_WRATH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), COIL_OF_WRATH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), COIL_OF_WRATH_UUID);
             }
         }
@@ -163,6 +172,9 @@ public class CoilOfWrath {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 8.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 20.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 20.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 20.0, COIL_OF_WRATH_UUID);
+
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), -3.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 4, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 4.5, COIL_OF_WRATH_UUID);
@@ -185,6 +197,8 @@ public class CoilOfWrath {
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), COIL_OF_WRATH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), COIL_OF_WRATH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE.get(), COIL_OF_WRATH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), COIL_OF_WRATH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), COIL_OF_WRATH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), COIL_OF_WRATH_UUID);
             }
         }
@@ -218,6 +232,9 @@ public class CoilOfWrath {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 12.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 24.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 24.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 24.0, COIL_OF_WRATH_UUID);
+
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), -3.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 9.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 9.0, COIL_OF_WRATH_UUID);
@@ -240,6 +257,8 @@ public class CoilOfWrath {
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), COIL_OF_WRATH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), COIL_OF_WRATH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE.get(), COIL_OF_WRATH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), COIL_OF_WRATH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), COIL_OF_WRATH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), COIL_OF_WRATH_UUID);
             }
         }

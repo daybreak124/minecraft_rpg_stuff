@@ -1046,6 +1046,15 @@ public class ModItems {
                 player.removeEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get());
                 player.removeEffect(ModEffects.QUANTUM_LEAP_READY.get());
                 player.removeEffect(ModEffects.QUANTUM_LEAP_COOLDOWN.get());
+                player.getPersistentData().remove("quantum_recall_ticks");
+                player.getPersistentData().remove("dash_x");
+                player.getPersistentData().remove("dash_y");
+                player.getPersistentData().remove("dash_z");
+                player.getPersistentData().remove("quantum_leaped");
+                player.getPersistentData().remove("dash_active");
+                player.getPersistentData().remove("dash_timer");
+                player.getPersistentData().remove("dash_crouch_ticks");
+                player.getPersistentData().remove("invis_added");
 
                 if (player instanceof ServerPlayer sp) {
                     NetworkHandler.sendToClient(new QuantumLeapSync.QuantumLeapFlagPacket(false), sp);
@@ -1074,6 +1083,9 @@ public class ModItems {
             tooltip.add(Component.literal(" Death From Above; duration,").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Damage and Move Speed +50%.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Cancels fall damage.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Crouch for a second while the").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" effect is active to return to").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" original location.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
                             .append(Component.literal("35s").withStyle(ChatFormatting.GRAY))
@@ -2121,6 +2133,14 @@ public class ModItems {
             if (slotContext.entity() instanceof Player player) {
                 player.removeEffect(ModEffects.COMBATANTS_AID_CD.get());
                 player.removeEffect(ModEffects.COMBATANTS_AID_READY.get());
+                player.getPersistentData().remove("dash_x");
+                player.getPersistentData().remove("dash_y");
+                player.getPersistentData().remove("dash_z");
+                player.getPersistentData().remove("dash_active");
+                player.getPersistentData().remove("dash_timer");
+                player.getPersistentData().remove("dash_crouch_ticks");
+                player.getPersistentData().remove("dash_was_sprinting");
+
             }
         }
 
@@ -2742,8 +2762,59 @@ public class ModItems {
             tooltip.add(Component.literal(" automatically.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Loot is granted to").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" player's inventory.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Holding shift key").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" disables the effect.").withStyle(ChatFormatting.GRAY));
         }
     }
+
+    // -------------------------------
+
+    public static final RegistryObject<Item> SELECTIVE_HELLFORGED_PLATING = ITEMS.register(
+            "selective_hellforged_plating",
+            () -> new SelectiveHellforgedPlatingItem(new Item.Properties().stacksTo(64))
+    );
+
+    private static class SelectiveHellforgedPlatingItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+        public SelectiveHellforgedPlatingItem(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Component getName(ItemStack stack) {
+            return Component.literal("Selective Hell Forged Plating").withStyle(ChatFormatting.GOLD);
+        }
+
+        @Override
+        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                player.getPersistentData().putBoolean("smelt2_eligible", true);
+            }
+        }
+
+        @Override
+        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+            if (slotContext.entity() instanceof Player player) {
+                player.getPersistentData().remove("smelt2_eligible");
+            }
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            super.appendHoverText(stack, level, tooltip, flag);
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal("Applies to:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Tools").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("Blessing: Forged Heart").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal(" Broken ores are smelt").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" automatically.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Loot is granted to").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" player's inventory.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Holding shift key").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" disables the effect.").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+
 
 //    public static final RegistryObject<Item> HOLLOW_STONE = ITEMS.register(
 //            "hollow_stone",

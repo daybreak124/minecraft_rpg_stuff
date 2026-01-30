@@ -4,6 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -48,6 +49,14 @@ public class Rod {
                 data.putDouble("grapple_target_y", hook.getY() + 1.2);
                 data.putDouble("grapple_target_z", hook.getZ());
                 data.putBoolean("is_grappling", true);
+
+                ItemStack rod = player.getItemInHand(event.getHand());
+
+                if (rod.getItem() instanceof net.minecraft.world.item.FishingRodItem) {
+                    int refundAmount = hitEntity ? 3 : 2;
+                    int currentDamage = rod.getDamageValue();
+                    rod.setDamageValue(Math.max(0, currentDamage - refundAmount));
+                }
 
                 EffectUtils.playSound(player, SoundEvents.FISHING_BOBBER_RETRIEVE, 1f, 1f);
             }

@@ -74,6 +74,8 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 1.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 0.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 2.0, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 2.0, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 2.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 2.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), -2.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 2, GLUTTONY_UUID);
@@ -105,6 +107,8 @@ public class GluttonySignet {
                 AttributeApplier.removeModifier(player, Attributes.ARMOR_TOUGHNESS, GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.POTENCY.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.NOCK_HASTE.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.CON.get(), GLUTTONY_UUID);
@@ -157,6 +161,8 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 1.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 2.5, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 2.5, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 2.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 2.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 2.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), -2.5, GLUTTONY_UUID);
@@ -188,6 +194,8 @@ public class GluttonySignet {
                 AttributeApplier.removeModifier(player, Attributes.ARMOR_TOUGHNESS, GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.POTENCY.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.NOCK_HASTE.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.CON.get(), GLUTTONY_UUID);
@@ -242,6 +250,8 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 3.25, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 3.25, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 3.25, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 3.25, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 3.25, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 3.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 3.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 3.0, GLUTTONY_UUID);
@@ -249,6 +259,8 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.02, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 0.03, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY_MULTIPLIER.get(), 0.03, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.03, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.03, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), 0.03, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 3.25, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), -3.25, GLUTTONY_UUID);
@@ -291,7 +303,10 @@ public class GluttonySignet {
                 AttributeApplier.removeModifier(player, ModAttributes.REJUVENATION_MULTIPLIER.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), GLUTTONY_UUID);
-
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), GLUTTONY_UUID);
             }
         }
 
@@ -353,6 +368,8 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, Attributes.ARMOR, 2.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 2.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 4.0, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 4.0, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 4.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 4, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 4.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 4.0, GLUTTONY_UUID);
@@ -362,6 +379,8 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.04, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 0.06, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY_MULTIPLIER.get(), 0.06, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.06, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.06, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), 0.06, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 4, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), -4, GLUTTONY_UUID);
@@ -404,6 +423,10 @@ public class GluttonySignet {
                 AttributeApplier.removeModifier(player, ModAttributes.REJUVENATION_MULTIPLIER.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), GLUTTONY_UUID);
             }
         }
 

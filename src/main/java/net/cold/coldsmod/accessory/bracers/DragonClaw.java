@@ -63,6 +63,8 @@ public class DragonClaw {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 3.0, DRAGON_CLAW_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 6.0, DRAGON_CLAW_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 6.0, DRAGON_CLAW_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 6.0, DRAGON_CLAW_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, DRAGON_CLAW_UUID);
             }
         }
@@ -80,6 +82,8 @@ public class DragonClaw {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_CLAW_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_CLAW_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_CLAW_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_CLAW_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_CLAW_UUID);
             }
         }
@@ -109,6 +113,8 @@ public class DragonClaw {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 5.0, DRAGON_CLAW_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 13.5, DRAGON_CLAW_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 13.5, DRAGON_CLAW_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 13.5, DRAGON_CLAW_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, DRAGON_CLAW_UUID);
             }
         }
@@ -127,6 +133,8 @@ public class DragonClaw {
                 AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_CLAW_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_CLAW_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_CLAW_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_CLAW_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_CLAW_UUID);
             }
         }
 
@@ -157,6 +165,8 @@ public class DragonClaw {
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 18.0, DRAGON_CLAW_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.075, DRAGON_CLAW_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, DRAGON_CLAW_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 18.0, DRAGON_CLAW_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 18.0, DRAGON_CLAW_UUID);
             }
         }
 
@@ -175,6 +185,8 @@ public class DragonClaw {
                 AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_CLAW_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), DRAGON_CLAW_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_CLAW_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_CLAW_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_CLAW_UUID);
             }
         }
 
@@ -206,6 +218,8 @@ public class DragonClaw {
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 24.0, DRAGON_CLAW_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.15, DRAGON_CLAW_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, DRAGON_CLAW_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 24.0, DRAGON_CLAW_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 24.0, DRAGON_CLAW_UUID);
             }
         }
 
@@ -224,6 +238,8 @@ public class DragonClaw {
                 AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_CLAW_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), DRAGON_CLAW_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_CLAW_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_CLAW_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_CLAW_UUID);
             }
         }
 

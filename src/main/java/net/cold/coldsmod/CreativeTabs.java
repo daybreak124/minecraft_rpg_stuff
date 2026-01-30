@@ -230,6 +230,7 @@ public class CreativeTabs {
                                 output.accept(ModItems.BOTTLED_LIGHT.get());
                                 output.accept(ModItems.FAIRY_TEARDROP.get());
                                 output.accept(ModItems.HELLFORGED_PLATING.get());
+                                output.accept(ModItems.SELECTIVE_HELLFORGED_PLATING.get());
                                 output.accept(ModItems.HOOK_OF_THE_DEPTHS.get());
 
 

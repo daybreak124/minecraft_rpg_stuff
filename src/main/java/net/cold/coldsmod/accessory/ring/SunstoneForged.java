@@ -65,6 +65,8 @@ public class SunstoneForged {
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 2.0, SUNSTONE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 4.0, SUNSTONE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 8.0, SUNSTONE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 8.0, SUNSTONE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 8.0, SUNSTONE_UUID);
             }
         }
 
@@ -83,6 +85,8 @@ public class SunstoneForged {
                 AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), SUNSTONE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), SUNSTONE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), SUNSTONE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), SUNSTONE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), SUNSTONE_UUID);
             }
         }
 
@@ -117,6 +121,8 @@ public class SunstoneForged {
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 3.0, SUNSTONE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 7.0, SUNSTONE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 12.0, SUNSTONE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 12.0, SUNSTONE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 12.0, SUNSTONE_UUID);
             }
         }
 
@@ -135,6 +141,8 @@ public class SunstoneForged {
                 AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), SUNSTONE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), SUNSTONE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), SUNSTONE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), SUNSTONE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), SUNSTONE_UUID);
             }
         }
 
@@ -169,6 +177,8 @@ public class SunstoneForged {
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 4.0, SUNSTONE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 10.0, SUNSTONE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 16.0, SUNSTONE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 16.0, SUNSTONE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 16.0, SUNSTONE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 8.0, SUNSTONE_UUID);
             }
         }
@@ -188,6 +198,8 @@ public class SunstoneForged {
                 AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), SUNSTONE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), SUNSTONE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), SUNSTONE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), SUNSTONE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), SUNSTONE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.NOCK_HASTE.get(), SUNSTONE_UUID);
             }
         }
@@ -224,6 +236,8 @@ public class SunstoneForged {
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 6.0, SUNSTONE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 13.0, SUNSTONE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 21.0, SUNSTONE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 21.0, SUNSTONE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 21.0, SUNSTONE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 12.0, SUNSTONE_UUID);
             }
         }
@@ -243,6 +257,8 @@ public class SunstoneForged {
                 AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), SUNSTONE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), SUNSTONE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), SUNSTONE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), SUNSTONE_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), SUNSTONE_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.NOCK_HASTE.get(), SUNSTONE_UUID);
             }
         }

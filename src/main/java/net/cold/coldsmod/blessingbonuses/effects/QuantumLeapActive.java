@@ -3,6 +3,7 @@ package net.cold.coldsmod.blessingbonuses.effects;
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.network.QuantumLeapSync;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -58,70 +59,83 @@ public class QuantumLeapActive extends MobEffect {
                 yOffset += 1.0;
             }
 
-            player.teleportTo(
-                    dashTarget.x,
-                    dashTarget.y + yOffset,
-                    dashTarget.z
-            );
+            player.getPersistentData().putBoolean("dash_active", true);
+            player.getPersistentData().putInt("dash_timer", 0);
+            player.getPersistentData().putInt("dash_crouch_ticks", 0);
 
-            // 🔑 ABSOLUTELY REQUIRED
+            player.getPersistentData().putDouble("dash_x", player.getX());
+            player.getPersistentData().putDouble("dash_y", player.getY());
+            player.getPersistentData().putDouble("dash_z", player.getZ());
+
+            player.teleportTo(dashTarget.x, dashTarget.y + yOffset, dashTarget.z);
+
             player.setDeltaMovement(Vec3.ZERO);
             player.hurtMarked = true;
 
             EffectUtils.spawnParticleBurst(player, ParticleTypes.FISHING);
 
-            player.addEffect(new MobEffectInstance(
-                    ModEffects.QUANTUM_LEAP_COOLDOWN.get(), 20 * 35, 0, false, false, true
-            ));
+            player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_COOLDOWN.get(), 20 * 35, 0, false, false, true));
 
-            player.addEffect(new MobEffectInstance(
-                    ModEffects.QUANTUM_LEAP_ACTIVE.get(), 80, 0, false, false, true
-            ));
+            player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), 80, 0, false, false, true));
 
             player.removeEffect(ModEffects.QUANTUM_LEAP_READY.get());
             player.getPersistentData().putBoolean("quantum_leaped", true);
 
             player.level().playSound(
-                    null,
-                    player.getX(), player.getY(), player.getZ(),
-                    SoundEvents.PLAYER_SPLASH_HIGH_SPEED,
-                    SoundSource.PLAYERS,
-                    0.6F, 1.0F
-            );
+                    null, player.getX(), player.getY(), player.getZ(),
+                    SoundEvents.PLAYER_SPLASH_HIGH_SPEED, SoundSource.PLAYERS,
+                    0.6F, 1.0F);
         });
     }
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (event.player.level().isClientSide()) return;
-        if (!event.player.getPersistentData().getBoolean("quantum_leaped")) return;
+        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide()) return;
 
         Player player = event.player;
+        CompoundTag tag = player.getPersistentData();
 
-        int invisDuration = 20*4;
-        int leapActiveDuration = 20*6;
+        if (player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())) {
+            if (player.isCrouching()) {
+                int crouchTicks = tag.getInt("quantum_recall_ticks") + 1;
+                tag.putInt("quantum_recall_ticks", crouchTicks);
 
-        if (player.hasEffect(ModEffects.ENHANCED_QUANTUM_LEAP.get())) { invisDuration = 20*6; leapActiveDuration = 20*9; }
-
-        if (player.onGround() && player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())) {
-            player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), leapActiveDuration, 0, false, false, true));
-
-            if (!player.hasEffect(MobEffects.INVISIBILITY)) {
-                player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, invisDuration, 0, false, false, true));
-                player.getPersistentData().putBoolean("invis_added", true);
+                if (crouchTicks >= 20) {
+                    returnToOrigin(player);
+                    return;
+                }
+            } else {
+                tag.putInt("quantum_recall_ticks", 0);
             }
-            player.getPersistentData().putBoolean("quantum_leaped", false);
+        }
 
-            List<LivingEntity> nearby = player.level().getEntitiesOfClass(
-                    LivingEntity.class,
-                    player.getBoundingBox().inflate(10),
-                    e -> e instanceof Enemy
-            );
+        if (tag.getBoolean("quantum_leaped")) {
+            int invisDuration = 20 * 4;
+            int leapActiveDuration = 20 * 6;
 
-            for (LivingEntity entity : nearby) {
-                if (entity instanceof Mob mob) {
-                    mob.setTarget(null);
+            if (player.hasEffect(ModEffects.ENHANCED_QUANTUM_LEAP.get())) {
+                invisDuration = 20 * 6;
+                leapActiveDuration = 20 * 9;
+            }
+
+            if (player.onGround() && player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())) {
+                player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), leapActiveDuration, 0, false, false, true));
+
+                if (!player.hasEffect(MobEffects.INVISIBILITY)) {
+                    player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, invisDuration, 0, false, false, true));
+                    tag.putBoolean("invis_added", true);
+                }
+
+                tag.putBoolean("quantum_leaped", false);
+
+                List<LivingEntity> nearby = player.level().getEntitiesOfClass(
+                        LivingEntity.class,
+                        player.getBoundingBox().inflate(10),
+                        e -> e instanceof Enemy
+                );
+
+                for (LivingEntity entity : nearby) {
+                    if (entity instanceof Mob mob) mob.setTarget(null);
                 }
             }
         }
@@ -138,5 +152,21 @@ public class QuantumLeapActive extends MobEffect {
             player.removeEffect(MobEffects.INVISIBILITY);
             player.getPersistentData().putBoolean("invis_added", false);
         }
+    }
+
+    private static void returnToOrigin(Player player) {
+        CompoundTag tag = player.getPersistentData();
+        if (!tag.contains("dash_x")) return;
+
+        player.teleportTo(tag.getDouble("dash_x"), tag.getDouble("dash_y"), tag.getDouble("dash_z"));
+
+        EffectUtils.playSound(player, SoundEvents.ENDERMAN_TELEPORT, 0.5F, 1.0F);
+        EffectUtils.spawnParticleBurst(player, ParticleTypes.PORTAL);
+
+        tag.remove("quantum_recall_ticks");
+        tag.putBoolean("quantum_leaped", false);
+        tag.remove("dash_x");
+        tag.remove("dash_y");
+        tag.remove("dash_z");
     }
 }

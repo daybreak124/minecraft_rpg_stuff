@@ -30,18 +30,4 @@ public class InventoryStatsTabScreen extends Screen {
                         .build()
         );
     }
-
-//    @Override
-//    public void tick() {
-//
-//        super.tick();
-//
-//        if (mc.player != null) {
-//            tickCounter++;
-//            if (tickCounter >= 60) {
-//                rebuildAll(mc.player);
-//                tickCounter = 0;
-//            }
-//        }
-//    }
 }

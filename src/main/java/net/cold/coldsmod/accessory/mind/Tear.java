@@ -249,7 +249,7 @@ public class Tear {
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+10 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+4 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+15 Knockback Resist").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+15% Knockback Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+7.5% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));

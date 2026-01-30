@@ -174,8 +174,8 @@ public class DragonEyeEmbeddedRing {
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 4.0, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 16, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 9, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.04, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.025, DRAGON_EYE_UUID);            }
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.06, DRAGON_EYE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.04, DRAGON_EYE_UUID);            }
         }
 
         @Override
@@ -214,8 +214,8 @@ public class DragonEyeEmbeddedRing {
             tooltip.add(Component.literal("+16 Melee Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
             tooltip.add(Component.literal("+9 Projectile Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
 
-            tooltip.add(Component.literal("+4% Melee Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
-            tooltip.add(Component.literal("+2.25% Projectile Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+12% Melee Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+8% Projectile Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -235,8 +235,8 @@ public class DragonEyeEmbeddedRing {
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 6.0, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 20, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 12.5, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.08, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.045, DRAGON_EYE_UUID);            }
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.12, DRAGON_EYE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.08, DRAGON_EYE_UUID);            }
             }
 
         @Override

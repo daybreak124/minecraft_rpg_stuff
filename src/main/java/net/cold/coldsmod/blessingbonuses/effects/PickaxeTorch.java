@@ -1,6 +1,7 @@
 package net.cold.coldsmod.blessingbonuses.effects;
 
 import net.cold.coldsmod.stat.ItemRarityUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -8,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -20,9 +22,20 @@ public class PickaxeTorch {
         if (event.getLevel().isClientSide()) return;
         if (event.getEntity().level().isClientSide()) return;
         ItemStack stack = event.getItemStack();
-
         if (!player.getPersistentData().getBoolean("lightbringer_applied")) return;
         if (player.getHealth() <= 3f) return;
+
+        BlockPos clickedPos = event.getPos();
+        BlockState clickedState = world.getBlockState(clickedPos);
+
+        if (!player.isSecondaryUseActive()) {
+            if (clickedState.hasBlockEntity()) return;
+            if (clickedState.is(net.minecraft.tags.BlockTags.DOORS) ||
+                    clickedState.is(net.minecraft.tags.BlockTags.BUTTONS) ||
+                    clickedState.is(net.minecraft.tags.BlockTags.TRAPDOORS)) {
+                return;
+            }
+        }
 
         ItemStack main = player.getMainHandItem();
 

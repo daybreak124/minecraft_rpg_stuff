@@ -65,6 +65,8 @@ public class StolenLegacies {
                 AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.15, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 6.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 6.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 6.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 6.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 4, STOLEN_LEGACIES_UUID);
             }
         }
@@ -84,6 +86,8 @@ public class StolenLegacies {
                 AttributeApplier.removeModifier(player, ModAttributes.XP_GAIN.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), STOLEN_LEGACIES_UUID);
             }
         }
@@ -117,6 +121,8 @@ public class StolenLegacies {
                 AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.20, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 10.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 10.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 10.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 10.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 7, STOLEN_LEGACIES_UUID);
             }
         }
@@ -137,6 +143,8 @@ public class StolenLegacies {
                 AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), STOLEN_LEGACIES_UUID);
             }
         }
 
@@ -169,7 +177,11 @@ public class StolenLegacies {
                 AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.25, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 16.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 12.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 12.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 12.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.05, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.05, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), 0.05, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 12.5, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), 0.0375, STOLEN_LEGACIES_UUID);
             }
@@ -190,7 +202,11 @@ public class StolenLegacies {
                 AttributeApplier.removeModifier(player, ModAttributes.XP_GAIN.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
             }
@@ -227,7 +243,11 @@ public class StolenLegacies {
                 AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.3, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 20.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 16.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 16.0, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 16.0, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.1, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.1, STOLEN_LEGACIES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), 0.1, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 15, STOLEN_LEGACIES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), 0.075, STOLEN_LEGACIES_UUID);
             }
@@ -248,7 +268,11 @@ public class StolenLegacies {
                 AttributeApplier.removeModifier(player, ModAttributes.XP_GAIN.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), STOLEN_LEGACIES_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
             }

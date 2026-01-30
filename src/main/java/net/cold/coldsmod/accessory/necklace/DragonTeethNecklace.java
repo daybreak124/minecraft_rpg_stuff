@@ -65,6 +65,8 @@ public class DragonTeethNecklace {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 2.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 6.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 6.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 6.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 2.0, DRAGON_TEETH_UUID);
             }
         }
@@ -84,6 +86,8 @@ public class DragonTeethNecklace {
                 AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), DRAGON_TEETH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_TEETH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_TEETH_UUID);
             }
         }
 
@@ -117,6 +121,8 @@ public class DragonTeethNecklace {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 3.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 12.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 12.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 12.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 0.5, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 3.0, DRAGON_TEETH_UUID);
             }
@@ -138,6 +144,8 @@ public class DragonTeethNecklace {
                 AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), DRAGON_TEETH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_TEETH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_TEETH_UUID);
             }
         }
 
@@ -174,6 +182,8 @@ public class DragonTeethNecklace {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 6.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 15.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 15.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 15.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 6.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.04, DRAGON_TEETH_UUID);
@@ -194,6 +204,8 @@ public class DragonTeethNecklace {
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_TEETH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_TEETH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), DRAGON_TEETH_UUID);
@@ -234,6 +246,8 @@ public class DragonTeethNecklace {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 8.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 18.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 18.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 18.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.5, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 8.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.08, DRAGON_TEETH_UUID);
@@ -254,6 +268,8 @@ public class DragonTeethNecklace {
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_TEETH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_TEETH_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), DRAGON_TEETH_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), DRAGON_TEETH_UUID);

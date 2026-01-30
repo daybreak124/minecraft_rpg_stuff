@@ -35,7 +35,12 @@ public class InventoryButtonHandler {
                 19,
                 TEXTURE,
                 20, 36,
-                b -> showStats = !showStats
+                b -> {
+                    showStats = !showStats;
+                    if (showStats) {
+                        C.lastUpdateTick = -1;
+                    }
+                }
         ) {
             @Override
             public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {

@@ -181,7 +181,7 @@ public class CombatantsAidReady extends MobEffect {
                 tag.getDouble("dash_z")
         );
 
-        EffectUtils.playSound(player, SoundEvents.ARMOR_EQUIP_ELYTRA, 0.5F, 1.0F);
+        EffectUtils.playSound(player, SoundEvents.ENDERMAN_TELEPORT, 0.5F, 1.0F);
 
         tag.putBoolean("dash_active", false);
         tag.remove("dash_timer");

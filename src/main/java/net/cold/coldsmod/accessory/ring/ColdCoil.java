@@ -100,7 +100,7 @@ public class ColdCoil {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+4 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+3 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
             tooltip.add(Component.literal("+3 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
             tooltip.add(Component.literal("+9% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
             tooltip.add(Component.literal(""));
@@ -152,7 +152,7 @@ public class ColdCoil {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7.5 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+7.5 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
             tooltip.add(Component.literal("+5 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
             tooltip.add(Component.literal("+12% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
             tooltip.add(Component.literal(""));
@@ -206,7 +206,7 @@ public class ColdCoil {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+9 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+12 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+12 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
             tooltip.add(Component.literal("+15 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
             tooltip.add(Component.literal("+5% Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
             tooltip.add(Component.literal("+15% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
@@ -265,9 +265,9 @@ public class ColdCoil {
             tooltip.add(Component.literal("+13 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+15 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+15 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
             tooltip.add(Component.literal("+20 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+5% Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+5% Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
             tooltip.add(Component.literal("+5% Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
 
             tooltip.add(Component.literal("+15% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));

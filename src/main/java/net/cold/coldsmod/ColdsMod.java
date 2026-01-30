@@ -26,11 +26,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -113,6 +111,8 @@ public class ColdsMod {
         MinecraftForge.EVENT_BUS.register(Rod.class);
         MinecraftForge.EVENT_BUS.register(Regrowth.class);
         MinecraftForge.EVENT_BUS.register(Flameheart.class);
+        MinecraftForge.EVENT_BUS.register(ForgedHeart.class);
+
 
         MinecraftForge.EVENT_BUS.register(BowProcHandler.class);
         MinecraftForge.EVENT_BUS.register(CrossbowProcHandler.class);

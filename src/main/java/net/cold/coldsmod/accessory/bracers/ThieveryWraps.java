@@ -65,6 +65,8 @@ public class ThieveryWraps {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), -0.06, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 11.0, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 11.0, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 11.0, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, THIEVERY_UUID);
             }
         }
@@ -82,6 +84,8 @@ public class ThieveryWraps {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), THIEVERY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), THIEVERY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), THIEVERY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), THIEVERY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), THIEVERY_UUID);
             }
         }
@@ -111,6 +115,8 @@ public class ThieveryWraps {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), -0.1, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 16.0, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 16.0, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 16.0, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.0, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, THIEVERY_UUID);
             }
@@ -131,6 +137,8 @@ public class ThieveryWraps {
                 AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), THIEVERY_UUID);
                 AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, THIEVERY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), THIEVERY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), THIEVERY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), THIEVERY_UUID);
             }
         }
 
@@ -160,6 +168,8 @@ public class ThieveryWraps {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), -0.15, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 22.0, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 22.0, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 22.0, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 2.0, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.09, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, THIEVERY_UUID);
@@ -182,6 +192,8 @@ public class ThieveryWraps {
                 AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, THIEVERY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), THIEVERY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), THIEVERY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), THIEVERY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), THIEVERY_UUID);
             }
         }
 
@@ -212,6 +224,8 @@ public class ThieveryWraps {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), -0.15, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 27.5, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 27.5, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 27.5, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.15, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 2.5, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, THIEVERY_UUID);
@@ -234,6 +248,8 @@ public class ThieveryWraps {
                 AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), THIEVERY_UUID);
                 AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, THIEVERY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), THIEVERY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), THIEVERY_UUID);
+                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), THIEVERY_UUID);
             }
         }
 
