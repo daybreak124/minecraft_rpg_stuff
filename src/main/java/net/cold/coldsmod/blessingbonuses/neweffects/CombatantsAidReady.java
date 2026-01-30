@@ -103,6 +103,9 @@ public class CombatantsAidReady extends MobEffect {
 
                 if (crouchTicks >= CROUCH_FOR_RECALL_TICKS) {
                     returnToOrigin(player);
+                    tag.putBoolean("dash_active", false);
+                    tag.remove("dash_timer");
+                    tag.remove("dash_crouch_ticks");
                 }
             } else {
                 tag.putInt("dash_crouch_ticks", 0);
@@ -172,8 +175,9 @@ public class CombatantsAidReady extends MobEffect {
         }
     }
 
-    private static void returnToOrigin(Player player) {
+    public static void returnToOrigin(Player player) {
         CompoundTag tag = player.getPersistentData();
+        if (!tag.contains("dash_x")) return;
 
         player.teleportTo(
                 tag.getDouble("dash_x"),
@@ -182,10 +186,9 @@ public class CombatantsAidReady extends MobEffect {
         );
 
         EffectUtils.playSound(player, SoundEvents.ENDERMAN_TELEPORT, 0.5F, 1.0F);
-
-        tag.putBoolean("dash_active", false);
-        tag.remove("dash_timer");
-        tag.remove("dash_crouch_ticks");
+        tag.remove("dash_x");
+        tag.remove("dash_y");
+        tag.remove("dash_z");
     }
 
     private static void spawnBorderParticle(ServerLevel level, Player player, double x, double z) {

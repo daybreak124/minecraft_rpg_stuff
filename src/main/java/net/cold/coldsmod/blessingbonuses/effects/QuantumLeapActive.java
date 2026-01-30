@@ -20,10 +20,13 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
+
+import static net.cold.coldsmod.blessingbonuses.neweffects.CombatantsAidReady.returnToOrigin;
 
 @Mod.EventBusSubscriber
 public class QuantumLeapActive extends MobEffect {
@@ -161,20 +164,24 @@ public class QuantumLeapActive extends MobEffect {
         }
     }
 
-    private static void returnToOrigin(Player player) {
-        CompoundTag tag = player.getPersistentData();
-        if (!tag.contains("dash_x")) return;
+    @SubscribeEvent
+    public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
+        handleRecall(event.getEntity());
+    }
 
-        player.teleportTo(tag.getDouble("dash_x"), tag.getDouble("dash_y"), tag.getDouble("dash_z"));
+    @SubscribeEvent
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        handleRecall(event.getEntity());
+    }
 
-        EffectUtils.playSound(player, SoundEvents.ENDERMAN_TELEPORT, 0.5F, 1.0F);
-        EffectUtils.spawnParticleBurst(player, ParticleTypes.PORTAL);
-
-        tag.remove("quantum_recall_ticks");
-        tag.putBoolean("quantum_leaped", false);
-        tag.remove("dash_x");
-        tag.remove("dash_y");
-        tag.remove("dash_z");
-        tag.remove("quantum_tp_eligible");
+    private static void handleRecall(Player player) {
+        if (player.level().isClientSide()) return;
+        if (player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())) {
+            CompoundTag tag = player.getPersistentData();
+            if (tag.contains("dash_x")) {
+                returnToOrigin(player);
+                player.removeEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get());
+            }
+        }
     }
 }
