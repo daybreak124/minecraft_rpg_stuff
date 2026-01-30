@@ -13,6 +13,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -85,7 +87,11 @@ public class SoulSeveranceActive extends MobEffect {
                 DamageSource source = new DamageSource(meleeType, player);
 
                 if (ticks % 20 == 0) {
-                    if (mob instanceof Enemy) {
+                    if (mob.isAlive() && (
+                            (mob instanceof Enemy && !(mob instanceof NeutralMob)) ||
+                                    (mob instanceof NeutralMob n && n.isAngry()) ||
+                                    (mob instanceof Mob m && m.getTarget() != null)
+                    )) {
                         mob.hurtMarked = true;
                         mob.hurt(source, 4.0f);
                         spawnParticleBurst(mob, ParticleTypes.SOUL);

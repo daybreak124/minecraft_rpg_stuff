@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import net.cold.coldsmod.ColdsMod;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.neweffects.SummoningStone;
+import net.cold.coldsmod.network.ClientKeyInputHandler;
 import net.cold.coldsmod.network.DFASync;
 import net.cold.coldsmod.network.NetworkHandler;
 import net.cold.coldsmod.network.QuantumLeapSync;
@@ -11,6 +12,7 @@ import net.cold.coldsmod.stat.ArmorRarityModifier;
 import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -1043,19 +1045,21 @@ public class ModItems {
         @Override
         public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
+                CompoundTag tag = player.getPersistentData();
                 player.removeEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get());
                 player.removeEffect(ModEffects.QUANTUM_LEAP_READY.get());
                 player.removeEffect(ModEffects.QUANTUM_LEAP_COOLDOWN.get());
-                player.getPersistentData().remove("quantum_recall_ticks");
-                player.getPersistentData().remove("dash_x");
-                player.getPersistentData().remove("dash_y");
-                player.getPersistentData().remove("dash_z");
-                player.getPersistentData().remove("quantum_leaped");
-                player.getPersistentData().remove("dash_active");
-                player.getPersistentData().remove("dash_timer");
-                player.getPersistentData().remove("dash_crouch_ticks");
-                player.getPersistentData().remove("invis_added");
-                player.getPersistentData().remove("quantum_tp_eligible");
+                tag.remove("quantum_recall_ticks");
+                tag.remove("dash_x");
+                tag.remove("dash_y");
+                tag.remove("dash_z");
+                tag.remove("quantum_leaped");
+                tag.remove("dash_active");
+                tag.remove("dash_timer");
+                tag.remove("dash_crouch_ticks");
+                tag.remove("invis_added");
+                tag.remove("quantum_tp_eligible");
+                tag.remove("leap_timestamp");
 
                 if (player instanceof ServerPlayer sp) {
                     NetworkHandler.sendToClient(new QuantumLeapSync.QuantumLeapFlagPacket(false), sp);
@@ -1073,8 +1077,8 @@ public class ModItems {
             super.appendHoverText(stack, level, tooltip, flag);
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Blessing: Quantum Leap").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal(" Upon crouch jumping, perform").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" a 10 block teleport and turn").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Activate to perform a 10").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" block teleport and turn").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" invisible for 4 seconds. Gain").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" +30 Potency and +20% Movement").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Speed for 8 seconds until you.").withStyle(ChatFormatting.GRAY));
@@ -1084,9 +1088,14 @@ public class ModItems {
             tooltip.add(Component.literal(" Death From Above; duration,").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Damage and Move Speed +50%.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Cancels fall damage.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Crouch for a second while the").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Activate a 2nd time while the").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" effect is active to return to").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" original location.").withStyle(ChatFormatting.GRAY));
+            Component keyName = ClientKeyInputHandler.quantumKey.getTranslatedKeyMessage();
+
+            tooltip.add(Component.literal(" Activation: ").withStyle(ChatFormatting.GRAY)
+                    .append(keyName.copy().withStyle(ChatFormatting.YELLOW))
+                    .append(Component.literal(" (Default: R)").withStyle(ChatFormatting.DARK_GRAY)));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
                             .append(Component.literal("35s").withStyle(ChatFormatting.GRAY))
@@ -2141,6 +2150,7 @@ public class ModItems {
                 player.getPersistentData().remove("dash_timer");
                 player.getPersistentData().remove("dash_crouch_ticks");
                 player.getPersistentData().remove("dash_was_sprinting");
+                player.getPersistentData().remove("dash_key_pressed");
 
             }
         }
@@ -2150,7 +2160,7 @@ public class ModItems {
             super.appendHoverText(stack, level, tooltip, flag);
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Blessing: Combatant's Aid").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal(" When you crouch while").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" When activated while").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" sprinting, perform an 8").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" block dash and heal allies").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" within 3 blocks by 4 and").withStyle(ChatFormatting.GRAY));
@@ -2158,6 +2168,11 @@ public class ModItems {
             tooltip.add(Component.literal(" Crouch for a second within").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 4 seconds of the dash to").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" return to original location.").withStyle(ChatFormatting.GRAY));
+            Component keyName = ClientKeyInputHandler.combatantKey.getTranslatedKeyMessage();
+
+            tooltip.add(Component.literal(" Activation: ").withStyle(ChatFormatting.GRAY)
+                    .append(keyName.copy().withStyle(ChatFormatting.YELLOW))
+                    .append(Component.literal(" (Default: V)").withStyle(ChatFormatting.DARK_GRAY)));
             tooltip.add(
                     Component.literal("Resistance Buff Duration: ").withStyle(ChatFormatting.DARK_AQUA)
                             .append(Component.literal("5s").withStyle(ChatFormatting.GRAY))

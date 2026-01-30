@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
@@ -34,7 +35,7 @@ public class JumpCritHandler {
                     LivingEntity.class,
                     player.getBoundingBox().inflate(10.0),
                     e -> {
-                        if (!(e instanceof Enemy)) return false;
+                        if (e.isInvulnerable() || !player.hasLineOfSight(e) || !((e instanceof Enemy && !(e instanceof NeutralMob)) || (e instanceof NeutralMob n && n.isAngry()) || (e instanceof Mob m && m.getTarget() != null))) return false;
                         double dx = e.getX() - player.getX();
                         double dz = e.getZ() - player.getZ();
                         return (dx * dx + dz * dz) <= rangeSq;

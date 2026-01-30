@@ -14,6 +14,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
@@ -109,7 +111,7 @@ public class VortexReady extends MobEffect {
                 LivingEntity.class,
                 new AABB(vPos, vPos).inflate(range),
                 e -> {
-                    if (!(e instanceof Enemy) || !e.isAlive()) return false;
+                    if (!e.isAlive() || !((e instanceof Enemy && !(e instanceof NeutralMob)) || (e instanceof NeutralMob n && n.isAngry()) || (e instanceof Mob m && m.getTarget() != null))) return false;
 
                     double dx = e.getX() - vPos.x;
                     double dz = e.getZ() - vPos.z;

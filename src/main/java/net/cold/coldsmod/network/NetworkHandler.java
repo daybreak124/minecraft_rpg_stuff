@@ -44,6 +44,21 @@ public class NetworkHandler {
                 .decoder(QuantumLeapSync.QuantumLeapFlagPacket::decode)
                 .consumerMainThread(QuantumLeapSync.QuantumLeapFlagPacket::handle)
                 .add();
+
+
+        // Quantum leap recall
+        CHANNEL.messageBuilder(QuantumLeapPacket.class, nextId(), NetworkDirection.PLAY_TO_SERVER)
+                .encoder(QuantumLeapPacket::encode)
+                .decoder(QuantumLeapPacket::decode)
+                .consumerMainThread(QuantumLeapPacket::handle)
+                .add();
+
+        // Quantum leap recall
+        CHANNEL.messageBuilder(CombatantsAidPacket.class, nextId(), NetworkDirection.PLAY_TO_SERVER)
+                .encoder(CombatantsAidPacket::encode)
+                .decoder(CombatantsAidPacket::decode)
+                .consumerMainThread(CombatantsAidPacket::handle)
+                .add();
     }
 
     public static void sendToClient(Object msg, ServerPlayer player) {

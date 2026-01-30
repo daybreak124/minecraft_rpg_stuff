@@ -123,5 +123,10 @@
   "effect.coldsmod.blessed_land_cd": "Blessed Land: Cooldown",
   "effect.coldsmod.blessed_land_ready": "Blessed Land: Ready",
 
-  "effect.coldsmod.enhanced_poison": "Enhanced Poison"
+  "effect.coldsmod.enhanced_poison": "Enhanced Poison",
+
+
+  "key.categories.coldsmod": "Cold's RPG Stuff",
+  "key.coldsmod.quantum_leap": "Quantum Leap Activate/Recall",
+  "key.coldsmod.combatants_aid": "Combatant's Aid Dash"
 }

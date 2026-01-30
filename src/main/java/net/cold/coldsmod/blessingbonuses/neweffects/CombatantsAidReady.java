@@ -42,29 +42,10 @@ public class CombatantsAidReady extends MobEffect {
         if (event.player.level().isClientSide()) return;
 
         Player player = event.player;
-        CompoundTag tag = player.getPersistentData();
-
-        if (player.hasEffect(ModEffects.COMBATANTS_AID_READY.get())) {
-
-            boolean wasSprinting = tag.getBoolean("dash_was_sprinting");
-            boolean isSprinting = player.isSprinting();
-            boolean isCrouching = player.isCrouching();
-
-            tag.putBoolean("dash_was_sprinting", isSprinting);
-
-            if (wasSprinting && isCrouching && !tag.getBoolean("dash_active")) {
-                startDash(player);
-
-                int cd = (int) (20*40 / (1.0 + (AttributeApplier.getScaledValue(player, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get()) / 100.0)));
-
-                player.removeEffect(ModEffects.COMBATANTS_AID_READY.get());
-                player.addEffect(new MobEffectInstance(ModEffects.COMBATANTS_AID_CD.get(), cd, 0, false, false, true));
-            }
-        }
         handleDashProcess(player);
     }
 
-    private static void startDash(Player player) {
+    public static void startDash(Player player) {
         CompoundTag tag = player.getPersistentData();
         tag.putBoolean("dash_active", true);
         tag.putInt("dash_timer", 0);
@@ -76,7 +57,7 @@ public class CombatantsAidReady extends MobEffect {
 
         Vec3 look = player.getLookAngle();
         double dashPower = 5;
-        player.setDeltaMovement(look.x * dashPower, -0.1, look.z * dashPower);
+        player.setDeltaMovement(look.x * dashPower, 0.0, look.z * dashPower);
         player.hurtMarked = true;
 
         EffectUtils.playSound(player, SoundEvents.ARMOR_EQUIP_ELYTRA, 0.5F, 1.0F);

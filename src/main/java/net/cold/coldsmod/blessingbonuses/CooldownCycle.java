@@ -21,6 +21,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
@@ -129,7 +131,7 @@ public class CooldownCycle {
                     LivingEntity.class,
                     player.getBoundingBox().inflate(5.0),
                     e -> {
-                        if (!(e instanceof Enemy) || e.isInvulnerable() || !player.hasLineOfSight(e)) return false;
+                        if (e == null || !e.isAlive() || e.isInvulnerable() || !player.hasLineOfSight(e) || !((e instanceof Enemy && !(e instanceof NeutralMob)) || (e instanceof NeutralMob n && n.isAngry()) || (e instanceof Mob m && m.getTarget() != null))) return false;
                         double dx = e.getX() - player.getX();
                         double dz = e.getZ() - player.getZ();
                         return (dx * dx + dz * dz) <= radiusSq;

@@ -57,12 +57,9 @@ public class BronzewoodApply {
             target.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_CURSE.get(), 20 * 10, 0, false, false, true));
 
             player.level().playSound(
-                    null,
-                    player.getX(), player.getY(), player.getZ(),
-                    SoundEvents.SOUL_ESCAPE,
-                    SoundSource.PLAYERS,
-                    7F,
-                    1.0F
+                    null, player.getX(), player.getY(), player.getZ(),
+                    SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS,
+                    7F, 1.0F
             );
 
             EffectUtils.spawnParticleBurst(target, ParticleTypes.SCULK_SOUL);

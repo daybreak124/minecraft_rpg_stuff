@@ -1,5 +1,6 @@
 package net.cold.coldsmod;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
 import net.cold.coldsmod.LootModifiers.ModLootModifiers;
 import net.cold.coldsmod.accessory.UtilityAccessories;
@@ -20,14 +21,17 @@ import net.cold.coldsmod.bow.BowAnimHandler;
 import net.cold.coldsmod.formulas.DebuffResistHandler;
 import net.cold.coldsmod.item.ModItems;
 import net.cold.coldsmod.mob.SbeveRenderer;
+import net.cold.coldsmod.network.ClientKeyInputHandler;
 import net.cold.coldsmod.network.NetworkHandler;
 import net.cold.coldsmod.stat.*;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -42,6 +46,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
+import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 
@@ -118,6 +123,7 @@ public class ColdsMod {
         MinecraftForge.EVENT_BUS.register(CrossbowProcHandler.class);
         MinecraftForge.EVENT_BUS.register(JumpCritHandler.class);
 
+        modEventBus.addListener(this::onRegisterKeyMappings);
 
 
         MinecraftForge.EVENT_BUS.register(CrossbowChargeDrawSpeedTag.class);
@@ -170,6 +176,10 @@ public class ColdsMod {
         ModEntities.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
+    private void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
+        ClientKeyInputHandler.register(event);
+    }
+
     private void commonSetup(final FMLCommonSetupEvent event) {
         LOGGER.info("HELLO FROM COMMON SETUP");
 
@@ -212,6 +222,19 @@ public class ColdsMod {
             event.registerEntityRenderer(ModEntities.SBEVE.get(), SbeveRenderer::new);
         }
     }
+
+    public static final KeyMapping RECALL_KEY = new KeyMapping(
+            "key.coldsmod.recall",
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_R,
+            "category.coldsmod.keys"
+    );
+
+    public static KeyMapping combatantKey = new KeyMapping(
+            "key.coldsmod.dash",
+            InputConstants.KEY_V,
+            "key.categories.coldsmod"
+    );
 
     @SubscribeEvent
     public void onRegisterCommands(RegisterCommandsEvent event) {

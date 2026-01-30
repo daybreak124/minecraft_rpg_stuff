@@ -46,12 +46,9 @@ public class RetaliateActive extends MobEffect {
             player.addEffect(new MobEffectInstance(ModEffects.RETALIATE_ACTIVE.get(), 20 * 4, 0, false, false, true));
             player.removeEffect(ModEffects.RETALIATE_READY.get());
             player.level().playSound(
-                    null,
-                    player.getX(), player.getY(), player.getZ(),
-                    ModSounds.RETALIATE_ACTIVATE.get(),
-                    SoundSource.PLAYERS,
-                    0.4F,
-                    1.0F
+                    null, player.getX(), player.getY(), player.getZ(),
+                    ModSounds.RETALIATE_ACTIVATE.get(), SoundSource.PLAYERS,
+                    0.4F, 1.0F
             );
             player.getPersistentData().putInt("retaliateHits", 0);
         }

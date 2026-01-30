@@ -13,6 +13,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -78,7 +80,7 @@ public class DeathFromAboveSkill {
                 LivingEntity.class,
                 player.getBoundingBox().inflate(JUMP_RADIUS),
                 e -> {
-                    if (!(e instanceof Enemy) || e.isInvulnerable() || !player.hasLineOfSight(e)) return false;
+                    if (e == null || !e.isAlive() || e.isInvulnerable() || !player.hasLineOfSight(e) || !((e instanceof Enemy && !(e instanceof NeutralMob)) || (e instanceof NeutralMob n && n.isAngry()) || (e instanceof Mob m && m.getTarget() != null))) return false;
 
                     double dx = e.getX() - player.getX();
                     double dz = e.getZ() - player.getZ();
@@ -126,7 +128,7 @@ public class DeathFromAboveSkill {
                 LivingEntity.class,
                 player.getBoundingBox().inflate(LAND_RADIUS),
                 e -> {
-                    if (!(e instanceof Enemy) || e.isInvulnerable() || !player.hasLineOfSight(e)) return false;
+                    if (e.isInvulnerable() || !player.hasLineOfSight(e) || !((e instanceof Enemy && !(e instanceof NeutralMob)) || (e instanceof NeutralMob n && n.isAngry()) || (e instanceof Mob m && m.getTarget() != null))) return false;
                     return e.distanceToSqr(player) <= landRadiusSq;
                 }
         );

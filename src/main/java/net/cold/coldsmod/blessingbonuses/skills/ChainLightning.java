@@ -7,6 +7,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -39,7 +41,11 @@ public class ChainLightning {
         List<LivingEntity> nearby = level.getEntitiesOfClass(
                 LivingEntity.class,
                 originalTarget.getBoundingBox().inflate(4.0),
-                e -> (e instanceof Enemy && e != originalTarget && e.isAlive())
+                e -> e != null && e.isAlive() && e != originalTarget && (
+                        (e instanceof Enemy && !(e instanceof NeutralMob)) ||
+                                (e instanceof NeutralMob n && n.isAngry()) ||
+                                (e instanceof Mob m && m.getTarget() != null)
+                )
         );
 
         for (LivingEntity next : nearby) {

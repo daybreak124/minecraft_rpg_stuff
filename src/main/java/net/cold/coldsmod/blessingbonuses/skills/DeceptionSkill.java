@@ -66,7 +66,8 @@ public class DeceptionSkill {
                 LivingEntity.class,
                 target.getBoundingBox().inflate(6.0),
                 e -> {
-                    if (!(e instanceof Enemy) || e == target || e.getType().is(Tags.EntityTypes.BOSSES) || e instanceof Warden || !player.hasLineOfSight(e)) return false;
+                    if (!(e instanceof Enemy) || e == target || e.getType().is(Tags.EntityTypes.BOSSES)
+                            || e instanceof Warden || !player.hasLineOfSight(e)) return false;
                     double dx = e.getX() - target.getX();
                     double dz = e.getZ() - target.getZ();
                     return (dx * dx + dz * dz) <= rangeSq;
