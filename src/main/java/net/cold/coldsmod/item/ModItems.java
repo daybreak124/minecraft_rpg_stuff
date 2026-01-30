@@ -1055,6 +1055,7 @@ public class ModItems {
                 player.getPersistentData().remove("dash_timer");
                 player.getPersistentData().remove("dash_crouch_ticks");
                 player.getPersistentData().remove("invis_added");
+                player.getPersistentData().remove("quantum_tp_eligible");
 
                 if (player instanceof ServerPlayer sp) {
                     NetworkHandler.sendToClient(new QuantumLeapSync.QuantumLeapFlagPacket(false), sp);

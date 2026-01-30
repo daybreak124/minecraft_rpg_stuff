@@ -80,6 +80,7 @@ public class QuantumLeapActive extends MobEffect {
 
             player.removeEffect(ModEffects.QUANTUM_LEAP_READY.get());
             player.getPersistentData().putBoolean("quantum_leaped", true);
+            player.getPersistentData().putBoolean("quantum_tp_eligible", true);
 
             player.level().playSound(
                     null, player.getX(), player.getY(), player.getZ(),
@@ -96,16 +97,22 @@ public class QuantumLeapActive extends MobEffect {
         CompoundTag tag = player.getPersistentData();
 
         if (player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())) {
-            if (player.isCrouching()) {
-                int crouchTicks = tag.getInt("quantum_recall_ticks") + 1;
-                tag.putInt("quantum_recall_ticks", crouchTicks);
-
-                if (crouchTicks >= 20) {
-                    returnToOrigin(player);
-                    return;
+            if (tag.getBoolean("quantum_tp_eligible")) {
+                if (!player.isCrouching()) {
+                    tag.putBoolean("quantum_tp_eligible", false);
                 }
             } else {
-                tag.putInt("quantum_recall_ticks", 0);
+                if (player.isCrouching()) {
+                    int crouchTicks = tag.getInt("quantum_recall_ticks") + 1;
+                    tag.putInt("quantum_recall_ticks", crouchTicks);
+
+                    if (crouchTicks >= 20) {
+                        returnToOrigin(player);
+                        return;
+                    }
+                } else {
+                    tag.putInt("quantum_recall_ticks", 0);
+                }
             }
         }
 
@@ -168,5 +175,6 @@ public class QuantumLeapActive extends MobEffect {
         tag.remove("dash_x");
         tag.remove("dash_y");
         tag.remove("dash_z");
+        tag.remove("quantum_tp_eligible");
     }
 }
