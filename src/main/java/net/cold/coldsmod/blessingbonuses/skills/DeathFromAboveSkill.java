@@ -70,7 +70,7 @@ public class DeathFromAboveSkill {
         Holder<DamageType> meleeType = level.registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
                 .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
-        DamageSource source = new DamageSource(meleeType, player);
+        DamageSource source = new DamageSource(meleeType, player, player);
 
 
         double jumpRadiusSq = 25;
@@ -114,7 +114,7 @@ public class DeathFromAboveSkill {
         Holder<DamageType> meleeType = level.registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
                 .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
-        DamageSource source = new DamageSource(meleeType, player);
+        DamageSource source = new DamageSource(meleeType, player, player);
 
         if (level instanceof ServerLevel serverLevel) {
             spawnParticleRing(serverLevel, player, ParticleTypes.POOF, LAND_RADIUS, 140);

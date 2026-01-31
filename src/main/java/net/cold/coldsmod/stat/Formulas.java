@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -171,6 +172,11 @@ public class Formulas {
         if (intimidated != null && !isIntimidating) {
             CompoundTag data = victim.getPersistentData();
             float scaledAmount = event.getAmount();
+            Entity attacker = event.getSource().getEntity();
+
+            if (attacker instanceof Player && !data.contains("temporal_attacker_id")) {
+                data.putUUID("temporal_attacker_id", attacker.getUUID());
+            }
 
             float currentStored = data.getFloat("stored_temporal_damage");
             float newTotal = currentStored + scaledAmount;
@@ -179,7 +185,7 @@ public class Formulas {
             float multiplier = (intimidated.getAmplifier() + 1) / 100f;
 
             if ((victim.getHealth()) <= newTotal * (1.0f + multiplier)) {
-                CooldownCycle.triggerSnapKill(victim, intimidated.getAmplifier());
+                CooldownCycle.triggerSnapKill(victim, attacker, intimidated.getAmplifier());
             }
             event.setCanceled(true);
         }

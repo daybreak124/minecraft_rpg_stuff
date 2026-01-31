@@ -84,7 +84,7 @@ public class SoulSeveranceActive extends MobEffect {
                         .registryOrThrow(Registries.DAMAGE_TYPE)
                         .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
 
-                DamageSource source = new DamageSource(meleeType, player);
+                DamageSource source = new DamageSource(meleeType, player, player);
 
                 if (ticks % 20 == 0) {
                     if (mob.isAlive() && (

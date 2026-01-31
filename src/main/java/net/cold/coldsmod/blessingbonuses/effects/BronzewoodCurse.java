@@ -38,7 +38,7 @@ public class BronzewoodCurse extends MobEffect {
         Holder<DamageType> meleeDOT = entity.level().registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
                 .getHolderOrThrow(ModDamageTypes.MELEE_DOT_DAMAGE);
-        DamageSource source = new DamageSource(meleeDOT, sourcePlayer);
+        DamageSource source = new DamageSource(meleeDOT, sourcePlayer, sourcePlayer);
 
         entity.hurt(source, 1f);
         entity.setDeltaMovement(entity.getDeltaMovement().scale(0));

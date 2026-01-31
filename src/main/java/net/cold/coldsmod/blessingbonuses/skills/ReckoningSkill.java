@@ -49,7 +49,6 @@ public class ReckoningSkill {
         if (event.getSource().is(ModDamageTypes.RECKONING_DAMAGE)) return;
         if (event.getSource().is(DamageTypes.FALL)) return;
 
-
         if (player.hasEffect(ModEffects.RECKONING_ACTIVE.get())) {
             double healed = event.getAmount() * HEAL_PERCENT;
 

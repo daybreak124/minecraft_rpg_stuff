@@ -75,6 +75,7 @@ public class IntimidatingPresenceSkill {
         for (LivingEntity target : entities) {
             target.addEffect(new MobEffectInstance(ModEffects.INTIMIDATED.get(), 80, amplifier, true, true, true));
             target.addEffect(new MobEffectInstance(ModEffects.INTIMIDATED_COOLDOWN.get(), 180, amplifier, true, true, true));
+            target.getPersistentData().putUUID("temporal_attacker_id", player.getUUID());
             EffectUtils.spawnParticleBurst(target, ParticleTypes.ENCHANTED_HIT);
         }
 

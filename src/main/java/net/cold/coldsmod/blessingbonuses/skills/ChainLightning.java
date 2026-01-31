@@ -51,7 +51,7 @@ public class ChainLightning {
         for (LivingEntity next : nearby) {
             if (bounceDamage < 1) break;
 
-            DamageSource source = new DamageSource(lightningType, player);
+            DamageSource source = new DamageSource(lightningType, player, player);
 
             next.hurt(source, (float) bounceDamage);
             spawnParticleBurst(next, ParticleTypes.ELECTRIC_SPARK);

@@ -28,15 +28,11 @@ public class BowProcHandler {
 
         if (player.getPersistentData().getBoolean("life_touch_applied")) {
             arrow.getPersistentData().putBoolean("life_touch_tagged", true);
-            return;
-        }
 
-        if (player.hasEffect(ModEffects.DECEPTION_READY.get())) {
+        } else if (player.hasEffect(ModEffects.DECEPTION_READY.get())) {
             arrow.getPersistentData().putBoolean("deception_tagged", true);
-            return;
-        }
 
-        if (player.hasEffect(ModEffects.VORTEX_READY.get())) {
+        } else if (player.hasEffect(ModEffects.VORTEX_READY.get())) {
             arrow.getPersistentData().putBoolean("vortex_tagged", true);
         }
     }

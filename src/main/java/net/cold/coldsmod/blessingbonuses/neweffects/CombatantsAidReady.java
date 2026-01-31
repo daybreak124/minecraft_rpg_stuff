@@ -1,6 +1,5 @@
 package net.cold.coldsmod.blessingbonuses.neweffects;
 
-import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.core.BlockPos;

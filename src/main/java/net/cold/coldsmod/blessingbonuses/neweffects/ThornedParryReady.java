@@ -92,7 +92,7 @@ public class ThornedParryReady extends MobEffect {
         Holder<DamageType> meleeType = level.registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
                 .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
-        DamageSource source = new DamageSource(meleeType, player);
+        DamageSource source = new DamageSource(meleeType, player, player);
 
         double radiusSq = 9.0;
         List<LivingEntity> enemies = level.getEntitiesOfClass(

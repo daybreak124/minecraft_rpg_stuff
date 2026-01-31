@@ -98,7 +98,7 @@ public class IntoTheFraySkill {
                 Holder<DamageType> meleeType = level.registryAccess()
                         .registryOrThrow(Registries.DAMAGE_TYPE)
                         .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
-                DamageSource source = new DamageSource(meleeType, player);
+                DamageSource source = new DamageSource(meleeType, player, player);
 
                 for (LivingEntity target : targetsHit) {
                     target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 8 * stackCount, 3));

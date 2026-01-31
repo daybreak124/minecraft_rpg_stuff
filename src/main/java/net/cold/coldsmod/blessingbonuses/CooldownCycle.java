@@ -124,7 +124,7 @@ public class CooldownCycle {
                     .registryOrThrow(Registries.DAMAGE_TYPE)
                     .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
 
-            DamageSource source = new DamageSource(meleeType, player);
+            DamageSource source = new DamageSource(meleeType, player, player);
 
             double radiusSq = 25.0;
             level.getEntitiesOfClass(
@@ -475,7 +475,12 @@ public class CooldownCycle {
         });
 
         EXPIRE_HANDLERS_MOB.put(ModEffects.INTIMIDATED.get(), (victim, instance) -> {
-            triggerSnapCD(victim, instance.getAmplifier());
+            Entity attacker = null;
+            if (victim.getPersistentData().contains("temporal_attacker_id")) {
+                UUID uuid = victim.getPersistentData().getUUID("temporal_attacker_id");
+                attacker = victim.level().getPlayerByUUID(uuid);
+            }
+            triggerSnapCD(victim, attacker, instance.getAmplifier());
         });
 
         EXPIRE_HANDLERS_MOB.put(ModEffects.EXPLOIT_WEAKNESS_DEBUFF.get(), (victim, instance) ->
@@ -556,7 +561,7 @@ public class CooldownCycle {
         }
     }
 
-    public static void triggerSnapKill(LivingEntity victim, int amplifier) {
+    public static void triggerSnapKill(LivingEntity victim, Entity attacker, int amplifier) {
         CompoundTag data = victim.getPersistentData();
         if (!data.contains("stored_temporal_damage")) return;
 
@@ -564,10 +569,19 @@ public class CooldownCycle {
         float bonusPercent = 1 + amplifier / 100f;
         float snapDamage = storedDamage * bonusPercent;
 
-        DamageSource reckoning = new DamageSource(victim.level()
-                        .registryAccess()
-                        .registryOrThrow(Registries.DAMAGE_TYPE)
-                        .getHolderOrThrow(ModDamageTypes.TRUE_DAMAGE));
+        var typeHolder = victim.level().registryAccess()
+                .registryOrThrow(Registries.DAMAGE_TYPE)
+                .getHolderOrThrow(ModDamageTypes.TRUE_DAMAGE);
+
+        if (victim.getPersistentData().contains("temporal_attacker_id")) {
+            UUID uuid = victim.getPersistentData().getUUID("temporal_attacker_id");
+            Entity savedPlayer = victim.level().getPlayerByUUID(uuid);
+            if (savedPlayer != null) {
+                attacker = savedPlayer;
+            }
+        }
+
+        DamageSource reckoning = new DamageSource(typeHolder, attacker, attacker);
 
         victim.removeEffect(ModEffects.INTIMIDATED.get());
         victim.hurt(reckoning, snapDamage);
@@ -579,7 +593,7 @@ public class CooldownCycle {
         data.remove("stored_temporal_damage");
     }
 
-    public static void triggerSnapCD(LivingEntity victim, int amplifier) {
+    public static void triggerSnapCD(LivingEntity victim, Entity attacker, int amplifier) {
         CompoundTag data = victim.getPersistentData();
         if (!data.contains("stored_temporal_damage")) return;
 
@@ -587,10 +601,19 @@ public class CooldownCycle {
         float bonusPercent = 1 + amplifier / 100f;
         float snapDamage = storedDamage * bonusPercent;
 
-        DamageSource reckoning = new DamageSource(victim.level()
-                .registryAccess()
+        if (victim.getPersistentData().contains("temporal_attacker_id")) {
+            UUID uuid = victim.getPersistentData().getUUID("temporal_attacker_id");
+            Entity savedPlayer = victim.level().getPlayerByUUID(uuid);
+            if (savedPlayer != null) {
+                attacker = savedPlayer;
+            }
+        }
+
+        var typeHolder = victim.level().registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ModDamageTypes.TRUE_DAMAGE));
+                .getHolderOrThrow(ModDamageTypes.TRUE_DAMAGE);
+
+        DamageSource reckoning = new DamageSource(typeHolder, attacker, attacker);
 
         victim.hurt(reckoning, snapDamage);
 
