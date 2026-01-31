@@ -63,8 +63,6 @@ public class QuantumLeapActive extends MobEffect {
         EffectUtils.spawnParticleBurst(player, ParticleTypes.FISHING);
 
         player.removeEffect(ModEffects.QUANTUM_LEAP_READY.get());
-        player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), 120, 0, false, false, true));
-        player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_COOLDOWN.get(), 20 * 35, 0, false, false, true));
 
         player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                 SoundEvents.PLAYER_SPLASH_HIGH_SPEED, SoundSource.PLAYERS, 0.6F, 1.0F);
@@ -87,13 +85,12 @@ public class QuantumLeapActive extends MobEffect {
             leapActiveDuration = 20 * 9;
         }
 
-        if (player.onGround() && player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())) {
-            player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), leapActiveDuration, 0, false, false, true));
+        player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), leapActiveDuration, 0, false, false, true));
+        player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_COOLDOWN.get(), 20 * 35, 0, false, false, true));
 
-            if (!player.hasEffect(MobEffects.INVISIBILITY)) {
-                player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, invisDuration, 0, false, false, true));
-                tag.putBoolean("invis_added", true);
-            }
+        if (!player.hasEffect(MobEffects.INVISIBILITY)) {
+            player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, invisDuration, 0, false, false, true));
+            tag.putBoolean("invis_added", true);
         }
     }
 
