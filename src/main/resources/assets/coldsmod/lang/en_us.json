@@ -103,6 +103,7 @@
 
   "effect.coldsmod.combatants_aid_cd": "Combatant's Aid: Cooldown",
   "effect.coldsmod.combatants_aid_ready": "Combatant's Aid: Ready",
+  "effect.coldsmod.combatants_aid_recall": "Combatant's Aid: Recall",
 
   "effect.coldsmod.radiating_warmth": "Radiating Warmth",
 
@@ -128,5 +129,7 @@
 
   "key.categories.coldsmod": "Cold's RPG Stuff",
   "key.coldsmod.quantum_leap": "Quantum Leap Activate/Recall",
-  "key.coldsmod.combatants_aid": "Combatant's Aid Dash"
+  "key.coldsmod.combatants_aid": "Combatant's Aid Dash Activate",
+  "key.coldsmod.overconfidence": "Overconfidence Activate",
+  "key.coldsmod.directed_hatred": "Directed Hatred Activate"
 }

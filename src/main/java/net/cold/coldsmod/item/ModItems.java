@@ -927,10 +927,15 @@ public class ModItems {
             super.appendHoverText(stack, level, tooltip, flag);
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Blessing: Directed Hatred").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal(" Jump critting taunts enemies").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Activate to taunt enemies").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" within 6 blocks and increases").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" their damage taken by 6% for").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 6 seconds.").withStyle(ChatFormatting.GRAY));
+            Component keyName = ClientKeyInputHandler.directedHatredKey.getTranslatedKeyMessage();
+
+            tooltip.add(Component.literal(" Activation: ").withStyle(ChatFormatting.GRAY)
+                    .append(keyName.copy().withStyle(ChatFormatting.YELLOW))
+                    .append(Component.literal(" (Default: X)").withStyle(ChatFormatting.DARK_GRAY)));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
                             .append(Component.literal("10s").withStyle(ChatFormatting.GRAY))
@@ -1049,17 +1054,7 @@ public class ModItems {
                 player.removeEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get());
                 player.removeEffect(ModEffects.QUANTUM_LEAP_READY.get());
                 player.removeEffect(ModEffects.QUANTUM_LEAP_COOLDOWN.get());
-                tag.remove("quantum_recall_ticks");
-                tag.remove("dash_x");
-                tag.remove("dash_y");
-                tag.remove("dash_z");
-                tag.remove("quantum_leaped");
-                tag.remove("dash_active");
-                tag.remove("dash_timer");
-                tag.remove("dash_crouch_ticks");
                 tag.remove("invis_added");
-                tag.remove("quantum_tp_eligible");
-                tag.remove("leap_timestamp");
 
                 if (player instanceof ServerPlayer sp) {
                     NetworkHandler.sendToClient(new QuantumLeapSync.QuantumLeapFlagPacket(false), sp);
@@ -1087,9 +1082,6 @@ public class ModItems {
             tooltip.add(Component.literal(" Death From Above; duration,").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Potency and Move Speed +50%.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Cancels fall damage.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Activate a 2nd time while the").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" effect is active to return to").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" original location.").withStyle(ChatFormatting.GRAY));
             Component keyName = ClientKeyInputHandler.quantumKey.getTranslatedKeyMessage();
 
             tooltip.add(Component.literal(" Activation: ").withStyle(ChatFormatting.GRAY)
@@ -1980,9 +1972,13 @@ public class ModItems {
             super.appendHoverText(stack, level, tooltip, flag);
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Blessing: Overconfidence").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal(" On jump crit, double your").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Activate to double your").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" damage but disable healing").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" received.").withStyle(ChatFormatting.GRAY));
+            Component keyName = ClientKeyInputHandler.overconfidenceKey.getTranslatedKeyMessage();
+            tooltip.add(Component.literal(" Activation: ").withStyle(ChatFormatting.GRAY)
+                    .append(keyName.copy().withStyle(ChatFormatting.YELLOW))
+                    .append(Component.literal(" (Default: Z)").withStyle(ChatFormatting.DARK_GRAY)));
             tooltip.add(
                     Component.literal("Doubled Damage Duration: ").withStyle(ChatFormatting.DARK_AQUA)
                             .append(Component.literal("8s").withStyle(ChatFormatting.GRAY))
@@ -2148,12 +2144,6 @@ public class ModItems {
                 player.getPersistentData().remove("dash_x");
                 player.getPersistentData().remove("dash_y");
                 player.getPersistentData().remove("dash_z");
-                player.getPersistentData().remove("dash_active");
-                player.getPersistentData().remove("dash_timer");
-                player.getPersistentData().remove("dash_crouch_ticks");
-                player.getPersistentData().remove("dash_was_sprinting");
-                player.getPersistentData().remove("dash_key_pressed");
-
             }
         }
 
@@ -2167,7 +2157,7 @@ public class ModItems {
             tooltip.add(Component.literal(" block dash and heal allies").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" within 3 blocks by 4 and").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" apply Resistance I.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Crouch for a second within").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Hold for a second within").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" 4 seconds of the dash to").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" return to original location.").withStyle(ChatFormatting.GRAY));
             Component keyName = ClientKeyInputHandler.combatantKey.getTranslatedKeyMessage();

@@ -11,7 +11,6 @@ import net.cold.coldsmod.accessory.ring.*;
 import net.cold.coldsmod.blessingbonuses.BowProcHandler;
 import net.cold.coldsmod.blessingbonuses.CooldownCycle;
 import net.cold.coldsmod.blessingbonuses.CrossbowProcHandler;
-import net.cold.coldsmod.blessingbonuses.JumpCritHandler;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.effects.PickaxeTorch;
 import net.cold.coldsmod.blessingbonuses.effects.SoulSeveranceActive;
@@ -21,6 +20,7 @@ import net.cold.coldsmod.bow.BowAnimHandler;
 import net.cold.coldsmod.formulas.DebuffResistHandler;
 import net.cold.coldsmod.item.ModItems;
 import net.cold.coldsmod.mob.SbeveRenderer;
+import net.cold.coldsmod.network.ClientInputEvent;
 import net.cold.coldsmod.network.ClientKeyInputHandler;
 import net.cold.coldsmod.network.NetworkHandler;
 import net.cold.coldsmod.stat.*;
@@ -121,10 +121,8 @@ public class ColdsMod {
 
         MinecraftForge.EVENT_BUS.register(BowProcHandler.class);
         MinecraftForge.EVENT_BUS.register(CrossbowProcHandler.class);
-        MinecraftForge.EVENT_BUS.register(JumpCritHandler.class);
 
         modEventBus.addListener(this::onRegisterKeyMappings);
-
 
         MinecraftForge.EVENT_BUS.register(CrossbowChargeDrawSpeedTag.class);
 
@@ -178,6 +176,7 @@ public class ColdsMod {
 
     private void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
         ClientKeyInputHandler.register(event);
+        ClientInputEvent.initializeKeys(event);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

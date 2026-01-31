@@ -59,6 +59,24 @@ public class NetworkHandler {
                 .decoder(CombatantsAidPacket::decode)
                 .consumerMainThread(CombatantsAidPacket::handle)
                 .add();
+
+        CHANNEL.messageBuilder(OverconfidencePacket.class, nextId(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(OverconfidencePacket::decode)
+                .encoder(OverconfidencePacket::encode)
+                .consumerMainThread(OverconfidencePacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(DirectedHatredPacket.class, nextId(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(DirectedHatredPacket::decode)
+                .encoder(DirectedHatredPacket::encode)
+                .consumerMainThread(DirectedHatredPacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(CombatantsRecallPacket.class, nextId(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(CombatantsRecallPacket::decode)
+                .encoder(CombatantsRecallPacket::encode)
+                .consumerMainThread(CombatantsRecallPacket::handle)
+                .add();
     }
 
     public static void sendToClient(Object msg, ServerPlayer player) {

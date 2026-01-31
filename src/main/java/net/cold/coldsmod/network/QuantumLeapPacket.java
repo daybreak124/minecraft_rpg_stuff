@@ -25,11 +25,6 @@ public class QuantumLeapPacket {
 
             if (player.hasEffect(ModEffects.QUANTUM_LEAP_READY.get())) {
                 QuantumLeapActive.performDash(player);
-            } else if (player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())) {
-                long lastLeap = player.getPersistentData().getLong("leap_timestamp");
-                if (player.level().getGameTime() - lastLeap > 10) { // ticks
-                    QuantumLeapActive.returnToOrigin(player);
-                }
             }
         });
         ctx.get().setPacketHandled(true);

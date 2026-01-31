@@ -205,6 +205,9 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> COMBATANTS_AID_READY =
             EFFECTS.register("combatants_aid_ready", CombatantsAidReady::new);
 
+    public static final RegistryObject<MobEffect> COMBATANTS_AID_RECALL =
+            EFFECTS.register("combatants_aid_recall", CombatantsAidReady::new);
+
     public static final RegistryObject<MobEffect> SANCTUARY_FATIGUE =
             EFFECTS.register("sanctuary_fatigue", SanctuaryFatigue::new);
 

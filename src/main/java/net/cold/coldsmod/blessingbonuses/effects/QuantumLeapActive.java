@@ -23,6 +23,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -53,11 +55,6 @@ public class QuantumLeapActive extends MobEffect {
         }
 
         CompoundTag tag = player.getPersistentData();
-        tag.putDouble("dash_x", player.getX());
-        tag.putDouble("dash_y", player.getY());
-        tag.putDouble("dash_z", player.getZ());
-        tag.putBoolean("quantum_leaped", true);
-        tag.putLong("leap_timestamp", player.level().getGameTime());
 
         player.teleportTo(dashTarget.x, dashTarget.y + yOffset, dashTarget.z);
         player.setDeltaMovement(Vec3.ZERO);
@@ -81,33 +78,21 @@ public class QuantumLeapActive extends MobEffect {
         for (LivingEntity entity : nearby) {
             if (entity instanceof Mob mob) mob.setTarget(null);
         }
-    }
 
-    @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide()) return;
+        int invisDuration = 20 * 4;
+        int leapActiveDuration = 20 * 6;
 
-        Player player = event.player;
-        CompoundTag tag = player.getPersistentData();
+        if (player.hasEffect(ModEffects.ENHANCED_QUANTUM_LEAP.get())) {
+            invisDuration = 20 * 6;
+            leapActiveDuration = 20 * 9;
+        }
 
-        if (tag.getBoolean("quantum_leaped")) {
-            int invisDuration = 20 * 4;
-            int leapActiveDuration = 20 * 6;
+        if (player.onGround() && player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())) {
+            player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), leapActiveDuration, 0, false, false, true));
 
-            if (player.hasEffect(ModEffects.ENHANCED_QUANTUM_LEAP.get())) {
-                invisDuration = 20 * 6;
-                leapActiveDuration = 20 * 9;
-            }
-
-            if (player.onGround() && player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), leapActiveDuration, 0, false, false, true));
-
-                if (!player.hasEffect(MobEffects.INVISIBILITY)) {
-                    player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, invisDuration, 0, false, false, true));
-                    tag.putBoolean("invis_added", true);
-                }
-
-                tag.putBoolean("quantum_leaped", false);
+            if (!player.hasEffect(MobEffects.INVISIBILITY)) {
+                player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, invisDuration, 0, false, false, true));
+                tag.putBoolean("invis_added", true);
             }
         }
     }
@@ -117,42 +102,12 @@ public class QuantumLeapActive extends MobEffect {
         if (!(event.getSource().getEntity() instanceof Player player)) return;
         if (!player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())) return;
 
+        CompoundTag tag = player.getPersistentData();
         player.removeEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get());
 
-        if (player.getPersistentData().getBoolean("invis_added")) {
+        if (tag.getBoolean("invis_added")) {
             player.removeEffect(MobEffects.INVISIBILITY);
-            player.getPersistentData().putBoolean("invis_added", false);
-        }
-    }
-
-    public static void returnToOrigin(ServerPlayer player) {
-        CompoundTag tag = player.getPersistentData();
-        if (!tag.contains("dash_x")) return;
-
-        player.teleportTo(tag.getDouble("dash_x"), tag.getDouble("dash_y"), tag.getDouble("dash_z"));
-
-        EffectUtils.playSound(player, SoundEvents.ENDERMAN_TELEPORT, 0.5F, 1.0F);
-        EffectUtils.spawnParticleBurst(player, ParticleTypes.PORTAL);
-
-        tag.remove("dash_x");
-        tag.remove("dash_y");
-        tag.remove("dash_z");
-        tag.remove("leap_timestamp");
-        tag.putBoolean("quantum_leaped", false);
-    }
-
-    @SubscribeEvent
-    public static void onKeyInput(InputEvent.Key event) {
-        if (ClientKeyInputHandler.quantumKey != null && ClientKeyInputHandler.quantumKey.consumeClick()) {
-            Player player = Minecraft.getInstance().player;
-            if (player == null) return;
-
-            boolean hasReady = player.hasEffect(ModEffects.QUANTUM_LEAP_READY.get());
-            boolean hasActive = player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get());
-
-            if (hasReady || hasActive) {
-                NetworkHandler.CHANNEL.sendToServer(new QuantumLeapPacket());
-            }
+                tag.putBoolean("invis_added", false);
         }
     }
 }

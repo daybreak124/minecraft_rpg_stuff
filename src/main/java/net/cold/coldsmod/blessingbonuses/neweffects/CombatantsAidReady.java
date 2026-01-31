@@ -1,11 +1,13 @@
 package net.cold.coldsmod.blessingbonuses.neweffects;
 
+import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -17,14 +19,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
 
 public class CombatantsAidReady extends MobEffect {
-    private static final int RECALL_WINDOW_TICKS = 20 * 4;
-    private static final int CROUCH_FOR_RECALL_TICKS = 20;
 
     public CombatantsAidReady() {
         super(MobEffectCategory.NEUTRAL, 0xFF0000);
@@ -35,65 +33,23 @@ public class CombatantsAidReady extends MobEffect {
         return false;
     }
 
-    @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (event.player.level().isClientSide()) return;
-
-        Player player = event.player;
-        handleDashProcess(player);
-    }
-
     public static void startDash(Player player) {
         CompoundTag tag = player.getPersistentData();
-        tag.putBoolean("dash_active", true);
-        tag.putInt("dash_timer", 0);
-        tag.putInt("dash_crouch_ticks", 0);
 
         tag.putDouble("dash_x", player.getX());
         tag.putDouble("dash_y", player.getY());
         tag.putDouble("dash_z", player.getZ());
 
         Vec3 look = player.getLookAngle();
-        double dashPower = 5;
-        player.setDeltaMovement(look.x * dashPower, 0.0, look.z * dashPower);
+        Vec3 direction = new Vec3(look.x, 0, look.z).normalize();
+
+        double speed = 2.0;
+        player.setDeltaMovement(direction.x * speed, 0.1, direction.z * speed);
+
         player.hurtMarked = true;
-
+        player.addEffect(new MobEffectInstance(ModEffects.COMBATANTS_AID_RECALL.get(), 100, 0, false, false, true));
         EffectUtils.playSound(player, SoundEvents.ARMOR_EQUIP_ELYTRA, 0.5F, 1.0F);
-        applyDashSupport(player, look);
-    }
-
-    private static void handleDashProcess(Player player) {
-        CompoundTag tag = player.getPersistentData();
-        if (!tag.getBoolean("dash_active")) return;
-
-        int timer = tag.getInt("dash_timer");
-        timer++;
-        tag.putInt("dash_timer", timer);
-
-        if (timer < 10) {
-            Vec3 movement = player.getDeltaMovement();
-            player.setDeltaMovement(movement.x * 1.1, movement.y, movement.z * 1.1);
-        }
-
-        if (timer <= RECALL_WINDOW_TICKS) {
-            if (player.isCrouching()) {
-                int crouchTicks = tag.getInt("dash_crouch_ticks") + 1;
-                tag.putInt("dash_crouch_ticks", crouchTicks);
-
-                if (crouchTicks >= CROUCH_FOR_RECALL_TICKS) {
-                    returnToOrigin(player);
-                    tag.putBoolean("dash_active", false);
-                    tag.remove("dash_timer");
-                    tag.remove("dash_crouch_ticks");
-                }
-            } else {
-                tag.putInt("dash_crouch_ticks", 0);
-            }
-        } else {
-            tag.putBoolean("dash_active", false);
-            tag.remove("dash_timer");
-        }
+        applyDashSupport(player, direction);
     }
 
     private static void applyDashSupport(Player player, Vec3 direction) {
@@ -155,20 +111,19 @@ public class CombatantsAidReady extends MobEffect {
         }
     }
 
-    public static void returnToOrigin(Player player) {
+    public static void returnToOrigin(ServerPlayer player) {
         CompoundTag tag = player.getPersistentData();
         if (!tag.contains("dash_x")) return;
 
-        player.teleportTo(
-                tag.getDouble("dash_x"),
-                tag.getDouble("dash_y"),
-                tag.getDouble("dash_z")
-        );
+        player.teleportTo(tag.getDouble("dash_x"), tag.getDouble("dash_y"), tag.getDouble("dash_z"));
 
         EffectUtils.playSound(player, SoundEvents.ENDERMAN_TELEPORT, 0.5F, 1.0F);
+        EffectUtils.spawnParticleBurst(player, ParticleTypes.REVERSE_PORTAL);
+
         tag.remove("dash_x");
         tag.remove("dash_y");
         tag.remove("dash_z");
+        player.removeEffect(ModEffects.COMBATANTS_AID_RECALL.get());
     }
 
     private static void spawnBorderParticle(ServerLevel level, Player player, double x, double z) {

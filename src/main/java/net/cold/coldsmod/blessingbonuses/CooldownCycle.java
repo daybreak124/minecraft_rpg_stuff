@@ -296,6 +296,7 @@ public class CooldownCycle {
             removeModifier(player, ModAttributes.POTENCY.get(), QUANTUM_DAMAGE_UUID);
             removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), QUANTUM_DAMAGE_UUID);
             removeModifier(player, ModAttributes.MELEE_POTENCY.get(), QUANTUM_DAMAGE_UUID);
+            player.getPersistentData().putBoolean("invis_added", false);
         });
 
         EXPIRE_HANDLERS.put(ModEffects.SOLARA.get(), (player, inst) -> {
