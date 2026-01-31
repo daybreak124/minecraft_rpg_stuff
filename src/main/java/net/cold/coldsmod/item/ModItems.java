@@ -1073,7 +1073,7 @@ public class ModItems {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Blessing: Quantum Leap").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Activate to perform a 10").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" block teleport and turn").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" block long teleport and turn").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" invisible for 4 seconds. Gain").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" +30 Potency and +20% Movement").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Speed for 8 seconds until you.").withStyle(ChatFormatting.GRAY));
