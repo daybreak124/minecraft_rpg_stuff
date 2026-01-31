@@ -322,7 +322,7 @@ public class UtilityAccessories {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+100% Jump Boost").withStyle(style -> style.withColor(0xD6C97A)));
-            tooltip.add(Component.literal("+100% Fall Damage Distance").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+100% Fall Damage Distance Threshold").withStyle(style -> style.withColor(0xD6C97A)));
 
         }
     }

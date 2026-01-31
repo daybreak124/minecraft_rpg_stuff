@@ -23,10 +23,10 @@ public class PickaxeTorch {
         Level world = event.getLevel();
         if (!player.getPersistentData().getBoolean("lightbringer_applied")) return;
         if (player.isCrouching()) return;
-        if (player.getHealth() <= 3f) return;
 
         BlockPos clickedPos = event.getPos();
         BlockState clickedState = world.getBlockState(clickedPos);
+        if (player.position().distanceToSqr(clickedPos.getX(), clickedPos.getY(), clickedPos.getZ()) > 9.0) return;
 
         if (!player.isSecondaryUseActive()) {
             if (clickedState.hasBlockEntity()) return;
@@ -62,8 +62,7 @@ public class PickaxeTorch {
         if (world.getBlockState(pos).canBeReplaced() && torchState.canSurvive(world, pos)) {
             world.setBlockAndUpdate(pos, torchState);
 
-            player.hurt(player.damageSources().magic(), 3f);
-
+            stack.hurtAndBreak(10, player, (p) -> p.broadcastBreakEvent(event.getHand()));
             world.playSound(null, pos, SoundEvents.WOOD_PLACE, player.getSoundSource(), 1.0f, 1.0f);
 
             player.swing(event.getHand(), true);

@@ -1930,7 +1930,9 @@ public class ModItems {
             tooltip.add(Component.literal("Blessing: Lightbringer").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Right clicking with a").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Pickaxe places a torch").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" but deals 3 Magic Damage.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" but costs 10 Durability.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Only works for 3 blocks").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" distance.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Disabled while crouching.").withStyle(ChatFormatting.GRAY));
         }
     }
