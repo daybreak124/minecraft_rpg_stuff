@@ -189,7 +189,7 @@ public class Formulas {
             }
             event.setCanceled(true);
         }
-        // System.out.println(event.getAmount());
+        System.out.println(event.getAmount());
     }
 
     private boolean rollCrit(Player player, double chance) {

@@ -4,6 +4,7 @@ import net.cold.coldsmod.damage.ModDamageTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,8 +18,6 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
-
-import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleBurst;
 
 public class ChainLightning {
 
@@ -38,10 +37,11 @@ public class ChainLightning {
                 .registryOrThrow(Registries.DAMAGE_TYPE)
                 .getHolderOrThrow(ModDamageTypes.LIGHTNING_DAMAGE);
 
+        LivingEntity finalOriginalTarget = originalTarget;
         List<LivingEntity> nearby = level.getEntitiesOfClass(
                 LivingEntity.class,
                 originalTarget.getBoundingBox().inflate(4.0),
-                e -> e != null && e.isAlive() && e != originalTarget && (
+                e -> e != null && e.isAlive() && e != finalOriginalTarget && (
                         (e instanceof Enemy && !(e instanceof NeutralMob)) ||
                                 (e instanceof NeutralMob n && n.isAngry()) ||
                                 (e instanceof Mob m && m.getTarget() != null)
@@ -52,11 +52,27 @@ public class ChainLightning {
             if (bounceDamage < 1) break;
 
             DamageSource source = new DamageSource(lightningType, player, player);
-
             next.hurt(source, (float) bounceDamage);
-            spawnParticleBurst(next, ParticleTypes.ELECTRIC_SPARK);
 
+            double startX = originalTarget.getX();
+            double startY = originalTarget.getY() + 1.2;
+            double startZ = originalTarget.getZ();
 
+            double dx = next.getX() - startX;
+            double dy = (next.getY() + 1.2) - startY;
+            double dz = next.getZ() - startZ;
+
+            double distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+            int particleCount = (int) (distance * 4);
+
+            for (int i = 0; i < particleCount; i++) {
+                double ratio = (double) i / particleCount;
+                ((ServerLevel)level).sendParticles(ParticleTypes.ELECTRIC_SPARK,
+                        startX + (dx * ratio), startY + (dy * ratio), startZ + (dz * ratio),
+                        1, 0, 0, 0, 0.0);
+            }
+
+            originalTarget = next;
             bounceDamage /= 2;
         }
     }

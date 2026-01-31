@@ -1285,7 +1285,7 @@ public class ModItems {
             tooltip.add(Component.literal(" bounces to the closest").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" monster within a 4 block").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" radius of the target for").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" half the main damage.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" half of the main damage.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" The damage keeps bouncing").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" until the damage is less").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" than 1. The range doesn't").withStyle(ChatFormatting.GRAY));
