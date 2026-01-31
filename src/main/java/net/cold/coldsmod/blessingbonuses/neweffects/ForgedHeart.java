@@ -31,6 +31,7 @@ public class ForgedHeart {
 
         BlockState state = event.getState();
         if (!state.is(net.minecraftforge.common.Tags.Blocks.ORES)) return;
+        if (state.is(net.minecraft.world.level.block.Blocks.NETHER_QUARTZ_ORE)) return;
 
         if (!player.hasCorrectToolForDrops(state)) return;
 
