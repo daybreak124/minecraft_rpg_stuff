@@ -63,8 +63,8 @@ public class WardenSkin {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 3.0, WARDEN_BRACERS_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 1.0, WARDEN_BRACERS_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 1.0, WARDEN_BRACERS_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 1.5, WARDEN_BRACERS_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 1.5, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 1.0, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 6.0, WARDEN_BRACERS_UUID);
@@ -101,8 +101,8 @@ public class WardenSkin {
             tooltip.add(Component.literal("+3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+1 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+1 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1.5 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1.5 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+6% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
@@ -118,8 +118,8 @@ public class WardenSkin {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 4.0, WARDEN_BRACERS_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 2.0, WARDEN_BRACERS_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 1.5, WARDEN_BRACERS_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 3.0, WARDEN_BRACERS_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 2.5, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 2.0, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 8.0, WARDEN_BRACERS_UUID);
@@ -156,8 +156,8 @@ public class WardenSkin {
             tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+1.5 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+3 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+2.5 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+8% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
@@ -173,10 +173,10 @@ public class WardenSkin {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 5.0, WARDEN_BRACERS_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 3.0, WARDEN_BRACERS_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 4.0, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.0, WARDEN_BRACERS_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 2.5, WARDEN_BRACERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.04, WARDEN_BRACERS_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 4.0, WARDEN_BRACERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.10, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 5.0, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 12.0, WARDEN_BRACERS_UUID);
@@ -215,11 +215,11 @@ public class WardenSkin {
             tooltip.add(Component.literal("+5 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+5 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+2.5 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+4 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+4 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+12% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+4% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+10% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }
@@ -234,10 +234,10 @@ public class WardenSkin {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 9.0, WARDEN_BRACERS_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 4.0, WARDEN_BRACERS_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 5.0, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 2.0, WARDEN_BRACERS_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 3.5, WARDEN_BRACERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.08, WARDEN_BRACERS_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 5.0, WARDEN_BRACERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.15, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 8.0, WARDEN_BRACERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 15.0, WARDEN_BRACERS_UUID);
@@ -276,11 +276,11 @@ public class WardenSkin {
             tooltip.add(Component.literal("+9 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+8 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+3.5 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+5 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+5 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+2 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+15% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+8% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+15% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }

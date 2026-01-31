@@ -279,20 +279,13 @@ public class Formulas {
         if (!(event.getEntity() instanceof Player player)) return;
 
         float jumpBoost = (float) player.getAttributeValue(ModAttributes.JUMP_BOOST.get());
-        if (jumpBoost <= 0) return;
-        float fallThreshold = 3.0f * jumpBoost;
+        float fallThreshold = 3.0f + (3.0f * (jumpBoost - 1.0f));
         float fallDistance = event.getDistance();
         if (fallDistance <= fallThreshold) {
+            if (jumpBoost > 1.5 && fallDistance > 3) { spawnExplosionOnFeet(player); }
             event.setDistance(0);
             event.setCanceled(true);
             player.fallDistance = 0;
-            if (jumpBoost > 1.5) { spawnExplosionOnFeet(player); }
-            return;
-        }
-
-        if (!player.level().isClientSide()) {
-            float damageMultiplier = 1.0f / jumpBoost;
-            event.setDamageMultiplier(Math.max(0.0f, damageMultiplier));
         }
     }
 

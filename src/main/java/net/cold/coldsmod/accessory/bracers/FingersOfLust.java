@@ -182,9 +182,9 @@ public class FingersOfLust {
                 AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 5.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -6.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 4.5, FINGERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 6, FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 7, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 12.0, FINGERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 0.075, FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 0.09, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, FINGERS_UUID);
             }
         }
@@ -224,8 +224,8 @@ public class FingersOfLust {
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+12 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+4.5 Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+7.5% Haste").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("+6 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+9% Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+7 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -243,9 +243,9 @@ public class FingersOfLust {
                 AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 6.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -6.0, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 6.0, FINGERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 10, FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 12, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 18.0, FINGERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 0.15, FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 0.18, FINGERS_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, FINGERS_UUID);
             }
         }
@@ -285,8 +285,8 @@ public class FingersOfLust {
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+18 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+6 Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+15% Haste").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("+10 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+18% Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+12 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }

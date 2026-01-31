@@ -121,7 +121,7 @@ public class UtilityAccessories {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, MONIS_LUCKY_UUID);
-                AttributeApplier.applyModifier(player, Attributes.LUCK, 3.0, MONIS_LUCKY_UUID);
+                AttributeApplier.applyModifier(player, Attributes.LUCK, 2.0, MONIS_LUCKY_UUID);
             }
         }
 
@@ -149,7 +149,7 @@ public class UtilityAccessories {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Luck").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+2 Luck").withStyle(style -> style.withColor(0xD6C97A)));
         }
     }
 
@@ -164,7 +164,7 @@ public class UtilityAccessories {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, ENDERMAN_FINGERS_UUID);
-                AttributeApplier.applyModifier(player, ForgeMod.BLOCK_REACH.get(), 3.0, ENDERMAN_FINGERS_UUID);
+                AttributeApplier.applyModifier(player, ForgeMod.BLOCK_REACH.get(), 1.5, ENDERMAN_FINGERS_UUID);
             }
         }
 
@@ -192,7 +192,7 @@ public class UtilityAccessories {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Block Reach").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+1.5 Block Reach").withStyle(style -> style.withColor(0xD6C97A)));
         }
     }
 
@@ -322,7 +322,6 @@ public class UtilityAccessories {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+100% Jump Boost").withStyle(style -> style.withColor(0xD6C97A)));
-            tooltip.add(Component.literal("-50% Fall Damage").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal("+100% Fall Damage Distance").withStyle(style -> style.withColor(0xD6C97A)));
 
         }

@@ -64,9 +64,9 @@ public class DragonTeethNecklace {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 2.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 6.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 6.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 6.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 8.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 8.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 8.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 2.0, DRAGON_TEETH_UUID);
             }
         }
@@ -103,7 +103,7 @@ public class DragonTeethNecklace {
             tooltip.add(Component.literal("+2 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+6 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+8 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -120,9 +120,9 @@ public class DragonTeethNecklace {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 3.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 12.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 12.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 12.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 14.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 14.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 14.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 0.5, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 3.0, DRAGON_TEETH_UUID);
             }
@@ -162,9 +162,7 @@ public class DragonTeethNecklace {
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal("+0.5 Max Health").withStyle(ChatFormatting.BLUE));
-
-
-            tooltip.add(Component.literal("+12 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+14 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -180,13 +178,15 @@ public class DragonTeethNecklace {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 6.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 7.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 15.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 15.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 15.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 6.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.04, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 7.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.1, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.1, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), 0.1, DRAGON_TEETH_UUID);
             }
         }
 
@@ -220,14 +220,14 @@ public class DragonTeethNecklace {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+6 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+7 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+7 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
 
             tooltip.add(Component.literal("+15 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+4% Precision").withStyle(style -> style.withColor(0xec3700)));
+            tooltip.add(Component.literal("+10% Precision").withStyle(style -> style.withColor(0xec3700)));
 
 
             tooltip.add(Component.literal(""));
@@ -244,13 +244,15 @@ public class DragonTeethNecklace {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 8.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 9.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 18.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 18.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 18.0, DRAGON_TEETH_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.5, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 8.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.08, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 9.0, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.15, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.15, DRAGON_TEETH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), 0.15, DRAGON_TEETH_UUID);
             }
         }
 
@@ -284,14 +286,14 @@ public class DragonTeethNecklace {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+8 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+9 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+9 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal("+1.5 Max Health").withStyle(ChatFormatting.BLUE));
 
             tooltip.add(Component.literal("+18 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+8% Precision").withStyle(style -> style.withColor(0xec3700)));
+            tooltip.add(Component.literal("+15% Precision").withStyle(style -> style.withColor(0xec3700)));
 
 
             tooltip.add(Component.literal(""));

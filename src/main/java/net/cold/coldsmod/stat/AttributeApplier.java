@@ -121,10 +121,10 @@ public class AttributeApplier {
                     .put("amplificationMultiplier", ModAttributes.AMPLIFICATION_MULTIPLIER)
 
                     .put("moveSpeed", () -> Attributes.MOVEMENT_SPEED)
-                    .put("swimSpeed", () -> ForgeMod.SWIM_SPEED.get())
-                    .put("stepHeight", () -> ForgeMod.STEP_HEIGHT_ADDITION.get())
-                    .put("blockReach", () -> ForgeMod.BLOCK_REACH.get())
-                    .put("entityReach", () -> ForgeMod.ENTITY_REACH.get())
+                    .put("swimSpeed", ForgeMod.SWIM_SPEED)
+                    .put("stepHeight", ForgeMod.STEP_HEIGHT_ADDITION)
+                    .put("blockReach", ForgeMod.BLOCK_REACH)
+                    .put("entityReach", ForgeMod.ENTITY_REACH)
                     .put("xpGain", ModAttributes.XP_GAIN)
                     .put("miningSpeed", ModAttributes.MINING_SPEED)
                     .put("jumpBoost", ModAttributes.JUMP_BOOST)
@@ -280,7 +280,7 @@ public class AttributeApplier {
 
             Map.entry(ModAttributes.XP_GAIN, s -> s.insight * 0.0025),
             Map.entry(ModAttributes.MINING_SPEED, s -> s.insight * 0.0025),
-            Map.entry(() -> ForgeMod.BLOCK_REACH.get(), s -> s.insight * 0.05)
+            Map.entry(() -> ForgeMod.BLOCK_REACH.get(), s -> s.insight * 0.025)
     );
 
     @SubscribeEvent

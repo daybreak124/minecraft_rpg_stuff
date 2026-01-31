@@ -67,7 +67,7 @@ public class CorruptedLostRing {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, CORRUPTED_LOST_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 4.0, CORRUPTED_LOST_UUID);
                 AttributeApplier.applyModifier(player, Attributes.KNOCKBACK_RESISTANCE, 0.05, CORRUPTED_LOST_UUID); // 5 scaled to 0.1 per 1
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 2.25, CORRUPTED_LOST_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 3, CORRUPTED_LOST_UUID);
             }
         }
 
@@ -100,7 +100,7 @@ public class CorruptedLostRing {
             tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+2.25 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+3 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+5% Knockback Resist").withStyle(ChatFormatting.BLUE));
 
             tooltip.add(Component.literal(""));
@@ -119,7 +119,7 @@ public class CorruptedLostRing {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, CORRUPTED_LOST_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 5.0, CORRUPTED_LOST_UUID);
                 AttributeApplier.applyModifier(player, Attributes.KNOCKBACK_RESISTANCE, 0.1, CORRUPTED_LOST_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 3.75, CORRUPTED_LOST_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 4.5, CORRUPTED_LOST_UUID);
             }
         }
 
@@ -152,7 +152,7 @@ public class CorruptedLostRing {
             tooltip.add(Component.literal("+5 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+3.75 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+4.5 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+10% Knockback Resist").withStyle(ChatFormatting.BLUE));
 
             tooltip.add(Component.literal(""));
@@ -169,11 +169,11 @@ public class CorruptedLostRing {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, CORRUPTED_LOST_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 6.0, CORRUPTED_LOST_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 7.0, CORRUPTED_LOST_UUID);
                 AttributeApplier.applyModifier(player, Attributes.KNOCKBACK_RESISTANCE, 0.15, CORRUPTED_LOST_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 5.5, CORRUPTED_LOST_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 3.0, CORRUPTED_LOST_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.04, CORRUPTED_LOST_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 6, CORRUPTED_LOST_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 4.0, CORRUPTED_LOST_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.08, CORRUPTED_LOST_UUID);
             }
         }
 
@@ -205,14 +205,14 @@ public class CorruptedLostRing {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+6 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+7 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+5.5 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+3 Armor Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+6 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+4 Armor Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+15% Knockback Resist").withStyle(ChatFormatting.BLUE));
 
-            tooltip.add(Component.literal("+4% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
+            tooltip.add(Component.literal("+8% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -228,11 +228,11 @@ public class CorruptedLostRing {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, CORRUPTED_LOST_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 7.0, CORRUPTED_LOST_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 10.0, CORRUPTED_LOST_UUID);
                 AttributeApplier.applyModifier(player, Attributes.KNOCKBACK_RESISTANCE, 0.2, CORRUPTED_LOST_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 7.0, CORRUPTED_LOST_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 5.0, CORRUPTED_LOST_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.08, CORRUPTED_LOST_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 8.0, CORRUPTED_LOST_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 6.0, CORRUPTED_LOST_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.15, CORRUPTED_LOST_UUID);
             }
         }
 
@@ -264,14 +264,14 @@ public class CorruptedLostRing {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+7 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+10 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+7 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+5 Armor Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+8 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+6 Armor Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+20% Knockback Resist").withStyle(ChatFormatting.BLUE));
 
-            tooltip.add(Component.literal("+8% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
+            tooltip.add(Component.literal("+15% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));

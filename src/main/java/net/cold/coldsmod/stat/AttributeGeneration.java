@@ -45,7 +45,7 @@ public class AttributeGeneration {
         INDIVIDUAL_RANGES.put("axe", new int[]{-3, 12});
         INDIVIDUAL_RANGES.put("bow", new int[]{-3, 12});
         INDIVIDUAL_RANGES.put("crossbow", new int[]{-3, 12});
-        INDIVIDUAL_RANGES.put("shield", new int[]{-3, 12});
+        INDIVIDUAL_RANGES.put("shield", new int[]{-2, 9});
         INDIVIDUAL_RANGES.put("tools", new int[]{2, 6});
 
     }
@@ -55,10 +55,10 @@ public class AttributeGeneration {
         int bias = rarity.getAttributeBias(itemType);
 
         int minTotal = TOTAL_RANGES.get(itemType)[0] + bias * 2;
-        int maxTotal = TOTAL_RANGES.get(itemType)[1] + bias * 3;
+        int maxTotal = TOTAL_RANGES.get(itemType)[1] + bias * 4;
 
         int minInd = INDIVIDUAL_RANGES.get(itemType)[0];
-        int maxInd = INDIVIDUAL_RANGES.get(itemType)[1] + bias;
+        int maxInd = INDIVIDUAL_RANGES.get(itemType)[1] + bias * 2;
 
         List<String> selected;
 

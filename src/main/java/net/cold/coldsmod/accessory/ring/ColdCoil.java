@@ -66,8 +66,8 @@ public class ColdCoil {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, COLD_COIL_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MOVEMENT_SPEED, 0.009, COLD_COIL_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 3.0, COLD_COIL_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 3, COLD_COIL_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 5.0, COLD_COIL_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 5, COLD_COIL_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 4.0, COLD_COIL_UUID);
             }
         }
@@ -100,8 +100,8 @@ public class ColdCoil {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+4 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+3 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+5 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+5 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
             tooltip.add(Component.literal("+9% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));
@@ -118,8 +118,8 @@ public class ColdCoil {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, COLD_COIL_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MOVEMENT_SPEED, 0.012, COLD_COIL_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 5.0, COLD_COIL_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 7.5, COLD_COIL_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 7.5, COLD_COIL_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 8, COLD_COIL_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 6.0, COLD_COIL_UUID);
             }
         }
@@ -152,8 +152,8 @@ public class ColdCoil {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7.5 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+5 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+8 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+7.5 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
             tooltip.add(Component.literal("+12% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));
@@ -170,9 +170,9 @@ public class ColdCoil {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, COLD_COIL_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MOVEMENT_SPEED, 0.015, COLD_COIL_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 15.0, COLD_COIL_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 12, COLD_COIL_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), 0.05, COLD_COIL_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 13.0, COLD_COIL_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 15, COLD_COIL_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), 0.08, COLD_COIL_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 9.0, COLD_COIL_UUID);
             }
         }
@@ -206,9 +206,9 @@ public class ColdCoil {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+9 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+12 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+15 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+5% Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+15 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+13 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+8% Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
             tooltip.add(Component.literal("+15% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));
@@ -224,10 +224,10 @@ public class ColdCoil {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, COLD_COIL_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), 0.05, COLD_COIL_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 20.0, COLD_COIL_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 15, COLD_COIL_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 0.05, COLD_COIL_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), 0.08, COLD_COIL_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 16.0, COLD_COIL_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 21, COLD_COIL_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 0.08, COLD_COIL_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MOVEMENT_SPEED, 0.015, COLD_COIL_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 13.0, COLD_COIL_UUID);
             }
@@ -265,10 +265,10 @@ public class ColdCoil {
             tooltip.add(Component.literal("+13 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+15 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+20 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+5% Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
-            tooltip.add(Component.literal("+5% Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+21 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+16 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+8% Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+8% Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
 
             tooltip.add(Component.literal("+15% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
 

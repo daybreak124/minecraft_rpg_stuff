@@ -66,7 +66,7 @@ public class EndlessWaves {
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 1.0, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 2.0, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 2.0, ENDLESS_WAVES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 5.0, ENDLESS_WAVES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 7.0, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 5.0, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MOVEMENT_SPEED, 0.0075, ENDLESS_WAVES_UUID);
             }
@@ -104,7 +104,7 @@ public class EndlessWaves {
             tooltip.add(Component.literal("+1 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7 Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+5 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal("+7.5% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
@@ -124,7 +124,7 @@ public class EndlessWaves {
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 3.0, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 5.0, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 4.0, ENDLESS_WAVES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 6.75, ENDLESS_WAVES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 9.0, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 7.5, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MOVEMENT_SPEED, 0.01, ENDLESS_WAVES_UUID);
             }
@@ -163,7 +163,7 @@ public class EndlessWaves {
             tooltip.add(Component.literal("+3 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+5 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6.75 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+9 Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+7.5 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal("+10% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
@@ -183,9 +183,9 @@ public class EndlessWaves {
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 5.0, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 9.0, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 5.0, ENDLESS_WAVES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 7.5, ENDLESS_WAVES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 14.0, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 11, ENDLESS_WAVES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 0.08, ENDLESS_WAVES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 0.1, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MOVEMENT_SPEED, 0.01, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), 0.05, ENDLESS_WAVES_UUID);
             }
@@ -225,8 +225,8 @@ public class EndlessWaves {
             tooltip.add(Component.literal("+5 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+9 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7.5 Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+8% Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+14 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+10% Haste").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal("+11 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal("+5% Restoration").withStyle(style -> style.withColor(0x3B8132)));
             tooltip.add(Component.literal("+10% Speed").withStyle(style -> style.withColor(0xD6C97A)));
@@ -247,11 +247,11 @@ public class EndlessWaves {
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 8.0, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 12, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 8.0, ENDLESS_WAVES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 12.5, ENDLESS_WAVES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 18.0, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 15, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), 0.0175, ENDLESS_WAVES_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MOVEMENT_SPEED, 0.0125, ENDLESS_WAVES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), 0.1, ENDLESS_WAVES_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), 0.125, ENDLESS_WAVES_UUID);
             }
         }
 
@@ -289,10 +289,10 @@ public class EndlessWaves {
             tooltip.add(Component.literal("+8 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+12 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+12.5 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+18 Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+17.5% Haste").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal("+15 Restoration").withStyle(style -> style.withColor(0x5BB450)));
-            tooltip.add(Component.literal("+10% Restoration").withStyle(style -> style.withColor(0x3B8132)));
+            tooltip.add(Component.literal("+12.5% Restoration").withStyle(style -> style.withColor(0x3B8132)));
             tooltip.add(Component.literal("+12.5% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Tsunami Sea").withStyle(ChatFormatting.AQUA));

@@ -63,10 +63,10 @@ public class KeyOfTheUnknown {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 3.0, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 5.0, KEY_UNKNOWN_UUID);
                 AttributeApplier.applyModifier(player, Attributes.KNOCKBACK_RESISTANCE, 0.05, KEY_UNKNOWN_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR, 2.0, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 3.0, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 6.0, KEY_UNKNOWN_UUID);
             }
         }
 
@@ -96,11 +96,11 @@ public class KeyOfTheUnknown {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+5 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+5% Knockback Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+3 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+6 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }
@@ -115,10 +115,10 @@ public class KeyOfTheUnknown {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 6.0, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 8.0, KEY_UNKNOWN_UUID);
                 AttributeApplier.applyModifier(player, Attributes.KNOCKBACK_RESISTANCE, 0.10, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 3.0, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 5.0, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 4.0, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 9.0, KEY_UNKNOWN_UUID);
             }
         }
 
@@ -148,11 +148,11 @@ public class KeyOfTheUnknown {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+6 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+4 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+10% Knockback Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+5 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+9 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }
@@ -169,11 +169,11 @@ public class KeyOfTheUnknown {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, KEY_UNKNOWN_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 8.0, KEY_UNKNOWN_UUID);
                 AttributeApplier.applyModifier(player, Attributes.KNOCKBACK_RESISTANCE, 0.15, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 4.0, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 3.0, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.0375, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 5.0, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 6.0, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.1, KEY_UNKNOWN_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 5.0, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 7.5, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 12, KEY_UNKNOWN_UUID);
             }
         }
 
@@ -207,13 +207,13 @@ public class KeyOfTheUnknown {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+8 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+5 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+15% Knockback Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+5% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+3.75% Armor").withStyle(style -> style.withColor(0x0F52BA)));
-            tooltip.add(Component.literal("+7.5 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+10% Armor").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+12 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }
@@ -228,13 +228,13 @@ public class KeyOfTheUnknown {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 10.0, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 11.0, KEY_UNKNOWN_UUID);
                 AttributeApplier.applyModifier(player, Attributes.KNOCKBACK_RESISTANCE, 0.15, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 5.0, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.075, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 6.0, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 7.0, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.18, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 8.0, KEY_UNKNOWN_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 12.0, KEY_UNKNOWN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 10, KEY_UNKNOWN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 15, KEY_UNKNOWN_UUID);
             }
         }
 
@@ -267,14 +267,14 @@ public class KeyOfTheUnknown {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+10 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+11 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+7 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+15% Knockback Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+12% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+7.5% Armor").withStyle(style -> style.withColor(0x0F52BA)));
-            tooltip.add(Component.literal("+10 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+18% Armor").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+15 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }

@@ -39,7 +39,6 @@ public class DeathFromAboveSkill {
         if (!(event.getEntity() instanceof Player player)) return;
         if (!(DFASync.DFAClientData.DFAEligible)) return;
         if (!player.hasEffect(ModEffects.DEATH_FROM_ABOVE.get())) return;
-        if (player.hasEffect(ModEffects.QUANTUM_LEAP_READY.get()) && player.isShiftKeyDown()) return;
         if (player.isInWater()) return;
 
         Level level = player.level();
@@ -58,7 +57,7 @@ public class DeathFromAboveSkill {
 
         double jumpBoost = 1.1;
 
-        if (player.isShiftKeyDown()) {
+        if (player.isCrouching()) {
             player.getPersistentData().putFloat("dfaFallDamage", 6.25f);
         } else {
             player.setDeltaMovement(motionX, jumpBoost, motionZ);

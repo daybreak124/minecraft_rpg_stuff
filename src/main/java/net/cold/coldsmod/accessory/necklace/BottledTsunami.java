@@ -64,7 +64,7 @@ public class BottledTsunami {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, BOTTLED_TSUNAMI_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 4.0, BOTTLED_TSUNAMI_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 6.0, BOTTLED_TSUNAMI_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), 0.10, BOTTLED_TSUNAMI_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 0.75, BOTTLED_TSUNAMI_UUID);
             }
@@ -96,7 +96,7 @@ public class BottledTsunami {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal("+0.75 Max Health").withStyle(ChatFormatting.BLUE));
@@ -116,7 +116,7 @@ public class BottledTsunami {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, BOTTLED_TSUNAMI_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 7.0, BOTTLED_TSUNAMI_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 9.0, BOTTLED_TSUNAMI_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), 0.20, BOTTLED_TSUNAMI_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 2.0, BOTTLED_TSUNAMI_UUID);
             }
@@ -148,7 +148,7 @@ public class BottledTsunami {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+7 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+9 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal("+2 Max Health").withStyle(ChatFormatting.BLUE));
@@ -168,9 +168,9 @@ public class BottledTsunami {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, BOTTLED_TSUNAMI_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 11.0, BOTTLED_TSUNAMI_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 13.0, BOTTLED_TSUNAMI_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), 0.30, BOTTLED_TSUNAMI_UUID);
-                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 3.0, BOTTLED_TSUNAMI_UUID);
+                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 3.5, BOTTLED_TSUNAMI_UUID);
             }
         }
 
@@ -200,10 +200,10 @@ public class BottledTsunami {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+11 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+13 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+3 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+3.5 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+30% Swim Speed").withStyle(style -> style.withColor(0x00AEEF)));
 
             tooltip.add(Component.literal(""));
@@ -220,9 +220,9 @@ public class BottledTsunami {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, BOTTLED_TSUNAMI_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 15.0, BOTTLED_TSUNAMI_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 17.0, BOTTLED_TSUNAMI_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), 0.40, BOTTLED_TSUNAMI_UUID);
-                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 4.0, BOTTLED_TSUNAMI_UUID);
+                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 5.0, BOTTLED_TSUNAMI_UUID);
             }
         }
 
@@ -252,10 +252,10 @@ public class BottledTsunami {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+15 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+17 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+4 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+5 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+40% Swim Speed").withStyle(style -> style.withColor(0x00AEEF)));
 
             tooltip.add(Component.literal(""));

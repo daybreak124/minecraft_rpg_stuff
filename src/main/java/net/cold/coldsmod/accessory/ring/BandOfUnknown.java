@@ -62,10 +62,10 @@ public class BandOfUnknown {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, UNKNOWN_BAND_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 4.0, UNKNOWN_BAND_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 4.0, UNKNOWN_BAND_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 2.0, UNKNOWN_BAND_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 2.0, UNKNOWN_BAND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 5.0, UNKNOWN_BAND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 5.0, UNKNOWN_BAND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 3.0, UNKNOWN_BAND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 3.0, UNKNOWN_BAND_UUID);
             }
         }
 
@@ -96,10 +96,10 @@ public class BandOfUnknown {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+4 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+5 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+5 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal(""));
@@ -116,10 +116,10 @@ public class BandOfUnknown {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, UNKNOWN_BAND_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 7.0, UNKNOWN_BAND_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 7.0, UNKNOWN_BAND_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 3.0, UNKNOWN_BAND_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 3.0, UNKNOWN_BAND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 8.0, UNKNOWN_BAND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.WISDOM.get(), 8.0, UNKNOWN_BAND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 4.0, UNKNOWN_BAND_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 4.0, UNKNOWN_BAND_UUID);
             }
         }
 
@@ -150,10 +150,10 @@ public class BandOfUnknown {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+7 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal(""));

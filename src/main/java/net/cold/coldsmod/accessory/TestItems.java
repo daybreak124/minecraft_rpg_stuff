@@ -221,7 +221,7 @@ public class TestItems {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+100 to +125 to all stats.").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal("+100% to all stats").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal("Except resto and ampl cos im lazy").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("Except heal stats cos im lazy").withStyle(ChatFormatting.GRAY));
         }
     }
 
@@ -402,7 +402,7 @@ public class TestItems {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+50 Wisdom").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal("+60 Wisdom").withStyle(ChatFormatting.GOLD));
         }
     }
 
@@ -412,7 +412,7 @@ public class TestItems {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 50.0, INS_ITEM_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 40.0, INS_ITEM_UUID);
             }
         }
 
@@ -432,7 +432,7 @@ public class TestItems {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+50 Insight").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal("+40 Insight").withStyle(ChatFormatting.GOLD));
         }
     }
 
@@ -470,7 +470,6 @@ public class TestItems {
             tooltip.add(Component.literal("+10 Armor Toughness").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal("+10% Armor Multiplier").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal("+10% Toughness Multiplier").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal("Equip if the game is unbalanced").withStyle(ChatFormatting.GRAY));
         }
     }
 
@@ -508,7 +507,6 @@ public class TestItems {
             tooltip.add(Component.literal("+20 Armor Toughness").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal("+20% Armor Multiplier").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal("+20% Toughness Multiplier").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal("Equip if the game is too unbalanced").withStyle(ChatFormatting.GRAY));
         }
     }
 
@@ -546,8 +544,6 @@ public class TestItems {
             tooltip.add(Component.literal("+30 Armor Toughness").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal("+30% Armor Multiplier").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal("+30% Toughness Multiplier").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal(""));
-            tooltip.add(Component.literal("Equip if the game is way too unbalanced").withStyle(ChatFormatting.GRAY));
         }
     }
 

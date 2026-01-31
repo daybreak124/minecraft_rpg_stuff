@@ -64,9 +64,9 @@ public class ThieveryWraps {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), -0.06, THIEVERY_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 11.0, THIEVERY_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 11.0, THIEVERY_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 11.0, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 13.0, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 13.0, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 13.0, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, THIEVERY_UUID);
             }
         }
@@ -98,7 +98,7 @@ public class ThieveryWraps {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+11 Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+13 Precision").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("-6% Haste").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
@@ -114,9 +114,9 @@ public class ThieveryWraps {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE_MULTIPLIER.get(), -0.1, THIEVERY_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 16.0, THIEVERY_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 16.0, THIEVERY_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 16.0, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 19.0, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 19.0, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 19.0, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.0, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, THIEVERY_UUID);
             }
@@ -151,7 +151,7 @@ public class ThieveryWraps {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+16 Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+19 Precision").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("-10% Haste").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
@@ -171,7 +171,7 @@ public class ThieveryWraps {
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 22.0, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 22.0, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 2.0, THIEVERY_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.09, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.135, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, THIEVERY_UUID);
             }
         }
@@ -207,7 +207,7 @@ public class ThieveryWraps {
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+22 Precision").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+9% Melee Potency").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+13.5% Melee Potency").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal("-15% Haste").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
@@ -226,7 +226,7 @@ public class ThieveryWraps {
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 27.5, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 27.5, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 27.5, THIEVERY_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.15, THIEVERY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.2, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 2.5, THIEVERY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, THIEVERY_UUID);
             }
@@ -263,7 +263,7 @@ public class ThieveryWraps {
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2.5 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+27.5 Precision").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+15% Melee Potency").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+20% Melee Potency").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal("-15% Haste").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));

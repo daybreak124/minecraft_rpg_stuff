@@ -64,7 +64,7 @@ public class DragonRoar {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 2.0, DRAGONS_ROAR_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, DRAGONS_ROAR_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 4.0, DRAGONS_ROAR_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 5.0, DRAGONS_ROAR_UUID);
             }
         }
 
@@ -94,7 +94,7 @@ public class DragonRoar {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+2 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+5 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
         }
@@ -110,7 +110,7 @@ public class DragonRoar {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 4.0, DRAGONS_ROAR_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, DRAGONS_ROAR_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 6.75, DRAGONS_ROAR_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 8, DRAGONS_ROAR_UUID);
             }
         }
 
@@ -140,7 +140,7 @@ public class DragonRoar {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+4 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6.75 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+7.5 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
         }
@@ -156,6 +156,7 @@ public class DragonRoar {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 6.0, DRAGONS_ROAR_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, DRAGONS_ROAR_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 5.0, DRAGONS_ROAR_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.2, DRAGONS_ROAR_UUID);
             }
         }
@@ -186,6 +187,7 @@ public class DragonRoar {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+6 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+5 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+20% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -202,7 +204,8 @@ public class DragonRoar {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 8.0, DRAGONS_ROAR_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, DRAGONS_ROAR_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.27, DRAGONS_ROAR_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 9.0, DRAGONS_ROAR_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.3, DRAGONS_ROAR_UUID);
             }
         }
 
@@ -232,7 +235,8 @@ public class DragonRoar {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+27% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+9 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+30% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
         }

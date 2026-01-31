@@ -160,13 +160,16 @@ public class StatGeneration {
 
         for (String stat : chosen) {
             double[] data = config.get(stat);
-            double min = data[0];
-            double max = data[1];
+            double weight = rarity.getWeight(itemType);
+            double penaltyReduction = weight * weight;
 
-            double scaledMin = min < 0 ? min * ((5 - rarity.getAttributeBias(itemType)) / 5.0) : min;
-            double roll = rand.nextDouble() * (max - scaledMin) + scaledMin;
+            double rangeMin = (data[0] < 0) ? (data[0] / penaltyReduction) : (data[0] * weight);
+            double rangeMax = (data[1] < 0) ? (data[1] / penaltyReduction) : (data[1] * weight);
 
-            double value = roll >= 0 ? roll * rarity.getWeight(itemType) : roll / rarity.getWeight(itemType);
+            double finalMin = Math.min(rangeMin, rangeMax);
+            double finalMax = Math.max(rangeMin, rangeMax);
+
+            double value = finalMin + (rand.nextDouble() * (finalMax - finalMin));
 
             if (stat.equals("damage")) {
                 String[] dmgTypes = {"damage", "meleeDamage", "projectileDamage"};

@@ -64,7 +64,7 @@ public class ReinforcedSteel {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 4.0, REINFORCED_STEEL_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR, 1.25, REINFORCED_STEEL_UUID);
-                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 0.25, REINFORCED_STEEL_UUID);
+                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 0.5, REINFORCED_STEEL_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, REINFORCED_STEEL_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 5.0, REINFORCED_STEEL_UUID);
             }
@@ -98,7 +98,7 @@ public class ReinforcedSteel {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1.25 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+0.25 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+0.5 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+4 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+5 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
@@ -116,7 +116,7 @@ public class ReinforcedSteel {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 7.5, REINFORCED_STEEL_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR, 2.0, REINFORCED_STEEL_UUID);
-                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 0.6, REINFORCED_STEEL_UUID);
+                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.0, REINFORCED_STEEL_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, REINFORCED_STEEL_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 7.0, REINFORCED_STEEL_UUID);
             }
@@ -150,7 +150,7 @@ public class ReinforcedSteel {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+0.6 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+7.5 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+7 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
@@ -168,8 +168,8 @@ public class ReinforcedSteel {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 12.0, REINFORCED_STEEL_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR, 3.5, REINFORCED_STEEL_UUID);
-                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.0, REINFORCED_STEEL_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY_MULTIPLIER.get(), 0.06, REINFORCED_STEEL_UUID);
+                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.5, REINFORCED_STEEL_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY_MULTIPLIER.get(), 0.08, REINFORCED_STEEL_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, REINFORCED_STEEL_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 10.0, REINFORCED_STEEL_UUID);
             }
@@ -204,9 +204,9 @@ public class ReinforcedSteel {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3.5 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1.5 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+12 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+6% Accuracy").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+8% Accuracy").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal("+10 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));
@@ -223,8 +223,8 @@ public class ReinforcedSteel {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 16.0, REINFORCED_STEEL_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR, 3.5, REINFORCED_STEEL_UUID);
-                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.5, REINFORCED_STEEL_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY_MULTIPLIER.get(), 0.12, REINFORCED_STEEL_UUID);
+                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 2.0, REINFORCED_STEEL_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY_MULTIPLIER.get(), 0.15, REINFORCED_STEEL_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, REINFORCED_STEEL_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.REJUVENATION.get(), 12.0, REINFORCED_STEEL_UUID);
             }
@@ -259,9 +259,9 @@ public class ReinforcedSteel {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3.5 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+1.5 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+2 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+16 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+12% Accuracy").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+15% Accuracy").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal("+12 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));

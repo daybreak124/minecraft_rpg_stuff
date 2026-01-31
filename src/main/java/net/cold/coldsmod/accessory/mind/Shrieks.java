@@ -64,7 +64,7 @@ public class Shrieks {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 8.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, SHRIEKS_UNSEEING_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 2.0, SHRIEKS_UNSEEING_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 3.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -3.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), -15.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 5.0, SHRIEKS_UNSEEING_UUID);
@@ -101,7 +101,7 @@ public class Shrieks {
             tooltip.add(Component.literal("+8 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+3 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+5% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("-15 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
@@ -119,7 +119,7 @@ public class Shrieks {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 12.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, SHRIEKS_UNSEEING_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 4.0, SHRIEKS_UNSEEING_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 5.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -3.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), -15.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 7.5, SHRIEKS_UNSEEING_UUID);
@@ -156,7 +156,7 @@ public class Shrieks {
             tooltip.add(Component.literal("+12 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+5 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+7.5% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("-15 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
@@ -174,8 +174,8 @@ public class Shrieks {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 15.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, SHRIEKS_UNSEEING_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 6.0, SHRIEKS_UNSEEING_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.05, SHRIEKS_UNSEEING_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 8.0, SHRIEKS_UNSEEING_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.075, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -3.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), -15.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 10.0, SHRIEKS_UNSEEING_UUID);
@@ -213,9 +213,9 @@ public class Shrieks {
             tooltip.add(Component.literal("+15 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+8 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+10% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+5% Armor").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+7.5% Armor").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal("-15 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
@@ -232,8 +232,8 @@ public class Shrieks {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 21.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, SHRIEKS_UNSEEING_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, 8.0, SHRIEKS_UNSEEING_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.1, SHRIEKS_UNSEEING_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR, 10.0, SHRIEKS_UNSEEING_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.ARMOR_MULTIPLIER.get(), 0.15, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -3.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), -15.0, SHRIEKS_UNSEEING_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 12.5, SHRIEKS_UNSEEING_UUID);
@@ -271,9 +271,9 @@ public class Shrieks {
             tooltip.add(Component.literal("+21 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+8 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+10 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+12.5% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+10% Armor").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+15% Armor").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal("-15 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));

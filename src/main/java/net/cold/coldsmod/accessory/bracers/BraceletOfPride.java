@@ -61,9 +61,9 @@ public class BraceletOfPride {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 3.0, BRACELET_PRIDE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 2.0, BRACELET_PRIDE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 2.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 4.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 4.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 4.0, BRACELET_PRIDE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, BRACELET_PRIDE_UUID);
             }
         }
@@ -93,9 +93,9 @@ public class BraceletOfPride {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+3 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
@@ -110,9 +110,9 @@ public class BraceletOfPride {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 5.0, BRACELET_PRIDE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 3.0, BRACELET_PRIDE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 3.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 8.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 4.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 4.0, BRACELET_PRIDE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, BRACELET_PRIDE_UUID);
             }
         }
@@ -142,9 +142,9 @@ public class BraceletOfPride {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+5 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
@@ -159,10 +159,10 @@ public class BraceletOfPride {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 7.0, BRACELET_PRIDE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 4.0, BRACELET_PRIDE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 4.0, BRACELET_PRIDE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 3.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 8.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 5.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 5.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 4.0, BRACELET_PRIDE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, BRACELET_PRIDE_UUID);
             }
         }
@@ -193,10 +193,10 @@ public class BraceletOfPride {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+7 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+5 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+5 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
@@ -211,10 +211,10 @@ public class BraceletOfPride {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 9.0, BRACELET_PRIDE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 6.0, BRACELET_PRIDE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 6.0, BRACELET_PRIDE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 5.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 10.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 7.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 7.0, BRACELET_PRIDE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 6.0, BRACELET_PRIDE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, BRACELET_PRIDE_UUID);
             }
         }
@@ -245,10 +245,10 @@ public class BraceletOfPride {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+9 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+10 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+7 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+7 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));

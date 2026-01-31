@@ -171,7 +171,7 @@ public class DragonEyeEmbeddedRing {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 8.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 4.0, DRAGON_EYE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 6.0, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 16, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 9, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.06, DRAGON_EYE_UUID);
@@ -208,7 +208,7 @@ public class DragonEyeEmbeddedRing {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
             tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal("+16 Melee Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
@@ -231,8 +231,8 @@ public class DragonEyeEmbeddedRing {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 9.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 6.0, DRAGON_EYE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 10.0, DRAGON_EYE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 10.0, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 20, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 12.5, DRAGON_EYE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.12, DRAGON_EYE_UUID);
@@ -268,8 +268,8 @@ public class DragonEyeEmbeddedRing {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+9 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+10 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+10 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal("+20 Melee Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));

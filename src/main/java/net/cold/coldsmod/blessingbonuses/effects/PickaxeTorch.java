@@ -17,12 +17,12 @@ public class PickaxeTorch {
 
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        Player player = event.getEntity();
-        Level world = event.getLevel();
         if (event.getLevel().isClientSide()) return;
         if (event.getEntity().level().isClientSide()) return;
-        ItemStack stack = event.getItemStack();
+        Player player = event.getEntity();
+        Level world = event.getLevel();
         if (!player.getPersistentData().getBoolean("lightbringer_applied")) return;
+        if (player.isCrouching()) return;
         if (player.getHealth() <= 3f) return;
 
         BlockPos clickedPos = event.getPos();
@@ -43,16 +43,28 @@ public class PickaxeTorch {
         boolean isShield = "shield".equals(ItemRarityUtils.getItemType(main)) ||
                 "shield".equals(ItemRarityUtils.getItemType(off));
 
+        ItemStack stack = event.getItemStack();
+
         if ((!(stack.getItem() instanceof PickaxeItem)) || isShield) return;
 
         var pos = event.getPos().relative(event.getFace());
-        if (world.getBlockState(pos).canBeReplaced() && Blocks.TORCH.canSurvive(Blocks.TORCH.defaultBlockState(), world, pos)) {
-            world.setBlockAndUpdate(pos, Blocks.TORCH.defaultBlockState());
+        BlockState torchState;
+
+        if (event.getFace() == net.minecraft.core.Direction.UP) {
+            torchState = Blocks.TORCH.defaultBlockState();
+        } else if (event.getFace() == net.minecraft.core.Direction.DOWN) {
+            return;
+        } else {
+            torchState = Blocks.WALL_TORCH.defaultBlockState()
+                    .setValue(net.minecraft.world.level.block.WallTorchBlock.FACING, event.getFace());
+        }
+
+        if (world.getBlockState(pos).canBeReplaced() && torchState.canSurvive(world, pos)) {
+            world.setBlockAndUpdate(pos, torchState);
 
             player.hurt(player.damageSources().magic(), 3f);
 
-            world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                    SoundEvents.WOOD_PLACE, player.getSoundSource(), 1.0f, 1.0f);
+            world.playSound(null, pos, SoundEvents.WOOD_PLACE, player.getSoundSource(), 1.0f, 1.0f);
 
             player.swing(event.getHand(), true);
             event.setCanceled(true);

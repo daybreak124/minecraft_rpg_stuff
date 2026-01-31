@@ -109,7 +109,7 @@ public class Tear {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, TEAR_FORGOTTEN_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 6.0, TEAR_FORGOTTEN_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 7.0, TEAR_FORGOTTEN_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 5.0, TEAR_FORGOTTEN_UUID);
             }
         }
@@ -140,7 +140,7 @@ public class Tear {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+5 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+7 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));
         }
@@ -155,10 +155,10 @@ public class Tear {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, TEAR_FORGOTTEN_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 8.0, TEAR_FORGOTTEN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 2.0, TEAR_FORGOTTEN_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 9.0, TEAR_FORGOTTEN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 3.0, TEAR_FORGOTTEN_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 5.0, TEAR_FORGOTTEN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.05, TEAR_FORGOTTEN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.1, TEAR_FORGOTTEN_UUID);
             }
         }
 
@@ -189,10 +189,10 @@ public class Tear {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+5 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+8 Toughness").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+5% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+9 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+10% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));
         }
@@ -207,11 +207,11 @@ public class Tear {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, TEAR_FORGOTTEN_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 10.0, TEAR_FORGOTTEN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 5.0, TEAR_FORGOTTEN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 5.0, TEAR_FORGOTTEN_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 11.0, TEAR_FORGOTTEN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 6.0, TEAR_FORGOTTEN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 6.0, TEAR_FORGOTTEN_UUID);
                 AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 4.0, TEAR_FORGOTTEN_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.075, TEAR_FORGOTTEN_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.15, TEAR_FORGOTTEN_UUID);
                 AttributeApplier.applyModifier(player, Attributes.KNOCKBACK_RESISTANCE, 0.15, TEAR_FORGOTTEN_UUID); // 15 stats = 0.15 attribute
             }
         }
@@ -244,13 +244,13 @@ public class Tear {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+5 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+10 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+11 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+4 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+15% Knockback Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+7.5% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+15% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));
         }

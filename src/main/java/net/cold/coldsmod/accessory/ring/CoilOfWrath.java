@@ -63,10 +63,10 @@ public class CoilOfWrath {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 4.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 6.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 6.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 6.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 7.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 8.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 8.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 8.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), -3.0, COIL_OF_WRATH_UUID);
             }
         }
@@ -98,10 +98,10 @@ public class CoilOfWrath {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+4 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+7 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+8 Precision").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -116,10 +116,10 @@ public class CoilOfWrath {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 7.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 12.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 12.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 12.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 10.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 14.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 14.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 14.0, COIL_OF_WRATH_UUID);
 
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), -3.0, COIL_OF_WRATH_UUID);
             }
@@ -152,10 +152,10 @@ public class CoilOfWrath {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+7 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+10 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+12 Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+14 Precision").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -170,13 +170,13 @@ public class CoilOfWrath {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 8.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 12.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 20.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 20.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 20.0, COIL_OF_WRATH_UUID);
 
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), -3.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 4, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 7, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 4.5, COIL_OF_WRATH_UUID);
             }
         }
@@ -210,10 +210,10 @@ public class CoilOfWrath {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+8 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+12 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7 Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+4.5 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+20 Precision").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
@@ -230,14 +230,14 @@ public class CoilOfWrath {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 12.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 14.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 24.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 24.0, COIL_OF_WRATH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 24.0, COIL_OF_WRATH_UUID);
 
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), -3.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 9.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 9.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 12.0, COIL_OF_WRATH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 10.0, COIL_OF_WRATH_UUID);
             }
         }
 
@@ -270,11 +270,11 @@ public class CoilOfWrath {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+12 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+14 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+9 Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+9 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+12 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+10 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+24 Precision").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));

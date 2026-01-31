@@ -72,7 +72,7 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 1.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR, 1.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 1.0, GLUTTONY_UUID);
-                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 0.5, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 2.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 2.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 2.0, GLUTTONY_UUID);
@@ -129,7 +129,7 @@ public class GluttonySignet {
             tooltip.add(Component.literal("+1 Attributes").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+1 Toughness").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+0.5 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("-20% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+2 Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+2 Haste").withStyle(style -> style.withColor(0xE0701B)));
@@ -159,7 +159,7 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 2.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR, 1.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 1.5, GLUTTONY_UUID);
-                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.0, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 2.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 2.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 2.5, GLUTTONY_UUID);
@@ -216,7 +216,7 @@ public class GluttonySignet {
             tooltip.add(Component.literal("+2 Attributes").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1.5 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+1.5 Toughness").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1.5 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("-20% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+2.5 Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+2.5 Haste").withStyle(style -> style.withColor(0xE0701B)));
@@ -247,6 +247,7 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 3.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR, 2.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 2.0, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 2.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 3.25, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 3.25, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 3.25, GLUTTONY_UUID);
@@ -288,6 +289,7 @@ public class GluttonySignet {
                 AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, Attributes.ARMOR, GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, Attributes.ARMOR_TOUGHNESS, GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.NOCK_HASTE.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.POTENCY.get(), GLUTTONY_UUID);
@@ -324,6 +326,7 @@ public class GluttonySignet {
 
             tooltip.add(Component.literal("+2 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+2 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+2 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("-20% Debuff Resist").withStyle(ChatFormatting.BLUE));
 
             tooltip.add(Component.literal("+2% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
@@ -367,6 +370,7 @@ public class GluttonySignet {
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 4.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR, 2.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 2.5, GLUTTONY_UUID);
+                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 2.5, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.POTENCY.get(), 4.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 4.0, GLUTTONY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 4.0, GLUTTONY_UUID);
@@ -407,6 +411,7 @@ public class GluttonySignet {
                 AttributeApplier.removeModifier(player, ModAttributes.DEBUFF_RESIST.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, Attributes.ARMOR, GLUTTONY_UUID);
+                AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, Attributes.ARMOR_TOUGHNESS, GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.POTENCY.get(), GLUTTONY_UUID);
                 AttributeApplier.removeModifier(player, ModAttributes.HASTE.get(), GLUTTONY_UUID);
@@ -442,6 +447,7 @@ public class GluttonySignet {
 
             tooltip.add(Component.literal("+2.5 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+2.5 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+2.5 Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("-20% Debuff Resist").withStyle(ChatFormatting.BLUE));
 
             tooltip.add(Component.literal("+4% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));

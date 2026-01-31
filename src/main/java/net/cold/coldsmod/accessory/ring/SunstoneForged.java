@@ -120,9 +120,9 @@ public class SunstoneForged {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, SUNSTONE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 3.0, SUNSTONE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 7.0, SUNSTONE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 12.0, SUNSTONE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 12.0, SUNSTONE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 12.0, SUNSTONE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 14.0, SUNSTONE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 14.0, SUNSTONE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 14.0, SUNSTONE_UUID);
             }
         }
 
@@ -158,7 +158,7 @@ public class SunstoneForged {
             tooltip.add(Component.literal("+7 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+12 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+14 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Sun's Cruelty").withStyle(ChatFormatting.YELLOW));

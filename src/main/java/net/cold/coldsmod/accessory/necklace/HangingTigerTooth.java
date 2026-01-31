@@ -62,8 +62,8 @@ public class HangingTigerTooth {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, TIGER_TOOTH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 4.0, TIGER_TOOTH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 3.0, TIGER_TOOTH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 6.0, TIGER_TOOTH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 4.5, TIGER_TOOTH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 3.0, TIGER_TOOTH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 2, TIGER_TOOTH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 5.0, TIGER_TOOTH_UUID);
@@ -97,11 +97,11 @@ public class HangingTigerTooth {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+4 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+5% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+2 Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+3 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+4.5 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+3 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Nature's Blessing").withStyle(ChatFormatting.GREEN));
@@ -117,8 +117,8 @@ public class HangingTigerTooth {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, TIGER_TOOTH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 6.0, TIGER_TOOTH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 4.5, TIGER_TOOTH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 9.0, TIGER_TOOTH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 7.0, TIGER_TOOTH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 5.0, TIGER_TOOTH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 3.5, TIGER_TOOTH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 7.5, TIGER_TOOTH_UUID);
@@ -152,11 +152,11 @@ public class HangingTigerTooth {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+9 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+7.5% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+3.5 Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+4.5 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+5 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Nature's Blessing").withStyle(ChatFormatting.GREEN));
@@ -172,12 +172,12 @@ public class HangingTigerTooth {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, TIGER_TOOTH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 9.0, TIGER_TOOTH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 7.5, TIGER_TOOTH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 12.0, TIGER_TOOTH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 10.0, TIGER_TOOTH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 7.5, TIGER_TOOTH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 6, TIGER_TOOTH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 10.0, TIGER_TOOTH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), 0.05, TIGER_TOOTH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), 0.1, TIGER_TOOTH_UUID);
             }
         }
 
@@ -209,13 +209,13 @@ public class HangingTigerTooth {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+9 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+12 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+10% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+6 Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+7.5 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+10 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+7.5 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+5% Nock Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+10% Nock Haste").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Nature's Blessing").withStyle(ChatFormatting.GREEN));
         }
@@ -230,12 +230,12 @@ public class HangingTigerTooth {
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, TIGER_TOOTH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 12.0, TIGER_TOOTH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 12.5, TIGER_TOOTH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 16.0, TIGER_TOOTH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 15.0, TIGER_TOOTH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE.get(), 13.5, TIGER_TOOTH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 10, TIGER_TOOTH_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 12.5, TIGER_TOOTH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), 0.10, TIGER_TOOTH_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.NOCK_HASTE_MULTIPLIER.get(), 0.18, TIGER_TOOTH_UUID);
             }
         }
 
@@ -267,13 +267,13 @@ public class HangingTigerTooth {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+12 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+16 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+12.5 Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+10 Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+12.5 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+15 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+13.5 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+10% Nock Haste ").withStyle(style -> style.withColor(0xec3700)));
+            tooltip.add(Component.literal("+18% Nock Haste ").withStyle(style -> style.withColor(0xec3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Nature's Blessing").withStyle(ChatFormatting.GREEN));
         }

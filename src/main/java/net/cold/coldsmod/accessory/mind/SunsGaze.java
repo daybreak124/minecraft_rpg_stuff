@@ -62,10 +62,10 @@ public class SunsGaze {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 1.0, SUNS_GAZE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 3.0, SUNS_GAZE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, SUNS_GAZE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 6.0, SUNS_GAZE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 4.0, SUNS_GAZE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 8.0, SUNS_GAZE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 5.0, SUNS_GAZE_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), -0.05, SUNS_GAZE_UUID);
             }
         }
@@ -96,10 +96,10 @@ public class SunsGaze {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+1 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+4 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+8 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+5 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("-5% Swim Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Sun's Cruelty").withStyle(ChatFormatting.YELLOW));
@@ -114,10 +114,10 @@ public class SunsGaze {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 3.0, SUNS_GAZE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 5.0, SUNS_GAZE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, SUNS_GAZE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 9.0, SUNS_GAZE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 6.0, SUNS_GAZE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 12.0, SUNS_GAZE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 7.5, SUNS_GAZE_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), -0.10, SUNS_GAZE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 5.0, SUNS_GAZE_UUID);
             }
@@ -150,11 +150,11 @@ public class SunsGaze {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+3 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+5 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+5% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+9 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+6 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+12 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7.5 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("-10% Swim Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Sun's Cruelty").withStyle(ChatFormatting.YELLOW));
@@ -169,12 +169,12 @@ public class SunsGaze {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 6.0, SUNS_GAZE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 9.0, SUNS_GAZE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, SUNS_GAZE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 12.0, SUNS_GAZE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 9.0, SUNS_GAZE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 15.0, SUNS_GAZE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 12.0, SUNS_GAZE_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), -0.15, SUNS_GAZE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.025, SUNS_GAZE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.08, SUNS_GAZE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 10.0, SUNS_GAZE_UUID);
             }
         }
@@ -207,12 +207,12 @@ public class SunsGaze {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+9 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+10% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+12 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+9 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+2.5% Melee Potency").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+15 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+12 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+8% Melee Potency").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal("-15% Swim Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Sun's Cruelty").withStyle(ChatFormatting.YELLOW));
@@ -227,10 +227,10 @@ public class SunsGaze {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 9.0, SUNS_GAZE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 13.0, SUNS_GAZE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, SUNS_GAZE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 16.0, SUNS_GAZE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 9.0, SUNS_GAZE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 20.0, SUNS_GAZE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 15.0, SUNS_GAZE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.125, SUNS_GAZE_UUID);
                 AttributeApplier.applyModifier(player, ForgeMod.SWIM_SPEED.get(), -0.20, SUNS_GAZE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEBUFF_RESIST.get(), 15.0, SUNS_GAZE_UUID);
@@ -265,11 +265,11 @@ public class SunsGaze {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+9 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+13 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+15% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+16 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+9 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+20 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+15 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+12.5% Melee Potency").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal("-20% Swim Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));

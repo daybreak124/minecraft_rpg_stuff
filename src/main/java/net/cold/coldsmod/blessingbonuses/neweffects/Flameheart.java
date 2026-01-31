@@ -24,7 +24,7 @@ public class Flameheart {
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         if (event.getPlayer().level().isClientSide) return;
         Player player = event.getPlayer();
-        if (player.isShiftKeyDown() || player.isCreative()) return;
+        if (player.isCrouching() || player.isCreative()) return;
         if (!player.getPersistentData().getBoolean("smelt_eligible")) return;
 
         BlockState state = event.getState();

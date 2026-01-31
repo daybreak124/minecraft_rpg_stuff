@@ -65,7 +65,7 @@ public class EnvyCollar {
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 3.0, COLLAR_ENVY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 4.0, COLLAR_ENVY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 4.0, COLLAR_ENVY_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 1.0, COLLAR_ENVY_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 2.0, COLLAR_ENVY_UUID);
             }
         }
 
@@ -100,7 +100,7 @@ public class EnvyCollar {
             tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+1 Armor Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+2 Armor Toughness").withStyle(ChatFormatting.BLUE));
 
             tooltip.add(Component.literal("+4 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
 
@@ -121,7 +121,7 @@ public class EnvyCollar {
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 3.0, COLLAR_ENVY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 6.0, COLLAR_ENVY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 4.0, COLLAR_ENVY_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 2.0, COLLAR_ENVY_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 3.0, COLLAR_ENVY_UUID);
             }
         }
 
@@ -156,7 +156,7 @@ public class EnvyCollar {
             tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+2 Armor Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+3 Armor Toughness").withStyle(ChatFormatting.BLUE));
 
             tooltip.add(Component.literal("+6 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
 
@@ -175,10 +175,10 @@ public class EnvyCollar {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, COLLAR_ENVY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 5.0, COLLAR_ENVY_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 9.0, COLLAR_ENVY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 12.0, COLLAR_ENVY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 4.0, COLLAR_ENVY_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 4.0, COLLAR_ENVY_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.05, COLLAR_ENVY_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 5.0, COLLAR_ENVY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.075, COLLAR_ENVY_UUID);
             }
         }
 
@@ -214,10 +214,10 @@ public class EnvyCollar {
             tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+4 Armor Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+5 Armor Toughness").withStyle(ChatFormatting.BLUE));
 
-            tooltip.add(Component.literal("+9 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+5% Melee Potency").withStyle(style -> style.withColor(0xec3700)));
+            tooltip.add(Component.literal("+12 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7.5% Melee Potency").withStyle(style -> style.withColor(0xec3700)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
@@ -234,10 +234,10 @@ public class EnvyCollar {
             if (slotContext.entity() instanceof Player player) {
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, COLLAR_ENVY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 6.0, COLLAR_ENVY_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 12.0, COLLAR_ENVY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 18.0, COLLAR_ENVY_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 6.0, COLLAR_ENVY_UUID);
-                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 6.0, COLLAR_ENVY_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.1, COLLAR_ENVY_UUID);
+                AttributeApplier.applyModifier(player, Attributes.ARMOR_TOUGHNESS, 7.5, COLLAR_ENVY_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.15, COLLAR_ENVY_UUID);
             }
         }
 
@@ -273,10 +273,10 @@ public class EnvyCollar {
             tooltip.add(Component.literal("+6 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+6 Armor Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+7.5 Armor Toughness").withStyle(ChatFormatting.BLUE));
 
-            tooltip.add(Component.literal("+12 Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+10% Potency").withStyle(style -> style.withColor(0xec3700)));
+            tooltip.add(Component.literal("+18 Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+15% Potency").withStyle(style -> style.withColor(0xec3700)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));

@@ -61,7 +61,7 @@ public class PendantOfSnowflake {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 6.0, SNOWFLAKE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 11.0, SNOWFLAKE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, SNOWFLAKE_UUID);
             }
         }
@@ -89,7 +89,7 @@ public class PendantOfSnowflake {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+11 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));
@@ -104,7 +104,7 @@ public class PendantOfSnowflake {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 10.0, SNOWFLAKE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 17.0, SNOWFLAKE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, SNOWFLAKE_UUID);
             }
         }
@@ -132,7 +132,7 @@ public class PendantOfSnowflake {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+10 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+17 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));
@@ -147,7 +147,7 @@ public class PendantOfSnowflake {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 16.0, SNOWFLAKE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 24.0, SNOWFLAKE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, SNOWFLAKE_UUID);
             }
         }
@@ -175,7 +175,7 @@ public class PendantOfSnowflake {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+16 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+24 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));
@@ -190,7 +190,7 @@ public class PendantOfSnowflake {
         @Override
         public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
             if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 24.0, SNOWFLAKE_UUID);
+                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 32.0, SNOWFLAKE_UUID);
                 AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, SNOWFLAKE_UUID);
             }
         }
@@ -218,7 +218,7 @@ public class PendantOfSnowflake {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+24 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+32 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));

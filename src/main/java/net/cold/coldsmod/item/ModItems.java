@@ -1082,11 +1082,10 @@ public class ModItems {
             tooltip.add(Component.literal(" invisible for 4 seconds. Gain").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" +30 Potency and +20% Movement").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Speed for 8 seconds until you.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" attack a target. Takes priority").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" over Death From Above.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" attack a target.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" If used 4 seconds within").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Death From Above; duration,").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Damage and Move Speed +50%.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Potency and Move Speed +50%.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Cancels fall damage.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Activate a 2nd time while the").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" effect is active to return to").withStyle(ChatFormatting.GRAY));
@@ -1932,6 +1931,7 @@ public class ModItems {
             tooltip.add(Component.literal(" Right clicking with a").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Pickaxe places a torch").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" but deals 3 Magic Damage.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Disabled while crouching.").withStyle(ChatFormatting.GRAY));
         }
     }
 
@@ -2778,8 +2778,7 @@ public class ModItems {
             tooltip.add(Component.literal(" automatically.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Loot is granted to").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" player's inventory.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Holding shift key").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" disables the effect.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Disabled while crouching.").withStyle(ChatFormatting.GRAY));
         }
     }
 
@@ -2825,8 +2824,7 @@ public class ModItems {
             tooltip.add(Component.literal(" automatically.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Loot is granted to").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" player's inventory.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Holding shift key").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" disables the effect.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Disabled while crouching.").withStyle(ChatFormatting.GRAY));
         }
     }
 
