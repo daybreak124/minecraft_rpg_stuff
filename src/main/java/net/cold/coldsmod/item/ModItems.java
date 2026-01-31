@@ -1081,7 +1081,6 @@ public class ModItems {
             tooltip.add(Component.literal(" If used 4 seconds within").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Death From Above; duration,").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Potency and Move Speed +50%.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Cancels fall damage.").withStyle(ChatFormatting.GRAY));
             Component keyName = ClientKeyInputHandler.quantumKey.getTranslatedKeyMessage();
 
             tooltip.add(Component.literal(" Activation: ").withStyle(ChatFormatting.GRAY)
