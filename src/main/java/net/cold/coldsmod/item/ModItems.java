@@ -586,7 +586,8 @@ public class ModItems {
             tooltip.add(Component.literal(" monsters within 8 blocks to ").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" you and stun them briefly.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" After 1s, explode and deal").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 12 Melee Damage.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" 12 Melee Damage and knock").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" them away.").withStyle(ChatFormatting.GRAY));
             Component keyName = ClientKeyInputHandler.intimidateKey.getTranslatedKeyMessage();
 
             tooltip.add(Component.literal(" Activation: ").withStyle(ChatFormatting.GRAY)
