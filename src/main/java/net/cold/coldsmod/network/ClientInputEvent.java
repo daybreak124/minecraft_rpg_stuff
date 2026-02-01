@@ -23,8 +23,7 @@ public class ClientInputEvent {
 
     public static void initializeKeys(RegisterKeyMappingsEvent event) {
         KEY_ACTIONS.put(ClientKeyInputHandler.quantumKey.getKey().getValue(), player -> {
-            if (player.hasEffect(ModEffects.QUANTUM_LEAP_READY.get()) ||
-                    player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())) {
+            if (player.hasEffect(ModEffects.QUANTUM_LEAP_READY.get())) {
                 NetworkHandler.CHANNEL.sendToServer(new QuantumLeapPacket());
             }
         });
@@ -47,11 +46,31 @@ public class ClientInputEvent {
                 NetworkHandler.CHANNEL.sendToServer(new DirectedHatredPacket());
             }
         });
+
+        KEY_ACTIONS.put(ClientKeyInputHandler.daringShoutKey.getKey().getValue(), player -> {
+            if (player.hasEffect(ModEffects.DARING_SHOUT.get())) {
+                NetworkHandler.CHANNEL.sendToServer(new DaringShoutPacket());
+            }
+        });
+
+        KEY_ACTIONS.put(ClientKeyInputHandler.intimidateKey.getKey().getValue(), player -> {
+            if (player.hasEffect(ModEffects.INTIMIDATING_PRESENCE.get())) {
+                NetworkHandler.CHANNEL.sendToServer(new IntimidatePacket());
+            }
+        });
+
+        KEY_ACTIONS.put(ClientKeyInputHandler.dfaKey.getKey().getValue(), player -> {
+            if (player.hasEffect(ModEffects.DEATH_FROM_ABOVE.get())) {
+                NetworkHandler.CHANNEL.sendToServer(new DFAPacket());
+            }
+        });
     }
 
     @SubscribeEvent
     public static void onKeyInput(InputEvent.Key event) {
         if (event.getAction() != GLFW.GLFW_PRESS) return;
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.screen != null) return;
 
         Player player = Minecraft.getInstance().player;
         if (player == null || KEY_ACTIONS.isEmpty()) return;

@@ -5,11 +5,6 @@
     "#forge:armors/chestplates",
     "#forge:armors/leggings",
     "#forge:armors/boots",
-    "#minecraft:helmets",
-    "#minecraft:chestplates",
-    "#minecraft:leggings",
-    "#minecraft:boots",
-    "#forge:armors",
-    "#c:armors"
+    "#forge:armors"
   ]
 }

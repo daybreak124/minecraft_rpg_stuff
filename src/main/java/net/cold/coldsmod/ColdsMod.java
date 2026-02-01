@@ -85,8 +85,6 @@ public class ColdsMod {
         ModEffects.EFFECTS.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(DeathFromAboveSkill.class);
         MinecraftForge.EVENT_BUS.register(IntoTheFraySkill.class);
-        MinecraftForge.EVENT_BUS.register(IntimidatingPresenceSkill.class);
-        MinecraftForge.EVENT_BUS.register(DaringShoutSkill.class);
         MinecraftForge.EVENT_BUS.register(ReckoningSkill.class);
         MinecraftForge.EVENT_BUS.register(BerserkAdditionalProcs.class);
         MinecraftForge.EVENT_BUS.register(ChainLightning.class);

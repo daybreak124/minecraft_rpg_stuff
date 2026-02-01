@@ -32,11 +32,11 @@ public class NetworkHandler {
 //                .consumerMainThread(SolaraSync.SolaraFlagPacket::handle)
 //                .add();
 
-        CHANNEL.messageBuilder(DFASync.DFAFlagPacket.class, nextId(), NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(DFASync.DFAFlagPacket::encode)
-                .decoder(DFASync.DFAFlagPacket::decode)
-                .consumerMainThread(DFASync.DFAFlagPacket::handle)
-                .add();
+//        CHANNEL.messageBuilder(DFASync.DFAFlagPacket.class, nextId(), NetworkDirection.PLAY_TO_CLIENT)
+//                .encoder(DFASync.DFAFlagPacket::encode)
+//                .decoder(DFASync.DFAFlagPacket::decode)
+//                .consumerMainThread(DFASync.DFAFlagPacket::handle)
+//                .add();
 
         // Quantum Leap packet
         CHANNEL.messageBuilder(QuantumLeapSync.QuantumLeapFlagPacket.class, nextId(), NetworkDirection.PLAY_TO_CLIENT)
@@ -53,7 +53,6 @@ public class NetworkHandler {
                 .consumerMainThread(QuantumLeapPacket::handle)
                 .add();
 
-        // Quantum leap recall
         CHANNEL.messageBuilder(CombatantsAidPacket.class, nextId(), NetworkDirection.PLAY_TO_SERVER)
                 .encoder(CombatantsAidPacket::encode)
                 .decoder(CombatantsAidPacket::decode)
@@ -76,6 +75,24 @@ public class NetworkHandler {
                 .decoder(CombatantsRecallPacket::decode)
                 .encoder(CombatantsRecallPacket::encode)
                 .consumerMainThread(CombatantsRecallPacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(DaringShoutPacket.class, nextId(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(DaringShoutPacket::decode)
+                .encoder(DaringShoutPacket::encode)
+                .consumerMainThread(DaringShoutPacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(IntimidatePacket.class, nextId(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(IntimidatePacket::decode)
+                .encoder(IntimidatePacket::encode)
+                .consumerMainThread(IntimidatePacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(DFAPacket.class, nextId(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(DFAPacket::decode)
+                .encoder(DFAPacket::encode)
+                .consumerMainThread(DFAPacket::handle)
                 .add();
     }
 

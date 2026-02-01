@@ -131,5 +131,8 @@
   "key.coldsmod.quantum_leap": "Quantum Leap Activate/Recall",
   "key.coldsmod.combatants_aid": "Combatant's Aid Dash Activate",
   "key.coldsmod.overconfidence": "Overconfidence Activate",
-  "key.coldsmod.directed_hatred": "Directed Hatred Activate"
+  "key.coldsmod.directed_hatred": "Directed Hatred Activate",
+  "key.coldsmod.daring_shout": "Daring Shout Activate",
+  "key.coldsmod.intimidate": "Intimidating Presence Activate",
+  "key.coldsmod.DFA": "Death From Above Activate"
 }

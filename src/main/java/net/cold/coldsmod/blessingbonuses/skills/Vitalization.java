@@ -38,7 +38,7 @@ public class Vitalization {
         if (!proj.getPersistentData().contains("ScaledDamage")) {
             double scaledPotency = getScaledValue(player, ModAttributes.PROJECTILE_POTENCY.get(), ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
 
-            double boosted = finalDamage * (1.0 + (scaledPotency / 100.0));
+            double boosted = 0.5 * finalDamage * (1.0 + (scaledPotency / 100.0));
             proj.getPersistentData().putDouble("ScaledDamage", boosted);
         }
 

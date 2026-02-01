@@ -73,7 +73,7 @@ public class ChainLightning {
             }
 
             originalTarget = next;
-            bounceDamage /= 2;
+            bounceDamage *= 0.35;
         }
     }
 }

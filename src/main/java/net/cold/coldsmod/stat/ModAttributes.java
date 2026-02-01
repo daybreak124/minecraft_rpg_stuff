@@ -124,6 +124,9 @@ public class ModAttributes {
     public static final RegistryObject<Attribute> REJUVENATION_MULTIPLIER = ATTRIBUTES.register("incoming_healing_multiplier",
             () -> new RangedAttribute("incoming_healing_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
 
+    public static final RegistryObject<Attribute> MELEE_DAMAGE_MULTIPLIER = ATTRIBUTES.register("melee_damage_multiplier",
+            () -> new RangedAttribute("melee_damage_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
+
 
     @SubscribeEvent
     public static void onModifyEntityAttributes(EntityAttributeModificationEvent event) {
@@ -181,6 +184,8 @@ public class ModAttributes {
 
         event.add(EntityType.PLAYER, ModAttributes.REJUVENATION_MULTIPLIER.get());
         event.add(EntityType.PLAYER, ModAttributes.REJUVENATION.get());
+
+        event.add(EntityType.PLAYER, ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
 
         for (EntityType<? extends LivingEntity> type : event.getTypes()) {
             event.add(type, ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());

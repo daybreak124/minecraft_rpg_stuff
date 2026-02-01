@@ -26,18 +26,14 @@ public class OverconfidencePacket {
             ServerPlayer player = context.getSender();
             if (player == null) return;
 
-            if (player.hasEffect(ModEffects.OVERCONFIDENCE_READY.get())) {
 
-                player.playNotifySound(
-                        SoundEvents.ENDER_DRAGON_GROWL, SoundSource.PLAYERS,
-                        0.3F, 1.0F);
+            player.playNotifySound(
+                    SoundEvents.ENDER_DRAGON_GROWL, SoundSource.PLAYERS,
+                    0.3F, 1.0F);
 
-                player.removeEffect(ModEffects.OVERCONFIDENCE_READY.get());
-
-                player.addEffect(new MobEffectInstance(ModEffects.BLACKENED_HEART.get(), 300, 0, false, false, true));
-
-                player.addEffect(new MobEffectInstance(ModEffects.OVERCONFIDENCE_ACTIVE.get(), 160, 0, false, false, true));
-            }
+            player.removeEffect(ModEffects.OVERCONFIDENCE_READY.get());
+            player.addEffect(new MobEffectInstance(ModEffects.BLACKENED_HEART.get(), 300, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(ModEffects.OVERCONFIDENCE_ACTIVE.get(), 160, 0, false, false, true));
         });
         return true;
     }

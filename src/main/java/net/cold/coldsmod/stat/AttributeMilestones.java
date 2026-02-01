@@ -25,9 +25,9 @@ public class AttributeMilestones {
     static {
         // --- STR ---
         register(ModAttributes.STR, 30, (p, id, add) -> {
-            applyBonus(p, id + "_gen", ModAttributes.POTENCY.get(), 7.5, add);
-            applyBonus(p, id + "_mel", ModAttributes.MELEE_POTENCY.get(), 7.5, add);
-            applyBonus(p, id + "_prj", ModAttributes.PROJECTILE_POTENCY.get(), 7.5, add);
+            applyBonus(p, id + "_gen", ModAttributes.POTENCY.get(), 6, add);
+            applyBonus(p, id + "_mel", ModAttributes.MELEE_POTENCY.get(), 6, add);
+            applyBonus(p, id + "_prj", ModAttributes.PROJECTILE_POTENCY.get(), 6, add);
         });
         register(ModAttributes.STR, 40, (p, id, add) -> applyBonus(p, id, Attributes.ARMOR, 5.0, add));
         register(ModAttributes.STR, 50, (p, id, add) -> applyBonus(p, id, ModAttributes.HASTE.get(), 8.0, add));
@@ -37,11 +37,11 @@ public class AttributeMilestones {
             applyBonus(p, id + "_prj", ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), 0.15, add);
         });
         register(ModAttributes.STR, 70, (p, id, add) -> {
-            applyBonus(p, id + "_gen", ModAttributes.POTENCY_MULTIPLIER.get(), 0.25, add);
-            applyBonus(p, id + "_mel", ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.25, add);
-            applyBonus(p, id + "_prj", ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.25, add);
+            applyBonus(p, id + "_gen", ModAttributes.POTENCY_MULTIPLIER.get(), 0.2, add);
+            applyBonus(p, id + "_mel", ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.2, add);
+            applyBonus(p, id + "_prj", ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.2, add);
         });
-        register(ModAttributes.STR, 80, (p, id, add) -> applyBonus(p, id, Attributes.ATTACK_DAMAGE, 2.0, add));
+        register(ModAttributes.STR, 80, (p, id, add) -> applyBonus(p, id, Attributes.ATTACK_DAMAGE, 1.0, add));
 
 
         // --- FORT ---
@@ -76,16 +76,16 @@ public class AttributeMilestones {
             applyBonus(p, id + "_pm", ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.15, add);
         });
         register(ModAttributes.DEX, 80, (p, id, add) -> {
-            applyBonus(p, id + "_dmg_gen", ModAttributes.POTENCY.get(), 9.0, add);
-            applyBonus(p, id + "_dmg_mel", ModAttributes.MELEE_POTENCY.get(), 9.0, add);
-            applyBonus(p, id + "_dmg_prj", ModAttributes.PROJECTILE_POTENCY.get(), 9.0, add);
-            applyBonus(p, id + "_nock", ModAttributes.NOCK_HASTE.get(), 9.0, add);
-            applyBonus(p, id + "_crit_gen", ModAttributes.ACCURACY.get(), 9.0, add);
-            applyBonus(p, id + "_crit_mel", ModAttributes.MELEE_ACCURACY.get(), 9.0, add);
-            applyBonus(p, id + "_crit_prj", ModAttributes.PROJECTILE_ACCURACY.get(), 9.0, add);
-            applyBonus(p, id + "_prec_gen", ModAttributes.PRECISION.get(), 9.0, add);
-            applyBonus(p, id + "_prec_mel", ModAttributes.MELEE_PRECISION.get(), 9.0, add);
-            applyBonus(p, id + "_prec_prj", ModAttributes.PROJECTILE_PRECISION.get(), 9.0, add);
+            applyBonus(p, id + "_dmg_gen", ModAttributes.POTENCY.get(), 6, add);
+            applyBonus(p, id + "_dmg_mel", ModAttributes.MELEE_POTENCY.get(), 6, add);
+            applyBonus(p, id + "_dmg_prj", ModAttributes.PROJECTILE_POTENCY.get(), 6, add);
+            applyBonus(p, id + "_nock", ModAttributes.NOCK_HASTE.get(), 6, add);
+            applyBonus(p, id + "_crit_gen", ModAttributes.ACCURACY.get(), 6, add);
+            applyBonus(p, id + "_crit_mel", ModAttributes.MELEE_ACCURACY.get(), 6, add);
+            applyBonus(p, id + "_crit_prj", ModAttributes.PROJECTILE_ACCURACY.get(), 6, add);
+            applyBonus(p, id + "_prec_gen", ModAttributes.PRECISION.get(), 6, add);
+            applyBonus(p, id + "_prec_mel", ModAttributes.MELEE_PRECISION.get(), 6, add);
+            applyBonus(p, id + "_prec_prj", ModAttributes.PROJECTILE_PRECISION.get(), 6, add);
         });
 
         // --- CON ---
@@ -111,21 +111,34 @@ public class AttributeMilestones {
         // --- PERC ---
         register(ModAttributes.PERC, 30, (p, id, add) -> applyBonus(p, id, Attributes.ARMOR_TOUGHNESS, 3.0, add));
         register(ModAttributes.PERC, 40, (p, id, add) -> {
-            applyBonus(p, id + "_gen", ModAttributes.POTENCY_MULTIPLIER.get(), 0.075, add);
-            applyBonus(p, id + "_mel", ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.075, add);
-            applyBonus(p, id + "_prj", ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.075, add);
+            applyBonus(p, id + "_gen", ModAttributes.POTENCY_MULTIPLIER.get(), 0.09, add);
+            applyBonus(p, id + "_mel", ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.09, add);
+            applyBonus(p, id + "_prj", ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.09, add);
         });
         register(ModAttributes.PERC, 50, (p, id, add) -> {
             applyBonus(p, id + "_gen", ModAttributes.PRECISION.get(), 10.0, add);
             applyBonus(p, id + "_mel", ModAttributes.MELEE_PRECISION.get(), 10.0, add);
             applyBonus(p, id + "_prj", ModAttributes.PROJECTILE_PRECISION.get(), 10.0, add);
         });
-        register(ModAttributes.PERC, 60, (p, id, add) -> applyBonus(p, id, ForgeMod.ENTITY_REACH.get(), 1.0, add));
+        register(ModAttributes.PERC, 60, (p, id, add) -> {
+            applyBonus(p, id, ForgeMod.ENTITY_REACH.get(), 1.0, add);
+            applyBonus(p, id + "_gen_60", ModAttributes.PRECISION_MULTIPLIER.get(), 0.03, add);
+            applyBonus(p, id + "_mel_60", ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.03, add);
+            applyBonus(p, id + "_prj_60", ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), 0.03, add);
+        });
+
+        register(ModAttributes.PERC, 70, (p, id, add) -> applyBonus(p, id, ModAttributes.ARMOR_MULTIPLIER.get(), 0.08, add));
+
+        register(ModAttributes.PERC, 80, (p, id, add) -> {
+            applyBonus(p, id + "_gen", ModAttributes.PRECISION_MULTIPLIER.get(), 0.15, add);
+            applyBonus(p, id + "_mel", ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.15, add);
+            applyBonus(p, id + "_prj", ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), 0.15, add);
+        });
         register(ModAttributes.PERC, 70, (p, id, add) -> applyBonus(p, id, ModAttributes.ARMOR_MULTIPLIER.get(), 0.08, add));
         register(ModAttributes.PERC, 80, (p, id, add) -> {
-            applyBonus(p, id + "_gen", ModAttributes.PRECISION_MULTIPLIER.get(), 0.25, add);
-            applyBonus(p, id + "_mel", ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.25, add);
-            applyBonus(p, id + "_prj", ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), 0.25, add);
+            applyBonus(p, id + "_gen", ModAttributes.PRECISION_MULTIPLIER.get(), 0.15, add);
+            applyBonus(p, id + "_mel", ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.15, add);
+            applyBonus(p, id + "_prj", ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), 0.15, add);
         });
 
         // --- INS ---

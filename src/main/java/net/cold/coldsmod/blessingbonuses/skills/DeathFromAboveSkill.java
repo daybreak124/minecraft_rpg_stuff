@@ -1,9 +1,7 @@
 package net.cold.coldsmod.blessingbonuses.skills;
 
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
-import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.damage.ModDamageTypes;
-import net.cold.coldsmod.network.DFASync;
 import net.cold.coldsmod.network.QuantumLeapSync;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
@@ -19,9 +17,7 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
@@ -30,75 +26,7 @@ import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.*;
 
 public class DeathFromAboveSkill {
 
-    private static final double JUMP_RADIUS = 5.0;
     private static final double LAND_RADIUS = 7.0;
-    private static final float JUMP_DAMAGE = 7.5f;
-
-    @SubscribeEvent(priority = EventPriority.LOW)
-    public static void onPlayerJump(LivingEvent.LivingJumpEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
-        if (!(DFASync.DFAClientData.DFAEligible)) return;
-        if (!player.hasEffect(ModEffects.DEATH_FROM_ABOVE.get())) return;
-        if (player.isInWater()) return;
-
-        Level level = player.level();
-
-        double motionX = player.getDeltaMovement().x;
-        double motionZ = player.getDeltaMovement().z;
-
-        if (Math.abs(motionX) < 0.01 && Math.abs(motionZ) < 0.01) {
-            motionX = 0;
-            motionZ = 0;
-        } else {
-            double dashMultiplier = 2.5;
-            motionX *= dashMultiplier;
-            motionZ *= dashMultiplier;
-        }
-
-        double jumpBoost = 1.1;
-
-        if (player.isCrouching()) {
-            player.getPersistentData().putFloat("dfaFallDamage", 6.25f);
-        } else {
-            player.setDeltaMovement(motionX, jumpBoost, motionZ);
-            player.getPersistentData().putFloat("dfaFallDamage", 12.5f);
-        }
-        player.getPersistentData().putBoolean("DFA_Airborne", true);
-        player.getPersistentData().putBoolean("DFA_fall_damage_cancel", true);
-
-
-        Holder<DamageType> meleeType = level.registryAccess()
-                .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
-        DamageSource source = new DamageSource(meleeType, player, player);
-
-
-        double jumpRadiusSq = 25;
-
-        List<LivingEntity> jumpTargets = level.getEntitiesOfClass(
-                LivingEntity.class,
-                player.getBoundingBox().inflate(JUMP_RADIUS),
-                e -> {
-                    if (e == null || !e.isAlive() || e.isInvulnerable() || !player.hasLineOfSight(e) || !((e instanceof Enemy && !(e instanceof NeutralMob)) || (e instanceof NeutralMob n && n.isAngry()) || (e instanceof Mob m && m.getTarget() != null))) return false;
-
-                    double dx = e.getX() - player.getX();
-                    double dz = e.getZ() - player.getZ();
-                    return (dx * dx + dz * dz) <= jumpRadiusSq;
-                }
-        );
-
-        for (LivingEntity target : jumpTargets) {target.hurt(source, JUMP_DAMAGE);}
-
-        EffectUtils.playExplosionSound(player, 0.5F);
-        EffectUtils.spawnExplosionOnFeet(player);
-        if (level instanceof ServerLevel serverLevel) {
-            spawnParticleRing(serverLevel, player, ParticleTypes.POOF, LAND_RADIUS, 140);
-        }
-
-        player.hurtMarked = true;
-        player.removeEffect(ModEffects.DEATH_FROM_ABOVE.get());
-        player.addEffect(new MobEffectInstance(ModEffects.DEATH_FROM_ABOVE_COOLDOWN.get(), 20 * 15, 0, false, false, true));
-    }
 
     @SubscribeEvent
     public static void onPlayerLand(LivingFallEvent event) {

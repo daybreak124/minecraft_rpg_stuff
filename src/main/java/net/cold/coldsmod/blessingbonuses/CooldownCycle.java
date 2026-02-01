@@ -314,10 +314,6 @@ public class CooldownCycle {
             player.addEffect(new MobEffectInstance(ModEffects.OVERCONFIDENCE_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
         });
 
-        APPLY_HANDLERS.put(ModEffects.OVERCONFIDENCE_ACTIVE.get(), (player, effect) -> {
-            applyPercentModifier(player, ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get(), 1.0, OVERCONFIDENCE_UUID);
-        });
-
         EXPIRE_HANDLERS.put(ModEffects.OVERCONFIDENCE_ACTIVE.get(), (player, inst) -> {
             player.addEffect(new MobEffectInstance(ModEffects.OVERCONFIDENCE_COOLDOWN.get(), 140, 0, false, false, true));
             removeModifier(player, ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get(), OVERCONFIDENCE_UUID);
@@ -463,7 +459,7 @@ public class CooldownCycle {
         });
 
         APPLY_HANDLERS_MOB.put(ModEffects.BRONZEWOOD_CURSE.get(), (victim, effect) -> {
-            applyPercentModifierAdditive(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), 0.1, CURSE_UUID);
+            applyPercentModifierAdditive(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), 0.07, CURSE_UUID);
         });
 
         EXPIRE_HANDLERS_MOB.put(ModEffects.BLINDED_BY_HATRED.get(), (victim, instance) ->
@@ -473,15 +469,6 @@ public class CooldownCycle {
 
         APPLY_HANDLERS_MOB.put(ModEffects.BLINDED_BY_HATRED.get(), (victim, effect) -> {
             applyPercentModifierAdditive(victim, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), 0.06, HATRED_UUID);
-        });
-
-        EXPIRE_HANDLERS_MOB.put(ModEffects.INTIMIDATED.get(), (victim, instance) -> {
-            Entity attacker = null;
-            if (victim.getPersistentData().contains("temporal_attacker_id")) {
-                UUID uuid = victim.getPersistentData().getUUID("temporal_attacker_id");
-                attacker = victim.level().getPlayerByUUID(uuid);
-            }
-            triggerSnapCD(victim, attacker, instance.getAmplifier());
         });
 
         EXPIRE_HANDLERS_MOB.put(ModEffects.EXPLOIT_WEAKNESS_DEBUFF.get(), (victim, instance) ->
@@ -560,68 +547,5 @@ public class CooldownCycle {
                 applyModifier(player, Attributes.ARMOR, armor, SOLARA_UUID);
             }
         }
-    }
-
-    public static void triggerSnapKill(LivingEntity victim, Entity attacker, int amplifier) {
-        CompoundTag data = victim.getPersistentData();
-        if (!data.contains("stored_temporal_damage")) return;
-
-        float storedDamage = data.getFloat("stored_temporal_damage");
-        float bonusPercent = 1 + amplifier / 100f;
-        float snapDamage = storedDamage * bonusPercent;
-
-        var typeHolder = victim.level().registryAccess()
-                .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ModDamageTypes.TRUE_DAMAGE);
-
-        if (victim.getPersistentData().contains("temporal_attacker_id")) {
-            UUID uuid = victim.getPersistentData().getUUID("temporal_attacker_id");
-            Entity savedPlayer = victim.level().getPlayerByUUID(uuid);
-            if (savedPlayer != null) {
-                attacker = savedPlayer;
-            }
-        }
-
-        DamageSource reckoning = new DamageSource(typeHolder, attacker, attacker);
-
-        victim.removeEffect(ModEffects.INTIMIDATED.get());
-        victim.hurt(reckoning, snapDamage);
-
-        EffectUtils.spawnParticleBurst(victim, ParticleTypes.PORTAL);
-        victim.level().playSound(null, victim.getX(), victim.getY(), victim.getZ(),
-                SoundEvents.GLASS_BREAK, SoundSource.HOSTILE, 1.0F, 0.6F);
-
-        data.remove("stored_temporal_damage");
-    }
-
-    public static void triggerSnapCD(LivingEntity victim, Entity attacker, int amplifier) {
-        CompoundTag data = victim.getPersistentData();
-        if (!data.contains("stored_temporal_damage")) return;
-
-        float storedDamage = data.getFloat("stored_temporal_damage");
-        float bonusPercent = 1 + amplifier / 100f;
-        float snapDamage = storedDamage * bonusPercent;
-
-        if (victim.getPersistentData().contains("temporal_attacker_id")) {
-            UUID uuid = victim.getPersistentData().getUUID("temporal_attacker_id");
-            Entity savedPlayer = victim.level().getPlayerByUUID(uuid);
-            if (savedPlayer != null) {
-                attacker = savedPlayer;
-            }
-        }
-
-        var typeHolder = victim.level().registryAccess()
-                .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ModDamageTypes.TRUE_DAMAGE);
-
-        DamageSource reckoning = new DamageSource(typeHolder, attacker, attacker);
-
-        victim.hurt(reckoning, snapDamage);
-
-        EffectUtils.spawnParticleBurst(victim, ParticleTypes.PORTAL);
-        victim.level().playSound(null, victim.getX(), victim.getY(), victim.getZ(),
-                SoundEvents.GLASS_BREAK, SoundSource.HOSTILE, 1.0F, 0.6F);
-
-        data.remove("stored_temporal_damage");
     }
 }

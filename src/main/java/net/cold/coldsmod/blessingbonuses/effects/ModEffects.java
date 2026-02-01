@@ -183,7 +183,9 @@ public class ModEffects {
             EFFECTS.register("overconfidence_cd", OverconfidenceCD::new);
 
     public static final RegistryObject<MobEffect> OVERCONFIDENCE_ACTIVE =
-            EFFECTS.register("overconfidence_active", OverconfidenceActive::new);
+            EFFECTS.register("overconfidence_active", () -> new BlackenedHeart()
+                    .addAttributeModifier(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get(), "f3e2b5c0-5538-5123-a223-024323360446", 0.5, AttributeModifier.Operation.MULTIPLY_BASE));
+
 
     public static final RegistryObject<MobEffect> ENTWINED_OFFERING_ACTIVE =
             EFFECTS.register("entwined_offering_active", () -> new EntwinedOfferingActive()

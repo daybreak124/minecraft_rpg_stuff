@@ -33,36 +33,34 @@ public class DirectedHatredPacket {
             ServerPlayer player = context.getSender();
             if (player == null) return;
 
-            if (player.hasEffect(ModEffects.DIRECTED_HATRED_READY.get())) {
-                ServerLevel level = player.serverLevel();
-                double rangeSq = 100.0;
+            ServerLevel level = player.serverLevel();
+            double rangeSq = 100.0;
 
-                List<LivingEntity> nearby = level.getEntitiesOfClass(
-                        LivingEntity.class,
-                        player.getBoundingBox().inflate(10.0),
-                        e -> {
-                            if (e.isInvulnerable() || !player.hasLineOfSight(e) || !((e instanceof Enemy && !(e instanceof NeutralMob)) || (e instanceof NeutralMob n && n.isAngryAt(player)) || (e instanceof Mob m && m.getTarget() != null))) return false;
-                            return player.distanceToSqr(e) <= rangeSq;
-                        }
-                );
-
-                for (LivingEntity entity : nearby) {
-                    if (entity instanceof Mob mob) {
-                        mob.setTarget(player);
-                        mob.addEffect(new MobEffectInstance(ModEffects.BLINDED_BY_HATRED.get(), 120, 0, false, true, false));
+            List<LivingEntity> nearby = level.getEntitiesOfClass(
+                    LivingEntity.class,
+                    player.getBoundingBox().inflate(10.0),
+                    e -> {
+                        if (e.isInvulnerable() || !player.hasLineOfSight(e) || !((e instanceof Enemy && !(e instanceof NeutralMob)) || (e instanceof NeutralMob n && n.isAngryAt(player)) || (e instanceof Mob m && m.getTarget() != null))) return false;
+                        return player.distanceToSqr(e) <= rangeSq;
                     }
+            );
+
+            for (LivingEntity entity : nearby) {
+                if (entity instanceof Mob mob) {
+                    mob.setTarget(player);
+                    mob.addEffect(new MobEffectInstance(ModEffects.BLINDED_BY_HATRED.get(), 120, 0, false, true, false));
                 }
-
-                level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                        SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 0.35F, 1.0F);
-
-                spawnParticleRingLow(level, player, ParticleTypes.ANGRY_VILLAGER, 6.0, 120);
-
-                EffectUtils.spawnParticleBurst(player, ParticleTypes.WITCH);
-
-                player.removeEffect(ModEffects.DIRECTED_HATRED_READY.get());
-                player.addEffect(new MobEffectInstance(ModEffects.DIRECTED_HATRED_COOLDOWN.get(), 200, 0, false, false, true));
             }
+
+            level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                    SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 0.35F, 1.0F);
+
+            spawnParticleRingLow(level, player, ParticleTypes.ANGRY_VILLAGER, 6.0, 120);
+
+            EffectUtils.spawnParticleBurst(player, ParticleTypes.WITCH);
+
+            player.removeEffect(ModEffects.DIRECTED_HATRED_READY.get());
+            player.addEffect(new MobEffectInstance(ModEffects.DIRECTED_HATRED_COOLDOWN.get(), 200, 0, false, false, true));
         });
         return true;
     }

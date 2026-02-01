@@ -1,6 +1,5 @@
 package net.cold.coldsmod.stat;
 
-import net.cold.coldsmod.blessingbonuses.CooldownCycle;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.damage.ModDamageTypes;
@@ -11,7 +10,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -53,7 +51,7 @@ public class Formulas {
     public void onLivingHurt(LivingHurtEvent event) {
         if (!(event.getSource().getEntity() instanceof Player player)) return;
         if (player.level().isClientSide()) return;
-        if (event.getSource().is(ModDamageTypes.LIGHTNING_DAMAGE)) return;
+        if (event.getSource().is(ModDamageTypes.LIGHTNING_DAMAGE) || event.getSource().is(ModDamageTypes.RECKONING_DAMAGE)) return;
 
         CompoundTag data = player.getPersistentData();
         float finalDamage = event.getAmount();
@@ -61,6 +59,7 @@ public class Formulas {
 
         boolean isProjectile = event.getSource().getDirectEntity() instanceof Projectile;
         InteractionHand hand = player.swingingArm;
+        double meleeDamageMultiplier = player.getAttributeValue(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
 
         if (event.getSource().is(ModDamageTypes.MELEE_DOT_DAMAGE)) {
             double meleeDmg = getScaledValue(player, ModAttributes.MELEE_POTENCY.get(), ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
@@ -72,6 +71,7 @@ public class Formulas {
             if (rollCrit(player, melCritCh)) {
                 finalDamage *= (1.5 + melCritDmg / 100.0);
             }
+            finalDamage *= meleeDamageMultiplier;
         } else if (isProjectile || event.getSource().is(ModDamageTypes.CUSTOM_RANGED_DAMAGE)) {
             double projDmg = getScaledValue(player, ModAttributes.PROJECTILE_POTENCY.get(), ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
             double projCritCh = getScaledValue(player, ModAttributes.PROJECTILE_ACCURACY.get(), ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get());
@@ -79,10 +79,10 @@ public class Formulas {
 
             if (event.getSource().getDirectEntity() instanceof Projectile proj) {
 
-                finalDamage *= 0.7f;
+                finalDamage /= 2;
 
                 if (proj.getPersistentData().getBoolean("clairvoyance_tagged")) {
-                    finalDamage *= 3;
+                    finalDamage *= 2;
                     resetClairvoyance(player, data);
                     spawnParticleBurst(event.getEntity(), ParticleTypes.SONIC_BOOM);
                 }
@@ -127,6 +127,7 @@ public class Formulas {
             }
 
             finalDamage *= (float) (1.0 + melDmg / 100.0);
+            finalDamage *= meleeDamageMultiplier;
             handleFrenzy(player, data);
         }
         else {
@@ -167,29 +168,6 @@ public class Formulas {
 
             event.setAmount((float) (event.getAmount() * incDamageMultiplier * attackerDamageMultiplier));
         }
-
-        MobEffectInstance intimidated = victim.getEffect(ModEffects.INTIMIDATED.get());
-        if (intimidated != null && !isIntimidating) {
-            CompoundTag data = victim.getPersistentData();
-            float scaledAmount = event.getAmount();
-            Entity attacker = event.getSource().getEntity();
-
-            if (attacker instanceof Player && !data.contains("temporal_attacker_id")) {
-                data.putUUID("temporal_attacker_id", attacker.getUUID());
-            }
-
-            float currentStored = data.getFloat("stored_temporal_damage");
-            float newTotal = currentStored + scaledAmount;
-            data.putFloat("stored_temporal_damage", newTotal);
-
-            float multiplier = (intimidated.getAmplifier() + 1) / 100f;
-
-            if ((victim.getHealth()) <= newTotal * (1.0f + multiplier)) {
-                CooldownCycle.triggerSnapKill(victim, attacker, intimidated.getAmplifier());
-            }
-            event.setCanceled(true);
-        }
-        System.out.println(event.getAmount());
     }
 
     private boolean rollCrit(Player player, double chance) {
@@ -310,7 +288,6 @@ public class Formulas {
         if (player.hasEffect(ModEffects.NIMBLE_GETAWAY_ACTIVE.get())) {
             event.setCanceled(true);
             EffectUtils.spawnParticleBurst(player, ParticleTypes.SNEEZE);
-
 
             player.removeEffect(ModEffects.NIMBLE_GETAWAY_ACTIVE.get());
             player.addEffect(new MobEffectInstance(ModEffects.NIMBLE_GETAWAY_COOLDOWN.get(), 20*20, 0, false, false, true));

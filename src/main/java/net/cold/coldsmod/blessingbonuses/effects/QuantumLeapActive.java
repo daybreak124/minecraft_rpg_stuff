@@ -1,10 +1,6 @@
 package net.cold.coldsmod.blessingbonuses.effects;
 
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
-import net.cold.coldsmod.network.ClientKeyInputHandler;
-import net.cold.coldsmod.network.NetworkHandler;
-import net.cold.coldsmod.network.QuantumLeapPacket;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,11 +16,7 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 

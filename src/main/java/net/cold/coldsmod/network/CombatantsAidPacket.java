@@ -26,18 +26,16 @@ public class CombatantsAidPacket {
             ServerPlayer player = ctx.get().getSender();
             if (player == null) return;
 
-            if (player.hasEffect(ModEffects.COMBATANTS_AID_READY.get())) {
+            CombatantsAidReady.startDash(player);
 
-                CombatantsAidReady.startDash(player);
+            double amp = AttributeApplier.getScaledValue(player,
+                    ModAttributes.AMPLIFICATION.get(),
+                    ModAttributes.AMPLIFICATION_MULTIPLIER.get());
+            int cdTicks = (int) (800 / (1.0 + (amp / 100.0)));
 
-                double amp = AttributeApplier.getScaledValue(player,
-                        ModAttributes.AMPLIFICATION.get(),
-                        ModAttributes.AMPLIFICATION_MULTIPLIER.get());
-                int cdTicks = (int) (800 / (1.0 + (amp / 100.0)));
+            player.removeEffect(ModEffects.COMBATANTS_AID_READY.get());
+            player.addEffect(new MobEffectInstance(ModEffects.COMBATANTS_AID_CD.get(), cdTicks, 0, false, false, true));
 
-                player.removeEffect(ModEffects.COMBATANTS_AID_READY.get());
-                player.addEffect(new MobEffectInstance(ModEffects.COMBATANTS_AID_CD.get(), cdTicks, 0, false, false, true));
-            }
         });
         ctx.get().setPacketHandled(true);
     }

@@ -1,11 +1,13 @@
-package net.cold.coldsmod.blessingbonuses.skills;
+package net.cold.coldsmod.network;
 
 import net.cold.coldsmod.ModSounds;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -14,43 +16,33 @@ import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleRing;
 
-public class DaringShoutSkill {
+public class DaringShoutPacket {
 
-    private static final int COOLDOWN_TICKS = 20 * 15;
+    public DaringShoutPacket() {}
+    public DaringShoutPacket(FriendlyByteBuf buffer) {}
+    public static DaringShoutPacket decode(FriendlyByteBuf buf) { return new DaringShoutPacket(); }
+    public void encode(FriendlyByteBuf buffer) {}
 
-    @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (event.player.level().isClientSide()) return;
-        if (!event.player.hasEffect(ModEffects.DARING_SHOUT.get())) return;
+    public boolean handle(Supplier<NetworkEvent.Context> supplier) {
+        NetworkEvent.Context context = supplier.get();
+        context.enqueueWork(() -> {
+            ServerPlayer player = context.getSender();
+            if (player == null) return;
 
-        Player player = event.player;
+            applyNoAi(player);
+            player.removeEffect(ModEffects.DARING_SHOUT.get());
+            player.addEffect(new MobEffectInstance(ModEffects.DARING_SHOUT_COOLDOWN.get(), 300, 0, false, false, true));
 
-        int crouchTicks = player.getPersistentData().getInt("daringShoutCrouchTicks");
-
-        if (player.isCrouching()) {
-            crouchTicks++;
-            player.getPersistentData().putInt("daringShoutCrouchTicks", crouchTicks);
-
-            if (crouchTicks >= 1) {
-                player.addEffect(new MobEffectInstance(ModEffects.DARING_SHOUT_COOLDOWN.get(), COOLDOWN_TICKS, 0, true, true, true));
-                player.getPersistentData().putInt("daringShoutCrouchTicks", 0);
-
-                applyNoAi(player);
-                player.removeEffect(ModEffects.DARING_SHOUT.get());
-
-                EffectUtils.playSound(player, ModSounds.DARING_SHOUT.get(), 0.6F, 1.0F);
-            }
-        } else {
-            player.getPersistentData().putInt("daringShoutCrouchTicks", 0);
-        }
+            EffectUtils.playSound(player, ModSounds.DARING_SHOUT.get(), 0.6F, 1.0F);
+        });
+        return true;
     }
 
     private static void applyNoAi(Player player) {

@@ -55,10 +55,10 @@ public class AttributeGeneration {
         int bias = rarity.getAttributeBias(itemType);
 
         int minTotal = TOTAL_RANGES.get(itemType)[0] + bias * 2;
-        int maxTotal = TOTAL_RANGES.get(itemType)[1] + bias * 4;
+        int maxTotal = TOTAL_RANGES.get(itemType)[1] + bias * 3;
 
         int minInd = INDIVIDUAL_RANGES.get(itemType)[0];
-        int maxInd = INDIVIDUAL_RANGES.get(itemType)[1] + bias * 2;
+        int maxInd = INDIVIDUAL_RANGES.get(itemType)[1] + bias;
 
         List<String> selected;
 

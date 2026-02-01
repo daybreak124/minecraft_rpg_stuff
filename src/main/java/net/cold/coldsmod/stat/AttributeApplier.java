@@ -255,7 +255,7 @@ public class AttributeApplier {
     private static final Map<Supplier<Attribute>, Function<BaseStatSnapshot, Double>> PER_POINT_FORMULAS = Map.ofEntries(
             Map.entry(ModAttributes.POTENCY, s -> s.str * 0.25 + s.con * 0.125),
             Map.entry(ModAttributes.MELEE_POTENCY, s -> s.str * 0.25 + s.con * 0.125),
-            Map.entry(ModAttributes.PROJECTILE_POTENCY, s -> (s.str * 0.25 + s.con * 0.125 + s.dex * 0.175)),
+            Map.entry(ModAttributes.PROJECTILE_POTENCY, s -> (s.str * 0.25 + s.con * 0.125 + s.dex * 0.125)),
             Map.entry(() -> Attributes.ATTACK_DAMAGE, s -> s.str * 0.020),
 
             Map.entry(ModAttributes.ACCURACY, s -> s.dex * 0.2),
@@ -267,7 +267,7 @@ public class AttributeApplier {
             Map.entry(ModAttributes.PROJECTILE_PRECISION, s -> s.perc * 0.15),
 
             Map.entry(ModAttributes.HASTE, s -> s.dex * 0.125),
-            Map.entry(ModAttributes.NOCK_HASTE, s -> s.dex * 0.15),
+            Map.entry(ModAttributes.NOCK_HASTE, s -> s.dex * 0.1),
             Map.entry(() -> Attributes.MOVEMENT_SPEED, s -> s.dex * 0.00012),
             Map.entry(() -> Attributes.ARMOR, s -> s.con * 0.15 + s.perc * 0.1 + s.fort * 0.2 + s.str * 0.1),
             Map.entry(() -> Attributes.ARMOR_TOUGHNESS, s -> s.fort * 0.15),
@@ -357,9 +357,9 @@ public class AttributeApplier {
 
         double effectiveRating = rating * multiplierValue;
 
-        if (500 + effectiveRating == 0) return 0;
+        if (300 + effectiveRating == 0) return 0;
 
-        return (500 * effectiveRating) / (500 + Math.abs(effectiveRating));
+        return (300 * effectiveRating) / (300 + Math.abs(effectiveRating));
     }
 
     public void removeCrossbowTag(Player player) {

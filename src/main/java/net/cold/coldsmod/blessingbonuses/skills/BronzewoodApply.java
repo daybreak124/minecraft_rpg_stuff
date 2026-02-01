@@ -11,6 +11,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,16 +29,16 @@ public class BronzewoodApply {
         if (event.getEntity().level().isClientSide()) return;
         if (!(event.getSource().getEntity() instanceof Player player)) return;
         if (event.getEntity() instanceof Player) return;
+        if (!(event.getSource().getDirectEntity() instanceof Player)) return;
 
         LivingEntity target = event.getEntity();
 
 
         InteractionHand hand = player.swingingArm;
-        String mainType = ItemRarityUtils.getItemType(player.getMainHandItem());
-        String offType = ItemRarityUtils.getItemType(player.getOffhandItem());
+        ItemStack stack = player.getItemInHand(hand);
+        String itemType = ItemRarityUtils.getItemType(stack);
 
-        boolean isMelee = (hand == InteractionHand.MAIN_HAND && ((mainType.equals("sword")))) ||
-                (hand == InteractionHand.OFF_HAND && (offType.equals("sword")));
+        boolean isMelee = itemType.equals("sword");
 
         if (!isMelee) return;
 
@@ -66,7 +67,7 @@ public class BronzewoodApply {
 
             curseSources.put(target, player.getUUID());
 
-            player.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_COOLDOWN.get(), 260, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_COOLDOWN.get(), 300, 0, false, false, true));
             player.getPersistentData().putBoolean("bronzewood_proc", true);
             player.removeEffect(ModEffects.BRONZEWOOD_READY.get());
         }
