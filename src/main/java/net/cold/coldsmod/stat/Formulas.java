@@ -148,15 +148,11 @@ public class Formulas {
     @SubscribeEvent
     public void onLivingDamage(LivingDamageEvent event) {
         if (event.getEntity().level().isClientSide()) return;
-        if (event.getSource().is(ModDamageTypes.RECKONING_DAMAGE)) {
-            // System.out.println(event.getAmount());
-            return;
-        }
 
         LivingEntity victim = event.getEntity();
-        boolean isIntimidating = event.getSource().is(ModDamageTypes.TRUE_DAMAGE);
+        boolean isIgnoringMultipliers = event.getSource().is(ModDamageTypes.TRUE_DAMAGE) || event.getSource().is(ModDamageTypes.RECKONING_DAMAGE);
 
-        if (!isIntimidating) {
+        if (!isIgnoringMultipliers) {
             double incDamageMultiplier = 1.0;
             var incAttr = victim.getAttribute(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get());
             if (incAttr != null) incDamageMultiplier = incAttr.getValue();
@@ -288,6 +284,7 @@ public class Formulas {
         if (player.hasEffect(ModEffects.NIMBLE_GETAWAY_ACTIVE.get())) {
             event.setCanceled(true);
             EffectUtils.spawnParticleBurst(player, ParticleTypes.SNEEZE);
+
 
             player.removeEffect(ModEffects.NIMBLE_GETAWAY_ACTIVE.get());
             player.addEffect(new MobEffectInstance(ModEffects.NIMBLE_GETAWAY_COOLDOWN.get(), 20*20, 0, false, false, true));

@@ -9,6 +9,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -25,13 +27,24 @@ import java.util.function.Supplier;
 import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleRing;
 
 public class DFAPacket {
-    public DFAPacket() {}
+    private double motionX;
+    private double motionZ;
+    private boolean isCrouching;
+
+    public DFAPacket(double motionX, double motionZ, boolean isCrouching) {
+        this.motionX = motionX;
+        this.motionZ = motionZ;
+        this.isCrouching = isCrouching;
+    }
 
     public static DFAPacket decode(FriendlyByteBuf buf) {
-        return new DFAPacket();
+        return new DFAPacket(buf.readDouble(), buf.readDouble(), buf.readBoolean());
     }
 
     public void encode(FriendlyByteBuf buf) {
+        buf.writeDouble(motionX);
+        buf.writeDouble(motionZ);
+        buf.writeBoolean(isCrouching);
     }
 
     private static final double JUMP_RADIUS = 5.0;
@@ -47,26 +60,13 @@ public class DFAPacket {
 
             Level level = player.level();
 
-            double motionX = player.getDeltaMovement().x;
-            double motionZ = player.getDeltaMovement().z;
+            double jumpBoost = this.isCrouching ? 0.42 : 1.1;
+            player.getPersistentData().putFloat("dfaFallDamage", this.isCrouching ? 6.25f : 12.5f);
 
-            if (Math.abs(motionX) < 0.01 && Math.abs(motionZ) < 0.01) {
-                motionX = 0;
-                motionZ = 0;
-            } else {
-                double dashMultiplier = 2.5;
-                motionX *= dashMultiplier;
-                motionZ *= dashMultiplier;
-            }
+            player.setDeltaMovement(this.motionX, jumpBoost, this.motionZ);
+            player.setOnGround(false);
+            player.fallDistance = 0;
 
-            double jumpBoost = 1.1;
-
-            if (player.isCrouching()) {
-                player.getPersistentData().putFloat("dfaFallDamage", 6.25f);
-            } else {
-                player.setDeltaMovement(motionX, jumpBoost, motionZ);
-                player.getPersistentData().putFloat("dfaFallDamage", 12.5f);
-            }
             player.getPersistentData().putBoolean("DFA_Airborne", true);
             player.getPersistentData().putBoolean("DFA_fall_damage_cancel", true);
 
@@ -93,15 +93,17 @@ public class DFAPacket {
 
             for (LivingEntity target : jumpTargets) {target.hurt(source, JUMP_DAMAGE);}
 
-            EffectUtils.playExplosionSound(player, 0.5F);
+            player.level().playSound(player, player.getX(), player.getY(), player.getZ(),
+                    SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 0.5F, 1.0F);
+
             EffectUtils.spawnExplosionOnFeet(player);
             if (level instanceof ServerLevel serverLevel) {
                 spawnParticleRing(serverLevel, player, ParticleTypes.POOF, JUMP_RADIUS, 100);
             }
 
-            player.hurtMarked = true;
             player.removeEffect(ModEffects.DEATH_FROM_ABOVE.get());
             player.addEffect(new MobEffectInstance(ModEffects.DEATH_FROM_ABOVE_COOLDOWN.get(), 300, 0, false, false, true));
+
 
         });
         return true;

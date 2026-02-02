@@ -2,7 +2,12 @@ package net.cold.coldsmod.network;
 
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -24,12 +29,49 @@ public class ClientInputEvent {
     public static void initializeKeys(RegisterKeyMappingsEvent event) {
         KEY_ACTIONS.put(ClientKeyInputHandler.quantumKey.getKey().getValue(), player -> {
             if (player.hasEffect(ModEffects.QUANTUM_LEAP_READY.get())) {
+
+                Vec3 look = player.getLookAngle().normalize();
+                Vec3 dashTarget = player.position().add(look.scale(10));
+
+                double yOffset = 1.0;
+                AABB targetBox = player.getBoundingBox().move(
+                        dashTarget.x - player.getX(),
+                        dashTarget.y - player.getY(),
+                        dashTarget.z - player.getZ()
+                );
+
+                if (!player.level().noCollision(player, targetBox)) {
+                    yOffset += 1.0;
+                }
+
+                player.teleportTo(dashTarget.x, dashTarget.y + yOffset, dashTarget.z);
+                player.setDeltaMovement(Vec3.ZERO);
+                player.level().playSound(player, player.blockPosition(),
+                        SoundEvents.PLAYER_SPLASH_HIGH_SPEED, SoundSource.PLAYERS,
+                        0.6F, 1.0F);
+
                 NetworkHandler.CHANNEL.sendToServer(new QuantumLeapPacket());
             }
         });
 
         KEY_ACTIONS.put(ClientKeyInputHandler.combatantKey.getKey().getValue(), player -> {
             if (player.isSprinting() && player.hasEffect(ModEffects.COMBATANTS_AID_READY.get())) {
+
+                Vec3 look = player.getLookAngle();
+                Vec3 direction = new Vec3(look.x, 0, look.z).normalize();
+
+                double speed = 2.0;
+                player.setDeltaMovement(direction.x * speed, 0.1, direction.z * speed);
+                CompoundTag tag = player.getPersistentData();
+
+                tag.putDouble("dash_x", player.getX());
+                tag.putDouble("dash_y", player.getY());
+                tag.putDouble("dash_z", player.getZ());
+
+                player.level().playSound(player, player.blockPosition(),
+                        SoundEvents.ARMOR_EQUIP_ELYTRA, SoundSource.PLAYERS,
+                        0.5F, 1.0F);
+
                 NetworkHandler.CHANNEL.sendToServer(new CombatantsAidPacket());
             }
             aidKeyPressTime = System.currentTimeMillis();
@@ -61,7 +103,36 @@ public class ClientInputEvent {
 
         KEY_ACTIONS.put(ClientKeyInputHandler.dfaKey.getKey().getValue(), player -> {
             if (player.hasEffect(ModEffects.DEATH_FROM_ABOVE.get())) {
-                NetworkHandler.CHANNEL.sendToServer(new DFAPacket());
+                double mX = player.getDeltaMovement().x;
+                double mZ = player.getDeltaMovement().z;
+
+                if (Math.abs(mX) > 0.01 || Math.abs(mZ) > 0.01) {
+                    double dashMultiplier = 3.0;
+                    mX *= dashMultiplier;
+                    mZ *= dashMultiplier;
+                }
+
+                double jumpBoost = player.isCrouching() ? 0.42 : 1.1;
+
+                player.setDeltaMovement(mX, jumpBoost, mZ);
+                player.setOnGround(false);
+
+                player.getPersistentData().putFloat("dfaFallDamage", player.isCrouching() ? 6.25f : 12.5f);
+                player.level().playSound(player, player.getX(), player.getY(), player.getZ(),
+                        SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 0.5F, 1.0F);
+                player.getPersistentData().putBoolean("DFA_Airborne", true);
+                NetworkHandler.CHANNEL.sendToServer(new DFAPacket(mX, mZ, player.isCrouching()));
+            } else if (player.getPersistentData().getBoolean("DFA_Airborne") && !player.onGround()) {
+                if (player.getPersistentData().getFloat("dfaFallDamage") < 10f) return;
+                double diveSpeed = -2.5;
+
+                player.setDeltaMovement(player.getDeltaMovement().x * 0.1, diveSpeed, player.getDeltaMovement().z * 0.1);
+                player.setOnGround(false);
+
+                player.level().playSound(player, player.blockPosition(), SoundEvents.TRIDENT_RIPTIDE_3, SoundSource.PLAYERS, 1.0F, 0.45F);
+                player.getPersistentData().putBoolean("DFA_Airborne", false);
+
+                NetworkHandler.CHANNEL.sendToServer(new DFADivePacket());
             }
         });
     }
@@ -99,6 +170,19 @@ public class ClientInputEvent {
 
         long duration = System.currentTimeMillis() - aidKeyPressTime;
         if (duration < 1000) return;
+
+        CompoundTag tag = player.getPersistentData();
+        if (!tag.contains("dash_x")) return;
+
+        player.teleportTo(tag.getDouble("dash_x"), tag.getDouble("dash_y"), tag.getDouble("dash_z"));
+
+        player.level().playSound(player, player.blockPosition(),
+                SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS,
+                0.5F, 1.0F);
+
+        tag.remove("dash_x");
+        tag.remove("dash_y");
+        tag.remove("dash_z");
 
         NetworkHandler.CHANNEL.sendToServer(new CombatantsRecallPacket());
 

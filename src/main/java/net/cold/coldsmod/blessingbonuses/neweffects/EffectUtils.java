@@ -88,6 +88,16 @@ public class EffectUtils {
         );
     }
 
+    public static void playSoundServer(Player player, SoundEvent soundEvent, float volume, float pitch) {
+        player.level().playSound(
+                player,
+                player.getX(), player.getY(), player.getZ(),
+                soundEvent,
+                SoundSource.PLAYERS,
+                volume, pitch
+        );
+    }
+
 
     public static void spawnParticleBurst(LivingEntity entity, ParticleOptions particleType) {
         if (entity.level() instanceof ServerLevel serverLevel) {

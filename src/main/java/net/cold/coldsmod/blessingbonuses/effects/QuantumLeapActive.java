@@ -56,7 +56,7 @@ public class QuantumLeapActive extends MobEffect {
 
         player.removeEffect(ModEffects.QUANTUM_LEAP_READY.get());
 
-        player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+        player.level().playSound(player, player.getX(), player.getY(), player.getZ(),
                 SoundEvents.PLAYER_SPLASH_HIGH_SPEED, SoundSource.PLAYERS, 0.6F, 1.0F);
 
         List<LivingEntity> nearby = player.level().getEntitiesOfClass(

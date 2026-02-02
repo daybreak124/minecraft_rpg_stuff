@@ -31,7 +31,7 @@ public class DeathFromAboveSkill {
     @SubscribeEvent
     public static void onPlayerLand(LivingFallEvent event) {
         if (!(event.getEntity() instanceof Player player) || player.level().isClientSide()) return;
-        if (!player.getPersistentData().getBoolean("DFA_Airborne")) return;
+        if (!player.getPersistentData().getBoolean("DFA_fall_damage_cancel")) return;
 
         event.setCanceled(true);
         player.getPersistentData().putBoolean("DFA_Airborne", false);
@@ -68,6 +68,8 @@ public class DeathFromAboveSkill {
                 target.hurtMarked = true;
             }
         }
+
+        player.hurtMarked = true;
 
         player.getPersistentData().putFloat("dfaFallDamage", 0);
         handleQuantumLeapSynergy(player);

@@ -1162,14 +1162,19 @@ public class ModItems {
             tooltip.add(Component.literal(" within a 7 block radius.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Applies a knock-up to").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" enemies on landing.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Holding shift reduces the").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" jump significantly, halves").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" the landing damage and").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" disables the knock-up.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Cancels fall damage.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Disabled while swimming.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Activate a second time").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" to dive down.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" ").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Reduces Quantum Leap").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" cooldown by 5 seconds and").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" enhances it for 4 seconds.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Disabled while swimming.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Cancels fall damage.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Holding shift cancels the").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" jump but halves the landing").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" damage.").withStyle(ChatFormatting.GRAY));
+
 
             Component keyName = ClientKeyInputHandler.dfaKey.getTranslatedKeyMessage();
 

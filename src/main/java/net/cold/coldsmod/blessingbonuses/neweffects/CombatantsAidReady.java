@@ -9,6 +9,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -46,9 +47,10 @@ public class CombatantsAidReady extends MobEffect {
         double speed = 2.0;
         player.setDeltaMovement(direction.x * speed, 0.1, direction.z * speed);
 
-        player.hurtMarked = true;
         player.addEffect(new MobEffectInstance(ModEffects.COMBATANTS_AID_RECALL.get(), 100, 0, false, false, true));
-        EffectUtils.playSound(player, SoundEvents.ARMOR_EQUIP_ELYTRA, 0.5F, 1.0F);
+        player.level().playSound(player, player.getX(), player.getY(), player.getZ(),
+                SoundEvents.ARMOR_EQUIP_ELYTRA, SoundSource.PLAYERS,
+                0.5F, 1.0F);
         applyDashSupport(player, direction);
     }
 
@@ -124,6 +126,7 @@ public class CombatantsAidReady extends MobEffect {
         tag.remove("dash_y");
         tag.remove("dash_z");
         player.removeEffect(ModEffects.COMBATANTS_AID_RECALL.get());
+        player.hurtMarked = true;
     }
 
     private static void spawnBorderParticle(ServerLevel level, Player player, double x, double z) {

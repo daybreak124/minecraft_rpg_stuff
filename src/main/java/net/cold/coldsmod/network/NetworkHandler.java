@@ -46,7 +46,7 @@ public class NetworkHandler {
                 .add();
 
 
-        // Quantum leap recall
+        // Quantum leap
         CHANNEL.messageBuilder(QuantumLeapPacket.class, nextId(), NetworkDirection.PLAY_TO_SERVER)
                 .encoder(QuantumLeapPacket::encode)
                 .decoder(QuantumLeapPacket::decode)
@@ -93,6 +93,12 @@ public class NetworkHandler {
                 .decoder(DFAPacket::decode)
                 .encoder(DFAPacket::encode)
                 .consumerMainThread(DFAPacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(DFADivePacket.class, nextId(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(DFADivePacket::decode)
+                .encoder(DFADivePacket::encode)
+                .consumerMainThread(DFADivePacket::handle)
                 .add();
     }
 
