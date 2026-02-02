@@ -126,7 +126,6 @@ public class CombatantsAidReady extends MobEffect {
         tag.remove("dash_y");
         tag.remove("dash_z");
         player.removeEffect(ModEffects.COMBATANTS_AID_RECALL.get());
-        player.hurtMarked = true;
     }
 
     private static void spawnBorderParticle(ServerLevel level, Player player, double x, double z) {

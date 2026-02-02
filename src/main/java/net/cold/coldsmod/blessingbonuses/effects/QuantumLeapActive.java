@@ -50,7 +50,6 @@ public class QuantumLeapActive extends MobEffect {
 
         player.teleportTo(dashTarget.x, dashTarget.y + yOffset, dashTarget.z);
         player.setDeltaMovement(Vec3.ZERO);
-        player.hurtMarked = true;
 
         EffectUtils.spawnParticleBurst(player, ParticleTypes.FISHING);
 
