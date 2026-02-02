@@ -41,11 +41,6 @@ public class ClientInputEvent {
 
                 double speed = 2.0;
                 player.setDeltaMovement(direction.x * speed, 0.1, direction.z * speed);
-                CompoundTag tag = player.getPersistentData();
-
-                tag.putDouble("dash_x", player.getX());
-                tag.putDouble("dash_y", player.getY());
-                tag.putDouble("dash_z", player.getZ());
 
                 player.level().playSound(player, player.blockPosition(),
                         SoundEvents.ARMOR_EQUIP_ELYTRA, SoundSource.PLAYERS,
@@ -150,21 +145,7 @@ public class ClientInputEvent {
         long duration = System.currentTimeMillis() - aidKeyPressTime;
         if (duration < 1000) return;
 
-        CompoundTag tag = player.getPersistentData();
-        if (!tag.contains("dash_x")) return;
-
-        player.teleportTo(tag.getDouble("dash_x"), tag.getDouble("dash_y"), tag.getDouble("dash_z"));
-
-        player.level().playSound(player, player.blockPosition(),
-                SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS,
-                0.5F, 1.0F);
-
-        tag.remove("dash_x");
-        tag.remove("dash_y");
-        tag.remove("dash_z");
-
         NetworkHandler.CHANNEL.sendToServer(new CombatantsRecallPacket());
-
         aidKeyPressTime = 0;
     }
 }

@@ -118,6 +118,7 @@ public class CombatantsAidReady extends MobEffect {
         if (!tag.contains("dash_x")) return;
 
         player.teleportTo(tag.getDouble("dash_x"), tag.getDouble("dash_y"), tag.getDouble("dash_z"));
+        player.hurtMarked = true;
 
         EffectUtils.playSound(player, SoundEvents.ENDERMAN_TELEPORT, 0.5F, 1.0F);
         EffectUtils.spawnParticleBurst(player, ParticleTypes.REVERSE_PORTAL);
