@@ -29,27 +29,6 @@ public class ClientInputEvent {
     public static void initializeKeys(RegisterKeyMappingsEvent event) {
         KEY_ACTIONS.put(ClientKeyInputHandler.quantumKey.getKey().getValue(), player -> {
             if (player.hasEffect(ModEffects.QUANTUM_LEAP_READY.get())) {
-
-                Vec3 look = player.getLookAngle().normalize();
-                Vec3 dashTarget = player.position().add(look.scale(10));
-
-                double yOffset = 1.0;
-                AABB targetBox = player.getBoundingBox().move(
-                        dashTarget.x - player.getX(),
-                        dashTarget.y - player.getY(),
-                        dashTarget.z - player.getZ()
-                );
-
-                if (!player.level().noCollision(player, targetBox)) {
-                    yOffset += 1.0;
-                }
-
-                player.teleportTo(dashTarget.x, dashTarget.y + yOffset, dashTarget.z);
-                player.setDeltaMovement(Vec3.ZERO);
-                player.level().playSound(player, player.blockPosition(),
-                        SoundEvents.PLAYER_SPLASH_HIGH_SPEED, SoundSource.PLAYERS,
-                        0.6F, 1.0F);
-
                 NetworkHandler.CHANNEL.sendToServer(new QuantumLeapPacket());
             }
         });
