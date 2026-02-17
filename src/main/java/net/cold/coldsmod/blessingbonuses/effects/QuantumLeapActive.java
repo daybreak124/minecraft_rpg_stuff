@@ -52,7 +52,8 @@ public class QuantumLeapActive extends MobEffect {
 
         // Ensure the player takes fall damage
 //        player.setDeltaMovement(Vec3.ZERO);
-//        player.hurtMarked = true;
+
+        player.hurtMarked = true;
 
         EffectUtils.spawnParticleBurst(player, ParticleTypes.FISHING);
 
