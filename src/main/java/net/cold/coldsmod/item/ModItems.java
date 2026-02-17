@@ -1592,10 +1592,9 @@ public class ModItems {
             tooltip.add(Component.literal(" Bows").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("Blessing: Deceptive Heart").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Shooting a target causes").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" the monsters within 6").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" blocks to attack the").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" target shot. Bosses can").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" not be deceived.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" monsters within 6 blocks").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" to attack the target shot").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Bosses cannot be deceived.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
                             .append(Component.literal("30s").withStyle(ChatFormatting.GRAY))

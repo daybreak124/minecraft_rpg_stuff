@@ -13,9 +13,11 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -69,7 +71,9 @@ public class QuantumLeapActive extends MobEffect {
         );
 
         for (LivingEntity entity : nearby) {
-            if (entity instanceof Mob mob) mob.setTarget(null);
+            if (entity instanceof Mob mob && !entity.getType().is(Tags.EntityTypes.BOSSES) && !(entity instanceof Warden)) {
+                mob.setTarget(null);
+            }
         }
 
         int invisDuration = 80;
