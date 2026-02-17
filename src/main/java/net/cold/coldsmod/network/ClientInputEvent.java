@@ -77,6 +77,8 @@ public class ClientInputEvent {
 
         KEY_ACTIONS.put(ClientKeyInputHandler.dfaKey.getKey().getValue(), player -> {
             if (player.hasEffect(ModEffects.DEATH_FROM_ABOVE.get())) {
+                if (!player.onGround()) return;
+
                 double mX = player.getDeltaMovement().x;
                 double mZ = player.getDeltaMovement().z;
 

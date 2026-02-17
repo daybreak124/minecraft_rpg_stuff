@@ -1154,26 +1154,26 @@ public class ModItems {
             super.appendHoverText(stack, level, tooltip, flag);
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Blessing: Death From Above").withStyle(ChatFormatting.GOLD));
-            tooltip.add(Component.literal(" Activate to shoot").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" yourself up and deal").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 7.5 Melee damage within").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" a 5 block radius and").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 12.5 Melee damage on landing").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" within a 7 block radius.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Applies a knock-up to").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" enemies on landing.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Holding shift reduces the").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" jump significantly, halves").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" the landing damage and").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Activate to shoot yourself").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" up 8 blocks and deal 7.5").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Melee Damage within a 5 block").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" radius and 12.5 Melee damage").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" on landing within a 7 block").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" radius.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Applies a knock-up to enemies").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" on landing.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Crouching causes a normal jump,").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" halves the landing damage and").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" disables the knock-up.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Cancels fall damage.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Disabled while swimming.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Activate a second time").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" to dive down.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Disabled while swimming and").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" while airborne.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Activate a second time to").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" dive down.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" ").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Reduces Quantum Leap").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" cooldown by 5 seconds and").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" enhances it for 4 seconds.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Reduces Quantum Leap Cooldown").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" by 5 seconds and enhances it").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" for 4 seconds.").withStyle(ChatFormatting.GRAY));
 
 
             Component keyName = ClientKeyInputHandler.dfaKey.getTranslatedKeyMessage();
@@ -1883,10 +1883,11 @@ public class ModItems {
             tooltip.add(Component.literal(" Shields").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("Blessing: Bastion").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" When releasing your shield,").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" take no damage for 1s.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" evade all attacks for 1.5s.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Duration increased by").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" 1% per Fortitude and 0.66%").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" 0.01s per Fortitude and 0.005s").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" per Perception & Constitution.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Fall Damage cannot be evaded.").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
                             .append(Component.literal("8s").withStyle(ChatFormatting.GRAY))
@@ -2116,7 +2117,8 @@ public class ModItems {
             tooltip.add(Component.literal("Blessing: Nimble Getaway").withStyle(ChatFormatting.GOLD));
             tooltip.add(Component.literal(" Every 20 seconds, gain an").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" effect that allows you to").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" dodge the next attack.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" evade the next attack.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Fall Damage cannot be evaded").withStyle(ChatFormatting.GRAY));
         }
     }
 

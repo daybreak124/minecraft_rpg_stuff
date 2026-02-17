@@ -27,9 +27,9 @@ import java.util.function.Supplier;
 import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleRing;
 
 public class DFAPacket {
-    private double motionX;
-    private double motionZ;
-    private boolean isCrouching;
+    private final double motionX;
+    private final double motionZ;
+    private final boolean isCrouching;
 
     public DFAPacket(double motionX, double motionZ, boolean isCrouching) {
         this.motionX = motionX;
@@ -56,6 +56,7 @@ public class DFAPacket {
         context.enqueueWork(() -> {
             ServerPlayer player = context.getSender();
             if (player == null) return;
+            if (!player.onGround()) return;
             if (player.isInWater()) return;
 
             Level level = player.level();

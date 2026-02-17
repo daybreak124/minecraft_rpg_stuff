@@ -49,8 +49,10 @@ public class QuantumLeapActive extends MobEffect {
         CompoundTag tag = player.getPersistentData();
 
         player.teleportTo(dashTarget.x, dashTarget.y + yOffset, dashTarget.z);
-        player.setDeltaMovement(Vec3.ZERO);
-        player.hurtMarked = true;
+
+        // Ensure the player takes fall damage
+//        player.setDeltaMovement(Vec3.ZERO);
+//        player.hurtMarked = true;
 
         EffectUtils.spawnParticleBurst(player, ParticleTypes.FISHING);
 
@@ -69,12 +71,12 @@ public class QuantumLeapActive extends MobEffect {
             if (entity instanceof Mob mob) mob.setTarget(null);
         }
 
-        int invisDuration = 20 * 4;
-        int leapActiveDuration = 20 * 6;
+        int invisDuration = 80;
+        int leapActiveDuration = 120;
 
         if (player.hasEffect(ModEffects.ENHANCED_QUANTUM_LEAP.get())) {
-            invisDuration = 20 * 6;
-            leapActiveDuration = 20 * 9;
+            invisDuration = 120;
+            leapActiveDuration = 180;
         }
 
         player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_ACTIVE.get(), leapActiveDuration, 0, false, false, true));

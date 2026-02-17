@@ -40,7 +40,7 @@ public class BastionActive extends MobEffect {
         double perc = player.getAttributeValue(ModAttributes.PERC.get());
         double con = player.getAttributeValue(ModAttributes.CON.get());
 
-        double seconds = 1 + 0.01 * fort + 0.0066 * perc + 0.0066 * con;
+        double seconds = 1.5 + 0.0075 * fort + 0.005 * perc + 0.005 * con;
         int ticks = (int)(seconds * 20);
 
         player.addEffect(new MobEffectInstance(ModEffects.BASTION_ACTIVE.get(), ticks, 0, false, false, true));
