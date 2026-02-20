@@ -16,7 +16,6 @@ public class ItemRarityUtils {
     public static Set<Item> CROSSBOWS = new HashSet<>();
     public static Set<Item> SHIELDS = new HashSet<>();
     public static Set<Item> TOOLS = new HashSet<>();
-    private static final String NBT_KEY = "custom_rarity";
 
     private static final TagKey<Item> SWORDS = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "swords"));
     private static final TagKey<Item> AXES = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "axes"));
@@ -24,24 +23,6 @@ public class ItemRarityUtils {
     private static final TagKey<Item> FORGE_BOWS = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "bows"));
     private static final TagKey<Item> CROSSBOWS_TAG = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "crossbows"));
     private static final TagKey<Item> SHIELDS_TAG = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "shields"));
-
-    public static boolean hasRarity(ItemStack stack) {
-        return stack != null && stack.hasTag() && stack.getTag().contains(NBT_KEY);
-    }
-
-    public static void writeRarityToNBT(ItemStack stack, ItemRarity rarity) {
-        if (stack == null || rarity == null) return;
-        stack.getOrCreateTag().putString(NBT_KEY, rarity.displayName);
-    }
-
-    public static ItemRarity readRarityFromNBT(ItemStack stack) {
-        if (!hasRarity(stack)) return ItemRarity.COMMON;
-        String name = stack.getTag().getString(NBT_KEY);
-        for (ItemRarity r : ItemRarity.values()) {
-            if (r.displayName.equals(name)) return r;
-        }
-        return ItemRarity.COMMON;
-    }
 
     public static String getItemType(ItemStack stack) {
         if (stack == null || stack.isEmpty()) return "unknown";

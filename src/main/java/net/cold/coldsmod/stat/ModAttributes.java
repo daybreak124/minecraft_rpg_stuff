@@ -34,17 +34,20 @@ public class ModAttributes {
     public static final RegistryObject<Attribute> INSIGHT = ATTRIBUTES.register("insight",
             () -> new RangedAttribute("insight", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
 
+    public static final RegistryObject<Attribute> DEBUFF_RESIST = ATTRIBUTES.register("debuff_resist",
+            () -> new RangedAttribute("debuff_resist", 0.0D, -2048.0D, 100.0D).setSyncable(true));
+
     public static final RegistryObject<Attribute> POTENCY = ATTRIBUTES.register("potency",
             () -> new RangedAttribute("potency", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> ACCURACY = ATTRIBUTES.register("accuracy",
             () -> new RangedAttribute("accuracy", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> PRECISION = ATTRIBUTES.register("precision",
             () -> new RangedAttribute("precision", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> HASTE = ATTRIBUTES.register("haste",
-            () -> new RangedAttribute("haste", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> MELEE_POTENCY = ATTRIBUTES.register("melee_potency",
             () -> new RangedAttribute("melee_potency", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
+    public static final RegistryObject<Attribute> HASTE = ATTRIBUTES.register("haste",
+            () -> new RangedAttribute("haste", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> MELEE_ACCURACY = ATTRIBUTES.register("melee_accuracy",
             () -> new RangedAttribute("melee_accuracy", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> MELEE_PRECISION = ATTRIBUTES.register("melee_precision",
@@ -66,8 +69,6 @@ public class ModAttributes {
             () -> new RangedAttribute("restoration", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> AMPLIFICATION = ATTRIBUTES.register("amplification",
             () -> new RangedAttribute("amplification", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> DEBUFF_RESIST = ATTRIBUTES.register("debuff_resist",
-            () -> new RangedAttribute("debuff_resist", 0.0D, -2048.0D, 100.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> POTENCY_MULTIPLIER = ATTRIBUTES.register("potency_multiplier",
             () -> new RangedAttribute("potency_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));

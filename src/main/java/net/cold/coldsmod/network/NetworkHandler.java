@@ -1,5 +1,6 @@
 package net.cold.coldsmod.network;
 
+import net.cold.coldsmod.stat.StatUpgradePacketTwo;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -100,6 +101,11 @@ public class NetworkHandler {
                 .encoder(DFADivePacket::encode)
                 .consumerMainThread(DFADivePacket::handle)
                 .add();
+
+        CHANNEL.registerMessage(nextId(), StatUpgradePacketTwo.class,
+                StatUpgradePacketTwo::toBytes,
+                StatUpgradePacketTwo::new,
+                StatUpgradePacketTwo::handle);
     }
 
     public static void sendToClient(Object msg, ServerPlayer player) {

@@ -7,7 +7,6 @@ import net.cold.coldsmod.blessingbonuses.neweffects.SummoningStone;
 import net.cold.coldsmod.network.ClientKeyInputHandler;
 import net.cold.coldsmod.network.NetworkHandler;
 import net.cold.coldsmod.network.QuantumLeapSync;
-import net.cold.coldsmod.stat.ArmorRarityModifier;
 import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.ChatFormatting;
@@ -2861,7 +2860,4 @@ public class ModItems {
 
     public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS =
             DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, "coldsmod");
-
-    public static final RegistryObject<Codec<ArmorRarityModifier>> ARMOR_RARITY =
-            LOOT_MODIFIERS.register("armor_rarity", () -> ArmorRarityModifier.CODEC);
 }

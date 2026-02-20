@@ -19,7 +19,6 @@ public class InventoryButtonHandler {
     private static final int PANEL_HEIGHT = 196;
     private static Button statsButton;
     private static final ResourceLocation TEXTURE = new ResourceLocation("coldsmod", "textures/gui/stats_button.png");
-
     private static final InventoryStatsCache C = InventoryStatsCache.CACHE;
 
     @SubscribeEvent

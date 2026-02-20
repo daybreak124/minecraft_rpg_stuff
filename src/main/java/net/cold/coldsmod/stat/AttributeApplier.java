@@ -2,9 +2,11 @@ package net.cold.coldsmod.stat;
 
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.Multimap;
+import net.cold.coldsmod.ModMessages;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundUpdateAttributesPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -31,6 +34,7 @@ import java.util.function.Supplier;
 
 import static net.cold.coldsmod.stat.AttributeMilestones.MILESTONES;
 import static net.cold.coldsmod.stat.ItemRarityUtils.getItemType;
+import static net.cold.coldsmod.stat.StatUpgradeHandlerTwo.STAT_MODIFIER_UUID;
 
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -470,6 +474,79 @@ public class AttributeApplier {
             });
         }
         return false;
+    }
+
+    @SubscribeEvent
+    public static void onPlayerClone(PlayerEvent.Clone event) {
+        // Only copy if it was a death (dimension changes handle NBT automatically)
+        if (event.isWasDeath()) {
+            CompoundTag oldData = event.getOriginal().getPersistentData();
+            CompoundTag newData = event.getEntity().getPersistentData();
+
+            // Move Screen 1
+            if (oldData.contains("SpentPointsOne")) {
+                newData.put("SpentPointsOne", oldData.getCompound("SpentPointsOne").copy());
+            }
+
+            // Move Screen 2
+            if (oldData.contains("SpentPoints")) {
+                newData.put("SpentPoints", oldData.getCompound("SpentPoints").copy());
+            }
+        }
+    }
+
+        @SubscribeEvent
+        public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+            if (event.getEntity() instanceof ServerPlayer sp) {
+                // 2. NETWORK SYNC: Now that the player is alive, fix attributes and update the screen
+                syncAndApplyAttributes(sp);
+            }
+        }
+
+        @SubscribeEvent
+        public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+            if (event.getEntity() instanceof ServerPlayer sp) {
+                // 3. INITIAL JOIN: Make sure the screen shows the right points when first joining
+                syncAndApplyAttributes(sp);
+            }
+        }
+
+    private static void syncAndApplyAttributes(ServerPlayer player) {
+
+        CompoundTag data = player.getPersistentData();
+
+        // --- SYNC SCREEN 1 (SpentPointsOne) ---
+        if (data.contains("SpentPointsOne")) {
+            CompoundTag spent1 = data.getCompound("SpentPointsOne");
+            for (String key : spent1.getAllKeys()) {
+                Attribute attr = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(key));
+                if (attr == null) continue;
+
+                int pts = spent1.getInt(key);
+                // SCREEN 1 logic: 1:1 ratio, Unique UUID
+                AttributeApplier.applyModifier(player, attr, (double) pts, StatUpgradeHandler.ATTRIBUTE_UPGRADE);
+
+                // Sync to client with a flag or unique packet for Screen 1
+                ModMessages.sendToPlayer(new StatsSyncPacket(key, pts, true), player);
+            }
+        }
+
+        // --- SYNC SCREEN 2 (SpentPoints) ---
+        if (data.contains("SpentPoints")) {
+            CompoundTag spent2 = data.getCompound("SpentPoints");
+            for (String key : spent2.getAllKeys()) {
+                Attribute attr = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(key));
+                if (attr == null) continue;
+
+                int pts = spent2.getInt(key);
+                double inc = StatUpgradeHandlerTwo.getIncrementFor(attr);
+                // SCREEN 2 logic: Increment ratio, Different UUID
+                AttributeApplier.applyModifier(player, attr, pts * inc, StatUpgradeHandlerTwo.STAT_MODIFIER_UUID);
+
+                // Sync to client for Screen 2
+                ModMessages.sendToPlayer(new StatsSyncPacket(key, pts, false), player);
+            }
+        }
     }
 
     // Randomized mobs

@@ -1,0 +1,62 @@
+package net.cold.coldsmod;
+
+import net.cold.coldsmod.stat.OpenStatMenuPacket;
+import net.cold.coldsmod.stat.StatUpgradePacket;
+import net.cold.coldsmod.stat.StatUpgradePacketTwo;
+import net.cold.coldsmod.stat.StatsSyncPacket;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.simple.SimpleChannel;
+
+public class ModMessages {
+    private static SimpleChannel INSTANCE;
+    private static int packetId = 0;
+    private static int id() { return packetId++; }
+
+    public static void register() {
+        SimpleChannel net = NetworkRegistry.ChannelBuilder
+                .named(new ResourceLocation("coldsmod", "messages"))
+                .networkProtocolVersion(() -> "1.0")
+                .clientAcceptedVersions(s -> true)
+                .serverAcceptedVersions(s -> true)
+                .simpleChannel();
+
+        INSTANCE = net;
+
+        // Register the packet that opens the menu
+        net.messageBuilder(OpenStatMenuPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(OpenStatMenuPacket::new)
+                .encoder(OpenStatMenuPacket::toBytes)
+                .consumerMainThread(OpenStatMenuPacket::handle)
+                .add();
+
+        net.messageBuilder(StatUpgradePacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(StatUpgradePacket::new)
+                .encoder(StatUpgradePacket::toBytes)
+                .consumerMainThread(StatUpgradePacket::handle)
+                .add();
+
+        net.messageBuilder(StatUpgradePacketTwo.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(StatUpgradePacketTwo::new)
+                .encoder(StatUpgradePacketTwo::toBytes)
+                .consumerMainThread(StatUpgradePacketTwo::handle)
+                .add();
+
+        net.messageBuilder(StatsSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(StatsSyncPacket::new)
+                .encoder(StatsSyncPacket::toBytes)
+                .consumerMainThread(StatsSyncPacket::handle)
+                .add();
+    }
+
+    public static <MSG> void sendToServer(MSG message) {
+        INSTANCE.sendToServer(message);
+    }
+
+    public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
+        INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
+    }
+}

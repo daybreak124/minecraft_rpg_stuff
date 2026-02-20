@@ -64,6 +64,8 @@ public class ColdsMod {
     public ColdsMod(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
 
+        MinecraftForge.EVENT_BUS.register(StatUpgradeHandler.class);
+
         copyDefaultConfig("melee_weapons.json");
         copyDefaultConfig("bows.json");
         copyDefaultConfig("crossbows.json");
@@ -74,7 +76,6 @@ public class ColdsMod {
 
         ModAttributes.ATTRIBUTES.register(modEventBus);
         ModItems.register(modEventBus);
-        MinecraftForge.EVENT_BUS.register(new ItemModifier());
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -170,6 +171,9 @@ public class ColdsMod {
         ModSounds.SOUND_EVENTS.register(modEventBus);
         modEventBus.addListener(ModAttributes::onModifyEntityAttributes);
         ModEntities.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+        ModMenu.MENUS.register(modEventBus);
+        ModMessages.register();
     }
 
     private void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
@@ -212,6 +216,7 @@ public class ColdsMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+            net.minecraft.client.gui.screens.MenuScreens.register(ModMenu.STAT_MENU.get(), StatScreen::new);
         }
 
         @SubscribeEvent

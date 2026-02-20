@@ -4,7 +4,6 @@ import net.cold.coldsmod.blessingbonuses.neweffects.*;
 import net.cold.coldsmod.blessingbonuses.skills.BastionActive;
 import net.cold.coldsmod.blessingbonuses.skills.BronzewoodCooldown;
 import net.cold.coldsmod.blessingbonuses.skills.RetaliateActive;
-import net.cold.coldsmod.stat.ItemModifier;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
@@ -15,10 +14,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModEffects {
-
-    public static void register() {
-        MinecraftForge.EVENT_BUS.register(new ItemModifier());
-    }
 
     public static final DeferredRegister<MobEffect> EFFECTS =
             DeferredRegister.create(Registries.MOB_EFFECT, "coldsmod");
