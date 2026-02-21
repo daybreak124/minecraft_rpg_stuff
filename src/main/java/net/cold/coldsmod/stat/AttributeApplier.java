@@ -4,6 +4,13 @@ import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.Multimap;
 import net.cold.coldsmod.ModMessages;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
+import net.cold.coldsmod.menu_blessing.BlessingEffectRegistry;
+import net.cold.coldsmod.menu_blessing.BlessingRegistry;
+import net.cold.coldsmod.menu_blessing.BlessingUnlockSyncPacket;
+import net.cold.coldsmod.menu_stat.StatUpgradeHandler;
+import net.cold.coldsmod.menu_stat.StatUpgradeHandlerThree;
+import net.cold.coldsmod.menu_stat.StatUpgradeHandlerTwo;
+import net.cold.coldsmod.menu_stat.StatsSyncPacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundUpdateAttributesPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -34,7 +41,6 @@ import java.util.function.Supplier;
 
 import static net.cold.coldsmod.stat.AttributeMilestones.MILESTONES;
 import static net.cold.coldsmod.stat.ItemRarityUtils.getItemType;
-import static net.cold.coldsmod.stat.StatUpgradeHandlerTwo.STAT_MODIFIER_UUID;
 
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -231,7 +237,7 @@ public class AttributeApplier {
     }
 
 
-    private static void recalculateDynamicBonuses(Player player) {
+    public static void recalculateDynamicBonuses(Player player) {
 
         removeModifier(player, Attributes.ARMOR, ARMOR_UUID);
         removeModifier(player, Attributes.ARMOR_TOUGHNESS, TOUGHNESS_UUID);
@@ -478,19 +484,39 @@ public class AttributeApplier {
 
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
-        // Only copy if it was a death (dimension changes handle NBT automatically)
         if (event.isWasDeath()) {
             CompoundTag oldData = event.getOriginal().getPersistentData();
             CompoundTag newData = event.getEntity().getPersistentData();
+            Player player = event.getEntity();
 
             // Move Screen 1
             if (oldData.contains("SpentPointsOne")) {
                 newData.put("SpentPointsOne", oldData.getCompound("SpentPointsOne").copy());
+                player.level().getServer().tell(new net.minecraft.server.TickTask(
+                        player.level().getServer().getTickCount() + 1,
+                        () -> {
+                            if (player.isAlive()) {
+                                refreshPerPointStats(player);
+                                refreshMilestones(player);
+                                recalculateDynamicBonuses(player);
+                                applyCrossbowTag(player);
+                            }
+                        }
+                ));
             }
 
             // Move Screen 2
             if (oldData.contains("SpentPoints")) {
                 newData.put("SpentPoints", oldData.getCompound("SpentPoints").copy());
+            }
+
+            // Move Screen 3
+            if (oldData.contains("SpentPointsUtil")) {
+                newData.put("SpentPointsUtil", oldData.getCompound("SpentPointsUtil").copy());
+            }
+
+            if (oldData.contains("ActiveBlessings")) {
+                newData.put("ActiveBlessings", oldData.getCompound("ActiveBlessings").copy());
             }
         }
     }
@@ -524,10 +550,22 @@ public class AttributeApplier {
 
                 int pts = spent1.getInt(key);
                 // SCREEN 1 logic: 1:1 ratio, Unique UUID
-                AttributeApplier.applyModifier(player, attr, (double) pts, StatUpgradeHandler.ATTRIBUTE_UPGRADE);
+                AttributeApplier.applyModifier(player, attr, pts, StatUpgradeHandler.ATTRIBUTE_UPGRADE);
 
                 // Sync to client with a flag or unique packet for Screen 1
-                ModMessages.sendToPlayer(new StatsSyncPacket(key, pts, true), player);
+                ModMessages.sendToPlayer(new StatsSyncPacket(key, pts, true, false), player);
+
+                player.level().getServer().tell(new net.minecraft.server.TickTask(
+                        player.level().getServer().getTickCount() + 1,
+                        () -> {
+                            if (player.isAlive()) {
+                                refreshPerPointStats(player);
+                                refreshMilestones(player);
+                                recalculateDynamicBonuses(player);
+                                applyCrossbowTag(player);
+                            }
+                        }
+                ));
             }
         }
 
@@ -544,8 +582,43 @@ public class AttributeApplier {
                 AttributeApplier.applyModifier(player, attr, pts * inc, StatUpgradeHandlerTwo.STAT_MODIFIER_UUID);
 
                 // Sync to client for Screen 2
-                ModMessages.sendToPlayer(new StatsSyncPacket(key, pts, false), player);
+                ModMessages.sendToPlayer(new StatsSyncPacket(key, pts, false, false), player);
             }
+        }
+
+        // --- SYNC SCREEN 3 ---
+        if (data.contains("SpentPointsUtil")) {
+            CompoundTag spent2 = data.getCompound("SpentPointsUtil");
+            for (String key : spent2.getAllKeys()) {
+                Attribute attr = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(key));
+                if (attr == null) continue;
+
+                int pts = spent2.getInt(key);
+                double inc = StatUpgradeHandlerThree.getIncrementFor(attr);
+                // SCREEN 2 logic: Increment ratio, Different UUID
+                AttributeApplier.applyModifier(player, attr, pts * inc, StatUpgradeHandlerThree.UTIL_STAT_MODIFIER_UUID);
+
+                // Sync to client for Screen 2
+                ModMessages.sendToPlayer(new StatsSyncPacket(key, pts, false, true), player);
+            }
+        }
+
+        if (data.contains("ActiveBlessings")) {
+            CompoundTag blessings = data.getCompound("ActiveBlessings");
+
+            for (String id : blessings.getAllKeys()) {
+                if (blessings.getBoolean(id)) {
+                    var entry = BlessingRegistry.MAP.get(id);
+                    if (entry != null) {
+                        // Re-apply the logic/modifiers associated with the blessing
+                        var onApply = BlessingEffectRegistry.ON_APPLY.get(entry.item());
+                        if (onApply != null) onApply.accept(player);
+                    }
+                }
+            }
+
+            // Final sync to client to ensure Screen buttons are Red/Green/Yellow correctly
+            ModMessages.sendToPlayer(new BlessingUnlockSyncPacket(data), player);
         }
     }
 

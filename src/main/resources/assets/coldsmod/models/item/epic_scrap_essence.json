@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "coldsmod:item/epic_scrap_essence"
-  }
-}

@@ -254,24 +254,8 @@ public class CreativeTabs {
 
                                 output.accept(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get());
 
-                                output.accept(ModItems.COMMON_SCRAP_ESSENCE.get());
-                                output.accept(ModItems.UNCOMMON_SCRAP_ESSENCE.get());
-                                output.accept(ModItems.RARE_SCRAP_ESSENCE.get());
-                                output.accept(ModItems.EPIC_SCRAP_ESSENCE.get());
-                                output.accept(ModItems.LEGENDARY_SCRAP_ESSENCE.get());
-
-                                output.accept(ModItems.PEARL_OF_REPLENISHING.get());
-                                output.accept(ModItems.PEARL_OF_RECHARGING.get());
-                                output.accept(ModItems.PEARL_OF_RENEWING.get());
-                                output.accept(ModItems.PEARL_OF_RESTORING.get());
-                                output.accept(ModItems.PEARL_OF_REJUVENATING.get());
+                                output.accept(ModItems.SCRAP_ESSENCE.get());
                                 output.accept(ModItems.PEARL_OF_REVITALIZING.get());
-
-                                output.accept(ModItems.SHARD_OF_INFUSION.get());
-                                output.accept(ModItems.SHARD_OF_AUGMENTATION.get());
-                                output.accept(ModItems.SHARD_OF_AMPLIFICATION.get());
-                                output.accept(ModItems.SHARD_OF_EMPOWERMENT.get());
-                                output.accept(ModItems.SHARD_OF_ASCENDANCY.get());
                                 output.accept(ModItems.SHARD_OF_TRANSCENDENCE.get());
                             })
                             .build()

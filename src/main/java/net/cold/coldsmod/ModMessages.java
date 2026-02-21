@@ -1,9 +1,9 @@
 package net.cold.coldsmod;
 
-import net.cold.coldsmod.stat.OpenStatMenuPacket;
-import net.cold.coldsmod.stat.StatUpgradePacket;
-import net.cold.coldsmod.stat.StatUpgradePacketTwo;
-import net.cold.coldsmod.stat.StatsSyncPacket;
+import net.cold.coldsmod.menu_blessing.BlessingMenuPacket;
+import net.cold.coldsmod.menu_blessing.BlessingPacket;
+import net.cold.coldsmod.menu_blessing.BlessingUnlockSyncPacket;
+import net.cold.coldsmod.menu_stat.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -45,10 +45,35 @@ public class ModMessages {
                 .consumerMainThread(StatUpgradePacketTwo::handle)
                 .add();
 
+        net.messageBuilder(StatUpgradePacketThree.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(StatUpgradePacketThree::new)
+                .encoder(StatUpgradePacketThree::toBytes)
+                .consumerMainThread(StatUpgradePacketThree::handle)
+                .add();
+
         net.messageBuilder(StatsSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(StatsSyncPacket::new)
                 .encoder(StatsSyncPacket::toBytes)
                 .consumerMainThread(StatsSyncPacket::handle)
+                .add();
+
+        // Register the packet that opens the menu
+        net.messageBuilder(BlessingMenuPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(BlessingMenuPacket::new)
+                .encoder(BlessingMenuPacket::toBytes)
+                .consumerMainThread(BlessingMenuPacket::handle)
+                .add();
+
+        net.messageBuilder(BlessingPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(BlessingPacket::new)
+                .encoder(BlessingPacket::toBytes)
+                .consumerMainThread(BlessingPacket::handle)
+                .add();
+
+        net.messageBuilder(BlessingUnlockSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(BlessingUnlockSyncPacket::new)
+                .encoder(BlessingUnlockSyncPacket::toBytes)
+                .consumerMainThread(BlessingUnlockSyncPacket::handle)
                 .add();
     }
 

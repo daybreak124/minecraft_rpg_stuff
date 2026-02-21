@@ -26,7 +26,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import top.theillusivec4.curios.api.SlotContext;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -133,104 +132,81 @@ public class ModItems {
             }
     );
 
-    public static final RegistryObject<Item> COMMON_SCRAP_ESSENCE = ITEMS.register(
-            "common_scrap_essence",
+//    public static final RegistryObject<Item> COMMON_SCRAP_ESSENCE = ITEMS.register(
+//            "common_scrap_essence",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Common Scrap Essence").withStyle(ChatFormatting.GRAY);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal(""));
+//                    tooltip.add(
+//                            Component.literal("Used to upgrade the rarity of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("COMMON").withStyle(ChatFormatting.GRAY))
+//                                    .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
+//                                    .append(Component.literal("UNCOMMON").withStyle(ChatFormatting.GREEN))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
+
+//    public static final RegistryObject<Item> UNCOMMON_SCRAP_ESSENCE = ITEMS.register(
+//            "uncommon_scrap_essence",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Uncommon Scrap Essence").withStyle(ChatFormatting.GREEN);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal(""));
+//                    tooltip.add(
+//                            Component.literal("Used to upgrade the rarity of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("UNCOMMON").withStyle(ChatFormatting.GREEN))
+//                                    .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
+//                                    .append(Component.literal("RARE").withStyle(ChatFormatting.BLUE))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
+//
+//    public static final RegistryObject<Item> RARE_SCRAP_ESSENCE = ITEMS.register(
+//            "rare_scrap_essence",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Rare Scrap Essence").withStyle(ChatFormatting.BLUE);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal("")); // empty line
+//                    tooltip.add(
+//                            Component.literal("Used to upgrade the rarity of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("RARE").withStyle(ChatFormatting.BLUE))
+//                                    .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
+//                                    .append(Component.literal("EPIC").withStyle(ChatFormatting.DARK_PURPLE))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
+
+    public static final RegistryObject<Item> SCRAP_ESSENCE = ITEMS.register(
+            "scrap_essence",
             () -> new Item(new Item.Properties().stacksTo(64)) {
                 @Override
                 public Component getName(ItemStack stack) {
-                    return Component.literal("Common Scrap Essence").withStyle(ChatFormatting.GRAY);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal(""));
-                    tooltip.add(
-                            Component.literal("Used to upgrade the rarity of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("COMMON").withStyle(ChatFormatting.GRAY))
-                                    .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
-                                    .append(Component.literal("UNCOMMON").withStyle(ChatFormatting.GREEN))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
-
-    public static final RegistryObject<Item> UNCOMMON_SCRAP_ESSENCE = ITEMS.register(
-            "uncommon_scrap_essence",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Uncommon Scrap Essence").withStyle(ChatFormatting.GREEN);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal(""));
-                    tooltip.add(
-                            Component.literal("Used to upgrade the rarity of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("UNCOMMON").withStyle(ChatFormatting.GREEN))
-                                    .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
-                                    .append(Component.literal("RARE").withStyle(ChatFormatting.BLUE))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
-
-    public static final RegistryObject<Item> RARE_SCRAP_ESSENCE = ITEMS.register(
-            "rare_scrap_essence",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Rare Scrap Essence").withStyle(ChatFormatting.BLUE);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal("")); // empty line
-                    tooltip.add(
-                            Component.literal("Used to upgrade the rarity of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("RARE").withStyle(ChatFormatting.BLUE))
-                                    .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
-                                    .append(Component.literal("EPIC").withStyle(ChatFormatting.DARK_PURPLE))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
-
-    public static final RegistryObject<Item> EPIC_SCRAP_ESSENCE = ITEMS.register(
-            "epic_scrap_essence",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Epic Scrap Essence").withStyle(ChatFormatting.DARK_PURPLE);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal("")); // empty line
-                    tooltip.add(
-                            Component.literal("Used to upgrade the rarity of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("EPIC").withStyle(ChatFormatting.DARK_PURPLE))
-                                    .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
-                                    .append(Component.literal("LEGENDARY").withStyle(ChatFormatting.GOLD))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
-
-    public static final RegistryObject<Item> LEGENDARY_SCRAP_ESSENCE = ITEMS.register(
-            "legendary_scrap_essence",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Legendary Scrap Essence").withStyle(ChatFormatting.GOLD);
+                    return Component.literal("Scrap Essence").withStyle(ChatFormatting.RED);
                 }
 
                 @Override
@@ -238,132 +214,151 @@ public class ModItems {
                     super.appendHoverText(stack, level, tooltip, flag);
                     tooltip.add(Component.literal("")); // empty line
                     tooltip.add(
-                            Component.literal("Used to upgrade the rarity of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("LEGENDARY").withStyle(ChatFormatting.GOLD))
-                                    .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
-                                    .append(Component.literal("MYTHIC").withStyle(ChatFormatting.AQUA))
-                    );
+                            Component.literal("Used to upgrade utility stats.").withStyle(ChatFormatting.GRAY));
                     tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
 
-    public static final RegistryObject<Item> PEARL_OF_REPLENISHING = ITEMS.register(
-            "pearl_of_replenishing",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Pearl of Replenishing").withStyle(ChatFormatting.GRAY);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal("")); // empty line
-                    tooltip.add(
-                            Component.literal("Used to re-roll the stats of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("COMMON").withStyle(ChatFormatting.GRAY))
-                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
-
-    public static final RegistryObject<Item> PEARL_OF_RECHARGING = ITEMS.register(
-            "pearl_of_recharging",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Pearl of Recharging").withStyle(ChatFormatting.GREEN);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal("")); // empty line
-                    tooltip.add(
-                            Component.literal("Used to re-roll the stats of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("UNCOMMON").withStyle(ChatFormatting.GREEN))
-                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
-
-    public static final RegistryObject<Item> PEARL_OF_RENEWING = ITEMS.register(
-            "pearl_of_renewing",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Pearl of Renewing").withStyle(ChatFormatting.BLUE);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal("")); // empty line
-                    tooltip.add(
-                            Component.literal("Used to re-roll the stats of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("RARE").withStyle(ChatFormatting.BLUE))
-                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
-
-    public static final RegistryObject<Item> PEARL_OF_RESTORING = ITEMS.register(
-            "pearl_of_restoring",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Pearl of Restoring").withStyle(ChatFormatting.DARK_PURPLE);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal("")); // empty line
-                    tooltip.add(
-                            Component.literal("Used to re-roll the stats of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("EPIC").withStyle(ChatFormatting.DARK_PURPLE))
-                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
-
-    public static final RegistryObject<Item> PEARL_OF_REJUVENATING = ITEMS.register(
-            "pearl_of_rejuvenating",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Pearl of Rejuvenating").withStyle(ChatFormatting.GOLD);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal("")); // empty line
-                    tooltip.add(
-                            Component.literal("Used to re-roll the stats of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("LEGENDARY").withStyle(ChatFormatting.GOLD))
-                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
+//    public static final RegistryObject<Item> LEGENDARY_SCRAP_ESSENCE = ITEMS.register(
+//            "legendary_scrap_essence",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Legendary Scrap Essence").withStyle(ChatFormatting.GOLD);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal("")); // empty line
+//                    tooltip.add(
+//                            Component.literal("Used to upgrade the rarity of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("LEGENDARY").withStyle(ChatFormatting.GOLD))
+//                                    .append(Component.literal(" items to ").withStyle(ChatFormatting.GRAY))
+//                                    .append(Component.literal("MYTHIC").withStyle(ChatFormatting.AQUA))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
+//
+//    public static final RegistryObject<Item> PEARL_OF_REPLENISHING = ITEMS.register(
+//            "pearl_of_replenishing",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Pearl of Replenishing").withStyle(ChatFormatting.GRAY);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal("")); // empty line
+//                    tooltip.add(
+//                            Component.literal("Used to re-roll the stats of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("COMMON").withStyle(ChatFormatting.GRAY))
+//                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
+//
+//    public static final RegistryObject<Item> PEARL_OF_RECHARGING = ITEMS.register(
+//            "pearl_of_recharging",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Pearl of Recharging").withStyle(ChatFormatting.GREEN);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal("")); // empty line
+//                    tooltip.add(
+//                            Component.literal("Used to re-roll the stats of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("UNCOMMON").withStyle(ChatFormatting.GREEN))
+//                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
+//
+//    public static final RegistryObject<Item> PEARL_OF_RENEWING = ITEMS.register(
+//            "pearl_of_renewing",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Pearl of Renewing").withStyle(ChatFormatting.BLUE);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal("")); // empty line
+//                    tooltip.add(
+//                            Component.literal("Used to re-roll the stats of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("RARE").withStyle(ChatFormatting.BLUE))
+//                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
+//
+//    public static final RegistryObject<Item> PEARL_OF_RESTORING = ITEMS.register(
+//            "pearl_of_restoring",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Pearl of Restoring").withStyle(ChatFormatting.DARK_PURPLE);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal("")); // empty line
+//                    tooltip.add(
+//                            Component.literal("Used to re-roll the stats of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("EPIC").withStyle(ChatFormatting.DARK_PURPLE))
+//                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
+//
+//    public static final RegistryObject<Item> PEARL_OF_REJUVENATING = ITEMS.register(
+//            "pearl_of_rejuvenating",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Pearl of Rejuvenating").withStyle(ChatFormatting.GOLD);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal("")); // empty line
+//                    tooltip.add(
+//                            Component.literal("Used to re-roll the stats of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("LEGENDARY").withStyle(ChatFormatting.GOLD))
+//                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
 
     public static final RegistryObject<Item> PEARL_OF_REVITALIZING = ITEMS.register(
             "pearl_of_revitalizing",
             () -> new Item(new Item.Properties().stacksTo(64)) {
                 @Override
                 public Component getName(ItemStack stack) {
-                    return Component.literal("Pearl of Revitalizing").withStyle(ChatFormatting.AQUA);
+                    return Component.literal("Pearl of Revitalizing").withStyle(ChatFormatting.RED);
                 }
 
                 @Override
@@ -371,124 +366,120 @@ public class ModItems {
                     super.appendHoverText(stack, level, tooltip, flag);
                     tooltip.add(Component.literal("")); // empty line
                     tooltip.add(
-                            Component.literal("Used to re-roll the stats of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("MYTHIC").withStyle(ChatFormatting.AQUA))
-                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                            Component.literal("Used to upgrade stats ").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
 
-    public static final RegistryObject<Item> SHARD_OF_INFUSION = ITEMS.register(
-            "shard_of_infusion",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Shard of Infusion").withStyle(ChatFormatting.GRAY);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal("")); // empty line
-                    tooltip.add(
-                            Component.literal("Used to re-roll the attributes of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("COMMON").withStyle(ChatFormatting.GRAY))
-                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
-
-    public static final RegistryObject<Item> SHARD_OF_AUGMENTATION = ITEMS.register(
-            "shard_of_augmentation",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Shard of Augmentation").withStyle(ChatFormatting.GREEN);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal("")); // empty line
-                    tooltip.add(
-                            Component.literal("Used to re-roll the attributes of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("UNCOMMON").withStyle(ChatFormatting.GREEN))
-                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
-
-    public static final RegistryObject<Item> SHARD_OF_AMPLIFICATION = ITEMS.register(
-            "shard_of_amplification",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Shard of Amplification").withStyle(ChatFormatting.BLUE);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal("")); // empty line
-                    tooltip.add(
-                            Component.literal("Used to re-roll the attributes of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("RARE").withStyle(ChatFormatting.BLUE))
-                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
-
-    public static final RegistryObject<Item> SHARD_OF_EMPOWERMENT = ITEMS.register(
-            "shard_of_empowerment",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Shard of Empowerment").withStyle(ChatFormatting.DARK_PURPLE);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal("")); // empty line
-                    tooltip.add(
-                            Component.literal("Used to re-roll the attributes of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("EPIC").withStyle(ChatFormatting.DARK_PURPLE))
-                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
-
-    public static final RegistryObject<Item> SHARD_OF_ASCENDANCY = ITEMS.register(
-            "shard_of_ascendancy",
-            () -> new Item(new Item.Properties().stacksTo(64)) {
-                @Override
-                public Component getName(ItemStack stack) {
-                    return Component.literal("Shard of Ascendancy").withStyle(ChatFormatting.GOLD);
-                }
-
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    super.appendHoverText(stack, level, tooltip, flag);
-                    tooltip.add(Component.literal("")); // empty line
-                    tooltip.add(
-                            Component.literal("Used to re-roll the attributes of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("LEGENDARY").withStyle(ChatFormatting.GOLD))
-                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
-                }
-            }
-    );
+//    public static final RegistryObject<Item> SHARD_OF_INFUSION = ITEMS.register(
+//            "shard_of_infusion",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Shard of Infusion").withStyle(ChatFormatting.GRAY);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal("")); // empty line
+//                    tooltip.add(
+//                            Component.literal("Used to re-roll the attributes of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("COMMON").withStyle(ChatFormatting.GRAY))
+//                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
+//
+//    public static final RegistryObject<Item> SHARD_OF_AUGMENTATION = ITEMS.register(
+//            "shard_of_augmentation",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Shard of Augmentation").withStyle(ChatFormatting.GREEN);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal("")); // empty line
+//                    tooltip.add(
+//                            Component.literal("Used to re-roll the attributes of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("UNCOMMON").withStyle(ChatFormatting.GREEN))
+//                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
+//
+//    public static final RegistryObject<Item> SHARD_OF_AMPLIFICATION = ITEMS.register(
+//            "shard_of_amplification",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Shard of Amplification").withStyle(ChatFormatting.BLUE);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal("")); // empty line
+//                    tooltip.add(
+//                            Component.literal("Used to re-roll the attributes of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("RARE").withStyle(ChatFormatting.BLUE))
+//                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
+//
+//    public static final RegistryObject<Item> SHARD_OF_EMPOWERMENT = ITEMS.register(
+//            "shard_of_empowerment",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Shard of Empowerment").withStyle(ChatFormatting.DARK_PURPLE);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal("")); // empty line
+//                    tooltip.add(
+//                            Component.literal("Used to re-roll the attributes of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("EPIC").withStyle(ChatFormatting.DARK_PURPLE))
+//                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
+//
+//    public static final RegistryObject<Item> SHARD_OF_ASCENDANCY = ITEMS.register(
+//            "shard_of_ascendancy",
+//            () -> new Item(new Item.Properties().stacksTo(64)) {
+//                @Override
+//                public Component getName(ItemStack stack) {
+//                    return Component.literal("Shard of Ascendancy").withStyle(ChatFormatting.GOLD);
+//                }
+//
+//                @Override
+//                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+//                    super.appendHoverText(stack, level, tooltip, flag);
+//                    tooltip.add(Component.literal("")); // empty line
+//                    tooltip.add(
+//                            Component.literal("Used to re-roll the attributes of ").withStyle(ChatFormatting.GRAY)
+//                                    .append(Component.literal("LEGENDARY").withStyle(ChatFormatting.GOLD))
+//                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
+//                    );
+//                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+//                }
+//            }
+//    );
 
     public static final RegistryObject<Item> PEARL_ICON = ITEMS.register("pearl_icon",
             () -> new Item(new Item.Properties()));
@@ -501,7 +492,7 @@ public class ModItems {
             () -> new Item(new Item.Properties().stacksTo(64)) {
                 @Override
                 public Component getName(ItemStack stack) {
-                    return Component.literal("Shard of Transcendence").withStyle(ChatFormatting.AQUA);
+                    return Component.literal("Shard of Transcendence").withStyle(ChatFormatting.RED);
                 }
 
                 @Override
@@ -509,11 +500,7 @@ public class ModItems {
                     super.appendHoverText(stack, level, tooltip, flag);
                     tooltip.add(Component.literal("")); // empty line
                     tooltip.add(
-                            Component.literal("Used to re-roll the attributes of ").withStyle(ChatFormatting.GRAY)
-                                    .append(Component.literal("MYTHIC").withStyle(ChatFormatting.AQUA))
-                                    .append(Component.literal(" items").withStyle(ChatFormatting.GRAY))
-                    );
-                    tooltip.add(Component.literal("Used in Anvils.").withStyle(ChatFormatting.GRAY));
+                            Component.literal("Used to upgrade attributes").withStyle(ChatFormatting.GRAY));
                 }
             }
     );
@@ -545,30 +532,9 @@ public class ModItems {
             () -> new WarlordsGazeItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class WarlordsGazeItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class WarlordsGazeItem extends Item {
         public WarlordsGazeItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !(player.hasEffect(ModEffects.INTIMIDATING_PRESENCE_COOLDOWN.get()))) {
-                player.addEffect(new MobEffectInstance(ModEffects.INTIMIDATING_PRESENCE.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.INTIMIDATING_PRESENCE.get());
-                player.removeEffect(ModEffects.INTIMIDATING_PRESENCE_COOLDOWN.get());
-            }
-        }
-
-        @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.INTIMIDATING_PRESENCE_COOLDOWN.get());
         }
 
         @Override
@@ -604,30 +570,9 @@ public class ModItems {
             () -> new HornOfFearmongeringItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class HornOfFearmongeringItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class HornOfFearmongeringItem extends Item {
         public HornOfFearmongeringItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !(player.hasEffect(ModEffects.DARING_SHOUT_COOLDOWN.get()))) {
-                player.addEffect(new MobEffectInstance(ModEffects.DARING_SHOUT.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.DARING_SHOUT.get());
-                player.removeEffect(ModEffects.DARING_SHOUT_COOLDOWN.get());
-            }
-        }
-
-        @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.DARING_SHOUT_COOLDOWN.get());
         }
 
         @Override
@@ -665,7 +610,7 @@ public class ModItems {
             () -> new HanksEyeItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class HanksEyeItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class HanksEyeItem extends Item {
         public HanksEyeItem(Properties properties) {
             super(properties);
         }
@@ -673,25 +618,6 @@ public class ModItems {
         @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Hank's Eye").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("hawkeye_eligible", true);
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.HAWKEYE.get());
-                player.getPersistentData().remove("hawkeye_eligible");
-                player.getPersistentData().remove("hawkeye");
-
-                removeModifier(player, ModAttributes.NOCK_HASTE.get(), HAWKEYE_UUID);
-                removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), HAWKEYE_UUID);
-            }
         }
 
         @Override
@@ -720,24 +646,9 @@ public class ModItems {
             () -> new SunstoneGemItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class SunstoneGemItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class SunstoneGemItem extends Item {
         public SunstoneGemItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.addEffect(new MobEffectInstance(ModEffects.SOLARA.get(), 24000, 0, false, false, true));
-                player.getPersistentData().putBoolean("solara_eligible", true);
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().remove("solara_eligible");
-            }
         }
 
         @Override
@@ -764,15 +675,14 @@ public class ModItems {
             tooltip.add(Component.literal(" least 1 Minecraft day.").withStyle(ChatFormatting.GRAY));
         }
     }
-
-    private static final UUID FRENZY_ATTACK_DAMAGE = UUID.fromString("d739268d-e62f-4c9b-8301-2812343ab281");
+    public static final UUID FRENZY_ATTACK_DAMAGE = UUID.fromString("d739268d-e62f-4c9b-8301-2812343ab281");
 
     public static final RegistryObject<Item> RAGE_AMPLIFIER = ITEMS.register(
             "rage_amplifier",
             () -> new RageAmplifierItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class RageAmplifierItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class RageAmplifierItem extends Item {
         public RageAmplifierItem(Properties properties) {
             super(properties);
         }
@@ -780,25 +690,6 @@ public class ModItems {
         @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Rage Amplifier").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("frenzy_eligible", true);
-                AttributeApplier.applyModifier(player, Attributes.ATTACK_DAMAGE, 1.0, FRENZY_ATTACK_DAMAGE);
-                AttributeApplier.applyPercentModifierAdditive(player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), 0.05, FRENZY_ATTACK_DAMAGE);            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.FRENZY.get());
-                player.getPersistentData().remove("frenzy_eligible");
-                player.getPersistentData().remove("frenzy");
-                AttributeApplier.removeModifier(player, Attributes.ATTACK_DAMAGE, FRENZY_ATTACK_DAMAGE);
-                AttributeApplier.removeModifier(player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), FRENZY_ATTACK_DAMAGE);
-            }
         }
 
         @Override
@@ -828,34 +719,9 @@ public class ModItems {
             () -> new DropOfSacrificialBloodItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class DropOfSacrificialBloodItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DropOfSacrificialBloodItem extends Item {
         public DropOfSacrificialBloodItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player
-                    && !player.hasEffect(ModEffects.RECKONING_COOLDOWN.get())
-                    && !(player.hasEffect(ModEffects.RECKONING_ACTIVE.get()))) {
-                player.addEffect(new MobEffectInstance(ModEffects.RECKONING.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.RECKONING.get());
-                player.removeEffect(ModEffects.RECKONING_COOLDOWN.get());
-                player.removeEffect(ModEffects.RECKONING_ACTIVE.get());
-                player.getPersistentData().remove("IgnoreRejuvenation");
-            }
-        }
-
-        @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.RECKONING_ACTIVE.get()) && !player.hasEffect(ModEffects.RECKONING_COOLDOWN.get());
         }
 
         @Override
@@ -893,30 +759,9 @@ public class ModItems {
             () -> new HellOnEarthItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class HellOnEarthItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class HellOnEarthItem extends Item {
         public HellOnEarthItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.DIRECTED_HATRED_COOLDOWN.get());
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !(player.hasEffect(ModEffects.DIRECTED_HATRED_COOLDOWN.get()))) {
-                player.addEffect(new MobEffectInstance(ModEffects.DIRECTED_HATRED_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.DIRECTED_HATRED_READY.get());
-                player.removeEffect(ModEffects.DIRECTED_HATRED_COOLDOWN.get());
-            }
         }
 
         @Override
@@ -950,34 +795,9 @@ public class ModItems {
             () -> new BannerOfDeterminationItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class BannerOfDeterminationItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class BannerOfDeterminationItem extends Item {
         public BannerOfDeterminationItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !(player.hasEffect(ModEffects.INTO_THE_FRAY.get()) || player.hasEffect(ModEffects.INTO_THE_FRAY_COOLDOWN.get()));
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("into_the_fray_eligible", true);
-
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.INTO_THE_FRAY_COOLDOWN.get());
-                player.removeEffect(ModEffects.INTO_THE_FRAY.get());
-                player.getPersistentData().remove("into_the_fray_eligible");
-                player.getPersistentData().remove("sprintTicks");
-                player.getPersistentData().remove("itfStacks");
-            }
         }
 
         @Override
@@ -1022,46 +842,9 @@ public class ModItems {
             () -> new WormholeItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class WormholeItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class WormholeItem extends Item {
         public WormholeItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.QUANTUM_LEAP_COOLDOWN.get());
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-
-                if (player instanceof ServerPlayer sp) {
-                    NetworkHandler.sendToClient(new QuantumLeapSync.QuantumLeapFlagPacket(true), sp);
-                }
-
-                if (!player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())
-                    && !player.hasEffect(ModEffects.QUANTUM_LEAP_COOLDOWN.get())) {
-                    player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-                }
-
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                CompoundTag tag = player.getPersistentData();
-                player.removeEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get());
-                player.removeEffect(ModEffects.QUANTUM_LEAP_READY.get());
-                player.removeEffect(ModEffects.QUANTUM_LEAP_COOLDOWN.get());
-                tag.remove("invis_added");
-
-                if (player instanceof ServerPlayer sp) {
-                    NetworkHandler.sendToClient(new QuantumLeapSync.QuantumLeapFlagPacket(false), sp);
-                }
-            }
         }
 
         @Override
@@ -1102,45 +885,9 @@ public class ModItems {
             () -> new OrbOfWorldDestructionItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class OrbOfWorldDestructionItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class OrbOfWorldDestructionItem extends Item {
         public OrbOfWorldDestructionItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.DEATH_FROM_ABOVE_COOLDOWN.get());
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-
-//                if (player instanceof ServerPlayer sp) {
-//                    NetworkHandler.sendToClient(new DFASync.DFAFlagPacket(true), sp);
-//                }
-                if (!player.hasEffect(ModEffects.DEATH_FROM_ABOVE_COOLDOWN.get())) {
-                    player.addEffect(new MobEffectInstance(ModEffects.DEATH_FROM_ABOVE.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-                }
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.DEATH_FROM_ABOVE.get());
-                player.removeEffect(ModEffects.DEATH_FROM_ABOVE_COOLDOWN.get());
-                player.removeEffect(ModEffects.ENHANCED_QUANTUM_LEAP.get());
-                player.getPersistentData().remove("DFA_fall_damage_cancel");
-                player.getPersistentData().remove("dfaFallDamage");
-                player.getPersistentData().remove("DFA_Airborne");
-
-//                if (player instanceof ServerPlayer sp) {
-//                    NetworkHandler.sendToClient(new DFASync.DFAFlagPacket(false), sp);
-//                }
-
-            }
         }
 
         @Override
@@ -1192,35 +939,9 @@ public class ModItems {
             () -> new SoulMagnetItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class SoulMagnetItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class SoulMagnetItem extends Item {
         public SoulMagnetItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.SOUL_SEVERANCE_ACTIVE.get()) && !player.hasEffect(ModEffects.SOUL_SEVERANCE_COOLDOWN.get());
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-
-                if (!player.hasEffect(ModEffects.SOUL_SEVERANCE_COOLDOWN.get())
-                && !player.hasEffect(ModEffects.SOUL_SEVERANCE_ACTIVE.get())) {
-                    player.addEffect(new MobEffectInstance(ModEffects.SOUL_SEVERANCE_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-                }
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.SOUL_SEVERANCE_ACTIVE.get());
-                player.removeEffect(ModEffects.SOUL_SEVERANCE_READY.get());
-                player.removeEffect(ModEffects.SOUL_SEVERANCE_COOLDOWN.get());
-            }
         }
 
         @Override
@@ -1253,7 +974,7 @@ public class ModItems {
             () -> new LightningInfusionItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class LightningInfusionItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class LightningInfusionItem extends Item {
         public LightningInfusionItem(Properties properties) {
             super(properties);
         }
@@ -1261,21 +982,6 @@ public class ModItems {
         @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Lightning Infusion").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("chain_lightning_applied", true);
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().remove("chain_lightning_applied");
-                player.getPersistentData().remove("procChainLightning");
-            }
         }
 
         @Override
@@ -1302,7 +1008,7 @@ public class ModItems {
             () -> new BloodthirstItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class BloodthirstItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class BloodthirstItem extends Item {
         public BloodthirstItem(Properties properties) {
             super(properties);
         }
@@ -1310,26 +1016,6 @@ public class ModItems {
         @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Handle of Bloodthirst").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("berserk_applied", true);
-                if (!player.hasEffect(ModEffects.BERSERK_TIMER.get())) {
-                    player.addEffect(new MobEffectInstance(ModEffects.BERSERK_TIMER.get(), 20*15, 0, false, false, true));
-                }
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.BERSERK.get());
-                player.removeEffect(ModEffects.BERSERK_TIMER.get());
-                player.removeEffect(ModEffects.BERSERK_READY.get());
-                player.getPersistentData().remove("berserk_applied");
-            }
         }
 
         @Override
@@ -1363,32 +1049,9 @@ public class ModItems {
             () -> new BranchOfTheWorldTreeItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class BranchOfTheWorldTreeItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class BranchOfTheWorldTreeItem extends Item {
         public BranchOfTheWorldTreeItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.BRONZEWOOD_COOLDOWN.get());
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.BRONZEWOOD_COOLDOWN.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.BRONZEWOOD_COOLDOWN.get());
-                player.removeEffect(ModEffects.BRONZEWOOD_READY.get());
-
-                player.getPersistentData().remove("bronzewood_proc");
-            }
         }
 
         @Override
@@ -1426,35 +1089,14 @@ public class ModItems {
             () -> new HanksOtherEyeItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class HanksOtherEyeItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class HanksOtherEyeItem extends Item {
         public HanksOtherEyeItem(Properties properties) {
             super(properties);
         }
 
         @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.CLAIRVOYANCE_COOLDOWN.get());
-        }
-
-        @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Hank's Other Eye").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.CLAIRVOYANCE_COOLDOWN.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.CLAIRVOYANCE_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.CLAIRVOYANCE_READY.get());
-                player.removeEffect(ModEffects.CLAIRVOYANCE_COOLDOWN.get());
-            }
         }
 
         @Override
@@ -1481,35 +1123,9 @@ public class ModItems {
             () -> new LifeTouchItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class LifeTouchItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class LifeTouchItem extends Item {
         public LifeTouchItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.LIFE_TOUCH_COOLDOWN.get());
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("life_touch_applied", true);
-
-                if (!player.hasEffect(ModEffects.LIFE_TOUCH_COOLDOWN.get())) {
-                    player.addEffect(new MobEffectInstance(ModEffects.LIFE_TOUCH_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-                }
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.LIFE_TOUCH_READY.get());
-                player.removeEffect(ModEffects.LIFE_TOUCH_COOLDOWN.get());
-                player.getPersistentData().remove("life_touch_applied");
-            }
         }
 
         @Override
@@ -1528,7 +1144,7 @@ public class ModItems {
             tooltip.add(Component.literal(" other players for 17.5% of").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" the Damage done and apply").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Regeneration I for 5 seconds.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Additionally, when shooting.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Additionally, when shooting").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" a block, spawn Spirit Forest,").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" which applies Regeneration I").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" to targets within a 3 block").withStyle(ChatFormatting.GRAY));
@@ -1552,35 +1168,14 @@ public class ModItems {
             () -> new CupidsArrowItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class CupidsArrowItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class CupidsArrowItem extends Item {
         public CupidsArrowItem(Properties properties) {
             super(properties);
         }
 
         @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.DECEPTION_COOLDOWN.get());
-        }
-
-        @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Cupid's Arrow").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.DECEPTION_COOLDOWN.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.DECEPTION_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.DECEPTION_COOLDOWN.get());
-                player.removeEffect(ModEffects.DECEPTION_READY.get());
-            }
         }
 
         @Override
@@ -1606,34 +1201,14 @@ public class ModItems {
             () -> new IgnitionMarkItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class IgnitionMarkItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class IgnitionMarkItem extends Item {
         public IgnitionMarkItem(Properties properties) {
             super(properties);
         }
 
         @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            return true;
-        }
-
-        @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Ignition Mark").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get(), 20*8, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get());
-                player.removeEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get());
-            }
         }
 
         @Override
@@ -1665,35 +1240,14 @@ public class ModItems {
             () -> new WeakPointStudiesItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class WeakPointStudiesItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class WeakPointStudiesItem extends Item {
         public WeakPointStudiesItem(Properties properties) {
             super(properties);
         }
 
         @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.EXPLOIT_WEAKNESS_COOLDOWN.get());
-        }
-
-        @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Weak Point Studies").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.EXPLOIT_WEAKNESS_COOLDOWN.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.EXPLOIT_WEAKNESS_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.EXPLOIT_WEAKNESS_COOLDOWN.get());
-                player.removeEffect(ModEffects.EXPLOIT_WEAKNESS_READY.get());
-            }
         }
 
         @Override
@@ -1718,12 +1272,13 @@ public class ModItems {
             tooltip.add(Component.literal(" per Dex.").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Slowness III for 3s + 0.03s").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" per Dex.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" Effects above spread to").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" monsters within 4 blocks").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" with halved duration.").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal(" ").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Instant Damage II (Heal if").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal(" Undead).").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" ").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Effects spread to monsters").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" within 4 blocks with halved").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" duration.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" ").withStyle(ChatFormatting.GRAY));
             tooltip.add(
                     Component.literal("Cooldown: ").withStyle(ChatFormatting.RED)
                             .append(Component.literal("8s").withStyle(ChatFormatting.GRAY))
@@ -1736,7 +1291,7 @@ public class ModItems {
             () -> new EndlessAdrenalineSyringeItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class EndlessAdrenalineSyringeItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class EndlessAdrenalineSyringeItem extends Item {
         public EndlessAdrenalineSyringeItem(Properties properties) {
             super(properties);
         }
@@ -1744,21 +1299,6 @@ public class ModItems {
         @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Endless Adrenaline Syringe").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.ADRENALINE_INJECTION_COOLDOWN.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.ADRENALINE_INJECTION_COOLDOWN.get(), 20*15, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.ADRENALINE_INJECTION_COOLDOWN.get());
-                player.removeEffect(ModEffects.ADRENALINE_INJECTION_UP.get());
-            }
         }
 
         @Override
@@ -1779,37 +1319,14 @@ public class ModItems {
             () -> new FortressOfSolitudeItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class FortressOfSolitudeItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class FortressOfSolitudeItem extends Item {
         public FortressOfSolitudeItem(Properties properties) {
             super(properties);
         }
 
         @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.RETALIATE_ACTIVE.get()) && !player.hasEffect(ModEffects.RETALIATE_COOLDOWN.get());
-        }
-
-        @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Fortress of Solitude").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.RETALIATE_ACTIVE.get())
-                && !player.hasEffect(ModEffects.RETALIATE_ACTIVE.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.RETALIATE_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.RETALIATE_COOLDOWN.get());
-                player.removeEffect(ModEffects.RETALIATE_READY.get());
-                player.removeEffect(ModEffects.RETALIATE_ACTIVE.get());
-            }
         }
 
         @Override
@@ -1840,32 +1357,9 @@ public class ModItems {
             () -> new GuardianAngelItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class GuardianAngelItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class GuardianAngelItem extends Item {
         public GuardianAngelItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.BASTION_ACTIVE.get()) && !player.hasEffect(ModEffects.BASTION_COOLDOWN.get());
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.BASTION_COOLDOWN.get())
-                    && !player.hasEffect(ModEffects.BASTION_ACTIVE.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.BASTION_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.BASTION_ACTIVE.get());
-                player.removeEffect(ModEffects.BASTION_READY.get());
-                player.removeEffect(ModEffects.BASTION_COOLDOWN.get());
-            }
         }
 
         @Override
@@ -1900,7 +1394,7 @@ public class ModItems {
             () -> new BottledLightItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class BottledLightItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class BottledLightItem extends Item {
         public BottledLightItem(Properties properties) {
             super(properties);
         }
@@ -1908,20 +1402,6 @@ public class ModItems {
         @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Bottled Light").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("lightbringer_applied", true);
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().remove("lightbringer_applied");
-            }
         }
 
         @Override
@@ -1945,37 +1425,14 @@ public class ModItems {
             () -> new PrideInfusedAigretteItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class PrideInfusedAigretteItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class PrideInfusedAigretteItem extends Item {
         public PrideInfusedAigretteItem(Properties properties) {
             super(properties);
         }
 
         @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.OVERCONFIDENCE_ACTIVE.get()) && !player.hasEffect(ModEffects.OVERCONFIDENCE_COOLDOWN.get());
-        }
-
-        @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Pride Infused Aigrette").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.OVERCONFIDENCE_READY.get())
-                    && !player.hasEffect(ModEffects.OVERCONFIDENCE_ACTIVE.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.OVERCONFIDENCE_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.OVERCONFIDENCE_ACTIVE.get());
-                player.removeEffect(ModEffects.OVERCONFIDENCE_READY.get());
-                player.removeEffect(ModEffects.OVERCONFIDENCE_COOLDOWN.get());
-            }
         }
 
         @Override
@@ -2011,36 +1468,11 @@ public class ModItems {
             "immolation_of_heart",
             () -> new ImmolationOfHeartItem(new Item.Properties().stacksTo(64))
     );
-    private static final UUID IMMOLATION_ARMOR = UUID.fromString("d739268d-e62f-4c9b-8301-2895473f3281");
+    public static final UUID IMMOLATION_ARMOR = UUID.fromString("d739268d-e62f-4c9b-8301-2895473f3281");
 
-    private static class ImmolationOfHeartItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class ImmolationOfHeartItem extends Item {
         public ImmolationOfHeartItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, Attributes.ARMOR, -10.0, IMMOLATION_ARMOR);
-                player.getPersistentData().putBoolean("entwined_offering_eligible", true);
-
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "immolation_of_heart");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, Attributes.ARMOR, IMMOLATION_ARMOR);
-                player.getPersistentData().remove("entwined_offering_eligible");
-            }
         }
 
         @Override
@@ -2077,35 +1509,14 @@ public class ModItems {
             () -> new FoxEyeItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class FoxEyeItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class FoxEyeItem extends Item {
         public FoxEyeItem(Properties properties) {
             super(properties);
         }
 
         @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.NIMBLE_GETAWAY_COOLDOWN.get());
-        }
-
-        @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Fox Eye").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.NIMBLE_GETAWAY_COOLDOWN.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.NIMBLE_GETAWAY_ACTIVE.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.NIMBLE_GETAWAY_ACTIVE.get());
-                player.removeEffect(ModEffects.NIMBLE_GETAWAY_COOLDOWN.get());
-            }
         }
 
         @Override
@@ -2125,38 +1536,14 @@ public class ModItems {
             () -> new BrokenHealthPotionItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class BrokenHealthPotionItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class BrokenHealthPotionItem extends Item {
         public BrokenHealthPotionItem(Properties properties) {
             super(properties);
         }
 
         @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.COMBATANTS_AID_CD.get());
-        }
-
-        @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Broken Health Potion").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.COMBATANTS_AID_CD.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.COMBATANTS_AID_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.COMBATANTS_AID_CD.get());
-                player.removeEffect(ModEffects.COMBATANTS_AID_READY.get());
-                player.getPersistentData().remove("dash_x");
-                player.getPersistentData().remove("dash_y");
-                player.getPersistentData().remove("dash_z");
-            }
         }
 
         @Override
@@ -2195,7 +1582,7 @@ public class ModItems {
             () -> new RestoringAuraItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class RestoringAuraItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class RestoringAuraItem extends Item {
         public RestoringAuraItem(Properties properties) {
             super(properties);
         }
@@ -2203,22 +1590,6 @@ public class ModItems {
         @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Restoring Aura").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.RADIATING_WARMTH.get())) {
-
-                int interval = (int) (20*20 / (1.0 + (AttributeApplier.getScaledValue(player, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get()) / 100.0)));
-                player.addEffect(new MobEffectInstance(ModEffects.RADIATING_WARMTH.get(), interval, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.RADIATING_WARMTH.get());
-            }
         }
 
         @Override
@@ -2239,29 +1610,9 @@ public class ModItems {
             () -> new DivineShieldItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class DivineShieldItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DivineShieldItem extends Item {
         public DivineShieldItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.SANCTUARY_FATIGUE.get());
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("sanctuary_eligible", true);
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().remove("sanctuary_eligible");
-            }
         }
 
         @Override
@@ -2298,7 +1649,7 @@ public class ModItems {
             () -> new NaturesBlessingItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class NaturesBlessingItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class NaturesBlessingItem extends Item {
         public NaturesBlessingItem(Properties properties) {
             super(properties);
         }
@@ -2306,20 +1657,6 @@ public class ModItems {
         @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Nature's Blessing").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("pulsating_love_eligible", true);
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().remove("pulsating_love_eligible");
-            }
         }
 
         @Override
@@ -2341,35 +1678,9 @@ public class ModItems {
             () -> new SummoningStoneItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class SummoningStoneItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class SummoningStoneItem extends Item {
         public SummoningStoneItem(Properties properties) {
             super(properties);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("summoning_stone_eligible", true);
-
-//                if (player.level() instanceof ServerLevel serverLevel
-//                        && !player.hasEffect(ModEffects.SOLARA.get())
-//                        && !player.hasEffect(ModEffects.SBEVE_CD.get())) {
-//                    SummoningStone.runSbeveUpdateLogic(player);
-//                }
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().remove("summoning_stone_eligible");
-
-                if (player.level() instanceof ServerLevel serverLevel) {
-                    SummoningStone.killSbeve(serverLevel, player);
-                    player.getPersistentData().remove("active_sbeve_uuid");
-                    player.getPersistentData().putInt("sbeve_timer", 0);
-                }
-            }
         }
 
         @Override
@@ -2417,35 +1728,14 @@ public class ModItems {
             () -> new WindWalkerArrowItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class WindWalkerArrowItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class WindWalkerArrowItem extends Item {
         public WindWalkerArrowItem(Properties properties) {
             super(properties);
         }
 
         @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.VORTEX_CD.get());
-        }
-
-        @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Wind Walker's Arrow").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.VORTEX_CD.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.VORTEX_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.VORTEX_CD.get());
-                player.removeEffect(ModEffects.VORTEX_READY.get());
-            }
         }
 
         @Override
@@ -2473,35 +1763,14 @@ public class ModItems {
             () -> new BurstingEnergyVialItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class BurstingEnergyVialItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class BurstingEnergyVialItem extends Item {
         public BurstingEnergyVialItem(Properties properties) {
             super(properties);
         }
 
         @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.FOCUSED_ENERGY_CD.get());
-        }
-
-        @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Vial of Bursting Energy").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player && !player.hasEffect(ModEffects.FOCUSED_ENERGY_CD.get())) {
-                player.addEffect(new MobEffectInstance(ModEffects.FOCUSED_ENERGY_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.FOCUSED_ENERGY_CD.get());
-                player.removeEffect(ModEffects.FOCUSED_ENERGY_READY.get());
-            }
         }
 
         @Override
@@ -2528,40 +1797,14 @@ public class ModItems {
             () -> new ThornCoveredForceFieldItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class ThornCoveredForceFieldItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class ThornCoveredForceFieldItem extends Item {
         public ThornCoveredForceFieldItem(Properties properties) {
             super(properties);
         }
 
         @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.THORNED_PARRY_CD.get());
-        }
-
-        @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Thorn Covered Force Field").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("thorn_eligible", true);
-
-                if (!player.hasEffect(ModEffects.THORNED_PARRY_CD.get())) {
-                    player.addEffect(new MobEffectInstance(ModEffects.THORNED_PARRY_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-                }
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.THORNED_PARRY_CD.get());
-                player.removeEffect(ModEffects.THORNED_PARRY_READY.get());
-                player.getPersistentData().remove("thorn_eligible");
-            }
         }
 
         @Override
@@ -2588,37 +1831,14 @@ public class ModItems {
             () -> new DivineExtractionItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class DivineExtractionItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DivineExtractionItem extends Item {
         public DivineExtractionItem(Properties properties) {
             super(properties);
         }
 
         @Override
-        public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-            if (!(slotContext.entity() instanceof Player player)) return true;
-            return !player.hasEffect(ModEffects.BLESSED_LAND_CD.get());
-        }
-
-        @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Divinity Extraction").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                if (!player.hasEffect(ModEffects.BLESSED_LAND_CD.get())) {
-                    player.addEffect(new MobEffectInstance(ModEffects.BLESSED_LAND_READY.get(), MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
-                }
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.removeEffect(ModEffects.BLESSED_LAND_READY.get());
-                player.removeEffect(ModEffects.BLESSED_LAND_CD.get());
-            }
         }
 
         @Override
@@ -2652,7 +1872,7 @@ public class ModItems {
             () -> new FairyTeardropItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class FairyTeardropItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class FairyTeardropItem extends Item  {
         public FairyTeardropItem(Properties properties) {
             super(properties);
         }
@@ -2660,20 +1880,6 @@ public class ModItems {
         @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Fairy's Teardrop").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("regrowth_eligible", true);
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().remove("regrowth_eligible");
-            }
         }
 
         @Override
@@ -2696,7 +1902,7 @@ public class ModItems {
             () -> new HookOfTheDepthsItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class HookOfTheDepthsItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class HookOfTheDepthsItem extends Item {
         public HookOfTheDepthsItem(Properties properties) {
             super(properties);
         }
@@ -2704,26 +1910,6 @@ public class ModItems {
         @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Hook of the Depths").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("grapple_eligible", true);
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().remove("grapple_eligible");
-                player.getPersistentData().remove("grapple_target_x");
-                player.getPersistentData().remove("grapple_target_y");
-                player.getPersistentData().remove("grapple_target_z");
-                player.getPersistentData().remove("is_grappling");
-                player.getPersistentData().remove("last_y");
-
-            }
         }
 
         @Override
@@ -2747,7 +1933,7 @@ public class ModItems {
             () -> new HellforgedPlatingItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class HellforgedPlatingItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class HellforgedPlatingItem extends Item {
         public HellforgedPlatingItem(Properties properties) {
             super(properties);
         }
@@ -2755,20 +1941,6 @@ public class ModItems {
         @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Hell Forged Plating").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("smelt_eligible", true);
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().remove("smelt_eligible");
-            }
         }
 
         @Override
@@ -2793,7 +1965,7 @@ public class ModItems {
             () -> new SelectiveHellforgedPlatingItem(new Item.Properties().stacksTo(64))
     );
 
-    private static class SelectiveHellforgedPlatingItem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class SelectiveHellforgedPlatingItem extends Item {
         public SelectiveHellforgedPlatingItem(Properties properties) {
             super(properties);
         }
@@ -2801,20 +1973,6 @@ public class ModItems {
         @Override
         public Component getName(ItemStack stack) {
             return Component.literal("Selective Hell Forged Plating").withStyle(ChatFormatting.GOLD);
-        }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().putBoolean("smelt2_eligible", true);
-            }
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                player.getPersistentData().remove("smelt2_eligible");
-            }
         }
 
         @Override

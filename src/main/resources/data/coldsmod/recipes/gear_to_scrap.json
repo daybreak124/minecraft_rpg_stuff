@@ -4,7 +4,7 @@
     { "tag": "coldsmod:scrap_sources" }
   ],
   "result": {
-    "item": "coldsmod:common_scrap_essence",
+    "item": "coldsmod:scrap_essence",
     "count": 1
   }
 }

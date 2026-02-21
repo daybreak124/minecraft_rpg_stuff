@@ -1,6 +1,9 @@
 package net.cold.coldsmod.network;
 
-import net.cold.coldsmod.stat.StatUpgradePacketTwo;
+import net.cold.coldsmod.menu_blessing.BlessingPacket;
+import net.cold.coldsmod.menu_blessing.BlessingUnlockSyncPacket;
+import net.cold.coldsmod.menu_stat.StatUpgradePacketThree;
+import net.cold.coldsmod.menu_stat.StatUpgradePacketTwo;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -106,6 +109,21 @@ public class NetworkHandler {
                 StatUpgradePacketTwo::toBytes,
                 StatUpgradePacketTwo::new,
                 StatUpgradePacketTwo::handle);
+
+        CHANNEL.registerMessage(nextId(), StatUpgradePacketThree.class,
+                StatUpgradePacketThree::toBytes,
+                StatUpgradePacketThree::new,
+                StatUpgradePacketThree::handle);
+
+        CHANNEL.registerMessage(nextId(), BlessingPacket.class,
+                BlessingPacket::toBytes,
+                BlessingPacket::new,
+                BlessingPacket::handle);
+
+        CHANNEL.registerMessage(nextId(), BlessingUnlockSyncPacket.class,
+                BlessingUnlockSyncPacket::toBytes,
+                BlessingUnlockSyncPacket::new,
+                BlessingUnlockSyncPacket::handle);
     }
 
     public static void sendToClient(Object msg, ServerPlayer player) {

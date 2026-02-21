@@ -19,6 +19,9 @@ import net.cold.coldsmod.blessingbonuses.skills.*;
 import net.cold.coldsmod.bow.BowAnimHandler;
 import net.cold.coldsmod.formulas.DebuffResistHandler;
 import net.cold.coldsmod.item.ModItems;
+import net.cold.coldsmod.menu_blessing.BlessingScreen;
+import net.cold.coldsmod.menu_stat.StatScreen;
+import net.cold.coldsmod.menu_stat.StatUpgradeHandler;
 import net.cold.coldsmod.mob.SbeveRenderer;
 import net.cold.coldsmod.network.ClientInputEvent;
 import net.cold.coldsmod.network.ClientKeyInputHandler;
@@ -65,6 +68,7 @@ public class ColdsMod {
         IEventBus modEventBus = context.getModEventBus();
 
         MinecraftForge.EVENT_BUS.register(StatUpgradeHandler.class);
+        MinecraftForge.EVENT_BUS.register(BlessingScreen.class);
 
         copyDefaultConfig("melee_weapons.json");
         copyDefaultConfig("bows.json");
@@ -217,6 +221,7 @@ public class ColdsMod {
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
             net.minecraft.client.gui.screens.MenuScreens.register(ModMenu.STAT_MENU.get(), StatScreen::new);
+            net.minecraft.client.gui.screens.MenuScreens.register(ModMenu.BLESSING_MENU.get(), BlessingScreen::new);
         }
 
         @SubscribeEvent
