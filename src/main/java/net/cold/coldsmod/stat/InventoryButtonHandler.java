@@ -85,9 +85,10 @@ public class InventoryButtonHandler {
         guiGraphics.drawString(mc.font, "Survivability", x, y, 0x5555FF); y += 10;
         guiGraphics.drawString(mc.font, "Armor: " + StatUtils.formatValue(C.armor), x, y, 0xFFFFFF); y += 10;
         guiGraphics.drawString(mc.font, "Toughness: " + StatUtils.formatValue(C.tough), x, y, 0xFFFFFF); y += 10;
-        guiGraphics.drawString(mc.font, "Damage Multiplier: " + StatUtils.formatValue(C.incDmg) + "x", x, y, 0xFFFFFF); y += 10;
-        guiGraphics.drawString(mc.font, "Total Damage Resist: " + StatUtils.formatValue(C.totalResist) + "%", x, y, 0xFFFFFF); y += 10;
         guiGraphics.drawString(mc.font, "Health: " + StatUtils.formatValue(C.health), x, y, 0xFFFFFF); y += 10;
+        guiGraphics.drawString(mc.font, "Inc. Damage Multiplier: " + StatUtils.formatValue(C.incDmg) + "x", x, y, 0xFFFFFF); y += 10;
+        guiGraphics.drawString(mc.font, "Total Damage Resist: " + StatUtils.formatValue(C.totalResist) + "%", x, y, 0xFFFFFF); y += 10;
+        guiGraphics.drawString(mc.font, "Effective HP: " + StatUtils.formatValue(C.eHP), x, y, 0xFFFFFF); y += 10;
         guiGraphics.drawString(mc.font, "Knockback Resist: " + StatUtils.formatValue(C.knkRes) + "%", x, y, 0xFFFFFF); y += 10;
         guiGraphics.drawString(mc.font, "Debuff Resist: " + StatUtils.formatValue(C.debuffRes) + "%", x, y, 0xFFFFFF); y += 15;
 
@@ -112,6 +113,7 @@ public class InventoryButtonHandler {
         guiGraphics.drawString(mc.font, "General", x, y, 0xE0701B); y += 10;
         guiGraphics.drawString(mc.font, "Damage Multiplier: " + StatUtils.formatValue(C.gMult) + "x", x, y, 0xFFFFFF); y += 10;
         guiGraphics.drawString(mc.font, "Potency: " + StatUtils.formatValue(C.fGenPot) + " | (" + StatUtils.formatValue(C.gPot) + "%)", x, y, 0xFFFFFF); y += 10;
+        guiGraphics.drawString(mc.font, "Haste: " + StatUtils.formatValue(C.fGenHaste) + " | (" + StatUtils.formatValue(C.gHaste) + "%)", x, y, 0xFFFFFF); y += 10;
         guiGraphics.drawString(mc.font, "Accuracy: " + StatUtils.formatValue(C.fGenAcc) + " | (" + StatUtils.formatValue(C.gAcc + 10.0) + "%)", x, y, 0xFFFFFF); y += 10;
         guiGraphics.drawString(mc.font, "Precision: " + StatUtils.formatValue(C.fGenPre) + " | (" + StatUtils.formatValue(C.gPre + 50.0) + "%)", x, y, 0xFFFFFF); y += 15;
 
@@ -148,7 +150,7 @@ public class InventoryButtonHandler {
         // --- Melee ---
         guiGraphics.drawString(mc.font, "Melee", x, y, 0xE0701B); y += 10;
         guiGraphics.drawString(mc.font, "Potency: " + StatUtils.formatValue(C.bMeleePot) + " | (" + StatUtils.formatValue(C.mMeleeMult) + "x)", x, y, 0xFFFFFF); y += 10;
-        guiGraphics.drawString(mc.font, "Haste: " + StatUtils.formatValue(C.bHaste) + " | (" + StatUtils.formatValue(C.mHasteMult) + "x)", x, y, 0xFFFFFF); y += 10;
+        guiGraphics.drawString(mc.font, "U. Haste: " + StatUtils.formatValue(C.bHaste) + " | (" + StatUtils.formatValue(C.mHasteMult) + "x)", x, y, 0xFFFFFF); y += 10;
         guiGraphics.drawString(mc.font, "Accuracy: " + StatUtils.formatValue(C.bMeleeAcc) + " | (" + StatUtils.formatValue(C.mMeleeAccMult) + "x)", x, y, 0xFFFFFF); y += 10;
         guiGraphics.drawString(mc.font, "Precision: " + StatUtils.formatValue(C.bMeleePre) + " | (" + StatUtils.formatValue(C.mMeleePreMult) + "x)", x, y, 0xFFFFFF); y += 15;
 
@@ -162,6 +164,7 @@ public class InventoryButtonHandler {
         // --- General ---
         guiGraphics.drawString(mc.font, "General", x, y, 0xE0701B); y += 10;
         guiGraphics.drawString(mc.font, "Potency: " + StatUtils.formatValue(C.bPot) + " | (" + StatUtils.formatValue(C.mPotMult) + "x)", x, y, 0xFFFFFF); y += 10;
+        guiGraphics.drawString(mc.font, "Haste: " + StatUtils.formatValue(C.bOHaste) + " | (" + 1 + "x)", x, y, 0xFFFFFF); y += 10;
         guiGraphics.drawString(mc.font, "Accuracy: " + StatUtils.formatValue(C.bAcc) + " | (" + StatUtils.formatValue(C.mAccMult) + "x)", x, y, 0xFFFFFF); y += 10;
         guiGraphics.drawString(mc.font, "Precision: " + StatUtils.formatValue(C.bPre) + " | (" + StatUtils.formatValue(C.mPreMult) + "x)", x, y, 0xFFFFFF); y += 15;
 

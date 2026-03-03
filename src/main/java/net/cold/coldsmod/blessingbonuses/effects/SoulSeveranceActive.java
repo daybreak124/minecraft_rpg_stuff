@@ -5,6 +5,8 @@ import net.cold.coldsmod.damage.ModDamageTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -32,87 +34,91 @@ public class SoulSeveranceActive extends MobEffect {
         super(MobEffectCategory.NEUTRAL, 0xFFD700); // gold color
     }
 
+    private static final ResourceKey<DamageType> MELEE_DAMAGE_KEY =
+            ResourceKey.create(Registries.DAMAGE_TYPE, ModDamageTypes.CUSTOM_MELEE_DAMAGE.location());
+
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (event.player.level().isClientSide()) return;
+        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide()) return;
 
-        if (!event.player.hasEffect(ModEffects.SOUL_SEVERANCE_READY.get())) return;
+        MobEffectInstance readyEffect = event.player.getEffect(ModEffects.SOUL_SEVERANCE_READY.get());
+        if (readyEffect == null) return;
 
         Player player = event.player;
         Level level = player.level();
+        CompoundTag data = player.getPersistentData();
+        int ticks = data.getInt("pull_ticks");
 
-        int ticks = player.getPersistentData().getInt("pull_ticks");
+        if (!player.isCrouching()) {
+            if (ticks > 0) resetSoulSeverance(player, data);
+            return;
+        }
 
-        if (player.isCrouching()) {
-            double range = 6.0;
-            double pullStrength = 0.05;
+        double range = 6.0;
+        double radiusSq = range * range;
+        double pullStrength = 0.05;
+        boolean isPulseTick = ticks % 20 == 0;
 
-            double radiusSq = 36.0;
-            List<LivingEntity> nearby = player.level().getEntitiesOfClass(
-                    LivingEntity.class,
-                    player.getBoundingBox().inflate(range),
-                    e -> {
-                        if (e instanceof Player || !player.hasLineOfSight(e)) return false;
-                        double dx = e.getX() - player.getX();
-                        double dz = e.getZ() - player.getZ();
-                        return (dx * dx + dz * dz) <= radiusSq;
-                    }
-            );
+        DamageSource source = null;
+        if (isPulseTick) {
+            Holder<DamageType> meleeType = level.registryAccess()
+                    .registryOrThrow(Registries.DAMAGE_TYPE)
+                    .getHolderOrThrow(MELEE_DAMAGE_KEY);
 
-            if (ticks%20 == 0) {
-                EffectUtils.playSound(player, SoundEvents.SOUL_ESCAPE, 7.0F, 1.0F);
-                spawnParticleRing((ServerLevel) level, player, ParticleTypes.SOUL_FIRE_FLAME, 6.0, 120);
-            }
+            source = new DamageSource(meleeType, player, player);
 
-            for (LivingEntity mob : nearby) {
-                double dx = player.getX() - mob.getX();
-                double dy = player.getY() - mob.getY();
-                double dz = player.getZ() - mob.getZ();
-                double distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
-                if (distance < 0.1) continue;
+            EffectUtils.playSound(player, SoundEvents.SOUL_ESCAPE, 7.0F, 1.0F);
+            spawnParticleRing((ServerLevel) level, player, ParticleTypes.SOUL_FIRE_FLAME, range, 120);
+        }
 
-                mob.setDeltaMovement(
-                        mob.getDeltaMovement().add(
-                                dx / distance * pullStrength,
-                                dy / distance * pullStrength,
-                                dz / distance * pullStrength
-                        )
-                );
+        List<LivingEntity> nearby = level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(range));
 
-                Holder<DamageType> meleeType = level.registryAccess()
-                        .registryOrThrow(Registries.DAMAGE_TYPE)
-                        .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
+        for (LivingEntity mob : nearby) {
+            if (mob == player || mob instanceof Player) continue;
 
-                DamageSource source = new DamageSource(meleeType, player, player);
+            double dx = player.getX() - mob.getX();
+            double dy = player.getY() - mob.getY();
+            double dz = player.getZ() - mob.getZ();
+            double distSq = dx * dx + dy * dy + dz * dz;
 
-                if (ticks % 20 == 0) {
-                    if (mob.isAlive() && (
-                            (mob instanceof Enemy && !(mob instanceof NeutralMob)) ||
-                                    (mob instanceof NeutralMob n && n.isAngry()) ||
-                                    (mob instanceof Mob m && m.getTarget() != null)
-                    )) {
-                        mob.hurtMarked = true;
-                        mob.hurt(source, 4.0f);
-                        spawnParticleBurst(mob, ParticleTypes.SOUL);
-                    }
+            if (distSq > radiusSq || distSq < 0.01) continue;
+
+            double distance = Math.sqrt(distSq);
+            mob.setDeltaMovement(mob.getDeltaMovement().add(
+                    (dx / distance) * pullStrength,
+                    (dy / distance) * pullStrength,
+                    (dz / distance) * pullStrength
+            ));
+
+            if (isPulseTick && isValidSoulTarget(player, mob)) {
+                if (player.hasLineOfSight(mob)) {
+                    mob.hurtMarked = true;
+                    mob.hurt(source, 4.0f);
+                    spawnParticleBurst(mob, ParticleTypes.SOUL);
                 }
             }
-
-            ticks++;
-            player.getPersistentData().putInt("pull_ticks", ticks);
-            player.addEffect(new MobEffectInstance(ModEffects.SOUL_SEVERANCE_ACTIVE.get()));
-
-            if (ticks >= 80) {
-                player.removeEffect(ModEffects.SOUL_SEVERANCE_READY.get());
-                player.addEffect(new MobEffectInstance(ModEffects.SOUL_SEVERANCE_COOLDOWN.get(), 20*9, 0, false, false, true));
-                player.getPersistentData().remove("pull_ticks");
-            }
-        } else if (ticks > 0) {
-            player.removeEffect(ModEffects.SOUL_SEVERANCE_READY.get());
-            player.addEffect(new MobEffectInstance(ModEffects.SOUL_SEVERANCE_COOLDOWN.get(), 20*9, 0, false, false, true));
-            player.getPersistentData().remove("pull_ticks");
         }
+
+        ticks++;
+        data.putInt("pull_ticks", ticks);
+        player.addEffect(new MobEffectInstance(ModEffects.SOUL_SEVERANCE_ACTIVE.get(), 10, 0, true, false, true));
+
+        if (ticks >= 80) {
+            resetSoulSeverance(player, data);
+        }
+    }
+
+    private static void resetSoulSeverance(Player player, CompoundTag data) {
+        player.removeEffect(ModEffects.SOUL_SEVERANCE_READY.get());
+        data.remove("pull_ticks");
+        player.addEffect(new MobEffectInstance(ModEffects.SOUL_SEVERANCE_COOLDOWN.get(), 180, 0, false, false, true));
+    }
+
+    private static boolean isValidSoulTarget(Player source, LivingEntity target) {
+        return target.isAlive() && !target.isInvulnerable() &&
+                ((target instanceof Enemy && !(target instanceof NeutralMob)) ||
+                        (target instanceof NeutralMob n && n.isAngry()) ||
+                        (target instanceof Mob m && m.getTarget() != null));
     }
 
     @Override

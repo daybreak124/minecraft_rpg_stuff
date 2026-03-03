@@ -91,6 +91,34 @@ public class IntimidatePacket {
                         if (target instanceof Mob mob && target.isAlive()) {
                             mob.setNoAi(true);
                             target.setNoGravity(true);
+
+                            // 1. Define the Start (Player's heart/chest area)
+                            double startX = player.getX();
+                            double startY = player.getY() + 1.0;
+                            double startZ = player.getZ();
+
+                            // 2. Define the End (Target's chest area)
+                            double endX = target.getX();
+                            double endY = target.getY() + (target.getBbHeight() / 2.0);
+                            double endZ = target.getZ();
+
+                            // 3. Calculate the delta (distance components)
+                            double dx = endX - startX;
+                            double dy = endY - startY;
+                            double dz = endZ - startZ;
+
+                            double distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+                            int particleCount = (int) (distance * 4);
+
+                            // 4. Draw the line
+                            for (int i = 0; i < particleCount; i++) {
+                                double ratio = (double) i / particleCount;
+                                ((ServerLevel)level).sendParticles(ParticleTypes.ELECTRIC_SPARK,
+                                        startX + (dx * ratio),
+                                        startY + (dy * ratio),
+                                        startZ + (dz * ratio),
+                                        1, 0, 0, 0, 0.0);
+                            }
                         }
                     });
                 });
@@ -100,9 +128,12 @@ public class IntimidatePacket {
                         if (!target.isAlive()) return;
 
                         if (target instanceof Mob mob) {
-                            if (!mob.getPersistentData().contains("freeze_timer")) {mob.setNoAi(false);}
+                            if (!mob.getPersistentData().contains("freeze_timer")) {
+                                mob.setNoAi(false);
+                                mob.getPersistentData().putBoolean("intimidate_stun_applied", true);
+                            }
                             if (!mob.getType().is(Tags.EntityTypes.BOSSES) || mob instanceof Warden) {
-                                mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 8, 10, false, false));
+                                mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 8, 7, false, false));
                                 mob.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 8, 255, false, false));
                             }
                         }
@@ -120,6 +151,33 @@ public class IntimidatePacket {
                             target.setDeltaMovement(Vec3.ZERO);
                             target.hurtMarked = true;
                             return;
+                        }
+
+                        // 1. Define the Start (Player's heart/chest area)
+                        double startX = player.getX();
+                        double startY = player.getY() + 1.0;
+                        double startZ = player.getZ();
+
+                        // 2. Define the End (Target's chest area)
+                        double endX = target.getX();
+                        double endY = target.getY() + (target.getBbHeight() / 2.0);
+                        double endZ = target.getZ();
+
+                        // 3. Calculate the delta (distance components)
+                        double dx = endX - startX;
+                        double dy = endY - startY;
+                        double dz = endZ - startZ;
+
+                        int particleCount = (int) (distance * 4);
+
+                        // 4. Draw the line
+                        for (int i = 0; i < particleCount; i++) {
+                            double ratio = (double) i / particleCount;
+                            ((ServerLevel)level).sendParticles(ParticleTypes.CRIT,
+                                    startX + (dx * ratio),
+                                    startY + (dy * ratio),
+                                    startZ + (dz * ratio),
+                                    1, 0, 0, 0, 0.0);
                         }
 
                         double maxSpeed = 1.3;
@@ -140,8 +198,9 @@ public class IntimidatePacket {
                     player.getServer().execute(() -> {
                         if (!target.isAlive()) return;
 
-                        if (target instanceof Mob mob && mob.getPersistentData().contains("freeze_timer")) {
+                        if (target instanceof Mob mob && !mob.getPersistentData().contains("freeze_timer")) {
                             mob.setNoAi(false);
+                            mob.getPersistentData().remove("intimidate_stun_applied");
                         }
                     });
                 });

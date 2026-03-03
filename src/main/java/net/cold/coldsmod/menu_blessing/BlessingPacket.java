@@ -29,11 +29,17 @@ public class BlessingPacket {
         ctx.get().enqueueWork(() -> {
             ServerPlayer player = ctx.get().getSender();
             if (player != null) {
-                // Match the logic flow of your StatUpgradePacket
                 if (this.isActivating) {
                     BlessingUpgradeHandler.tryUpgrade(player, this.blessingId);
                 } else {
-                    BlessingUpgradeHandler.tryDowngrade(player, this.blessingId);
+                    var entry = BlessingRegistry.MAP.get(this.blessingId);
+
+                    if (entry != null) {
+                        boolean canRemove = BlessingEffectRegistry.CAN_REMOVE.getOrDefault(entry.item(), p -> true).test(player);
+                        if (canRemove) {
+                            BlessingUpgradeHandler.tryDowngrade(player, this.blessingId);
+                        }
+                    }
                 }
             }
         });

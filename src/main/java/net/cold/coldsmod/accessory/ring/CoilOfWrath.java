@@ -1,11 +1,8 @@
 package net.cold.coldsmod.accessory.ring;
 
 import net.cold.coldsmod.ColdsMod;
-import net.cold.coldsmod.stat.AttributeApplier;
-import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -14,11 +11,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import top.theillusivec4.curios.api.SlotContext;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 
 public class CoilOfWrath {
@@ -30,7 +25,6 @@ public class CoilOfWrath {
         ITEMS.register(eventBus);
     }
 
-    private static final UUID COIL_OF_WRATH_UUID = UUID.fromString("c9b8a7d6-e5f4-4321-b1a2-c3d4e5f6a7b8");
 
 // --- Registry ---
 
@@ -56,40 +50,8 @@ public class CoilOfWrath {
 
 // --- Rare ---
 
-    private static class CoilOfWrathRare extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class CoilOfWrathRare extends Item {
         public CoilOfWrathRare(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 7.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 8.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 8.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 8.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), -3.0, COIL_OF_WRATH_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "coil_of_wrath");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), COIL_OF_WRATH_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Coil of Wrath").withStyle(ChatFormatting.BLUE); }
@@ -109,41 +71,8 @@ public class CoilOfWrath {
 
 // --- Epic ---
 
-    private static class CoilOfWrathEpic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class CoilOfWrathEpic extends Item {
         public CoilOfWrathEpic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 10.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 14.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 14.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 14.0, COIL_OF_WRATH_UUID);
-
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), -3.0, COIL_OF_WRATH_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "coil_of_wrath");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), COIL_OF_WRATH_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Coil of Wrath").withStyle(ChatFormatting.DARK_PURPLE); }
@@ -155,7 +84,7 @@ public class CoilOfWrath {
             tooltip.add(Component.literal("+10 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+14 Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+13 Precision").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -163,45 +92,8 @@ public class CoilOfWrath {
 
 // --- Legendary ---
 
-    private static class CoilOfWrathLegendary extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class CoilOfWrathLegendary extends Item {
         public CoilOfWrathLegendary(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 12.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 20.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 20.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 20.0, COIL_OF_WRATH_UUID);
-
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), -3.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 7, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 4.5, COIL_OF_WRATH_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "coil_of_wrath");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.HASTE.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), COIL_OF_WRATH_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Coil of Wrath").withStyle(ChatFormatting.GOLD); }
@@ -213,9 +105,9 @@ public class CoilOfWrath {
             tooltip.add(Component.literal("+12 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7 Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+4.5 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+20 Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+8 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+3 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+17 Precision").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -223,45 +115,8 @@ public class CoilOfWrath {
 
 // --- Mythic ---
 
-    private static class CoilOfWrathMythic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class CoilOfWrathMythic extends Item {
         public CoilOfWrathMythic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.DEX.get(), 14.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 24.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 24.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 24.0, COIL_OF_WRATH_UUID);
-
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), -3.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HASTE.get(), 12.0, COIL_OF_WRATH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 10.0, COIL_OF_WRATH_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "coil_of_wrath");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.DEX.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.HASTE.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), COIL_OF_WRATH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), COIL_OF_WRATH_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Coil of Wrath").withStyle(ChatFormatting.AQUA); }
@@ -273,9 +128,9 @@ public class CoilOfWrath {
             tooltip.add(Component.literal("+14 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+12 Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+10 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+24 Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+15 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+22 Precision").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }

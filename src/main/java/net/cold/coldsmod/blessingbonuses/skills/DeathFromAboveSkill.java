@@ -6,6 +6,7 @@ import net.cold.coldsmod.network.QuantumLeapSync;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
@@ -27,6 +28,8 @@ import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.*;
 public class DeathFromAboveSkill {
 
     private static final double LAND_RADIUS = 7.0;
+    private static final ResourceKey<DamageType> MELEE_DAMAGE_KEY =
+            ResourceKey.create(Registries.DAMAGE_TYPE, ModDamageTypes.CUSTOM_MELEE_DAMAGE.location());
 
     @SubscribeEvent
     public static void onPlayerLand(LivingFallEvent event) {
@@ -41,7 +44,7 @@ public class DeathFromAboveSkill {
 
         Holder<DamageType> meleeType = level.registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
+                .getHolderOrThrow(MELEE_DAMAGE_KEY);
         DamageSource source = new DamageSource(meleeType, player, player);
 
         if (level instanceof ServerLevel serverLevel) {

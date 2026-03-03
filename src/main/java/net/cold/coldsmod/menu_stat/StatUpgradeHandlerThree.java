@@ -15,31 +15,29 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.UUID;
 
-import static net.cold.coldsmod.stat.AttributeApplier.*;
-import static net.cold.coldsmod.menu_stat.StatUpgradeHandler.getRequiredAmount;
+import static net.cold.coldsmod.stat.AttributeApplier.applyModifier;
 
 public class StatUpgradeHandlerThree {
-    public static final int MAX_GLOBAL_POINTS = 120;
+    public static final int MAX_GLOBAL_POINTS = 160;
     public static final UUID UTIL_STAT_MODIFIER_UUID = UUID.fromString("6a1224-c01d-5374-a711-3257c0de");
 
     public static double getIncrementFor(Attribute attr) {
-        if (attr == ForgeMod.STEP_HEIGHT_ADDITION.get()) return 0.03333;
-        if (attr == ForgeMod.BLOCK_REACH.get()) return 0.1;
-        if (attr == ModAttributes.MINING_SPEED.get()) return 0.015;
-        if (attr == ModAttributes.XP_GAIN.get()) return 0.015;
+        if (attr == ForgeMod.STEP_HEIGHT_ADDITION.get()) return 0.025;
+        if (attr == ForgeMod.BLOCK_REACH.get()) return 0.05;
+        if (attr == ModAttributes.MINING_SPEED.get()) return 0.01;
+        if (attr == ModAttributes.XP_GAIN.get()) return 0.01;
         return 0.1;
     }
 
     public static int getMaxPointsFor(Attribute attr) {
-//        if (attr == ForgeMod.STEP_HEIGHT_ADDITION.get()) return 30;
-//        if (attr == ForgeMod.BLOCK_REACH.get()) return 30;
-//        if (attr == ModAttributes.MINING_SPEED.get()) return 30;
-//        if (attr == ModAttributes.XP_GAIN.get()) return 30;
+        if (attr == ForgeMod.STEP_HEIGHT_ADDITION.get()) return 40;
+        if (attr == ForgeMod.BLOCK_REACH.get()) return 40;
+        if (attr == ModAttributes.MINING_SPEED.get()) return 40;
+        if (attr == ModAttributes.XP_GAIN.get()) return 40;
 
         return 30;
     }
 
-    // This reads the actual "Spent Points" integer from NBT
     public static int getPointsSpent(Player player, Attribute attr) {
         String key = ForgeRegistries.ATTRIBUTES.getKey(attr).toString();
         CompoundTag data = player.getPersistentData().getCompound("SpentPointsUtil");
@@ -66,6 +64,15 @@ public class StatUpgradeHandlerThree {
 
     public static Item getRequiredScrap(int level) {
         return ModItems.SCRAP_ESSENCE.get();
+    }
+
+    public static int getRequiredAmount(int level) {
+        if (level < 10) return 1;
+        if (level < 30) return 2;
+        if (level < 55) return 3;
+        if (level < 85) return 5;
+        if (level < 120) return 8;
+        return 12;
     }
 
     public static void tryUpgrade(ServerPlayer player, Attribute attribute) {
@@ -103,7 +110,12 @@ public class StatUpgradeHandlerThree {
         int globalPoints = getTotalPointsSpent(player);
         Item pearlToReturn = getRequiredScrap(globalPoints - 1);
         int amountToReturn = getRequiredAmount(globalPoints - 1);
-        player.getInventory().add(new ItemStack(pearlToReturn, amountToReturn));
+
+        ItemStack stackToReturn = new ItemStack(pearlToReturn, amountToReturn);
+        player.getInventory().add(stackToReturn);
+        if (!player.getInventory().add(stackToReturn)) {
+            player.drop(stackToReturn, false);
+        }
 
         int newPoints = points - 1;
         setPointsSpent(player, attribute, newPoints);

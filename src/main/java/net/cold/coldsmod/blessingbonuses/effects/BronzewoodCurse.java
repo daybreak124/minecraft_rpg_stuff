@@ -4,6 +4,7 @@ import net.cold.coldsmod.blessingbonuses.skills.BronzewoodApply;
 import net.cold.coldsmod.damage.ModDamageTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -19,6 +20,9 @@ public class BronzewoodCurse extends MobEffect {
     public BronzewoodCurse() {
         super(MobEffectCategory.HARMFUL, 0x000000);
     }
+
+    private static final ResourceKey<DamageType> MELEE_DOT_KEY =
+            ResourceKey.create(Registries.DAMAGE_TYPE, ModDamageTypes.MELEE_DOT_DAMAGE.location());
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
@@ -37,11 +41,11 @@ public class BronzewoodCurse extends MobEffect {
 
         Holder<DamageType> meleeDOT = entity.level().registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ModDamageTypes.MELEE_DOT_DAMAGE);
+                .getHolderOrThrow(MELEE_DOT_KEY);
+
         DamageSource source = new DamageSource(meleeDOT, sourcePlayer, sourcePlayer);
 
         entity.hurt(source, 1f);
-        entity.setDeltaMovement(entity.getDeltaMovement().scale(0));
 
         entity.level().playSound(
                 null, entity.getX(), entity.getY(), entity.getZ(),

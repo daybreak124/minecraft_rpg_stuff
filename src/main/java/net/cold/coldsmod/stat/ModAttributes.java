@@ -43,11 +43,16 @@ public class ModAttributes {
             () -> new RangedAttribute("accuracy", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> PRECISION = ATTRIBUTES.register("precision",
             () -> new RangedAttribute("precision", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
+    public static final RegistryObject<Attribute> HASTE = ATTRIBUTES.register("haste",
+            () -> new RangedAttribute("haste", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
+    public static final RegistryObject<Attribute> HASTE_MULTIPLIER = ATTRIBUTES.register("haste_multiplier",
+            () -> new RangedAttribute("haste_multiplier", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
+
 
     public static final RegistryObject<Attribute> MELEE_POTENCY = ATTRIBUTES.register("melee_potency",
             () -> new RangedAttribute("melee_potency", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> HASTE = ATTRIBUTES.register("haste",
-            () -> new RangedAttribute("haste", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
+    public static final RegistryObject<Attribute> MELEE_HASTE = ATTRIBUTES.register("melee_haste",
+            () -> new RangedAttribute("melee_haste", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> MELEE_ACCURACY = ATTRIBUTES.register("melee_accuracy",
             () -> new RangedAttribute("melee_accuracy", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> MELEE_PRECISION = ATTRIBUTES.register("melee_precision",
@@ -76,8 +81,8 @@ public class ModAttributes {
             () -> new RangedAttribute("accuracy_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> PRECISION_MULTIPLIER = ATTRIBUTES.register("precision_multiplier",
             () -> new RangedAttribute("precision_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> HASTE_MULTIPLIER = ATTRIBUTES.register("haste_multiplier",
-            () -> new RangedAttribute("haste_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
+    public static final RegistryObject<Attribute> MELEE_HASTE_MULTIPLIER = ATTRIBUTES.register("melee_haste_multiplier",
+            () -> new RangedAttribute("melee_haste_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> MELEE_POTENCY_MULTIPLIER = ATTRIBUTES.register("melee_potency_multiplier",
             () -> new RangedAttribute("melee_potency_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
@@ -128,7 +133,6 @@ public class ModAttributes {
     public static final RegistryObject<Attribute> MELEE_DAMAGE_MULTIPLIER = ATTRIBUTES.register("melee_damage_multiplier",
             () -> new RangedAttribute("melee_damage_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
 
-
     @SubscribeEvent
     public static void onModifyEntityAttributes(EntityAttributeModificationEvent event) {
         event.add(EntityType.PLAYER, ModAttributes.STR.get());
@@ -141,9 +145,10 @@ public class ModAttributes {
         event.add(EntityType.PLAYER, ModAttributes.INSIGHT.get());
 
         event.add(EntityType.PLAYER, ModAttributes.POTENCY.get());
+        event.add(EntityType.PLAYER, ModAttributes.HASTE.get());
         event.add(EntityType.PLAYER, ModAttributes.ACCURACY.get());
         event.add(EntityType.PLAYER, ModAttributes.PRECISION.get());
-        event.add(EntityType.PLAYER, ModAttributes.HASTE.get());
+        event.add(EntityType.PLAYER, ModAttributes.MELEE_HASTE.get());
 
         event.add(EntityType.PLAYER, ModAttributes.MELEE_POTENCY.get());
         event.add(EntityType.PLAYER, ModAttributes.MELEE_ACCURACY.get());
@@ -159,11 +164,12 @@ public class ModAttributes {
         event.add(EntityType.PLAYER, ModAttributes.DEBUFF_RESIST.get());
 
         event.add(EntityType.PLAYER, ModAttributes.POTENCY_MULTIPLIER.get());
+        event.add(EntityType.PLAYER, ModAttributes.HASTE_MULTIPLIER.get());
         event.add(EntityType.PLAYER, ModAttributes.ACCURACY_MULTIPLIER.get());
         event.add(EntityType.PLAYER, ModAttributes.PRECISION_MULTIPLIER.get());
-        event.add(EntityType.PLAYER, ModAttributes.HASTE_MULTIPLIER.get());
 
         event.add(EntityType.PLAYER, ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
+        event.add(EntityType.PLAYER, ModAttributes.MELEE_HASTE_MULTIPLIER.get());
         event.add(EntityType.PLAYER, ModAttributes.MELEE_ACCURACY_MULTIPLIER.get());
         event.add(EntityType.PLAYER, ModAttributes.MELEE_PRECISION_MULTIPLIER.get());
 

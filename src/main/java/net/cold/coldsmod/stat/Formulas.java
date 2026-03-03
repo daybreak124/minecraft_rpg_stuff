@@ -50,8 +50,9 @@ public class Formulas {
 
     @SubscribeEvent
     public void onLivingHurt(LivingHurtEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
         if (!(event.getSource().getEntity() instanceof Player player)) return;
-        if (player.level().isClientSide()) return;
+        if (event.getEntity() == event.getSource().getEntity()) return;
         if (event.getSource().is(ModDamageTypes.LIGHTNING_DAMAGE) || event.getSource().is(ModDamageTypes.RECKONING_DAMAGE)) return;
 
         CompoundTag data = player.getPersistentData();
@@ -59,20 +60,19 @@ public class Formulas {
         boolean isDirectMelee = event.getSource().getDirectEntity() == player;
 
         boolean isProjectile = event.getSource().getDirectEntity() instanceof Projectile;
-        InteractionHand hand = player.swingingArm;
         double meleeDamageMultiplier = player.getAttributeValue(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
 
         if (event.getSource().is(ModDamageTypes.MELEE_DOT_DAMAGE)) {
             double meleeDmg = getScaledValue(player, ModAttributes.MELEE_POTENCY.get(), ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
-            finalDamage *= (1.0 + meleeDmg / 100.0);
+            finalDamage *= (float) (1.0 + meleeDmg / 100.0);
 
             double melCritDmg = getScaledValue(player, ModAttributes.MELEE_PRECISION.get(), ModAttributes.MELEE_PRECISION_MULTIPLIER.get());
             double melCritCh = getScaledValue(player, ModAttributes.MELEE_ACCURACY.get(), ModAttributes.MELEE_ACCURACY_MULTIPLIER.get());
 
             if (rollCrit(player, melCritCh)) {
-                finalDamage *= (1.5 + melCritDmg / 100.0);
+                finalDamage *= (float) (1.5 + melCritDmg / 100.0);
             }
-            finalDamage *= meleeDamageMultiplier;
+            finalDamage *= (float) meleeDamageMultiplier;
         } else if (isProjectile || event.getSource().is(ModDamageTypes.CUSTOM_RANGED_DAMAGE)) {
             double projDmg = getScaledValue(player, ModAttributes.PROJECTILE_POTENCY.get(), ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
             double projCritCh = getScaledValue(player, ModAttributes.PROJECTILE_ACCURACY.get(), ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get());
@@ -93,11 +93,11 @@ public class Formulas {
                 }
                 finalDamage = (float) proj.getPersistentData().getDouble("ScaledDamage");
             } else {
-                finalDamage *= (1.0 + projDmg / 100.0);
+                finalDamage *= (float) (1.0 + projDmg / 100.0);
             }
 
             if (rollCrit(player, projCritCh)) {
-                finalDamage *= (1.5 + projCritDmg / 100.0);
+                finalDamage *= (float) (1.5 + projCritDmg / 100.0);
                 playCritSound(player);
             }
             resetHawkeye(player, data);
@@ -107,28 +107,24 @@ public class Formulas {
             double melCritDmg = getScaledValue(player, ModAttributes.MELEE_PRECISION.get(), ModAttributes.MELEE_PRECISION_MULTIPLIER.get());
             double melCritCh = getScaledValue(player, ModAttributes.MELEE_ACCURACY.get(), ModAttributes.MELEE_ACCURACY_MULTIPLIER.get());
 
-            if (player.hasEffect(ModEffects.BERSERK_READY.get()) && data.getBoolean("berserk_applied")) {
-                finalDamage *= (1.0 + melDmg * 0.006);
+            if (player.hasEffect(ModEffects.BERSERK_READY.get())) {
+                finalDamage *= (float) (1.0 + melDmg * 0.006);
                 handleBerserkReset(player, data);
             } else if (data.getBoolean("berserk_applied")) {
                 handleBerserkStacking(player, data);
             }
 
-            if (data.getBoolean("bronzewood_proc")) {
-                finalDamage += 3;
-                data.putBoolean("bronzewood_proc", false);
-            }
-
             if (event.getSource().is(ModDamageTypes.CUSTOM_MELEE_DAMAGE) && rollCrit(player, melCritCh)) {
-                finalDamage *= (1.5 + melCritDmg / 100.0);
+                finalDamage *= (float) (1.5 + melCritDmg / 100.0);
                 playCritSound(player);
             } else if (!event.getSource().is(ModDamageTypes.CUSTOM_MELEE_DAMAGE) && player.getPersistentData().getBoolean("adjustSharpness")) {
-                finalDamage += getSharpnessBonus(player, hand) * (0.5 + melCritDmg / 100.0);
+                InteractionHand hand = player.swingingArm;
+                finalDamage += (float) (getSharpnessBonus(player, hand) * (0.5 + melCritDmg / 100.0));
                 player.getPersistentData().putBoolean("adjustSharpness", false);
             }
 
             finalDamage *= (float) (1.0 + melDmg / 100.0);
-            finalDamage *= meleeDamageMultiplier;
+            finalDamage *= (float) meleeDamageMultiplier;
             handleFrenzy(player, data);
         }
         else {
@@ -136,14 +132,15 @@ public class Formulas {
             double genCritDmg = getScaledValue(player, ModAttributes.PRECISION.get(), ModAttributes.PRECISION_MULTIPLIER.get());
             double genCritCh = getScaledValue(player, ModAttributes.ACCURACY.get(), ModAttributes.ACCURACY_MULTIPLIER.get());
 
-            finalDamage *= (1.0 + genDmg / 100.0);
+            finalDamage *= (float) (1.0 + genDmg / 100.0);
 
             if (rollCrit(player, genCritCh)) {
-                finalDamage *= (1.5 + genCritDmg / 100.0);
+                finalDamage *= (float) (1.5 + genCritDmg / 100.0);
             }
             handleFrenzy(player, data);
         }
         event.setAmount(finalDamage);
+        // System.out.println(finalDamage);
     }
 
     @SubscribeEvent
@@ -167,7 +164,7 @@ public class Formulas {
         }
     }
 
-    private boolean rollCrit(Player player, double chance) {
+    public static boolean rollCrit(Player player, double chance) {
         return player.getRandom().nextDouble() < (chance + 10.0) / 100.0;
     }
 

@@ -11,6 +11,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -46,7 +47,7 @@ public class EffectUtils {
             double angle = 2 * Math.PI * i / count;
             double x = center.getX() + (radius * Math.cos(angle));
             double z = center.getZ() + (radius * Math.sin(angle));
-            double y = center.getY();
+            double y = center.getY() + 0.2;
 
             level.sendParticles(particle, x, y, z, 1, 0, 0, 0, 0.0);
         }
@@ -166,8 +167,9 @@ public class EffectUtils {
         if (freezeTimer > 0) {
             freezeTimer--;
 
-            if (freezeTimer <= 0) {
+            if (freezeTimer <= 0 && !mob.getPersistentData().getBoolean("intimidate_stun_applied")) {
                 mob.setNoAi(false);
+                mob.getPersistentData().remove("freeze_timer");
             }
             mob.getPersistentData().putInt("freeze_timer", freezeTimer);
         }
@@ -175,5 +177,15 @@ public class EffectUtils {
 
     public static boolean isAlly(LivingEntity target) {
         return (target instanceof TamableAnimal t && t.isTame()) || (target instanceof Player);
+    }
+
+    public static void spawnExplosionAt(ServerLevel level, Vec3 pos) {
+        level.sendParticles(ParticleTypes.EXPLOSION, pos.x, pos.y, pos.z, 6, 0.4, 0.5, 0.4, 0.05);
+    }
+
+    public static void playExplosionSoundAt(Level level, Vec3 pos, float volume) {
+        level.playSound(null, pos.x, pos.y, pos.z,
+                SoundEvents.GENERIC_EXPLODE,
+                SoundSource.PLAYERS, volume, 1.0F);
     }
 }

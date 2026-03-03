@@ -6,8 +6,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class ItemRarityUtils {
 
@@ -24,59 +23,46 @@ public class ItemRarityUtils {
     private static final TagKey<Item> CROSSBOWS_TAG = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "crossbows"));
     private static final TagKey<Item> SHIELDS_TAG = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "shields"));
 
-    public static String getItemType(ItemStack stack) {
-        if (stack == null || stack.isEmpty()) return "unknown";
+    private static final Map<Item, String> TYPE_CACHE = new HashMap<>();
 
+    public static String getItemType(ItemStack stack) {
+        if (stack.isEmpty()) return "unknown";
         Item item = stack.getItem();
 
-        if (item instanceof ArmorItem armor) {
-            return switch (armor.getEquipmentSlot()) {
-                case HEAD -> "helmet";
-                case CHEST -> "chestplate";
-                case LEGS -> "leggings";
-                case FEET -> "boots";
-                default -> "armor";
-            };
-        }
+        return TYPE_CACHE.computeIfAbsent(item, ItemRarityUtils::determineItemHype);
+    }
 
-        String id = ForgeRegistries.ITEMS.getKey(item).getPath().toLowerCase();
-        if (!item.builtInRegistryHolder().is(SWORDS) &&
-                !item.builtInRegistryHolder().is(AXES) &&
-                !item.builtInRegistryHolder().is(TRIDENTS) &&
-                MELEE_WEAPONS.contains(item)) return "sword";
+    public static String determineItemHype(Item item) {
+        var holder = item.builtInRegistryHolder();
 
-        if (!item.builtInRegistryHolder().is(FORGE_BOWS) && BOWS.contains(item)) return "bow";
-        if (!item.builtInRegistryHolder().is(CROSSBOWS_TAG) && CROSSBOWS.contains(item)) return "crossbow";
-        if (!item.builtInRegistryHolder().is(SHIELDS_TAG) && SHIELDS.contains(item)) return "shield";
+        if (MELEE_WEAPONS.contains(item)) return "sword";
+        if (BOWS.contains(item)) return "bow";
+        if (CROSSBOWS.contains(item)) return "crossbow";
+        if (SHIELDS.contains(item)) return "shield";
         if (TOOLS.contains(item)) return "tools";
 
-
-        if (item.builtInRegistryHolder().is(SWORDS) ||
-                item.builtInRegistryHolder().is(AXES) ||
-                item.builtInRegistryHolder().is(TRIDENTS)) return "sword";
-
-        if (item.builtInRegistryHolder().is(FORGE_BOWS)) return "bow";
-        if (item.builtInRegistryHolder().is(CROSSBOWS_TAG)) return "crossbow";
-        if (item.builtInRegistryHolder().is(SHIELDS_TAG)) return "shield";
+        if (holder.is(SWORDS) || holder.is(AXES) || holder.is(TRIDENTS)) return "sword";
+        if (holder.is(FORGE_BOWS)) return "bow";
+        if (holder.is(CROSSBOWS_TAG)) return "crossbow";
+        if (holder.is(SHIELDS_TAG)) return "shield";
 
         if (item instanceof SwordItem || item instanceof AxeItem || item instanceof TridentItem) return "sword";
         if (item instanceof BowItem) return "bow";
         if (item instanceof CrossbowItem) return "crossbow";
         if (item instanceof ShieldItem) return "shield";
-        if (item instanceof HoeItem || item instanceof ShovelItem || item instanceof PickaxeItem) return "tools";
+        if (item instanceof DiggerItem) return "tools";
 
+        String id = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item)).getPath().toLowerCase();
 
         if (id.contains("sword") || (id.contains("axe") && !id.contains("waxed")) || id.contains("trident") ||
                 id.contains("hammer") || id.contains("mace") ||
                 id.contains("rapier") || id.contains("longsword") || id.contains("katana") ||
-                id.contains("saber") || id.contains("club")  ||
+                id.contains("saber") || id.contains("club") ||
                 id.contains("lance") || id.contains("warhammer") || id.contains("staff") ||
                 id.contains("glaive") || id.contains("spear") || id.contains("gauntlet")) return "sword";
 
         if (id.contains("bow") && !id.contains("bowl")) return "bow";
         if (id.contains("crossbow")) return "crossbow";
-        // if (id.contains("shield")) return "shield";
-
         if (id.contains("pickaxe") || id.contains("shovel") || id.contains("hoe")) return "tools";
 
         return "unknown";

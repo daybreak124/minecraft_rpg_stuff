@@ -1,12 +1,8 @@
 package net.cold.coldsmod.accessory.necklace;
 
 import net.cold.coldsmod.ColdsMod;
-import net.cold.coldsmod.stat.AttributeApplier;
-import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -15,11 +11,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import top.theillusivec4.curios.api.SlotContext;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public class DragonTeethNecklace {
 
@@ -30,7 +24,6 @@ public class DragonTeethNecklace {
         ITEMS.register(eventBus);
     }
 
-    private static final UUID DRAGON_TEETH_UUID = UUID.fromString("e5d4c3b2-a1f0-4b9c-8d7e-6f5a4b3c2d1e");
 
 // --- Registry ---
 
@@ -56,40 +49,8 @@ public class DragonTeethNecklace {
 
 // --- Rare ---
 
-    private static class DragonTeethNecklaceRare extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DragonTeethNecklaceRare extends Item {
         public DragonTeethNecklaceRare(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 2.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 8.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 8.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 8.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 2.0, DRAGON_TEETH_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "dragon_teeth_necklace");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_TEETH_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Dragon Teeth Necklace").withStyle(ChatFormatting.BLUE); }
@@ -112,42 +73,8 @@ public class DragonTeethNecklace {
 
 // --- Epic ---
 
-    private static class DragonTeethNecklaceEpic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DragonTeethNecklaceEpic extends Item {
         public DragonTeethNecklaceEpic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 3.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 14.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 14.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 14.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 0.5, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 3.0, DRAGON_TEETH_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "dragon_teeth_necklace");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_TEETH_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Dragon Teeth Necklace").withStyle(ChatFormatting.DARK_PURPLE); }
@@ -161,7 +88,7 @@ public class DragonTeethNecklace {
             tooltip.add(Component.literal("+3 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+0.5 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+0.3 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+14 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
 
             tooltip.add(Component.literal(""));
@@ -171,46 +98,8 @@ public class DragonTeethNecklace {
 
 // --- Legendary ---
 
-    private static class DragonTeethNecklaceLegendary extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DragonTeethNecklaceLegendary extends Item {
         public DragonTeethNecklaceLegendary(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 7.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 15.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 15.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 15.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 7.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.1, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.1, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), 0.1, DRAGON_TEETH_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "dragon_teeth_necklace");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), DRAGON_TEETH_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Dragon Teeth Necklace").withStyle(ChatFormatting.GOLD); }
@@ -224,7 +113,7 @@ public class DragonTeethNecklace {
             tooltip.add(Component.literal("+7 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+0.5 Max Health").withStyle(ChatFormatting.BLUE));
 
             tooltip.add(Component.literal("+15 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+10% Precision").withStyle(style -> style.withColor(0xec3700)));
@@ -237,46 +126,8 @@ public class DragonTeethNecklace {
 
 // --- Mythic ---
 
-    private static class DragonTeethNecklaceMythic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DragonTeethNecklaceMythic extends Item {
         public DragonTeethNecklaceMythic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 9.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 18.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 18.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 18.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, Attributes.MAX_HEALTH, 1.5, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 9.0, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.15, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.15, DRAGON_TEETH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), 0.15, DRAGON_TEETH_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "dragon_teeth_necklace");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, Attributes.MAX_HEALTH, DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), DRAGON_TEETH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), DRAGON_TEETH_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Dragon Teeth Necklace").withStyle(ChatFormatting.AQUA); }
@@ -290,7 +141,7 @@ public class DragonTeethNecklace {
             tooltip.add(Component.literal("+9 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+1.5 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+0.7 Max Health").withStyle(ChatFormatting.BLUE));
 
             tooltip.add(Component.literal("+18 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+15% Precision").withStyle(style -> style.withColor(0xec3700)));

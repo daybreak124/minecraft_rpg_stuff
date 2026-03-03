@@ -1,5 +1,8 @@
 package net.cold.coldsmod;
 
+import net.cold.coldsmod.menu_accessory.AccessoryMenuPacket;
+import net.cold.coldsmod.menu_accessory.AccessoryPacket;
+import net.cold.coldsmod.menu_accessory.AccessoryUnlockSyncPacket;
 import net.cold.coldsmod.menu_blessing.BlessingMenuPacket;
 import net.cold.coldsmod.menu_blessing.BlessingPacket;
 import net.cold.coldsmod.menu_blessing.BlessingUnlockSyncPacket;
@@ -75,6 +78,24 @@ public class ModMessages {
                 .encoder(BlessingUnlockSyncPacket::toBytes)
                 .consumerMainThread(BlessingUnlockSyncPacket::handle)
                 .add();
+
+        // --
+
+        net.messageBuilder(AccessoryMenuPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(AccessoryMenuPacket::new)
+                .encoder(AccessoryMenuPacket::toBytes)
+                .consumerMainThread(AccessoryMenuPacket::handle)
+                .add();
+
+        net.messageBuilder(AccessoryPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(AccessoryPacket::new)
+                .encoder(AccessoryPacket::toBytes)
+                .consumerMainThread(AccessoryPacket::handle)
+                .add();
+
+        net.messageBuilder(AccessoryUnlockSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(AccessoryUnlockSyncPacket::new).encoder(AccessoryUnlockSyncPacket::toBytes)
+                .consumerMainThread(AccessoryUnlockSyncPacket::handle).add();
     }
 
     public static <MSG> void sendToServer(MSG message) {

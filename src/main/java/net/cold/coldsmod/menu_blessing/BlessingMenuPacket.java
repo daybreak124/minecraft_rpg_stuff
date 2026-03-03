@@ -19,7 +19,6 @@ public class BlessingMenuPacket {
         context.enqueueWork(() -> {
             ServerPlayer player = context.getSender();
             if (player != null) {
-                // This opens the ContainerMenu you created for the stats
                 NetworkHooks.openScreen(player, new SimpleMenuProvider(
                         (id, inv, p) -> new BlessingMenu(id, inv),
                         Component.empty()

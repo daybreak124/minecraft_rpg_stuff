@@ -5,6 +5,7 @@ import net.cold.coldsmod.damage.ModDamageTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -51,6 +52,9 @@ public class VortexReady extends MobEffect {
             this.levelDim = level.dimension().location().toString();
         }
     }
+
+    private static final ResourceKey<DamageType> RANGED_DAMAGE_KEY =
+            ResourceKey.create(Registries.DAMAGE_TYPE, ModDamageTypes.CUSTOM_RANGED_DAMAGE.location());
 
     public VortexReady() {
         super(MobEffectCategory.NEUTRAL, 0xFF0000);
@@ -131,7 +135,7 @@ public class VortexReady extends MobEffect {
 
         Holder<DamageType> rangedType = level.registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ModDamageTypes.CUSTOM_RANGED_DAMAGE);
+                .getHolderOrThrow(RANGED_DAMAGE_KEY);
 
         DamageSource source = new DamageSource(rangedType, player);
 

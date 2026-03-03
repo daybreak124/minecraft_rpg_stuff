@@ -1,11 +1,8 @@
 package net.cold.coldsmod.accessory.mind;
 
 import net.cold.coldsmod.ColdsMod;
-import net.cold.coldsmod.stat.AttributeApplier;
-import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -14,11 +11,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import top.theillusivec4.curios.api.SlotContext;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public class TemptingWhispers {
 
@@ -29,7 +24,6 @@ public class TemptingWhispers {
         ITEMS.register(eventBus);
     }
 
-    private static final UUID TEMPTING_WHISPERS_UUID = UUID.fromString("a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d");
 
 // --- Registry ---
 
@@ -55,38 +49,8 @@ public class TemptingWhispers {
 
 // --- Rare ---
 
-    private static class TemptingWhispersRare extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class TemptingWhispersRare extends Item {
         public TemptingWhispersRare(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 3.0, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.3, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.25, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -4.0, TEMPTING_WHISPERS_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "tempting_whispers");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), TEMPTING_WHISPERS_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Tempting Whispers").withStyle(ChatFormatting.BLUE); }
@@ -107,38 +71,8 @@ public class TemptingWhispers {
 
 // --- Epic ---
 
-    private static class TemptingWhispersEpic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class TemptingWhispersEpic extends Item {
         public TemptingWhispersEpic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 5.0, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.6, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.40, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -4.0, TEMPTING_WHISPERS_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "tempting_whispers");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), TEMPTING_WHISPERS_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Tempting Whispers").withStyle(ChatFormatting.DARK_PURPLE); }
@@ -159,38 +93,8 @@ public class TemptingWhispers {
 
 // --- Legendary ---
 
-    private static class TemptingWhispersLegendary extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class TemptingWhispersLegendary extends Item {
         public TemptingWhispersLegendary(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 7.0, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 1.2, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.5, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -4.0, TEMPTING_WHISPERS_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "tempting_whispers");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), TEMPTING_WHISPERS_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Tempting Whispers").withStyle(ChatFormatting.GOLD); }
@@ -211,38 +115,8 @@ public class TemptingWhispers {
 
 // --- Mythic ---
 
-    private static class TemptingWhispersMythic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class TemptingWhispersMythic extends Item {
         public TemptingWhispersMythic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 9.0, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 1.5, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.5, TEMPTING_WHISPERS_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -4.0, TEMPTING_WHISPERS_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "tempting_whispers");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.FORT.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), TEMPTING_WHISPERS_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), TEMPTING_WHISPERS_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Tempting Whispers").withStyle(ChatFormatting.AQUA); }

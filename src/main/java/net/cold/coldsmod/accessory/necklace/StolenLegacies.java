@@ -1,11 +1,8 @@
 package net.cold.coldsmod.accessory.necklace;
 
 import net.cold.coldsmod.ColdsMod;
-import net.cold.coldsmod.stat.AttributeApplier;
-import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -14,11 +11,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import top.theillusivec4.curios.api.SlotContext;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public class StolenLegacies {
 
@@ -29,7 +24,6 @@ public class StolenLegacies {
         ITEMS.register(eventBus);
     }
 
-    private static final UUID STOLEN_LEGACIES_UUID = UUID.fromString("b7d6c5a4-e3f2-4109-8d7c-6e5b4a3f2d1c");
 
 // --- Registry ---
 
@@ -55,42 +49,8 @@ public class StolenLegacies {
 
 // --- Rare ---
 
-    private static class StolenLegaciesChokerRare extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class StolenLegaciesChokerRare extends Item {
         public StolenLegaciesChokerRare(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.15, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 6.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 6.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 6.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 6.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 4, STOLEN_LEGACIES_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "stolen_legacies_choker");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.XP_GAIN.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), STOLEN_LEGACIES_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Stolen Legacies Choker").withStyle(ChatFormatting.BLUE); }
@@ -111,42 +71,8 @@ public class StolenLegacies {
 
 // --- Epic ---
 
-    private static class StolenLegaciesChokerEpic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class StolenLegaciesChokerEpic extends Item {
         public StolenLegaciesChokerEpic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.20, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 10.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 10.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 10.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 10.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 7, STOLEN_LEGACIES_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "stolen_legacies_choker");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.XP_GAIN.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), STOLEN_LEGACIES_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Stolen Legacies Choker").withStyle(ChatFormatting.DARK_PURPLE); }
@@ -167,50 +93,8 @@ public class StolenLegacies {
 
 // --- Legendary ---
 
-    private static class StolenLegaciesChokerLegendary extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class StolenLegaciesChokerLegendary extends Item {
         public StolenLegaciesChokerLegendary(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.25, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 16.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 12.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 12.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 12.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.1, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.1, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), 0.1, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 12.5, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), 0.08, STOLEN_LEGACIES_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "stolen_legacies_choker");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.XP_GAIN.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Stolen Legacies Choker").withStyle(ChatFormatting.GOLD); }
@@ -233,50 +117,8 @@ public class StolenLegacies {
 
 // --- Mythic ---
 
-    private static class StolenLegaciesChokerMythic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class StolenLegaciesChokerMythic extends Item {
         public StolenLegaciesChokerMythic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.3, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 20.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION.get(), 16.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION.get(), 16.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), 16.0, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), 0.16, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.16, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), 0.16, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION.get(), 15, STOLEN_LEGACIES_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), 0.14, STOLEN_LEGACIES_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "stolen_legacies_choker");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.XP_GAIN.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PRECISION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION.get(), STOLEN_LEGACIES_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.RESTORATION_MULTIPLIER.get(), STOLEN_LEGACIES_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Stolen Legacies Choker").withStyle(ChatFormatting.AQUA); }

@@ -1,11 +1,8 @@
 package net.cold.coldsmod.accessory.necklace;
 
 import net.cold.coldsmod.ColdsMod;
-import net.cold.coldsmod.stat.AttributeApplier;
-import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -14,11 +11,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import top.theillusivec4.curios.api.SlotContext;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public class PendantOfSnowflake {
 
@@ -29,7 +24,6 @@ public class PendantOfSnowflake {
         ITEMS.register(eventBus);
     }
 
-    private static final UUID SNOWFLAKE_UUID = UUID.fromString("d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a");
 
 // --- Registry ---
 
@@ -55,32 +49,8 @@ public class PendantOfSnowflake {
 
 // --- Rare ---
 
-    private static class PendantOfFloatingSnowflakeRare extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class PendantOfFloatingSnowflakeRare extends Item {
         public PendantOfFloatingSnowflakeRare(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 11.0, SNOWFLAKE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, SNOWFLAKE_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "pendant_of_floating_snowflake");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.CON.get(), SNOWFLAKE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), SNOWFLAKE_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Pendant of Floating Snowflake").withStyle(ChatFormatting.BLUE); }
@@ -98,32 +68,8 @@ public class PendantOfSnowflake {
 
 // --- Epic ---
 
-    private static class PendantOfFloatingSnowflakeEpic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class PendantOfFloatingSnowflakeEpic extends Item {
         public PendantOfFloatingSnowflakeEpic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 17.0, SNOWFLAKE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, SNOWFLAKE_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "pendant_of_floating_snowflake");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.CON.get(), SNOWFLAKE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), SNOWFLAKE_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Pendant of Floating Snowflake").withStyle(ChatFormatting.DARK_PURPLE); }
@@ -141,32 +87,8 @@ public class PendantOfSnowflake {
 
 // --- Legendary ---
 
-    private static class PendantOfFloatingSnowflakeLegendary extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class PendantOfFloatingSnowflakeLegendary extends Item {
         public PendantOfFloatingSnowflakeLegendary(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 24.0, SNOWFLAKE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, SNOWFLAKE_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "pendant_of_floating_snowflake");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.CON.get(), SNOWFLAKE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), SNOWFLAKE_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Pendant of Floating Snowflake").withStyle(ChatFormatting.GOLD); }
@@ -184,32 +106,8 @@ public class PendantOfSnowflake {
 
 // --- Mythic ---
 
-    private static class PendantOfFloatingSnowflakeMythic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class PendantOfFloatingSnowflakeMythic extends Item {
         public PendantOfFloatingSnowflakeMythic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.CON.get(), 32.0, SNOWFLAKE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, SNOWFLAKE_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "pendant_of_floating_snowflake");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.CON.get(), SNOWFLAKE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), SNOWFLAKE_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Pendant of Floating Snowflake").withStyle(ChatFormatting.AQUA); }

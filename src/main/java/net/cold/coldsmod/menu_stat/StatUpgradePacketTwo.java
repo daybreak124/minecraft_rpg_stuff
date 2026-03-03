@@ -36,7 +36,6 @@ public class StatUpgradePacketTwo {
             Attribute attr = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(attrId));
             if (attr != null) {
                 if (isUpgrade) {
-                    // Point specifically to the Pearl/Stat logic
                     StatUpgradeHandlerTwo.tryUpgrade(player, attr);
                 } else {
                     StatUpgradeHandlerTwo.tryDowngrade(player, attr);

@@ -9,8 +9,10 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import static net.cold.coldsmod.stat.ItemRarityUtils.getItemType;
 
 public class BastionActive extends MobEffect {
     public BastionActive() {
@@ -23,18 +25,11 @@ public class BastionActive extends MobEffect {
     }
 
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (event.player.level().isClientSide()) return;
-        if (!event.player.hasEffect(ModEffects.BASTION_READY.get())) return;
-
-        Player player = event.player;
-
-        boolean isBlocking = player.isBlocking();
-        boolean wasBlocking = player.getPersistentData().getBoolean("wasBlocking");
-        player.getPersistentData().putBoolean("wasBlocking", isBlocking);
-
-        if (isBlocking || !wasBlocking) return;
+    public static void onGuardDown(LivingEntityUseItemEvent.Stop event) {
+        if (event.getEntity().level().isClientSide) return;
+        if (!(event.getEntity() instanceof Player player)) return;
+        if (!"shield".equals(getItemType(event.getItem()))) return;
+        if (!event.getEntity().hasEffect(ModEffects.BASTION_READY.get())) return;
 
         double fort = player.getAttributeValue(ModAttributes.FORT.get());
         double perc = player.getAttributeValue(ModAttributes.PERC.get());

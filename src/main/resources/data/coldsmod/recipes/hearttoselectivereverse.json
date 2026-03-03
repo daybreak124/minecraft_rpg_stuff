@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    { "item": "coldsmod:selective_hellforged_plating" }
+    { "item": "coldsmod:flameforged_plating" }
   ],
   "result": {
     "item": "coldsmod:hellforged_plating",

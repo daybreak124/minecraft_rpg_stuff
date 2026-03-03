@@ -33,7 +33,7 @@ public class LootInjector {
 
         float accessoryMultiplier = 6 * ModConfigs.ACCESSORY_MULTIPLIER.get().floatValue();
         float blessingMultiplier = ModConfigs.BLESSING_MULTIPLIER.get().floatValue();
-        float materialMultiplier = 12 * ModConfigs.MATERIAL_MULTIPLIER.get().floatValue();
+        float materialMultiplier = ModConfigs.MATERIAL_MULTIPLIER.get().floatValue();
 
         if (name.equals(new ResourceLocation("minecraft", "chests/nether_bridge"))) {
 
@@ -78,6 +78,10 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 0.0083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 0.0083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0083f* accessoryMultiplier),
 
                     // --- Accessory Upgrade Smithing Template (3%) ---
                     new LootEntry(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get(), 1, 0.03f* materialMultiplier),
@@ -96,11 +100,7 @@ public class LootInjector {
                     new LootEntry(ModItems.SOUL_MAGNET.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f* blessingMultiplier)
+                    new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f* blessingMultiplier)
             );
             injectLoot(event.getTable(), netherLoot);
         }
@@ -151,6 +151,11 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 0.0083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 0.0083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0083f* accessoryMultiplier),
+
 
                     // Accessory upgrade smithing template (~3%)
                     new LootEntry(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get(), 1, 0.03f* materialMultiplier),
@@ -167,11 +172,7 @@ public class LootInjector {
                     new LootEntry(ModItems.SOUL_MAGNET.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f* blessingMultiplier)
+                    new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f* blessingMultiplier)
                     );
             injectLoot(event.getTable(), bastionLoot);
         }
@@ -218,6 +219,10 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 0.0083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 0.0083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0083f* accessoryMultiplier),
 
                     // Accessory upgrade smithing template (~3%)
                     new LootEntry(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get(), 1, 0.03f* materialMultiplier),
@@ -233,11 +238,7 @@ public class LootInjector {
                     new LootEntry(ModItems.BLOODTHIRST.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.SOUL_MAGNET.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.00214285f* blessingMultiplier),
-                    new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.00214285f* blessingMultiplier),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0218570f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0218570f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0218570f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0218570f* blessingMultiplier)
+                    new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.00214285f* blessingMultiplier)
             );
             injectLoot(event.getTable(), ruinedPortalLoot);
         }
@@ -294,11 +295,7 @@ public class LootInjector {
                     new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.001071425f* blessingMultiplier),
                     new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.001071425f* blessingMultiplier),
                     new LootEntry(ModItems.RESTORING_AURA.get(), 1, 0.001071425f* blessingMultiplier),
-                    new LootEntry(ModItems.DIVINITY_EXTRACTION.get(), 1, 0.001071425f* blessingMultiplier),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.01071425f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.01071425f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.01071425f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.01071425f* blessingMultiplier)
+                    new LootEntry(ModItems.DIVINITY_EXTRACTION.get(), 1, 0.001071425f* blessingMultiplier)
             );
             injectLoot(event.getTable(), barterLoot);
         }
@@ -337,6 +334,10 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 0.0083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 0.0083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0083f* accessoryMultiplier),
 
                     // Accessory upgrade smithing template (~3%)
                     new LootEntry(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get(), 1, 0.03f* materialMultiplier),
@@ -355,11 +356,7 @@ public class LootInjector {
                     new LootEntry(ModItems.DIVINITY_EXTRACTION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.DIVINE_SHIELD.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f* blessingMultiplier)
+                    new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f* blessingMultiplier)
             );
             injectLoot(event.getTable(), ancientCityLoot);
         }
@@ -407,6 +404,11 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 0.00083f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0083f* accessoryMultiplier),
+
 
                     // Accessory upgrade smithing template (~3%)
                     new LootEntry(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get(), 1, 0.03f * materialMultiplier),
@@ -414,7 +416,6 @@ public class LootInjector {
                     new LootEntry(ModItems.SHARD_OF_TRANSCENDENCE.get(), 1, 0.2F* materialMultiplier),
                     new LootEntry(ModItems.SCRAP_ESSENCE.get(), 1, 0.2F* materialMultiplier/2),
 
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f*blessingMultiplier),
                     new LootEntry(ModItems.HANKS_EYE.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.HANKS_OTHER_EYE.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.WEAK_POINT_STUDIES.get(), 1, 0.0042857f*blessingMultiplier),
@@ -426,10 +427,7 @@ public class LootInjector {
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.DIVINE_SHIELD.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f*blessingMultiplier),
-                    new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f*blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f*blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f*blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f*blessingMultiplier)
+                    new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f*blessingMultiplier)
             );
             injectLoot(event.getTable(), endCityLoot);
         }
@@ -462,13 +460,16 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 0.00083f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0083f* accessoryMultiplier),
 
                     new LootEntry(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get(), 1, 0.03f * materialMultiplier),
                     new LootEntry(ModItems.PEARL_OF_REVITALIZING.get(), 1, 0.2F* materialMultiplier),
                     new LootEntry(ModItems.SHARD_OF_TRANSCENDENCE.get(), 1, 0.2F* materialMultiplier),
                     new LootEntry(ModItems.SCRAP_ESSENCE.get(), 1, 0.2F* materialMultiplier/2),
 
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.02144285f * blessingMultiplier),
                     new LootEntry(ModItems.HANKS_EYE.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.HANKS_OTHER_EYE.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.WEAK_POINT_STUDIES.get(), 1, 0.00214285f* blessingMultiplier),
@@ -480,10 +481,7 @@ public class LootInjector {
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.DIVINE_SHIELD.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.00214285f* blessingMultiplier),
-                    new LootEntry(ModItems.CUPIDS_ARROW.get(), 1, 0.00214285f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.02144285f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.02144285f* blessingMultiplier)
+                    new LootEntry(ModItems.CUPIDS_ARROW.get(), 1, 0.00214285f* blessingMultiplier)
 
             );
             injectLoot(event.getTable(), strongholdLoot);
@@ -517,6 +515,10 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 2*0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 2*0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 2*0.00083f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 2*0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 2*0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 2*0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 2*0.0083f* accessoryMultiplier),
 
                     // Accessory upgrade smithing template (~3%)
                     new LootEntry(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get(), 1, 2*0.03f* materialMultiplier),
@@ -524,7 +526,6 @@ public class LootInjector {
                     new LootEntry(ModItems.SHARD_OF_TRANSCENDENCE.get(), 1, 0.2F* materialMultiplier),
                     new LootEntry(ModItems.SCRAP_ESSENCE.get(), 1, 0.2F* materialMultiplier),
 
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.085714f* blessingMultiplier),
                     new LootEntry(ModItems.CUPIDS_ARROW.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.DROP_OF_SACRIFICIAL_BLOOD.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.HANKS_EYE.get(), 1, 0.0085714f* blessingMultiplier),
@@ -534,10 +535,7 @@ public class LootInjector {
                     new LootEntry(ModItems.RESTORING_AURA.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0085714f* blessingMultiplier),
-                    new LootEntry(ModItems.HORN_OF_FEARMONGERING.get(), 1, 0.0085714f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.085714f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.085714f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.085714f* blessingMultiplier)
+                    new LootEntry(ModItems.HORN_OF_FEARMONGERING.get(), 1, 0.0085714f* blessingMultiplier)
             );
             injectLoot(event.getTable(), iglooLoot);
         }
@@ -571,6 +569,10 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 0.00083f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0083f* accessoryMultiplier),
 
                     // Accessory upgrade smithing template (~3%)
                     new LootEntry(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get(), 1, 0.03f * materialMultiplier),
@@ -578,7 +580,6 @@ public class LootInjector {
                     new LootEntry(ModItems.SHARD_OF_TRANSCENDENCE.get(), 1, 0.2F* materialMultiplier),
                     new LootEntry(ModItems.SCRAP_ESSENCE.get(), 1, 0.2F* materialMultiplier/2),
 
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f* blessingMultiplier),
                     new LootEntry(ModItems.BANNER_OF_DETERMINATION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.HORN_OF_FEARMONGERING.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.HELL_ON_EARTH.get(), 1, 0.0042857f* blessingMultiplier),
@@ -590,10 +591,7 @@ public class LootInjector {
                     new LootEntry(ModItems.RESTORING_AURA.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.NATURES_BLESSING.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.IGNITION_MARK.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f* blessingMultiplier)
+                    new LootEntry(ModItems.IGNITION_MARK.get(), 1, 0.0042857f* blessingMultiplier)
             );
             injectLoot(event.getTable(), desertLoot);
         }
@@ -624,6 +622,10 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 0.00083f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0083f* accessoryMultiplier),
 
                     // Accessory upgrade smithing template (~3%)
                     new LootEntry(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get(), 1, 0.03f* materialMultiplier),
@@ -631,7 +633,6 @@ public class LootInjector {
                     new LootEntry(ModItems.SHARD_OF_TRANSCENDENCE.get(), 1, 0.2F* materialMultiplier),
                     new LootEntry(ModItems.SCRAP_ESSENCE.get(), 1, 0.2F* materialMultiplier/2),
 
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f* blessingMultiplier),
                     new LootEntry(ModItems.BANNER_OF_DETERMINATION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.BRANCH_OF_THE_WORLD_TREE.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.GUARDIAN_ANGEL.get(), 1, 0.0042857f* blessingMultiplier),
@@ -645,9 +646,7 @@ public class LootInjector {
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.NATURES_BLESSING.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.ENDLESS_ADRENALINE_SYRINGE.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f* blessingMultiplier)
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f* blessingMultiplier)
             );
             injectLoot(event.getTable(), jungleLoot);
         }
@@ -678,8 +677,11 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 0.00083f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0083f* accessoryMultiplier),
 
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f*blessingMultiplier),
                     new LootEntry(ModItems.BANNER_OF_DETERMINATION.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.BRANCH_OF_THE_WORLD_TREE.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.GUARDIAN_ANGEL.get(), 1, 0.0042857f*blessingMultiplier),
@@ -693,10 +695,7 @@ public class LootInjector {
                     new LootEntry(ModItems.DIVINITY_EXTRACTION.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.NATURES_BLESSING.get(), 1, 0.0042857f*blessingMultiplier),
-                    new LootEntry(ModItems.ENDLESS_ADRENALINE_SYRINGE.get(), 1, 0.0042857f*blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f*blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f*blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f*blessingMultiplier)
+                    new LootEntry(ModItems.ENDLESS_ADRENALINE_SYRINGE.get(), 1, 0.0042857f*blessingMultiplier)
             );
             injectLoot(event.getTable(), archeologyLoot);
         }
@@ -731,6 +730,10 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 0.00083f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0083f* accessoryMultiplier),
 
                     // Accessory upgrade smithing template (~3%)
                     new LootEntry(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get(), 1, 0.03f * materialMultiplier),
@@ -752,11 +755,7 @@ public class LootInjector {
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.NATURES_BLESSING.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.BRANCH_OF_THE_WORLD_TREE.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.CUPIDS_ARROW.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f* blessingMultiplier)
+                    new LootEntry(ModItems.CUPIDS_ARROW.get(), 1, 0.0042857f* blessingMultiplier)
             );
             injectLoot(event.getTable(), waterLoot);
         }
@@ -790,11 +789,7 @@ public class LootInjector {
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0005357f* blessingMultiplier),
                     new LootEntry(ModItems.DIVINE_SHIELD.get(), 1, 0.0005357f* blessingMultiplier),
                     new LootEntry(ModItems.NATURES_BLESSING.get(), 1, 0.0005357f* blessingMultiplier),
-                    new LootEntry(ModItems.BRANCH_OF_THE_WORLD_TREE.get(), 1, 0.0005357f* blessingMultiplier),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0053570f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0053570f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0053570f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0053570f* blessingMultiplier)
+                    new LootEntry(ModItems.BRANCH_OF_THE_WORLD_TREE.get(), 1, 0.0005357f* blessingMultiplier)
             );
             injectLoot(event.getTable(), fishingLoot);
         }
@@ -826,6 +821,10 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 0.00083f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0083f* accessoryMultiplier),
 
                     new LootEntry(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get(), 1, 0.03f* materialMultiplier),
                     new LootEntry(ModItems.PEARL_OF_REVITALIZING.get(), 1, 0.2F* materialMultiplier),
@@ -843,11 +842,7 @@ public class LootInjector {
                     new LootEntry(ModItems.RESTORING_AURA.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f* blessingMultiplier)
+                    new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f* blessingMultiplier)
             );
             injectLoot(event.getTable(), dungeonLoot);
         }
@@ -878,9 +873,7 @@ public class LootInjector {
                     new LootEntry(WardenSkin.WARDEN_SKIN_FORGED_BRACERS_MYTHIC.get(), 1, 0.0000085f* accessoryMultiplier),
                     new LootEntry(Shrieks.SHRIEKS_OF_UNSEEING_MYTHIC.get(), 1, 0.0000085f* accessoryMultiplier)
             );
-
             injectLoot(event.getTable(), wardenLoot);
-
         }
 
         if (name.equals(EntityType.ENDER_DRAGON.getDefaultLootTable())) {
@@ -939,6 +932,10 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 0.00083f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 0.00083f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 0.0083f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0083f* accessoryMultiplier),
 
                     // Accessory upgrade smithing template (~3%)
                     new LootEntry(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get(), 1, 0.03f* materialMultiplier),
@@ -956,11 +953,7 @@ public class LootInjector {
                     new LootEntry(ModItems.FOX_EYE.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0428570f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0428570f* blessingMultiplier)
+                    new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0042857f* blessingMultiplier)
             );
             injectLoot(event.getTable(), outpostLoot);
         }
@@ -991,6 +984,10 @@ public class LootInjector {
                     new LootEntry(UtilityAccessories.MONIS_LUCKY_CHARM.get(), 1, 0.01f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.ANTIQUE_POCKET_WATCH.get(), 1, 0.01f* accessoryMultiplier),
                     new LootEntry(UtilityAccessories.CLOUDSPIRE_GEM.get(), 1, 0.01f* accessoryMultiplier),
+                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.01f* accessoryMultiplier),
+                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.01f* accessoryMultiplier),
+                    new LootEntry(ModItems.FLAMEFORGED_PLATING.get(), 1, 0.01f* accessoryMultiplier),
+                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.01f* accessoryMultiplier),
 
                     // Accessory upgrade smithing template (~3%)
                     new LootEntry(ModItems.ACCESSORY_UPGRADE_SMITHING_TEMPLATE.get(), 1, 0.03f* materialMultiplier),
@@ -1009,11 +1006,7 @@ public class LootInjector {
                     new LootEntry(ModItems.FOX_EYE.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0085714f* blessingMultiplier),
-                    new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0085714f* blessingMultiplier),
-                    new LootEntry(ModItems.BOTTLED_LIGHT.get(), 1, 0.0855714f* blessingMultiplier),
-                    new LootEntry(ModItems.FAIRY_TEARDROP.get(), 1, 0.0855714f* blessingMultiplier),
-                    new LootEntry(ModItems.HELLFORGED_PLATING.get(), 1, 0.0855714f* blessingMultiplier),
-                    new LootEntry(ModItems.HOOK_OF_THE_DEPTHS.get(), 1, 0.0855714f* blessingMultiplier)
+                    new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0085714f* blessingMultiplier)
             );
 
             injectLoot(event.getTable(), mansionLoot);
@@ -1023,9 +1016,9 @@ public class LootInjector {
 
             List<LootEntry> snifferLoot = List.of(
 
-                    new LootEntry(ModItems.FOCUSED_GEM_CLUSTER.get(), 1, 0.05f* materialMultiplier),
-                    new LootEntry(ModItems.REINFORCED_GEM_CLUSTER.get(), 1, 0.025f* materialMultiplier),
-                    new LootEntry(ModItems.PERFECTED_GEM_CLUSTER.get(), 1, 0.0125f* materialMultiplier)
+                    new LootEntry(ModItems.FOCUSED_GEM_CLUSTER.get(), 1, 0.05f),
+                    new LootEntry(ModItems.REINFORCED_GEM_CLUSTER.get(), 1, 0.025f),
+                    new LootEntry(ModItems.PERFECTED_GEM_CLUSTER.get(), 1, 0.0125f)
             );
 
             injectLoot(event.getTable(), snifferLoot);

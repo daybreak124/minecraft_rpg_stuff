@@ -3,15 +3,17 @@ package net.cold.coldsmod.blessingbonuses.skills;
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
 import net.cold.coldsmod.damage.ModDamageTypes;
-import net.cold.coldsmod.stat.ItemRarityUtils;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,31 +31,20 @@ public class BronzewoodApply {
         if (event.getEntity().level().isClientSide()) return;
         if (!(event.getSource().getEntity() instanceof Player player)) return;
         if (event.getEntity() instanceof Player) return;
+        if (event.getSource().getDirectEntity() != player) return;
         if (!(event.getSource().getDirectEntity() instanceof Player)) return;
+        if (event.getSource().is(ModDamageTypes.MELEE_DOT_DAMAGE)) return;
 
         LivingEntity target = event.getEntity();
 
-
-        InteractionHand hand = player.swingingArm;
-        ItemStack stack = player.getItemInHand(hand);
-        String itemType = ItemRarityUtils.getItemType(stack);
-
-        boolean isMelee = itemType.equals("sword");
-
-        if (!isMelee) return;
-
-
-        if (event.getSource().is(ModDamageTypes.MELEE_DOT_DAMAGE)) return;
-
-        if (event.getSource().getEntity() instanceof Player p) {
-            player = p;
-        } else if ("player".equals(event.getSource().getMsgId()) && event.getSource().getEntity() != null) {
-            if (event.getSource().getEntity() instanceof Player p2) player = p2;
-        }
-
-        if (player == null) return;
-
         if (player.hasEffect(ModEffects.BRONZEWOOD_READY.get())) {
+            Level level = player.level();
+            Holder<DamageType> meleeType = level.registryAccess()
+                    .registryOrThrow(Registries.DAMAGE_TYPE)
+                    .getHolderOrThrow(ModDamageTypes.MELEE_DOT_DAMAGE);
+
+            DamageSource source = new DamageSource(meleeType, player, player);
+            target.hurt(source, 3.0f);
 
             target.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_CURSE.get(), 20 * 10, 0, false, false, true));
 
@@ -68,7 +59,6 @@ public class BronzewoodApply {
             curseSources.put(target, player.getUUID());
 
             player.addEffect(new MobEffectInstance(ModEffects.BRONZEWOOD_COOLDOWN.get(), 300, 0, false, false, true));
-            player.getPersistentData().putBoolean("bronzewood_proc", true);
             player.removeEffect(ModEffects.BRONZEWOOD_READY.get());
         }
     }

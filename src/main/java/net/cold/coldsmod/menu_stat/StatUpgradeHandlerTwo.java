@@ -15,72 +15,73 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.UUID;
 
-import static net.cold.coldsmod.stat.AttributeApplier.*;
 import static net.cold.coldsmod.menu_stat.StatUpgradeHandler.getRequiredAmount;
+import static net.cold.coldsmod.stat.AttributeApplier.*;
 
 public class StatUpgradeHandlerTwo {
     public static final int MAX_GLOBAL_POINTS = 120;
     public static final UUID STAT_MODIFIER_UUID = UUID.fromString("6d6224-c01d-5374-a711-5557c0de");
 
     public static double getIncrementFor(Attribute attr) {
-        if (attr == Attributes.ARMOR) return 1.25;
-        if (attr == Attributes.ARMOR_TOUGHNESS) return 1.00;
+        if (attr == Attributes.ARMOR) return 0.6;
+        if (attr == Attributes.ARMOR_TOUGHNESS) return 0.75;
         if (attr == Attributes.KNOCKBACK_RESISTANCE) return 0.05;
-        if (attr == Attributes.MAX_HEALTH) return 0.6;
-        if (attr == Attributes.MOVEMENT_SPEED) return 0.001;
+        if (attr == Attributes.MAX_HEALTH) return 0.3;
+        if (attr == Attributes.MOVEMENT_SPEED) return 0.002;
         if (attr == ModAttributes.DEBUFF_RESIST.get()) return 4;
 
-        if (attr == ModAttributes.POTENCY.get()) return 1;
-        if (attr == ModAttributes.ACCURACY.get()) return 2.5;
-        if (attr == ModAttributes.PRECISION.get()) return 2;
+        if (attr == ModAttributes.POTENCY.get()) return 1.25;
+        if (attr == ModAttributes.HASTE.get()) return 1.5;
+        if (attr == ModAttributes.ACCURACY.get()) return 2;
+        if (attr == ModAttributes.PRECISION.get()) return 1.75;
 
-        if (attr == ModAttributes.MELEE_POTENCY.get()) return 1.5;
-        if (attr == ModAttributes.HASTE.get()) return 1.25;
-        if (attr == ModAttributes.MELEE_ACCURACY.get()) return 3.75;
-        if (attr == ModAttributes.MELEE_PRECISION.get()) return 3;
+        if (attr == ModAttributes.MELEE_POTENCY.get()) return 1.75;
+        if (attr == ModAttributes.MELEE_HASTE.get()) return 2.1;
+        if (attr == ModAttributes.MELEE_ACCURACY.get()) return 2.75;
+        if (attr == ModAttributes.MELEE_PRECISION.get()) return 2.45;
 
-        if (attr == ModAttributes.PROJECTILE_POTENCY.get()) return 1.5;
-        if (attr == ModAttributes.NOCK_HASTE.get()) return 1.25;
-        if (attr == ModAttributes.PROJECTILE_ACCURACY.get()) return 3.75;
-        if (attr == ModAttributes.PROJECTILE_PRECISION.get()) return 3;
+        if (attr == ModAttributes.PROJECTILE_POTENCY.get()) return 1.75;
+        if (attr == ModAttributes.NOCK_HASTE.get()) return 2.1;
+        if (attr == ModAttributes.PROJECTILE_ACCURACY.get()) return 2.75;
+        if (attr == ModAttributes.PROJECTILE_PRECISION.get()) return 2.45;
 
-        if (attr == ModAttributes.REJUVENATION.get()) return 1.5;
-        if (attr == ModAttributes.RESTORATION.get()) return 1.5;
-        if (attr == ModAttributes.AMPLIFICATION.get()) return 2.25;
+        if (attr == ModAttributes.REJUVENATION.get()) return 2.0;
+        if (attr == ModAttributes.RESTORATION.get()) return 1.75;
+        if (attr == ModAttributes.AMPLIFICATION.get()) return 2.0;
 
         return 1.0;
     }
 
     public static int getMaxPointsFor(Attribute attr) {
-        if (attr == Attributes.ARMOR) return 24;
-        if (attr == Attributes.ARMOR_TOUGHNESS) return 15;
+        if (attr == Attributes.ARMOR) return 21;
+        if (attr == Attributes.ARMOR_TOUGHNESS) return 16;
         if (attr == Attributes.KNOCKBACK_RESISTANCE) return 10;
-        if (attr == Attributes.MAX_HEALTH) return 30;
-        if (attr == Attributes.MOVEMENT_SPEED) return 25;
-        if (attr == ModAttributes.DEBUFF_RESIST.get()) return 10;
+        if (attr == Attributes.MAX_HEALTH) return 21;
+        if (attr == Attributes.MOVEMENT_SPEED) return 15;
+        if (attr == ModAttributes.DEBUFF_RESIST.get()) return 12;
 
-        if (attr == ModAttributes.POTENCY.get()) return 10;
-        if (attr == ModAttributes.ACCURACY.get()) return 10;
+        if (attr == ModAttributes.POTENCY.get()) return 8;
+        if (attr == ModAttributes.HASTE.get()) return 6;
+        if (attr == ModAttributes.ACCURACY.get()) return 12;
         if (attr == ModAttributes.PRECISION.get()) return 10;
 
-        if (attr == ModAttributes.MELEE_POTENCY.get()) return 10;
-        if (attr == ModAttributes.HASTE.get()) return 10;
-        if (attr == ModAttributes.MELEE_ACCURACY.get()) return 12;
-        if (attr == ModAttributes.MELEE_PRECISION.get()) return 15;
+        if (attr == ModAttributes.MELEE_POTENCY.get()) return 15;
+        if (attr == ModAttributes.MELEE_HASTE.get()) return 12;
+        if (attr == ModAttributes.MELEE_ACCURACY.get()) return 22;
+        if (attr == ModAttributes.MELEE_PRECISION.get()) return 18;
 
-        if (attr == ModAttributes.PROJECTILE_POTENCY.get()) return 10;
-        if (attr == ModAttributes.NOCK_HASTE.get()) return 10;
-        if (attr == ModAttributes.PROJECTILE_ACCURACY.get()) return 12;
-        if (attr == ModAttributes.PROJECTILE_PRECISION.get()) return 15;
+        if (attr == ModAttributes.PROJECTILE_POTENCY.get()) return 15;
+        if (attr == ModAttributes.NOCK_HASTE.get()) return 12;
+        if (attr == ModAttributes.PROJECTILE_ACCURACY.get()) return 22;
+        if (attr == ModAttributes.PROJECTILE_PRECISION.get()) return 18;
 
-        if (attr == ModAttributes.REJUVENATION.get()) return 20;
-        if (attr == ModAttributes.RESTORATION.get()) return 25;
-        if (attr == ModAttributes.AMPLIFICATION.get()) return 30;
+        if (attr == ModAttributes.REJUVENATION.get()) return 25;
+        if (attr == ModAttributes.RESTORATION.get()) return 15;
+        if (attr == ModAttributes.AMPLIFICATION.get()) return 20;
 
         return 20;
     }
 
-    // This reads the actual "Spent Points" integer from NBT
     public static int getPointsSpent(Player player, Attribute attr) {
         String key = ForgeRegistries.ATTRIBUTES.getKey(attr).toString();
         CompoundTag data = player.getPersistentData().getCompound("SpentPoints");
@@ -147,17 +148,15 @@ public class StatUpgradeHandlerTwo {
         else if (attribute == ModAttributes.PRECISION.get()) {
             updateSubStat(player, ModAttributes.MELEE_PRECISION.get(), ModAttributes.PRECISION.get());
             updateSubStat(player, ModAttributes.PROJECTILE_PRECISION.get(), ModAttributes.PRECISION.get());
+        } else if (attribute == ModAttributes.HASTE.get()) {
+            updateSubStat(player, ModAttributes.MELEE_HASTE.get(), ModAttributes.HASTE.get());
+            updateSubStat(player, ModAttributes.NOCK_HASTE.get(), ModAttributes.HASTE.get());
         }
 
-        player.level().getServer().tell(new net.minecraft.server.TickTask(
-                player.level().getServer().getTickCount() + 1,
-                () -> {
-                    if (player.isAlive()) {
-                        recalculateDynamicBonuses(player);
-                        applyCrossbowTag(player);
-                    }
-                }
-        ));
+        refreshPerPointStats(player);
+        refreshMilestones(player);
+        recalculateDynamicBonuses(player);
+        // applyCrossbowTag(player);
     }
 
     public static void tryDowngrade(ServerPlayer player, Attribute attribute) {
@@ -167,7 +166,12 @@ public class StatUpgradeHandlerTwo {
         int globalPoints = getTotalPointsSpent(player);
         Item pearlToReturn = getRequiredPearl(globalPoints - 1);
         int amountToReturn = getRequiredAmount(globalPoints - 1);
-        player.getInventory().add(new ItemStack(pearlToReturn, amountToReturn));
+
+        ItemStack stackToReturn = new ItemStack(pearlToReturn, amountToReturn);
+        player.getInventory().add(stackToReturn);
+        if (!player.getInventory().add(stackToReturn)) {
+            player.drop(stackToReturn, false);
+        }
 
         int newPoints = points - 1;
         setPointsSpent(player, attribute, newPoints);
@@ -191,15 +195,10 @@ public class StatUpgradeHandlerTwo {
             updateSubStat(player, ModAttributes.PROJECTILE_PRECISION.get(), ModAttributes.PRECISION.get());
         }
 
-        player.level().getServer().tell(new net.minecraft.server.TickTask(
-                player.level().getServer().getTickCount() + 1,
-                () -> {
-                    if (player.isAlive()) {
-                        recalculateDynamicBonuses(player);
-                        applyCrossbowTag(player);
-                    }
-                }
-        ));
+        refreshPerPointStats(player);
+        refreshMilestones(player);
+        recalculateDynamicBonuses(player);
+        // applyCrossbowTag(player);
     }
 
     private static void updateSubStat(ServerPlayer player, Attribute subAttr, Attribute baseAttr) {

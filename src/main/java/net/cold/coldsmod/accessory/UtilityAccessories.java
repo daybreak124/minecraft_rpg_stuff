@@ -1,26 +1,19 @@
 package net.cold.coldsmod.accessory;
 
 import net.cold.coldsmod.ColdsMod;
-import net.cold.coldsmod.stat.AttributeApplier;
-import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import top.theillusivec4.curios.api.SlotContext;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public class UtilityAccessories {
 
@@ -28,12 +21,7 @@ public class UtilityAccessories {
             DeferredRegister.create(ForgeRegistries.ITEMS, ColdsMod.MODID);
 
     // UUIDs
-    private static final UUID CLOUDTREADER_UUID = UUID.fromString("11111111-2222-3333-4444-555555555555");
-    private static final UUID MONIS_LUCKY_UUID = UUID.fromString("22222222-3333-4444-5555-666666666666");
-    private static final UUID ENDERMAN_FINGERS_UUID = UUID.fromString("33333333-4444-5555-6666-777777777777");
-    private static final UUID ANTIQUE_WATCH_UUID = UUID.fromString("44444444-5555-6666-7777-888888888888");
-    private static final UUID REINFORCED_DIAMOND_UUID = UUID.fromString("55555555-6666-7777-8888-999999999999");
-    private static final UUID CLOUDSPIRE_GEM_UUID = UUID.fromString("66666666-7777-8888-9999-aaaaaaaaaaaa");
+
 
     // --- Registry ---
 
@@ -71,32 +59,8 @@ public class UtilityAccessories {
     // --- Cloudtreader Boots -----
     // -----------------------------
 
-    private static class CloudtreaderBoots extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class CloudtreaderBoots extends Item {
         public CloudtreaderBoots(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, CLOUDTREADER_UUID);
-                AttributeApplier.applyModifier(player, ForgeMod.STEP_HEIGHT_ADDITION.get(), 1.0, CLOUDTREADER_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "cloudtreader_boots");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), CLOUDTREADER_UUID);
-                AttributeApplier.removeModifier(player, ForgeMod.STEP_HEIGHT_ADDITION.get(), CLOUDTREADER_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Cloudtreader Boots").withStyle(style -> style.withColor(0xD6C97A)); }
@@ -114,32 +78,8 @@ public class UtilityAccessories {
     // --- Moni's Lucky Charm -----
     // -----------------------------
 
-    private static class MonisLuckyCharm extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class MonisLuckyCharm extends Item {
         public MonisLuckyCharm(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, MONIS_LUCKY_UUID);
-                AttributeApplier.applyModifier(player, Attributes.LUCK, 2.0, MONIS_LUCKY_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "monis_lucky_charm");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), MONIS_LUCKY_UUID);
-                AttributeApplier.removeModifier(player, Attributes.LUCK, MONIS_LUCKY_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Moni's Lucky Charm").withStyle(style -> style.withColor(0xD6C97A)); }
@@ -157,32 +97,8 @@ public class UtilityAccessories {
     // --- Enderman's Fingers -----
     // -----------------------------
 
-    private static class EndermanFingers extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class EndermanFingers extends Item {
         public EndermanFingers(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, ENDERMAN_FINGERS_UUID);
-                AttributeApplier.applyModifier(player, ForgeMod.BLOCK_REACH.get(), 1.5, ENDERMAN_FINGERS_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "enderman_fingers");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), ENDERMAN_FINGERS_UUID);
-                AttributeApplier.removeModifier(player, ForgeMod.BLOCK_REACH.get(), ENDERMAN_FINGERS_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Enderman's Fingers").withStyle(style -> style.withColor(0xD6C97A)); }
@@ -200,32 +116,8 @@ public class UtilityAccessories {
     // --- Antique Pocket Watch -----
     // -----------------------------
 
-    private static class AntiquePocketWatch extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class AntiquePocketWatch extends Item {
         public AntiquePocketWatch(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, ANTIQUE_WATCH_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.XP_GAIN.get(), 0.3, ANTIQUE_WATCH_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "antique_pocket_watch");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), ANTIQUE_WATCH_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.XP_GAIN.get(), ANTIQUE_WATCH_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Antique Pocket Watch").withStyle(style -> style.withColor(0xD6C97A)); }
@@ -243,32 +135,8 @@ public class UtilityAccessories {
     // --- Reinforced Diamond Plating -----
     // -----------------------------
 
-    private static class ReinforcedDiamondPlating extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class ReinforcedDiamondPlating extends Item {
         public ReinforcedDiamondPlating(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, REINFORCED_DIAMOND_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MINING_SPEED.get(), 0.3, REINFORCED_DIAMOND_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "reinforced_diamond_plating");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), REINFORCED_DIAMOND_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MINING_SPEED.get(), REINFORCED_DIAMOND_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Reinforced Diamond Plating").withStyle(style -> style.withColor(0xD6C97A)); }
@@ -286,32 +154,8 @@ public class UtilityAccessories {
     // --- Cloudspire Gem -----
     // -----------------------------
 
-    private static class CloudspireGem extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class CloudspireGem extends Item {
         public CloudspireGem(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, CLOUDSPIRE_GEM_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.JUMP_BOOST.get(), 1.0, CLOUDSPIRE_GEM_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "cloudspire_gem");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), CLOUDSPIRE_GEM_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.JUMP_BOOST.get(), CLOUDSPIRE_GEM_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Cloudspire Gem").withStyle(style -> style.withColor(0xD6C97A)); }

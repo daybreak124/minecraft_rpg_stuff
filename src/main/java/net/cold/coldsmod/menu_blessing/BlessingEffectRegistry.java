@@ -16,17 +16,20 @@ import net.minecraft.world.item.Item;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import static net.cold.coldsmod.blessingbonuses.CooldownCycle.HAWKEYE_UUID;
-import static net.cold.coldsmod.item.ModItems.FRENZY_ATTACK_DAMAGE;
-import static net.cold.coldsmod.item.ModItems.IMMOLATION_ARMOR;
 
 public class BlessingEffectRegistry {
     public static final Map<Item, Consumer<Player>> ON_APPLY = new HashMap<>();
     public static final Map<Item, Consumer<Player>> ON_REMOVE = new HashMap<>();
     public static final Map<Item, Predicate<Player>> CAN_REMOVE = new HashMap<>();
+
+    public static final UUID FRENZY_ATTACK_DAMAGE = UUID.fromString("d739268d-e62f-4c9b-8301-2812343ab281");
+    public static final UUID IMMOLATION_ARMOR = UUID.fromString("d739268d-e62f-4c9b-8301-2895473f3281");
+
 
     static {
         // --- WARLORD'S GAZE ---
@@ -184,6 +187,8 @@ public class BlessingEffectRegistry {
                     player.removeEffect(ModEffects.SOUL_SEVERANCE_ACTIVE.get());
                     player.removeEffect(ModEffects.SOUL_SEVERANCE_READY.get());
                     player.removeEffect(ModEffects.SOUL_SEVERANCE_COOLDOWN.get());
+                    player.getPersistentData().remove("pull_ticks");
+
                 },
                 player -> !player.hasEffect(ModEffects.SOUL_SEVERANCE_ACTIVE.get()) && !player.hasEffect(ModEffects.SOUL_SEVERANCE_COOLDOWN.get())
         );
@@ -236,6 +241,8 @@ public class BlessingEffectRegistry {
                 player -> {
                     player.removeEffect(ModEffects.CLAIRVOYANCE_READY.get());
                     player.removeEffect(ModEffects.CLAIRVOYANCE_COOLDOWN.get());
+                    player.getPersistentData().remove("Clairvoyance");
+                    player.getPersistentData().remove("ClairvoyanceTarget");
                 },
                 player -> !player.hasEffect(ModEffects.CLAIRVOYANCE_COOLDOWN.get())
         );
@@ -333,12 +340,6 @@ public class BlessingEffectRegistry {
                     player.removeEffect(ModEffects.BASTION_COOLDOWN.get());
                 },
                 player -> !player.hasEffect(ModEffects.BASTION_ACTIVE.get()) && !player.hasEffect(ModEffects.BASTION_COOLDOWN.get())
-        );
-
-        register(ModItems.BOTTLED_LIGHT.get(),
-                player -> player.getPersistentData().putBoolean("lightbringer_applied", true),
-                player -> player.getPersistentData().remove("lightbringer_applied"),
-                player -> true
         );
 
         register(ModItems.PRIDE_INFUSED_AIGRETTE.get(),
@@ -473,6 +474,8 @@ public class BlessingEffectRegistry {
                     player.removeEffect(ModEffects.THORNED_PARRY_CD.get());
                     player.removeEffect(ModEffects.THORNED_PARRY_READY.get());
                     player.getPersistentData().remove("thorn_eligible");
+                    player.getPersistentData().remove("parry_time");
+                    player.getPersistentData().remove("last_attacker_uuid");
                 },
                 player -> !player.hasEffect(ModEffects.THORNED_PARRY_CD.get())
         );
@@ -488,37 +491,6 @@ public class BlessingEffectRegistry {
                     player.removeEffect(ModEffects.BLESSED_LAND_CD.get());
                 },
                 player -> !player.hasEffect(ModEffects.BLESSED_LAND_CD.get())
-        );
-
-        register(ModItems.FAIRY_TEARDROP.get(),
-                player -> player.getPersistentData().putBoolean("regrowth_eligible", true),
-                player -> player.getPersistentData().remove("regrowth_eligible"),
-                player -> true
-        );
-
-        register(ModItems.HOOK_OF_THE_DEPTHS.get(),
-                player -> player.getPersistentData().putBoolean("grapple_eligible", true),
-                player -> {
-                    player.getPersistentData().remove("grapple_eligible");
-                    player.getPersistentData().remove("grapple_target_x");
-                    player.getPersistentData().remove("grapple_target_y");
-                    player.getPersistentData().remove("grapple_target_z");
-                    player.getPersistentData().remove("is_grappling");
-                    player.getPersistentData().remove("last_y");
-                },
-                player -> true
-        );
-
-        register(ModItems.HELLFORGED_PLATING.get(),
-                player -> player.getPersistentData().putBoolean("smelt_eligible", true),
-                player -> player.getPersistentData().remove("smelt_eligible"),
-                player -> true
-        );
-
-        register(ModItems.SELECTIVE_HELLFORGED_PLATING.get(),
-                player -> player.getPersistentData().putBoolean("smelt2_eligible", true),
-                player -> player.getPersistentData().remove("smelt2_eligible"),
-                player -> true
         );
     }
 

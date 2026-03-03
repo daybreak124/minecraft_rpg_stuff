@@ -1,11 +1,8 @@
 package net.cold.coldsmod.accessory.bracers;
 
 import net.cold.coldsmod.ColdsMod;
-import net.cold.coldsmod.stat.AttributeApplier;
-import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -14,11 +11,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import top.theillusivec4.curios.api.SlotContext;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public class DragonClaw {
 
@@ -28,8 +23,6 @@ public class DragonClaw {
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
-
-    private static final UUID DRAGON_CLAW_UUID = UUID.fromString("b72a4e1d-8c3b-4f92-a106-928475f32104");
 
 // --- Registry ---
 
@@ -55,38 +48,8 @@ public class DragonClaw {
 
 // --- Rare ---
 
-    private static class DragonClawGlovesRare extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DragonClawGlovesRare extends Item {
         public DragonClawGlovesRare(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 3.0, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 6.0, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 6.0, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 6.0, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, DRAGON_CLAW_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "dragon_claw_gloves");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_CLAW_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Dragon Claw Gloves").withStyle(ChatFormatting.BLUE); }
@@ -105,38 +68,8 @@ public class DragonClaw {
 
 // --- Epic ---
 
-    private static class DragonClawGlovesEpic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DragonClawGlovesEpic extends Item {
         public DragonClawGlovesEpic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 5.0, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 13.5, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 13.5, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 13.5, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, DRAGON_CLAW_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "dragon_claw_gloves");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_CLAW_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Dragon Claw Gloves").withStyle(ChatFormatting.DARK_PURPLE); }
@@ -155,40 +88,8 @@ public class DragonClaw {
 
 // --- Legendary ---
 
-    private static class DragonClawGlovesLegendary extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DragonClawGlovesLegendary extends Item {
         public DragonClawGlovesLegendary(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 7.0, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 18.0, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.075, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 18.0, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 18.0, DRAGON_CLAW_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "dragon_claw_gloves");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_CLAW_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Dragon Claw Gloves").withStyle(ChatFormatting.GOLD); }
@@ -199,7 +100,7 @@ public class DragonClaw {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+7 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7.5% Armor Toughness").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+8 Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+18 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -208,40 +109,8 @@ public class DragonClaw {
 
 // --- Mythic ---
 
-    private static class DragonClawGlovesMythic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DragonClawGlovesMythic extends Item {
         public DragonClawGlovesMythic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 9.0, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.ACCURACY.get(), 24.0, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), 0.15, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_ACCURACY.get(), 24.0, DRAGON_CLAW_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), 24.0, DRAGON_CLAW_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "dragon_claw_gloves");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.ACCURACY.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.TOUGHNESS_MULTIPLIER.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_ACCURACY.get(), DRAGON_CLAW_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_ACCURACY.get(), DRAGON_CLAW_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Dragon Claw Gloves").withStyle(ChatFormatting.AQUA); }
@@ -252,7 +121,7 @@ public class DragonClaw {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+9 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+15% Armor Toughness").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+11 Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("+24 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));

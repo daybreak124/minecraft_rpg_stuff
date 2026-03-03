@@ -219,8 +219,8 @@ public class Sbeve extends TamableAnimal {
                 if (this.sbeve.getOwner() instanceof Player owner) {
 
                     double scaledHaste = getScaledValue(owner,
-                            ModAttributes.HASTE.get(),
-                            ModAttributes.HASTE_MULTIPLIER.get());
+                            ModAttributes.MELEE_HASTE.get(),
+                            ModAttributes.MELEE_HASTE_MULTIPLIER.get());
 
                     double cooldownBase = 30.0;
                     double divisor = 1.0 + (scaledHaste / 100.0);

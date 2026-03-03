@@ -2,6 +2,7 @@ package net.cold.coldsmod.blessingbonuses.neweffects;
 
 import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.stat.AttributeApplier;
+import net.cold.coldsmod.stat.ItemRarityUtils;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -11,7 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
@@ -32,25 +33,24 @@ public class Sanctuary {
 
 
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (event.player.level().isClientSide()) return;
+    public static void onShieldUseStart(LivingEntityUseItemEvent.Start event) {
+        if (event.getEntity().level().isClientSide() || !(event.getEntity() instanceof Player player)) return;
+        if (!player.getPersistentData().getBoolean("sanctuary_eligible")) return;
+        if (!"shield".equals(ItemRarityUtils.getItemType(event.getItem()))) return;
 
-        Player player = event.player;
         CompoundTag tag = player.getPersistentData();
+        tag.putInt(BLOCK_TICKS, 0);
+        tag.putInt(PULSE_TICKS, 0);
+    }
 
+    @SubscribeEvent
+    public static void onShieldUseTick(LivingEntityUseItemEvent.Tick event) {
+        if (event.getEntity().level().isClientSide() || !(event.getEntity() instanceof Player player)) return;
+        CompoundTag tag = player.getPersistentData();
         if (!tag.getBoolean("sanctuary_eligible")) return;
+        if (!"shield".equals(ItemRarityUtils.getItemType(event.getItem()))) return;
 
-        if (!player.isBlocking()) {
-            if (tag.getInt(BLOCK_TICKS) != 0) {
-                tag.putInt(BLOCK_TICKS, 0);
-                tag.putInt(PULSE_TICKS, 0);
-            }
-            return;
-        }
-
-        int blockTicks = tag.getInt(BLOCK_TICKS) + 1;
-        tag.putInt(BLOCK_TICKS, blockTicks);
+        int blockTicks = player.getTicksUsingItem();
 
         if (blockTicks >= CHANNEL_DELAY) {
             int pulseTicks = tag.getInt(PULSE_TICKS) + 1;
@@ -61,6 +61,14 @@ public class Sanctuary {
             } else {
                 tag.putInt(PULSE_TICKS, pulseTicks);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onShieldUseStop(LivingEntityUseItemEvent.Stop event) {
+        if (event.getEntity() instanceof Player player) {
+            player.getPersistentData().putInt(BLOCK_TICKS, 0);
+            player.getPersistentData().putInt(PULSE_TICKS, 0);
         }
     }
 

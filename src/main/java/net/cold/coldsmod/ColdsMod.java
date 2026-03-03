@@ -19,6 +19,8 @@ import net.cold.coldsmod.blessingbonuses.skills.*;
 import net.cold.coldsmod.bow.BowAnimHandler;
 import net.cold.coldsmod.formulas.DebuffResistHandler;
 import net.cold.coldsmod.item.ModItems;
+import net.cold.coldsmod.menu_accessory.AccessoryMenu;
+import net.cold.coldsmod.menu_accessory.AccessoryScreen;
 import net.cold.coldsmod.menu_blessing.BlessingScreen;
 import net.cold.coldsmod.menu_stat.StatScreen;
 import net.cold.coldsmod.menu_stat.StatUpgradeHandler;
@@ -31,7 +33,6 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -40,7 +41,6 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -51,7 +51,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
-import top.theillusivec4.curios.api.SlotTypeMessage;
 
 import java.io.File;
 import java.io.IOException;
@@ -69,6 +68,7 @@ public class ColdsMod {
 
         MinecraftForge.EVENT_BUS.register(StatUpgradeHandler.class);
         MinecraftForge.EVENT_BUS.register(BlessingScreen.class);
+        MinecraftForge.EVENT_BUS.register(AccessoryMenu.class);
 
         copyDefaultConfig("melee_weapons.json");
         copyDefaultConfig("bows.json");
@@ -165,7 +165,6 @@ public class ColdsMod {
         SunstoneForged.register(modEventBus);
 
         UtilityAccessories.register(modEventBus);
-        net.cold.coldsmod.accessory.TestItems.register(modEventBus);
 
 
         MinecraftForge.EVENT_BUS.register(BowAnimHandler.class);
@@ -222,6 +221,7 @@ public class ColdsMod {
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
             net.minecraft.client.gui.screens.MenuScreens.register(ModMenu.STAT_MENU.get(), StatScreen::new);
             net.minecraft.client.gui.screens.MenuScreens.register(ModMenu.BLESSING_MENU.get(), BlessingScreen::new);
+            net.minecraft.client.gui.screens.MenuScreens.register(ModMenu.ACCESSORY_MENU.get(), AccessoryScreen::new);
         }
 
         @SubscribeEvent
@@ -262,85 +262,85 @@ public class ColdsMod {
 
     public void enqueueIMC(final InterModEnqueueEvent event) {
 
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aaaheads")
-                        .size(2)
-                        .icon(new ResourceLocation("coldsmod", "item/head_slot"))
-                        .build()
-        );
-
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aabnecklaces")
-                        .size(1)
-                        .icon(new ResourceLocation("coldsmod", "item/necklace_slot"))
-                        .build()
-        );
-
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aacbracelets")
-                        .size(2)
-                        .icon(new ResourceLocation("coldsmod", "item/bracer_slot"))
-                        .build()
-        );
-
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aadrings")
-                        .size(2)
-                        .icon(new ResourceLocation("coldsmod", "item/ring_slot"))
-                        .build()
-        );
-
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aaeutility")
-                        .size(5)
-                        .icon(new ResourceLocation("coldsmod", "item/utility_slot"))
-                        .build()
-        );
-
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aafblessingcombat")
-                        .size(4)
-                        .icon(new ResourceLocation("coldsmod", "item/slot1"))
-                        .build()
-        );
-
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aafblessingpresence")
-                        .size(1)
-                        .icon(new ResourceLocation("coldsmod", "item/slot10"))
-                        .build()
-        );
-
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aajblessingsword")
-                        .size(1)
-                        .icon(new ResourceLocation("coldsmod", "item/slot5"))
-                        .build()
-        );
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aakblessingbow")
-                        .size(1)
-                        .icon(new ResourceLocation("coldsmod", "item/slot6"))
-                        .build()
-        );
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aalblessingcrossbow")
-                        .size(1)
-                        .icon(new ResourceLocation("coldsmod", "item/slot7"))
-                        .build()
-        );
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aamblessingshield")
-                        .size(1)
-                        .icon(new ResourceLocation("coldsmod", "item/slot8"))
-                        .build()
-        );
-
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("aanblessingtool")
-                        .size(3)
-                        .icon(new ResourceLocation("coldsmod", "item/slot9"))
-                        .build()
-        );
+//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+//                () -> new SlotTypeMessage.Builder("aaaheads")
+//                        .size(2)
+//                        .icon(new ResourceLocation("coldsmod", "item/head_slot"))
+//                        .build()
+//        );
+//
+//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+//                () -> new SlotTypeMessage.Builder("aabnecklaces")
+//                        .size(1)
+//                        .icon(new ResourceLocation("coldsmod", "item/necklace_slot"))
+//                        .build()
+//        );
+//
+//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+//                () -> new SlotTypeMessage.Builder("aacbracelets")
+//                        .size(2)
+//                        .icon(new ResourceLocation("coldsmod", "item/bracer_slot"))
+//                        .build()
+//        );
+//
+//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+//                () -> new SlotTypeMessage.Builder("aadrings")
+//                        .size(2)
+//                        .icon(new ResourceLocation("coldsmod", "item/ring_slot"))
+//                        .build()
+//        );
+//
+//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+//                () -> new SlotTypeMessage.Builder("aaeutility")
+//                        .size(5)
+//                        .icon(new ResourceLocation("coldsmod", "item/utility_slot"))
+//                        .build()
+//        );
+//
+//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+//                () -> new SlotTypeMessage.Builder("aafblessingcombat")
+//                        .size(4)
+//                        .icon(new ResourceLocation("coldsmod", "item/slot1"))
+//                        .build()
+//        );
+//
+//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+//                () -> new SlotTypeMessage.Builder("aafblessingpresence")
+//                        .size(1)
+//                        .icon(new ResourceLocation("coldsmod", "item/slot10"))
+//                        .build()
+//        );
+//
+//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+//                () -> new SlotTypeMessage.Builder("aajblessingsword")
+//                        .size(1)
+//                        .icon(new ResourceLocation("coldsmod", "item/slot5"))
+//                        .build()
+//        );
+//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+//                () -> new SlotTypeMessage.Builder("aakblessingbow")
+//                        .size(1)
+//                        .icon(new ResourceLocation("coldsmod", "item/slot6"))
+//                        .build()
+//        );
+//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+//                () -> new SlotTypeMessage.Builder("aalblessingcrossbow")
+//                        .size(1)
+//                        .icon(new ResourceLocation("coldsmod", "item/slot7"))
+//                        .build()
+//        );
+//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+//                () -> new SlotTypeMessage.Builder("aamblessingshield")
+//                        .size(1)
+//                        .icon(new ResourceLocation("coldsmod", "item/slot8"))
+//                        .build()
+//        );
+//
+//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+//                () -> new SlotTypeMessage.Builder("aanblessingtool")
+//                        .size(3)
+//                        .icon(new ResourceLocation("coldsmod", "item/slot9"))
+//                        .build()
+//        );
     }
 }

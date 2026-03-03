@@ -6,6 +6,8 @@ import net.cold.coldsmod.damage.ModDamageTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
@@ -28,123 +30,128 @@ import static net.cold.coldsmod.stat.AttributeApplier.removeModifier;
 
 public class IntoTheFraySkill {
 
-    private static final float DAMAGE_PER_STACK = 5f;
+    private static final double DAMAGE_PER_STACK = 2.5; // Example value, adjust as needed
+    private static final String SPRINT_TICKS_KEY = "sprintTicks";
+    private static final String ELIGIBLE_KEY = "into_the_fray_eligible";
+    private static final ResourceKey<DamageType> MELEE_DAMAGE_KEY =
+            ResourceKey.create(Registries.DAMAGE_TYPE, ModDamageTypes.CUSTOM_MELEE_DAMAGE.location());
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (event.player.level().isClientSide()) return;
-        if (!event.player.isSprinting()) return;
-        if (!event.player.getPersistentData().getBoolean("into_the_fray_eligible")) return;
+        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide()) return;
 
         Player player = event.player;
+        CompoundTag data = player.getPersistentData();
 
-        boolean sprinting = player.isSprinting();
-        int sprintTicks = player.getPersistentData().getInt("sprintTicks");
-        int stackCount = player.getPersistentData().getInt("itfStacks");
+        if (!data.getBoolean(ELIGIBLE_KEY)) return;
 
-        if (sprinting && !player.hasEffect(ModEffects.INTO_THE_FRAY_COOLDOWN.get())) {
-            sprintTicks++;
-            player.getPersistentData().putInt("sprintTicks", sprintTicks);
+        if (!player.isSprinting() || player.hasEffect(ModEffects.INTO_THE_FRAY_COOLDOWN.get())) {
+            resetFray(player, data);
+            return;
+        }
 
-            int itfAmplifier = 0;
-            boolean giveAbsorption = false;
+        int sprintTicks = data.getInt(SPRINT_TICKS_KEY) + 1;
+        data.putInt(SPRINT_TICKS_KEY, sprintTicks);
 
-            if (sprintTicks >= 220) {
-                itfAmplifier = 4;
-                giveAbsorption = true;
-            } else if (sprintTicks >= 180) {
-                itfAmplifier = 3;
-            } else if (sprintTicks >= 140) {
-                itfAmplifier = 2;
-            } else if (sprintTicks >= 100) {
-                itfAmplifier = 1;
-            } else if (sprintTicks >= 60) {
-                itfAmplifier = 0;
-            }
+        if (sprintTicks < 60) return;
 
-            if (sprintTicks <= 60) return;
 
-            player.getPersistentData().putInt("itfStacks", itfAmplifier + 1);
+        int amplifier = Math.min((sprintTicks - 60) / 40, 4);
+        int stackCount = amplifier + 1;
 
-            MobEffectInstance currentItf = player.getEffect(ModEffects.INTO_THE_FRAY.get());
-            if (currentItf == null || currentItf.getAmplifier() != itfAmplifier) {
-                player.addEffect(new MobEffectInstance(ModEffects.INTO_THE_FRAY.get(), 40, itfAmplifier, true, false, true));
-            }
+        updateSprintingBuffs(player, amplifier, sprintTicks >= 220);
 
-            if (giveAbsorption) {
-                MobEffectInstance currentAbs = player.getEffect(MobEffects.ABSORPTION);
-                if (currentAbs == null || currentAbs.getAmplifier() != 0) {
-                    player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 40, 0, true, false, true));
-                }
-            } else {
-                player.removeEffect(MobEffects.ABSORPTION);
-            }
+        // 7. Collision & Explosion Logic
+        checkCollisions(player, data, stackCount);
+    }
 
-            Level level = player.level();
-            double radiusSq = 0.36;
-            List<LivingEntity> targetsHit = level.getEntitiesOfClass(
-                    LivingEntity.class,
-                    player.getBoundingBox().inflate(0.6),
-                    e -> {
-                        if (!e.isAlive() || e.isInvulnerable() || !player.hasLineOfSight(e) || !((e instanceof Enemy && !(e instanceof NeutralMob)) || (e instanceof NeutralMob n && n.isAngry()) || (e instanceof Mob m && m.getTarget() != null))) return false;
-                        double dx = e.getX() - player.getX();
-                        double dz = e.getZ() - player.getZ();
-                        return (dx * dx + dz * dz) <= radiusSq;
-                    }
-            );
+    private static void updateSprintingBuffs(Player player, int amplifier, boolean giveAbsorption) {
+        MobEffectInstance current = player.getEffect(ModEffects.INTO_THE_FRAY.get());
+        if (current == null || current.getAmplifier() != amplifier) {
+            player.addEffect(new MobEffectInstance(ModEffects.INTO_THE_FRAY.get(), 40, amplifier, true, false, true));
+        }
 
-            if (!targetsHit.isEmpty()) {
-                Holder<DamageType> meleeType = level.registryAccess()
-                        .registryOrThrow(Registries.DAMAGE_TYPE)
-                        .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
-                DamageSource source = new DamageSource(meleeType, player, player);
-
-                for (LivingEntity target : targetsHit) {
-                    target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 8 * stackCount, 3));
-                    double dx = target.getX() - player.getX();
-                    double dz = target.getZ() - player.getZ();
-                    target.knockback(0.5f * stackCount, dx, dz);
-                }
-
-                double explosionRadius = 16.0;
-                List<LivingEntity> nearbyEntities = level.getEntitiesOfClass(
-                        LivingEntity.class,
-                        player.getBoundingBox().inflate(4.0),
-                        e -> {
-                            if (!e.isAlive() || e.isInvulnerable() || !player.hasLineOfSight(e) || !((e instanceof Enemy && !(e instanceof NeutralMob)) || (e instanceof NeutralMob n && n.isAngry()) || (e instanceof Mob m && m.getTarget() != null))) return false;
-                            double dx = e.getX() - player.getX();
-                            double dz = e.getZ() - player.getZ();
-                            return (dx * dx + dz * dz) <= explosionRadius;
-                        }
-                );
-
-                for (LivingEntity aoeTarget : nearbyEntities) {
-                    aoeTarget.hurt(source, DAMAGE_PER_STACK * stackCount);
-                    EffectUtils.spawnExplosionEffect(player);
-                    EffectUtils.spawnParticleRing((ServerLevel) level, player, ParticleTypes.POOF, 4, 80);
-                }
-
-                player.addEffect(new MobEffectInstance(ModEffects.INTO_THE_FRAY_COOLDOWN.get(), 180, 0, false, false, true));
-                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 1, false, false, true));
-
-                removeModifier(player, Attributes.MOVEMENT_SPEED, FRAY_SPEED_UUID);
-
-                player.getPersistentData().putInt("sprintTicks", 0);
-                player.getPersistentData().putInt("itfStacks", 0);
-
-                EffectUtils.playExplosionSound(player, 0.5F);
-                EffectUtils.spawnExplosionOnFeet(player);
-            }
-        } else {
-            player.getPersistentData().putInt("sprintTicks", 0);
-            player.getPersistentData().putInt("itfStacks", 0);
-            player.removeEffect(ModEffects.INTO_THE_FRAY.get());
-            player.removeEffect(MobEffects.ABSORPTION);
-
-            if (!player.hasEffect(ModEffects.INTO_THE_FRAY.get())) {
-                removeModifier(player, Attributes.MOVEMENT_SPEED, FRAY_SPEED_UUID);
+        if (giveAbsorption) {
+            if (!player.hasEffect(MobEffects.ABSORPTION)) {
+                player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 40, 0, true, false, true));
             }
         }
+    }
+
+    private static void checkCollisions(Player player, CompoundTag data, int stackCount) {
+        Level level = player.level();
+        double collisionRadiusSq = 0.49;
+
+        List<LivingEntity> nearby = level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(4.0));
+        boolean hasCollided = false;
+
+        for (LivingEntity entity : nearby) {
+            if (entity == player || !isValidTarget(player, entity)) continue;
+
+            if (entity.distanceToSqr(player) <= collisionRadiusSq) {
+                hasCollided = true;
+                break;
+            }
+        }
+
+        if (hasCollided) {
+            triggerExplosion(player, nearby, stackCount);
+            resetFray(player, data);
+
+            player.addEffect(new MobEffectInstance(ModEffects.INTO_THE_FRAY_COOLDOWN.get(), 180, 0));
+            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 1));
+        }
+    }
+
+    private static void triggerExplosion(Player player, List<LivingEntity> nearby, int stackCount) {
+        Level level = player.level();
+        Holder<DamageType> meleeType = level.registryAccess()
+                .registryOrThrow(Registries.DAMAGE_TYPE)
+                .getHolderOrThrow(MELEE_DAMAGE_KEY);
+        DamageSource source = new DamageSource(meleeType, player);
+
+
+        for (LivingEntity target : nearby) {
+            if (target == player || !isValidTarget(player, target)) continue;
+
+            double distSq = target.distanceToSqr(player);
+            if (distSq <= 16.0 && player.hasLineOfSight(target)) {
+                target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10 * stackCount, 3));
+
+                target.hurt(source, (float) (DAMAGE_PER_STACK * stackCount));
+
+                // Knockback
+                double dx = target.getX() - player.getX();
+                double dz = target.getZ() - player.getZ();
+                target.knockback(0.4f * stackCount, dx, dz);
+            }
+        }
+
+        if (level instanceof ServerLevel serverLevel) {
+            EffectUtils.spawnExplosionEffect(player);
+            EffectUtils.spawnParticleRing(serverLevel, player, ParticleTypes.POOF, 4.0, 60);
+            EffectUtils.playExplosionSound(player, 0.7F);
+        }
+    }
+
+    private static boolean isValidTarget(Player player, LivingEntity target) {
+        if (!target.isAlive() || target.isInvulnerable()) return false;
+
+        return (target instanceof Enemy && !(target instanceof NeutralMob)) ||
+                (target instanceof NeutralMob n && n.isAngry()) ||
+                (target instanceof Mob m && m.getTarget() != null);
+    }
+
+    private static void resetFray(Player player, CompoundTag data) {
+        if (data.getInt(SPRINT_TICKS_KEY) > 0) {
+            data.putInt(SPRINT_TICKS_KEY, 0);
+        }
+
+        if (player.hasEffect(ModEffects.INTO_THE_FRAY.get())) {
+            player.removeEffect(ModEffects.INTO_THE_FRAY.get());
+        }
+
+        player.removeEffect(MobEffects.ABSORPTION);
+        removeModifier(player, Attributes.MOVEMENT_SPEED, FRAY_SPEED_UUID);
     }
 }

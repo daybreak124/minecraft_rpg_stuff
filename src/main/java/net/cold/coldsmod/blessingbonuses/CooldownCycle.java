@@ -67,6 +67,7 @@ public class CooldownCycle {
         var handler = EXPIRE_HANDLERS.get(event.getEffectInstance().getEffect());
         if (handler == null) return;
 
+
         if (event.getEntity() instanceof Player player) {
             handler.accept(player, event.getEffectInstance());
         }

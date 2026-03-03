@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+
 import java.util.function.Consumer;
 
 public class BlessingUpgradeHandler {
@@ -38,8 +39,8 @@ public class BlessingUpgradeHandler {
     public static int getMaxForCategory(String category) {
         return switch (category) {
             case "combat" -> 4;
-            case "utility" -> 5; // Unlimited
-            default -> 1; // presence, sword, shield, bow, crossbow
+            case "utility" -> 5;
+            default -> 1;
         };
     }
 
@@ -69,7 +70,12 @@ public class BlessingUpgradeHandler {
         if (entry == null) return;
 
         setBlessingState(player, id, false);
-        player.getInventory().add(new ItemStack(entry.item(), 1));
+
+        ItemStack stackToReturn = new ItemStack(entry.item(), 1);
+        player.getInventory().add(stackToReturn);
+        if (!player.getInventory().add(stackToReturn)) {
+            player.drop(stackToReturn, false);
+        }
 
         Consumer<Player> remove = BlessingEffectRegistry.ON_REMOVE.get(entry.item());
         if (remove != null) remove.accept(player);

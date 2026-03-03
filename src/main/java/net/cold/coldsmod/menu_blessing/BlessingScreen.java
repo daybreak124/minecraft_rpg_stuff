@@ -1,7 +1,9 @@
 package net.cold.coldsmod.menu_blessing;
 
 import net.cold.coldsmod.ModMessages;
+import net.cold.coldsmod.accessory.UtilityAccessories;
 import net.cold.coldsmod.item.ModItems;
+import net.cold.coldsmod.menu_accessory.AccessoryMenuPacket;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
@@ -19,6 +21,10 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
     private static final int SPACING = 20;
     private static final int ROW_GAP = 10;
 
+    private static final ResourceLocation TEXTURE = new ResourceLocation("coldsmod", "textures/gui/ab_background.png");
+    private final java.util.Map<net.minecraft.world.item.Item, ItemStack> stackCache = new java.util.HashMap<>();
+    private ItemStack hoveredStack = ItemStack.EMPTY;
+
     public BlessingScreen(BlessingMenu menu, Inventory inv, Component title) {
         super(menu, inv, title);
         this.imageWidth = 190;
@@ -30,17 +36,32 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
         super.init();
         this.clearWidgets();
 
-        int y = 19;
+        BlessingRegistry.MAP.values().forEach(entry -> {
+            stackCache.putIfAbsent(entry.item(), new ItemStack(entry.item()));
+        });
+
+        int y = 29;
+        // Row 1
         y = addCategoryButtons("combat", 10, y, 160);
-        int row2Y = y + ROW_GAP;
-        addCategoryButtons("presence", 10, row2Y, 80);
-        y = addCategoryButtons("utility", 95, row2Y, 80);
-        int row3Y = y + ROW_GAP;
-        addCategoryButtons("sword", 10, row3Y, 80);
-        y = addCategoryButtons("shield", 95, row3Y, 80);
-        int row4Y = y + ROW_GAP;
-        addCategoryButtons("bow", 10, row4Y, 80);
-        addCategoryButtons("crossbow", 95, row4Y, 80);
+
+        // Row 2
+        y += ROW_GAP; // Add gap after Row 1
+        addCategoryButtons("sword", 10, y, 80);
+        y = addCategoryButtons("shield", 99, y, 80);
+
+        // Row 3
+        y += ROW_GAP; // Add gap after Row 2
+        addCategoryButtons("bow", 10, y, 80);
+        y = addCategoryButtons("crossbow", 99, y, 80);
+
+        // Row 4
+        y += ROW_GAP; // Add gap after Row 3
+        addCategoryButtons("presence", 10, y, 80);
+
+
+        this.addRenderableWidget(Button.builder(Component.literal("Inv"), b -> {
+            this.minecraft.setScreen(new net.minecraft.client.gui.screens.inventory.InventoryScreen(this.minecraft.player));
+        }).pos(leftPos + imageWidth - 42, topPos + imageHeight - 22).size(35, 9).build());
     }
 
     private int addCategoryButtons(String cat, int xOffset, int y, int widthLimit) {
@@ -59,19 +80,20 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
 
                 boolean active = BlessingUpgradeHandler.isActive(minecraft.player, id);
                 boolean hasItem = minecraft.player.getInventory().countItem(entry.getValue().item()) > 0;
+                boolean canRemove = BlessingEffectRegistry.CAN_REMOVE.getOrDefault(entry.getValue().item(), p -> true).test(minecraft.player);
 
                 // --- ACTUAL MINUS BUTTON WIDGET ---
                 Button btnMinus = Button.builder(Component.literal(""), b -> ModMessages.sendToServer(new BlessingPacket(id, false)))
                         .pos(leftPos + drawX - 3, topPos + currentY + 13)
-                        .size(9, 7) // Your 8x7 size
+                        .size(9, 7)
                         .build();
-                btnMinus.active = active;
+                btnMinus.active = active && canRemove;
                 addRenderableWidget(btnMinus);
 
                 // --- ACTUAL PLUS BUTTON WIDGET ---
                 Button btnPlus = Button.builder(Component.literal(""), b -> ModMessages.sendToServer(new BlessingPacket(id, true)))
                         .pos(leftPos + drawX + 7, topPos + currentY + 13)
-                        .size(9, 7) // Your 8x7 size
+                        .size(9, 7)
                         .build();
                 btnPlus.active = !active && hasItem && !isFull;
                 addRenderableWidget(btnPlus);
@@ -79,7 +101,7 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
                 col++;
                 if ((col + 1) * SPACING > widthLimit) {
                     col = 0;
-                    currentY += SPACING + 2;
+                    currentY += SPACING + 5;
                 }
             }
         }
@@ -88,17 +110,29 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
 
     @Override
     protected void renderLabels(GuiGraphics g, int mx, int my) {
-        int y = 19;
+        String title = "Blessings";
+        int titleWidth = this.font.width(title);
+        int centerX = this.imageWidth / 2;
+        g.drawString(this.font, title, centerX - (titleWidth / 2), 14, 0xFFAA00, true);
+
+        int y = 27;
+
+        // Row 1: Combat
         y = renderCategory(g, "combat", 10, y, 160, mx, my);
+
+        // Row 2: Sword and Shield
         int row2Y = y + ROW_GAP;
-        renderCategory(g, "presence", 10, row2Y, 80, mx, my);
-        y = renderCategory(g, "utility", 95, row2Y, 80, mx, my);
+        renderCategory(g, "sword", 10, row2Y, 80, mx, my);
+        y = renderCategory(g, "shield", 99, row2Y, 80, mx, my);
+
+        // Row 3: Bow and Crossbow
         int row3Y = y + ROW_GAP;
-        renderCategory(g, "sword", 10, row3Y, 80, mx, my);
-        y = renderCategory(g, "shield", 95, row3Y, 80, mx, my);
+        renderCategory(g, "bow", 10, row3Y, 80, mx, my);
+        y = renderCategory(g, "crossbow", 99, row3Y, 80, mx, my);
+
+        // Row 4: Presence
         int row4Y = y + ROW_GAP;
-        renderCategory(g, "bow", 10, row4Y, 80, mx, my);
-        renderCategory(g, "crossbow", 95, row4Y, 80, mx, my);
+        renderCategory(g, "presence", 10, row4Y, 80, mx, my);
     }
 
     private int renderCategory(GuiGraphics g, String cat, int x, int y, int widthLimit, int mx, int my) {
@@ -113,8 +147,7 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
         // Header Text: "Category (0/4)"
         String headerText = cat.substring(0, 1).toUpperCase() + cat.substring(1) + " (" + current + "/" + max + ")";
 
-        // COLOR CHANGE: Gold (0xFFAA00) usually, Orange (0xFF6600) when full
-        int headerColor = isFull ? 0xFF6600 : 0xFFAA00;
+        int headerColor = isFull ? 0xFF6600 : 0x8B4513;
 
         g.drawString(font, headerText, 0, 0, headerColor, false);
         g.pose().popPose();
@@ -130,73 +163,80 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
 
                 boolean active = BlessingUpgradeHandler.isActive(minecraft.player, id);
                 boolean hasItem = minecraft.player.getInventory().countItem(entry.getValue().item()) > 0;
+                boolean canRemove = BlessingEffectRegistry.CAN_REMOVE.getOrDefault(entry.getValue().item(), p -> true).test(minecraft.player);
+
 
                 renderBlessingIcon(g, entry.getValue(), drawX, currentY, mx, my, hasItem, active, isFull);
 
                 // +/- Text Colors
-                int mColor = active ? 0xFFFFFF : 0x555555;
+                int mColor = (active && canRemove) ? 0xFFFFFF : 0x555555;
                 int pColor = (!active && hasItem && !isFull) ? 0xFFFFFF : 0x555555;
 
-                g.drawString(font, "-", drawX - 1, currentY + 13, mColor, false);
-                g.drawString(font, "+", drawX + 9, currentY + 13, pColor, false);
+                g.drawString(font, "-", drawX - 1, currentY + 15, mColor, false);
+                g.drawString(font, "+", drawX + 9, currentY + 15, pColor, false);
 
                 col++;
                 if ((col + 1) * SPACING > widthLimit) {
                     col = 0;
-                    currentY += SPACING + 2;
+                    currentY += SPACING + 5;
                 }
             }
         }
         return (col == 0) ? currentY : currentY + SPACING + 2;
     }
 
+
     private void renderBlessingIcon(GuiGraphics g, BlessingRegistry.BlessingEntry data, int x, int y, int mx, int my, boolean hasItem, boolean active, boolean isFull) {
-        ItemStack stack = new ItemStack(data.item());
-        g.pose().pushPose();
-        g.pose().translate(x, y, 0);
-        g.pose().scale(0.8f, 0.8f, 0.8f);
+        // 1. Determine Background Color
+        int bgColor = active ? 0xAA006600 : (isFull ? 0xAA660000 : (hasItem ? 0xAAFFFF00 : 0xAA333333));
 
-        // --- NEW ICON BACKGROUND LOGIC ---
-        if (active) {
-            g.fill(0, 0, 16, 16, 0xAA006600); // Green (Always first priority)
-        } else if (isFull) {
-            g.fill(0, 0, 16, 16, 0xAA660000); // Red (Maxed category, can't add more)
-        } else if (hasItem) {
-            g.fill(0, 0, 16, 16, 0xAAFFFF00); // Yellow (In inventory & space available)
-        } else {
-            g.fill(0, 0, 16, 16, 0xAA333333); // Dark Gray (Missing item)
-        }
+        // 2. Draw Background (using screen-space coordinates)
+        // 0.8f scale of 16x16 is ~13x13
+        g.fill(x, y, x + 13, y + 13, bgColor);
 
-        g.renderFakeItem(stack, 0, 0);
-        g.pose().popPose();
+        // 3. Draw the Icon via Sprite Blitting
+        renderItemIcon(g, data.item(), x, y, 0.8f);
 
+        // 4. Set tooltip target (Check against 13x13 area)
         if (mx >= leftPos + x && mx < leftPos + x + 13 && my >= topPos + y && my < topPos + y + 13) {
-            g.renderTooltip(this.font, stack, mx - leftPos, my - topPos);
+            this.hoveredStack = stackCache.getOrDefault(data.item(), ItemStack.EMPTY);
+        }
+    }
+
+    private void renderItemIcon(GuiGraphics g, net.minecraft.world.item.Item item, int x, int y, float scale) {
+        var model = minecraft.getItemRenderer().getItemModelShaper().getItemModel(new ItemStack(item));
+        var sprite = model.getParticleIcon();
+
+        if (sprite != null) {
+            g.pose().pushPose();
+            g.pose().translate(x, y, 100);
+            g.pose().scale(scale, scale, 1.0f);
+            g.blit(0, 0, 0, 16, 16, sprite);
+            g.pose().popPose();
+        }
+    }
+
+    @Override
+    public void render(GuiGraphics g, int mx, int my, float pt) {
+        this.hoveredStack = ItemStack.EMPTY; // Reset
+        this.renderBackground(g);
+        super.render(g, mx, my, pt);
+
+        // Draw tooltip ONCE at the very end
+        if (!hoveredStack.isEmpty()) {
+            g.renderTooltip(this.font, hoveredStack, mx, my);
         }
     }
 
     @Override
     protected void renderBg(GuiGraphics graphics, float pt, int mx, int my) {
-        graphics.fill(leftPos, topPos, leftPos + imageWidth, topPos + imageHeight, 0xFF111111);
-        graphics.fill(leftPos + 2, topPos + 2, leftPos + imageWidth - 2, topPos + imageHeight - 2, 0xFF222222);
-
-//        graphics.fill(leftPos, topPos, leftPos + imageWidth, topPos + imageHeight, 0xFF000000);
-//
-//        // 2. Draw the "Inner Box" (Standard Grey)
-//        // 0xFFC6C6C6 is the standard Minecraft light grey
-//        graphics.fill(leftPos + 2, topPos + 2, leftPos + imageWidth - 2, topPos + imageHeight - 2, 0xFFA0A0A0);
-//
-//        // 3. Draw a "Shadow" edge for depth (Optional)
-//        graphics.fill(leftPos + 2, topPos + imageHeight - 4, leftPos + imageWidth - 2, topPos + imageHeight - 2, 0xFFC6C6C6);
-//        graphics.fill(leftPos + imageWidth - 4, topPos + 2, leftPos + imageWidth - 2, topPos + imageHeight - 2, 0xFF555555);
-
+        this.renderBackground(graphics);
+        int x = leftPos - 6;
+        int y = topPos - 6;
+        int width = imageWidth + 12;
+        int height = imageHeight + 12;
+        graphics.blit(TEXTURE, x, y, width, height, 0, 0, 1248, 913, 1248, 913);
     }
-
-    public void refresh() {
-        this.init(this.minecraft, this.width, this.height);
-    }
-
-
 
     private static final ResourceLocation VANILLA_TABS = new ResourceLocation("minecraft", "textures/gui/container/creative_inventory/tabs.png");
     @SubscribeEvent
@@ -209,12 +249,28 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
                     1, 0, 32,
                     VANILLA_TABS,
                     256, 256,
-                    b -> ModMessages.sendToServer(new BlessingMenuPacket())
-            ) {
+                    b -> ModMessages.sendToServer(new BlessingMenuPacket()))
+            {
                 @Override
                 public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
                     super.renderWidget(graphics, mouseX, mouseY, partialTick);
                     graphics.renderFakeItem(new ItemStack(ModItems.ORB_ICON.get()), getX() + 4, getY() + 8);
+                }
+            });
+
+            event.addListener(new ImageButton(
+                    inv.getGuiLeft() + 97,
+                    inv.getGuiTop() - 25,
+                    25, 28,
+                    1, 0, 32,
+                    VANILLA_TABS,
+                    256, 256,
+                    b -> ModMessages.sendToServer(new AccessoryMenuPacket())
+            ) {
+                @Override
+                public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+                    super.renderWidget(graphics, mouseX, mouseY, partialTick);
+                    graphics.renderFakeItem(new ItemStack(UtilityAccessories.MONIS_LUCKY_CHARM.get()), getX() + 4, getY() + 8);
                 }
             });
         }

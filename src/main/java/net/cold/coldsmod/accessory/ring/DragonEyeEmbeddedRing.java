@@ -2,13 +2,10 @@ package net.cold.coldsmod.accessory.ring;
 
 
 import net.cold.coldsmod.ColdsMod;
-import net.cold.coldsmod.stat.AttributeApplier;
-import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -17,11 +14,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import top.theillusivec4.curios.api.SlotContext;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public class DragonEyeEmbeddedRing {
 
@@ -32,7 +27,6 @@ public class DragonEyeEmbeddedRing {
         ITEMS.register(eventBus);
     }
 
-    private static final UUID DRAGON_EYE_UUID = UUID.fromString("d7e8f9a0-b1c2-4d3e-5f6a-7b8c9d0e1f2a");
 
 // --- Registry ---
 
@@ -58,36 +52,8 @@ public class DragonEyeEmbeddedRing {
 
 // --- Rare ---
 
-    private static class DragonEyeRare extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DragonEyeRare extends Item {
         public DragonEyeRare(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 4.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 7.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 5.0, DRAGON_EYE_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "dragon_eye_embedded_ring");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), DRAGON_EYE_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Dragon Eye Embedded Ring").withStyle(ChatFormatting.BLUE); }
@@ -110,37 +76,8 @@ public class DragonEyeEmbeddedRing {
 
 // --- Epic ---
 
-    private static class DragonEyeEpic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DragonEyeEpic extends Item {
         public DragonEyeEpic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 6.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 12.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 7.5, DRAGON_EYE_UUID);
-            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "dragon_eye_embedded_ring");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.POTENCY.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), DRAGON_EYE_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Dragon Eye Embedded Ring").withStyle(ChatFormatting.DARK_PURPLE); }
@@ -163,41 +100,8 @@ public class DragonEyeEmbeddedRing {
 
 // --- Legendary ---
 
-    private static class DragonEyeLegendary extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DragonEyeLegendary extends Item {
         public DragonEyeLegendary(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 8.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 6.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 16, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 9, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.06, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.04, DRAGON_EYE_UUID);            }
-        }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "dragon_eye_embedded_ring");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), DRAGON_EYE_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Dragon Eye Embedded Ring").withStyle(ChatFormatting.GOLD); }
@@ -224,41 +128,8 @@ public class DragonEyeEmbeddedRing {
 
 // --- Mythic ---
 
-    private static class DragonEyeMythic extends Item implements top.theillusivec4.curios.api.type.capability.ICurioItem {
+    private static class DragonEyeMythic extends Item {
         public DragonEyeMythic(Properties properties) { super(properties); }
-
-        @Override
-        public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.STR.get(), 10.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), 10.0, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY.get(), 20, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), 12.5, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), 0.12, DRAGON_EYE_UUID);
-                AttributeApplier.applyModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), 0.08, DRAGON_EYE_UUID);            }
-            }
-
-        @Override
-        public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                return !AttributeApplier.isDuplicateAccessory(player, stack, "dragon_eye_embedded_ring");
-            }
-            return true;
-        }
-
-        @Override
-        public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-            if (slotContext.entity() instanceof Player player) {
-                AttributeApplier.removeModifier(player, ModAttributes.INSIGHT.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.STR.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY_MULTIPLIER.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PERC.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.MELEE_POTENCY.get(), DRAGON_EYE_UUID);
-                AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), DRAGON_EYE_UUID);
-            }
-        }
 
         @Override
         public Component getName(ItemStack stack) { return Component.literal("Dragon Eye Embedded Ring").withStyle(ChatFormatting.AQUA); }

@@ -1,5 +1,7 @@
 package net.cold.coldsmod.network;
 
+import net.cold.coldsmod.menu_accessory.AccessoryPacket;
+import net.cold.coldsmod.menu_accessory.AccessoryUnlockSyncPacket;
 import net.cold.coldsmod.menu_blessing.BlessingPacket;
 import net.cold.coldsmod.menu_blessing.BlessingUnlockSyncPacket;
 import net.cold.coldsmod.menu_stat.StatUpgradePacketThree;
@@ -124,6 +126,16 @@ public class NetworkHandler {
                 BlessingUnlockSyncPacket::toBytes,
                 BlessingUnlockSyncPacket::new,
                 BlessingUnlockSyncPacket::handle);
+
+        CHANNEL.registerMessage(nextId(), AccessoryPacket.class,
+                AccessoryPacket::toBytes,
+                AccessoryPacket::new,
+                AccessoryPacket::handle);
+
+        CHANNEL.registerMessage(nextId(), AccessoryUnlockSyncPacket.class,
+                AccessoryUnlockSyncPacket::toBytes,
+                AccessoryUnlockSyncPacket::new,
+                AccessoryUnlockSyncPacket::handle);
     }
 
     public static void sendToClient(Object msg, ServerPlayer player) {

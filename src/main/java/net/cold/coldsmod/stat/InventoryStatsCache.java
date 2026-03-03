@@ -16,21 +16,21 @@ public class InventoryStatsCache {
     // Data Fields
     public double mPot, mAcc, mPre, mHaste, mAvg, mMax;
     public double pPot, pAcc, pPre, pNock, pAvg;
-    public double gPot, gAcc, gPre, gMult;
+    public double gPot, gAcc, gPre, gMult, gHaste;
     public double armor, tough, incDmg, totalResist, health, knkRes, debuffRes;
     public double restoration, amplification, rejuvenation;
     public double moveSpeed, swimSpeed, stepHeight, jumpBoost;
     public double blockReach, entityReach, mineSpeed, xpGain, luck;
     public double bMeleePot, mMeleeMult, bHaste, mHasteMult, bMeleeAcc, mMeleeAccMult, bMeleePre, mMeleePreMult;
     public double bProjPot, mProjMult, bNock, mNockMult, bProjAcc, mProjAccMult, bProjPre, mProjPreMult;
-    public double bPot, mPotMult, bAcc, mAccMult, bPre, mPreMult;
+    public double bPot, mPotMult, bAcc, mAccMult, bPre, mPreMult, bOHaste;
     public double bResto, mRestoMult, bAmp, mAmpMult, bReju, mRejuMult;
     public double baseArmor, multArmor, baseTough, multTough, baseHealth, multHealth;
     public double str, dex, fort, con, perc, wis, ins;
     public double fMeleePot, fMeleeHaste, fMeleeAcc, fMeleePre;
     public double fProjPot, fProjNock, fProjAcc, fProjPre;
-    public double fGenPot, fGenAcc, fGenPre;
-    public double fResto, fAmp, fReju;
+    public double fGenPot, fGenAcc, fGenPre, fGenHaste;
+    public double fResto, fAmp, fReju, eHP;
 
     public long lastUpdateTick = -1;
 
@@ -43,8 +43,8 @@ public class InventoryStatsCache {
         // --- Melee ---
         CACHE.bMeleePot = p.getAttributeValue(ModAttributes.MELEE_POTENCY.get());
         CACHE.mMeleeMult = p.getAttributeValue(ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
-        CACHE.bHaste = p.getAttributeValue(ModAttributes.HASTE.get());
-        CACHE.mHasteMult = p.getAttributeValue(ModAttributes.HASTE_MULTIPLIER.get());
+        CACHE.bHaste = p.getAttributeValue(ModAttributes.MELEE_HASTE.get());
+        CACHE.mHasteMult = p.getAttributeValue(ModAttributes.MELEE_HASTE_MULTIPLIER.get());
         CACHE.bMeleeAcc = p.getAttributeValue(ModAttributes.MELEE_ACCURACY.get());
         CACHE.mMeleeAccMult = p.getAttributeValue(ModAttributes.MELEE_ACCURACY_MULTIPLIER.get());
         CACHE.bMeleePre = p.getAttributeValue(ModAttributes.MELEE_PRECISION.get());
@@ -75,6 +75,7 @@ public class InventoryStatsCache {
         CACHE.mAccMult = p.getAttributeValue(ModAttributes.ACCURACY_MULTIPLIER.get());
         CACHE.bPre = p.getAttributeValue(ModAttributes.PRECISION.get());
         CACHE.mPreMult = p.getAttributeValue(ModAttributes.PRECISION_MULTIPLIER.get());
+        CACHE.bOHaste = p.getAttributeValue(ModAttributes.HASTE.get());
 
         // --- Healing ---
         CACHE.bResto = p.getAttributeValue(ModAttributes.RESTORATION.get());
@@ -88,7 +89,7 @@ public class InventoryStatsCache {
         CACHE.mPot = getScaledValue(p, ModAttributes.MELEE_POTENCY.get(), ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
         CACHE.mAcc = getScaledValue(p, ModAttributes.MELEE_ACCURACY.get(), ModAttributes.MELEE_ACCURACY_MULTIPLIER.get());
         CACHE.mPre = getScaledValue(p, ModAttributes.MELEE_PRECISION.get(), ModAttributes.MELEE_PRECISION_MULTIPLIER.get());
-        CACHE.mHaste = getScaledValue(p, ModAttributes.HASTE.get(), ModAttributes.HASTE_MULTIPLIER.get());
+        CACHE.mHaste = getScaledValue(p, ModAttributes.MELEE_HASTE.get(), ModAttributes.MELEE_HASTE_MULTIPLIER.get());
 
         CACHE.pPot = getScaledValue(p, ModAttributes.PROJECTILE_POTENCY.get(), ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
         CACHE.pAcc = getScaledValue(p, ModAttributes.PROJECTILE_ACCURACY.get(), ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get());
@@ -111,6 +112,7 @@ public class InventoryStatsCache {
         CACHE.gPot = getScaledValue(p, ModAttributes.POTENCY.get(), ModAttributes.POTENCY_MULTIPLIER.get());
         CACHE.gAcc = getScaledValue(p, ModAttributes.ACCURACY.get(), ModAttributes.ACCURACY_MULTIPLIER.get());
         CACHE.gPre = getScaledValue(p, ModAttributes.PRECISION.get(), ModAttributes.PRECISION_MULTIPLIER.get());
+        CACHE.gHaste = getScaledValue(p, ModAttributes.HASTE.get(), ModAttributes.HASTE_MULTIPLIER.get());
 
         CACHE.fMeleePot = CACHE.bMeleePot * CACHE.mMeleeMult;
         CACHE.fMeleeHaste = CACHE.bHaste * CACHE.mHasteMult;
@@ -138,12 +140,7 @@ public class InventoryStatsCache {
         CACHE.knkRes = p.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE) * 100.0;
         CACHE.debuffRes = p.getAttributeValue(ModAttributes.DEBUFF_RESIST.get());
 
-        double armorRed = CACHE.armor / (80.0 + CACHE.armor - 80.0 * (CACHE.tough / (CACHE.tough + 50.0)));
-        double res = p.hasEffect(MobEffects.DAMAGE_RESISTANCE) ? (p.getEffect(MobEffects.DAMAGE_RESISTANCE).getAmplifier() + 1) * 0.2 : 0.0;
-        int prot = 0;
-        for (ItemStack s : p.getArmorSlots()) prot += EnchantmentHelper.getItemEnchantmentLevel(Enchantments.ALL_DAMAGE_PROTECTION, s);
-        double protRed = prot * 0.02;
-        CACHE.totalResist = (1.0 - ((1.0 - armorRed) * (1.0 - protRed) * (1.0 - res) * CACHE.incDmg)) * 100.0;
+        CACHE.eHP = CACHE.health / (1.0 - (CACHE.totalResist / 100.0));
 
         // --- Base/Mult splits ---
         CACHE.multArmor = 1 + p.getAttributeValue(ModAttributes.ARMOR_MULTIPLIER.get());
@@ -167,6 +164,13 @@ public class InventoryStatsCache {
         CACHE.mineSpeed = 100 * p.getAttributeValue(ModAttributes.MINING_SPEED.get()) -100;
         CACHE.xpGain = 100 * p.getAttributeValue(ModAttributes.XP_GAIN.get()) -100;
         CACHE.luck = p.getAttributeValue(Attributes.LUCK);
+
+        double armorRed = CACHE.armor / (75.0 + CACHE.armor - 80.0 * (CACHE.tough / (CACHE.tough + 100.0)));
+        double res = p.hasEffect(MobEffects.DAMAGE_RESISTANCE) ? (p.getEffect(MobEffects.DAMAGE_RESISTANCE).getAmplifier() + 1) * 0.2 : 0.0;
+        int prot = 0;
+        for (ItemStack s : p.getArmorSlots()) prot += EnchantmentHelper.getItemEnchantmentLevel(Enchantments.ALL_DAMAGE_PROTECTION, s);
+        double protRed = prot * 0.02;
+        CACHE.totalResist = (1.0 - ((1.0 - armorRed) * (1.0 - protRed) * (1.0 - res) * CACHE.incDmg)) * 100.0;
 
         CACHE.lastUpdateTick = p.tickCount;
     }

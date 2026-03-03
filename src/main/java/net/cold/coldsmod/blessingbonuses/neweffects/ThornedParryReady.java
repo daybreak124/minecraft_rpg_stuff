@@ -5,6 +5,8 @@ import net.cold.coldsmod.damage.ModDamageTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -20,6 +22,7 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -27,6 +30,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils.spawnParticleRing;
+import static net.cold.coldsmod.stat.ItemRarityUtils.getItemType;
 
 public class ThornedParryReady extends MobEffect {
 
@@ -39,6 +43,8 @@ public class ThornedParryReady extends MobEffect {
         return false; // only trigger via events
     }
 
+    private static final ResourceKey<DamageType> MELEE_DAMAGE_KEY =
+            ResourceKey.create(Registries.DAMAGE_TYPE, ModDamageTypes.CUSTOM_MELEE_DAMAGE.location());
 
     @SubscribeEvent
     public static void onShieldHit(LivingHurtEvent event) {
@@ -53,28 +59,32 @@ public class ThornedParryReady extends MobEffect {
     }
 
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (event.player.level().isClientSide()) return;
-
-        Player player = event.player;
-
-        if (!(player.getPersistentData().getBoolean("thorn_eligible"))) return;
+    public static void onGuardDown(LivingEntityUseItemEvent.Stop event) {
+        if (event.getEntity().level().isClientSide()) return;
+        if (!(event.getEntity() instanceof Player player)) return;
+        if (!player.getPersistentData().getBoolean("thorn_eligible")) return;
+        if (!player.hasEffect(ModEffects.THORNED_PARRY_READY.get())) return;
+        if (!"shield".equals(getItemType(event.getItem()))) return;
 
         int parryTimer = player.getPersistentData().getInt("parry_time");
-
         if (parryTimer > 0) {
-            player.getPersistentData().putInt("parry_time", parryTimer - 1);
-        }
-
-        boolean isBlocking = player.isBlocking();
-        boolean wasBlocking = player.getPersistentData().getBoolean("was_blocking_last_tick");
-
-        if (wasBlocking && !isBlocking && parryTimer > 0) {
             triggerParryExplosion(player);
             player.getPersistentData().putInt("parry_time", 0);
+            player.removeEffect(ModEffects.THORNED_PARRY_READY.get());
         }
-        player.getPersistentData().putBoolean("was_blocking_last_tick", isBlocking);
+    }
+
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide()) return;
+
+        Player player = event.player;
+        CompoundTag data = player.getPersistentData();
+
+        int parryTimer = data.getInt("parry_time");
+        if (parryTimer > 0) {
+            data.putInt("parry_time", parryTimer - 1);
+        }
     }
 
     private static void triggerParryExplosion(Player player) {
@@ -91,7 +101,7 @@ public class ThornedParryReady extends MobEffect {
 
         Holder<DamageType> meleeType = level.registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
+                .getHolderOrThrow(MELEE_DAMAGE_KEY);
         DamageSource source = new DamageSource(meleeType, player, player);
 
         double radiusSq = 9.0;

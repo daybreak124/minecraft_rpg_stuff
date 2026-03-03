@@ -8,9 +8,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -28,21 +27,11 @@ public class RetaliateActive extends MobEffect {
     }
 
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (event.player.level().isClientSide()) return;
-        if (!event.player.hasEffect(ModEffects.RETALIATE_READY.get())) return;
+    public static void onShieldUseStart(LivingEntityUseItemEvent.Start event) {
+        if (event.getEntity().level().isClientSide() || !(event.getEntity() instanceof Player player)) return;
+        if (!"shield".equals(ItemRarityUtils.getItemType(event.getItem()))) return;
 
-        Player player = event.player;
-
-        ItemStack main = player.getMainHandItem();
-        ItemStack off = player.getOffhandItem();
-        if (!("shield".equals(ItemRarityUtils.getItemType(main)) ||
-                "shield".equals(ItemRarityUtils.getItemType(off)))) return;
-
-        MobEffectInstance ready = player.getEffect(ModEffects.RETALIATE_READY.get());
-        if (ready != null && player.isBlocking()) {
-
+        if (player.hasEffect(ModEffects.RETALIATE_READY.get())) {
             player.addEffect(new MobEffectInstance(ModEffects.RETALIATE_ACTIVE.get(), 20 * 4, 0, false, false, true));
             player.removeEffect(ModEffects.RETALIATE_READY.get());
             player.level().playSound(

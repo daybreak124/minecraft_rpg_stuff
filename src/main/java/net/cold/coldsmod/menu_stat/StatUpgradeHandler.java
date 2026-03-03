@@ -25,11 +25,8 @@ public class StatUpgradeHandler {
     public static final int BASE_POINTS = 120;
     public static final int ATTRIBUTE_MAX_LEVEL = 50;
     private static final ResourceLocation VANILLA_TABS = new ResourceLocation("minecraft", "textures/gui/container/creative_inventory/tabs.png");
-
-    // This UUID is now unique to Screen 1
     public static final UUID ATTRIBUTE_UPGRADE = UUID.fromString("4a221b-221d-5374-a711-998760de");
 
-    // UNIQUE NBT KEY: "SpentPointsOne"
     public static int getPointsSpent(Player player, Attribute attr) {
         String key = ForgeRegistries.ATTRIBUTES.getKey(attr).toString();
         return player.getPersistentData().getCompound("SpentPointsOne").getInt(key);
@@ -59,7 +56,7 @@ public class StatUpgradeHandler {
 
         int totalPoints = getTotalPointsSpent(player);
         if (totalPoints >= BASE_POINTS) {
-            player.sendSystemMessage(Component.literal("§cLimit Reached."));
+            player.sendSystemMessage(Component.literal("§cLimit reached."));
             return;
         }
 
@@ -79,17 +76,11 @@ public class StatUpgradeHandler {
         String attrId = ForgeRegistries.ATTRIBUTES.getKey(attribute).toString();
         ModMessages.sendToPlayer(new StatsSyncPacket(attrId, newLevel, true, false), player);
 
-        player.level().getServer().tell(new net.minecraft.server.TickTask(
-                player.level().getServer().getTickCount() + 1,
-                () -> {
-                    if (player.isAlive()) {
-                        refreshPerPointStats(player);
-                        refreshMilestones(player);
-                        recalculateDynamicBonuses(player);
-                        applyCrossbowTag(player);
-                    }
-                }
-        ));
+
+        refreshPerPointStats(player);
+        refreshMilestones(player);
+        recalculateDynamicBonuses(player);
+        // applyCrossbowTag(player);
     }
 
     public static void tryDowngrade(ServerPlayer player, Attribute attribute) {
@@ -99,41 +90,37 @@ public class StatUpgradeHandler {
         int totalPoints = getTotalPointsSpent(player);
         int amountToReturn = getRequiredAmount(totalPoints - 1);
         Item shardToReturn = getRequiredShard(totalPoints - 1);
-        player.getInventory().add(new ItemStack(shardToReturn, amountToReturn));
+
+        ItemStack stackToReturn = new ItemStack(shardToReturn, amountToReturn);
+        player.getInventory().add(stackToReturn);
+        if (!player.getInventory().add(stackToReturn)) {
+            player.drop(stackToReturn, false);
+        }
 
         int newLevel = currentLevel - 1;
         setPointsSpent(player, attribute, newLevel);
 
-        // APPLY MODIFIER
         applyModifier(player, attribute, newLevel, ATTRIBUTE_UPGRADE);
 
         String attrId = ForgeRegistries.ATTRIBUTES.getKey(attribute).toString();
         ModMessages.sendToPlayer(new StatsSyncPacket(attrId, newLevel, true, false), player);
 
-        player.level().getServer().tell(new net.minecraft.server.TickTask(
-                player.level().getServer().getTickCount() + 1,
-                () -> {
-                    if (player.isAlive()) {
-                        refreshPerPointStats(player);
-                        refreshMilestones(player);
-                        recalculateDynamicBonuses(player);
-                        applyCrossbowTag(player);
-                    }
-                }
-        ));
+        refreshPerPointStats(player);
+        refreshMilestones(player);
+        recalculateDynamicBonuses(player);
+        // applyCrossbowTag(player);
     }
 
-    // ... (Your existing getRequiredShard and hasAndRemoveItem remain the same)
     public static Item getRequiredShard(int level) {
         return ModItems.SHARD_OF_TRANSCENDENCE.get();
     }
 
     public static int getRequiredAmount(int level) {
-        if (level < 10) return 4;
-        if (level < 30) return 8;
-        if (level < 55) return 12;
-        if (level < 85) return 20;
-        return 32;
+        if (level < 10) return 1;
+        if (level < 30) return 2;
+        if (level < 55) return 3;
+        if (level < 85) return 5;
+        return 8;
     }
 
     private static boolean hasAndRemoveItem(Player player, Item item, int count) {
