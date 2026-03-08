@@ -1,12 +1,12 @@
-package net.cold.coldsmod.blessingbonuses.neweffects;
+package net.cold.coldsmod.blessingbonuses.feat_tree;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 
-public class FocusedEnergyReady extends MobEffect {
+public class Penetrated extends MobEffect {
 
-    public FocusedEnergyReady() {
-        super(MobEffectCategory.NEUTRAL, 0xFF0000); // category + color
+    public Penetrated() {
+        super(MobEffectCategory.NEUTRAL, 0xFFA500); // category + color
     }
 
     @Override

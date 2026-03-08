@@ -45,7 +45,7 @@ public class DeathFromAboveSkill {
         Holder<DamageType> meleeType = level.registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
                 .getHolderOrThrow(MELEE_DAMAGE_KEY);
-        DamageSource source = new DamageSource(meleeType, player, player);
+        DamageSource source = new DamageSource(meleeType, null, player);
 
         if (level instanceof ServerLevel serverLevel) {
             spawnParticleRing(serverLevel, player, ParticleTypes.POOF, LAND_RADIUS, 140);

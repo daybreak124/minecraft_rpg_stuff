@@ -1086,7 +1086,11 @@ public class AccessoryStatRegistry {
                     AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 3.0, TEMPTING_WHISPERS_UUID);
                     AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 1.0, TEMPTING_WHISPERS_UUID);
                     AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.3, TEMPTING_WHISPERS_UUID);
-                    AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.25, TEMPTING_WHISPERS_UUID);
+                    if (player.getPersistentData().contains("imminent_temptation")) {
+                        AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.20, TEMPTING_WHISPERS_UUID);
+                    } else {
+                        AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.25, TEMPTING_WHISPERS_UUID);
+                    }
                     AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -4.0, TEMPTING_WHISPERS_UUID);
                 },
                 player -> {
@@ -1103,7 +1107,11 @@ public class AccessoryStatRegistry {
                     AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 5.0, TEMPTING_WHISPERS_UUID);
                     AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 2.0, TEMPTING_WHISPERS_UUID);
                     AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 0.6, TEMPTING_WHISPERS_UUID);
-                    AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.40, TEMPTING_WHISPERS_UUID);
+                    if (player.getPersistentData().contains("imminent_temptation")) {
+                        AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.32, TEMPTING_WHISPERS_UUID);
+                    } else {
+                        AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.4, TEMPTING_WHISPERS_UUID);
+                    }
                     AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -4.0, TEMPTING_WHISPERS_UUID);
                 },
                 player -> {
@@ -1120,7 +1128,11 @@ public class AccessoryStatRegistry {
                     AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 7.0, TEMPTING_WHISPERS_UUID);
                     AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 3.0, TEMPTING_WHISPERS_UUID);
                     AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 1.2, TEMPTING_WHISPERS_UUID);
-                    AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.5, TEMPTING_WHISPERS_UUID);
+                    if (player.getPersistentData().contains("imminent_temptation")) {
+                        AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.40, TEMPTING_WHISPERS_UUID);
+                    } else {
+                        AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.50, TEMPTING_WHISPERS_UUID);
+                    }
                     AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -4.0, TEMPTING_WHISPERS_UUID);
                 },
                 player -> {
@@ -1137,7 +1149,11 @@ public class AccessoryStatRegistry {
                     AttributeApplier.applyModifier(player, ModAttributes.FORT.get(), 9.0, TEMPTING_WHISPERS_UUID);
                     AttributeApplier.applyModifier(player, ModAttributes.INSIGHT.get(), 4.0, TEMPTING_WHISPERS_UUID);
                     AttributeApplier.applyModifier(player, ModAttributes.MELEE_PRECISION_MULTIPLIER.get(), 1.5, TEMPTING_WHISPERS_UUID);
-                    AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.5, TEMPTING_WHISPERS_UUID);
+                    if (player.getPersistentData().contains("imminent_temptation")) {
+                        AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.40, TEMPTING_WHISPERS_UUID);
+                    } else {
+                        AttributeApplier.applyModifier(player, ModAttributes.HEALTH_MULTIPLIER.get(), -0.50, TEMPTING_WHISPERS_UUID);
+                    }
                     AttributeApplier.applyModifier(player, ModAttributes.PERC.get(), -4.0, TEMPTING_WHISPERS_UUID);
                 },
                 player -> {

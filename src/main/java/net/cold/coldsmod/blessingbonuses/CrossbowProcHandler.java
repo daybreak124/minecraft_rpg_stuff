@@ -1,6 +1,5 @@
 package net.cold.coldsmod.blessingbonuses;
 
-import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.stat.ItemRarityUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
@@ -29,19 +28,7 @@ public class CrossbowProcHandler {
 
         CompoundTag tag = arrow.getPersistentData();
 
-        if (player.hasEffect(ModEffects.EXPLOIT_WEAKNESS_READY.get())) {
-            tag.putBoolean("exploit_weakness_arrow", true);
-            return;
-        }
-
-        if (player.hasEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get())) {
-            tag.putBoolean("explosive_tendency_tagged", true);
-            return;
-        }
-
-        if (player.hasEffect(ModEffects.FOCUSED_ENERGY_READY.get())) {
-            tag.putBoolean("focused_energy_arrow", true);
-        }
+        tag.putBoolean("arrow_crossbow", true);
     }
 
 

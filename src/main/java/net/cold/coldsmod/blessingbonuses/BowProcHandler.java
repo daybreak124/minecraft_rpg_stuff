@@ -1,6 +1,5 @@
 package net.cold.coldsmod.blessingbonuses;
 
-import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.stat.ItemRarityUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -26,15 +25,7 @@ public class BowProcHandler {
         boolean isBow = mainIsBow || (offIsBow && !mainIsCrossbow);
         if (!isBow) return;
 
-        if (player.getPersistentData().getBoolean("life_touch_applied")) {
-            arrow.getPersistentData().putBoolean("life_touch_tagged", true);
-
-        } else if (player.hasEffect(ModEffects.DECEPTION_READY.get())) {
-            arrow.getPersistentData().putBoolean("deception_tagged", true);
-
-        } else if (player.hasEffect(ModEffects.VORTEX_READY.get())) {
-            arrow.getPersistentData().putBoolean("vortex_tagged", true);
-        }
+        arrow.getPersistentData().putBoolean("arrow_bow", true);
     }
 
 

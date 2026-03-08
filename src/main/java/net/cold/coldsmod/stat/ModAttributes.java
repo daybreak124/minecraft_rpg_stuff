@@ -133,6 +133,12 @@ public class ModAttributes {
     public static final RegistryObject<Attribute> MELEE_DAMAGE_MULTIPLIER = ATTRIBUTES.register("melee_damage_multiplier",
             () -> new RangedAttribute("melee_damage_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
 
+    public static final RegistryObject<Attribute> PROJECTILE_DAMAGE_MULTIPLIER = ATTRIBUTES.register("projectile_damage_multiplier",
+            () -> new RangedAttribute("projectile_damage_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
+
+    public static final RegistryObject<Attribute> UNCATEGORIZED_DAMAGE_MULTIPLIER = ATTRIBUTES.register("uncategorized_damage_multiplier",
+            () -> new RangedAttribute("uncategorized_damage_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
+
     @SubscribeEvent
     public static void onModifyEntityAttributes(EntityAttributeModificationEvent event) {
         event.add(EntityType.PLAYER, ModAttributes.STR.get());
@@ -193,6 +199,8 @@ public class ModAttributes {
         event.add(EntityType.PLAYER, ModAttributes.REJUVENATION.get());
 
         event.add(EntityType.PLAYER, ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
+        event.add(EntityType.PLAYER, ModAttributes.PROJECTILE_DAMAGE_MULTIPLIER.get());
+        event.add(EntityType.PLAYER, ModAttributes.UNCATEGORIZED_DAMAGE_MULTIPLIER.get());
 
         for (EntityType<? extends LivingEntity> type : event.getTypes()) {
             event.add(type, ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());

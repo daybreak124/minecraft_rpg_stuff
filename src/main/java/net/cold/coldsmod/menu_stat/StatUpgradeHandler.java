@@ -80,7 +80,7 @@ public class StatUpgradeHandler {
         refreshPerPointStats(player);
         refreshMilestones(player);
         recalculateDynamicBonuses(player);
-        // applyCrossbowTag(player);
+        applyCrossbowTag(player);
     }
 
     public static void tryDowngrade(ServerPlayer player, Attribute attribute) {
@@ -108,7 +108,7 @@ public class StatUpgradeHandler {
         refreshPerPointStats(player);
         refreshMilestones(player);
         recalculateDynamicBonuses(player);
-        // applyCrossbowTag(player);
+        applyCrossbowTag(player);
     }
 
     public static Item getRequiredShard(int level) {

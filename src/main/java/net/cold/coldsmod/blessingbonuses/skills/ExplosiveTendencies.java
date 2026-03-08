@@ -1,21 +1,11 @@
 package net.cold.coldsmod.blessingbonuses.skills;
 
-import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
 import net.cold.coldsmod.stat.ModAttributes;
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -27,62 +17,6 @@ import java.util.UUID;
 import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
 
 public class ExplosiveTendencies {
-
-    @SubscribeEvent
-    public static void onArrowHitSpawnCreeper(LivingHurtEvent event) {
-        if (event.getEntity().level().isClientSide()) return;
-        if (!(event.getSource().getDirectEntity() instanceof AbstractArrow arrow)) return;
-        Entity shooter = arrow.getOwner();
-        if (!(shooter instanceof Player player)) return;
-        if (!arrow.getPersistentData().getBoolean("explosive_tendency_tagged")) return;
-
-        LivingEntity target = event.getEntity();
-
-        Level level = player.level();
-        if (level.isClientSide()) return;
-        ServerLevel server = (ServerLevel) level;
-
-        Vec3 targetPos = target.position();
-        Vec3 direction = shooter.position().subtract(targetPos).normalize();
-        Vec3 spawnVec = targetPos.add(direction.scale(3));
-
-        BlockPos spawnPos = BlockPos.containing(spawnVec);
-
-        Creeper creeper = EntityType.CREEPER.spawn(server, spawnPos, MobSpawnType.TRIGGERED);
-        if (creeper == null) { return; }
-
-        creeper.getPersistentData().putBoolean("noBlockDamage", true);
-        creeper.getPersistentData().putUUID("ownerPlayerUUID", player.getUUID());
-        target.getPersistentData().putBoolean("customCreeperTarget", true);
-
-        creeper.setHealth(40);
-        creeper.setSilent(true);
-        creeper.setAggressive(false);
-
-        creeper.setAggressive(true);
-
-        creeper.setTarget(target);
-
-        double x = target.getX();
-        double y = target.getY();
-        double z = target.getZ();
-        creeper.moveTo(x, y, z);
-
-        MobEffectInstance stackEffect = player.getEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get());
-        if (stackEffect != null) {
-            int currentStacks = stackEffect.getAmplifier();
-            if (currentStacks <= 0) {
-                player.removeEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get());
-            } else {
-                player.removeEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get());
-                player.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_STACK.get(), MobEffectInstance.INFINITE_DURATION, currentStacks - 1, false, false, true));
-            }
-        }
-        if (!player.hasEffect(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get())) {
-            player.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get(), 20*8, 0, false, false));
-        }
-        arrow.getPersistentData().putBoolean("explosive_tendency_tagged", false);
-    }
 
     @SubscribeEvent
     public static void onExplosion(ExplosionEvent.Detonate event) {

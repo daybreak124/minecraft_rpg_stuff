@@ -1,5 +1,7 @@
 package net.cold.coldsmod.blessingbonuses.effects;
 
+import net.cold.coldsmod.blessingbonuses.feat_tree.Penetrated;
+import net.cold.coldsmod.blessingbonuses.feat_tree.Penetrator;
 import net.cold.coldsmod.blessingbonuses.neweffects.*;
 import net.cold.coldsmod.blessingbonuses.skills.BastionActive;
 import net.cold.coldsmod.blessingbonuses.skills.BronzewoodCooldown;
@@ -242,4 +244,28 @@ public class ModEffects {
 
     public static final RegistryObject<MobEffect> ENHANCED_POISON =
             EFFECTS.register("enhanced_poison", EnhancedPoison::new);
+
+    public static final RegistryObject<MobEffect> PENETRATOR =
+            EFFECTS.register("penetrator", () -> new Penetrator()
+                    .addAttributeModifier(Attributes.ARMOR, "f3e2b6c0-1934-5178-91bc-200602270084", 3.0, AttributeModifier.Operation.ADDITION));
+
+    public static final RegistryObject<MobEffect> PENETRATED =
+            EFFECTS.register("penetrated", () -> new Penetrated()
+                    .addAttributeModifier(Attributes.ARMOR, "f3e2b6c0-1934-5678-9abc-020666777084", -5.0, AttributeModifier.Operation.ADDITION));
+
+
+    public static final RegistryObject<MobEffect> ENCHANTED_BRONZEWOOD =
+            EFFECTS.register("enchanted_bronzewood", () -> new Penetrated()
+                    .addAttributeModifier(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), "f3e242c0-1534-5678-9abc-020556777554", 0.03, AttributeModifier.Operation.MULTIPLY_BASE)
+                    .addAttributeModifier(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get(), "f3e242c0-1534-5678-9abc-020556777554", 0.05, AttributeModifier.Operation.MULTIPLY_BASE));
+
+
+    public static final RegistryObject<MobEffect> HELPING_HAND =
+            EFFECTS.register("helping_hand", () -> new Penetrated()
+                    .addAttributeModifier(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get(), "f311b6c0-1934-5678-9abc-020996777084", 0.13, AttributeModifier.Operation.MULTIPLY_BASE)
+                    .addAttributeModifier(ModAttributes.PROJECTILE_DAMAGE_MULTIPLIER.get(), "f311b6c0-1934-5678-9abc-020996777084", 0.13, AttributeModifier.Operation.MULTIPLY_BASE)
+                    .addAttributeModifier(ModAttributes.UNCATEGORIZED_DAMAGE_MULTIPLIER.get(), "f311b6c0-1934-5678-9abc-020996777084", 0.13, AttributeModifier.Operation.MULTIPLY_BASE)
+            );
+
+
 }

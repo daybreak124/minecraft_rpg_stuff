@@ -492,6 +492,86 @@ public class BlessingEffectRegistry {
                 },
                 player -> !player.hasEffect(ModEffects.BLESSED_LAND_CD.get())
         );
+
+        register(ModItems.PREDATORS_INSTINCT.get(),
+                player -> {
+                    player.getPersistentData().putBoolean("predators_instinct", true);
+                },
+                player -> {
+                    player.getPersistentData().remove("predator_instinct");
+                },
+                player -> true
+        );
+
+        register(ModItems.AVALANCHING_STRIKE.get(),
+                player -> {
+                    player.getPersistentData().putBoolean("avalanching_strike", true);
+                },
+                player -> {
+                    player.getPersistentData().remove("avalanching_strike");
+                },
+                player -> true
+        );
+
+        register(ModItems.COURAGEOUS_BLOW.get(),
+                player -> {
+                    player.getPersistentData().putBoolean("courageous_blow", true);
+                },
+                player -> {
+                    player.getPersistentData().remove("courageous_blow");
+                },
+                player -> true
+        );
+
+        register(ModItems.PENETRATING_WILL.get(),
+                player -> {
+                    player.getPersistentData().putBoolean("penetrating_will", true);
+                },
+                player -> {
+                    player.getPersistentData().remove("penetrating_will");
+                },
+                player -> true
+        );
+
+        register(ModItems.RETALIATORY.get(),
+                player -> {
+                    player.getPersistentData().putBoolean("retaliatory", true);
+                },
+                player -> {
+                    player.getPersistentData().remove("retaliatory");
+                },
+                player -> true
+        );
+
+        register(ModItems.ENCHANTED_BLADE.get(),
+                player -> {
+                    player.getPersistentData().putBoolean("enchanted_blade", true);
+                },
+                player -> {
+                    player.getPersistentData().remove("enchanted_blade");
+                },
+                player -> true
+        );
+
+        register(ModItems.HELPING_HAND.get(),
+                player -> {
+                    player.getPersistentData().putBoolean("helping_hand", true);
+                },
+                player -> {
+                    player.getPersistentData().remove("helping_hand");
+                },
+                player -> true
+        );
+
+        register(ModItems.IMMINENT_TEMPTATION.get(),
+                player -> {
+                    player.getPersistentData().putBoolean("imminent_temptation", true);
+                },
+                player -> {
+                    player.getPersistentData().remove("imminent_temptation");
+                },
+                player -> true
+        );
     }
 
     public static void register(Item item, Consumer<Player> onApply, Consumer<Player> onRemove, Predicate<Player> canRemove) {

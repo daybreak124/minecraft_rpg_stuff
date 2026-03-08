@@ -96,14 +96,6 @@ public class QuantumLeapActive extends MobEffect {
     @SubscribeEvent
     public static void onPlayerAttack(LivingAttackEvent event) {
         if (!(event.getSource().getEntity() instanceof Player player)) return;
-        if (!player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get())) return;
 
-        CompoundTag tag = player.getPersistentData();
-        player.removeEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get());
-
-        if (tag.getBoolean("invis_added")) {
-            player.removeEffect(MobEffects.INVISIBILITY);
-                tag.putBoolean("invis_added", false);
-        }
     }
 }

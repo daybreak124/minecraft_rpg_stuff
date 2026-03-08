@@ -75,7 +75,7 @@ public class DFAPacket {
             Holder<DamageType> meleeType = level.registryAccess()
                     .registryOrThrow(Registries.DAMAGE_TYPE)
                     .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
-            DamageSource source = new DamageSource(meleeType, player, player);
+            DamageSource source = new DamageSource(meleeType, null, player);
 
 
             double jumpRadiusSq = 25;

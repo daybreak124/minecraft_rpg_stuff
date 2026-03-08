@@ -1,12 +1,12 @@
-package net.cold.coldsmod.blessingbonuses.neweffects;
+package net.cold.coldsmod.blessingbonuses.feat_tree;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 
-public class FocusedEnergyReady extends MobEffect {
+public class EnchantedBronzewood extends MobEffect {
 
-    public FocusedEnergyReady() {
-        super(MobEffectCategory.NEUTRAL, 0xFF0000); // category + color
+    public EnchantedBronzewood() {
+        super(MobEffectCategory.HARMFUL, 0x000000);
     }
 
     @Override

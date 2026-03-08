@@ -1,66 +1,6 @@
 package net.cold.coldsmod.blessingbonuses.skills;
 
-import net.cold.coldsmod.ModSounds;
-import net.cold.coldsmod.blessingbonuses.effects.ModEffects;
-import net.cold.coldsmod.blessingbonuses.neweffects.EffectUtils;
-import net.cold.coldsmod.damage.ModDamageTypes;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-
 public class ReckoningSkill {
 
-    private static final int ACTIVE_DURATION = 20 * 10; // 10 seconds
-    private static final double HEAL_PERCENT = 0.4; // 40%
 
-    private static final String HEALED_NBT = "reckoningHealed";
-
-    @SubscribeEvent
-    public static void onPlayerDamage(LivingHurtEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
-        if (player.level().isClientSide()) return;
-        if (event.getSource().is(DamageTypes.FALL)) return;
-        if (!player.hasEffect(ModEffects.RECKONING.get())) return;
-
-        player.removeEffect(ModEffects.RECKONING.get());
-        player.addEffect(new MobEffectInstance(ModEffects.RECKONING_ACTIVE.get(), ACTIVE_DURATION, 0, false, false, true));
-
-        if (player instanceof ServerPlayer serverPlayer) {
-            serverPlayer.playNotifySound(
-                    ModSounds.RECKONING_ACTIVE.get(), SoundSource.PLAYERS,
-                    0.3F, 1.0F
-            );
-        }
-
-        player.getPersistentData().putDouble(HEALED_NBT, 0);
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOW)
-    public static void onReckoningHeal(LivingDamageEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
-        if (player.level().isClientSide()) return;
-        if (event.getSource().is(ModDamageTypes.RECKONING_DAMAGE)) return;
-        if (event.getSource().is(DamageTypes.FALL)) return;
-
-        if (player.hasEffect(ModEffects.RECKONING_ACTIVE.get())) {
-            double healed = event.getAmount() * HEAL_PERCENT;
-
-            player.getPersistentData().putBoolean("IgnoreRejuvenation", true);
-            player.heal((float) healed);
-            player.getPersistentData().remove("IgnoreRejuvenation");
-
-
-            double totalHealed = player.getPersistentData().getDouble(HEALED_NBT);
-            totalHealed += healed;
-            player.getPersistentData().putDouble(HEALED_NBT, totalHealed);
-            EffectUtils.spawnParticleBurst(player, ParticleTypes.DAMAGE_INDICATOR);
-        }
-    }
 }

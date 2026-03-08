@@ -20,8 +20,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
 
@@ -36,36 +34,7 @@ public class IntoTheFraySkill {
     private static final ResourceKey<DamageType> MELEE_DAMAGE_KEY =
             ResourceKey.create(Registries.DAMAGE_TYPE, ModDamageTypes.CUSTOM_MELEE_DAMAGE.location());
 
-    @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide()) return;
-
-        Player player = event.player;
-        CompoundTag data = player.getPersistentData();
-
-        if (!data.getBoolean(ELIGIBLE_KEY)) return;
-
-        if (!player.isSprinting() || player.hasEffect(ModEffects.INTO_THE_FRAY_COOLDOWN.get())) {
-            resetFray(player, data);
-            return;
-        }
-
-        int sprintTicks = data.getInt(SPRINT_TICKS_KEY) + 1;
-        data.putInt(SPRINT_TICKS_KEY, sprintTicks);
-
-        if (sprintTicks < 60) return;
-
-
-        int amplifier = Math.min((sprintTicks - 60) / 40, 4);
-        int stackCount = amplifier + 1;
-
-        updateSprintingBuffs(player, amplifier, sprintTicks >= 220);
-
-        // 7. Collision & Explosion Logic
-        checkCollisions(player, data, stackCount);
-    }
-
-    private static void updateSprintingBuffs(Player player, int amplifier, boolean giveAbsorption) {
+    public static void updateSprintingBuffs(Player player, int amplifier, boolean giveAbsorption) {
         MobEffectInstance current = player.getEffect(ModEffects.INTO_THE_FRAY.get());
         if (current == null || current.getAmplifier() != amplifier) {
             player.addEffect(new MobEffectInstance(ModEffects.INTO_THE_FRAY.get(), 40, amplifier, true, false, true));
@@ -78,7 +47,7 @@ public class IntoTheFraySkill {
         }
     }
 
-    private static void checkCollisions(Player player, CompoundTag data, int stackCount) {
+    public static void checkCollisions(Player player, CompoundTag data, int stackCount) {
         Level level = player.level();
         double collisionRadiusSq = 0.49;
 
@@ -103,12 +72,12 @@ public class IntoTheFraySkill {
         }
     }
 
-    private static void triggerExplosion(Player player, List<LivingEntity> nearby, int stackCount) {
+    public static void triggerExplosion(Player player, List<LivingEntity> nearby, int stackCount) {
         Level level = player.level();
         Holder<DamageType> meleeType = level.registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
                 .getHolderOrThrow(MELEE_DAMAGE_KEY);
-        DamageSource source = new DamageSource(meleeType, player);
+        DamageSource source = new DamageSource(meleeType, null, player);
 
 
         for (LivingEntity target : nearby) {
@@ -134,7 +103,7 @@ public class IntoTheFraySkill {
         }
     }
 
-    private static boolean isValidTarget(Player player, LivingEntity target) {
+    public static boolean isValidTarget(Player player, LivingEntity target) {
         if (!target.isAlive() || target.isInvulnerable()) return false;
 
         return (target instanceof Enemy && !(target instanceof NeutralMob)) ||
@@ -142,7 +111,7 @@ public class IntoTheFraySkill {
                 (target instanceof Mob m && m.getTarget() != null);
     }
 
-    private static void resetFray(Player player, CompoundTag data) {
+    public static void resetFray(Player player, CompoundTag data) {
         if (data.getInt(SPRINT_TICKS_KEY) > 0) {
             data.putInt(SPRINT_TICKS_KEY, 0);
         }

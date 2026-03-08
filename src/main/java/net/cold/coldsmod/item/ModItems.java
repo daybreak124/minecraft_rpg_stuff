@@ -1978,6 +1978,223 @@ public class ModItems {
         }
     }
 
+    public static final RegistryObject<Item> AVALANCHING_STRIKE = ITEMS.register(
+            "avalanching_strike",
+            () -> new FlameforgedPlating(new Item.Properties().stacksTo(64))
+    );
+
+
+    private static class AvalanchingStrike extends Item {
+        public AvalanchingStrike(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Component getName(ItemStack stack) {
+            return Component.literal("Avalanching Strike").withStyle(style -> style.withColor(0xD6C97A));
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            super.appendHoverText(stack, level, tooltip, flag);
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal(" Melee attacks have a 10%").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" change to deal 50% more damage.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Stacks additively with damage").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+
+    public static final RegistryObject<Item> COURAGEOUS_BLOW = ITEMS.register(
+            "courageous_blow",
+            () -> new FlameforgedPlating(new Item.Properties().stacksTo(64))
+    );
+
+
+    private static class CourageousBlow extends Item {
+        public CourageousBlow(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Component getName(ItemStack stack) {
+            return Component.literal("Courageous Blow").withStyle(style -> style.withColor(0xD6C97A));
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            super.appendHoverText(stack, level, tooltip, flag);
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal(" Direct melee hits now deal").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" an additional damage equal to").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" 8% of your health. Effect").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" reduces to 2% for indirect melee").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" hits.").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+    public static final RegistryObject<Item> PREDATORS_INSTINCT = ITEMS.register(
+            "predator_instinct",
+            () -> new FlameforgedPlating(new Item.Properties().stacksTo(64))
+    );
+
+
+    private static class PredatorsInstinct extends Item {
+        public PredatorsInstinct(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Component getName(ItemStack stack) {
+            return Component.literal("Predator's Instinct").withStyle(style -> style.withColor(0xD6C97A));
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            super.appendHoverText(stack, level, tooltip, flag);
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal(" 10% Damage against targets").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" with half health or below.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Stacks additively with damage").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+    public static final RegistryObject<Item> PENETRATING_WILL = ITEMS.register(
+            "penetrating_will",
+            () -> new FlameforgedPlating(new Item.Properties().stacksTo(64))
+    );
+
+
+    private static class PenetratingWill extends Item {
+        public PenetratingWill(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Component getName(ItemStack stack) {
+            return Component.literal("Penetrating Will").withStyle(style -> style.withColor(0xD6C97A));
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            super.appendHoverText(stack, level, tooltip, flag);
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal(" Your melee hits reduce your").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" target's armor by 5 and increase").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" your armor by 3.").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+    public static final RegistryObject<Item> RETALIATORY = ITEMS.register(
+            "retaliatory",
+            () -> new FlameforgedPlating(new Item.Properties().stacksTo(64))
+    );
+
+
+    private static class Retaliatory extends Item {
+        public Retaliatory(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Component getName(ItemStack stack) {
+            return Component.literal("Retaliatory").withStyle(style -> style.withColor(0xD6C97A));
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            super.appendHoverText(stack, level, tooltip, flag);
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal(" When taking damage, 30% chance").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" to deal the same damage to the").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" attacker.").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+
+    public static final RegistryObject<Item> ENCHANTED_BLADE = ITEMS.register(
+            "enchanted_blade",
+            () -> new FlameforgedPlating(new Item.Properties().stacksTo(64))
+    );
+
+
+    private static class EnchantedBlade extends Item {
+        public EnchantedBlade(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Component getName(ItemStack stack) {
+            return Component.literal("Enchanted Blade").withStyle(style -> style.withColor(0xD6C97A));
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            super.appendHoverText(stack, level, tooltip, flag);
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal(" Chain Lightning bounce damage").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" increases to 45%").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Bronzewood's Curse debuff increases").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" by 3% and reduces enemy damage by 5%.").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" Handle of Bloodthirst effect increases").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" to 75%.").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+
+    public static final RegistryObject<Item> HELPING_HAND = ITEMS.register(
+            "helping_hand",
+            () -> new FlameforgedPlating(new Item.Properties().stacksTo(64))
+    );
+
+
+    private static class HelpingHand extends Item {
+        public HelpingHand(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Component getName(ItemStack stack) {
+            return Component.literal("Helping Hand").withStyle(style -> style.withColor(0xD6C97A));
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            super.appendHoverText(stack, level, tooltip, flag);
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal(" Whenever a negative effect").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" is applied, gain 13% Damage for 6s.").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+
+    public static final RegistryObject<Item> IMMINENT_TEMPTATION = ITEMS.register(
+            "imminent_temptation",
+            () -> new FlameforgedPlating(new Item.Properties().stacksTo(64))
+    );
+
+
+    private static class ImminentTemptation extends Item {
+        public ImminentTemptation(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public Component getName(ItemStack stack) {
+            return Component.literal("Imminent Temptation").withStyle(style -> style.withColor(0xD6C97A));
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+            super.appendHoverText(stack, level, tooltip, flag);
+            tooltip.add(Component.literal(""));
+            tooltip.add(Component.literal(" Tempting Whispers item's HP").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(" reduction effect reduces by 20%.").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+
+
 
 
 //    public static final RegistryObject<Item> HOLLOW_STONE = ITEMS.register(

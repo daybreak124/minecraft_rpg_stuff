@@ -18,6 +18,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -80,7 +81,9 @@ public class CooldownCycle {
 
         if (!(event.getEntity() instanceof Player player)) return;
 
-        handler.accept(player, event.getEffectInstance());
+        MobEffectInstance effect = event.getEffectInstance();
+        handler.accept(player, effect);
+        handleHelpingHand(player, effect.getEffect());
     }
 
     @SubscribeEvent
@@ -105,6 +108,12 @@ public class CooldownCycle {
         handler.accept(victim, event.getEffectInstance());
     }
 
+    public static void handleHelpingHand(Player player, MobEffect debuff) {
+        if (!player.getPersistentData().contains("helping_hand") || (debuff.getCategory() != MobEffectCategory.HARMFUL)) return;
+
+        player.addEffect(new MobEffectInstance(ModEffects.HELPING_HAND.get(), 120, 0));
+    }
+
     public static void init() {
         EXPIRE_HANDLERS.put(ModEffects.RETALIATE_ACTIVE.get(), (player, instance) -> {
 
@@ -125,7 +134,7 @@ public class CooldownCycle {
                     .registryOrThrow(Registries.DAMAGE_TYPE)
                     .getHolderOrThrow(ModDamageTypes.CUSTOM_MELEE_DAMAGE);
 
-            DamageSource source = new DamageSource(meleeType, player, player);
+            DamageSource source = new DamageSource(meleeType, null, player);
 
             double radiusSq = 25.0;
             level.getEntitiesOfClass(
@@ -248,7 +257,7 @@ public class CooldownCycle {
             player.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_STACK.get(), MobEffectInstance.INFINITE_DURATION, newAmplifier, false, false, true));
             if (player.hasEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get())
                     && player.getEffect(ModEffects.EXPLOSIVE_TENDENCY_STACK.get()).getAmplifier() < 2) {
-
+                //TODO Fix this
                 player.getPersistentData().putBoolean("refresh_et", true);
             }
         });

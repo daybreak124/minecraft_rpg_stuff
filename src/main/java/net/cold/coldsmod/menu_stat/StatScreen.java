@@ -301,7 +301,7 @@ public class StatScreen extends AbstractContainerScreen<StatMenu> {
         if (name.equals("Strength")) {
             lines.add(getMilestoneComp(30, "+8 Potency", currentVal));
             lines.add(getMilestoneComp(40, "+3 Armor", currentVal));
-            lines.add(getMilestoneComp(50, "+12 Haste", currentVal));
+            lines.add(getMilestoneComp(50, "+12 Melee Haste", currentVal));
             lines.add(getMilestoneComp(60, "+5 Melee Accuracy", currentVal));
             lines.add(getMilestoneComp(60, "+7 Precision", currentVal));
             lines.add(getMilestoneComp(70, "+18% Potency & +5 Armor", currentVal));

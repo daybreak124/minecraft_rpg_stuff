@@ -31,6 +31,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -57,138 +58,138 @@ public class AttributeApplier {
     private static final UUID TOUGHNESS_UUID = UUID.fromString("e2228876-1234-5352-5454-118115412111");
     private static final UUID HP_UUID = UUID.fromString("e2209476-1234-5352-5454-113995001111");
 
-    private static final Multimap<String, Supplier<Attribute>> ATTRIBUTE_LOOKUP =
-            ImmutableListMultimap.<String, Supplier<Attribute>>builder()
-                    .put("str", ModAttributes.STR)
-                    .put("dex", ModAttributes.DEX)
-                    .put("fort", ModAttributes.FORT)
-                    .put("con", ModAttributes.CON)
-                    .put("perc", ModAttributes.PERC)
-                    .put("insight", ModAttributes.INSIGHT)
-                    .put("wisdom", ModAttributes.WISDOM)
-                    .put("intelligence", ModAttributes.INTELLIGENCE)
+//    private static final Multimap<String, Supplier<Attribute>> ATTRIBUTE_LOOKUP =
+//            ImmutableListMultimap.<String, Supplier<Attribute>>builder()
+//                    .put("str", ModAttributes.STR)
+//                    .put("dex", ModAttributes.DEX)
+//                    .put("fort", ModAttributes.FORT)
+//                    .put("con", ModAttributes.CON)
+//                    .put("perc", ModAttributes.PERC)
+//                    .put("insight", ModAttributes.INSIGHT)
+//                    .put("wisdom", ModAttributes.WISDOM)
+//                    .put("intelligence", ModAttributes.INTELLIGENCE)
+//
+//                    .put("armor", () -> Attributes.ARMOR)
+//                    .put("armorToughness", () -> Attributes.ARMOR_TOUGHNESS)
+//                    .put("maxHealth", () -> Attributes.MAX_HEALTH)
+//                    .put("knockbackResist", () -> Attributes.KNOCKBACK_RESISTANCE)
+//                    .put("luck", () -> Attributes.LUCK)
+//
+//                    .put("damage", ModAttributes.POTENCY)
+//                    .put("damage", ModAttributes.MELEE_POTENCY)
+//                    .put("damage", ModAttributes.PROJECTILE_POTENCY)
+//
+//                    .put("critChance", ModAttributes.ACCURACY)
+//                    .put("critChance", ModAttributes.MELEE_ACCURACY)
+//                    .put("critChance", ModAttributes.PROJECTILE_ACCURACY)
+//
+//                    .put("critDamage", ModAttributes.PRECISION)
+//                    .put("critDamage", ModAttributes.MELEE_PRECISION)
+//                    .put("critDamage", ModAttributes.PROJECTILE_PRECISION)
+//
+//                    .put("attackSpeed", ModAttributes.MELEE_HASTE)
+//
+//                    .put("meleeDamage", ModAttributes.MELEE_POTENCY)
+//                    .put("meleeCritChance", ModAttributes.MELEE_ACCURACY)
+//                    .put("meleeCritDamage", ModAttributes.MELEE_PRECISION)
+//
+//                    .put("projectileDamage", ModAttributes.PROJECTILE_POTENCY)
+//                    .put("projectileCritChance", ModAttributes.PROJECTILE_ACCURACY)
+//                    .put("projectileCritDamage", ModAttributes.PROJECTILE_PRECISION)
+//                    .put("drawSpeed", ModAttributes.NOCK_HASTE)
+//
+//
+//                    .put("restoration", ModAttributes.RESTORATION)
+//                    .put("rejuvenation", ModAttributes.REJUVENATION)
+//                    .put("amplification", ModAttributes.AMPLIFICATION)
+//
+//
+//                    .put("damageMultiplier", ModAttributes.POTENCY_MULTIPLIER)
+//                    .put("damageMultiplier", ModAttributes.MELEE_POTENCY_MULTIPLIER)
+//                    .put("damageMultiplier", ModAttributes.PROJECTILE_POTENCY_MULTIPLIER)
+//
+//                    .put("critChanceMultiplier", ModAttributes.ACCURACY_MULTIPLIER)
+//                    .put("critChanceMultiplier", ModAttributes.MELEE_ACCURACY_MULTIPLIER)
+//                    .put("critChanceMultiplier", ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER)
+//
+//                    .put("critDamageMultiplier", ModAttributes.PRECISION_MULTIPLIER)
+//                    .put("critDamageMultiplier", ModAttributes.MELEE_PRECISION_MULTIPLIER)
+//                    .put("critDamageMultiplier", ModAttributes.PROJECTILE_PRECISION_MULTIPLIER)
+//
+//                    .put("speedMultiplier", ModAttributes.MELEE_HASTE_MULTIPLIER)
+//
+//
+//                    .put("meleeDamageMultiplier", ModAttributes.MELEE_POTENCY_MULTIPLIER)
+//                    .put("meleeCritChanceMultiplier", ModAttributes.MELEE_ACCURACY_MULTIPLIER)
+//                    .put("meleeCritDamageMultiplier", ModAttributes.MELEE_PRECISION_MULTIPLIER)
+//                    .put("projectileDamageMultiplier", ModAttributes.PROJECTILE_POTENCY_MULTIPLIER)
+//                    .put("projectileCritChanceMultiplier", ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER)
+//                    .put("projectileCritDamageMultiplier", ModAttributes.PROJECTILE_PRECISION_MULTIPLIER)
+//                    .put("drawSpeedMultiplier", ModAttributes.NOCK_HASTE_MULTIPLIER)
+//
+//
+//                    .put("armorMultiplier", ModAttributes.ARMOR_MULTIPLIER)
+//                    .put("toughnessMultiplier", ModAttributes.TOUGHNESS_MULTIPLIER)
+//                    .put("healthMultiplier", ModAttributes.HEALTH_MULTIPLIER)
+//                    .put("debuffResist", ModAttributes.DEBUFF_RESIST)
+//
+//                    .put("restorationMultiplier", ModAttributes.RESTORATION_MULTIPLIER)
+//                    .put("rejuvenationMultiplier", ModAttributes.REJUVENATION_MULTIPLIER)
+//                    .put("amplificationMultiplier", ModAttributes.AMPLIFICATION_MULTIPLIER)
+//
+//                    .put("moveSpeed", () -> Attributes.MOVEMENT_SPEED)
+//                    .put("swimSpeed", ForgeMod.SWIM_SPEED)
+//                    .put("stepHeight", ForgeMod.STEP_HEIGHT_ADDITION)
+//                    .put("blockReach", ForgeMod.BLOCK_REACH)
+//                    .put("entityReach", ForgeMod.ENTITY_REACH)
+//                    .put("xpGain", ModAttributes.XP_GAIN)
+//                    .put("miningSpeed", ModAttributes.MINING_SPEED)
+//                    .put("jumpBoost", ModAttributes.JUMP_BOOST)
+//                    .build();
 
-                    .put("armor", () -> Attributes.ARMOR)
-                    .put("armorToughness", () -> Attributes.ARMOR_TOUGHNESS)
-                    .put("maxHealth", () -> Attributes.MAX_HEALTH)
-                    .put("knockbackResist", () -> Attributes.KNOCKBACK_RESISTANCE)
-                    .put("luck", () -> Attributes.LUCK)
-
-                    .put("damage", ModAttributes.POTENCY)
-                    .put("damage", ModAttributes.MELEE_POTENCY)
-                    .put("damage", ModAttributes.PROJECTILE_POTENCY)
-
-                    .put("critChance", ModAttributes.ACCURACY)
-                    .put("critChance", ModAttributes.MELEE_ACCURACY)
-                    .put("critChance", ModAttributes.PROJECTILE_ACCURACY)
-
-                    .put("critDamage", ModAttributes.PRECISION)
-                    .put("critDamage", ModAttributes.MELEE_PRECISION)
-                    .put("critDamage", ModAttributes.PROJECTILE_PRECISION)
-
-                    .put("attackSpeed", ModAttributes.MELEE_HASTE)
-
-                    .put("meleeDamage", ModAttributes.MELEE_POTENCY)
-                    .put("meleeCritChance", ModAttributes.MELEE_ACCURACY)
-                    .put("meleeCritDamage", ModAttributes.MELEE_PRECISION)
-
-                    .put("projectileDamage", ModAttributes.PROJECTILE_POTENCY)
-                    .put("projectileCritChance", ModAttributes.PROJECTILE_ACCURACY)
-                    .put("projectileCritDamage", ModAttributes.PROJECTILE_PRECISION)
-                    .put("drawSpeed", ModAttributes.NOCK_HASTE)
-
-
-                    .put("restoration", ModAttributes.RESTORATION)
-                    .put("rejuvenation", ModAttributes.REJUVENATION)
-                    .put("amplification", ModAttributes.AMPLIFICATION)
-
-
-                    .put("damageMultiplier", ModAttributes.POTENCY_MULTIPLIER)
-                    .put("damageMultiplier", ModAttributes.MELEE_POTENCY_MULTIPLIER)
-                    .put("damageMultiplier", ModAttributes.PROJECTILE_POTENCY_MULTIPLIER)
-
-                    .put("critChanceMultiplier", ModAttributes.ACCURACY_MULTIPLIER)
-                    .put("critChanceMultiplier", ModAttributes.MELEE_ACCURACY_MULTIPLIER)
-                    .put("critChanceMultiplier", ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER)
-
-                    .put("critDamageMultiplier", ModAttributes.PRECISION_MULTIPLIER)
-                    .put("critDamageMultiplier", ModAttributes.MELEE_PRECISION_MULTIPLIER)
-                    .put("critDamageMultiplier", ModAttributes.PROJECTILE_PRECISION_MULTIPLIER)
-
-                    .put("speedMultiplier", ModAttributes.MELEE_HASTE_MULTIPLIER)
-
-
-                    .put("meleeDamageMultiplier", ModAttributes.MELEE_POTENCY_MULTIPLIER)
-                    .put("meleeCritChanceMultiplier", ModAttributes.MELEE_ACCURACY_MULTIPLIER)
-                    .put("meleeCritDamageMultiplier", ModAttributes.MELEE_PRECISION_MULTIPLIER)
-                    .put("projectileDamageMultiplier", ModAttributes.PROJECTILE_POTENCY_MULTIPLIER)
-                    .put("projectileCritChanceMultiplier", ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER)
-                    .put("projectileCritDamageMultiplier", ModAttributes.PROJECTILE_PRECISION_MULTIPLIER)
-                    .put("drawSpeedMultiplier", ModAttributes.NOCK_HASTE_MULTIPLIER)
-
-
-                    .put("armorMultiplier", ModAttributes.ARMOR_MULTIPLIER)
-                    .put("toughnessMultiplier", ModAttributes.TOUGHNESS_MULTIPLIER)
-                    .put("healthMultiplier", ModAttributes.HEALTH_MULTIPLIER)
-                    .put("debuffResist", ModAttributes.DEBUFF_RESIST)
-
-                    .put("restorationMultiplier", ModAttributes.RESTORATION_MULTIPLIER)
-                    .put("rejuvenationMultiplier", ModAttributes.REJUVENATION_MULTIPLIER)
-                    .put("amplificationMultiplier", ModAttributes.AMPLIFICATION_MULTIPLIER)
-
-                    .put("moveSpeed", () -> Attributes.MOVEMENT_SPEED)
-                    .put("swimSpeed", ForgeMod.SWIM_SPEED)
-                    .put("stepHeight", ForgeMod.STEP_HEIGHT_ADDITION)
-                    .put("blockReach", ForgeMod.BLOCK_REACH)
-                    .put("entityReach", ForgeMod.ENTITY_REACH)
-                    .put("xpGain", ModAttributes.XP_GAIN)
-                    .put("miningSpeed", ModAttributes.MINING_SPEED)
-                    .put("jumpBoost", ModAttributes.JUMP_BOOST)
-                    .build();
-
-    private static void handleItemStats(Player player, ItemStack stack, EquipmentSlot slot, boolean adding) {
-        if (stack.isEmpty() || !stack.hasTag()) return;
-
-        CompoundTag statsTag = stack.getTag().getCompound("custom_stats");
-        if (statsTag.isEmpty()) return;
-
-        String type = getItemType(stack);
-        if (slot.getType() == EquipmentSlot.Type.HAND) {
-            boolean isValidWeaponOrTool = type.equals("sword") ||
-                    type.equals("bow") ||
-                    type.equals("crossbow") ||
-                    type.equals("shield") ||
-                    type.equals("tools");
-
-            if (!isValidWeaponOrTool) return;
-        }
-
-        for (String key : statsTag.getAllKeys()) {
-            Collection<Supplier<Attribute>> suppliers = ATTRIBUTE_LOOKUP.get(key);
-            if (suppliers.isEmpty()) continue;
-
-            double value = statsTag.getDouble(key);
-            if (value == 0 && adding) continue;
-
-
-            for (Supplier<Attribute> supplier : suppliers) {
-                Attribute attribute = supplier.get();
-                AttributeInstance instance = player.getAttribute(attribute);
-
-                if (instance != null) {
-                    String uniqueId = type + "_" + key + "_" + attribute.getDescriptionId();
-                    UUID modifierUUID = UUID.nameUUIDFromBytes(uniqueId.getBytes(StandardCharsets.UTF_8));
-
-                    instance.removeModifier(modifierUUID);
-
-                    if (adding) {
-                        instance.addTransientModifier(new AttributeModifier(modifierUUID,
-                                "Gear Stat: " + key, value, AttributeModifier.Operation.ADDITION));
-                    }
-                }
-            }
-        }
-    }
+//    private static void handleItemStats(Player player, ItemStack stack, EquipmentSlot slot, boolean adding) {
+//        if (stack.isEmpty() || !stack.hasTag()) return;
+//
+//        CompoundTag statsTag = stack.getTag().getCompound("custom_stats");
+//        if (statsTag.isEmpty()) return;
+//
+//        String type = getItemType(stack);
+//        if (slot.getType() == EquipmentSlot.Type.HAND) {
+//            boolean isValidWeaponOrTool = type.equals("sword") ||
+//                    type.equals("bow") ||
+//                    type.equals("crossbow") ||
+//                    type.equals("shield") ||
+//                    type.equals("tools");
+//
+//            if (!isValidWeaponOrTool) return;
+//        }
+//
+//        for (String key : statsTag.getAllKeys()) {
+//            Collection<Supplier<Attribute>> suppliers = ATTRIBUTE_LOOKUP.get(key);
+//            if (suppliers.isEmpty()) continue;
+//
+//            double value = statsTag.getDouble(key);
+//            if (value == 0 && adding) continue;
+//
+//
+//            for (Supplier<Attribute> supplier : suppliers) {
+//                Attribute attribute = supplier.get();
+//                AttributeInstance instance = player.getAttribute(attribute);
+//
+//                if (instance != null) {
+//                    String uniqueId = type + "_" + key + "_" + attribute.getDescriptionId();
+//                    UUID modifierUUID = UUID.nameUUIDFromBytes(uniqueId.getBytes(StandardCharsets.UTF_8));
+//
+//                    instance.removeModifier(modifierUUID);
+//
+//                    if (adding) {
+//                        instance.addTransientModifier(new AttributeModifier(modifierUUID,
+//                                "Gear Stat: " + key, value, AttributeModifier.Operation.ADDITION));
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 
     public static void register() {
@@ -318,6 +319,50 @@ public class AttributeApplier {
 //                }
 //        ));
 //    }
+//
+    @SubscribeEvent
+    public static void onEquipmentChange(LivingEquipmentChangeEvent event) {
+        if (!(event.getEntity() instanceof Player player)) return;
+        if (player.level().isClientSide()) return;
+        applyCrossbowTag(player);
+    }
+
+    public static void applyCrossbowTag(Player player) {
+        ItemStack mainHand = player.getMainHandItem();
+        ItemStack offHand = player.getOffhandItem();
+
+        if ("crossbow".equals(ItemRarityUtils.getItemType(mainHand))) {
+            CompoundTag nbt = mainHand.getOrCreateTag();
+
+            double currentHaste = getScaledValue(player, ModAttributes.NOCK_HASTE.get(), ModAttributes.NOCK_HASTE_MULTIPLIER.get());
+
+            if (nbt.getDouble("drawSpeedIncrease") != currentHaste) {
+                nbt.putDouble("drawSpeedIncrease", currentHaste);
+            }
+
+            boolean hasAdrenaline = player.hasEffect(ModEffects.ADRENALINE_INJECTION_UP.get());
+            if (hasAdrenaline) {
+                nbt.putBoolean("adrenalineInjection", true);
+            } else {
+                nbt.remove("adrenalineInjection");
+            }
+        } else if ("crossbow".equals(ItemRarityUtils.getItemType(offHand))) {
+            CompoundTag nbt = offHand.getOrCreateTag();
+
+            double currentHaste = getScaledValue(player, ModAttributes.NOCK_HASTE.get(), ModAttributes.NOCK_HASTE_MULTIPLIER.get());
+
+            if (nbt.getDouble("drawSpeedIncrease") != currentHaste) {
+                nbt.putDouble("drawSpeedIncrease", currentHaste);
+            }
+
+            boolean hasAdrenaline = player.hasEffect(ModEffects.ADRENALINE_INJECTION_UP.get());
+            if (hasAdrenaline) {
+                nbt.putBoolean("adrenalineInjection", true);
+            } else {
+                nbt.remove("adrenalineInjection");
+            }
+        }
+    }
 
 //    @SubscribeEvent
 //    public static void onCurioChange(CurioChangeEvent event) {
@@ -360,30 +405,30 @@ public class AttributeApplier {
 //        return false;
 //    }
 
-    @SubscribeEvent
-    public static void onUseItemStart(LivingEntityUseItemEvent.Start event) {
-        if (!(event.getEntity() instanceof Player player) || player.level().isClientSide()) return;
-
-        ItemStack stack = event.getItem();
-        String itemType = ItemRarityUtils.getItemType(stack);
-
-        if ("crossbow".equals(itemType)) {
-            CompoundTag nbt = stack.getOrCreateTag();
-
-            double currentHaste = getScaledValue(player, ModAttributes.NOCK_HASTE.get(), ModAttributes.NOCK_HASTE_MULTIPLIER.get());
-
-            if (nbt.getDouble("drawSpeedIncrease") != currentHaste) {
-                nbt.putDouble("drawSpeedIncrease", currentHaste);
-            }
-
-            boolean hasAdrenaline = player.hasEffect(ModEffects.ADRENALINE_INJECTION_UP.get());
-            if (hasAdrenaline) {
-                nbt.putBoolean("adrenalineInjection", true);
-            } else {
-                nbt.remove("adrenalineInjection");
-            }
-        }
-    }
+//    @SubscribeEvent
+//    public static void onUseItemStart(LivingEntityUseItemEvent.Start event) {
+//        if (!(event.getEntity() instanceof Player player) || player.level().isClientSide()) return;
+//
+//        ItemStack stack = event.getItem();
+//        String itemType = ItemRarityUtils.getItemType(stack);
+//
+//        if ("crossbow".equals(itemType)) {
+//            CompoundTag nbt = stack.getOrCreateTag();
+//
+//            double currentHaste = getScaledValue(player, ModAttributes.NOCK_HASTE.get(), ModAttributes.NOCK_HASTE_MULTIPLIER.get());
+//
+//            if (nbt.getDouble("drawSpeedIncrease") != currentHaste) {
+//                nbt.putDouble("drawSpeedIncrease", currentHaste);
+//            }
+//
+//            boolean hasAdrenaline = player.hasEffect(ModEffects.ADRENALINE_INJECTION_UP.get());
+//            if (hasAdrenaline) {
+//                nbt.putBoolean("adrenalineInjection", true);
+//            } else {
+//                nbt.remove("adrenalineInjection");
+//            }
+//        }
+//    }
 
     public static double getScaledValue(Player player, Attribute ratingAttr, Attribute multiplierAttr) {
         double rating = player.getAttributeValue(ratingAttr);
@@ -515,7 +560,7 @@ public class AttributeApplier {
             refreshPerPointStats(player);
             refreshMilestones(player);
             recalculateDynamicBonuses(player);
-            // applyCrossbowTag(player);
+            applyCrossbowTag(player);
 
 //                player.level().getServer().tell(new net.minecraft.server.TickTask(
 //                        player.level().getServer().getTickCount() + 1,
@@ -568,7 +613,7 @@ public class AttributeApplier {
                                 refreshPerPointStats(player);
                                 refreshMilestones(player);
                                 recalculateDynamicBonuses(player);
-                                // applyCrossbowTag(player);
+                                applyCrossbowTag(player);
                             }
                         }
                 ));

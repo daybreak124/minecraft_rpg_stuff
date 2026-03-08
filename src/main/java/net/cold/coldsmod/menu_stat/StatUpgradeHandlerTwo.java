@@ -156,7 +156,7 @@ public class StatUpgradeHandlerTwo {
         refreshPerPointStats(player);
         refreshMilestones(player);
         recalculateDynamicBonuses(player);
-        // applyCrossbowTag(player);
+        applyCrossbowTag(player);
     }
 
     public static void tryDowngrade(ServerPlayer player, Attribute attribute) {
@@ -198,7 +198,7 @@ public class StatUpgradeHandlerTwo {
         refreshPerPointStats(player);
         refreshMilestones(player);
         recalculateDynamicBonuses(player);
-        // applyCrossbowTag(player);
+        applyCrossbowTag(player);
     }
 
     private static void updateSubStat(ServerPlayer player, Attribute subAttr, Attribute baseAttr) {

@@ -9,7 +9,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,18 +18,6 @@ import java.util.UUID;
 public class SummoningStone {
 
     private static final int SBEVE_INTERVAL = 5995;
-
-    @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide()) return;
-
-        Player player = event.player;
-        if (player.tickCount % 1200 != 0) return;
-
-
-        if (!player.getPersistentData().getBoolean("summoning_stone_eligible")) return;
-        runSbeveUpdateLogic(player);
-    }
 
     public static void runSbeveUpdateLogic(Player player) {
         if (player.hasEffect(ModEffects.SOLARA.get()) || player.hasEffect(ModEffects.SBEVE_CD.get())) return;

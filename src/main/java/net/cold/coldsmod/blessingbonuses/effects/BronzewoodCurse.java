@@ -22,7 +22,7 @@ public class BronzewoodCurse extends MobEffect {
     }
 
     private static final ResourceKey<DamageType> MELEE_DOT_KEY =
-            ResourceKey.create(Registries.DAMAGE_TYPE, ModDamageTypes.MELEE_DOT_DAMAGE.location());
+            ResourceKey.create(Registries.DAMAGE_TYPE, ModDamageTypes.DOT_DAMAGE.location());
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
@@ -43,7 +43,7 @@ public class BronzewoodCurse extends MobEffect {
                 .registryOrThrow(Registries.DAMAGE_TYPE)
                 .getHolderOrThrow(MELEE_DOT_KEY);
 
-        DamageSource source = new DamageSource(meleeDOT, sourcePlayer, sourcePlayer);
+        DamageSource source = new DamageSource(meleeDOT, null, sourcePlayer);
 
         entity.hurt(source, 1f);
 
