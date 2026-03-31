@@ -84,6 +84,7 @@ public class Formulas {
                 BonusRegistry.process(attacker, null, attacker.level(), BonusTrigger.PROJECTILE_HURT_BOW, data);
                 BonusRegistry.process(attacker, event.getEntity(), attacker.level(), BonusTrigger.FRIENDLY_FIRE_LIFE_TOUCH, data);
 
+                // For cancelling event
                 if (data[0] == -1f) {
                     event.setCanceled(true);
                     arrow.discard();
