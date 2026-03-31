@@ -1,0 +1,44 @@
+package net.cold.coldsmod.capabilities_and_blessings.Capabilities;
+
+public enum BonusTrigger {
+    HURT,
+
+    MELEE_HURT,
+    INDIRECT_MELEE_HURT,
+    MELEE_CRIT,
+
+    PROJECTILE_HURT_BOW,
+    PROJECTILE_LAND_BOW,
+    FRIENDLY_FIRE_LIFE_TOUCH,
+
+    PROJECTILE_HURT_CROSSBOW,
+    PROJECTILE_LAND_CROSSBOW,
+
+    KILL,
+
+    HEAL,
+
+    DEFEND,
+    DAMAGE_TAKE_DAMAGE_EVENT,
+    DAMAGE_TAKE_ATTACK_EVENT,
+
+    ITEM_USE_START_SHIELD,
+    ITEM_USE_TICK_SHIELD,
+    ITEM_USE_END_SHIELD,
+
+    ITEM_USE_START_BOW,
+    ITEM_USE_TICK_BOW,
+    ITEM_USE_END_BOW,
+
+    LAND,
+
+    TICK,
+    TICK_STAND_STILL,
+    TICK_CROUCH,
+    TICK_SPRINT,
+
+    BLESSING_ACTIVATION,
+
+    DEBUFF_APPLIED,
+
+}

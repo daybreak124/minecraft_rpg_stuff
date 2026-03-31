@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": { "item": "coldsmod:sunstone_forged_ring_rare" },
+  "addition": { "item": "coldsmod:gem_cluster" },
+  "template": { "item": "coldsmod:accessory_upgrade_smithing_template" },
+  "result": { "item": "coldsmod:sunstone_forged_ring_epic" }
+}

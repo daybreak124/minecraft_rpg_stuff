@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "coldsmod:true_damage",
+    "coldsmod:custom_melee_damage",
+    "coldsmod:custom_ranged_damage",
+    "coldsmod:melee_dot_damage",
+    "coldsmod:lightning_damage"
+  ]
+}

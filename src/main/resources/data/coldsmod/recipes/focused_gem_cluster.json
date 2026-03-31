@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "coldsmod:gem_cluster" },
+    { "item": "coldsmod:gem_cluster" },
+    { "item": "coldsmod:gem_cluster" },
+    { "item": "coldsmod:gem_cluster" }
+  ],
+  "result": {
+    "item": "coldsmod:focused_gem_cluster"
+  }
+}

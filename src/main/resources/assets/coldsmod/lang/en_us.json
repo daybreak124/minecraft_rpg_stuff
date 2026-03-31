@@ -1,0 +1,129 @@
+{
+  "creativetab.upgrade_item_tab": "Cold's RPG Stuff: Upgrades",
+  "creativetab.accessory_tab": "Cold's RPG Stuff: Accessories",
+  "creativetab.blessing_tab": "Cold's RPG Stuff: Blessings",
+  "creativetab.test_item_tab": "Cold's RPG Stuff: Test Items",
+
+  "entity.coldsmod.sbeve": "Sbeve",
+
+  "effect.coldsmod.hawkeye_stack": "Hawkeye",
+
+  "effect.coldsmod.frenzy_stack": "Frenzy",
+
+  "effect.coldsmod.dfa_up": "Death From Above: Ready",
+  "effect.coldsmod.dfa_cd": "Death From Above: Cooldown",
+
+  "effect.coldsmod.bastion_active": "Bastion",
+  "effect.coldsmod.bastion_up": "Bastion: Ready",
+  "effect.coldsmod.bastion_cd": "Bastion: Cooldown",
+
+  "effect.coldsmod.berserk_stack": "Rage",
+  "effect.coldsmod.berserk_up": "Berserk",
+
+  "effect.coldsmod.bronzewoods_curse": "Cursed",
+  "effect.coldsmod.bronzewood_up": "Bronzewood: Ready",
+  "effect.coldsmod.bronzewood_cooldown": "Bronzewood: Cooldown",
+
+  "effect.coldsmod.clairvoyance_up": "Clairvoyance: Ready",
+  "effect.coldsmod.clairvoyance_cd": "Clairvoyance: Cooldown",
+
+  "effect.coldsmod.daring_shout_up": "Daring Shout: Ready",
+  "effect.coldsmod.daring_shout_cd": "Daring Shout: Cooldown",
+
+  "effect.coldsmod.exploit_weakness_debuff": "Exploited",
+  "effect.coldsmod.exploit_weakness_up": "Exploit: Ready",
+  "effect.coldsmod.exploit_weakness_cd": "Exploit: Cooldown",
+
+  "effect.coldsmod.intimidated": "Intimidated",
+  "effect.coldsmod.intimidated_cd": "Intimidated: Cooldown",
+  "effect.coldsmod.intimidating_presence_up": "Intimidating Presence: Ready",
+  "effect.coldsmod.intimidating_presence_cd": "Intimidating Presence: Cooldown",
+
+  "effect.coldsmod.reckoning_active": "Reckoning",
+  "effect.coldsmod.reckoning_up": "Reckoning: Ready",
+  "effect.coldsmod.reckoning_cd": "Reckoning: Cooldown",
+
+  "effect.coldsmod.retaliate_active": "Retaliate",
+  "effect.coldsmod.retaliate_up": "Retaliate: Ready",
+  "effect.coldsmod.retaliate_cd": "Retaliate: Cooldown",
+
+  "effect.coldsmod.adrenaline_injection_cd": "Adrenaline Injection: Cooldown",
+  "effect.coldsmod.adrenaline_injection_up": "Injected",
+
+  "effect.coldsmod.deceptive_heart_ready": "Deceptive Heart: Ready",
+  "effect.coldsmod.deceptive_heart_cd": "Deceptive Heart: Cooldown",
+
+  "effect.coldsmod.directed_hatred_up": "Directed Hatred: Ready",
+  "effect.coldsmod.directed_hatred_cd": "Directed Hatred: Cooldown",
+  "effect.coldsmod.blinded_by_hatred": "Blinded by Hatred",
+
+  "effect.coldsmod.soul_severance_ready": "Soul Severance: Ready",
+  "effect.coldsmod.soul_severance_cd": "Soul Severance: Cooldown",
+  "effect.coldsmod.soul_severance_up": "Soul Siphon",
+
+  "effect.coldsmod.itf_cd": "ITF: Cooldown",
+  "effect.coldsmod.itf_stack": "ITF: Ready",
+  "effect.coldsmod.itf_collision": "ITF: Collision Check",
+  "effect.coldsmod.itf_active": "ITF: Marching",
+
+  "effect.coldsmod.spirit_forest_cd": "Spirit Forest: Cooldown",
+  "effect.coldsmod.spirit_forest_ready": "Spirit Forest: Ready",
+
+  "effect.coldsmod.quantum_leap_ready": "Quantum Leap: Ready",
+  "effect.coldsmod.quantum_leap_cd": "Quantum Leap: Cooldown",
+  "effect.coldsmod.quantum_leap_up": "Quantum Leap",
+  "effect.coldsmod.enhanced_quantum_leap": "Enhanced Leap",
+
+  "effect.coldsmod.explosive_tendencies_stack": "Explosive Tendencies",
+  "effect.coldsmod.explosive_tendencies_timer": "Explosive Tendencies Timer",
+
+  "effect.coldsmod.solara": "Solara",
+  "effect.coldsmod.depths_current": "Depth's Current",
+
+  "effect.coldsmod.overconfidence_active": "Overconfident",
+  "effect.coldsmod.overconfidence_cd": "Overconfidence: Cooldown",
+  "effect.coldsmod.overconfidence_ready": "Overconfidence: Ready",
+  "effect.coldsmod.blackened_heart": "Blackened Heart",
+
+  "effect.coldsmod.entwined_offering_active": "Offering",
+
+  "effect.coldsmod.nimble_getaway_cd": "Nimble Getaway: Cooldown",
+  "effect.coldsmod.nimble_getaway_active": "Nimble Getaway",
+
+  "effect.coldsmod.combatants_aid_cd": "Combatant's Aid: Cooldown",
+  "effect.coldsmod.combatants_aid_ready": "Combatant's Aid: Ready",
+  "effect.coldsmod.combatants_aid_recall": "Combatant's Aid: Recall",
+
+  "effect.coldsmod.radiating_warmth": "Radiating Warmth",
+
+  "effect.coldsmod.vortex_cd": "Vortex: Cooldown",
+  "effect.coldsmod.vortex_ready": "Vortex: Ready",
+
+  "effect.coldsmod.sanctuary_shared": "Shared Divinity",
+  "effect.coldsmod.sanctuary_fatigue": "Sanctuary Fatigue",
+
+  "effect.coldsmod.sbeve": "Sbeve",
+
+  "effect.coldsmod.focused_energy_cd": "Focused Energy: Cooldown",
+  "effect.coldsmod.focused_energy_ready": "Focused Energy: Ready",
+
+  "effect.coldsmod.thorned_parry_cd": "Thorned Parry: Cooldown",
+  "effect.coldsmod.thorned_parry_ready": "Thorned Parry: Ready",
+
+  "effect.coldsmod.blessed_land_cd": "Blessed Land: Cooldown",
+  "effect.coldsmod.blessed_land_ready": "Blessed Land: Ready",
+
+  "effect.coldsmod.enhanced_poison": "Enhanced Poison",
+
+  "effect.coldsmod.pulsating_love": "Pulsating Love",
+
+  "key.categories.coldsmod": "Cold's RPG Stuff",
+  "key.coldsmod.quantum_leap": "Quantum Leap Activate",
+  "key.coldsmod.combatants_aid": "Combatant's Aid Dash/Recall",
+  "key.coldsmod.overconfidence": "Overconfidence Activate",
+  "key.coldsmod.directed_hatred": "Directed Hatred Activate",
+  "key.coldsmod.daring_shout": "Daring Shout Activate",
+  "key.coldsmod.intimidate": "Intimidating Presence Activate",
+  "key.coldsmod.dfa": "Death From Above Activate",
+  "key.coldsmod.soul_severance": "Soul Severance Activate"
+}
