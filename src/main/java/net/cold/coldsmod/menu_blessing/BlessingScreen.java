@@ -4,6 +4,7 @@ import net.cold.coldsmod.ModMessages;
 import net.cold.coldsmod.accessory.UtilityAccessories;
 import net.cold.coldsmod.item.ModItems;
 import net.cold.coldsmod.menu_accessory.AccessoryMenuPacket;
+import net.cold.coldsmod.menu_stat.OpenFeatMenuPacket;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
@@ -12,9 +13,13 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.Map;
 
 public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
 
@@ -22,8 +27,10 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
     private static final int ROW_GAP = 10;
 
     private static final ResourceLocation TEXTURE = new ResourceLocation("coldsmod", "textures/gui/ab_background.png");
-    private final java.util.Map<net.minecraft.world.item.Item, ItemStack> stackCache = new java.util.HashMap<>();
+    private final Map<Item, ItemStack> stackCache = new java.util.HashMap<>();
     private ItemStack hoveredStack = ItemStack.EMPTY;
+    private boolean needsCacheRefresh = false;
+
 
     public BlessingScreen(BlessingMenu menu, Inventory inv, Component title) {
         super(menu, inv, title);
@@ -31,14 +38,16 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
         this.imageHeight = 240;
     }
 
+    public void refreshFromPacket() {
+        this.needsCacheRefresh = true;
+    }
+
     @Override
     protected void init() {
         super.init();
         this.clearWidgets();
 
-        BlessingRegistry.MAP.values().forEach(entry -> {
-            stackCache.putIfAbsent(entry.item(), new ItemStack(entry.item()));
-        });
+        BlessingRegistry.MAP.values().forEach(entry -> stackCache.putIfAbsent(entry.item(), new ItemStack(entry.item())));
 
         int y = 29;
         // Row 1
@@ -83,7 +92,9 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
                 boolean canRemove = BlessingEffectRegistry.CAN_REMOVE.getOrDefault(entry.getValue().item(), p -> true).test(minecraft.player);
 
                 // --- ACTUAL MINUS BUTTON WIDGET ---
-                Button btnMinus = Button.builder(Component.literal(""), b -> ModMessages.sendToServer(new BlessingPacket(id, false)))
+                Button btnMinus = Button.builder(Component.literal(""), b -> {
+                            ModMessages.sendToServer(new BlessingPacket(id, false));
+                        })
                         .pos(leftPos + drawX - 3, topPos + currentY + 13)
                         .size(9, 7)
                         .build();
@@ -91,7 +102,9 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
                 addRenderableWidget(btnMinus);
 
                 // --- ACTUAL PLUS BUTTON WIDGET ---
-                Button btnPlus = Button.builder(Component.literal(""), b -> ModMessages.sendToServer(new BlessingPacket(id, true)))
+                Button btnPlus = Button.builder(Component.literal(""), b -> {
+                            ModMessages.sendToServer(new BlessingPacket(id, true));
+                        })
                         .pos(leftPos + drawX + 7, topPos + currentY + 13)
                         .size(9, 7)
                         .build();
@@ -117,20 +130,16 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
 
         int y = 27;
 
-        // Row 1: Combat
         y = renderCategory(g, "combat", 10, y, 160, mx, my);
 
-        // Row 2: Sword and Shield
         int row2Y = y + ROW_GAP;
         renderCategory(g, "sword", 10, row2Y, 80, mx, my);
         y = renderCategory(g, "shield", 99, row2Y, 80, mx, my);
 
-        // Row 3: Bow and Crossbow
         int row3Y = y + ROW_GAP;
         renderCategory(g, "bow", 10, row3Y, 80, mx, my);
         y = renderCategory(g, "crossbow", 99, row3Y, 80, mx, my);
 
-        // Row 4: Presence
         int row4Y = y + ROW_GAP;
         renderCategory(g, "presence", 10, row4Y, 80, mx, my);
     }
@@ -187,17 +196,12 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
 
 
     private void renderBlessingIcon(GuiGraphics g, BlessingRegistry.BlessingEntry data, int x, int y, int mx, int my, boolean hasItem, boolean active, boolean isFull) {
-        // 1. Determine Background Color
         int bgColor = active ? 0xAA006600 : (isFull ? 0xAA660000 : (hasItem ? 0xAAFFFF00 : 0xAA333333));
 
-        // 2. Draw Background (using screen-space coordinates)
-        // 0.8f scale of 16x16 is ~13x13
         g.fill(x, y, x + 13, y + 13, bgColor);
 
-        // 3. Draw the Icon via Sprite Blitting
         renderItemIcon(g, data.item(), x, y, 0.8f);
 
-        // 4. Set tooltip target (Check against 13x13 area)
         if (mx >= leftPos + x && mx < leftPos + x + 13 && my >= topPos + y && my < topPos + y + 13) {
             this.hoveredStack = stackCache.getOrDefault(data.item(), ItemStack.EMPTY);
         }
@@ -218,13 +222,17 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
 
     @Override
     public void render(GuiGraphics g, int mx, int my, float pt) {
-        this.hoveredStack = ItemStack.EMPTY; // Reset
+        this.hoveredStack = ItemStack.EMPTY;
         this.renderBackground(g);
         super.render(g, mx, my, pt);
 
-        // Draw tooltip ONCE at the very end
         if (!hoveredStack.isEmpty()) {
             g.renderTooltip(this.font, hoveredStack, mx, my);
+        }
+
+        if (needsCacheRefresh) {
+            this.init(minecraft, width, height);
+            needsCacheRefresh = false;
         }
     }
 
@@ -271,6 +279,23 @@ public class BlessingScreen extends AbstractContainerScreen<BlessingMenu> {
                 public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
                     super.renderWidget(graphics, mouseX, mouseY, partialTick);
                     graphics.renderFakeItem(new ItemStack(UtilityAccessories.MONIS_LUCKY_CHARM.get()), getX() + 4, getY() + 8);
+                }
+            });
+
+            event.addListener(new ImageButton(
+                    inv.getGuiLeft() + 70,
+                    inv.getGuiTop() - 25,
+                    25, 28,
+                    1, 0,
+                    32,
+                    VANILLA_TABS, 256, 256, (b) -> {
+                ModMessages.sendToServer(new OpenFeatMenuPacket());
+            }
+            ) {
+                @Override
+                public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+                    super.renderWidget(graphics, mouseX, mouseY, partialTick);
+                    graphics.renderFakeItem(new ItemStack(Items.END_CRYSTAL), getX() + 4, getY() + 8);
                 }
             });
         }

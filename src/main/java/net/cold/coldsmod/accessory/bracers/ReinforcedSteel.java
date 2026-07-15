@@ -59,12 +59,9 @@ public class ReinforcedSteel {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+3 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+1 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+0.25 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+4 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+5 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+4.2 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));
         }
@@ -82,12 +79,10 @@ public class ReinforcedSteel {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+5 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+1.5 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+0.5 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+7.5 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+7 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+6.5 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+2 Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));
         }
@@ -105,13 +100,11 @@ public class ReinforcedSteel {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+8 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+9 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+0.75 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+12 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+8% Accuracy").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("+10 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+9.5 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+3 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7% Melee Potency").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));
         }
@@ -129,13 +122,11 @@ public class ReinforcedSteel {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+10 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+12 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2.75 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+16 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+15% Accuracy").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("+12 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+12.5 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+4 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+14% Melee Potency").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));
         }

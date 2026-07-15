@@ -8,34 +8,34 @@ import net.cold.coldsmod.accessory.mind.*;
 import net.cold.coldsmod.accessory.necklace.*;
 import net.cold.coldsmod.accessory.ring.*;
 import net.cold.coldsmod.bow_drawspeed.BowAnimHandler;
-import net.cold.coldsmod.capabilities_and_blessings.BowProcHandler;
 import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusRegister;
 import net.cold.coldsmod.capabilities_and_blessings.Capabilities.PlayerBonusCache;
-import net.cold.coldsmod.capabilities_and_blessings.CrossbowProcHandler;
 import net.cold.coldsmod.capabilities_and_blessings.registry.CooldownCycle;
 import net.cold.coldsmod.capabilities_and_blessings.registry.EffectUtils;
 import net.cold.coldsmod.capabilities_and_blessings.registry.ModEffects;
+import net.cold.coldsmod.custom_attacks.AttackHandler;
 import net.cold.coldsmod.events.DebuffResistHandler;
 import net.cold.coldsmod.events.Formulas;
 import net.cold.coldsmod.item.ModItems;
 import net.cold.coldsmod.menu_accessory.AccessoryMenu;
 import net.cold.coldsmod.menu_accessory.AccessoryScreen;
 import net.cold.coldsmod.menu_blessing.BlessingScreen;
+import net.cold.coldsmod.menu_stat.FeatScreen;
+import net.cold.coldsmod.menu_stat.FeatUpgradeHandlerRegistry;
 import net.cold.coldsmod.menu_stat.StatScreen;
 import net.cold.coldsmod.menu_stat.StatUpgradeHandler;
 import net.cold.coldsmod.mob.SbeveRenderer;
-import net.cold.coldsmod.network.ClientInputEvent;
-import net.cold.coldsmod.network.Keybinds;
-import net.cold.coldsmod.network.NetworkHandler;
 import net.cold.coldsmod.stat.ItemRarityUtils;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.cold.coldsmod.stat.StatUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -74,7 +74,6 @@ public class ColdsMod {
         copyDefaultConfig("bows.json");
         copyDefaultConfig("crossbows.json");
         copyDefaultConfig("shields.json");
-        copyDefaultConfig("tools.json");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC, "coldsmod-drop_rates.toml");
 
 
@@ -86,7 +85,6 @@ public class ColdsMod {
         modEventBus.addListener(this::enqueueIMC);
         ModLootModifiers.register();
         MinecraftForge.EVENT_BUS.register(new DebuffResistHandler());
-        NetworkHandler.register();
         ModEffects.EFFECTS.register(modEventBus);
 
 
@@ -96,10 +94,6 @@ public class ColdsMod {
 //        MinecraftForge.EVENT_BUS.register(Regrowth.class);
 //        MinecraftForge.EVENT_BUS.register(Flameheart.class);
 //        MinecraftForge.EVENT_BUS.register(ForgedHeart.class);
-
-
-        MinecraftForge.EVENT_BUS.register(BowProcHandler.class);
-        MinecraftForge.EVENT_BUS.register(CrossbowProcHandler.class);
 
         // MinecraftForge.EVENT_BUS.register(CrossbowChargeDrawSpeedTag.class);
 
@@ -138,6 +132,8 @@ public class ColdsMod {
         GluttonySignet.register(modEventBus);
         SunstoneForged.register(modEventBus);
 
+
+
         UtilityAccessories.register(modEventBus);
 
 
@@ -151,6 +147,9 @@ public class ColdsMod {
 
         ModMenu.MENUS.register(modEventBus);
         ModMessages.register();
+        MinecraftForge.EVENT_BUS.register(FeatUpgradeHandlerRegistry.class);
+        MinecraftForge.EVENT_BUS.register(AttackHandler.class);
+
     }
 
     @SubscribeEvent
@@ -165,6 +164,7 @@ public class ColdsMod {
 
         BonusRegister.init();
         CooldownCycle.init();
+        MinecraftForge.EVENT_BUS.register(FeatUpgradeHandlerRegistry.class);
         MinecraftForge.EVENT_BUS.register(ModAttributes.class);
     }
 
@@ -194,9 +194,11 @@ public class ColdsMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-            net.minecraft.client.gui.screens.MenuScreens.register(ModMenu.STAT_MENU.get(), StatScreen::new);
-            net.minecraft.client.gui.screens.MenuScreens.register(ModMenu.BLESSING_MENU.get(), BlessingScreen::new);
-            net.minecraft.client.gui.screens.MenuScreens.register(ModMenu.ACCESSORY_MENU.get(), AccessoryScreen::new);
+            MenuScreens.register(ModMenu.STAT_MENU.get(), StatScreen::new);
+            MenuScreens.register(ModMenu.BLESSING_MENU.get(), BlessingScreen::new);
+            MenuScreens.register(ModMenu.ACCESSORY_MENU.get(), AccessoryScreen::new);
+            MenuScreens.register(ModMenu.FEAT_MENU.get(), FeatScreen::new);
+
         }
 
         @SubscribeEvent
@@ -222,87 +224,5 @@ public class ColdsMod {
         );
     }
 
-    public void enqueueIMC(final InterModEnqueueEvent event) {
-
-//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-//                () -> new SlotTypeMessage.Builder("aaaheads")
-//                        .size(2)
-//                        .icon(new ResourceLocation("coldsmod", "item/head_slot"))
-//                        .build()
-//        );
-//
-//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-//                () -> new SlotTypeMessage.Builder("aabnecklaces")
-//                        .size(1)
-//                        .icon(new ResourceLocation("coldsmod", "item/necklace_slot"))
-//                        .build()
-//        );
-//
-//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-//                () -> new SlotTypeMessage.Builder("aacbracelets")
-//                        .size(2)
-//                        .icon(new ResourceLocation("coldsmod", "item/bracer_slot"))
-//                        .build()
-//        );
-//
-//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-//                () -> new SlotTypeMessage.Builder("aadrings")
-//                        .size(2)
-//                        .icon(new ResourceLocation("coldsmod", "item/ring_slot"))
-//                        .build()
-//        );
-//
-//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-//                () -> new SlotTypeMessage.Builder("aaeutility")
-//                        .size(5)
-//                        .icon(new ResourceLocation("coldsmod", "item/utility_slot"))
-//                        .build()
-//        );
-//
-//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-//                () -> new SlotTypeMessage.Builder("aafblessingcombat")
-//                        .size(4)
-//                        .icon(new ResourceLocation("coldsmod", "item/slot1"))
-//                        .build()
-//        );
-//
-//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-//                () -> new SlotTypeMessage.Builder("aafblessingpresence")
-//                        .size(1)
-//                        .icon(new ResourceLocation("coldsmod", "item/slot10"))
-//                        .build()
-//        );
-//
-//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-//                () -> new SlotTypeMessage.Builder("aajblessingsword")
-//                        .size(1)
-//                        .icon(new ResourceLocation("coldsmod", "item/slot5"))
-//                        .build()
-//        );
-//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-//                () -> new SlotTypeMessage.Builder("aakblessingbow")
-//                        .size(1)
-//                        .icon(new ResourceLocation("coldsmod", "item/slot6"))
-//                        .build()
-//        );
-//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-//                () -> new SlotTypeMessage.Builder("aalblessingcrossbow")
-//                        .size(1)
-//                        .icon(new ResourceLocation("coldsmod", "item/slot7"))
-//                        .build()
-//        );
-//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-//                () -> new SlotTypeMessage.Builder("aamblessingshield")
-//                        .size(1)
-//                        .icon(new ResourceLocation("coldsmod", "item/slot8"))
-//                        .build()
-//        );
-//
-//        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-//                () -> new SlotTypeMessage.Builder("aanblessingtool")
-//                        .size(3)
-//                        .icon(new ResourceLocation("coldsmod", "item/slot9"))
-//                        .build()
-//        );
-    }
+    public void enqueueIMC(final InterModEnqueueEvent event) {}
 }

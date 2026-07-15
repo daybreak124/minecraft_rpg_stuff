@@ -88,11 +88,106 @@ public class PlayerBonusCache {
         this.chainLightningEnhanced = other.chainLightningEnhanced;
         this.bronzewoodEnhanced = other.bronzewoodEnhanced;
         this.temptingBuff = other.temptingBuff;
+        this.bowSlowdownCancel = other.bowSlowdownCancel;
+        this.shieldSlowdownCancel = other.shieldSlowdownCancel;
+        this.bowGravityCancel = other.bowGravityCancel;
+        this.chainLightningActive = other.chainLightningActive;
+        this.vortexEnhanced = other.vortexEnhanced;
+        this.vortexSeveranceEnhanced = other.vortexSeveranceEnhanced;
+        this.tankBlessingEnhanced = other.tankBlessingEnhanced;
+        this.shieldBlessingEnhanced = other.shieldBlessingEnhanced;
+        this.shieldBlessingHungerEnhanced = other.shieldBlessingHungerEnhanced;
+        this.arrowEvasion = other.arrowEvasion;
+        this.sanctuaryEnhance = other.sanctuaryEnhance;
+        this.jumpBoostEnabled = other.jumpBoostEnabled;
+        this.isAutoSmeltEnabled = other.isAutoSmeltEnabled;
+        this.cloudspireEquipped = other.cloudspireEquipped;
+        this.healSeverance = other.healSeverance;
+        this.overconfidenceHealSpecBuff = other.overconfidenceHealSpecBuff;
+        this.directedHatredHealSpec = other.directedHatredHealSpec;
+        this.lastUsedAttack = other.lastUsedAttack;
+        this.secondLastAttack = other.secondLastAttack;
     }
+
+    private int lastUsedAttack = 0;
+    public void setLastUsedAttack(int num) { this.lastUsedAttack = num; }
+    public int getLastUsedAttack() { return this.lastUsedAttack; }
+
+    private int secondLastAttack = 0;
+    public void setSecondLastAttack(int num) { this.secondLastAttack = num; }
+    public int getSecondLastAttack() { return this.secondLastAttack; }
+
+    private boolean overconfidenceHealSpecBuff = false;
+    public void setOverconfidenceHealSpecBuff(boolean active) { this.overconfidenceHealSpecBuff = active; }
+    public boolean isOverconfidenceHealSpecBuff() { return this.overconfidenceHealSpecBuff; }
+
+    private boolean directedHatredHealSpec = false;
+    public void setDirectedHatredHealSpec(boolean active) { this.directedHatredHealSpec = active; }
+    public boolean isDirectedHatredHealSpec() { return this.directedHatredHealSpec; }
+
+    private boolean healSeverance = false;
+    public void setHealSeverance(boolean active) { this.healSeverance = active; }
+    public boolean isHealSeverance() { return this.healSeverance; }
+
+    private boolean jumpBoostEnabled = false;
+    public void setJumpBoostEnabled(boolean active) { this.jumpBoostEnabled = active; }
+    public boolean isJumpBoostEnabled() { return this.jumpBoostEnabled; }
+
+    private boolean cloudspireEquipped = false;
+    public void setCloudspireEquipped(boolean active) { this.cloudspireEquipped = active; }
+    public boolean isCloudspireEquipped() { return this.cloudspireEquipped; }
+
+    private boolean isAutoSmeltEnabled = false;
+    public void setAutoSmeltEnabled(boolean active) { this.isAutoSmeltEnabled = active; }
+    public boolean isAutoSmeltEnabled() { return this.isAutoSmeltEnabled; }
 
     private boolean temptingBuff = false;
     public void setTemptingBuff(boolean active) { this.temptingBuff = active; }
     public boolean isTemptingBuff() { return this.temptingBuff; }
+
+    private boolean sanctuaryEnhance = false;
+    public void setSanctuaryEnhance(boolean active) { this.sanctuaryEnhance = active; }
+    public boolean isSanctuaryEnhance() { return this.sanctuaryEnhance; }
+
+    private boolean arrowEvasion = false;
+    public void setArrowEvasion(boolean active) { this.arrowEvasion = active; }
+    public boolean isArrowEvasion() { return this.arrowEvasion; }
+
+    private boolean vortexEnhanced = false;
+    public void setVortexEnhanced(boolean active) { this.vortexEnhanced = active; }
+    public boolean isVortexEnhanced() { return this.vortexEnhanced; }
+
+    private boolean shieldBlessingHungerEnhanced = false;
+    public void setShieldBlessingHungerEnhanced(boolean active) { this.shieldBlessingHungerEnhanced = active; }
+    public boolean isShieldBlessingHungerEnhanced() { return this.shieldBlessingHungerEnhanced; }
+
+    private boolean shieldBlessingEnhanced = false;
+    public void setShieldBlessingEnhanced(boolean active) { this.shieldBlessingEnhanced = active; }
+    public boolean isShieldBlessingEnhanced() { return this.shieldBlessingEnhanced; }
+
+    private boolean tankBlessingEnhanced = false;
+    public void setTankBlessingEnhanced(boolean active) { this.tankBlessingEnhanced = active; }
+    public boolean isTankBlessingEnhanced() { return this.tankBlessingEnhanced; }
+
+    private boolean vortexSeveranceEnhanced = false;
+    public void setVortexSeveranceEnhanced(boolean active) { this.vortexSeveranceEnhanced = active; }
+    public boolean isVortexSeveranceEnhanced() { return this.vortexSeveranceEnhanced; }
+
+    private boolean chainLightningActive = false;
+    public void setChainLightningActive(boolean active) { this.chainLightningActive = active; }
+    public boolean isChainLightningActive() { return this.chainLightningActive; }
+
+    private boolean bowGravityCancel = false;
+    public void setBowGravityCancel(boolean active) { this.bowGravityCancel = active; }
+    public boolean isBowGravityCancel() { return this.bowGravityCancel; }
+
+    private boolean bowSlowdownCancel = false;
+    public void setBowSlowdownCancel(boolean active) { this.bowSlowdownCancel = active; }
+    public boolean isBowSlowdownCancel() { return this.bowSlowdownCancel; }
+
+    private boolean shieldSlowdownCancel = false;
+    public void setShieldSlowdownCancel(boolean active) { this.shieldSlowdownCancel = active; }
+    public boolean isShieldSlowdownCancel() { return this.shieldSlowdownCancel; }
 
     private boolean hookEligible = false;
     public void setHookEligible(boolean active) { this.hookEligible = active; }

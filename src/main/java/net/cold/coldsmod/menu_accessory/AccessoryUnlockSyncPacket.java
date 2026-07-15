@@ -19,8 +19,8 @@ public class AccessoryUnlockSyncPacket {
             if (mc.player != null) {
                 mc.player.getPersistentData().merge(this.data);
 
-                if (mc.screen instanceof AccessoryScreen screen) {
-                    screen.init(mc, screen.width, screen.height);
+                if (mc.screen instanceof AccessoryScreen accessoryScreen) {
+                    accessoryScreen.refreshFromPacket();
                 }
             }
         });

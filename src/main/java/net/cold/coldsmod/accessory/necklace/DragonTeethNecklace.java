@@ -60,11 +60,8 @@ public class DragonTeethNecklace {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+2 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Perception").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-
-            tooltip.add(Component.literal("+8 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1% Potency").withStyle(style -> style.withColor(0xEC3700)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -84,12 +81,9 @@ public class DragonTeethNecklace {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+3 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Perception").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+16 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2% Potency").withStyle(style -> style.withColor(0xEC3700)));
 
-            tooltip.add(Component.literal("+0.3 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+14 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -109,14 +103,8 @@ public class DragonTeethNecklace {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+7 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7 Perception").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-
-            tooltip.add(Component.literal("+0.5 Max Health").withStyle(ChatFormatting.BLUE));
-
-            tooltip.add(Component.literal("+15 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+10% Precision").withStyle(style -> style.withColor(0xec3700)));
+            tooltip.add(Component.literal("+24 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3% Potency").withStyle(style -> style.withColor(0xEC3700)));
 
 
             tooltip.add(Component.literal(""));
@@ -137,14 +125,8 @@ public class DragonTeethNecklace {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+9 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+9 Perception").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-
-            tooltip.add(Component.literal("+0.7 Max Health").withStyle(ChatFormatting.BLUE));
-
-            tooltip.add(Component.literal("+18 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+15% Precision").withStyle(style -> style.withColor(0xec3700)));
+            tooltip.add(Component.literal("+32 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4% Potency").withStyle(style -> style.withColor(0xEC3700)));
 
 
             tooltip.add(Component.literal(""));

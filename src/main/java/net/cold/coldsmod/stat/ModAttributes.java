@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = ColdsMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModAttributes {
+public class  ModAttributes {
 
     public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, "coldsmod");
 
@@ -45,9 +45,6 @@ public class ModAttributes {
             () -> new RangedAttribute("precision", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
     public static final RegistryObject<Attribute> HASTE = ATTRIBUTES.register("haste",
             () -> new RangedAttribute("haste", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> HASTE_MULTIPLIER = ATTRIBUTES.register("haste_multiplier",
-            () -> new RangedAttribute("haste_multiplier", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
-
 
     public static final RegistryObject<Attribute> MELEE_POTENCY = ATTRIBUTES.register("melee_potency",
             () -> new RangedAttribute("melee_potency", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
@@ -75,35 +72,6 @@ public class ModAttributes {
     public static final RegistryObject<Attribute> AMPLIFICATION = ATTRIBUTES.register("amplification",
             () -> new RangedAttribute("amplification", 0.0D, -2048.0D, 2048.0D).setSyncable(true));
 
-    public static final RegistryObject<Attribute> POTENCY_MULTIPLIER = ATTRIBUTES.register("potency_multiplier",
-            () -> new RangedAttribute("potency_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> ACCURACY_MULTIPLIER = ATTRIBUTES.register("accuracy_multiplier",
-            () -> new RangedAttribute("accuracy_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> PRECISION_MULTIPLIER = ATTRIBUTES.register("precision_multiplier",
-            () -> new RangedAttribute("precision_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> MELEE_HASTE_MULTIPLIER = ATTRIBUTES.register("melee_haste_multiplier",
-            () -> new RangedAttribute("melee_haste_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
-
-    public static final RegistryObject<Attribute> MELEE_POTENCY_MULTIPLIER = ATTRIBUTES.register("melee_potency_multiplier",
-            () -> new RangedAttribute("melee_potency_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> MELEE_ACCURACY_MULTIPLIER = ATTRIBUTES.register("melee_accuracy_multiplier",
-            () -> new RangedAttribute("melee_accuracy_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> MELEE_PRECISION_MULTIPLIER = ATTRIBUTES.register("melee_precision_multiplier",
-            () -> new RangedAttribute("melee_precision_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
-
-    public static final RegistryObject<Attribute> PROJECTILE_POTENCY_MULTIPLIER = ATTRIBUTES.register("projectile_potency_multiplier",
-            () -> new RangedAttribute("projectile_potency_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> PROJECTILE_ACCURACY_MULTIPLIER = ATTRIBUTES.register("projectile_accuracy_multiplier",
-            () -> new RangedAttribute("projectile_accuracy_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> PROJECTILE_PRECISION_MULTIPLIER = ATTRIBUTES.register("projectile_precision_multiplier",
-            () -> new RangedAttribute("projectile_precision_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> NOCK_HASTE_MULTIPLIER = ATTRIBUTES.register("nock_haste_multiplier",
-            () -> new RangedAttribute("name.nock_haste_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
-
-    public static final RegistryObject<Attribute> RESTORATION_MULTIPLIER = ATTRIBUTES.register("restoration_multiplier",
-            () -> new RangedAttribute("restoration_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
-    public static final RegistryObject<Attribute> AMPLIFICATION_MULTIPLIER = ATTRIBUTES.register("amplification_multiplier",
-            () -> new RangedAttribute("amplification_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> JUMP_BOOST = ATTRIBUTES.register("jump_boost",
             () -> new RangedAttribute("jump_boost", 1.0D, 0D, 2048.0D).setSyncable(true));
@@ -112,23 +80,14 @@ public class ModAttributes {
     public static final RegistryObject<Attribute> XP_GAIN = ATTRIBUTES.register("xp_gain",
             () -> new RangedAttribute("xp_gain", 1.0D, 0D, 2048.0D).setSyncable(true));
 
-    public static final RegistryObject<Attribute> ARMOR_MULTIPLIER = ATTRIBUTES.register("armor_multiplier",
-            () -> new RangedAttribute("armor_multiplier", 0.0D, -0.99D, 2048.0D).setSyncable(true));
-
-    public static final RegistryObject<Attribute> TOUGHNESS_MULTIPLIER = ATTRIBUTES.register("toughness_multiplier",
-            () -> new RangedAttribute("toughness_multiplier", 0.0D, -0.99D, 2048.0D).setSyncable(true));
-
-    public static final RegistryObject<Attribute> HEALTH_MULTIPLIER = ATTRIBUTES.register("health_multiplier",
-            () -> new RangedAttribute("health_multiplier", 0.0D, -0.99D, 2048.0D).setSyncable(true));
-
     public static final RegistryObject<Attribute> OUTGOING_DAMAGE_MULTIPLIER = ATTRIBUTES.register("damage_multiplier",
             () -> new RangedAttribute("damage_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> INCOMING_DAMAGE_MULTIPLIER = ATTRIBUTES.register("incoming_damage_multiplier",
             () -> new RangedAttribute("incoming_damage_multiplier", 1.0D,   0.0D, 2048.0D).setSyncable(true));
 
-    public static final RegistryObject<Attribute> REJUVENATION_MULTIPLIER = ATTRIBUTES.register("incoming_healing_multiplier",
-            () -> new RangedAttribute("incoming_healing_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
+    public static final RegistryObject<Attribute> DOT_INCOMING_DAMAGE_MULTIPLIER = ATTRIBUTES.register("dot_incoming_damage_multiplier",
+            () -> new RangedAttribute("dot_incoming_damage_multiplier", 0.0D,   0.0D, 2048.0D).setSyncable(true));
 
     public static final RegistryObject<Attribute> MELEE_DAMAGE_MULTIPLIER = ATTRIBUTES.register("melee_damage_multiplier",
             () -> new RangedAttribute("melee_damage_multiplier", 1.0D, 0.0D, 2048.0D).setSyncable(true));
@@ -176,34 +135,13 @@ public class ModAttributes {
         event.add(EntityType.PLAYER, ModAttributes.AMPLIFICATION.get());
         event.add(EntityType.PLAYER, ModAttributes.DEBUFF_RESIST.get());
 
-        event.add(EntityType.PLAYER, ModAttributes.POTENCY_MULTIPLIER.get());
-        event.add(EntityType.PLAYER, ModAttributes.HASTE_MULTIPLIER.get());
-        event.add(EntityType.PLAYER, ModAttributes.ACCURACY_MULTIPLIER.get());
-        event.add(EntityType.PLAYER, ModAttributes.PRECISION_MULTIPLIER.get());
-
-        event.add(EntityType.PLAYER, ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
-        event.add(EntityType.PLAYER, ModAttributes.MELEE_HASTE_MULTIPLIER.get());
-        event.add(EntityType.PLAYER, ModAttributes.MELEE_ACCURACY_MULTIPLIER.get());
-        event.add(EntityType.PLAYER, ModAttributes.MELEE_PRECISION_MULTIPLIER.get());
-
-        event.add(EntityType.PLAYER, ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
-        event.add(EntityType.PLAYER, ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get());
-        event.add(EntityType.PLAYER, ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get());
-        event.add(EntityType.PLAYER, ModAttributes.NOCK_HASTE_MULTIPLIER.get());
-
-        event.add(EntityType.PLAYER, ModAttributes.RESTORATION_MULTIPLIER.get());
-        event.add(EntityType.PLAYER, ModAttributes.AMPLIFICATION_MULTIPLIER.get());
 
         event.add(EntityType.PLAYER, ModAttributes.JUMP_BOOST.get());
         event.add(EntityType.PLAYER, ModAttributes.MINING_SPEED.get());
         event.add(EntityType.PLAYER, ModAttributes.XP_GAIN.get());
 
-        event.add(EntityType.PLAYER, ModAttributes.ARMOR_MULTIPLIER.get());
-        event.add(EntityType.PLAYER, ModAttributes.TOUGHNESS_MULTIPLIER.get());
-        event.add(EntityType.PLAYER, ModAttributes.HEALTH_MULTIPLIER.get());
         event.add(EntityType.PLAYER, ModAttributes.EVASION.get());
 
-        event.add(EntityType.PLAYER, ModAttributes.REJUVENATION_MULTIPLIER.get());
         event.add(EntityType.PLAYER, ModAttributes.REJUVENATION.get());
 
         event.add(EntityType.PLAYER, ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
@@ -217,6 +155,7 @@ public class ModAttributes {
         for (EntityType<? extends LivingEntity> type : event.getTypes()) {
             event.add(type, ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
             event.add(type, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get());
+            event.add(type, ModAttributes.DOT_INCOMING_DAMAGE_MULTIPLIER.get());
         }
     }
 }

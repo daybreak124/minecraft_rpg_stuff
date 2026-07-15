@@ -17,6 +17,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import static net.cold.coldsmod.menu_stat.StatUpgradeHandlerTwo.MAX_GLOBAL_POINTS;
+
 public class StatScreenTwo extends AbstractContainerScreen<StatMenu> {
     private static final int START_Y = 25;
     private static final int SPACING = 11;
@@ -114,7 +116,7 @@ public class StatScreenTwo extends AbstractContainerScreen<StatMenu> {
 
         y = START_Y + 75;
         renderStatLine(graphics, "Potency", ModAttributes.MELEE_POTENCY.get(), y, MobEffects.DAMAGE_BOOST, 0); y += SPACING;
-        renderStatLine(graphics, "Swing Haste", ModAttributes.MELEE_HASTE.get(), y, Items.SUGAR, 0); y += SPACING;
+        renderStatLine(graphics, "Melee Haste", ModAttributes.MELEE_HASTE.get(), y, Items.SUGAR, 0); y += SPACING;
         renderStatLine(graphics, "Accuracy", ModAttributes.MELEE_ACCURACY.get(), y, Items.FLINT, 0); y += SPACING;
         renderStatLine(graphics, "Precision", ModAttributes.MELEE_PRECISION.get(), y, Items.GOLDEN_SWORD, 0);
 
@@ -146,26 +148,22 @@ public class StatScreenTwo extends AbstractContainerScreen<StatMenu> {
         int costY = imageHeight - 16;
         int pointsY = costY - 11;
 
-        // 1. Data Logic
         int totalSpent = StatUpgradeHandlerTwo.getTotalPointsSpent(this.minecraft.player);
         int amountNeeded = StatUpgradeHandler.getRequiredAmount(totalSpent);
         Item pearl = StatUpgradeHandlerTwo.getRequiredPearl(totalSpent);
         ItemStack pearlStack = new ItemStack(pearl);
         boolean hasEnough = this.minecraft.player.getInventory().countItem(pearl) >= amountNeeded;
 
-        // Colors
         int activeColor = hasEnough ? INK_GREEN : INK_RED;
-        int hasPointColor = totalSpent < 120 ? INK_GREEN : INK_GOLD;
+        int hasPointColor = totalSpent >= MAX_GLOBAL_POINTS ? INK_GOLD : INK_GREEN;
 
         graphics.pose().pushPose();
-
         float textScale = 0.8f;
 
         graphics.pose().translate(x, pointsY, 0);
         graphics.pose().scale(textScale, textScale, textScale);
 
-        // Points display
-        graphics.drawString(this.font, "Points: " + totalSpent + "/120", 0, 0, hasPointColor, false);
+        graphics.drawString(this.font, "Points: " + totalSpent + "/" + MAX_GLOBAL_POINTS, 0, 0, hasPointColor, false);
 
         graphics.pose().translate(0, 11, 0);
         graphics.drawString(this.font, "Cost: x" + amountNeeded, 0, 0, activeColor, false);
@@ -229,13 +227,23 @@ public class StatScreenTwo extends AbstractContainerScreen<StatMenu> {
 
     private void addStatRow(Attribute attr, int xOffset, int y) {
         String id = ForgeRegistries.ATTRIBUTES.getKey(attr).toString();
-        this.addRenderableWidget(Button.builder(Component.literal("-"), b ->
-                        ModMessages.sendToServer(new StatUpgradePacketTwo(id, false)))
-                .pos(leftPos + xOffset, topPos + y + 2).size(10, 8).build());
+        this.addRenderableWidget(Button.builder(Component.literal("-"), b -> {
+            int amount = hasShiftDown() ? 10:1;
 
-        this.addRenderableWidget(Button.builder(Component.literal("+"), b ->
-                        ModMessages.sendToServer(new StatUpgradePacketTwo(id, true)))
-                .pos(leftPos + xOffset + 115, topPos + y + 2).size(10, 8).build());
+            for (int i = 0; i < amount; i++) {
+                ModMessages.sendToServer(new StatUpgradePacketTwo(id, false));
+            }
+        }).pos(leftPos + xOffset, topPos + y + 2).size(10, 8).build());
+
+
+
+        this.addRenderableWidget(Button.builder(Component.literal("+"), b -> {
+            int amount = hasShiftDown() ? 10:1;
+
+            for (int i = 0; i < amount; i++) {
+                ModMessages.sendToServer(new StatUpgradePacketTwo(id, true));
+            }
+        }).pos(leftPos + xOffset + 115, topPos + y + 2).size(10, 8).build());
     }
 
     private void renderHeader(GuiGraphics g, String text, int x, int y, int color) {

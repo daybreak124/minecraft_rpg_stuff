@@ -59,13 +59,10 @@ public class EndlessWaves {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+2 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+1 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+5 Restoration").withStyle(style -> style.withColor(0x5BB450)));
-            tooltip.add(Component.literal("+7.5% Speed").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+0.5 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+0.5 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Tsunami Sea").withStyle(ChatFormatting.AQUA));
         }
@@ -83,13 +80,10 @@ public class EndlessWaves {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+9 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+7.5 Restoration").withStyle(style -> style.withColor(0x5BB450)));
-            tooltip.add(Component.literal("+10% Speed").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Tsunami Sea").withStyle(ChatFormatting.AQUA));
         }
@@ -107,15 +101,13 @@ public class EndlessWaves {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+5 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+9 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+14 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+10% Melee Haste").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("+11 Restoration").withStyle(style -> style.withColor(0x5BB450)));
-            tooltip.add(Component.literal("+5% Restoration").withStyle(style -> style.withColor(0x3B8132)));
-            tooltip.add(Component.literal("+10% Speed").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+5 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+5% Armor").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Tsunami Sea").withStyle(ChatFormatting.AQUA));
         }
@@ -133,15 +125,15 @@ public class EndlessWaves {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+8 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+8 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+12 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+18 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+17.5% Melee Haste").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("+15 Restoration").withStyle(style -> style.withColor(0x5BB450)));
-            tooltip.add(Component.literal("+12.5% Restoration").withStyle(style -> style.withColor(0x3B8132)));
-            tooltip.add(Component.literal("+12.5% Speed").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+5 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+5 Amplification").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+5% Armor").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+5% Restoration").withStyle(style -> style.withColor(0x3B8132)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Tsunami Sea").withStyle(ChatFormatting.AQUA));
         }

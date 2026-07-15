@@ -11,8 +11,10 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.Collections;
 import java.util.List;
 
 import static net.cold.coldsmod.capabilities_and_blessings.registry.EffectUtils.isAlly;
@@ -26,19 +28,18 @@ public class RadiatingWarmthTimer extends MobEffect {
 
     public static void radiate(Player player) {
         double healIncrease = getScaledValue(player,
-                ModAttributes.RESTORATION.get(),
-                ModAttributes.RESTORATION_MULTIPLIER.get());
+                ModAttributes.RESTORATION.get());
 
         Level level = player.level();
 
         if (level instanceof ServerLevel serverLevel) {
-            spawnParticleRing(serverLevel, player, ParticleTypes.COMPOSTER, 8, 8*20);
+            spawnParticleRing(serverLevel, player, ParticleTypes.COMPOSTER, 8, 100);
         }
 
-        double radiusSq = 64.0;
+        double radiusSq = 25.0;
         List<LivingEntity> entities = level.getEntitiesOfClass(
                 LivingEntity.class,
-                player.getBoundingBox().inflate(8.0),
+                player.getBoundingBox().inflate(5.0),
                 e -> {
                     if (!isAlly(e) || !player.hasLineOfSight(e)) return false;
                     double dx = e.getX() - player.getX();
@@ -58,8 +59,13 @@ public class RadiatingWarmthTimer extends MobEffect {
             EffectUtils.spawnComposterBurst(target);
         }
 
-        int cd = (int) ((400) / (1.0 + (AttributeApplier.getScaledValue(player, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get()) / 100.0)));
+        int cd = (int) ((400) / (1.0 + (AttributeApplier.getScaledValue(player, ModAttributes.AMPLIFICATION.get()) / 100.0)));
         player.addEffect(new MobEffectInstance(ModEffects.RADIATING_WARMTH.get(), cd, 0, false, false, true));
 
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

@@ -22,8 +22,10 @@ import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -76,8 +78,21 @@ public class ThornedParryReady extends MobEffect {
                 }
         );
 
+        float damage = 5f;
+
+        PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
+        if (cache.isShieldBlessingEnhanced()) {
+            damage *= 1.5f;
+        }
+
+        if (cache.isShieldBlessingHungerEnhanced()) {
+            if (player.getRandom().nextDouble() < 0.5) {
+                player.getFoodData().setFoodLevel(player.getFoodData().getFoodLevel() + 2);
+            }
+        }
+
         for (LivingEntity target : enemies) {
-            target.hurt(source, 5.0f);
+            target.hurt(source, damage);
             target.hurtMarked = true;
         }
 
@@ -88,5 +103,10 @@ public class ThornedParryReady extends MobEffect {
 
         EffectUtils.spawnParticleBurst(player, ParticleTypes.CRIT);
         EffectUtils.playSound(player, SoundEvents.TRIDENT_HIT_GROUND, 1F, 1F);
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

@@ -1,11 +1,13 @@
 package net.cold.coldsmod.capabilities_and_blessings.EffectsFeatTree;
 
-import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 public class ArmorBreak extends MobEffect {
@@ -17,7 +19,12 @@ public class ArmorBreak extends MobEffect {
 
         this.addAttributeModifier(Attributes.ARMOR,
                 AB_UUID.toString(),
-                -5,
+                -8,
                 AttributeModifier.Operation.ADDITION);
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

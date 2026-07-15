@@ -1,37 +1,29 @@
 package net.cold.coldsmod.menu_blessing;
 
+import net.cold.coldsmod.ModMessages;
 import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusCapabilityProvider;
 import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusRegister;
 import net.cold.coldsmod.capabilities_and_blessings.Capabilities.PlayerBonusCache;
 import net.cold.coldsmod.capabilities_and_blessings.effects.SummoningStone;
 import net.cold.coldsmod.capabilities_and_blessings.registry.ModEffects;
 import net.cold.coldsmod.item.ModItems;
-import net.cold.coldsmod.network.NetworkHandler;
 import net.cold.coldsmod.network.QuantumLeapSync;
-import net.cold.coldsmod.stat.AttributeApplier;
-import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
-
-import static net.cold.coldsmod.capabilities_and_blessings.effects.Hawkeye.HAWKEYE_UUID;
 
 public class BlessingEffectRegistry {
     public static final Map<Item, Consumer<Player>> ON_APPLY = new HashMap<>();
     public static final Map<Item, Consumer<Player>> ON_REMOVE = new HashMap<>();
     public static final Map<Item, Predicate<Player>> CAN_REMOVE = new HashMap<>();
 
-    public static final UUID FRENZY_ATTACK_DAMAGE = UUID.fromString("d739268d-e62f-4c9b-8301-2812343ab281");
-    public static final UUID IMMOLATION_ARMOR = UUID.fromString("d739268d-e62f-4c9b-8301-2895473f3281");
 
 
     static {
@@ -62,58 +54,15 @@ public class BlessingEffectRegistry {
                 player -> !player.hasEffect(ModEffects.DARING_SHOUT_COOLDOWN.get())
         );
 
-        register(ModItems.HANKS_EYE.get(),
-                player -> {
-                    player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
-                        cache.unlock(BonusRegister.HAWKEYE_CONSUME_BOW);
-                        cache.unlock(BonusRegister.HAWKEYE_CONSUME_CROSSBOW);
-                        cache.unlock(BonusRegister.HAWKEYE_STACK);
-                    });
-                },
-                player -> {
-                    player.removeEffect(ModEffects.HAWKEYE.get());
-
-                    player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
-                        cache.remove(BonusRegister.HAWKEYE_CONSUME_BOW);
-                        cache.remove(BonusRegister.HAWKEYE_CONSUME_CROSSBOW);
-                        cache.remove(BonusRegister.HAWKEYE_STACK);
-                    });
-
-                    AttributeApplier.removeModifier(player, ModAttributes.NOCK_HASTE.get(), HAWKEYE_UUID);
-                    AttributeApplier.removeModifier(player, ModAttributes.PROJECTILE_POTENCY.get(), HAWKEYE_UUID);
-                },
-                player -> true
-        );
-
         register(ModItems.SUNSTONE_GEM.get(),
                 player -> {
                     PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
                     cache.setSolaraActive(true);
-                    player.addEffect(new MobEffectInstance(ModEffects.SOLARA.get(), 24000, 0, false, false, true));
+                    player.addEffect(new MobEffectInstance(ModEffects.SOLARA.get(), 24000, 0, false, false, false));
                 },
                 player -> {
                     PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
                     cache.setSolaraActive(false);
-                },
-                player -> true
-        );
-
-        register(ModItems.RAGE_AMPLIFIER.get(),
-                player -> {
-                    AttributeApplier.applyModifier(player, Attributes.ATTACK_DAMAGE, 1.0, FRENZY_ATTACK_DAMAGE);
-                    AttributeApplier.applyPercentModifierAdditive(player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), 0.05, FRENZY_ATTACK_DAMAGE);
-                    player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
-                        cache.unlock(BonusRegister.FRENZY);
-                    });
-
-                },
-                player -> {
-                    player.removeEffect(ModEffects.FRENZY.get());
-                    AttributeApplier.removeModifier(player, Attributes.ATTACK_DAMAGE, FRENZY_ATTACK_DAMAGE);
-                    AttributeApplier.removeModifier(player, ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(), FRENZY_ATTACK_DAMAGE);
-                    player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
-                        cache.remove(BonusRegister.FRENZY);
-                    });
                 },
                 player -> true
         );
@@ -158,7 +107,7 @@ public class BlessingEffectRegistry {
 
         register(ModItems.WORMHOLE.get(),
                 player -> {
-                    NetworkHandler.sendToClient(new QuantumLeapSync.QuantumLeapFlagPacket(true), (ServerPlayer) player);
+                    ModMessages.sendToPlayer(new QuantumLeapSync.QuantumLeapFlagPacket(true), (ServerPlayer) player);
                     PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
                     cache.setDfaQuantumSynergy(true);
                     if (!player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get()) && !player.hasEffect(ModEffects.QUANTUM_LEAP_COOLDOWN.get())) {
@@ -178,7 +127,7 @@ public class BlessingEffectRegistry {
                     PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
                     cache.setDfaQuantumSynergy(false);
 
-                    NetworkHandler.sendToClient(new QuantumLeapSync.QuantumLeapFlagPacket(false), (ServerPlayer) player);
+                    ModMessages.sendToPlayer(new QuantumLeapSync.QuantumLeapFlagPacket(false), (ServerPlayer) player);
                 },
                 player -> !player.hasEffect(ModEffects.QUANTUM_LEAP_ACTIVE.get()) && !player.hasEffect(ModEffects.QUANTUM_LEAP_COOLDOWN.get())
         );
@@ -221,11 +170,13 @@ public class BlessingEffectRegistry {
                 player -> {
                     player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
                         cache.unlock(BonusRegister.CHAIN_LIGHTNING);
+                        cache.setChainLightningActive(true);
                     });
                 },
                 player -> {
                     player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
                         cache.remove(BonusRegister.CHAIN_LIGHTNING);
+                        cache.setChainLightningActive(false);
                     });
                 },
                 player -> true
@@ -343,7 +294,7 @@ public class BlessingEffectRegistry {
         register(ModItems.IGNITION_MARK.get(),
                 player -> {
                     if (!player.hasEffect(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get())) {
-                        player.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get(), 160, 0, false, false, true));
+                        player.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get(), 240, 0, false, false, false));
                     }
                     player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
                         cache.unlock(BonusRegister.EXPLOSIVE_TENDENCIES);
@@ -448,44 +399,6 @@ public class BlessingEffectRegistry {
                 player -> !player.hasEffect(ModEffects.OVERCONFIDENCE_ACTIVE.get()) && !player.hasEffect(ModEffects.OVERCONFIDENCE_COOLDOWN.get())
         );
 
-
-        register(ModItems.IMMOLATION_OF_HEART.get(),
-                player -> {
-                    AttributeApplier.applyModifier(player, Attributes.ARMOR, -10.0, IMMOLATION_ARMOR);
-                    player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
-                        cache.unlock(BonusRegister.ENTWINED_OFFERING);
-                    });
-                },
-                player -> {
-                    AttributeApplier.removeModifier(player, Attributes.ARMOR, IMMOLATION_ARMOR);
-                    player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
-                        cache.remove(BonusRegister.ENTWINED_OFFERING);
-                    });
-                },
-                player -> true
-        );
-
-        register(ModItems.FOX_EYE.get(),
-                player -> {
-                    player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
-                        cache.unlock(BonusRegister.NIMBLE_GETAWAY);
-                        cache.setNimbleEquipped(true);
-                    });
-                    if (!player.hasEffect(ModEffects.NIMBLE_GETAWAY_COOLDOWN.get())) {
-                        player.addEffect(new MobEffectInstance(ModEffects.NIMBLE_GETAWAY_ACTIVE.get(), -1, 0, false, false, true));
-                    }
-                },
-                player -> {
-                    player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
-                        cache.remove(BonusRegister.NIMBLE_GETAWAY);
-                        cache.setNimbleEquipped(false);
-                    });
-                    player.removeEffect(ModEffects.NIMBLE_GETAWAY_ACTIVE.get());
-                    player.removeEffect(ModEffects.NIMBLE_GETAWAY_COOLDOWN.get());
-                },
-                player ->!player.hasEffect(ModEffects.NIMBLE_GETAWAY_COOLDOWN.get())
-        );
-
         register(ModItems.BROKEN_HEALTH_POTION.get(),
                 player -> {
                     if (!player.hasEffect(ModEffects.COMBATANTS_AID_CD.get())) {
@@ -500,20 +413,6 @@ public class BlessingEffectRegistry {
                     player.getPersistentData().remove("dash_z");
                 },
                 player -> !player.hasEffect(ModEffects.COMBATANTS_AID_CD.get())
-        );
-
-        register(ModItems.RESTORING_AURA.get(),
-                player -> {
-
-                    if (!player.hasEffect(ModEffects.RADIATING_WARMTH.get())) {
-                        int interval = (int) (400 / (1.0 + (AttributeApplier.getScaledValue(player, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get()) / 100.0)));
-                        player.addEffect(new MobEffectInstance(ModEffects.RADIATING_WARMTH.get(), interval, 0, false, false, true));
-                    }
-                },
-                player -> {
-                    player.removeEffect(ModEffects.RADIATING_WARMTH.get());
-                },
-                player -> true
         );
 
         register(ModItems.DIVINE_SHIELD.get(),
@@ -560,6 +459,7 @@ public class BlessingEffectRegistry {
                     }
                     player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
                         cache.unlock(BonusRegister.VORTEX);
+                        cache.unlock(BonusRegister.VORTEX_BOW_GUARANTEE);
                     });
                 },
                 player -> {
@@ -567,6 +467,7 @@ public class BlessingEffectRegistry {
                     player.removeEffect(ModEffects.VORTEX_READY.get());
                     player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
                         cache.remove(BonusRegister.VORTEX);
+                        cache.unlock(BonusRegister.VORTEX_BOW_GUARANTEE);
                     });
                 },
                 player -> !player.hasEffect(ModEffects.VORTEX_CD.get())

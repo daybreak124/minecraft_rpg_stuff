@@ -1,6 +1,7 @@
 package net.cold.coldsmod.accessory;
 
 import net.cold.coldsmod.ColdsMod;
+import net.cold.coldsmod.network.Keybinds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -19,9 +20,6 @@ public class UtilityAccessories {
 
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, ColdsMod.MODID);
-
-    // UUIDs
-
 
     // --- Registry ---
 
@@ -89,7 +87,7 @@ public class UtilityAccessories {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Luck").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+1 Luck").withStyle(style -> style.withColor(0xD6C97A)));
         }
     }
 
@@ -167,7 +165,11 @@ public class UtilityAccessories {
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+100% Jump Boost").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal("+100% Fall Damage Distance Threshold").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.empty());
 
+            Component keyName = Keybinds.jumpBoostKey.getTranslatedKeyMessage();
+            tooltip.add(Component.literal(" Turn on/off: ").withStyle(ChatFormatting.GRAY)
+                    .append(keyName.copy().withStyle(ChatFormatting.YELLOW)));
         }
     }
 

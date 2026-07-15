@@ -59,9 +59,9 @@ public class DragonRoar {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+2 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+3 Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
         }
@@ -79,9 +79,9 @@ public class DragonRoar {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+5 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+9 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+6 Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
         }
@@ -99,10 +99,11 @@ public class DragonRoar {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+9 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Toughness").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+22% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+6 Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+4.5 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+5% Potency").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
         }
@@ -122,8 +123,9 @@ public class DragonRoar {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+12 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+9 Toughness").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+30% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+6 Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+9 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+10% Potency").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
         }

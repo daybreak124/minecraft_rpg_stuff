@@ -60,11 +60,10 @@ public class BottledTsunami {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+6 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+1.2 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+10% Swim Speed").withStyle(style -> style.withColor(0x00AEEF)));
+            tooltip.add(Component.literal("+1% Restoration").withStyle(style -> style.withColor(0x3B8132)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Tsunami Sea").withStyle(ChatFormatting.AQUA));
@@ -84,11 +83,10 @@ public class BottledTsunami {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+9 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+16 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+1.75 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+20% Swim Speed").withStyle(style -> style.withColor(0x00AEEF)));
+            tooltip.add(Component.literal("+2% Restoration").withStyle(style -> style.withColor(0x3B8132)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Tsunami Sea").withStyle(ChatFormatting.AQUA));
@@ -108,11 +106,10 @@ public class BottledTsunami {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+13 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+24 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+2.4 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+30% Swim Speed").withStyle(style -> style.withColor(0x00AEEF)));
+            tooltip.add(Component.literal("+3% Restoration").withStyle(style -> style.withColor(0x3B8132)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Tsunami Sea").withStyle(ChatFormatting.AQUA));
@@ -132,11 +129,10 @@ public class BottledTsunami {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+17 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+32 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+3 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+40% Swim Speed").withStyle(style -> style.withColor(0x00AEEF)));
+            tooltip.add(Component.literal("+4% Restoration").withStyle(style -> style.withColor(0x3B8132)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Tsunami Sea").withStyle(ChatFormatting.AQUA));

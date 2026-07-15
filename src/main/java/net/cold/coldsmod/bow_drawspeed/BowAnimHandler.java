@@ -28,7 +28,7 @@ public class BowAnimHandler {
                         if (!(entity instanceof Player player)) return 0.0F;
                         if (entity.getUseItem().getItem() != item) return 0.0F;
 
-                        float drawSpeed = (float) AttributeApplier.getScaledValue(player, ModAttributes.NOCK_HASTE.get(), ModAttributes.NOCK_HASTE_MULTIPLIER.get());
+                        float drawSpeed = (float) AttributeApplier.getScaledValue(player, ModAttributes.NOCK_HASTE.get());
 
                         float speedMultiplier = 1.0F + (drawSpeed / 100.0F);
                         if (speedMultiplier < 0.01F) speedMultiplier = 0.01F;

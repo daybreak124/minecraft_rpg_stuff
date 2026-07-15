@@ -59,12 +59,12 @@ public class Shrieks {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2.5 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+2.8 Armor").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+5% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("-8 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("-3 Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }
@@ -82,12 +82,13 @@ public class Shrieks {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+10 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+9 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3.75 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1.45 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+7.5% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("-8 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("-5 Potency").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }
@@ -105,13 +106,15 @@ public class Shrieks {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+13 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+12 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Perception").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+10% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+7.5% Armor").withStyle(style -> style.withColor(0x0F52BA)));
-            tooltip.add(Component.literal("-8 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3.75 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1.4 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+8% Debuff Resist").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("-7 Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+4 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+5% Armor").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }
@@ -129,13 +132,15 @@ public class Shrieks {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+17 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+15 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("-3 Perception").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7.5 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+12.5% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+12% Armor").withStyle(style -> style.withColor(0x0F52BA)));
-            tooltip.add(Component.literal("-8 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1.6 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+10% Debuff Resist").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("-10 Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+5 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+10% Armor").withStyle(style -> style.withColor(0x0F52BA)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }

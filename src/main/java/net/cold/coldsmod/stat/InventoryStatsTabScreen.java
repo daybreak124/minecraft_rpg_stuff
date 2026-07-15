@@ -23,8 +23,7 @@ public class InventoryStatsTabScreen extends Screen {
             InventoryStatsCache.rebuildCache(mc);
         }
 
-        addRenderableWidget(
-                Button.builder(Component.literal("X"), btn -> mc.setScreen(parent))
+        addRenderableWidget(Button.builder(Component.literal("X"), btn -> mc.setScreen(parent))
                         .pos(this.width / 2 + 80, this.height / 2 - 90)
                         .size(20, 20)
                         .build()

@@ -61,10 +61,10 @@ public class SunstoneForged {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
             tooltip.add(Component.literal("+2 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+8 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+3.75 Haste").withStyle(style -> style.withColor(0xE0701B)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Sun's Cruelty").withStyle(ChatFormatting.YELLOW));
@@ -84,11 +84,14 @@ public class SunstoneForged {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+3 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+14 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+3.75 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+3.3 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+3.3 Projectile Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Sun's Cruelty").withStyle(ChatFormatting.YELLOW));
@@ -108,12 +111,13 @@ public class SunstoneForged {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+4 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+10 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+8 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+16 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+8 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+6 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+6 Projectile Accuracy").withStyle(style -> style.withColor(0xE0701B)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Sun's Cruelty").withStyle(ChatFormatting.YELLOW));
@@ -133,12 +137,13 @@ public class SunstoneForged {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+13 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+12 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+21 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+10.5 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7.6 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7.6 Projectile Accuracy").withStyle(style -> style.withColor(0xE0701B)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Sun's Cruelty").withStyle(ChatFormatting.YELLOW));

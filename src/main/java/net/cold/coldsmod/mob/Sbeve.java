@@ -3,6 +3,7 @@ package net.cold.coldsmod.mob;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -28,7 +29,7 @@ public class Sbeve extends TamableAnimal {
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 40.0)
-                .add(Attributes.ATTACK_DAMAGE, 1.25)
+                .add(Attributes.ATTACK_DAMAGE, 1)
                 .add(Attributes.MOVEMENT_SPEED, 0.55)
                 .add(Attributes.FOLLOW_RANGE, 32.0);
     }
@@ -76,8 +77,7 @@ public class Sbeve extends TamableAnimal {
         if (owner == null) return false;
 
         double scaledPotency = getScaledValue(owner,
-                ModAttributes.POTENCY.get(),
-                ModAttributes.POTENCY_MULTIPLIER.get());
+                ModAttributes.POTENCY.get());
         double damageIncrease = 1.0 + (scaledPotency / 100.0);
 
         float baseDamage = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
@@ -97,18 +97,16 @@ public class Sbeve extends TamableAnimal {
 
     private float applyCrit(Player owner, float damage) {
         double scaledAccuracy = getScaledValue(owner,
-                ModAttributes.ACCURACY.get(),
-                ModAttributes.ACCURACY_MULTIPLIER.get());
+                ModAttributes.ACCURACY.get());
 
         double critChance = scaledAccuracy + 10.0;
 
         double scaledPrecision = getScaledValue(owner,
-                ModAttributes.PRECISION.get(),
-                ModAttributes.PRECISION_MULTIPLIER.get());
+                ModAttributes.PRECISION.get());
 
 
         if (owner.getRandom().nextDouble() < critChance) {
-            double critMultiplier = 1.5 + scaledPrecision / 100.0;
+            double critMultiplier = 1.25 + scaledPrecision / 100.0;
             return (float) (damage * critMultiplier);
         }
         return damage;
@@ -116,10 +114,10 @@ public class Sbeve extends TamableAnimal {
 
 
     public void applyOwnerScaling(Player owner) {
-        double guardianHp = owner.getMaxHealth() * 2;
+        double sbeveHP = owner.getMaxHealth() * 2;
 
-        this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(guardianHp);
-        this.setHealth((float) guardianHp);
+        this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(sbeveHP);
+        this.setHealth((float) sbeveHP);
 
         double playerArmor = owner.getAttributeValue(Attributes.ARMOR);
         this.getAttribute(Attributes.ARMOR).setBaseValue(playerArmor);
@@ -219,8 +217,7 @@ public class Sbeve extends TamableAnimal {
                 if (this.sbeve.getOwner() instanceof Player owner) {
 
                     double scaledHaste = getScaledValue(owner,
-                            ModAttributes.HASTE.get(),
-                            ModAttributes.HASTE_MULTIPLIER.get());
+                            ModAttributes.HASTE.get());
 
                     double cooldownBase = 30.0;
                     double divisor = 1.0 + (scaledHaste / 100.0);
@@ -230,7 +227,7 @@ public class Sbeve extends TamableAnimal {
                     this.customCooldown = 40;
                 }
 
-                this.mob.swing(net.minecraft.world.InteractionHand.MAIN_HAND);
+                this.mob.swing(InteractionHand.MAIN_HAND);
                 this.mob.doHurtTarget(enemy);
             }
         }

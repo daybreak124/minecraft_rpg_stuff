@@ -1,6 +1,8 @@
 package net.cold.coldsmod.network;
 
 import net.cold.coldsmod.ModSounds;
+import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusRegistry;
+import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusTrigger;
 import net.cold.coldsmod.capabilities_and_blessings.registry.ModEffects;
 import net.cold.coldsmod.damage_types.ModDamageTypes;
 import net.minecraft.core.Holder;
@@ -50,7 +52,8 @@ public class IntimidatePacket {
                 spawnParticleRing(serverLevel, player, ParticleTypes.POOF, 8.0, 160);
             }
 
-            player.addEffect(new MobEffectInstance(ModEffects.INTIMIDATING_PRESENCE_COOLDOWN.get(), 240, 0, false, false, true));
+            BonusRegistry.process(player, null, player.level(), BonusTrigger.BLESSING_ACTIVATION);
+            player.addEffect(new MobEffectInstance(ModEffects.INTIMIDATING_PRESENCE_COOLDOWN.get(), 360, 0, false, false, true));
             player.removeEffect(ModEffects.INTIMIDATING_PRESENCE_READY.get());
             level.playSound(
                     null, player.getX(), player.getY(), player.getZ(),
@@ -181,7 +184,7 @@ public class IntimidatePacket {
                         target.setDeltaMovement(blastDir.x * 1.1, 0.4, blastDir.z * 1.1);
 
                         target.hurtMarked = true;
-                        target.hurt(source, 12.0f);
+                        target.hurt(source, 8.0f);
                     }
                 });
             }, 800, TimeUnit.MILLISECONDS);

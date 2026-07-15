@@ -1,5 +1,6 @@
 package net.cold.coldsmod;
 
+import net.cold.coldsmod.custom_attacks.ExecuteAttackPacket;
 import net.cold.coldsmod.menu_accessory.AccessoryMenuPacket;
 import net.cold.coldsmod.menu_accessory.AccessoryPacket;
 import net.cold.coldsmod.menu_accessory.AccessoryUnlockSyncPacket;
@@ -30,134 +31,54 @@ public class ModMessages {
 
         INSTANCE = net;
 
-        // Register the packet that opens the menu
-        net.messageBuilder(OpenStatMenuPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(OpenStatMenuPacket::new)
-                .encoder(OpenStatMenuPacket::toBytes)
-                .consumerMainThread(OpenStatMenuPacket::handle)
-                .add();
+        // Server
+        net.messageBuilder(OpenStatMenuPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(OpenStatMenuPacket::new).encoder(OpenStatMenuPacket::toBytes).consumerMainThread(OpenStatMenuPacket::handle).add();
+        net.messageBuilder(StatUpgradePacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(StatUpgradePacket::new).encoder(StatUpgradePacket::toBytes).consumerMainThread(StatUpgradePacket::handle).add();
+        net.messageBuilder(StatUpgradePacketTwo.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(StatUpgradePacketTwo::new).encoder(StatUpgradePacketTwo::toBytes).consumerMainThread(StatUpgradePacketTwo::handle).add();
+        net.messageBuilder(StatUpgradePacketThree.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(StatUpgradePacketThree::new).encoder(StatUpgradePacketThree::toBytes).consumerMainThread(StatUpgradePacketThree::handle).add();
+        net.messageBuilder(OpenFeatMenuPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(OpenFeatMenuPacket::new).encoder(OpenFeatMenuPacket::toBytes).consumerMainThread(OpenFeatMenuPacket::handle).add();
+        net.messageBuilder(FeatUnlockPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(FeatUnlockPacket::new).encoder(FeatUnlockPacket::toBytes).consumerMainThread(FeatUnlockPacket::handle).add();
+        net.messageBuilder(BlessingMenuPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(BlessingMenuPacket::new).encoder(BlessingMenuPacket::toBytes).consumerMainThread(BlessingMenuPacket::handle).add();
+        net.messageBuilder(BlessingPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(BlessingPacket::new).encoder(BlessingPacket::toBytes).consumerMainThread(BlessingPacket::handle).add();
+        net.messageBuilder(AccessoryMenuPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(AccessoryMenuPacket::new).encoder(AccessoryMenuPacket::toBytes).consumerMainThread(AccessoryMenuPacket::handle).add();
+        net.messageBuilder(AccessoryPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(AccessoryPacket::new).encoder(AccessoryPacket::toBytes).consumerMainThread(AccessoryPacket::handle).add();
 
-        net.messageBuilder(StatUpgradePacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(StatUpgradePacket::new)
-                .encoder(StatUpgradePacket::toBytes)
-                .consumerMainThread(StatUpgradePacket::handle)
-                .add();
+        // ----
+        net.messageBuilder(QuantumLeapPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).encoder(QuantumLeapPacket::encode).decoder(QuantumLeapPacket::decode).consumerMainThread(QuantumLeapPacket::handle).add();
+        net.messageBuilder(CombatantsAidPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).encoder(CombatantsAidPacket::encode).decoder(CombatantsAidPacket::decode).consumerMainThread(CombatantsAidPacket::handle).add();
+        net.messageBuilder(OverconfidencePacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(OverconfidencePacket::decode).encoder(OverconfidencePacket::encode).consumerMainThread(OverconfidencePacket::handle).add();
+        net.messageBuilder(DirectedHatredPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(DirectedHatredPacket::decode).encoder(DirectedHatredPacket::encode).consumerMainThread(DirectedHatredPacket::handle).add();
+        net.messageBuilder(CombatantsRecallPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(CombatantsRecallPacket::decode).encoder(CombatantsRecallPacket::encode).consumerMainThread(CombatantsRecallPacket::handle).add();
+        net.messageBuilder(DaringShoutPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(DaringShoutPacket::decode).encoder(DaringShoutPacket::encode).consumerMainThread(DaringShoutPacket::handle).add();
+        net.messageBuilder(IntimidatePacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(IntimidatePacket::decode).encoder(IntimidatePacket::encode).consumerMainThread(IntimidatePacket::handle).add();
+        net.messageBuilder(SoulSeverancePacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(SoulSeverancePacket::decode).encoder(SoulSeverancePacket::encode).consumerMainThread(SoulSeverancePacket::handle).add();
+        net.messageBuilder(DFAPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(DFAPacket::decode).encoder(DFAPacket::encode).consumerMainThread(DFAPacket::handle).add();
+        net.messageBuilder(DFADivePacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(DFADivePacket::decode).encoder(DFADivePacket::encode).consumerMainThread(DFADivePacket::handle).add();
 
-        net.messageBuilder(StatUpgradePacketTwo.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(StatUpgradePacketTwo::new)
-                .encoder(StatUpgradePacketTwo::toBytes)
-                .consumerMainThread(StatUpgradePacketTwo::handle)
-                .add();
+        // Client
+        net.messageBuilder(StatsSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).decoder(StatsSyncPacket::new).encoder(StatsSyncPacket::toBytes).consumerMainThread(StatsSyncPacket::handle).add();
+        net.messageBuilder(FeatSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).decoder(FeatSyncPacket::new).encoder(FeatSyncPacket::toBytes).consumerMainThread(FeatSyncPacket::handle).add();
+        net.messageBuilder(BlessingUnlockSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).decoder(BlessingUnlockSyncPacket::new).encoder(BlessingUnlockSyncPacket::toBytes).consumerMainThread(BlessingUnlockSyncPacket::handle).add();
+        net.messageBuilder(AccessoryUnlockSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).decoder(AccessoryUnlockSyncPacket::new).encoder(AccessoryUnlockSyncPacket::toBytes).consumerMainThread(AccessoryUnlockSyncPacket::handle).add();
 
-        net.messageBuilder(StatUpgradePacketThree.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(StatUpgradePacketThree::new)
-                .encoder(StatUpgradePacketThree::toBytes)
-                .consumerMainThread(StatUpgradePacketThree::handle)
-                .add();
+        // ----
+        net.messageBuilder(IntimidatingPresenceSync.IntimidatingPresenceFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).encoder(IntimidatingPresenceSync.IntimidatingPresenceFlagPacket::encode).decoder(IntimidatingPresenceSync.IntimidatingPresenceFlagPacket::decode).consumerMainThread(IntimidatingPresenceSync.IntimidatingPresenceFlagPacket::handle).add();
+        net.messageBuilder(CombatantSync.CombatantFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).encoder(CombatantSync.CombatantFlagPacket::encode).decoder(CombatantSync.CombatantFlagPacket::decode).consumerMainThread(CombatantSync.CombatantFlagPacket::handle).add();
+        net.messageBuilder(CombatantRecallSync.CombatantRecallFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).encoder(CombatantRecallSync.CombatantRecallFlagPacket::encode).decoder(CombatantRecallSync.CombatantRecallFlagPacket::decode).consumerMainThread(CombatantRecallSync.CombatantRecallFlagPacket::handle).add();
+        net.messageBuilder(DFASync.DFAFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).encoder(DFASync.DFAFlagPacket::encode).decoder(DFASync.DFAFlagPacket::decode).consumerMainThread(DFASync.DFAFlagPacket::handle).add();
+        net.messageBuilder(DfaAirborneSync.DfaAirborneFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).encoder(DfaAirborneSync.DfaAirborneFlagPacket::encode).decoder(DfaAirborneSync.DfaAirborneFlagPacket::decode).consumerMainThread(DfaAirborneSync.DfaAirborneFlagPacket::handle).add();
+        net.messageBuilder(OverconfidenceSync.OverconfidenceSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).encoder(OverconfidenceSync.OverconfidenceSyncPacket::encode).decoder(OverconfidenceSync.OverconfidenceSyncPacket::decode).consumerMainThread(OverconfidenceSync.OverconfidenceSyncPacket::handle).add();
+        net.messageBuilder(SeveranceSync.SeveranceFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).encoder(SeveranceSync.SeveranceFlagPacket::encode).decoder(SeveranceSync.SeveranceFlagPacket::decode).consumerMainThread(SeveranceSync.SeveranceFlagPacket::handle).add();
+        net.messageBuilder(QuantumLeapSync.QuantumLeapFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).encoder(QuantumLeapSync.QuantumLeapFlagPacket::encode).decoder(QuantumLeapSync.QuantumLeapFlagPacket::decode).consumerMainThread(QuantumLeapSync.QuantumLeapFlagPacket::handle).add();
+        net.messageBuilder(HatredSync.HatredSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).encoder(HatredSync.HatredSyncPacket::encode).decoder(HatredSync.HatredSyncPacket::decode).consumerMainThread(HatredSync.HatredSyncPacket::handle).add();
+        net.messageBuilder(DaringShoutSync.DaringShoutSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).encoder(DaringShoutSync.DaringShoutSyncPacket::encode).decoder(DaringShoutSync.DaringShoutSyncPacket::decode).consumerMainThread(DaringShoutSync.DaringShoutSyncPacket::handle).add();
+        net.messageBuilder(DrawSpeedSync.class, id(), NetworkDirection.PLAY_TO_CLIENT).encoder(DrawSpeedSync::encode).decoder(DrawSpeedSync::decode).consumerMainThread(DrawSpeedSync::handle).add();
 
-        net.messageBuilder(StatsSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(StatsSyncPacket::new)
-                .encoder(StatsSyncPacket::toBytes)
-                .consumerMainThread(StatsSyncPacket::handle)
-                .add();
+        net.registerMessage(id(), ToggleAutoSmeltPacket.class, ToggleAutoSmeltPacket::encode, ToggleAutoSmeltPacket::decode, ToggleAutoSmeltPacket::handle);
+        net.registerMessage(id(), ToggleJumpBoostPacket.class, ToggleJumpBoostPacket::encode, ToggleJumpBoostPacket::decode, ToggleJumpBoostPacket::handle);
 
-        // Register the packet that opens the menu
-        net.messageBuilder(BlessingMenuPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(BlessingMenuPacket::new)
-                .encoder(BlessingMenuPacket::toBytes)
-                .consumerMainThread(BlessingMenuPacket::handle)
-                .add();
+        net.messageBuilder(ExecuteAttackPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(ExecuteAttackPacket::decode).encoder(ExecuteAttackPacket::encode).consumerMainThread(ExecuteAttackPacket::handle).add();
 
-        net.messageBuilder(BlessingPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(BlessingPacket::new)
-                .encoder(BlessingPacket::toBytes)
-                .consumerMainThread(BlessingPacket::handle)
-                .add();
-
-        net.messageBuilder(BlessingUnlockSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(BlessingUnlockSyncPacket::new)
-                .encoder(BlessingUnlockSyncPacket::toBytes)
-                .consumerMainThread(BlessingUnlockSyncPacket::handle)
-                .add();
-
-        // --
-
-        net.messageBuilder(AccessoryMenuPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(AccessoryMenuPacket::new)
-                .encoder(AccessoryMenuPacket::toBytes)
-                .consumerMainThread(AccessoryMenuPacket::handle)
-                .add();
-
-        net.messageBuilder(AccessoryPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(AccessoryPacket::new)
-                .encoder(AccessoryPacket::toBytes)
-                .consumerMainThread(AccessoryPacket::handle)
-                .add();
-
-        net.messageBuilder(AccessoryUnlockSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(AccessoryUnlockSyncPacket::new).encoder(AccessoryUnlockSyncPacket::toBytes)
-                .consumerMainThread(AccessoryUnlockSyncPacket::handle).add();
-
-
-        net.messageBuilder(IntimidatingPresenceSync.IntimidatingPresenceFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(IntimidatingPresenceSync.IntimidatingPresenceFlagPacket::encode)
-                .decoder(IntimidatingPresenceSync.IntimidatingPresenceFlagPacket::decode)
-                .consumerMainThread(IntimidatingPresenceSync.IntimidatingPresenceFlagPacket::handle)
-                .add();
-
-        net.messageBuilder(CombatantSync.CombatantFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(CombatantSync.CombatantFlagPacket::encode)
-                .decoder(CombatantSync.CombatantFlagPacket::decode)
-                .consumerMainThread(CombatantSync.CombatantFlagPacket::handle)
-                .add();
-
-        net.messageBuilder(CombatantRecallSync.CombatantRecallFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(CombatantRecallSync.CombatantRecallFlagPacket::encode)
-                .decoder(CombatantRecallSync.CombatantRecallFlagPacket::decode)
-                .consumerMainThread(CombatantRecallSync.CombatantRecallFlagPacket::handle)
-                .add();
-
-        net.messageBuilder(DFASync.DFAFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(DFASync.DFAFlagPacket::encode)
-                .decoder(DFASync.DFAFlagPacket::decode)
-                .consumerMainThread(DFASync.DFAFlagPacket::handle)
-                .add();
-
-        net.messageBuilder(DfaAirborneSync.DfaAirborneFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(DfaAirborneSync.DfaAirborneFlagPacket::encode)
-                .decoder(DfaAirborneSync.DfaAirborneFlagPacket::decode)
-                .consumerMainThread(DfaAirborneSync.DfaAirborneFlagPacket::handle)
-                .add();
-
-        net.messageBuilder(OverconfidenceSync.OverconfidenceSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(OverconfidenceSync.OverconfidenceSyncPacket::encode)
-                .decoder(OverconfidenceSync.OverconfidenceSyncPacket::decode)
-                .consumerMainThread(OverconfidenceSync.OverconfidenceSyncPacket::handle)
-                .add();
-
-        net.messageBuilder(SeveranceSync.SeveranceFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(SeveranceSync.SeveranceFlagPacket::encode)
-                .decoder(SeveranceSync.SeveranceFlagPacket::decode)
-                .consumerMainThread(SeveranceSync.SeveranceFlagPacket::handle)
-                .add();
-
-        net.messageBuilder(QuantumLeapSync.QuantumLeapFlagPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(QuantumLeapSync.QuantumLeapFlagPacket::encode)
-                .decoder(QuantumLeapSync.QuantumLeapFlagPacket::decode)
-                .consumerMainThread(QuantumLeapSync.QuantumLeapFlagPacket::handle)
-                .add();
-
-        net.messageBuilder(HatredSync.HatredSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(HatredSync.HatredSyncPacket::encode)
-                .decoder(HatredSync.HatredSyncPacket::decode)
-                .consumerMainThread(HatredSync.HatredSyncPacket::handle)
-                .add();
-
-        net.messageBuilder(DaringShoutSync.DaringShoutSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(DaringShoutSync.DaringShoutSyncPacket::encode)
-                .decoder(DaringShoutSync.DaringShoutSyncPacket::decode)
-                .consumerMainThread(DaringShoutSync.DaringShoutSyncPacket::handle)
-                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) {

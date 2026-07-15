@@ -59,11 +59,13 @@ public class StolenLegacies {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+
+            tooltip.add(Component.literal("+8 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+6 Precision").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+4 Restoration").withStyle(style -> style.withColor(0x5BB450)));
-            tooltip.add(Component.literal("+15% XP Gain").withStyle(style -> style.withColor(0xD6C97A)));
+
+            tooltip.add(Component.literal("+1% Precision").withStyle(style -> style.withColor(0xEC3700)));
+
+
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
         }
@@ -81,11 +83,12 @@ public class StolenLegacies {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+10 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+10 Precision").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+7 Restoration").withStyle(style -> style.withColor(0x5BB450)));
-            tooltip.add(Component.literal("+20% XP Gain").withStyle(style -> style.withColor(0xD6C97A)));
+
+            tooltip.add(Component.literal("+16 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+
+            tooltip.add(Component.literal("+2% Precision").withStyle(style -> style.withColor(0xEC3700)));
+
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
         }
@@ -103,13 +106,12 @@ public class StolenLegacies {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+16 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+12 Precision").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+10% Precision").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("+12.5 Restoration").withStyle(style -> style.withColor(0x5BB450)));
-            tooltip.add(Component.literal("+8% Restoration").withStyle(style -> style.withColor(0x3B8132)));
-            tooltip.add(Component.literal("+25% XP Gain").withStyle(style -> style.withColor(0xD6C97A)));
+
+            tooltip.add(Component.literal("+24 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+
+            tooltip.add(Component.literal("+3% Precision").withStyle(style -> style.withColor(0xEC3700)));
+
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
         }
@@ -127,13 +129,12 @@ public class StolenLegacies {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+20 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+16 Precision").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+16% Precision").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("+15 Restoration").withStyle(style -> style.withColor(0x5BB450)));
-            tooltip.add(Component.literal("+14% Restoration").withStyle(style -> style.withColor(0x3B8132)));
-            tooltip.add(Component.literal("+30% XP Gain").withStyle(style -> style.withColor(0xD6C97A)));
+
+            tooltip.add(Component.literal("+32 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+
+            tooltip.add(Component.literal("+4% Precision").withStyle(style -> style.withColor(0xEC3700)));
+
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
         }

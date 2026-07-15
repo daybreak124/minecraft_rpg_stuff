@@ -59,12 +59,9 @@ public class HangingTigerTooth {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+2 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+4.5 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+3 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+2% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Nature's Blessing").withStyle(ChatFormatting.GREEN));
         }
@@ -82,12 +79,9 @@ public class HangingTigerTooth {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+9 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7.5% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+2.5 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+7 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+6 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+16 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Nature's Blessing").withStyle(ChatFormatting.GREEN));
         }
@@ -105,13 +99,9 @@ public class HangingTigerTooth {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+12 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+10% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+4 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+11 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+8.5 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+10% Nock Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+24 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Nature's Blessing").withStyle(ChatFormatting.GREEN));
         }
@@ -129,13 +119,9 @@ public class HangingTigerTooth {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+16 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+12.5 Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+6 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+17 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+15.5 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+18% Nock Haste ").withStyle(style -> style.withColor(0xec3700)));
+            tooltip.add(Component.literal("+32 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Nature's Blessing").withStyle(ChatFormatting.GREEN));
         }

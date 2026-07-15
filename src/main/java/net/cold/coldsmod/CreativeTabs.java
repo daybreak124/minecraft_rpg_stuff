@@ -191,20 +191,20 @@ public class CreativeTabs {
                                 output.accept(ModItems.WARLORDS_GAZE.get());
                                 output.accept(ModItems.PRIDE_INFUSED_AIGRETTE.get());
                                 output.accept(ModItems.ORB_OF_WORLD_DESTRUCTION.get());
-                                output.accept(ModItems.HANKS_EYE.get());
-                                output.accept(ModItems.RAGE_AMPLIFIER.get());
+                                // output.accept(ModItems.HANKS_EYE.get());
+                                // output.accept(ModItems.RAGE_AMPLIFIER.get());
                                 output.accept(ModItems.BANNER_OF_DETERMINATION.get());
                                 output.accept(ModItems.SOUL_MAGNET.get());
 
-                                output.accept(ModItems.FOX_EYE.get());
+                                // output.accept(ModItems.FOX_EYE.get());
                                 // output.accept(ModItems.DROP_OF_SACRIFICIAL_BLOOD.get());
 
                                 output.accept(ModItems.HELL_ON_EARTH.get());
                                 output.accept(ModItems.HORN_OF_FEARMONGERING.get());
 
                                 output.accept(ModItems.BROKEN_HEALTH_POTION.get());
-                                output.accept(ModItems.IMMOLATION_OF_HEART.get());
-                                output.accept(ModItems.RESTORING_AURA.get());
+                                // output.accept(ModItems.IMMOLATION_OF_HEART.get());
+                                // output.accept(ModItems.RESTORING_AURA.get());
 
                                 output.accept(ModItems.WORMHOLE.get());
 

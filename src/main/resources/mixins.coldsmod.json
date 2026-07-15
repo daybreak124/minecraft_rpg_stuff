@@ -9,7 +9,8 @@
     "CrossbowDrawSpeedMixin",
     "InfinityMendingMixin",
     "ProtectionMixin",
-    "RangedAttributeMixin"
+    "RangedAttributeMixin",
+    "PlayerSlowdownMixin"
   ],
   "injectors": {
     "defaultRequire": 1

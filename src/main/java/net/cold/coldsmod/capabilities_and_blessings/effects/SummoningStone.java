@@ -8,10 +8,15 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -73,6 +78,7 @@ public class SummoningStone extends MobEffect {
                 1.0F, 0.8F
         );
 
+        sbeve.addEffect(new MobEffectInstance(MobEffects.REGENERATION, MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
     }
 
     public static void killSbeve(ServerLevel level, Player player) {
@@ -84,5 +90,10 @@ public class SummoningStone extends MobEffect {
             }
             tag.remove("active_sbeve_uuid");
         }
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

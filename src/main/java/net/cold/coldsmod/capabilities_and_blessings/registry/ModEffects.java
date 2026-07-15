@@ -101,7 +101,7 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> EXPLOITED =
             EFFECTS.register("exploit_weakness_debuff", Exploited::new);
 
-        public static final RegistryObject<MobEffect> ENHANCED_POISON =
+    public static final RegistryObject<MobEffect> ENHANCED_POISON =
             EFFECTS.register("enhanced_poison", EnhancedPoison::new);
 
     public static final RegistryObject<MobEffect> RETALIATE_READY =
@@ -201,12 +201,8 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> NIMBLE_GETAWAY_COOLDOWN =
             EFFECTS.register("nimble_getaway_cd", NimbleGetawayCD::new);
 
-    public static final RegistryObject<MobEffect> NIMBLE_GETAWAY_ACTIVE = EFFECTS.register("nimble_getaway_active",
-            () -> new NimbleGetawayActive()
-                    .addAttributeModifier(
-                            ModAttributes.EVASION.get(), "a3e2b3c0-1758-5cc3-ad23-02bb77060446", 1.0, AttributeModifier.Operation.ADDITION)
-    );
-
+    public static final RegistryObject<MobEffect> NIMBLE_GETAWAY_ACTIVE =
+            EFFECTS.register("nimble_getaway_active", NimbleGetawayActive::new);
 
     public static final RegistryObject<MobEffect> COMBATANTS_AID_CD =
             EFFECTS.register("combatants_aid_cd", CombatantsAidCD::new);
@@ -277,9 +273,85 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> ENHANCED_BRONZEWOODS_CURSE =
             EFFECTS.register("enhanced_bronzewoods_curse", EnhancedBronzewood::new);
 
-    public static final RegistryObject<MobEffect> ABSORBED_EVIL =
-            EFFECTS.register("absorbed_evil", AbsorbedEvil::new);
+    public static final RegistryObject<MobEffect> OPPORTUNIST =
+            EFFECTS.register("opportunist", Opportunist::new);
 
     public static final RegistryObject<MobEffect> BLOODWORM =
-            EFFECTS.register("blood_worm", Bloodworm::new);
+            EFFECTS.register("bloodworm", Bloodworm::new);
+
+    public static final RegistryObject<MobEffect> SHARPENED_BLADE =
+            EFFECTS.register("sharpened_blade", SharpenedBlade::new);
+
+    public static final RegistryObject<MobEffect> STEALTH =
+            EFFECTS.register("stealth", Stealth::new);
+
+    public static final RegistryObject<MobEffect> BLEED =
+            EFFECTS.register("bleed", Bleed::new);
+
+    public static final RegistryObject<MobEffect> BLADEDANCER =
+            EFFECTS.register("bladedancer", BladeDancer::new);
+
+    public static final RegistryObject<MobEffect> RIPPED_SOUL =
+            EFFECTS.register("ripped_soul", RippedSoul::new);
+
+    public static final RegistryObject<MobEffect> COLLECTOR =
+            EFFECTS.register("collector", Collector::new);
+
+    public static final RegistryObject<MobEffect> GAMBIT =
+            EFFECTS.register("gambit", Gambit::new);
+
+    public static final RegistryObject<MobEffect> HEARTPIERCER =
+            EFFECTS.register("heartpiercer", HeartPiercer::new);
+
+    public static final RegistryObject<MobEffect> HEARTPIERCER_CD =
+            EFFECTS.register("heartpiercer_cd", HeartPiercerCD::new);
+
+    public static final RegistryObject<MobEffect> BRIMSTONE =
+            EFFECTS.register("brimstone", Brimstone::new);
+
+    public static final RegistryObject<MobEffect> ARMOR_PIERCE =
+            EFFECTS.register("armorpierce", ArmorPierce::new);
+
+    public static final RegistryObject<MobEffect> ASCENSION_CD =
+            EFFECTS.register("ascension_cd", AscensionCD::new);
+
+    public static final RegistryObject<MobEffect> RETALIATED =
+            EFFECTS.register("retaliated", Retaliated::new);
+
+    public static final RegistryObject<MobEffect> PRECISE_BLOW =
+            EFFECTS.register("precise_blow", PreciseBlow::new);
+
+    public static final RegistryObject<MobEffect> HOLY_AVENGER =
+            EFFECTS.register("holy_avenger", HolyAvenger::new);
+
+    public static final RegistryObject<MobEffect> RECOVERY =
+            EFFECTS.register("recovery", Recovery::new);
+
+
+    public static final RegistryObject<MobEffect> OVERCONFIDENCE_BUFF = EFFECTS.register("overconfidence_aoe_buff",
+            () -> new AigretteBuff()
+                    .addAttributeModifier(
+                            ModAttributes.MELEE_DAMAGE_MULTIPLIER.get(), "f3e2b3c0-5538-5123-a223-02a3a3360446", 0.2, AttributeModifier.Operation.ADDITION)
+    );
+
+    public static final RegistryObject<MobEffect> GRACE_TIMER =
+            EFFECTS.register("grace_timer", GraceTimer::new);
+
+    public static final RegistryObject<MobEffect> GRACE_DAMAGE =
+            EFFECTS.register("grace_damage", GraceDamage::new);
+
+    public static final RegistryObject<MobEffect> GRACE_EVASION =
+            EFFECTS.register("grace_evasion", GraceEvasion::new);
+
+    public static final RegistryObject<MobEffect> SOUL_HARVEST =
+            EFFECTS.register("soul_harvest", SoulHarvest::new);
+
+    public static final RegistryObject<MobEffect> DIRECTED_DIVINITY =
+            EFFECTS.register("directed_divinity", DirectedBuff::new);
+
+    public static final RegistryObject<MobEffect> LEVITATION_CURSE =
+            EFFECTS.register("levitation_curse", CurseLevitationEffect::new);
+
+    public static final RegistryObject<MobEffect> MELEE_VULNERABILITY =
+            EFFECTS.register("melee_vulnerability", MeleeVulnerability::new);
 }

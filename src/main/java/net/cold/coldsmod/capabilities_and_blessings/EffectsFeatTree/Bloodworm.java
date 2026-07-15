@@ -4,8 +4,10 @@ import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 public class Bloodworm extends MobEffect {
@@ -17,22 +19,27 @@ public class Bloodworm extends MobEffect {
 
         this.addAttributeModifier(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get(),
                 BLOODWORM_UUID.toString(),
-                0.0025D,
+                0.0020D,
                 AttributeModifier.Operation.MULTIPLY_BASE);
 
         this.addAttributeModifier(ModAttributes.PROJECTILE_DAMAGE_MULTIPLIER.get(),
                 BLOODWORM_UUID.toString(),
-                0.0025D,
+                0.0020D,
                 AttributeModifier.Operation.MULTIPLY_BASE);
 
         this.addAttributeModifier(ModAttributes.DOT_DAMAGE_MULTIPLIER.get(),
                 BLOODWORM_UUID.toString(),
-                0.0025D,
+                0.0020D,
                 AttributeModifier.Operation.MULTIPLY_BASE);
 
         this.addAttributeModifier(ModAttributes.ALL_DAMAGE_MULTIPLIER.get(),
                 BLOODWORM_UUID.toString(),
-                0.0025D,
+                0.0020D,
                 AttributeModifier.Operation.MULTIPLY_BASE);
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

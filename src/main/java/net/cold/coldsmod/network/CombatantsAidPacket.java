@@ -1,6 +1,8 @@
 package net.cold.coldsmod.network;
 
 import net.cold.coldsmod.ModMessages;
+import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusRegistry;
+import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusTrigger;
 import net.cold.coldsmod.capabilities_and_blessings.effects.CombatantsAidReady;
 import net.cold.coldsmod.capabilities_and_blessings.registry.ModEffects;
 import net.cold.coldsmod.stat.AttributeApplier;
@@ -30,10 +32,10 @@ public class CombatantsAidPacket {
             CombatantsAidReady.startDash(player);
 
             double amp = AttributeApplier.getScaledValue(player,
-                    ModAttributes.AMPLIFICATION.get(),
-                    ModAttributes.AMPLIFICATION_MULTIPLIER.get());
+                    ModAttributes.AMPLIFICATION.get());
             int cdTicks = (int) (800 / (1.0 + (amp / 100.0)));
 
+            BonusRegistry.process(player, null, player.level(), BonusTrigger.BLESSING_ACTIVATION);
             player.removeEffect(ModEffects.COMBATANTS_AID_READY.get());
             player.addEffect(new MobEffectInstance(ModEffects.COMBATANTS_AID_CD.get(), cdTicks, 0, false, false, true));
             ModMessages.sendToPlayer(new CombatantRecallSync.CombatantRecallFlagPacket(true), player);

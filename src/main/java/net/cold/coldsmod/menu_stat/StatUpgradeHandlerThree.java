@@ -4,7 +4,6 @@ import net.cold.coldsmod.ModMessages;
 import net.cold.coldsmod.item.ModItems;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
@@ -15,7 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.UUID;
 
-import static net.cold.coldsmod.stat.AttributeApplier.applyModifier;
+import static net.cold.coldsmod.stat.AttributeApplier.*;
 
 public class StatUpgradeHandlerThree {
     public static final int MAX_GLOBAL_POINTS = 160;
@@ -67,11 +66,11 @@ public class StatUpgradeHandlerThree {
     }
 
     public static int getRequiredAmount(int level) {
-        if (level < 10) return 1;
-        if (level < 30) return 2;
-        if (level < 55) return 3;
-        if (level < 85) return 5;
-        if (level < 120) return 8;
+        if (level < 20) return 1;
+        if (level < 40) return 2;
+        if (level < 60) return 3;
+        if (level <= 80) return 4;
+        if (level <= 120) return 5;
         return 12;
     }
 
@@ -81,7 +80,6 @@ public class StatUpgradeHandlerThree {
 
         int globalPoints = getTotalPointsSpent(player);
         if (globalPoints >= MAX_GLOBAL_POINTS) {
-            player.sendSystemMessage(Component.literal("§cLimit reached."));
             return;
         }
 
@@ -89,7 +87,6 @@ public class StatUpgradeHandlerThree {
         int amountNeeded = getRequiredAmount(globalPoints);
 
         if (!hasAndRemoveItem(player, pearl, amountNeeded)) {
-            player.sendSystemMessage(Component.literal("§cMissing items."));
             return;
         }
 
@@ -101,6 +98,15 @@ public class StatUpgradeHandlerThree {
 
         String attrId = ForgeRegistries.ATTRIBUTES.getKey(attribute).toString();
         ModMessages.sendToPlayer(new StatsSyncPacket(attrId, newPoints, false, true), player);
+
+        player.containerMenu.broadcastChanges();
+        player.inventoryMenu.slotsChanged(player.getInventory());
+
+        refreshPerPointStats(player);
+        refreshMilestones(player);
+        recalculateDynamicBonuses(player);
+        // applyCrossbowTag(player);
+        recalcAS(player);
     }
 
     public static void tryDowngrade(ServerPlayer player, Attribute attribute) {
@@ -125,6 +131,15 @@ public class StatUpgradeHandlerThree {
 
         String attrId = ForgeRegistries.ATTRIBUTES.getKey(attribute).toString();
         ModMessages.sendToPlayer(new StatsSyncPacket(attrId, newPoints, false, true), player);
+
+        player.containerMenu.broadcastChanges();
+        player.inventoryMenu.slotsChanged(player.getInventory());
+
+        refreshPerPointStats(player);
+        refreshMilestones(player);
+        recalculateDynamicBonuses(player);
+        // applyCrossbowTag(player);
+        recalcAS(player);
     }
 
     private static boolean hasAndRemoveItem(Player player, Item item, int count) {

@@ -60,10 +60,11 @@ public class SerpentSkin {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+3 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+12 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+6 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+3% Debuff Resist").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+3 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+1.5 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Nature's Blessing").withStyle(ChatFormatting.GREEN));
         }
@@ -81,11 +82,11 @@ public class SerpentSkin {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+2 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+11 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+6 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+4.5% Debuff Resist").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+7 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+2 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Nature's Blessing").withStyle(ChatFormatting.GREEN));
         }
@@ -103,13 +104,12 @@ public class SerpentSkin {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+4 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+9 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+8% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+16 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+9 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+6.75% Projectile Potency").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("+4% Nock Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+6% Debuff Resist").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+8,75 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+5 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7% Projectile Potency").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Nature's Blessing").withStyle(ChatFormatting.GREEN));
         }
@@ -127,13 +127,12 @@ public class SerpentSkin {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+6 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+12 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+10% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+21 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+11 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+6.75% Projectile Potency").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("+11.75% Nock Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+7.5% Debuff Resist").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+11 Projectile Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7.5 Nock Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+14% Projectile Potency").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Nature's Blessing").withStyle(ChatFormatting.GREEN));
         }

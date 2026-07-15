@@ -1,25 +1,13 @@
 package net.cold.coldsmod.capabilities_and_blessings.EffectsFeatTree;
 
-import net.cold.coldsmod.damage_types.ModDamageTypes;
 import net.cold.coldsmod.stat.ModAttributes;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.item.ItemStack;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 public class EnhancedBronzewood extends MobEffect {
@@ -31,12 +19,17 @@ public class EnhancedBronzewood extends MobEffect {
 
         this.addAttributeModifier(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get(),
                 EB_UUID.toString(),
-                0.05d,
+                -0.05d,
                 AttributeModifier.Operation.MULTIPLY_BASE);
 
         this.addAttributeModifier(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get(),
                 EB_UUID.toString(),
                 0.03d,
                 AttributeModifier.Operation.MULTIPLY_BASE);
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

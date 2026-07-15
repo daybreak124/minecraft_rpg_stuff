@@ -59,10 +59,10 @@ public class BraceletOfPride {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+4 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+0.6 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -80,10 +80,10 @@ public class BraceletOfPride {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1.2 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+2 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -101,11 +101,10 @@ public class BraceletOfPride {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+9 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2.7 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+2 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -123,11 +122,10 @@ public class BraceletOfPride {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+10 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+12 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3.4 Max Health").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+4 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }

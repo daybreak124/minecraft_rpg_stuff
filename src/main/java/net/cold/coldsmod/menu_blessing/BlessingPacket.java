@@ -41,6 +41,7 @@ public class BlessingPacket {
                         }
                     }
                 }
+
             }
         });
         ctx.get().setPacketHandled(true);

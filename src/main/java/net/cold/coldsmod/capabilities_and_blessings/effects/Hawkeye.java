@@ -5,8 +5,11 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 import static net.cold.coldsmod.stat.AttributeApplier.applyModifier;
@@ -30,8 +33,8 @@ public class Hawkeye extends MobEffect {
         double scalingMultiplier = 1.0 + ((dex + perc * 0.5) / 100.0);
         int stacks = pAmplifier + 1;
 
-        double finalPotency = (5.0 * stacks) * scalingMultiplier;
-        double finalNockHaste = (11.0 * stacks) * scalingMultiplier;
+        double finalPotency = (4.0 * stacks) * scalingMultiplier;
+        double finalNockHaste = (13.5 * stacks) * scalingMultiplier;
 
         applyModifier(pLivingEntity, ModAttributes.PROJECTILE_POTENCY.get(), finalPotency, HAWKEYE_UUID);
         applyModifier(pLivingEntity, ModAttributes.NOCK_HASTE.get(), finalNockHaste, HAWKEYE_UUID);
@@ -43,5 +46,10 @@ public class Hawkeye extends MobEffect {
 
         removeModifier(pLivingEntity, ModAttributes.NOCK_HASTE.get(), HAWKEYE_UUID);
         removeModifier(pLivingEntity, ModAttributes.PROJECTILE_POTENCY.get(), HAWKEYE_UUID);
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

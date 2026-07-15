@@ -63,11 +63,12 @@ public class DragonEyeEmbeddedRing {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+4 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+7 Melee Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+5 Projectile Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+2 Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+1.25 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -87,11 +88,12 @@ public class DragonEyeEmbeddedRing {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+6 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+12 Melee Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+7.5 Projectile Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+4 Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+2.5 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -111,15 +113,15 @@ public class DragonEyeEmbeddedRing {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+5 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+16 Melee Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+9 Projectile Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+6 Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+3.75 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
 
-            tooltip.add(Component.literal("+12% Melee Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
-            tooltip.add(Component.literal("+8% Projectile Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+3.75% Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+1.25% Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -139,15 +141,15 @@ public class DragonEyeEmbeddedRing {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+10 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+10 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+20 Melee Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+12.5 Projectile Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+8 Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+5 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
 
-            tooltip.add(Component.literal("+8% Melee Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
-            tooltip.add(Component.literal("+4.5% Projectile Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+7.5% Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+2.5% Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));

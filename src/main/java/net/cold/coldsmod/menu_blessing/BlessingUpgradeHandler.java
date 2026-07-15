@@ -2,7 +2,6 @@ package net.cold.coldsmod.menu_blessing;
 
 import net.cold.coldsmod.ModMessages;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -50,7 +49,6 @@ public class BlessingUpgradeHandler {
 
         String cat = entry.category();
         if (getCountInCategory(player, cat) >= getMaxForCategory(cat)) {
-            player.sendSystemMessage(Component.literal("§cLimit reached. "));
             return;
         }
 
@@ -60,6 +58,9 @@ public class BlessingUpgradeHandler {
             if (apply != null) apply.accept(player);
 
             ModMessages.sendToPlayer(new BlessingUnlockSyncPacket(player.getPersistentData()), player);
+
+            player.containerMenu.broadcastChanges();
+            player.inventoryMenu.slotsChanged(player.getInventory());
         }
     }
 
@@ -80,6 +81,9 @@ public class BlessingUpgradeHandler {
         if (remove != null) remove.accept(player);
 
         ModMessages.sendToPlayer(new BlessingUnlockSyncPacket(player.getPersistentData()), player);
+
+        player.containerMenu.broadcastChanges();
+        player.inventoryMenu.slotsChanged(player.getInventory());
     }
 
     private static boolean hasAndRemoveItem(Player player, Item item, int count) {

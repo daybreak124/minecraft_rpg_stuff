@@ -1,5 +1,6 @@
 package net.cold.coldsmod.network;
 
+import net.cold.coldsmod.ModMessages;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundEvents;
@@ -24,7 +25,7 @@ public class ClientInputEvent {
 
         KEY_ACTIONS.put(Keybinds.quantumKey, player -> {
             if (QuantumLeapSync.QuantumLeapClientData.quantumLeapEligible) {
-                NetworkHandler.CHANNEL.sendToServer(new QuantumLeapPacket());
+                ModMessages.sendToServer(new QuantumLeapPacket());
             }
         });
 
@@ -41,40 +42,40 @@ public class ClientInputEvent {
                         SoundEvents.ARMOR_EQUIP_ELYTRA, SoundSource.PLAYERS,
                         0.5F, 1.0F);
 
-                NetworkHandler.CHANNEL.sendToServer(new CombatantsAidPacket());
+                ModMessages.sendToServer(new CombatantsAidPacket());
 
             } else if (CombatantRecallSync.CombatantRecallClientData.combatantRecallEligible) {
-                NetworkHandler.CHANNEL.sendToServer(new CombatantsRecallPacket());
+                ModMessages.sendToServer(new CombatantsRecallPacket());
             }
         });
 
         KEY_ACTIONS.put(Keybinds.overconfidenceKey, player -> {
             if (OverconfidenceSync.OverconfidenceData.OverconfidenceEligible) {
-                NetworkHandler.CHANNEL.sendToServer(new OverconfidencePacket());
+                ModMessages.sendToServer(new OverconfidencePacket());
             }
         });
 
         KEY_ACTIONS.put(Keybinds.directedHatredKey, player -> {
             if (HatredSync.HatredData.HatredEligible) {
-                NetworkHandler.CHANNEL.sendToServer(new DirectedHatredPacket());
+                ModMessages.sendToServer(new DirectedHatredPacket());
             }
         });
 
         KEY_ACTIONS.put(Keybinds.daringShoutKey, player -> {
             if (DaringShoutSync.DaringClientData.DaringEligible) {
-                NetworkHandler.CHANNEL.sendToServer(new DaringShoutPacket());
+                ModMessages.sendToServer(new DaringShoutPacket());
             }
         });
 
         KEY_ACTIONS.put(Keybinds.intimidateKey, player -> {
             if (IntimidatingPresenceSync.IntimidatingSync.IntimidatingPresenceEligible) {
-                NetworkHandler.CHANNEL.sendToServer(new IntimidatePacket());
+                ModMessages.sendToServer(new IntimidatePacket());
             }
         });
 
         KEY_ACTIONS.put(Keybinds.severanceKey, player -> {
             if (SeveranceSync.SeveranceClientData.severanceEligible) {
-                NetworkHandler.CHANNEL.sendToServer(new SoulSeverancePacket());
+                ModMessages.sendToServer(new SoulSeverancePacket());
             }
         });
 
@@ -99,7 +100,7 @@ public class ClientInputEvent {
                 player.level().playSound(player, player.getX(), player.getY(), player.getZ(),
                         SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 0.5F, 1.0F);
 
-                NetworkHandler.CHANNEL.sendToServer(new DFAPacket(mX, mZ, player.isCrouching()));
+                ModMessages.sendToServer(new DFAPacket(mX, mZ, player.isCrouching()));
 
             } else if (DfaAirborneSync.DfaAirborneClientData.dfaAirborneEligible) {
 
@@ -117,8 +118,16 @@ public class ClientInputEvent {
                         SoundEvents.TRIDENT_RIPTIDE_3,
                         SoundSource.PLAYERS, 1.0F, 0.45F);
 
-                NetworkHandler.CHANNEL.sendToServer(new DFADivePacket());
+                ModMessages.sendToServer(new DFADivePacket());
             }
+        });
+
+        KEY_ACTIONS.put(Keybinds.autoSmeltKey, player -> {
+            ModMessages.sendToServer(new ToggleAutoSmeltPacket());
+        });
+
+        KEY_ACTIONS.put(Keybinds.jumpBoostKey, player -> {
+            ModMessages.sendToServer(new ToggleJumpBoostPacket());
         });
     }
 

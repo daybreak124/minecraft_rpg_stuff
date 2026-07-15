@@ -1,0 +1,6 @@
+{
+  "message_id": "direct_melee_damage",
+  "scaling": "never",
+  "exhaustion": 0.0,
+  "effects": "hurt"
+}

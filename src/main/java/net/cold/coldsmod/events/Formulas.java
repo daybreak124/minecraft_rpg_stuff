@@ -4,31 +4,42 @@ import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusCapability
 import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusRegistry;
 import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusTrigger;
 import net.cold.coldsmod.capabilities_and_blessings.Capabilities.PlayerBonusCache;
-import net.cold.coldsmod.capabilities_and_blessings.effects.BlessedLandReady;
 import net.cold.coldsmod.capabilities_and_blessings.registry.EffectUtils;
 import net.cold.coldsmod.capabilities_and_blessings.registry.ModEffects;
+import net.cold.coldsmod.custom_attacks.AttackHandler;
+import net.cold.coldsmod.custom_attacks.attacks.*;
 import net.cold.coldsmod.damage_types.ModDamageTypes;
+import net.cold.coldsmod.mob.Sbeve;
+import net.cold.coldsmod.stat.AttributeApplier;
 import net.cold.coldsmod.stat.ItemRarityUtils;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.FishingHook;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
@@ -42,7 +53,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.*;
@@ -63,7 +74,8 @@ import java.util.UUID;
 import static net.cold.coldsmod.capabilities_and_blessings.effects.IntoTheFrayCollisionCheck.isValidTarget;
 import static net.cold.coldsmod.capabilities_and_blessings.registry.CooldownCycle.EXPIRE_HANDLERS;
 import static net.cold.coldsmod.capabilities_and_blessings.registry.EffectUtils.spawnExplosionOnFeet;
-import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
+
+import static net.cold.coldsmod.stat.AttributeApplier.*;
 import static net.cold.coldsmod.stat.ModAttributes.*;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -72,29 +84,39 @@ public class Formulas {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void onLivingAttack(LivingAttackEvent event) {
         if (event.getEntity().level().isClientSide()) return;
-        if (event.getSource().is(DamageTypes.FALL)) return;
 
+        DamageSource source = event.getSource();
+
+        if (source.is(DamageTypes.FALL) || source.is(DamageTypes.FELL_OUT_OF_WORLD) || source.is(DamageTypes.GENERIC_KILL)) return;
         // Player takes damage
+
         if (event.getEntity() instanceof Player victim) {
 
+            double evasion = victim.getAttributeValue(ModAttributes.EVASION.get());
+
             // Player deals damage
-            if (event.getSource().getEntity() instanceof Player attacker && event.getSource().getDirectEntity() instanceof AbstractArrow arrow) {
-                float[] data = { (float) attacker.getAttributeValue(ModAttributes.PROJECTILE_DAMAGE_MULTIPLIER.get()), event.getAmount() };
+            if (source.getDirectEntity() instanceof Projectile arrow) {
+                if (source.getEntity() instanceof Player attacker) {
+                    float[] data = { (float) attacker.getAttributeValue(ModAttributes.PROJECTILE_DAMAGE_MULTIPLIER.get()), event.getAmount() };
 
-                BonusRegistry.process(attacker, null, attacker.level(), BonusTrigger.PROJECTILE_HURT_BOW, data);
-                BonusRegistry.process(attacker, event.getEntity(), attacker.level(), BonusTrigger.FRIENDLY_FIRE_LIFE_TOUCH, data);
+                    BonusRegistry.process(attacker, null, attacker.level(), BonusTrigger.PROJECTILE_HURT_BOW, data);
+                    BonusRegistry.process(attacker, event.getEntity(), attacker.level(), BonusTrigger.FRIENDLY_FIRE_LIFE_TOUCH, data);
 
-                // For cancelling event
-                if (data[0] == -1f) {
-                    event.setCanceled(true);
-                    arrow.discard();
-                    return;
+                    // For cancelling event
+                    if (data[0] == -1f) {
+                        event.setCanceled(true);
+                        arrow.discard();
+                        return;
+                    }
+                } else {
+                    PlayerBonusCache cache = victim.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
+                    if (cache.isArrowEvasion()) {
+                        evasion += 0.25d;
+                    }
                 }
             }
 
-            double evasion = victim.getAttributeValue(ModAttributes.EVASION.get());
-            LivingEntity attacker = event.getSource().getEntity() instanceof LivingEntity lentity ? lentity : null;
-
+            LivingEntity attacker = source.getEntity() instanceof LivingEntity lentity ? lentity : null;
 
             if (victim.getRandom().nextDouble() < evasion) {
                 event.setCanceled(true);
@@ -102,6 +124,9 @@ public class Formulas {
                 if (victim instanceof ServerPlayer serverPlayer) {
                     serverPlayer.playNotifySound(SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75F, 1.5F);
                 }
+
+                BonusRegistry.process(victim, attacker, victim.level(), BonusTrigger.DAMAGE_TAKE_ATTACK_EVENT_PRE);
+
                 return;
             }
 
@@ -117,7 +142,8 @@ public class Formulas {
 
         float finalDamage = event.getAmount();
 
-        Entity source = event.getSource().getEntity();
+        DamageSource type = event.getSource();
+        Entity source = type.getEntity();
         LivingEntity victim = event.getEntity();
 
         // PLAYER TAKES DAMAGE
@@ -134,83 +160,118 @@ public class Formulas {
             BonusRegistry.process(player, attacker, player.level(), BonusTrigger.DAMAGE_TAKE_DAMAGE_EVENT, data);
 
             if (player.isBlocking()) {
-                BonusRegistry.process(player, attacker, player.level(), BonusTrigger.DEFEND, data);
+                if (source instanceof Projectile proj) {
+                    BonusRegistry.process(player, (LivingEntity) proj.getOwner(), player.level(), BonusTrigger.DEFEND, data);
+                } else {
+                    BonusRegistry.process(player, attacker, player.level(), BonusTrigger.DEFEND, data);
+                }
             }
 
             finalDamage *= data[0];
+            BonusRegistry.process(player, attacker, player.level(), BonusTrigger.DAMAGE_TAKE_DAMAGE_EVENT_POST, data);
         } else {
-            finalDamage *= (float) victim.getAttributeValue(INCOMING_DAMAGE_MULTIPLIER.get());
+            if (type.is(ModDamageTypes.DOT_DAMAGE)) finalDamage *= (float) (victim.getAttributeValue(INCOMING_DAMAGE_MULTIPLIER.get()) + victim.getAttributeValue(DOT_INCOMING_DAMAGE_MULTIPLIER.get()));
+            else finalDamage *= (float) victim.getAttributeValue(INCOMING_DAMAGE_MULTIPLIER.get());
         }
 
         // PLAYER DEALS DAMAGE
         if (source instanceof Player player) {
             if (!(victim instanceof Player)) {
-                if (event.getSource().is(ModDamageTypes.TRUE_DAMAGE)) return;
+                if (type.is(ModDamageTypes.TRUE_DAMAGE)) return;
+                PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
 
                 // Additive multipliers, damage
                 float[] data = { 0.0f, finalDamage};
 
-                if (event.getSource().getDirectEntity() == player) {
+                if (type.is(ModDamageTypes.CUSTOM_MELEE_DAMAGE)) {
 
-                    double melPot = getScaledValue(player, ModAttributes.MELEE_POTENCY.get(), ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
+                    double melPot = getScaledValue(player, ModAttributes.MELEE_POTENCY.get());
 
                     data[0] += (float) player.getAttributeValue(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
-                    BonusRegistry.process(player, victim, player.level(), BonusTrigger.MELEE_HURT, data);
+                    BonusRegistry.process(player, victim, player.level(), BonusTrigger.MELEE_HURT_INDIRECT, data);
+
+                    if (rollCrit(player, getScaledValue(player, ModAttributes.MELEE_ACCURACY.get()))) {
+                        finalDamage *= (float) (1.25 + getScaledValue(player, ModAttributes.MELEE_PRECISION.get()) / 100.0);
+                        playCritSound(victim);
+                        BonusRegistry.process(player, victim, player.level(), BonusTrigger.MELEE_CRIT_INDIRECT, data);
+                    } else {
+                        BonusRegistry.process(player, victim, player.level(), BonusTrigger.MELEE_NON_CRIT_INDIRECT, data);
+                    }
                     finalDamage *= (float) (1.0 + melPot / 100.0);
 
-                } else if (event.getSource().is(ModDamageTypes.CUSTOM_MELEE_DAMAGE)) {
+                }
+                else if (type.getDirectEntity() instanceof AbstractArrow arrow) {
 
-                    double melPot = getScaledValue(player, ModAttributes.MELEE_POTENCY.get(), ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
-
-                    if (rollCrit(player, getScaledValue(player, ModAttributes.MELEE_ACCURACY.get(), ModAttributes.MELEE_ACCURACY_MULTIPLIER.get()))) {
-                        finalDamage *= (float) (1.5 + getScaledValue(player, ModAttributes.MELEE_PRECISION.get(), ModAttributes.MELEE_PRECISION_MULTIPLIER.get()) / 100.0);
-                        playCritSound(player);
-
-                    }
-                    data[0] += (float) player.getAttributeValue(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
-                    BonusRegistry.process(player, victim, player.level(), BonusTrigger.INDIRECT_MELEE_HURT, data);
-                    finalDamage *= (float) (1.0 + melPot / 100.0);
-
-                } else if (event.getSource().getDirectEntity() instanceof AbstractArrow arrow) {
-
-                    double projPot = getScaledValue(player, ModAttributes.PROJECTILE_POTENCY.get(), ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
-
-                    if (rollCrit(player, getScaledValue(player, ModAttributes.PROJECTILE_ACCURACY.get(), ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get()))) {
-                        finalDamage *= (float) (1.5 + getScaledValue(player, ModAttributes.PROJECTILE_PRECISION.get(), ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get()) / 100.0);
-                        playCritSound(player);
-                    }
+                    double projPot = getScaledValue(player, ModAttributes.PROJECTILE_POTENCY.get());
 
                     data[0] += (float) player.getAttributeValue(ModAttributes.PROJECTILE_DAMAGE_MULTIPLIER.get());
                     if (arrow.getPersistentData().getBoolean("arr_bow")) {
                         BonusRegistry.process(player, victim, player.level(), BonusTrigger.PROJECTILE_HURT_BOW, data);
+                        if (rollCrit(player, getScaledValue(player, ModAttributes.PROJECTILE_ACCURACY.get()))) {
+                            BonusRegistry.process(player, victim, player.level(), BonusTrigger.PROJECTILE_HURT_BOW_CRIT, data);
+                            finalDamage *= (float) (1.25 + getScaledValue(player, ModAttributes.PROJECTILE_PRECISION.get()) / 100.0);
+                            playCritSound(player);
+                        } else {
+                            BonusRegistry.process(player, victim, player.level(), BonusTrigger.PROJECTILE_HURT_BOW_NON_CRIT, data);
+                        }
                     }
                     else if (arrow.getPersistentData().getBoolean("arr_cbow")) {
                         BonusRegistry.process(player, victim, player.level(), BonusTrigger.PROJECTILE_HURT_CROSSBOW, data);
+                        if (rollCrit(player, getScaledValue(player, ModAttributes.PROJECTILE_ACCURACY.get()))) {
+                            BonusRegistry.process(player, victim, player.level(), BonusTrigger.PROJECTILE_HURT_CROSSBOW_CRIT, data);
+                            finalDamage *= (float) (1.25 + getScaledValue(player, ModAttributes.PROJECTILE_PRECISION.get()) / 100.0);
+                            playCritSound(player);
+                        } else {
+                            BonusRegistry.process(player, victim, player.level(), BonusTrigger.PROJECTILE_HURT_CROSSBOW_NON_CRIT, data);
+                        }
                     }
-                    finalDamage *= (float) (1.0 + projPot / 100.0)/2;
+                    finalDamage *= (float) (1.0 + projPot / 100.0);
 
-                } else if (event.getSource().is(ModDamageTypes.CUSTOM_RANGED_DAMAGE)) {
-                    double genPot = getScaledValue(player, ModAttributes.PROJECTILE_POTENCY.get(), ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
-                    if (rollCrit(player, getScaledValue(player, ModAttributes.PROJECTILE_ACCURACY.get(), ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get()))) {
-                        finalDamage *= (float) (1.5 + getScaledValue(player, ModAttributes.PROJECTILE_PRECISION.get(), ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get()) / 100.0);
-                        playCritSound(player);
-                    }
+                } else if (type.is(ModDamageTypes.CUSTOM_RANGED_DAMAGE)) {
+                    double genPot = getScaledValue(player, ModAttributes.PROJECTILE_POTENCY.get());
+
                     data[0] += (float) player.getAttributeValue(ModAttributes.PROJECTILE_DAMAGE_MULTIPLIER.get());
                     finalDamage *= (float) (1.0 + genPot / 100.0);
-                } else if (event.getSource().is(ModDamageTypes.DOT_DAMAGE)) {
-                    double dotPot = getScaledValue(player, ModAttributes.POTENCY.get(), ModAttributes.POTENCY_MULTIPLIER.get());
-                    if (rollCrit(player, getScaledValue(player, ModAttributes.ACCURACY.get(), ModAttributes.ACCURACY_MULTIPLIER.get()))) {
-                        finalDamage *= (float) (1.5 + getScaledValue(player, ModAttributes.PRECISION.get(), ModAttributes.PRECISION_MULTIPLIER.get()) / 100.0);
+
+                    if (rollCrit(player, getScaledValue(player, ModAttributes.PROJECTILE_ACCURACY.get()))) {
+                        finalDamage *= (float) (1.25 + getScaledValue(player, ModAttributes.PROJECTILE_PRECISION.get()) / 100.0);
+                        playCritSound(player);
+                        BonusRegistry.process(player, victim, player.level(), BonusTrigger.INDIRECT_RANGE_CRIT, data);
+                    } else {
+                        BonusRegistry.process(player, victim, player.level(), BonusTrigger.INDIRECT_RANGE_NONCRIT, data);
                     }
+                } else if (type.is(ModDamageTypes.DOT_DAMAGE)) {
+                    double dotPot = getScaledValue(player, ModAttributes.POTENCY.get());
+
                     data[0] += (float) player.getAttributeValue(ModAttributes.DOT_DAMAGE_MULTIPLIER.get());
                     finalDamage *= (float) (1.0 + dotPot / 100.0);
-                } else {
-                    double genPot = getScaledValue(player, ModAttributes.POTENCY.get(), ModAttributes.POTENCY_MULTIPLIER.get());
-                    if (rollCrit(player, getScaledValue(player, ModAttributes.ACCURACY.get(), ModAttributes.ACCURACY_MULTIPLIER.get()))) {
-                        finalDamage *= (float) (1.5 + getScaledValue(player, ModAttributes.PRECISION.get(), ModAttributes.PRECISION_MULTIPLIER.get()) / 100.0);
+
+                    if (rollCrit(player, getScaledValue(player, ModAttributes.ACCURACY.get()))) {
+                        finalDamage *= (float) (1.25 + getScaledValue(player, ModAttributes.PRECISION.get()) / 100.0);
                     }
+                } else if (cache.getLastUsedAttack() == 1) {
+                    finalDamage = aoeAttack(player, victim, cache, finalDamage, data);
+                } else if (cache.getLastUsedAttack() == 2) {
+                    finalDamage = heavyAttack(player, victim, cache, finalDamage, data);
+                } else if (cache.getLastUsedAttack() == 3) {
+                    finalDamage = jumpingAttack(player, victim, cache, finalDamage, data);
+                } else if (cache.getLastUsedAttack() == 4) {
+                    finalDamage = lungeAttack(player, victim, cache, finalDamage, data);
+                } else if (cache.getLastUsedAttack() == 5) {
+                    finalDamage = swingAttack(player, victim, cache, finalDamage, data);
+                }
+                else {
+                    double genPot = getScaledValue(player, ModAttributes.POTENCY.get());
+
                     data[0] += (float) player.getAttributeValue(ModAttributes.ALL_DAMAGE_MULTIPLIER.get());
                     finalDamage *= (float) (1.0 + genPot / 100.0) * (float) player.getAttributeValue(ALL_DAMAGE_MULTIPLIER.get());
+
+                    if (rollCrit(player, getScaledValue(player, ModAttributes.ACCURACY.get()))) {
+                        finalDamage *= (float) (1.25 + getScaledValue(player, ModAttributes.PRECISION.get()) / 100.0);
+                        BonusRegistry.process(player, victim, player.level(), BonusTrigger.OTHER_CRIT, data);
+                    } else {
+                        BonusRegistry.process(player, victim, player.level(), BonusTrigger.OTHER_NONCRIT, data);
+                    }
                 }
 
                 BonusRegistry.process(player, victim, player.level(), BonusTrigger.HURT, data);
@@ -223,36 +284,13 @@ public class Formulas {
             finalDamage *= (float) outgoingMult;
         }
         event.setAmount(finalDamage);
+        // System.out.println(event.getAmount());
     }
 
     @SubscribeEvent
     public void onCrit(CriticalHitEvent event) {
-        if (event.getEntity().level().isClientSide()) return;
-        Player player = event.getEntity();
-
-        boolean isVanillaCrit = event.isVanillaCritical();
-
-        double scaledDamage = getScaledValue(player,
-                ModAttributes.MELEE_PRECISION.get(),
-                ModAttributes.MELEE_PRECISION_MULTIPLIER.get());
-        float critBonus = (float) (1.5 + (scaledDamage / 100.0));
-
-        if (isVanillaCrit) {
-            BonusRegistry.process(player, (LivingEntity) event.getTarget(), player.level(), BonusTrigger.MELEE_CRIT);
-            event.setDamageModifier(critBonus);
-        } else {
-            double scaledChance = getScaledValue(player,
-                    ModAttributes.MELEE_ACCURACY.get(),
-                    ModAttributes.MELEE_ACCURACY_MULTIPLIER.get());
-
-            boolean isCustomCrit = player.getRandom().nextDouble() < (scaledChance + 10.0) / 100.0;
-
-            if (isCustomCrit) {
-                event.setResult(Event.Result.ALLOW);
-                BonusRegistry.process(player, (LivingEntity) event.getTarget(), player.level(), BonusTrigger.MELEE_CRIT);
-                event.setDamageModifier(critBonus);
-            }
-        }
+        event.setDamageModifier(1);
+        event.setResult(Event.Result.DENY);
     }
 
     @SubscribeEvent
@@ -261,7 +299,7 @@ public class Formulas {
             float[] data = { 1.0f };
             BonusRegistry.process(player, null, player.level(), BonusTrigger.HEAL, data);
 
-            double incHeal = getScaledValue(player, ModAttributes.REJUVENATION.get(), ModAttributes.REJUVENATION_MULTIPLIER.get());
+            double incHeal = getScaledValue(player, ModAttributes.REJUVENATION.get());
             event.setAmount((float) (event.getAmount() * (1 + incHeal/100) * data[0]));
         }
     }
@@ -295,20 +333,25 @@ public class Formulas {
 
     @SubscribeEvent
     public void onLivingFall(LivingFallEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
+        if (event.getEntity().level().isClientSide() || !(event.getEntity() instanceof Player player)) return;
 
         float jumpBoost = (float) player.getAttributeValue(ModAttributes.JUMP_BOOST.get());
-        float fallThreshold = 3.0f + (3.0f * (jumpBoost - 1.0f));
-        float fallDistance = event.getDistance();
-        if (fallDistance <= fallThreshold) {
-            if (jumpBoost > 1.5 && fallDistance > 3) { spawnExplosionOnFeet(player); }
+        float safeDistance = 3.0f + (3.0f * (jumpBoost - 1.0f));
+        float actualDistance = event.getDistance();
+
+        if (actualDistance <= safeDistance) {
+            if (jumpBoost > 1.5f && actualDistance > 3.0f) {
+                spawnExplosionOnFeet(player);
+            }
+
             event.setDistance(0);
             event.setCanceled(true);
-            player.fallDistance = 0;
+        } else {
+            float damageDistance = (actualDistance - safeDistance) + 3.0f;
+            event.setDistance(damageDistance);
         }
-
         float[] data = { event.getDistance() };
-        BonusRegistry.process(player, event.getEntity(), player.level(), BonusTrigger.LAND, data);
+        BonusRegistry.process(player, player, player.level(), BonusTrigger.LAND, data);
         event.setDistance(data[0]);
     }
 
@@ -320,7 +363,7 @@ public class Formulas {
         switch (type) {
             case "shield" -> BonusRegistry.process(player, null, player.level(), BonusTrigger.ITEM_USE_START_SHIELD);
             case "bow"    -> BonusRegistry.process(player, null, player.level(), BonusTrigger.ITEM_USE_START_BOW);
-            case "crossbow" -> BonusRegistry.process(player, null, player.level(), BonusTrigger.ITEM_USE_START_BOW); // If they share logic
+            // case "crossbow" -> BonusRegistry.process(player, null, player.level(), BonusTrigger.ITEM_USE_START_CROSSBOW);
         }
     }
 
@@ -349,6 +392,11 @@ public class Formulas {
         switch (type) {
             case "shield" -> BonusRegistry.process(player, null, player.level(), BonusTrigger.ITEM_USE_END_SHIELD);
             case "bow"    -> BonusRegistry.process(player, null, player.level(), BonusTrigger.ITEM_USE_END_BOW);
+            case "crossbow" -> {
+                CompoundTag nbt = event.getItem().getOrCreateTag();
+                crossbowDrawSpeedUpdate(player, event.getItem(), nbt);
+
+            }
         }
     }
 
@@ -401,22 +449,9 @@ public class Formulas {
                 SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.0F);
     }
 
-
-    private double getSharpnessLevel(ItemStack stack) {
-        if (stack.isEmpty() || !"sword".equals(ItemRarityUtils.getItemType(stack))) return 0.0;
-        int level = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SHARPNESS, stack);
-        if (level == 0) return 0.0;
-        return 1.0 + (level - 1) * 0.5;
-    }
-
-    private double getSharpnessBonus(Player player, InteractionHand hand) {
-        InteractionHand actualHand = (hand == null) ? InteractionHand.MAIN_HAND : hand;
-        ItemStack stack = player.getItemInHand(actualHand);
-        if (stack.isEmpty()) return 0.0;
-        if (!stack.isEmpty() && "sword".equals(ItemRarityUtils.getItemType(stack))) {
-            return getSharpnessLevel(stack);
-        }
-        return 0.0;
+    public static void playCritSound(LivingEntity target) {
+        target.level().playSound(null, target.getX(), target.getY(), target.getZ(),
+                SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 0.5F, 1.0F);
     }
 
     @SubscribeEvent
@@ -439,7 +474,6 @@ public class Formulas {
 
         if (!(creeper.level() instanceof ServerLevel serverLevel)) return;
         MinecraftServer server = serverLevel.getServer();
-        if (server == null) return;
 
         Player owner = server.getPlayerList().getPlayer(ownerUUID);
         if (owner == null) return;
@@ -449,20 +483,17 @@ public class Formulas {
         double finalDamage = 5 * projDmg;
 
         double totalProjDamage = getScaledValue(owner,
-                ModAttributes.PROJECTILE_POTENCY.get(),
-                ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
+                ModAttributes.PROJECTILE_POTENCY.get());
 
 
         double totalCritChance = getScaledValue(owner,
-                ModAttributes.PROJECTILE_ACCURACY.get(),
-                ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get()) + 10.0;
+                ModAttributes.PROJECTILE_ACCURACY.get()) + 10.0;
 
         double totalCritDamage = getScaledValue(owner,
-                ModAttributes.PROJECTILE_PRECISION.get(),
-                ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get());
+                ModAttributes.PROJECTILE_PRECISION.get());
 
         if (owner.getRandom().nextDouble() < (totalCritChance / 100.0)) {
-            finalDamage *= (1.5 + (totalCritDamage / 100.0));
+            finalDamage *= (1.25 + (totalCritDamage / 100.0));
         }
 
         finalDamage *= (1.0 + (totalProjDamage / 100.0));
@@ -471,39 +502,20 @@ public class Formulas {
     }
 
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (event.player.level().isClientSide()) return;
-
-        Player player = event.player;
-        if (!(player.tickCount % 10 == 0)) return;
-        if (player.getHealth() >= player.getMaxHealth()) return;
-        Level level = player.level();
-
-        List<BlessedLandReady.BlessedLandEntity> clouds = level.getEntitiesOfClass(BlessedLandReady.BlessedLandEntity.class,
-                player.getBoundingBox());
-
-        for (BlessedLandReady.BlessedLandEntity cloud : clouds) {
-            player.heal(cloud.getHealAmount());
-            cloud.discard();
-        }
-    }
-
-    @SubscribeEvent
     public static void onArrowSpawn(EntityJoinLevelEvent event) {
         if (event.getLevel().isClientSide() || !(event.getEntity() instanceof AbstractArrow arrow)) return;
-        if (!(arrow.getOwner() instanceof Player)) return;
+        if (!(arrow.getOwner() instanceof Player player)) return;
+
 
         if (arrow.shotFromCrossbow()) {
             arrow.getPersistentData().putBoolean("arr_cbow", true);
-            return;
+            PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
+            if (cache.isBowGravityCancel()) arrow.setNoGravity(true);
         }
-
-
-        if (arrow.getOwner() instanceof Player player) {
-            if ("bow".equals(ItemRarityUtils.getItemType(player.getUseItem()))) {
-                arrow.getPersistentData().putBoolean("arr_bow", true);
-            }
+        else if ("bow".equals(ItemRarityUtils.getItemType(player.getUseItem()))) {
+            arrow.getPersistentData().putBoolean("arr_bow", true);
+            PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
+            if (cache.isBowGravityCancel()) arrow.setNoGravity(true);
         }
     }
 
@@ -634,7 +646,7 @@ public class Formulas {
         if (event.getPlayer().level().isClientSide) return;
         Player player = event.getPlayer();
         PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
-        if (!(cache.isFlameEligible() || cache.isForgeEligible())) return;
+        if (!cache.isAutoSmeltEnabled()) return;
 
         if (player.isCrouching() || player.isCreative()) return;
 
@@ -672,17 +684,34 @@ public class Formulas {
 
         if (smeltedAny) {
             event.setCanceled(true);
-            level.destroyBlock(pos, false);
 
-            level.removeBlock(pos, false);
+            int blockExp = state.getExpDrop(level, level.random, pos,
+                    EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, tool),
+                    EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool));
+
+            level.destroyBlock(pos, false);
 
             for (ItemStack drop : finalDrops) {
                 if (!player.getInventory().add(drop)) {
                     Block.popResource(level, pos, drop);
                 }
+
+                float furnaceExp = getSmeltingExperience(level, drop);
+                blockExp += (int) furnaceExp + (level.random.nextFloat() < (furnaceExp % 1) ? 1 : 0);
             }
+
+            if (blockExp > 0) {
+                state.getBlock().popExperience((ServerLevel) level, pos, blockExp);
+            }
+
             ((ServerLevel)level).sendParticles(ParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, 0.2, 0.2, 0.2, 0.05);
         }
+    }
+
+    private static float getSmeltingExperience(Level level, ItemStack stack) {
+        return level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, new SimpleContainer(stack), level)
+                .map(recipe -> recipe.getExperience())
+                .orElse(0.0f);
     }
 
     private static ItemStack getSmeltingResult(Level level, ItemStack stack) {
@@ -698,7 +727,7 @@ public class Formulas {
         Player player = event.getEntity();
         PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
         if (!cache.isHookEligible()) return;
-        if ((player.getHealth() <= 6.0F || (player.fishing == null))) return;
+        if ((player.getHealth() <= 6.0F || (player.fishing == null) || player.fishing.getHookedIn() instanceof Player)) return;
 
         FishingHook hook = player.fishing;
         Level level = player.level();
@@ -737,6 +766,311 @@ public class Formulas {
 
                 EffectUtils.playSound(player, SoundEvents.FISHING_BOBBER_RETRIEVE, 1f, 1f);
             }
+        }
+    }
+
+    private static final UUID ARMOR_UUID = UUID.fromString("d6e4b8a0-1222-4242-3232-12312345611");
+
+//    @SubscribeEvent
+//    public static void onMobSpawn(EntityJoinLevelEvent event) {
+//        if (event.getLevel().isClientSide()) return;
+//
+//        Entity entity = event.getEntity();
+//
+//        if (entity instanceof LivingEntity living && !(entity instanceof Sbeve || entity instanceof Player))  {
+//            AttributeInstance armor = living.getAttribute(Attributes.ARMOR);
+//            if (armor != null && armor.getModifier(ARMOR_UUID) == null) {
+//                RandomSource random = living.getRandom();
+//
+//                double randomArmor = (random.nextGaussian() * 1.66) + 5.0;
+//                float finalArmor = Mth.clamp((float) randomArmor, 0.0f, 10.0f);
+//
+//                armor.addTransientModifier(new AttributeModifier(ARMOR_UUID,
+//                        "scaling", finalArmor, AttributeModifier.Operation.ADDITION));
+//
+//                AttributeInstance toughness = living.getAttribute(Attributes.ARMOR_TOUGHNESS);
+//
+//                if (toughness != null) {
+//                    double randomToughness = (random.nextGaussian() * 1.66) + 5;
+//                    float finalToughness = Mth.clamp((float) randomToughness, 0.0f, 10.0f);
+//
+//                    toughness.addTransientModifier(new AttributeModifier(ARMOR_UUID,
+//                            "scaling", finalToughness, AttributeModifier.Operation.ADDITION));
+//                }
+//            }
+//        }
+//    }
+
+    public static final UUID CUSTOM_ATTACK_UUID = UUID.fromString("ccb2c3d4-e5f6-4a5b-8c9d-0e1f2a3b215d");
+
+
+    public static float aoeAttack(Player player, LivingEntity target, PlayerBonusCache cache, float finalDamage, float... data) {
+
+        AttributeApplier.removeModifier(player, Attributes.ATTACK_SPEED, CUSTOM_ATTACK_UUID);
+
+        double penalty = -0.2;
+        AttributeApplier.applyModifier(player, Attributes.ATTACK_SPEED, CUSTOM_ATTACK_UUID.toString(), penalty, AttributeModifier.Operation.MULTIPLY_TOTAL);
+
+
+        boolean vulnUp = target.hasEffect(ModEffects.MELEE_VULNERABILITY.get());
+
+
+        float multiplier = 0.6f;
+        if (vulnUp) {
+            multiplier += 0.1f;
+        }
+
+        int sweepLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SWEEPING_EDGE, player.getMainHandItem());
+        if (sweepLevel > 0) {
+            multiplier += sweepLevel * 0.1f;
+        }
+
+
+        if (player.level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.CRIT,
+                    target.getX(), target.getY(0.5D), target.getZ(),
+                    8, 0.2D, 0.2D, 0.2D, 0.1D);
+        }
+
+        double melPot = getScaledValue(player, ModAttributes.MELEE_POTENCY.get());
+
+        data[0] += (float) player.getAttributeValue(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
+        BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_HURT, data);
+
+        if (rollCrit(player, getScaledValue(player, ModAttributes.MELEE_ACCURACY.get()))) {
+            finalDamage *= (float) (1.25 + getScaledValue(player, ModAttributes.MELEE_PRECISION.get()) / 100.0);
+            playCritSound(target);
+            BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_CRIT_INDIRECT, data);
+        } else {
+            BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_NON_CRIT_INDIRECT, data);
+        }
+        finalDamage *= (float) (1.0 + melPot / 100.0);
+
+        return finalDamage * multiplier;
+    }
+
+
+    public static float heavyAttack(Player player, LivingEntity target, PlayerBonusCache cache, float finalDamage, float... data) {
+
+        AttributeApplier.removeModifier(player, Attributes.ATTACK_SPEED, CUSTOM_ATTACK_UUID);
+
+        boolean vulnUp = target.hasEffect(ModEffects.MELEE_VULNERABILITY.get());
+
+
+        if (vulnUp) {
+            finalDamage *= 1.6f;
+        } else {
+            finalDamage *= 1.3f;
+        }
+
+        if (player.level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.CRIT,
+                    target.getX(), target.getY(0.5D), target.getZ(),
+                    8, 0.2D, 0.2D, 0.2D, 0.1D);
+        }
+        player.swing(InteractionHand.MAIN_HAND, true);
+
+        if (target instanceof Player targetPlayer && targetPlayer.isBlocking()) {
+            targetPlayer.disableShield(true);
+        }
+
+        double melPot = getScaledValue(player, ModAttributes.MELEE_POTENCY.get());
+
+        data[0] += (float) player.getAttributeValue(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
+        BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_HURT, data);
+
+        if (rollCrit(player, getScaledValue(player, ModAttributes.MELEE_ACCURACY.get()))) {
+            finalDamage *= (float) (1.25 + getScaledValue(player, ModAttributes.MELEE_PRECISION.get()) / 100.0);
+            playCritSound(target);
+            BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_CRIT_INDIRECT, data);
+        } else {
+            BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_NON_CRIT_INDIRECT, data);
+        }
+        finalDamage *= (float) (1.0 + melPot / 100.0);
+
+        return finalDamage;
+    }
+
+    public static float jumpingAttack(Player player, LivingEntity target, PlayerBonusCache cache, float finalDamage, float... data) {
+
+
+        AttributeApplier.removeModifier(player, Attributes.ATTACK_SPEED, CUSTOM_ATTACK_UUID);
+
+        double penalty = -0.2;
+        AttributeApplier.applyModifier(player, Attributes.ATTACK_SPEED, CUSTOM_ATTACK_UUID.toString(), penalty, AttributeModifier.Operation.MULTIPLY_TOTAL);
+
+
+
+        if (player.level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.CRIT,
+                    target.getX(), target.getY(0.5D), target.getZ(),
+                    8, 0.2D, 0.2D, 0.2D, 0.1D);
+        }
+
+//        if (target instanceof Player targetPlayer) {
+//            if (targetPlayer.isBlocking() && targetPlayer.getUseItem().canPerformAction(ToolAction.get("shield_block"))) {
+//                ItemStack shieldStack = targetPlayer.getUseItem();
+//                targetPlayer.getCooldowns().addCooldown(shieldStack.getItem(), 100);
+//                targetPlayer.stopUsingItem();
+//                player.level().broadcastEntityEvent(targetPlayer, (byte) 30);
+//            }
+//        }
+
+        double melPot = getScaledValue(player, ModAttributes.MELEE_POTENCY.get());
+
+        data[0] += (float) player.getAttributeValue(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
+        BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_HURT, data);
+
+        if (rollCrit(player, getScaledValue(player, ModAttributes.MELEE_ACCURACY.get()))) {
+            finalDamage *= (float) (1.25 + getScaledValue(player, ModAttributes.MELEE_PRECISION.get()) / 100.0);
+            playCritSound(target);
+            BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_CRIT_INDIRECT, data);
+        } else {
+            BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_NON_CRIT_INDIRECT, data);
+        }
+        finalDamage *= (float) (1.0 + melPot / 100.0);
+
+        double currentXVelocity = target.getDeltaMovement().x;
+        double currentZVelocity = target.getDeltaMovement().z;
+
+        Vec3 look = player.getLookAngle();
+        Vec3 pushDir = new Vec3(look.x, 0, look.z).normalize();
+        double pushStrength = 0.2;
+
+        if (player.getServer() != null) {
+            player.getServer().tell(new net.minecraft.server.TickTask(
+                    player.getServer().getTickCount() + 1,
+                    () -> {
+                        if (player.isAlive() && target.isAlive()) {
+                            target.hasImpulse = true;
+                            target.setDeltaMovement(currentXVelocity + (pushDir.x * pushStrength), 0.62D, currentZVelocity + (pushDir.z * pushStrength));
+                            target.hurtMarked = true;
+                        }
+                    }
+            ));
+        }
+        target.addEffect(new MobEffectInstance(ModEffects.MELEE_VULNERABILITY.get(), 40, 0, false, false, false));
+
+
+        return finalDamage;
+    }
+
+
+    public static float lungeAttack(Player player, LivingEntity target, PlayerBonusCache cache, float finalDamage, float... data) {
+
+        AttributeApplier.removeModifier(player, Attributes.ATTACK_SPEED, CUSTOM_ATTACK_UUID);
+
+        double penalty = -0.333;
+        AttributeApplier.applyModifier(player, Attributes.ATTACK_SPEED, CUSTOM_ATTACK_UUID.toString(), penalty, AttributeModifier.Operation.MULTIPLY_TOTAL);
+
+
+
+        boolean vulnUp = target.hasEffect(ModEffects.MELEE_VULNERABILITY.get());
+        if (vulnUp) {
+            finalDamage *= 1.5f;
+        } else {
+        }
+
+        if (player.level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.CRIT,
+                    target.getX(), target.getY(0.5D), target.getZ(),
+                    8, 0.2D, 0.2D, 0.2D, 0.1D);
+        }
+
+        float yawRadians = player.getYRot() * ((float) Math.PI / 180F);
+        double xVector = -net.minecraft.util.Mth.sin(yawRadians);
+        double zVector = net.minecraft.util.Mth.cos(yawRadians);
+
+        double pushStrength = vulnUp ? 1.4D : 1.1D;
+
+        player.getServer().tell(new net.minecraft.server.TickTask(
+                player.getServer().getTickCount() + 1,
+                () -> {
+                    if (player.isAlive() && target.isAlive()) {
+                        target.hasImpulse = true;
+                        target.setDeltaMovement(xVector * pushStrength, 0.2D, zVector * pushStrength);
+
+                        target.hurtMarked = true;
+                    }
+                }
+        ));
+
+        double melPot = getScaledValue(player, ModAttributes.MELEE_POTENCY.get());
+
+        data[0] += (float) player.getAttributeValue(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
+        BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_HURT, data);
+
+        if (rollCrit(player, getScaledValue(player, ModAttributes.MELEE_ACCURACY.get()))) {
+            finalDamage *= (float) (1.25 + getScaledValue(player, ModAttributes.MELEE_PRECISION.get()) / 100.0);
+            playCritSound(target);
+            BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_CRIT_INDIRECT, data);
+        } else {
+            BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_NON_CRIT_INDIRECT, data);
+        }
+        finalDamage *= (float) (1.0 + melPot / 100.0);
+
+        if (player.level() instanceof ServerLevel serverLevel) {
+
+            serverLevel.sendParticles(ParticleTypes.CRIT,
+                    target.getX(), target.getY(0.5D), target.getZ(),
+                    6, 0.1D, 0.1D, 0.1D, 0.15D);
+        }
+        return finalDamage;
+    }
+
+
+    public static float swingAttack(Player player, LivingEntity target, PlayerBonusCache cache, float finalDamage, float... data) {
+
+        AttributeApplier.removeModifier(player, Attributes.ATTACK_SPEED, CUSTOM_ATTACK_UUID);
+
+
+        boolean vulnUp = target.hasEffect(ModEffects.MELEE_VULNERABILITY.get());
+
+
+        if (vulnUp) {
+            finalDamage *= 1.15f;
+        }
+
+        if (player.level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.CRIT,
+                    target.getX(), target.getY(0.5D), target.getZ(),
+                    8, 0.2D, 0.2D, 0.2D, 0.1D);
+        }
+        player.swing(InteractionHand.MAIN_HAND, true);
+
+//        if (target instanceof Player targetPlayer) {
+//            if (targetPlayer.isBlocking() && targetPlayer.getUseItem().canPerformAction(ToolAction.get("shield_block"))) {
+//                ItemStack shieldStack = targetPlayer.getUseItem();
+//                targetPlayer.getCooldowns().addCooldown(shieldStack.getItem(), 100);
+//                targetPlayer.stopUsingItem();
+//                player.level().broadcastEntityEvent(targetPlayer, (byte) 30);
+//            }
+//        }
+
+        double melPot = getScaledValue(player, ModAttributes.MELEE_POTENCY.get());
+
+        data[0] += (float) player.getAttributeValue(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
+        BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_HURT, data);
+
+        if (rollCrit(player, getScaledValue(player, ModAttributes.MELEE_ACCURACY.get()))) {
+            finalDamage *= (float) (1.25 + getScaledValue(player, ModAttributes.MELEE_PRECISION.get()) / 100.0);
+            playCritSound(target);
+            BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_CRIT_INDIRECT, data);
+        } else {
+            BonusRegistry.process(player, target, player.level(), BonusTrigger.MELEE_NON_CRIT_INDIRECT, data);
+        }
+        finalDamage *= (float) (1.0 + melPot / 100.0);
+
+        return finalDamage;
+    }
+
+    public static final UUID CONSECUTIVE_UUID = UUID.fromString("ccb123d4-e5f6-4a5b-1c9d-0abf2a3b215d");
+
+    public static void applyConsecutiveAttackDebuff(Player player, PlayerBonusCache cache) {
+        if (cache.getSecondLastAttack() == cache.getLastUsedAttack()) {
+            applyModifier(player, Attributes.ATTACK_SPEED, CONSECUTIVE_UUID.toString(),-0.3, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        } else {
+            removeModifier(player, Attributes.ATTACK_SPEED, CONSECUTIVE_UUID);
         }
     }
 }

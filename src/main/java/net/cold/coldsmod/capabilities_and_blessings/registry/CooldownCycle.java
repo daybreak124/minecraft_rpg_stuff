@@ -47,7 +47,15 @@ public class CooldownCycle {
             }
 
             double fort = player.getAttributeValue(ModAttributes.FORT.get());
-            double damage = hits * 3.0 * (1 + fort / 100.0);
+            float damage = (float) (hits * 3.0 * (1 + fort / 100.0));
+
+            if (cache.isShieldBlessingEnhanced()) {
+                damage *= 1.35f;
+            }
+
+            if (cache.isShieldBlessingHungerEnhanced()) {
+                player.getFoodData().setFoodLevel(player.getFoodData().getFoodLevel() + hits/3);
+            }
 
             Level level = player.level();
 
@@ -58,6 +66,8 @@ public class CooldownCycle {
             DamageSource source = new DamageSource(meleeType, null, player);
 
             double radiusSq = 25.0;
+            float finalDamage = damage;
+
             level.getEntitiesOfClass(
                     LivingEntity.class,
                     player.getBoundingBox().inflate(5.0),
@@ -67,7 +77,7 @@ public class CooldownCycle {
                         double dz = e.getZ() - player.getZ();
                         return (dx * dx + dz * dz) <= radiusSq;
                     }
-            ).forEach(target -> target.hurt(source, (float) damage));
+            ).forEach(target -> target.hurt(source, finalDamage));
 
             level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.RETALIATE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
 
@@ -168,7 +178,7 @@ public class CooldownCycle {
         });
 
         EXPIRE_HANDLERS.put(ModEffects.OVERCONFIDENCE_ACTIVE.get(), (player, instance) -> {
-            player.addEffect(new MobEffectInstance(ModEffects.OVERCONFIDENCE_COOLDOWN.get(), 140, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(ModEffects.OVERCONFIDENCE_COOLDOWN.get(), 280, 0, false, false, true));
         });
 
         EXPIRE_HANDLERS.put(ModEffects.OVERCONFIDENCE_COOLDOWN.get(), (player, instance) -> {

@@ -59,11 +59,9 @@ public class KeyOfTheUnknown {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+5% Knockback Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+6 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+10% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }
@@ -81,11 +79,9 @@ public class KeyOfTheUnknown {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+7 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+10% Knockback Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+9 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+16 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+20% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }
@@ -103,14 +99,9 @@ public class KeyOfTheUnknown {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+8 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+15% Knockback Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+5% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+10% Armor").withStyle(style -> style.withColor(0x0F52BA)));
-            tooltip.add(Component.literal("+12 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+24 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+30% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }
@@ -128,14 +119,9 @@ public class KeyOfTheUnknown {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+9 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+8 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+15% Knockback Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+12% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+18% Armor").withStyle(style -> style.withColor(0x0F52BA)));
-            tooltip.add(Component.literal("+15 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+32 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+40% Debuff Resist").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Otherworlds").withStyle(ChatFormatting.DARK_AQUA));
         }

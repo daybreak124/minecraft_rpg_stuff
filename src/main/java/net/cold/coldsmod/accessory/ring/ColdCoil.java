@@ -61,11 +61,9 @@ public class ColdCoil {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+4 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Melee Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+5 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+9% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
+            tooltip.add(Component.literal("+5.2 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));
         }
@@ -83,11 +81,9 @@ public class ColdCoil {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+8 Melee Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+7.5 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+12% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
+            tooltip.add(Component.literal("+10.4 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));
         }
@@ -105,12 +101,13 @@ public class ColdCoil {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+9 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+15 Melee Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+13 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+8% Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
-            tooltip.add(Component.literal("+15% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
+            tooltip.add(Component.literal("+10.4 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+5 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+7% Nock Haste").withStyle(style -> style.withColor(0xEC3700)));
+
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));
         }
@@ -129,15 +126,14 @@ public class ColdCoil {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+13 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
+
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+21 Melee Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+16 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+8% Melee Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
-            tooltip.add(Component.literal("+8% Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
-
-            tooltip.add(Component.literal("+15% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
+            tooltip.add(Component.literal("+10.4 Nock Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+10 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+14% Nock Haste").withStyle(style -> style.withColor(0xEC3700)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));

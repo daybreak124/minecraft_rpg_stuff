@@ -10,10 +10,6 @@ import java.util.function.Supplier;
 public class BlessingRegistry {
     public static final Map<String, BlessingEntry> MAP = new LinkedHashMap<>();
 
-    /**
-     * @param item The physical item associated with the blessing.
-     * @param category The group name (e.g., "combat", "sword", "bow", "utility").
-     */
     public record BlessingEntry(Item item, String category) {}
 
     static {
@@ -21,21 +17,14 @@ public class BlessingRegistry {
         register("warlords_gaze", ModItems.WARLORDS_GAZE, "combat");
         register("pride_infused_aigrette", ModItems.PRIDE_INFUSED_AIGRETTE, "combat");
         register("orb_of_world_destruction", ModItems.ORB_OF_WORLD_DESTRUCTION, "combat");
-        register("hanks_eye", ModItems.HANKS_EYE, "combat");
-        register("rage_amplifier", ModItems.RAGE_AMPLIFIER, "combat");
         register("banner_of_determination", ModItems.BANNER_OF_DETERMINATION, "combat");
         register("soul_magnet", ModItems.SOUL_MAGNET, "combat");
 
-        register("fox_eye", ModItems.FOX_EYE, "combat");
         // register("drop_of_sacrificial_blood", ModItems.DROP_OF_SACRIFICIAL_BLOOD, "combat");
 
         register("hell_on_earth", ModItems.HELL_ON_EARTH, "combat");
         register("horn_of_fearmongering", ModItems.HORN_OF_FEARMONGERING, "combat");
-
         register("broken_health_potion", ModItems.BROKEN_HEALTH_POTION, "combat");
-        register("immolation_of_heart", ModItems.IMMOLATION_OF_HEART, "combat");
-        register("restoring_aura", ModItems.RESTORING_AURA, "combat");
-
         register("wormhole", ModItems.WORMHOLE, "combat");
 
 

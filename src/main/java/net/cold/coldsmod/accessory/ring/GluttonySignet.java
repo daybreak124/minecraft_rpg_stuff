@@ -66,11 +66,10 @@ public class GluttonySignet {
             tooltip.add(Component.literal("+0.5 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+0.2 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("-20% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+2 Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+2 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+1 Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+1 Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("-2 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal("+2 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
-            tooltip.add(Component.literal("-15% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
 
@@ -94,11 +93,10 @@ public class GluttonySignet {
             tooltip.add(Component.literal("+1 Toughness").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("+0.4 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("-20% Debuff Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+2.5 Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+2.5 Haste").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+1.5 Potency").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+1.5 Haste").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal("-2.5 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal("+2.5 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
-            tooltip.add(Component.literal("-15% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -128,23 +126,20 @@ public class GluttonySignet {
             tooltip.add(Component.literal("+0.6 Max Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("-20% Debuff Resist").withStyle(ChatFormatting.BLUE));
 
-            tooltip.add(Component.literal("+2% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
-            tooltip.add(Component.literal("+2% Toughness").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
+            tooltip.add(Component.literal("+1.5% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
+            tooltip.add(Component.literal("+1.5% Toughness").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
 
-            tooltip.add(Component.literal("+3.25 Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
-            tooltip.add(Component.literal("+3.25 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+2 Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
+            tooltip.add(Component.literal("+2 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
 
-            tooltip.add(Component.literal("+3% Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
-            tooltip.add(Component.literal("+3% Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+2% Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+2% Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
 
             tooltip.add(Component.literal("-3.25 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal("+3.25 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
 
-            tooltip.add(Component.literal("-3% Restoration").withStyle(style -> style.withColor(0x3B8132)));
-            tooltip.add(Component.literal("+3% Rejuvenation").withStyle(style -> style.withColor(0x3B8132)));
-
-
-            tooltip.add(Component.literal("-15% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
+            tooltip.add(Component.literal("-2% Restoration").withStyle(style -> style.withColor(0x3B8132)));
+            tooltip.add(Component.literal("+2% Rejuvenation").withStyle(style -> style.withColor(0x3B8132)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
@@ -171,14 +166,14 @@ public class GluttonySignet {
             tooltip.add(Component.literal("+0.8 Health").withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.literal("-20% Debuff Resist").withStyle(ChatFormatting.BLUE));
 
-            tooltip.add(Component.literal("+4% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
-            tooltip.add(Component.literal("+4% Toughness").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
+            tooltip.add(Component.literal("+3% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
+            tooltip.add(Component.literal("+3% Toughness").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
 
             tooltip.add(Component.literal("+4 Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
             tooltip.add(Component.literal("+4 Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE0701B))));
 
-            tooltip.add(Component.literal("+6% Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
-            tooltip.add(Component.literal("+6% Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+4% Potency").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
+            tooltip.add(Component.literal("+4% Haste").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xec3700))));
 
             tooltip.add(Component.literal("-4 Restoration").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal("+4 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
@@ -186,7 +181,6 @@ public class GluttonySignet {
             tooltip.add(Component.literal("-4% Restoration").withStyle(style -> style.withColor(0x3B8132)));
             tooltip.add(Component.literal("+4% Rejuvenation").withStyle(style -> style.withColor(0x3B8132)));
 
-            tooltip.add(Component.literal("-15% Speed").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xD6C97A))));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));

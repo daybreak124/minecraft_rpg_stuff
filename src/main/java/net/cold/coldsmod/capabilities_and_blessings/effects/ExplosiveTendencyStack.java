@@ -6,7 +6,11 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
+import java.util.List;
 
 public class ExplosiveTendencyStack extends MobEffect {
     public ExplosiveTendencyStack() {
@@ -19,5 +23,9 @@ public class ExplosiveTendencyStack extends MobEffect {
         cache.setExplosiveStack(pAmplifier + 1);
     }
 
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
+    }
     // Handled in event
 }

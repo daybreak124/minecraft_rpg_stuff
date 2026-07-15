@@ -60,9 +60,11 @@ public class ThieveryWraps {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+1 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+13 Precision").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("-6% Melee Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+5 Melee Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+2% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
         }
@@ -80,10 +82,11 @@ public class ThieveryWraps {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+3 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+0.5 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+19 Precision").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("-10% Melee Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+10 Melee Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+4% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
         }
@@ -101,11 +104,12 @@ public class ThieveryWraps {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+4 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+5 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+1 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+22 Precision").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+13.5% Melee Potency").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("-15% Melee Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+15 Melee Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7% Melee Precision").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+6% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
         }
@@ -123,11 +127,12 @@ public class ThieveryWraps {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("+6 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+1.2 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+27.5 Precision").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+20% Melee Potency").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("-15% Melee Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+15 Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+14% Melee Precision").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+8% Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Stolen Wealth").withStyle(ChatFormatting.DARK_GREEN));
         }

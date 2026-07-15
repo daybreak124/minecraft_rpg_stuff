@@ -62,11 +62,11 @@ public class CorruptedLostRing {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+2 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+5% Knockback Resist").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1.5 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+3% Knockback Resist").withStyle(ChatFormatting.BLUE));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -86,11 +86,11 @@ public class CorruptedLostRing {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+5 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal("+3 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+10% Knockback Resist").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+6% Knockback Resist").withStyle(ChatFormatting.BLUE));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -110,14 +110,14 @@ public class CorruptedLostRing {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+7 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+9 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+4 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+3 Armor Toughness").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+15% Knockback Resist").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+3 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+2 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+9% Knockback Resist").withStyle(ChatFormatting.BLUE));
 
-            tooltip.add(Component.literal("+8% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
+            tooltip.add(Component.literal("+5% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -137,14 +137,14 @@ public class CorruptedLostRing {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+10 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+12 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-            tooltip.add(Component.literal("+6 Armor").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+4 Armor Toughness").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+20% Knockback Resist").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+3.5 Armor").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+3 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+12% Knockback Resist").withStyle(ChatFormatting.BLUE));
 
-            tooltip.add(Component.literal("+15% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
+            tooltip.add(Component.literal("+10% Armor").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x0F52BA))));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));

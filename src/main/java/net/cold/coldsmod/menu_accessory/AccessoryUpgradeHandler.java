@@ -2,13 +2,14 @@ package net.cold.coldsmod.menu_accessory;
 
 import net.cold.coldsmod.ModMessages;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Consumer;
+
+import static net.cold.coldsmod.stat.AttributeApplier.*;
 
 public class AccessoryUpgradeHandler {
 
@@ -28,6 +29,8 @@ public class AccessoryUpgradeHandler {
         int count = 0;
         CompoundTag active = player.getPersistentData().getCompound("ActiveAccessories");
         for (var entry : AccessoryRegistry.MAP.entrySet()) {
+            if (entry == null || entry.getValue() == null) continue;
+
             if (entry.getValue().category().equals(category)) {
                 if (active.getBoolean(entry.getKey())) count++;
             }
@@ -37,13 +40,14 @@ public class AccessoryUpgradeHandler {
 
     public static int getMaxForCategory(String category) {
         return switch (category) {
-            case "ring", "bracelet", "head" -> 2;
+            case "bracelet" -> 2;
+            case "ring" -> 2;
+            case "head" -> 2;
             case "utility" -> 10;
             default -> 1;
         };
     }
 
-    // AccessoryUpgradeHandler.java
 
     public static String getBaseName(String id) {
         var entry = AccessoryRegistry.MAP.get(id);
@@ -75,15 +79,12 @@ public class AccessoryUpgradeHandler {
         var entry = AccessoryRegistry.MAP.get(id);
         if (entry == null) return;
 
-        // USE THE UNIFIED CHECK HERE
         if (isAnyVersionActive(player, id)) {
-            player.sendSystemMessage(Component.literal("§cAlready using a version of this item!"));
             return;
         }
 
         String cat = entry.category();
         if (getCountInCategory(player, cat) >= getMaxForCategory(cat)) {
-            player.sendSystemMessage(Component.literal("§cLimit reached."));
             return;
         }
 
@@ -94,7 +95,15 @@ public class AccessoryUpgradeHandler {
 
             ModMessages.sendToPlayer(new AccessoryUnlockSyncPacket(player.getPersistentData()), player);
 
+            player.containerMenu.broadcastChanges();
+            player.inventoryMenu.slotsChanged(player.getInventory());
         }
+
+        refreshPerPointStats(player);
+        refreshMilestones(player);
+        recalculateDynamicBonuses(player);
+        // applyCrossbowTag(player);
+        recalcAS(player);
     }
 
     public static void tryDowngrade(ServerPlayer player, String id) {
@@ -115,6 +124,15 @@ public class AccessoryUpgradeHandler {
 
         ModMessages.sendToPlayer(new AccessoryUnlockSyncPacket(player.getPersistentData()), player);
 
+        player.containerMenu.broadcastChanges();
+        player.inventoryMenu.slotsChanged(player.getInventory());
+
+
+        refreshPerPointStats(player);
+        refreshMilestones(player);
+        recalculateDynamicBonuses(player);
+        // applyCrossbowTag(player);
+        recalcAS(player);
     }
 
     private static boolean hasAndRemoveItem(Player player, Item item, int count) {

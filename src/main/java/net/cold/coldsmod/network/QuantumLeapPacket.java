@@ -1,6 +1,8 @@
 package net.cold.coldsmod.network;
 
 import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusCapabilityProvider;
+import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusRegistry;
+import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusTrigger;
 import net.cold.coldsmod.capabilities_and_blessings.Capabilities.PlayerBonusCache;
 import net.cold.coldsmod.capabilities_and_blessings.registry.EffectUtils;
 import net.cold.coldsmod.capabilities_and_blessings.registry.ModEffects;
@@ -42,12 +44,14 @@ public class QuantumLeapPacket {
         ctx.get().enqueueWork(() -> {
             ServerPlayer player = ctx.get().getSender();
             if (player == null) return;
-            performDash(player);
+            PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
+
+            performDash(player, cache);
         });
         ctx.get().setPacketHandled(true);
     }
 
-    public static void performDash(ServerPlayer player) {
+    public static void performDash(ServerPlayer player, PlayerBonusCache cache) {
         if (!player.isAlive()) return;
 
         Vec3 look = player.getLookAngle().normalize();
@@ -101,12 +105,12 @@ public class QuantumLeapPacket {
         player.addEffect(new MobEffectInstance(ModEffects.QUANTUM_LEAP_COOLDOWN.get(), 20 * 35, 0, false, false, true));
 
         player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 160, 0, false, false, true));
+        BonusRegistry.process(player, null, player.level(), BonusTrigger.BLESSING_ACTIVATION);
 
 
         double potencyBuff = 30;
         double moveSpeedBuff = 0.02;
 
-        PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
 
         if (cache.isDfaQuantumSynergized()) {
             potencyBuff *= 1.5;

@@ -7,10 +7,12 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PulsatingLove extends MobEffect {
@@ -30,7 +32,7 @@ public class PulsatingLove extends MobEffect {
 
     private static void applyTamedAura(LivingEntity player) {
         Level level = player.level();
-        AABB area = player.getBoundingBox().inflate(7);
+        AABB area = player.getBoundingBox().inflate(4);
 
         List<TamableAnimal> animals = level.getEntitiesOfClass(
                 TamableAnimal.class,
@@ -44,5 +46,10 @@ public class PulsatingLove extends MobEffect {
             animal.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 600, 1, true, true));
             animal.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 600, 1, true, true));
         }
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

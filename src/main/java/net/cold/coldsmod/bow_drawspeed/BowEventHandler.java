@@ -21,9 +21,7 @@ public class BowEventHandler {
 
         if (!"bow".equals(ItemRarityUtils.getItemType(bow))) return;
 
-        float drawSpeed = (float) getScaledValue(player,
-                ModAttributes.NOCK_HASTE.get(),
-                ModAttributes.NOCK_HASTE_MULTIPLIER.get());
+        float drawSpeed = (float) getScaledValue(player, ModAttributes.NOCK_HASTE.get());
 
         float speedMultiplier = 1.0F + (drawSpeed / 100.0F);
 

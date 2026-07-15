@@ -60,13 +60,11 @@ public class FingersOfLust {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+5 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("-6 Perception").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+2 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+2 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+2.2 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+3.45 Precision").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -84,13 +82,11 @@ public class FingersOfLust {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("-6 Perception").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6.75 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+3.75 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+3.75 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+3.3 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+7.5 Precision").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -108,14 +104,12 @@ public class FingersOfLust {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+7 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("-6 Perception").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+12 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+4.5 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+9% Melee Haste").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("+7 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+5.5 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+10.5 Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+5% Haste").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -133,14 +127,12 @@ public class FingersOfLust {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+8 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("-6 Perception").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Perception").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+18 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+6 Melee Haste").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+18% Melee Haste").withStyle(style -> style.withColor(0xEC3700)));
-            tooltip.add(Component.literal("+12 Restoration").withStyle(style -> style.withColor(0x5BB450)));
+            tooltip.add(Component.literal("+7.7 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+13.75 Precision").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+10% Haste").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }

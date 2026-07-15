@@ -5,6 +5,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 public class StatMenu extends AbstractContainerMenu {
@@ -15,12 +16,12 @@ public class StatMenu extends AbstractContainerMenu {
 
     public StatMenu(int containerId, Inventory playerInventory, FriendlyByteBuf extraData) {
         super(ModMenu.STAT_MENU.get(), containerId);
-        // layoutPlayerInventorySlots(playerInventory, 8, 84);
+        layoutPlayerInventorySlots(playerInventory, 8, 1000);
     }
 
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
-        return ItemStack.EMPTY; // No item moving logic needed for this tab
+        return ItemStack.EMPTY;
     }
 
     @Override
@@ -28,15 +29,14 @@ public class StatMenu extends AbstractContainerMenu {
         return true; // Keeps the menu open
     }
 
-//    private void layoutPlayerInventorySlots(Inventory inv, int x, int y) {
-//        // Standard code to add the 3x9 inventory and 1x9 hotbar slots
-//        for (int i = 0; i < 3; i++) {
-//            for (int j = 0; j < 9; j++) {
-//                this.addSlot(new Slot(inv, j + i * 9 + 9, x + j * 18, y + i * 18));
-//            }
-//        }
-//        for (int i = 0; i < 9; i++) {
-//            this.addSlot(new Slot(inv, i, x + i * 18, y + 142));
-//        }
-//    }
+    private void layoutPlayerInventorySlots(Inventory inv, int x, int y) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
+                this.addSlot(new Slot(inv, j + i * 9 + 9, x + j * 18, y + i * 18));
+            }
+        }
+        for (int i = 0; i < 9; i++) {
+            this.addSlot(new Slot(inv, i, x + i * 18, y + 142));
+        }
+    }
 }

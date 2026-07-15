@@ -59,13 +59,9 @@ public class EnvyCollar {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+4 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2 to all Attributes").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
-
-            tooltip.add(Component.literal("+4 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+2 Precision").withStyle(style -> style.withColor(0xE0701B)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
@@ -85,12 +81,8 @@ public class EnvyCollar {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+5 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 to all Attributes").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-
-            tooltip.add(Component.literal("+6 Melee Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+4 Precision").withStyle(style -> style.withColor(0xE0701B)));
 
 
             tooltip.add(Component.literal(""));
@@ -111,13 +103,8 @@ public class EnvyCollar {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+7 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 to all Attributes").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-
-            tooltip.add(Component.literal("+8 Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+8 Precision").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+7.5% Melee Potency").withStyle(style -> style.withColor(0xec3700)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
@@ -137,13 +124,8 @@ public class EnvyCollar {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 to all Attributes").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-
-            tooltip.add(Component.literal("+14 Potency").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+12 Precision").withStyle(style -> style.withColor(0xE0701B)));
-            tooltip.add(Component.literal("+15% Melee Potency").withStyle(style -> style.withColor(0xec3700)));
 
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));

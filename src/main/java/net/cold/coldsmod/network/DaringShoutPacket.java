@@ -1,6 +1,8 @@
 package net.cold.coldsmod.network;
 
 import net.cold.coldsmod.ModSounds;
+import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusRegistry;
+import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusTrigger;
 import net.cold.coldsmod.capabilities_and_blessings.registry.EffectUtils;
 import net.cold.coldsmod.capabilities_and_blessings.registry.ModEffects;
 import net.cold.coldsmod.stat.ModAttributes;
@@ -76,6 +78,7 @@ public class DaringShoutPacket {
             }
         }
 
+        BonusRegistry.process(player, null, player.level(), BonusTrigger.BLESSING_ACTIVATION);
         spawnParticleRing((ServerLevel) level, player, ParticleTypes.LARGE_SMOKE, 5.0, 100);
         EffectUtils.spawnParticleBurst(player, ParticleTypes.LARGE_SMOKE);
     }

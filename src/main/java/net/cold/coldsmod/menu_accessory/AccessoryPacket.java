@@ -6,6 +6,8 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
+import static net.cold.coldsmod.stat.AttributeApplier.*;
+
 public class AccessoryPacket {
     private final String accessoryId;
     private final boolean isActivating;
@@ -31,8 +33,30 @@ public class AccessoryPacket {
             if (player != null) {
                 if (this.isActivating) {
                     AccessoryUpgradeHandler.tryUpgrade(player, this.accessoryId);
+                    player.getServer().tell(new net.minecraft.server.TickTask(
+                            player.getServer().getTickCount() + 1,
+                            () -> {
+                                if (player.isAlive()) {
+                                    syncAndApplyAttributes(player);
+                                    refreshPerPointStats(player);
+                                    refreshMilestones(player);
+                                    recalculateDynamicBonuses(player);
+                                }
+                            }
+                    ));
                 } else {
                     AccessoryUpgradeHandler.tryDowngrade(player, this.accessoryId);
+                    player.getServer().tell(new net.minecraft.server.TickTask(
+                            player.getServer().getTickCount() + 1,
+                            () -> {
+                                if (player.isAlive()) {
+                                    syncAndApplyAttributes(player);
+                                    refreshPerPointStats(player);
+                                    refreshMilestones(player);
+                                    recalculateDynamicBonuses(player);
+                                }
+                            }
+                    ));
                 }
             }
         });

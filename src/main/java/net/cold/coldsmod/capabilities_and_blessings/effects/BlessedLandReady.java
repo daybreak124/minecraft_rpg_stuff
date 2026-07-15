@@ -11,9 +11,13 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
+import java.util.List;
 
 import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
 
@@ -38,8 +42,7 @@ public class BlessedLandReady extends MobEffect {
         if (owner.level().isClientSide) return;
 
         double healIncrease = getScaledValue(owner,
-                ModAttributes.RESTORATION.get(),
-                ModAttributes.RESTORATION_MULTIPLIER.get());
+                ModAttributes.RESTORATION.get());
 
         float finalHeal = (float) (3.0 * (1 + healIncrease/100));
 
@@ -72,5 +75,18 @@ public class BlessedLandReady extends MobEffect {
         public float getHealAmount() {
             return this.healAmount;
         }
+
+        @Override
+        public void playerTouch(Player player) {
+            if (!this.level().isClientSide() && player.isAlive()) {
+                player.heal(this.getHealAmount());
+                this.discard();
+            }
+        }
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

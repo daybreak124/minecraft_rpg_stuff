@@ -10,9 +10,17 @@ import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.List;
+
 public class AdrenalineInjectionUp extends MobEffect {
     public AdrenalineInjectionUp() {
         super(MobEffectCategory.NEUTRAL, 0x00000);
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 
     @Override

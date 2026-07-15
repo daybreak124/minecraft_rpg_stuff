@@ -3,15 +3,12 @@ package net.cold.coldsmod.capabilities_and_blessings.effects;
 import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.item.ItemStack;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
-
-import static net.cold.coldsmod.stat.AttributeApplier.applyPercentModifierAdditive;
-import static net.cold.coldsmod.stat.AttributeApplier.removeModifier;
 
 public class DirectedHatredBlinded extends MobEffect {
 
@@ -24,5 +21,10 @@ public class DirectedHatredBlinded extends MobEffect {
                 HATRED_UUID.toString(),
                 0.06D,
                 AttributeModifier.Operation.MULTIPLY_BASE);
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

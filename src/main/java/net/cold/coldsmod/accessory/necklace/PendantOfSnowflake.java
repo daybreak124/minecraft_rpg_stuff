@@ -59,8 +59,9 @@ public class PendantOfSnowflake {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+11 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));
         }
@@ -78,8 +79,9 @@ public class PendantOfSnowflake {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+17 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+16 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));
         }
@@ -99,6 +101,7 @@ public class PendantOfSnowflake {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+24 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));
         }
@@ -118,6 +121,7 @@ public class PendantOfSnowflake {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.literal("+32 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Rejuvenation").withStyle(style -> style.withColor(0x5BB450)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Whiteout").withStyle(ChatFormatting.WHITE));
         }

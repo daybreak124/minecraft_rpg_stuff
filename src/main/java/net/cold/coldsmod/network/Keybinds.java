@@ -16,6 +16,8 @@ public class Keybinds {
     public static final String KEY_INTIMIDATE = "key.coldsmod.intimidate";
     public static final String KEY_DFA = "key.coldsmod.dfa";
     public static final String KEY_SEVERANCE = "key.coldsmod.soul_severance";
+    public static final String KEY_AUTOSMELT = "key.coldsmod.auto_smelt";
+    public static final String KEY_JUMPBOOST = "key.coldsmod.jump_boost";
 
     public static KeyMapping quantumKey;
     public static KeyMapping combatantKey;
@@ -25,6 +27,8 @@ public class Keybinds {
     public static KeyMapping intimidateKey;
     public static KeyMapping dfaKey;
     public static KeyMapping severanceKey;
+    public static KeyMapping autoSmeltKey;
+    public static KeyMapping jumpBoostKey;
 
     public static void register(RegisterKeyMappingsEvent event) {
         quantumKey = new KeyMapping(KEY_COLDSMOD_QUANTUM_LEAP, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), KEY_CATEGORY);
@@ -35,6 +39,8 @@ public class Keybinds {
         intimidateKey = new KeyMapping(KEY_INTIMIDATE, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), KEY_CATEGORY);
         dfaKey = new KeyMapping(KEY_DFA, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), KEY_CATEGORY);
         severanceKey = new KeyMapping(KEY_SEVERANCE, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), KEY_CATEGORY);
+        autoSmeltKey = new KeyMapping(KEY_AUTOSMELT, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), KEY_CATEGORY);
+        jumpBoostKey = new KeyMapping(KEY_JUMPBOOST, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), KEY_CATEGORY);
 
         event.register(quantumKey);
         event.register(combatantKey);
@@ -44,5 +50,7 @@ public class Keybinds {
         event.register(intimidateKey);
         event.register(dfaKey);
         event.register(severanceKey);
+        event.register(autoSmeltKey);
+        event.register(jumpBoostKey);
     }
 }

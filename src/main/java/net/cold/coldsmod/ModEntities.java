@@ -14,9 +14,7 @@ public class ModEntities {
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ColdsMod.MODID);
 
     public static final RegistryObject<EntityType<Sbeve>> SBEVE =
-            ENTITIES.register("sbeve",
-                    () -> EntityType.Builder
-                            .of(Sbeve::new, MobCategory.MISC)
+            ENTITIES.register("sbeve", () -> EntityType.Builder.of(Sbeve::new, MobCategory.MISC)
                             .sized(0.75f, 0.75f)
                             .build("sbeve")
             );

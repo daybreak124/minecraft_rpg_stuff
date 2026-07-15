@@ -10,8 +10,11 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 import static net.cold.coldsmod.stat.AttributeApplier.applyModifier;
@@ -32,6 +35,9 @@ public class Solara extends MobEffect {
         if (!active) {
             removeModifier(pLivingEntity, ModAttributes.MELEE_POTENCY.get(), SOLARA_UUID);
             removeModifier(pLivingEntity, Attributes.ARMOR, SOLARA_UUID);
+//            if (pLivingEntity instanceof Player player) {
+//                recalcArmor(player);
+//            }
         } else {
             pLivingEntity.addEffect(new MobEffectInstance(ModEffects.SOLARA.get(), 24000, 0, false, false, false));
         }
@@ -56,26 +62,35 @@ public class Solara extends MobEffect {
         switch (phase) {
             case 0 -> {
                 factor = time / 6000.0;
-                melee = 25.0 * factor;
-                armor = 10.0 * factor;
+                melee = 12.5 * factor;
+                armor = 5d * factor;
             }
             case 1 -> {
                 factor = 1.0 - (time - 6000) / 6000.0;
-                melee = 25.0 * factor;
-                armor = 10.0 * factor;
+                melee = 12.5 * factor;
+                armor = 5d * factor;
             }
             case 2 -> {
                 factor = (time - 12000) / 6000.0;
-                melee = -15.0 * factor;
-                armor = -15.0 * factor;
+                melee = -7.5 * factor;
+                armor = -7.5 * factor;
             }
             case 3 -> {
                 factor = 1.0 - (time - 18000) / 6000.0;
-                melee = -15.0 * factor;
-                armor = -15.0 * factor;
+                melee = -7.5 * factor;
+                armor = -7.5 * factor;
             }
         }
+
         applyModifier(entity, ModAttributes.MELEE_POTENCY.get(), melee, SOLARA_UUID);
         applyModifier(entity, Attributes.ARMOR, armor, SOLARA_UUID);
+//        if (entity instanceof Player player) {
+//            recalcArmor(player);
+//        }
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

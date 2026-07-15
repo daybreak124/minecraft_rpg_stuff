@@ -1,10 +1,8 @@
 package net.cold.coldsmod.capabilities_and_blessings.effects;
 
 import net.cold.coldsmod.ModMessages;
-import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusCapabilityProvider;
 import net.cold.coldsmod.capabilities_and_blessings.Capabilities.PlayerBonusCache;
 import net.cold.coldsmod.capabilities_and_blessings.registry.EffectUtils;
-import net.cold.coldsmod.capabilities_and_blessings.registry.ModEffects;
 import net.cold.coldsmod.network.CombatantRecallSync;
 import net.cold.coldsmod.network.CombatantSync;
 import net.cold.coldsmod.stat.AttributeApplier;
@@ -21,15 +19,16 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -59,7 +58,6 @@ public class CombatantsAidReady extends MobEffect {
 
     public static void startDash(Player player) {
         Level level = player.level();
-        PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
         CompoundTag tag = player.getPersistentData();
 
         tag.putDouble("dash_x", player.getX());
@@ -139,10 +137,9 @@ public class CombatantsAidReady extends MobEffect {
         }
 
         double healIncrease = AttributeApplier.getScaledValue(player,
-                ModAttributes.RESTORATION.get(),
-                ModAttributes.RESTORATION_MULTIPLIER.get());
+                ModAttributes.RESTORATION.get());
 
-        float healAmount = (float) (4.0f * (1.0 + (healIncrease / 100.0)));
+        float healAmount = (float) (3.0f * (1.0 + (healIncrease / 100.0)));
 
         for (LivingEntity ally : allies) {
             ally.heal(healAmount);
@@ -152,8 +149,7 @@ public class CombatantsAidReady extends MobEffect {
         }
     }
 
-    public static void returnToOrigin(ServerPlayer player) {
-        PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
+    public static void returnToOrigin(ServerPlayer player, PlayerBonusCache cache) {
         cache.setCombatantsAidRecall(false);
         CompoundTag tag = player.getPersistentData();
         if (!tag.contains("dash_x")) return;
@@ -172,5 +168,10 @@ public class CombatantsAidReady extends MobEffect {
     private static void spawnBorderParticle(ServerLevel level, Player player, double x, double z) {
         BlockPos groundPos = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, BlockPos.containing(x, player.getY(), z));
         level.sendParticles(ParticleTypes.COMPOSTER, x, groundPos.getY() + 0.1, z, 1, 0, 0, 0, 0.0);
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

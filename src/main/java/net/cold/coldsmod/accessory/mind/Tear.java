@@ -59,9 +59,11 @@ public class Tear {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+3 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2.5 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+1 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+1 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+2.4 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));
         }
@@ -79,9 +81,11 @@ public class Tear {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+5 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4.5 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+2 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+4.8  Accuracy").withStyle(style -> style.withColor(0xE0701B)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));
         }
@@ -99,11 +103,13 @@ public class Tear {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+5 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Perception").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Toughness").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+8% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+3 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+6 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+7.2 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+1% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+4% Accuracy").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));
         }
@@ -121,13 +127,13 @@ public class Tear {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+6 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Perception").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7.5 Toughness").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+1.5 Max Health").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+15% Knockback Resist").withStyle(ChatFormatting.BLUE));
-            tooltip.add(Component.literal("+12% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+4 Constitution").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8 Dexterity").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+4 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+9.6 Accuracy").withStyle(style -> style.withColor(0xE0701B)));
+            tooltip.add(Component.literal("+2% Toughness").withStyle(style -> style.withColor(0x0F52BA)));
+            tooltip.add(Component.literal("+8% Accuracy").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Miner's Fortune").withStyle(ChatFormatting.GRAY));
         }

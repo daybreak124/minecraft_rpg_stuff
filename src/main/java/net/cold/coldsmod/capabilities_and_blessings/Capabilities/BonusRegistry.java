@@ -21,7 +21,7 @@ public class BonusRegistry {
         player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(cache -> {
             List<PlayerBonusCache.ProcInstance> procs = cache.get(trigger);
             for (PlayerBonusCache.ProcInstance proc : procs) {
-                proc.logic().execute(player, victim, level, data);
+                proc.logic().execute(player, victim, level, data, cache);
             }
         });
     }

@@ -2,182 +2,158 @@ package net.cold.coldsmod.stat;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.ForgeMod;
 
-import static net.cold.coldsmod.stat.AttributeApplier.getScaledValue;
-
 public class InventoryStatsCache {
     public static final InventoryStatsCache CACHE = new InventoryStatsCache();
 
-    // Data Fields
-    public double mPot, mAcc, mPre, mHaste, mAvg, mMax;
-    public double pPot, pAcc, pPre, pNock, pAvg;
-    public double gPot, gAcc, gPre, gMult, gHaste;
-    public double armor, tough, incDmg, totalResist, health, knkRes, debuffRes;
-    public double restoration, amplification, rejuvenation;
-    public double moveSpeed, swimSpeed, stepHeight, jumpBoost;
-    public double blockReach, entityReach, mineSpeed, xpGain, luck;
-    public double bMeleePot, mMeleeMult, bHaste, mHasteMult, bMeleeAcc, mMeleeAccMult, bMeleePre, mMeleePreMult;
-    public double bProjPot, mProjMult, bNock, mNockMult, bProjAcc, mProjAccMult, bProjPre, mProjPreMult;
-    public double bPot, mPotMult, bAcc, mAccMult, bPre, mPreMult, bOHaste;
-    public double bResto, mRestoMult, bAmp, mAmpMult, bReju, mRejuMult;
-    public double baseArmor, multArmor, baseTough, multTough, baseHealth, multHealth;
+    // Final Engine-Calculated Values
     public double str, dex, fort, con, perc, wis, ins;
-    public double fMeleePot, fMeleeHaste, fMeleeAcc, fMeleePre;
-    public double fProjPot, fProjNock, fProjAcc, fProjPre;
-    public double fGenPot, fGenAcc, fGenPre, fGenHaste;
-    public double fResto, fAmp, fReju, eHP;
-    public double fEva, fDotMult, fAllDmgMult, fProjMult, fMeleeMult;
+    public double armor, tough, health, incDmg, totalResist, eHP, fEva, knkRes, debuffRes;
+    public double fMeleePot, fMeleeHaste, fMeleeAcc, fMeleePre, mAvg, mMax;
+    public double fProjPot, fProjNock, fProjAcc, fProjPre, pAvg;
+    public double fGenPot, fGenHaste, fGenAcc, fGenPre, fDotMult, fAllDmgMult, fMeleeMult, fProjMult;
+    public double fResto, fAmp, fReju;
+    public double moveSpeed, swimSpeed, stepHeight, jumpBoost, blockReach, entityReach, mineSpeed, xpGain, luck;
+
+    // Values WITHOUT Operation 2 (Multiply Total) for comparison
+    public double bArmor, bTough, bHealth, bMeleePot, bHaste, bMeleeAcc, bMeleePre;
+    public double bProjPot, bNock, bProjAcc, bProjPre, bPot, bAcc, bPre, bOHaste;
+    public double bResto, bAmp, bReju;
 
     public long lastUpdateTick = -1;
 
     private InventoryStatsCache() {}
 
     public static void rebuildCache(Minecraft mc) {
-        if (mc.player == null || mc.player.tickCount < CACHE.lastUpdateTick + 20) return;
-        var p = mc.player;
+        if (mc.player == null) return;
 
-        // --- Melee ---
-        CACHE.bMeleePot = p.getAttributeValue(ModAttributes.MELEE_POTENCY.get());
-        CACHE.mMeleeMult = p.getAttributeValue(ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
-        CACHE.bHaste = p.getAttributeValue(ModAttributes.MELEE_HASTE.get());
-        CACHE.mHasteMult = p.getAttributeValue(ModAttributes.MELEE_HASTE_MULTIPLIER.get());
-        CACHE.bMeleeAcc = p.getAttributeValue(ModAttributes.MELEE_ACCURACY.get());
-        CACHE.mMeleeAccMult = p.getAttributeValue(ModAttributes.MELEE_ACCURACY_MULTIPLIER.get());
-        CACHE.bMeleePre = p.getAttributeValue(ModAttributes.MELEE_PRECISION.get());
-        CACHE.mMeleePreMult = p.getAttributeValue(ModAttributes.MELEE_PRECISION_MULTIPLIER.get());
+        if (mc.player.tickCount % 20 == 0) {
+            Player p = mc.player;
 
-        CACHE.str  = p.getAttributeValue(ModAttributes.STR.get());
-        CACHE.dex  = p.getAttributeValue(ModAttributes.DEX.get());
-        CACHE.fort = p.getAttributeValue(ModAttributes.FORT.get());
-        CACHE.con  = p.getAttributeValue(ModAttributes.CON.get());
-        CACHE.perc = p.getAttributeValue(ModAttributes.PERC.get());
-        CACHE.wis  = p.getAttributeValue(ModAttributes.WISDOM.get());
-        CACHE.ins  = p.getAttributeValue(ModAttributes.INSIGHT.get());
-        CACHE.fEva  = 100 * p.getAttributeValue(ModAttributes.EVASION.get());
-        CACHE.fAllDmgMult  = p.getAttributeValue(ModAttributes.ALL_DAMAGE_MULTIPLIER.get());
-        CACHE.fDotMult  = p.getAttributeValue(ModAttributes.DOT_DAMAGE_MULTIPLIER.get());
-        CACHE.fMeleeMult  = p.getAttributeValue(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
+            // --- Core Attributes ---
+            CACHE.str = p.getAttributeValue(ModAttributes.STR.get());
+            CACHE.dex = p.getAttributeValue(ModAttributes.DEX.get());
+            CACHE.fort = p.getAttributeValue(ModAttributes.FORT.get());
+            CACHE.con = p.getAttributeValue(ModAttributes.CON.get());
+            CACHE.perc = p.getAttributeValue(ModAttributes.PERC.get());
+            CACHE.wis = p.getAttributeValue(ModAttributes.WISDOM.get());
+            CACHE.ins = p.getAttributeValue(ModAttributes.INSIGHT.get());
 
-        // --- Projectile ---
-        CACHE.fProjMult  = p.getAttributeValue(ModAttributes.PROJECTILE_DAMAGE_MULTIPLIER.get());
-        CACHE.bProjPot = p.getAttributeValue(ModAttributes.PROJECTILE_POTENCY.get());
-        CACHE.mProjMult = p.getAttributeValue(ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
-        CACHE.bNock = p.getAttributeValue(ModAttributes.NOCK_HASTE.get());
-        CACHE.mNockMult = p.getAttributeValue(ModAttributes.NOCK_HASTE_MULTIPLIER.get());
-        CACHE.bProjAcc = p.getAttributeValue(ModAttributes.PROJECTILE_ACCURACY.get());
-        CACHE.mProjAccMult = p.getAttributeValue(ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get());
-        CACHE.bProjPre = p.getAttributeValue(ModAttributes.PROJECTILE_PRECISION.get());
-        CACHE.mProjPreMult = p.getAttributeValue(ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get());
+            // --- Final Values (Includes all Operations) ---
+            CACHE.fMeleePot = p.getAttributeValue(ModAttributes.MELEE_POTENCY.get());
+            CACHE.fMeleeHaste = p.getAttributeValue(ModAttributes.MELEE_HASTE.get());
+            CACHE.fMeleeAcc = p.getAttributeValue(ModAttributes.MELEE_ACCURACY.get());
+            CACHE.fMeleePre = p.getAttributeValue(ModAttributes.MELEE_PRECISION.get());
 
-        // --- General ---
-        CACHE.bPot = p.getAttributeValue(ModAttributes.POTENCY.get());
-        CACHE.mPotMult = p.getAttributeValue(ModAttributes.POTENCY_MULTIPLIER.get());
-        CACHE.bAcc = p.getAttributeValue(ModAttributes.ACCURACY.get());
-        CACHE.mAccMult = p.getAttributeValue(ModAttributes.ACCURACY_MULTIPLIER.get());
-        CACHE.bPre = p.getAttributeValue(ModAttributes.PRECISION.get());
-        CACHE.mPreMult = p.getAttributeValue(ModAttributes.PRECISION_MULTIPLIER.get());
-        CACHE.bOHaste = p.getAttributeValue(ModAttributes.HASTE.get());
+            CACHE.fProjPot = p.getAttributeValue(ModAttributes.PROJECTILE_POTENCY.get());
+            CACHE.fProjNock = p.getAttributeValue(ModAttributes.NOCK_HASTE.get());
+            CACHE.fProjAcc = p.getAttributeValue(ModAttributes.PROJECTILE_ACCURACY.get());
+            CACHE.fProjPre = p.getAttributeValue(ModAttributes.PROJECTILE_PRECISION.get());
 
-        // --- Healing ---
-        CACHE.bResto = p.getAttributeValue(ModAttributes.RESTORATION.get());
-        CACHE.mRestoMult = p.getAttributeValue(ModAttributes.RESTORATION_MULTIPLIER.get());
-        CACHE.bAmp = p.getAttributeValue(ModAttributes.AMPLIFICATION.get());
-        CACHE.mAmpMult = p.getAttributeValue(ModAttributes.AMPLIFICATION_MULTIPLIER.get());
-        CACHE.bReju = p.getAttributeValue(ModAttributes.REJUVENATION.get());
-        CACHE.mRejuMult = p.getAttributeValue(ModAttributes.REJUVENATION_MULTIPLIER.get());
+            CACHE.fGenPot = p.getAttributeValue(ModAttributes.POTENCY.get());
+            CACHE.fGenHaste = p.getAttributeValue(ModAttributes.HASTE.get());
+            CACHE.fGenAcc = p.getAttributeValue(ModAttributes.ACCURACY.get());
+            CACHE.fGenPre = p.getAttributeValue(ModAttributes.PRECISION.get());
 
-        // --- Scaling ---
-        CACHE.mPot = getScaledValue(p, ModAttributes.MELEE_POTENCY.get(), ModAttributes.MELEE_POTENCY_MULTIPLIER.get());
-        CACHE.mAcc = getScaledValue(p, ModAttributes.MELEE_ACCURACY.get(), ModAttributes.MELEE_ACCURACY_MULTIPLIER.get());
-        CACHE.mPre = getScaledValue(p, ModAttributes.MELEE_PRECISION.get(), ModAttributes.MELEE_PRECISION_MULTIPLIER.get());
-        CACHE.mHaste = getScaledValue(p, ModAttributes.MELEE_HASTE.get(), ModAttributes.MELEE_HASTE_MULTIPLIER.get());
+            CACHE.fResto = p.getAttributeValue(ModAttributes.RESTORATION.get());
+            CACHE.fAmp = p.getAttributeValue(ModAttributes.AMPLIFICATION.get());
+            CACHE.fReju = p.getAttributeValue(ModAttributes.REJUVENATION.get());
 
-        CACHE.pPot = getScaledValue(p, ModAttributes.PROJECTILE_POTENCY.get(), ModAttributes.PROJECTILE_POTENCY_MULTIPLIER.get());
-        CACHE.pAcc = getScaledValue(p, ModAttributes.PROJECTILE_ACCURACY.get(), ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER.get());
-        CACHE.pPre = getScaledValue(p, ModAttributes.PROJECTILE_PRECISION.get(), ModAttributes.PROJECTILE_PRECISION_MULTIPLIER.get());
-        CACHE.pNock = getScaledValue(p, ModAttributes.NOCK_HASTE.get(), ModAttributes.NOCK_HASTE_MULTIPLIER.get());
+            // --- Survivability & Damage ---
+            CACHE.armor = p.getAttributeValue(Attributes.ARMOR);
+            CACHE.tough = p.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
+            CACHE.health = p.getMaxHealth();
+            CACHE.incDmg = p.getAttributeValue(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get());
+            CACHE.fEva = p.getAttributeValue(ModAttributes.EVASION.get()) * 100.0;
+            CACHE.knkRes = p.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE) * 100.0;
+            CACHE.debuffRes = p.getAttributeValue(ModAttributes.DEBUFF_RESIST.get());
+            CACHE.fAllDmgMult = p.getAttributeValue(ModAttributes.ALL_DAMAGE_MULTIPLIER.get());
+            CACHE.fDotMult = p.getAttributeValue(ModAttributes.DOT_DAMAGE_MULTIPLIER.get());
+            CACHE.fMeleeMult = p.getAttributeValue(ModAttributes.MELEE_DAMAGE_MULTIPLIER.get());
+            CACHE.fProjMult = p.getAttributeValue(ModAttributes.PROJECTILE_DAMAGE_MULTIPLIER.get());
 
-        // --- Melee Math ---
-        double mCritChance = Math.min(10.0 + CACHE.mAcc, 100.0) / 100.0;
-        double mCritBonus = 0.5 + (CACHE.mPre / 100.0);
-        CACHE.mAvg = ((1.0 + CACHE.mPot / 100.0) * (1.0 + (mCritChance * mCritBonus)) * (1.0 + CACHE.mHaste / 100.0)) * CACHE.fMeleeMult / 1.05;
-        CACHE.mMax = ((1.0 + CACHE.mPot / 100.0) * (1.0 + mCritBonus) * (1.0 + CACHE.mHaste / 100.0)) * CACHE.fMeleeMult / 1.05;
+            // -----------------------------
+            // --- Melee Calculations ---
+            double mCritChance = (10.0 + AttributeApplier.getScaledValue(p, ModAttributes.MELEE_ACCURACY.get())) / 100.0;
+            double mCritBonus = (25.0 + AttributeApplier.getScaledValue(p, ModAttributes.MELEE_PRECISION.get())) / 100.0;
 
-        // --- Projectile Math ---
-        double pCritChance = Math.min(10.0 + CACHE.pAcc, 100.0) / 100.0;
-        double pCritBonus = 0.5 + (CACHE.pPre / 100.0);
-        CACHE.pAvg = ((1.0 + CACHE.pPot / 100.0) * (1.0 + (pCritChance * pCritBonus)) * (1.0 + CACHE.pNock / 100.0)) * CACHE.fProjMult / 1.05;
+            double mPotMult = 1.0 + (AttributeApplier.getScaledValue(p, ModAttributes.MELEE_POTENCY.get()) / 100.0);
+            double mHasteMult = 1.0 + (AttributeApplier.getScaledValue(p, ModAttributes.MELEE_HASTE.get()) / 100.0);
 
-        // --- General ---
-        CACHE.gMult = p.getAttributeValue(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
-        CACHE.gPot = getScaledValue(p, ModAttributes.POTENCY.get(), ModAttributes.POTENCY_MULTIPLIER.get());
-        CACHE.gAcc = getScaledValue(p, ModAttributes.ACCURACY.get(), ModAttributes.ACCURACY_MULTIPLIER.get());
-        CACHE.gPre = getScaledValue(p, ModAttributes.PRECISION.get(), ModAttributes.PRECISION_MULTIPLIER.get());
-        CACHE.gHaste = getScaledValue(p, ModAttributes.HASTE.get(), ModAttributes.HASTE_MULTIPLIER.get());
+            CACHE.mAvg = (mPotMult * (1.0 + (Math.min(1.0, mCritChance - 0.10) * mCritBonus - 0.25)) * mHasteMult) * CACHE.fMeleeMult;
+            CACHE.mMax = (mPotMult * (1.0 + mCritBonus) * mHasteMult) * CACHE.fMeleeMult / 1.025;
 
-        CACHE.fMeleePot = CACHE.bMeleePot * CACHE.mMeleeMult;
-        CACHE.fMeleeHaste = CACHE.bHaste * CACHE.mHasteMult;
-        CACHE.fMeleeAcc = CACHE.bMeleeAcc * CACHE.mMeleeAccMult;
-        CACHE.fMeleePre = CACHE.bMeleePre * CACHE.mMeleePreMult;
+            // --- Projectile Calculations ---
+            double pCritChance = (10.0 + AttributeApplier.getScaledValue(p, ModAttributes.PROJECTILE_ACCURACY.get())) / 100.0;
+            double pCritBonus = (25.0 + AttributeApplier.getScaledValue(p, ModAttributes.PROJECTILE_PRECISION.get())) / 100.0;
 
-        CACHE.fProjPot = CACHE.bProjPot * CACHE.mProjMult;
-        CACHE.fProjNock = CACHE.bNock * CACHE.mNockMult;
-        CACHE.fProjAcc = CACHE.bProjAcc * CACHE.mProjAccMult;
-        CACHE.fProjPre = CACHE.bProjPre * CACHE.mProjPreMult;
+            double pPotMult = 1.0 + (AttributeApplier.getScaledValue(p, ModAttributes.PROJECTILE_POTENCY.get()) / 100.0);
+            double pNockMult = 1.0 + (AttributeApplier.getScaledValue(p, ModAttributes.NOCK_HASTE.get()) / 100.0);
 
-        CACHE.fGenPot = CACHE.bPot * CACHE.mPotMult;
-        CACHE.fGenAcc = CACHE.bAcc * CACHE.mAccMult;
-        CACHE.fGenPre = CACHE.bPre * CACHE.mPreMult;
+            CACHE.pAvg = (pPotMult * (1.0 + (Math.min(1.0, pCritChance) * pCritBonus)) * pNockMult) * CACHE.fProjMult / 1.025;
+            // -----------------------------
 
-        CACHE.fResto = CACHE.bResto * CACHE.mRestoMult;
-        CACHE.fAmp   = CACHE.bAmp   * CACHE.mAmpMult;
-        CACHE.fReju  = CACHE.bReju  * CACHE.mRejuMult;
+            CACHE.moveSpeed = (p.getAttributeValue(Attributes.MOVEMENT_SPEED) / 0.1) * 100 - 100;
+            CACHE.swimSpeed = (p.getAttributeValue(ForgeMod.SWIM_SPEED.get()) * 100) - 100;
+            CACHE.stepHeight = p.getAttributeValue(ForgeMod.STEP_HEIGHT_ADDITION.get());
+            CACHE.jumpBoost = (p.getAttributeValue(ModAttributes.JUMP_BOOST.get()) * 100) - 100;
+            CACHE.blockReach = p.getAttributeValue(ForgeMod.BLOCK_REACH.get());
+            CACHE.entityReach = p.getAttributeValue(ForgeMod.ENTITY_REACH.get());
+            CACHE.mineSpeed = (p.getAttributeValue(ModAttributes.MINING_SPEED.get()) * 100) - 100;
+            CACHE.xpGain = (p.getAttributeValue(ModAttributes.XP_GAIN.get()) * 100) - 100;
+            CACHE.luck = p.getAttributeValue(Attributes.LUCK);
 
-        // --- Survivability ---
-        CACHE.armor = p.getAttributeValue(Attributes.ARMOR);
-        CACHE.tough = p.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
-        CACHE.health = p.getMaxHealth();
-        CACHE.incDmg = p.getAttributeValue(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get());
-        CACHE.knkRes = p.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE) * 100.0;
-        CACHE.debuffRes = p.getAttributeValue(ModAttributes.DEBUFF_RESIST.get());
+            // -----------------------------
+            double armorRed = CACHE.armor / (40 + CACHE.armor - (28+ CACHE.armor*0.005) * ((CACHE.tough + 25) / (CACHE.tough + 35)));
+            double res = p.hasEffect(MobEffects.DAMAGE_RESISTANCE) ? (p.getEffect(MobEffects.DAMAGE_RESISTANCE).getAmplifier() + 1) * 0.2 : 0.0;
+            int prot = 0;
+            for (ItemStack s : p.getArmorSlots()) prot += EnchantmentHelper.getItemEnchantmentLevel(Enchantments.ALL_DAMAGE_PROTECTION, s);
+            double protRed = prot * 0.02;
+            CACHE.totalResist = (1.0 - ((1.0 - armorRed) * (1.0 - protRed) * (1.0 - res) * CACHE.incDmg)) * 100.0;
+            CACHE.eHP = CACHE.health / (1.0 - (CACHE.totalResist / 100.0));
 
-        CACHE.eHP = CACHE.health / (1.0 - (CACHE.totalResist / 100.0));
+            CACHE.bArmor = getBaseValue(p, Attributes.ARMOR);
+            CACHE.bTough = getBaseValue(p, Attributes.ARMOR_TOUGHNESS);
+            CACHE.bHealth = getBaseValue(p, Attributes.MAX_HEALTH);
+            CACHE.bMeleePot = getBaseValue(p, ModAttributes.MELEE_POTENCY.get());
+            CACHE.bHaste = getBaseValue(p, ModAttributes.MELEE_HASTE.get());
+            CACHE.bMeleeAcc = getBaseValue(p, ModAttributes.MELEE_ACCURACY.get());
+            CACHE.bMeleePre = getBaseValue(p, ModAttributes.MELEE_PRECISION.get());
+            CACHE.bProjPot = getBaseValue(p, ModAttributes.PROJECTILE_POTENCY.get());
+            CACHE.bNock = getBaseValue(p, ModAttributes.NOCK_HASTE.get());
+            CACHE.bProjAcc = getBaseValue(p, ModAttributes.PROJECTILE_ACCURACY.get());
+            CACHE.bProjPre = getBaseValue(p, ModAttributes.PROJECTILE_PRECISION.get());
+            CACHE.bPot = getBaseValue(p, ModAttributes.POTENCY.get());
+            CACHE.bAcc = getBaseValue(p, ModAttributes.ACCURACY.get());
+            CACHE.bPre = getBaseValue(p, ModAttributes.PRECISION.get());
+            CACHE.bOHaste = getBaseValue(p, ModAttributes.HASTE.get());
+            CACHE.bResto = getBaseValue(p, ModAttributes.RESTORATION.get());
+            CACHE.bAmp = getBaseValue(p, ModAttributes.AMPLIFICATION.get());
+            CACHE.bReju = getBaseValue(p, ModAttributes.REJUVENATION.get());
 
-        // --- Base/Mult splits ---
-        CACHE.multArmor = 1 + p.getAttributeValue(ModAttributes.ARMOR_MULTIPLIER.get());
-        CACHE.baseArmor  = CACHE.multArmor  == 0 ? 0 : CACHE.armor  / CACHE.multArmor;
-        CACHE.multTough = 1 + p.getAttributeValue(ModAttributes.TOUGHNESS_MULTIPLIER.get());
-        CACHE.baseTough  = CACHE.multTough  == 0 ? 0 : CACHE.tough  / CACHE.multTough;
-        CACHE.multHealth = 1 + p.getAttributeValue(ModAttributes.HEALTH_MULTIPLIER.get());
-        CACHE.baseHealth = CACHE.multHealth == 0 ? 0 : CACHE.health / CACHE.multHealth;
+            CACHE.lastUpdateTick = p.tickCount;
+        }
+    }
 
-        // --- Misc ---
-        CACHE.restoration = getScaledValue(p, ModAttributes.RESTORATION.get(), ModAttributes.RESTORATION_MULTIPLIER.get());
-        CACHE.amplification = getScaledValue(p, ModAttributes.AMPLIFICATION.get(), ModAttributes.AMPLIFICATION_MULTIPLIER.get());
-        CACHE.rejuvenation = getScaledValue(p, ModAttributes.REJUVENATION.get(), ModAttributes.REJUVENATION_MULTIPLIER.get());
-
-        CACHE.moveSpeed = 1000 * p.getAttributeValue(Attributes.MOVEMENT_SPEED) - 100;
-        CACHE.swimSpeed = 100 * p.getAttributeValue(ForgeMod.SWIM_SPEED.get()) - 100;
-        CACHE.stepHeight = p.getAttributeValue(ForgeMod.STEP_HEIGHT_ADDITION.get());
-        CACHE.jumpBoost = 100 * p.getAttributeValue(ModAttributes.JUMP_BOOST.get()) -100;
-        CACHE.blockReach = p.getAttributeValue(ForgeMod.BLOCK_REACH.get());
-        CACHE.entityReach = p.getAttributeValue(ForgeMod.ENTITY_REACH.get());
-        CACHE.mineSpeed = 100 * p.getAttributeValue(ModAttributes.MINING_SPEED.get()) -100;
-        CACHE.xpGain = 100 * p.getAttributeValue(ModAttributes.XP_GAIN.get()) -100;
-        CACHE.luck = p.getAttributeValue(Attributes.LUCK);
-
-        double armorRed = CACHE.armor / (75.0 + CACHE.armor - 80.0 * (CACHE.tough / (CACHE.tough + 100.0)));
-        double res = p.hasEffect(MobEffects.DAMAGE_RESISTANCE) ? (p.getEffect(MobEffects.DAMAGE_RESISTANCE).getAmplifier() + 1) * 0.2 : 0.0;
-        int prot = 0;
-        for (ItemStack s : p.getArmorSlots()) prot += EnchantmentHelper.getItemEnchantmentLevel(Enchantments.ALL_DAMAGE_PROTECTION, s);
-        double protRed = prot * 0.02;
-        CACHE.totalResist = (1.0 - ((1.0 - armorRed) * (1.0 - protRed) * (1.0 - res) * CACHE.incDmg)) * 100.0;
-
-        CACHE.lastUpdateTick = p.tickCount;
+    private static double getBaseValue(Player player, net.minecraft.world.entity.ai.attributes.Attribute attribute) {
+        AttributeInstance instance = player.getAttribute(attribute);
+        if (instance == null) return 0.0;
+        double val = instance.getBaseValue();
+        for (AttributeModifier modifier : instance.getModifiers(AttributeModifier.Operation.ADDITION)) {
+            val += modifier.getAmount();
+        }
+        double multiplier = 0.0;
+        for (AttributeModifier modifier : instance.getModifiers(AttributeModifier.Operation.MULTIPLY_BASE)) {
+            multiplier += modifier.getAmount();
+        }
+        return val * (1.0 + multiplier);
     }
 }

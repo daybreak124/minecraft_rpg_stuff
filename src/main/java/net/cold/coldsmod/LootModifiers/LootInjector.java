@@ -31,8 +31,8 @@ public class LootInjector {
     public static void onLootTableLoad(LootTableLoadEvent event) {
         ResourceLocation name = event.getName();
 
-        float accessoryMultiplier = 6 * ModConfigs.ACCESSORY_MULTIPLIER.get().floatValue();
-        float blessingMultiplier = ModConfigs.BLESSING_MULTIPLIER.get().floatValue();
+        float accessoryMultiplier = 6f * ModConfigs.ACCESSORY_MULTIPLIER.get().floatValue();
+        float blessingMultiplier = 1.5f * ModConfigs.BLESSING_MULTIPLIER.get().floatValue();
         float materialMultiplier = ModConfigs.MATERIAL_MULTIPLIER.get().floatValue();
 
         if (name.equals(new ResourceLocation("minecraft", "chests/nether_bridge"))) {
@@ -93,13 +93,11 @@ public class LootInjector {
                     // new LootEntry(ModItems.HOLLOW_STONE.get(), 1, 0.01f),
                     new LootEntry(ModItems.WEAK_POINT_STUDIES.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.WARLORDS_GAZE.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.RAGE_AMPLIFIER.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.HELL_ON_EARTH.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.ORB_OF_WORLD_DESTRUCTION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.BLOODTHIRST.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.SOUL_MAGNET.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f* blessingMultiplier)
             );
             injectLoot(event.getTable(), netherLoot);
@@ -165,13 +163,11 @@ public class LootInjector {
 
                     new LootEntry(ModItems.WEAK_POINT_STUDIES.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.WARLORDS_GAZE.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.RAGE_AMPLIFIER.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.HELL_ON_EARTH.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.ORB_OF_WORLD_DESTRUCTION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.BLOODTHIRST.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.SOUL_MAGNET.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.SUMMONING_STONE.get(), 1, 0.0042857f* blessingMultiplier)
                     );
             injectLoot(event.getTable(), bastionLoot);
@@ -232,13 +228,11 @@ public class LootInjector {
 
                     new LootEntry(ModItems.WEAK_POINT_STUDIES.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.WARLORDS_GAZE.get(), 1, 0.00214285f* blessingMultiplier),
-                    new LootEntry(ModItems.RAGE_AMPLIFIER.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.HELL_ON_EARTH.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.ORB_OF_WORLD_DESTRUCTION.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.BLOODTHIRST.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.SOUL_MAGNET.get(), 1, 0.00214285f* blessingMultiplier),
-                    new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.00214285f* blessingMultiplier),
-                    new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.00214285f* blessingMultiplier)
+                    new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.00214285f* blessingMultiplier)
             );
             injectLoot(event.getTable(), ruinedPortalLoot);
         }
@@ -287,14 +281,11 @@ public class LootInjector {
 
                     new LootEntry(ModItems.WEAK_POINT_STUDIES.get(), 1, 0.001071425f* blessingMultiplier),
                     new LootEntry(ModItems.WARLORDS_GAZE.get(), 1, 0.001071425f* blessingMultiplier),
-                    new LootEntry(ModItems.RAGE_AMPLIFIER.get(), 1, 0.001071425f* blessingMultiplier),
                     new LootEntry(ModItems.HELL_ON_EARTH.get(), 1, 0.001071425f* blessingMultiplier),
                     new LootEntry(ModItems.ORB_OF_WORLD_DESTRUCTION.get(), 1, 0.001071425f* blessingMultiplier),
                     new LootEntry(ModItems.BLOODTHIRST.get(), 1, 0.001071425f* blessingMultiplier),
                     new LootEntry(ModItems.SOUL_MAGNET.get(), 1, 0.001071425f* blessingMultiplier),
                     new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.001071425f* blessingMultiplier),
-                    new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.001071425f* blessingMultiplier),
-                    new LootEntry(ModItems.RESTORING_AURA.get(), 1, 0.001071425f* blessingMultiplier),
                     new LootEntry(ModItems.DIVINITY_EXTRACTION.get(), 1, 0.001071425f* blessingMultiplier)
             );
             injectLoot(event.getTable(), barterLoot);
@@ -350,9 +341,7 @@ public class LootInjector {
                     new LootEntry(ModItems.WARLORDS_GAZE.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.LIGHTNING_INFUSION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.SOUL_MAGNET.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.RAGE_AMPLIFIER.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.LIFE_TOUCH.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.DIVINITY_EXTRACTION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.DIVINE_SHIELD.get(), 1, 0.0042857f* blessingMultiplier),
@@ -416,7 +405,6 @@ public class LootInjector {
                     new LootEntry(ModItems.SHARD_OF_TRANSCENDENCE.get(), 1, 0.2F* materialMultiplier),
                     new LootEntry(ModItems.SCRAP_ESSENCE.get(), 1, 0.2F* materialMultiplier/2),
 
-                    new LootEntry(ModItems.HANKS_EYE.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.HANKS_OTHER_EYE.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.WEAK_POINT_STUDIES.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.LIGHTNING_INFUSION.get(), 1, 0.0042857f*blessingMultiplier),
@@ -470,7 +458,6 @@ public class LootInjector {
                     new LootEntry(ModItems.SHARD_OF_TRANSCENDENCE.get(), 1, 0.2F* materialMultiplier),
                     new LootEntry(ModItems.SCRAP_ESSENCE.get(), 1, 0.2F* materialMultiplier/2),
 
-                    new LootEntry(ModItems.HANKS_EYE.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.HANKS_OTHER_EYE.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.WEAK_POINT_STUDIES.get(), 1, 0.00214285f* blessingMultiplier),
                     new LootEntry(ModItems.LIGHTNING_INFUSION.get(), 1, 0.00214285f* blessingMultiplier),
@@ -528,11 +515,9 @@ public class LootInjector {
 
                     new LootEntry(ModItems.CUPIDS_ARROW.get(), 1, 0.0085714f* blessingMultiplier),
                     // new LootEntry(ModItems.DROP_OF_SACRIFICIAL_BLOOD.get(), 1, 0.0085714f* blessingMultiplier),
-                    new LootEntry(ModItems.HANKS_EYE.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.HANKS_OTHER_EYE.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.GUARDIAN_ANGEL.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.WEAK_POINT_STUDIES.get(), 1, 0.0085714f* blessingMultiplier),
-                    new LootEntry(ModItems.RESTORING_AURA.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.HORN_OF_FEARMONGERING.get(), 1, 0.0085714f* blessingMultiplier)
@@ -583,12 +568,10 @@ public class LootInjector {
                     new LootEntry(ModItems.BANNER_OF_DETERMINATION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.HORN_OF_FEARMONGERING.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.HELL_ON_EARTH.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.RAGE_AMPLIFIER.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.SUNSTONE_GEM.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.WARLORDS_GAZE.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.IGNITION_MARK.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.RESTORING_AURA.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.NATURES_BLESSING.get(), 1, 0.0042857f* blessingMultiplier)
             );
@@ -635,11 +618,9 @@ public class LootInjector {
                     new LootEntry(ModItems.BRANCH_OF_THE_WORLD_TREE.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.GUARDIAN_ANGEL.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.WORMHOLE.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.HANKS_EYE.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.HANKS_OTHER_EYE.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.IGNITION_MARK.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.FOX_EYE.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.DIVINITY_EXTRACTION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.NATURES_BLESSING.get(), 1, 0.0042857f* blessingMultiplier),
@@ -684,11 +665,9 @@ public class LootInjector {
                     new LootEntry(ModItems.BRANCH_OF_THE_WORLD_TREE.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.GUARDIAN_ANGEL.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.WORMHOLE.get(), 1, 0.0042857f*blessingMultiplier),
-                    new LootEntry(ModItems.HANKS_EYE.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.HANKS_OTHER_EYE.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.IGNITION_MARK.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.PRIDE_INFUSED_AIGRETTE.get(), 1, 0.0042857f*blessingMultiplier),
-                    new LootEntry(ModItems.FOX_EYE.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.DIVINITY_EXTRACTION.get(), 1, 0.0042857f*blessingMultiplier),
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f*blessingMultiplier),
@@ -746,8 +725,6 @@ public class LootInjector {
                     new LootEntry(ModItems.LIFE_TOUCH.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.ORB_OF_WORLD_DESTRUCTION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.SUNSTONE_GEM.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.RESTORING_AURA.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.DIVINE_SHIELD.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f* blessingMultiplier),
@@ -783,7 +760,6 @@ public class LootInjector {
                     new LootEntry(ModItems.LIFE_TOUCH.get(), 1, 0.0005357f* blessingMultiplier),
                     new LootEntry(ModItems.ORB_OF_WORLD_DESTRUCTION.get(), 1, 0.0005357f* blessingMultiplier),
                     new LootEntry(ModItems.SUNSTONE_GEM.get(), 1, 0.0005357f* blessingMultiplier),
-                    new LootEntry(ModItems.FOX_EYE.get(), 1, 0.0005357f* blessingMultiplier),
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0005357f* blessingMultiplier),
                     new LootEntry(ModItems.DIVINE_SHIELD.get(), 1, 0.0005357f* blessingMultiplier),
                     new LootEntry(ModItems.NATURES_BLESSING.get(), 1, 0.0005357f* blessingMultiplier),
@@ -834,10 +810,8 @@ public class LootInjector {
                     // new LootEntry(ModItems.DROP_OF_SACRIFICIAL_BLOOD.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.HORN_OF_FEARMONGERING.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.LIGHTNING_INFUSION.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.RAGE_AMPLIFIER.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.CUPIDS_ARROW.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.IGNITION_MARK.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.RESTORING_AURA.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.THORN_COVERED_FORCEFIELD.get(), 1, 0.0042857f* blessingMultiplier)
@@ -948,7 +922,6 @@ public class LootInjector {
                     new LootEntry(ModItems.SUNSTONE_GEM.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.LIFE_TOUCH.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.CUPIDS_ARROW.get(), 1, 0.0042857f* blessingMultiplier),
-                    new LootEntry(ModItems.FOX_EYE.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0042857f* blessingMultiplier),
                     new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0042857f* blessingMultiplier)
@@ -1000,8 +973,6 @@ public class LootInjector {
                     new LootEntry(ModItems.SUNSTONE_GEM.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.LIFE_TOUCH.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.LIGHTNING_INFUSION.get(), 1, 0.0085714f* blessingMultiplier),
-                    new LootEntry(ModItems.IMMOLATION_OF_HEART.get(), 1, 0.0085714f* blessingMultiplier),
-                    new LootEntry(ModItems.FOX_EYE.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.BROKEN_HEALTH_POTION.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.VIAL_OF_BURSTING_ENERGY.get(), 1, 0.0085714f* blessingMultiplier),
                     new LootEntry(ModItems.WIND_WALKER_ARROW.get(), 1, 0.0085714f* blessingMultiplier)

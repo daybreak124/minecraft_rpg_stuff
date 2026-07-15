@@ -63,20 +63,19 @@ public class TemptingWhispers {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("-4 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("-3 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
             Player player = Minecraft.getInstance().player;
             if (player != null) {
                 PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
 
                 if (cache.isTemptingBuff()) {
-                    tooltip.add(Component.literal("-20% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
+                    tooltip.add(Component.literal("-16% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
                 } else {
-                    tooltip.add(Component.literal("-25% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
+                    tooltip.add(Component.literal("-20% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
                 }
             }
-            tooltip.add(Component.literal("+30% Melee Precision").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+50% Melee Precision").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -94,20 +93,19 @@ public class TemptingWhispers {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+5 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("-4 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("-3 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
             Player player = Minecraft.getInstance().player;
             if (player != null) {
                 PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
 
                 if (cache.isTemptingBuff()) {
-                    tooltip.add(Component.literal("-32% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
+                    tooltip.add(Component.literal("-24% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
                 } else {
-                    tooltip.add(Component.literal("-40% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
+                    tooltip.add(Component.literal("-30% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
                 }
             }
-            tooltip.add(Component.literal("+60% Melee Precision").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+90% Melee Precision").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -125,20 +123,20 @@ public class TemptingWhispers {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+7 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("-4 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("-3 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+12.5 Melee Precision").withStyle(style -> style.withColor(0xE0701B)));
             Player player = Minecraft.getInstance().player;
             if (player != null) {
                 PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
 
                 if (cache.isTemptingBuff()) {
-                    tooltip.add(Component.literal("-40% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
+                    tooltip.add(Component.literal("-28% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
                 } else {
-                    tooltip.add(Component.literal("-50% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
+                    tooltip.add(Component.literal("-35% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
                 }
             }
-            tooltip.add(Component.literal("+120% Melee Precision").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+135% Melee Precision").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }
@@ -156,20 +154,20 @@ public class TemptingWhispers {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+9 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("-4 Perception").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("-3 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+25 Melee Precision").withStyle(style -> style.withColor(0xE0701B)));
             Player player = Minecraft.getInstance().player;
             if (player != null) {
                 PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
 
                 if (cache.isTemptingBuff()) {
-                    tooltip.add(Component.literal("-40% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
+                    tooltip.add(Component.literal("-32% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
                 } else {
-                    tooltip.add(Component.literal("-50% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
+                    tooltip.add(Component.literal("-40% Max Health").withStyle(style -> style.withColor(0x0F52BA)));
                 }
             }
-            tooltip.add(Component.literal("+150% Melee Precision").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+200% Melee Precision").withStyle(style -> style.withColor(0xEC3700)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("Infernal Pact").withStyle(ChatFormatting.DARK_RED));
         }

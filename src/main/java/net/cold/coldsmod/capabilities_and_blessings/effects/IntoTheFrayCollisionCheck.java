@@ -1,5 +1,7 @@
 package net.cold.coldsmod.capabilities_and_blessings.effects;
 
+import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusRegistry;
+import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusTrigger;
 import net.cold.coldsmod.capabilities_and_blessings.registry.EffectUtils;
 import net.cold.coldsmod.capabilities_and_blessings.registry.ModEffects;
 import net.cold.coldsmod.damage_types.ModDamageTypes;
@@ -18,8 +20,10 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.Collections;
 import java.util.List;
 
 public class IntoTheFrayCollisionCheck extends MobEffect {
@@ -62,6 +66,7 @@ public class IntoTheFrayCollisionCheck extends MobEffect {
             player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 1));
             player.removeEffect(ModEffects.INTO_THE_FRAY_COLLISION_CHECK.get());
             player.removeEffect(ModEffects.INTO_THE_FRAY_ACTIVE.get());
+            BonusRegistry.process(player, null, player.level(), BonusTrigger.BLESSING_ACTIVATION);
         }
     }
 
@@ -80,7 +85,7 @@ public class IntoTheFrayCollisionCheck extends MobEffect {
             if (distSq <= 16.0 && player.hasLineOfSight(target)) {
                 target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10 * stackCount, 3));
 
-                target.hurt(source, (float) (3 * stackCount));
+                target.hurt(source, (float) (2 * stackCount));
 
                 // Knockback
                 double dx = target.getX() - player.getX();
@@ -102,5 +107,10 @@ public class IntoTheFrayCollisionCheck extends MobEffect {
         return (target instanceof Enemy && !(target instanceof NeutralMob)) ||
                 (target instanceof NeutralMob n && n.isAngry()) ||
                 (target instanceof Mob m && m.getTarget() != null);
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

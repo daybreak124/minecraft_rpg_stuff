@@ -1,18 +1,17 @@
 package net.cold.coldsmod.capabilities_and_blessings.effects;
 
 import net.cold.coldsmod.capabilities_and_blessings.registry.ModEffects;
-import net.cold.coldsmod.stat.AttributeApplier;
-import net.cold.coldsmod.stat.ModAttributes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.item.ItemStack;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 public class IntoTheFrayActive extends MobEffect {
@@ -43,5 +42,10 @@ public class IntoTheFrayActive extends MobEffect {
             entity.removeEffect(this);
             entity.removeEffect(ModEffects.INTO_THE_FRAY_COLLISION_CHECK.get());
         }
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

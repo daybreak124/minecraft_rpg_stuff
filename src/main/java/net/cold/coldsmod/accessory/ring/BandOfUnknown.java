@@ -62,8 +62,6 @@ public class BandOfUnknown {
 
             tooltip.add(Component.literal("+5 Strength").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal(""));
@@ -85,9 +83,8 @@ public class BandOfUnknown {
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
             tooltip.add(Component.literal("+8 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+8 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+3 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+5 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal(""));
@@ -109,10 +106,9 @@ public class BandOfUnknown {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+10 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+5 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+10 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+15 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+7 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+7 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal(""));
@@ -133,10 +129,9 @@ public class BandOfUnknown {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
 
-            tooltip.add(Component.literal("+15 Strength").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7 Constitution").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+7 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+15 Wisdom").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+16 Strength").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+13 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+13 Constitution").withStyle(ChatFormatting.DARK_AQUA));
             tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
 
             tooltip.add(Component.literal(""));

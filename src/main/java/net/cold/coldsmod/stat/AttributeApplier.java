@@ -11,12 +11,10 @@ import net.cold.coldsmod.menu_accessory.AccessoryUnlockSyncPacket;
 import net.cold.coldsmod.menu_blessing.BlessingEffectRegistry;
 import net.cold.coldsmod.menu_blessing.BlessingRegistry;
 import net.cold.coldsmod.menu_blessing.BlessingUnlockSyncPacket;
-import net.cold.coldsmod.menu_stat.StatUpgradeHandler;
-import net.cold.coldsmod.menu_stat.StatUpgradeHandlerThree;
-import net.cold.coldsmod.menu_stat.StatUpgradeHandlerTwo;
-import net.cold.coldsmod.menu_stat.StatsSyncPacket;
+import net.cold.coldsmod.menu_stat.*;
 import net.cold.coldsmod.mob.Sbeve;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundUpdateAttributesPacket;
@@ -54,16 +52,12 @@ import java.util.function.Supplier;
 import static net.cold.coldsmod.capabilities_and_blessings.effects.SummoningStone.getPlayerSbeve;
 import static net.cold.coldsmod.capabilities_and_blessings.effects.SummoningStone.killSbeve;
 import static net.cold.coldsmod.stat.AttributeMilestones.MILESTONES;
-import static net.cold.coldsmod.stat.ItemRarityUtils.getItemType;
 
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AttributeApplier {
 
     private static final UUID AS_UUID = UUID.fromString("e2225476-1234-5352-5454-113215411111");
-    private static final UUID ARMOR_UUID = UUID.fromString("e2222376-1234-5352-5254-113225461111");
-    private static final UUID TOUGHNESS_UUID = UUID.fromString("e2228876-1234-5352-5454-118115412111");
-    private static final UUID HP_UUID = UUID.fromString("e2209476-1234-5352-5454-113995001111");
 
     private static final Multimap<String, Supplier<Attribute>> ATTRIBUTE_LOOKUP =
             ImmutableListMultimap.<String, Supplier<Attribute>>builder()
@@ -110,39 +104,7 @@ public class AttributeApplier {
                     .put("rejuvenation", ModAttributes.REJUVENATION)
                     .put("amplification", ModAttributes.AMPLIFICATION)
 
-
-                    .put("damageMultiplier", ModAttributes.POTENCY_MULTIPLIER)
-                    .put("damageMultiplier", ModAttributes.MELEE_POTENCY_MULTIPLIER)
-                    .put("damageMultiplier", ModAttributes.PROJECTILE_POTENCY_MULTIPLIER)
-
-                    .put("critChanceMultiplier", ModAttributes.ACCURACY_MULTIPLIER)
-                    .put("critChanceMultiplier", ModAttributes.MELEE_ACCURACY_MULTIPLIER)
-                    .put("critChanceMultiplier", ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER)
-
-                    .put("critDamageMultiplier", ModAttributes.PRECISION_MULTIPLIER)
-                    .put("critDamageMultiplier", ModAttributes.MELEE_PRECISION_MULTIPLIER)
-                    .put("critDamageMultiplier", ModAttributes.PROJECTILE_PRECISION_MULTIPLIER)
-
-                    .put("speedMultiplier", ModAttributes.MELEE_HASTE_MULTIPLIER)
-
-
-                    .put("meleeDamageMultiplier", ModAttributes.MELEE_POTENCY_MULTIPLIER)
-                    .put("meleeCritChanceMultiplier", ModAttributes.MELEE_ACCURACY_MULTIPLIER)
-                    .put("meleeCritDamageMultiplier", ModAttributes.MELEE_PRECISION_MULTIPLIER)
-                    .put("projectileDamageMultiplier", ModAttributes.PROJECTILE_POTENCY_MULTIPLIER)
-                    .put("projectileCritChanceMultiplier", ModAttributes.PROJECTILE_ACCURACY_MULTIPLIER)
-                    .put("projectileCritDamageMultiplier", ModAttributes.PROJECTILE_PRECISION_MULTIPLIER)
-                    .put("drawSpeedMultiplier", ModAttributes.NOCK_HASTE_MULTIPLIER)
-
-
-                    .put("armorMultiplier", ModAttributes.ARMOR_MULTIPLIER)
-                    .put("toughnessMultiplier", ModAttributes.TOUGHNESS_MULTIPLIER)
-                    .put("healthMultiplier", ModAttributes.HEALTH_MULTIPLIER)
                     .put("debuffResist", ModAttributes.DEBUFF_RESIST)
-
-                    .put("restorationMultiplier", ModAttributes.RESTORATION_MULTIPLIER)
-                    .put("rejuvenationMultiplier", ModAttributes.REJUVENATION_MULTIPLIER)
-                    .put("amplificationMultiplier", ModAttributes.AMPLIFICATION_MULTIPLIER)
 
                     .put("moveSpeed", () -> Attributes.MOVEMENT_SPEED)
                     .put("swimSpeed", ForgeMod.SWIM_SPEED)
@@ -153,50 +115,6 @@ public class AttributeApplier {
                     .put("miningSpeed", ModAttributes.MINING_SPEED)
                     .put("jumpBoost", ModAttributes.JUMP_BOOST)
                     .build();
-
-    private static void handleItemStats(Player player, ItemStack stack, EquipmentSlot slot, boolean adding) {
-        if (stack.isEmpty() || !stack.hasTag()) return;
-
-        CompoundTag statsTag = stack.getTag().getCompound("custom_stats");
-        if (statsTag.isEmpty()) return;
-
-        String type = getItemType(stack);
-        if (slot.getType() == EquipmentSlot.Type.HAND) {
-            boolean isValidWeaponOrTool = type.equals("sword") ||
-                    type.equals("bow") ||
-                    type.equals("crossbow") ||
-                    type.equals("shield") ||
-                    type.equals("tools");
-
-            if (!isValidWeaponOrTool) return;
-        }
-
-        for (String key : statsTag.getAllKeys()) {
-            Collection<Supplier<Attribute>> suppliers = ATTRIBUTE_LOOKUP.get(key);
-            if (suppliers.isEmpty()) continue;
-
-            double value = statsTag.getDouble(key);
-            if (value == 0 && adding) continue;
-
-
-            for (Supplier<Attribute> supplier : suppliers) {
-                Attribute attribute = supplier.get();
-                AttributeInstance instance = player.getAttribute(attribute);
-
-                if (instance != null) {
-                    String uniqueId = type + "_" + key + "_" + attribute.getDescriptionId();
-                    UUID modifierUUID = UUID.nameUUIDFromBytes(uniqueId.getBytes(StandardCharsets.UTF_8));
-
-                    instance.removeModifier(modifierUUID);
-
-                    if (adding) {
-                        instance.addTransientModifier(new AttributeModifier(modifierUUID,
-                                "Gear Stat: " + key, value, AttributeModifier.Operation.ADDITION));
-                    }
-                }
-            }
-        }
-    }
 
 
     public static void register() {
@@ -252,20 +170,20 @@ public class AttributeApplier {
 
 
     public static void recalculateDynamicBonuses(Player player) {
-        removeModifier(player, Attributes.ARMOR, ARMOR_UUID);
-        removeModifier(player, Attributes.ARMOR_TOUGHNESS, TOUGHNESS_UUID);
-        removeModifier(player, Attributes.MAX_HEALTH, HP_UUID);
-        removeModifier(player, Attributes.ATTACK_SPEED, AS_UUID);
-
-        double healthPercent = player.getAttributeValue(ModAttributes.HEALTH_MULTIPLIER.get());
-        double armorPercent = player.getAttributeValue(ModAttributes.ARMOR_MULTIPLIER.get());
-        double toughnessPercent = player.getAttributeValue(ModAttributes.TOUGHNESS_MULTIPLIER.get());
-        double ASBonus = getScaledValue(player, ModAttributes.MELEE_HASTE.get(), ModAttributes.MELEE_HASTE_MULTIPLIER.get());
-
-        applyPercentModifier(player, Attributes.MAX_HEALTH, healthPercent, HP_UUID);
-        applyPercentModifier(player, Attributes.ARMOR, armorPercent, ARMOR_UUID);
-        applyPercentModifier(player, Attributes.ARMOR_TOUGHNESS, toughnessPercent, TOUGHNESS_UUID);
-        applyPercentModifier(player, Attributes.ATTACK_SPEED, ASBonus / 100.0, AS_UUID);
+//        removeModifier(player, Attributes.ARMOR, ARMOR_UUID);
+//        removeModifier(player, Attributes.ARMOR_TOUGHNESS, TOUGHNESS_UUID);
+//        removeModifier(player, Attributes.MAX_HEALTH, HP_UUID);
+//        removeModifier(player, Attributes.ATTACK_SPEED, AS_UUID);
+//
+//        double healthPercent = player.getAttributeValue(ModAttributes.HEALTH_MULTIPLIER.get());
+//        double armorPercent = player.getAttributeValue(ModAttributes.ARMOR_MULTIPLIER.get());
+//        double toughnessPercent = player.getAttributeValue(ModAttributes.TOUGHNESS_MULTIPLIER.get());
+//        double ASBonus = getScaledValue(player, ModAttributes.MELEE_HASTE.get(), ModAttributes.MELEE_HASTE_MULTIPLIER.get());
+//
+//        applyPercentModifier(player, Attributes.MAX_HEALTH, healthPercent, HP_UUID);
+//        applyPercentModifier(player, Attributes.ARMOR, armorPercent, ARMOR_UUID);
+//        applyPercentModifier(player, Attributes.ARMOR_TOUGHNESS, toughnessPercent, TOUGHNESS_UUID);
+//        applyPercentModifier(player, Attributes.ATTACK_SPEED, ASBonus / 100.0, AS_UUID);
 
 
         if (player.getHealth() > player.getMaxHealth()) {
@@ -273,34 +191,55 @@ public class AttributeApplier {
         }
     }
 
+//    public static void recalcArmor(Player player) {
+//        removeModifier(player, Attributes.ARMOR, ARMOR_UUID);
+//        double armorPercent = player.getAttributeValue(ModAttributes.ARMOR_MULTIPLIER.get());
+//        applyPercentModifier(player, Attributes.ARMOR, armorPercent, ARMOR_UUID);
+//
+//    }
+//
+//    public static void recalcToughness(Player player) {
+//        removeModifier(player, Attributes.ARMOR_TOUGHNESS, TOUGHNESS_UUID);
+//        double toughnessPercent = player.getAttributeValue(ModAttributes.TOUGHNESS_MULTIPLIER.get());
+//        applyPercentModifier(player, Attributes.ARMOR_TOUGHNESS, toughnessPercent, TOUGHNESS_UUID);
+//    }
+//
+    public static void recalcAS(Player player) {
+        removeModifier(player, Attributes.ATTACK_SPEED, AS_UUID);
+        double ASBonus = getScaledValue(player, ModAttributes.MELEE_HASTE.get());
+        applyModifier(player, Attributes.ATTACK_SPEED, AS_UUID.toString(), ASBonus / 100.0, AttributeModifier.Operation.MULTIPLY_BASE);
+    }
+
     public record BaseStatSnapshot(double str, double dex, double fort, double con, double perc, double insight, double wisdom) {}
 
     private static final Map<Supplier<Attribute>, Function<BaseStatSnapshot, Double>> PER_POINT_FORMULAS = Map.ofEntries(
-            Map.entry(ModAttributes.POTENCY, s -> s.str * 0.1 + s.con * 0.175),
-            Map.entry(ModAttributes.MELEE_POTENCY, s -> s.str * 0.35 + s.con * 0.175),
-            Map.entry(ModAttributes.PROJECTILE_POTENCY, s -> (s.str * 0.1 + s.con * 0.175 + s.dex * 0.125)),
-            Map.entry(() -> Attributes.ATTACK_DAMAGE, s -> s.str * 0.012),
+            Map.entry(ModAttributes.POTENCY, s -> s.str * 0.06 + s.con * 0.04),
+            Map.entry(ModAttributes.MELEE_POTENCY, s -> s.str * 0.06 + s.str * 0.12 + s.con * 0.04),
+            Map.entry(ModAttributes.PROJECTILE_POTENCY, s -> (s.str * 0.06 + s.con * 0.04 + s.dex * 0.075)),
+            Map.entry(() -> Attributes.ATTACK_DAMAGE, s -> s.str * 0.006),
 
-            Map.entry(ModAttributes.ACCURACY, s -> s.dex * 0.25),
-            Map.entry(ModAttributes.MELEE_ACCURACY, s -> s.dex * 0.25),
-            Map.entry(ModAttributes.PROJECTILE_ACCURACY, s -> s.dex * 0.25),
+            Map.entry(ModAttributes.ACCURACY, s -> s.dex * 0.11),
+            Map.entry(ModAttributes.MELEE_ACCURACY, s -> s.dex * 0.11),
+            Map.entry(ModAttributes.PROJECTILE_ACCURACY, s -> s.dex * 0.11),
 
-            Map.entry(ModAttributes.PRECISION, s -> s.perc * 0.35),
-            Map.entry(ModAttributes.MELEE_PRECISION, s -> s.perc * 0.35),
-            Map.entry(ModAttributes.PROJECTILE_PRECISION, s -> s.perc * 0.35),
+            Map.entry(ModAttributes.PRECISION, s -> s.perc * 0.32),
+            Map.entry(ModAttributes.MELEE_PRECISION, s -> s.perc * 0.32),
+            Map.entry(ModAttributes.PROJECTILE_PRECISION, s -> s.perc * 0.32),
 
-            Map.entry(ModAttributes.MELEE_HASTE, s -> s.dex * 0.15),
+            Map.entry(ModAttributes.HASTE, s -> s.dex * 0.05),
+            Map.entry(ModAttributes.MELEE_HASTE, s -> s.dex * 0.05),
             Map.entry(ModAttributes.NOCK_HASTE, s -> s.dex * 0.1),
-            Map.entry(() -> Attributes.MOVEMENT_SPEED, s -> s.dex * 0.0003),
-            Map.entry(() -> Attributes.ARMOR, s -> s.perc * 0.04 + s.fort * 0.18 + s.str * 0.12),
-            Map.entry(() -> Attributes.MAX_HEALTH, s -> s.con * 0.06),
-            Map.entry(() -> Attributes.ARMOR_TOUGHNESS, s -> s.fort * 0.1),
-            Map.entry(ModAttributes.DEBUFF_RESIST, s -> s.con * 0.05 + s.wisdom * 0.125),
-            Map.entry(() -> Attributes.KNOCKBACK_RESISTANCE, s -> s.fort * 0.002),
+            Map.entry(() -> Attributes.MOVEMENT_SPEED, s -> s.dex * 0.000125),
 
-            Map.entry(ModAttributes.RESTORATION, s -> s.wisdom * 0.18),
+            Map.entry(() -> Attributes.ARMOR, s -> s.perc * 0.05 + s.fort * 0.1 + s.str * 0.075),
+            Map.entry(() -> Attributes.MAX_HEALTH, s -> s.con * 0.035),
+            Map.entry(() -> Attributes.ARMOR_TOUGHNESS, s -> s.fort * 0.05),
+            Map.entry(ModAttributes.DEBUFF_RESIST, s -> s.con * 0.05 + s.wisdom * 0.1),
+            Map.entry(() -> Attributes.KNOCKBACK_RESISTANCE, s -> s.fort * 0.0015),
+
+            Map.entry(ModAttributes.RESTORATION, s -> s.wisdom * 0.25),
             Map.entry(ModAttributes.AMPLIFICATION, s -> s.wisdom * 0.25),
-            Map.entry(ModAttributes.REJUVENATION, s -> s.con * 0.125),
+            Map.entry(ModAttributes.REJUVENATION, s -> s.con * 0.2),
 
             Map.entry(ModAttributes.XP_GAIN, s -> s.insight * 0.0025),
             Map.entry(ModAttributes.MINING_SPEED, s -> s.insight * 0.0025),
@@ -380,11 +319,7 @@ public class AttributeApplier {
 
                 CompoundTag nbt = newStack.getOrCreateTag();
 
-                double currentHaste = getScaledValue(player, ModAttributes.NOCK_HASTE.get(), ModAttributes.NOCK_HASTE_MULTIPLIER.get());
-
-                if (nbt.getDouble("draw") != currentHaste) {
-                    nbt.putDouble("draw", currentHaste);
-                }
+                crossbowDrawSpeedUpdate(player, newStack, nbt);
 
                 PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
                 boolean hasAdrenaline = cache.isInjection();
@@ -397,6 +332,15 @@ public class AttributeApplier {
         }
     }
 
+    public static void crossbowDrawSpeedUpdate(Player player, ItemStack stack, CompoundTag nbt) {
+
+        double currentHaste = getScaledValue(player, ModAttributes.NOCK_HASTE.get());
+
+        if (nbt.getDouble("draw") != currentHaste) {
+            nbt.putDouble("draw", currentHaste);
+        }
+    }
+
 //    @SubscribeEvent
 //    public static void onUseItemStart(LivingEntityUseItemEvent.Start event) {
 //        if (!(event.getEntity() instanceof Player player) || player.level().isClientSide()) return;
@@ -405,41 +349,11 @@ public class AttributeApplier {
 //        String itemType = ItemRarityUtils.getItemType(stack);
 //    }
 
-    public static double getScaledValue(Player player, Attribute ratingAttr, Attribute multiplierAttr) {
-        double rating = player.getAttributeValue(ratingAttr);
-        double multiplierValue = player.getAttributeValue(multiplierAttr);
-
-        double effectiveRating = rating * multiplierValue;
-
-        if (450 + effectiveRating == 0) return 0;
-
-        return (450 * effectiveRating) / (450 + Math.abs(effectiveRating));
-    }
-
-    public static void applyPercentModifier(Player player, Attribute attribute, double percent, UUID uuid) {
-        AttributeInstance inst = player.getAttribute(attribute);
-        if (inst == null) return;
-
-        AttributeModifier existing = inst.getModifier(uuid);
-        if (existing != null && existing.getAmount() == percent) return;
-
-        if (existing != null) inst.removeModifier(uuid);
-        if (percent != 0) {
-            inst.addTransientModifier(new AttributeModifier(uuid, attribute.getDescriptionId() + "_percent", percent, AttributeModifier.Operation.MULTIPLY_TOTAL));
-        }
-    }
-
-    public static void applyPercentModifierAdditive(LivingEntity entity, Attribute attribute, double percent, UUID uuid) {
-        AttributeInstance inst = entity.getAttribute(attribute);
-        if (inst == null) return;
-
-        AttributeModifier existing = inst.getModifier(uuid);
-        if (existing != null && existing.getAmount() == percent) return;
-
-        if (existing != null) inst.removeModifier(uuid);
-        if (percent != 0) {
-            inst.addTransientModifier(new AttributeModifier(uuid, attribute.getDescriptionId() + "_percent", percent, AttributeModifier.Operation.MULTIPLY_BASE));
-        }
+    public static double getScaledValue(Player player, Attribute ratingAttr) {
+        double effectiveRating = player.getAttributeValue(ratingAttr);
+        int constant = 200;
+        if (constant + effectiveRating == 0) return 0;
+        return (constant * effectiveRating) / (constant + Math.abs(effectiveRating));
     }
 
 
@@ -453,12 +367,18 @@ public class AttributeApplier {
 
         if (existing != null) instance.removeModifier(uuid);
         if (value != 0) {
-            AttributeModifier modifier = new AttributeModifier(uuid, "Custom Stat", value, AttributeModifier.Operation.ADDITION);
+            AttributeModifier modifier = new AttributeModifier(uuid, "stat", value, AttributeModifier.Operation.ADDITION);
             instance.addTransientModifier(modifier);
         }
+    }
 
-        if (!entity.level().isClientSide && entity instanceof ServerPlayer serverPlayer) {
-            serverPlayer.connection.send(new ClientboundUpdateAttributesPacket(entity.getId(), Collections.singleton(instance)));
+    public static void applyModifier(Player player, Attribute attribute, String uuidString, double amount, AttributeModifier.Operation operation) {
+        AttributeInstance instance = player.getAttribute(attribute);
+        if (instance != null) {
+            UUID uuid = UUID.fromString(uuidString);
+            instance.removeModifier(uuid);
+            AttributeModifier modifier = new AttributeModifier(uuid, "stat", amount, operation);
+            instance.addTransientModifier(modifier);
         }
     }
 
@@ -478,67 +398,92 @@ public class AttributeApplier {
 
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
-        if (event.isWasDeath()) {
-            CompoundTag oldData = event.getOriginal().getPersistentData();
-            CompoundTag newData = event.getEntity().getPersistentData();
-            Player player = event.getEntity();
+        CompoundTag oldData = event.getOriginal().getPersistentData();
+        CompoundTag newData = event.getEntity().getPersistentData();
+        Player player = event.getEntity();
 
-            if (event.isWasDeath()) {
-                event.getOriginal().getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(oldStore -> {
-                    event.getEntity().getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(newStore -> {
-                        newStore.copyFrom(oldStore);
-                    });
-                });
-            }
+        event.getOriginal().getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(oldStore -> {
+            event.getEntity().getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).ifPresent(newStore -> {
+                newStore.copyFrom(oldStore);
+            });
+        });
 
-            // Move Screen 1
-            if (oldData.contains("SpentPointsOne")) {
-                newData.put("SpentPointsOne", oldData.getCompound("SpentPointsOne").copy());
-            }
-
-            // Move Screen 2
-            if (oldData.contains("SpentPoints")) {
-                newData.put("SpentPoints", oldData.getCompound("SpentPoints").copy());
-            }
-
-            // Move Screen 3
-            if (oldData.contains("SpentPointsUtil")) {
-                newData.put("SpentPointsUtil", oldData.getCompound("SpentPointsUtil").copy());
-            }
-
-            if (oldData.contains("ActiveBlessings")) {
-                newData.put("ActiveBlessings", oldData.getCompound("ActiveBlessings").copy());
-            }
-
-            if (oldData.contains("ActiveAccessories")) {
-                newData.put("ActiveAccessories", oldData.getCompound("ActiveAccessories").copy());
-            }
-
-            refreshPerPointStats(player);
-            refreshMilestones(player);
-            recalculateDynamicBonuses(player);
-            // applyCrossbowTag(player);
-
-//                player.level().getServer().tell(new net.minecraft.server.TickTask(
-//                        player.level().getServer().getTickCount() + 1,
-//                        () -> {
-//                            if (player.isAlive()) {
-//                                refreshPerPointStats(player);
-//                                refreshMilestones(player);
-//                                recalculateDynamicBonuses(player);
-//                                applyCrossbowTag(player);
-//                            }
-//                        }
-//                ));
+        // Move Screen 1
+        if (oldData.contains("SpentPointsOne")) {
+            newData.put("SpentPointsOne", oldData.getCompound("SpentPointsOne").copy());
         }
 
+        // Move Screen 2
+        if (oldData.contains("SpentPoints")) {
+            newData.put("SpentPoints", oldData.getCompound("SpentPoints").copy());
+        }
 
+        // Move Screen 3
+        if (oldData.contains("SpentPointsUtil")) {
+            newData.put("SpentPointsUtil", oldData.getCompound("SpentPointsUtil").copy());
+        }
+
+        if (oldData.contains("ActiveBlessings")) {
+            newData.put("ActiveBlessings", oldData.getCompound("ActiveBlessings").copy());
+        }
+
+        if (oldData.contains("ActiveAccessories")) {
+            newData.put("ActiveAccessories", oldData.getCompound("ActiveAccessories").copy());
+        }
+
+        String[] trees = {"LION", "NIGHT", "STEEL", "HERALD"};
+        for (String tree : trees) {
+            String key = "ActiveFeats_" + tree;
+            if (oldData.contains(key)) {
+                newData.put(key, oldData.getCompound(key).copy());
+            }
+        }
+
+        player.getServer().tell(new net.minecraft.server.TickTask(
+                player.getServer().getTickCount() + 1,
+                () -> {
+                    if (player.isAlive()) {
+                        syncAndApplyAttributes((ServerPlayer) player);
+                        refreshPerPointStats(player);
+                        refreshMilestones(player);
+                        recalculateDynamicBonuses(player);
+                    }
+                }
+        ));
+    }
+
+    @SubscribeEvent
+    public static void onDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
+        if (event.getEntity() instanceof ServerPlayer sp) {
+            sp.getServer().tell(new net.minecraft.server.TickTask(
+                    sp.getServer().getTickCount() + 1,
+                    () -> {
+                            if (sp.isAlive()) {
+                                syncAndApplyAttributes(sp);
+                                refreshPerPointStats(sp);
+                                refreshMilestones(sp);
+                                recalculateDynamicBonuses(sp);
+                            }
+                        }
+            ));
+        }
     }
 
     @SubscribeEvent
     public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
         if (event.getEntity() instanceof ServerPlayer sp) {
-            syncAndApplyAttributes(sp);
+
+            sp.getServer().tell(new net.minecraft.server.TickTask(
+                    sp.getServer().getTickCount() + 1,
+                    () -> {
+                        if (sp.isAlive()) {
+                            syncAndApplyAttributes(sp);
+                            refreshPerPointStats(sp);
+                            refreshMilestones(sp);
+                            recalculateDynamicBonuses(sp);
+                        }
+                    }
+            ));
         }
     }
 
@@ -552,45 +497,36 @@ public class AttributeApplier {
 
                 player.removeEffectNoUpdate(type);
 
-                player.addEffect(new MobEffectInstance(
-                        type,
-                        instance.getDuration(),
-                        instance.getAmplifier(),
-                        instance.isAmbient(),
-                        instance.isVisible(),
-                        instance.showIcon()
-                ));
+                player.addEffect(new MobEffectInstance(type, instance.getDuration(), instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));
             }
-            syncAndApplyAttributes(player);
+
+            player.getServer().tell(new net.minecraft.server.TickTask(
+                    player.getServer().getTickCount() + 1,
+                    () -> {
+                        if (player.isAlive()) {
+                            syncAndApplyAttributes(player);
+                            refreshPerPointStats(player);
+                            refreshMilestones(player);
+                            recalculateDynamicBonuses(player);
+                        }
+                    }
+            ));
         }
     }
 
-    private static void syncAndApplyAttributes(ServerPlayer player) {
+    public static void syncAndApplyAttributes(ServerPlayer player) {
         CompoundTag data = player.getPersistentData();
+        List<AttributeInstance> toSync = new ArrayList<>();
 
         if (data.contains("SpentPointsOne")) {
             CompoundTag spent1 = data.getCompound("SpentPointsOne");
             for (String key : spent1.getAllKeys()) {
                 Attribute attr = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(key));
                 if (attr == null) continue;
-
-                int pts = spent1.getInt(key);
-                AttributeApplier.applyModifier(player, attr, pts, StatUpgradeHandler.ATTRIBUTE_UPGRADE);
-
-                ModMessages.sendToPlayer(new StatsSyncPacket(key, pts, true, false), player);
-
-                player.level().getServer().tell(new net.minecraft.server.TickTask(
-                        player.level().getServer().getTickCount() + 1,
-                        () -> {
-                            if (player.isAlive()) {
-                                refreshPerPointStats(player);
-                                refreshMilestones(player);
-                                recalculateDynamicBonuses(player);
-                                // applyCrossbowTag(player);
-                            }
-                        }
-                ));
+                AttributeApplier.applyModifier(player, attr, spent1.getInt(key), StatUpgradeHandler.ATTRIBUTE_UPGRADE);
+                if (player.getAttribute(attr) != null) toSync.add(player.getAttribute(attr));
             }
+            ModMessages.sendToPlayer(new StatsSyncPacket(spent1, true, false), player);
         }
 
         if (data.contains("SpentPoints")) {
@@ -598,27 +534,27 @@ public class AttributeApplier {
             for (String key : spent2.getAllKeys()) {
                 Attribute attr = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(key));
                 if (attr == null) continue;
-
-                int pts = spent2.getInt(key);
                 double inc = StatUpgradeHandlerTwo.getIncrementFor(attr);
-                AttributeApplier.applyModifier(player, attr, pts * inc, StatUpgradeHandlerTwo.STAT_MODIFIER_UUID);
-
-                ModMessages.sendToPlayer(new StatsSyncPacket(key, pts, false, false), player);
+                AttributeApplier.applyModifier(player, attr, spent2.getInt(key) * inc, StatUpgradeHandlerTwo.STAT_MODIFIER_UUID);
+                if (player.getAttribute(attr) != null) toSync.add(player.getAttribute(attr));
             }
+            ModMessages.sendToPlayer(new StatsSyncPacket(spent2, false, false), player);
         }
 
         if (data.contains("SpentPointsUtil")) {
-            CompoundTag spent2 = data.getCompound("SpentPointsUtil");
-            for (String key : spent2.getAllKeys()) {
+            CompoundTag spent3 = data.getCompound("SpentPointsUtil");
+            for (String key : spent3.getAllKeys()) {
                 Attribute attr = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(key));
                 if (attr == null) continue;
-
-                int pts = spent2.getInt(key);
                 double inc = StatUpgradeHandlerThree.getIncrementFor(attr);
-                AttributeApplier.applyModifier(player, attr, pts * inc, StatUpgradeHandlerThree.UTIL_STAT_MODIFIER_UUID);
-
-                ModMessages.sendToPlayer(new StatsSyncPacket(key, pts, false, true), player);
+                AttributeApplier.applyModifier(player, attr, spent3.getInt(key) * inc, StatUpgradeHandlerThree.UTIL_STAT_MODIFIER_UUID);
+                if (player.getAttribute(attr) != null) toSync.add(player.getAttribute(attr));
             }
+            ModMessages.sendToPlayer(new StatsSyncPacket(spent3, false, true), player);
+        }
+
+        if (!toSync.isEmpty()) {
+            player.connection.send(new ClientboundUpdateAttributesPacket(player.getId(), toSync));
         }
 
         if (data.contains("ActiveBlessings")) {
@@ -628,7 +564,6 @@ public class AttributeApplier {
                 if (blessings.getBoolean(id)) {
                     var entry = BlessingRegistry.MAP.get(id);
                     if (entry != null) {
-                        // Re-apply the logic/modifiers associated with the blessing
                         var onApply = BlessingEffectRegistry.ON_APPLY.get(entry.item());
                         if (onApply != null) onApply.accept(player);
                     }
@@ -653,6 +588,32 @@ public class AttributeApplier {
             }
             ModMessages.sendToPlayer(new AccessoryUnlockSyncPacket(accessories), player);
         }
+
+        String[] trees = {"LION", "NIGHT", "STEEL", "HERALD"};
+        for (String tree : trees) {
+            String key = "ActiveFeats_" + tree;
+            if (data.contains(key)) {
+                CompoundTag treeFeats = data.getCompound(key);
+                for (String featKey : treeFeats.getAllKeys()) {
+                    try {
+                        int featId = Integer.parseInt(featKey.replace("feat_", ""));
+                        if (treeFeats.getBoolean(featKey)) {
+                            FeatUpgradeHandlerRegistry.reapplyFeat(player, featId);
+                        }
+                    } catch (Exception ignored) {}
+                }
+            }
+        }
+        ModMessages.sendToPlayer(new FeatSyncPacket(data), player);
+
+        player.level().getServer().tell(new net.minecraft.server.TickTask(
+                player.level().getServer().getTickCount() + 10,
+                () -> {
+                    if (player.isAlive()) {
+                        recalcAS(player);
+                    }
+                }
+        ));
     }
 
     @SubscribeEvent
@@ -689,29 +650,129 @@ public class AttributeApplier {
         }
     }
 
-    // Randomized mobs
-//    @SubscribeEvent
-//    public static void onMonsterSpawn(EntityJoinLevelEvent event) {
-//        if (event.getLevel().isClientSide()) return;
-//
-//        if (event.getEntity() instanceof Enemy && event.getEntity() instanceof LivingEntity living) {
-//            RandomSource random = living.getRandom();
-//
-//            double outgoingVal = Math.max(0.75, Math.min(1.5, 1.0 + (random.nextGaussian() * 0.15)));
-//            AttributeInstance outgoing = living.getAttribute(ModAttributes.OUTGOING_DAMAGE_MULTIPLIER.get());
-//            if (outgoing != null) outgoing.setBaseValue(outgoingVal);
-//
-//            double incomingVal = Math.max(0.75, Math.min(1.5, 1.0 + (random.nextGaussian() * 0.15)));
-//            AttributeInstance incoming = living.getAttribute(ModAttributes.INCOMING_DAMAGE_MULTIPLIER.get());
-//            if (incoming != null) incoming.setBaseValue(incomingVal);
-//        }
-//    }
 
     @SubscribeEvent
     public static void onItemTooltip(ItemTooltipEvent event) {
         if (event.getFlags().isAdvanced()) {
             ItemStack stack = event.getItemStack();
             String type = ItemRarityUtils.getItemType(stack);
+
+            if (type.equals("sword")) {
+                boolean holdingAlt = Screen.hasAltDown();
+                boolean holdingCtrl = Screen.hasControlDown();
+                boolean holdingShift = Screen.hasShiftDown();
+
+                if (!holdingAlt && !holdingCtrl && !holdingShift) {
+                    event.getToolTip().add(Component.literal("Hold [ALT]   -> Basic Attack").withStyle(ChatFormatting.YELLOW));
+                    event.getToolTip().add(Component.literal("Hold [CTRL]  -> Jump Attacks").withStyle(ChatFormatting.YELLOW));
+                    event.getToolTip().add(Component.literal("Hold [SHIFT] -> Directional Attacks").withStyle(ChatFormatting.YELLOW));
+
+                    event.getToolTip().add(Component.empty());
+                    event.getToolTip().add(Component.literal("Using the same type of").withStyle(ChatFormatting.WHITE));
+                    event.getToolTip().add(Component.literal("attack consecutively applies").withStyle(ChatFormatting.WHITE));
+                    event.getToolTip().add(Component.literal("a -30% Attack Speed penalty").withStyle(ChatFormatting.WHITE));
+                }
+
+                else if (holdingAlt) {
+                    event.getToolTip().add(Component.literal("BASIC ATTACKS").withStyle(ChatFormatting.GOLD));
+                    event.getToolTip().add(Component.empty());
+
+                    event.getToolTip().add(Component.literal("Attack: ").withStyle(ChatFormatting.GOLD)
+                            .append(Component.literal("Swing").withStyle(ChatFormatting.WHITE)));
+
+                    event.getToolTip().add(Component.literal("Condition: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("Attack").withStyle(ChatFormatting.WHITE)));
+
+                    event.getToolTip().add(Component.literal("Damage: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("100% (+15%)").withStyle(ChatFormatting.RED)));
+
+                    event.getToolTip().add(Component.literal("Attack Speed: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("-0%").withStyle(ChatFormatting.BLUE)));
+                }
+
+                else if (holdingCtrl) {
+                    event.getToolTip().add(Component.literal("JUMP ATTACKS").withStyle(ChatFormatting.GOLD));
+                    event.getToolTip().add(Component.empty());
+
+                    // Heavy Attack
+                    event.getToolTip().add(Component.literal("Attack: ").withStyle(ChatFormatting.GOLD)
+                            .append(Component.literal("Heavy Attack").withStyle(ChatFormatting.WHITE)));
+
+                    event.getToolTip().add(Component.literal("Condition: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("Falling + Attack + >=50% Attack Bar").withStyle(ChatFormatting.WHITE)));
+
+                    event.getToolTip().add(Component.literal("Damage: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("130% (+30%)").withStyle(ChatFormatting.RED)));
+
+                    event.getToolTip().add(Component.literal("Attack Speed: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("-0%").withStyle(ChatFormatting.BLUE)));
+
+                    event.getToolTip().add(Component.literal("Effect: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("Disable target (player) shields for 5s").withStyle(ChatFormatting.WHITE)));
+
+                    event.getToolTip().add(Component.empty());
+
+                    // Upward Attack
+                    event.getToolTip().add(Component.literal("Attack: ").withStyle(ChatFormatting.GOLD)
+                            .append(Component.literal("Upward Attack").withStyle(ChatFormatting.WHITE)));
+
+                    event.getToolTip().add(Component.literal("Condition: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("Ascending + Attack + >=50% Attack Bar").withStyle(ChatFormatting.WHITE)));
+
+                    event.getToolTip().add(Component.literal("Damage: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("100%").withStyle(ChatFormatting.RED)));
+
+                    event.getToolTip().add(Component.literal("Attack Speed: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("-20%").withStyle(ChatFormatting.BLUE)));
+
+                    event.getToolTip().add(Component.literal("Effect: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("Throw target in the air.").withStyle(ChatFormatting.WHITE)));
+                    event.getToolTip().add(Component.literal("Apply Melee Vulnerability to target").withStyle(ChatFormatting.WHITE));
+                    event.getToolTip().add(Component.literal("causing other attacks to have extra").withStyle(ChatFormatting.WHITE));
+                    event.getToolTip().add(Component.literal("benefits on them.").withStyle(ChatFormatting.WHITE));
+                }
+
+                else if (holdingShift) {
+                    event.getToolTip().add(Component.literal("DIRECTIONAL ATTACKS").withStyle(ChatFormatting.GOLD));
+                    event.getToolTip().add(Component.empty());
+
+                    event.getToolTip().add(Component.literal("Attack: ").withStyle(ChatFormatting.GOLD)
+                            .append(Component.literal("Poke").withStyle(ChatFormatting.WHITE)));
+
+                    event.getToolTip().add(Component.literal("Condition: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("Sprint + Attack + >=90% Attack Bar").withStyle(ChatFormatting.WHITE)));
+
+                    event.getToolTip().add(Component.literal("Damage: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("125% (+25%)").withStyle(ChatFormatting.RED)));
+
+                    event.getToolTip().add(Component.literal("Attack Speed: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("-33.3%").withStyle(ChatFormatting.BLUE)));
+
+                    event.getToolTip().add(Component.literal("Effect: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("Pushes target 5 (+2) blocks").withStyle(ChatFormatting.WHITE)));
+
+                    event.getToolTip().add(Component.empty());
+
+                    // Cleave
+                    event.getToolTip().add(Component.literal("Attack: ").withStyle(ChatFormatting.GOLD)
+                            .append(Component.literal("Cleave").withStyle(ChatFormatting.WHITE)));
+
+                    event.getToolTip().add(Component.literal("Condition: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("Move Sideways + Attack + >=50% Attack Bar").withStyle(ChatFormatting.WHITE)));
+
+                    event.getToolTip().add(Component.literal("Damage: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("60% (+10%) (+10%*S)").withStyle(ChatFormatting.RED)));
+
+                    event.getToolTip().add(Component.literal("Attack Speed: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("-20%").withStyle(ChatFormatting.BLUE)));
+
+                    event.getToolTip().add(Component.literal("Effect: ").withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("Strikes all enemies in a 120° arc").withStyle(ChatFormatting.WHITE)));
+
+                    event.getToolTip().add(Component.literal("Range scale with attack speed").withStyle(ChatFormatting.WHITE));
+                    event.getToolTip().add(Component.literal("Damage +10% additively per Sweeping Edge level").withStyle(ChatFormatting.WHITE));
+                }
+            }
 
             if (!type.equals("unknown")) {
                 String formattedType = type.substring(0, 1).toUpperCase() + type.substring(1);

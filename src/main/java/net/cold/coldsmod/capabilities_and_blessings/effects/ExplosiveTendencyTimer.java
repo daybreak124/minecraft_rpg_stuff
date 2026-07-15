@@ -8,8 +8,12 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
+import java.util.List;
 
 public class ExplosiveTendencyTimer extends MobEffect {
     public ExplosiveTendencyTimer() {
@@ -35,11 +39,16 @@ public class ExplosiveTendencyTimer extends MobEffect {
             level.getServer().tell(new net.minecraft.server.TickTask(
                     level.getServer().getTickCount() + 1, () -> {
                         if (pLivingEntity.isAlive()) {
-                            pLivingEntity.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get(), 159, 0, false, false, true));
+                            pLivingEntity.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_TIMER.get(), 239, 0, false, false, false));
                         }
             }));
         }
         pLivingEntity.addEffect(new MobEffectInstance(ModEffects.EXPLOSIVE_TENDENCY_STACK.get(), MobEffectInstance.INFINITE_DURATION,
                 stacks, false, false, true));
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

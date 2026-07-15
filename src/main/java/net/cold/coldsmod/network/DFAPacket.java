@@ -2,6 +2,8 @@ package net.cold.coldsmod.network;
 
 import net.cold.coldsmod.ModMessages;
 import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusCapabilityProvider;
+import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusRegistry;
+import net.cold.coldsmod.capabilities_and_blessings.Capabilities.BonusTrigger;
 import net.cold.coldsmod.capabilities_and_blessings.Capabilities.PlayerBonusCache;
 import net.cold.coldsmod.capabilities_and_blessings.registry.EffectUtils;
 import net.cold.coldsmod.capabilities_and_blessings.registry.ModEffects;
@@ -51,7 +53,7 @@ public class DFAPacket {
         buf.writeBoolean(isCrouching);
     }
 
-    private static final float JUMP_DAMAGE = 7.5f;
+    private static final float JUMP_DAMAGE = 5f;
 
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
@@ -66,6 +68,8 @@ public class DFAPacket {
 
             PlayerBonusCache cache = player.getCapability(BonusCapabilityProvider.PLAYER_BONUS_CACHE).orElse(null);
             cache.setDFAAirborne(true);
+            BonusRegistry.process(player, null, player.level(), BonusTrigger.BLESSING_ACTIVATION);
+
 
             double jumpBoost;
             if (this.isCrouching) {
@@ -114,7 +118,7 @@ public class DFAPacket {
             }
 
             player.removeEffect(ModEffects.DEATH_FROM_ABOVE_READY.get());
-            player.addEffect(new MobEffectInstance(ModEffects.DEATH_FROM_ABOVE_COOLDOWN.get(), 300, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(ModEffects.DEATH_FROM_ABOVE_COOLDOWN.get(), 420, 0, false, false, true));
             handleQuantumLeapSynergy(player, cache);
         });
         return true;

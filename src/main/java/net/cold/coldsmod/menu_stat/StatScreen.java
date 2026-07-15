@@ -29,7 +29,7 @@ public class StatScreen extends AbstractContainerScreen<StatMenu> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation("coldsmod", "textures/gui/attribute_background.png");
 
-    private static final int START_Y = 35; // Moved down 10px
+    private static final int START_Y = 35;
     private static final int SPACING = 11;
 
     private static final int INK_BLACK = 0x282828;
@@ -92,7 +92,6 @@ public class StatScreen extends AbstractContainerScreen<StatMenu> {
         renderHeader(g, "Attributes", half / 2, START_Y - 8, INK_BLUE);
         renderHeader(g, "Utility Stats", half + (half / 2), START_Y - 8, 0x994400);
 
-        // --- ATTRIBUTES ---
         renderAttributeLine(g, "Strength", ModAttributes.STR.get(), START_Y, Items.IRON_SWORD, mx, my, 0);
         renderAttributeLine(g, "Dexterity", ModAttributes.DEX.get(), START_Y + SPACING, Items.BOW, mx, my, 0);
         renderAttributeLine(g, "Fortitude", ModAttributes.FORT.get(), START_Y + (SPACING * 2), Items.SHIELD, mx, my, 0);
@@ -100,7 +99,6 @@ public class StatScreen extends AbstractContainerScreen<StatMenu> {
         renderAttributeLine(g, "Perception", ModAttributes.PERC.get(), START_Y + (SPACING * 4), MobEffects.CONDUIT_POWER, mx, my, 0);
         renderAttributeLine(g, "Wisdom", ModAttributes.WISDOM.get(), START_Y + (SPACING * 5), Items.ENCHANTED_BOOK, mx, my, 0);
 
-        // --- UTILITY ---
         renderUtilityLine(g, "Step Height", ForgeMod.STEP_HEIGHT_ADDITION.get(), START_Y, UtilityAccessories.CLOUDTREADER_BOOTS.get(), half);
         renderUtilityLine(g, "Block Reach", ForgeMod.BLOCK_REACH.get(), START_Y + SPACING, UtilityAccessories.ENDERMAN_FINGERS.get(), half);
         renderUtilityLine(g, "Mining Speed", ModAttributes.MINING_SPEED.get(), START_Y + (SPACING * 2), MobEffects.DIG_SPEED, half);
@@ -131,13 +129,11 @@ public class StatScreen extends AbstractContainerScreen<StatMenu> {
         int valX = (int)((xOff + 35) / 0.7f);
         g.drawString(this.font, String.valueOf(val), valX, textY, INK_BLUE, false);
 
-        // --- CENTERED NAME ---
         int nameWidth = this.font.width(name);
         int centerAnchorScaled = (int)((xOff + 72) / 0.7f);
         int nameX = centerAnchorScaled - (nameWidth / 2);
         g.drawString(this.font, name, nameX, textY, INK_BLACK, false);
 
-        // --- BUTTON-ANCHORED POINTS ---
         int ptsWidth = this.font.width(pointsStr);
         int ptsX = (int)((xOff + 120) / 0.7f) - ptsWidth;
 
@@ -171,7 +167,7 @@ public class StatScreen extends AbstractContainerScreen<StatMenu> {
         g.pose().pushPose();
         g.pose().scale(0.7f, 0.7f, 0.7f);
 
-        int textX = (int)((xOff + 32) / 0.7f); // Start name near icon
+        int textX = (int)((xOff + 32) / 0.7f);
         int textY = (int)((y + 3) / 0.7f);
         g.drawString(this.font, name, textX, textY, INK_BLACK, false);
 
@@ -189,13 +185,24 @@ public class StatScreen extends AbstractContainerScreen<StatMenu> {
 
     private void addStatRow(Attribute attr, int y, int xOffset, boolean isAttribute) {
         String id = ForgeRegistries.ATTRIBUTES.getKey(attr).toString();
-        this.addRenderableWidget(Button.builder(Component.literal("-"), b ->
-                        ModMessages.sendToServer(isAttribute ? new StatUpgradePacket(id, false) : new StatUpgradePacketThree(id, false)))
-                .pos(leftPos + xOffset, topPos + y + 2).size(10, 8).build());
 
-        this.addRenderableWidget(Button.builder(Component.literal("+"), b ->
-                        ModMessages.sendToServer(isAttribute ? new StatUpgradePacket(id, true) : new StatUpgradePacketThree(id, true)))
-                .pos(leftPos + xOffset + 115, topPos + y + 2).size(10, 8).build());
+        this.addRenderableWidget(Button.builder(Component.literal("-"), b -> {
+            int amount = hasShiftDown() ? 10:1;
+
+            for (int i = 0; i < amount; i++) {
+                ModMessages.sendToServer(isAttribute ? new StatUpgradePacket(id, false) : new StatUpgradePacketThree(id, false));
+            }
+        }).pos(leftPos + xOffset, topPos + y + 2).size(10, 8).build());
+
+
+
+        this.addRenderableWidget(Button.builder(Component.literal("+"), b -> {
+            int amount = hasShiftDown() ? 10:1;
+            for (int i = 0; i < amount; i++) {
+                ModMessages.sendToServer(isAttribute ? new StatUpgradePacket(id, true) : new StatUpgradePacketThree(id, true));
+            }
+    }).pos(leftPos + xOffset + 115, topPos + y + 2).size(10, 8).build());
+
     }
 
     private void renderHeader(GuiGraphics g, String text, int x, int y, int color) {
@@ -207,35 +214,56 @@ public class StatScreen extends AbstractContainerScreen<StatMenu> {
 
     private void renderBottomInfo(GuiGraphics g, int mx, int my) {
         int half = imageWidth / 2;
-        int spent1 = StatUpgradeHandler.getTotalPointsSpent(this.minecraft.player);
-        renderCostLogic(g, spent1, BASE_POINTS, StatUpgradeHandler.getRequiredShard(spent1), 6, mx, my);
-
-        int spent2 = StatUpgradeHandlerThree.getTotalPointsSpent(this.minecraft.player);
-        renderCostLogic(g, spent2, StatUpgradeHandlerThree.MAX_GLOBAL_POINTS, StatUpgradeHandlerThree.getRequiredScrap(spent2), half + 6, mx, my);
+        renderCostLogic(g, true, BASE_POINTS, StatUpgradeHandler.getRequiredShard(0), 6, mx, my);
+        renderCostLogic(g, false, StatUpgradeHandlerThree.MAX_GLOBAL_POINTS, StatUpgradeHandlerThree.getRequiredScrap(0), half + 6, mx, my);
     }
 
-    private void renderCostLogic(GuiGraphics g, int spent, int max, Item item, int x, int mx, int my) {
+    private void renderCostLogic(GuiGraphics g, boolean isScreenOne, int max, Item fallbackItem, int x, int mx, int my) {
         int costY = imageHeight - 16;
         int pointsY = costY - 11;
-        int amount = StatUpgradeHandler.getRequiredAmount(spent);
-        if (max == StatUpgradeHandlerThree.MAX_GLOBAL_POINTS && amount == 3) amount = 4;
 
-        boolean hasEnough = this.minecraft.player.getInventory().countItem(item) >= amount;
+        int currentSpent = isScreenOne ? StatUpgradeHandler.getTotalPointsSpent(this.minecraft.player) : StatUpgradeHandlerThree.getTotalPointsSpent(this.minecraft.player);
+
+        // Check if we are at max points
+        if (currentSpent >= max) {
+            g.pose().pushPose();
+            g.pose().translate(x, pointsY, 0);
+            g.pose().scale(0.8f, 0.8f, 0.8f);
+            g.drawString(this.font, "Points: " + currentSpent + "/" + max, 0, 0, INK_GOLD, false);
+            g.pose().popPose();
+            return;
+        }
+
+        Item currentItem = isScreenOne ? StatUpgradeHandler.getRequiredShard(currentSpent) : StatUpgradeHandlerThree.getRequiredScrap(currentSpent);
+        int amountNeeded = isScreenOne ? StatUpgradeHandler.getRequiredAmount(currentSpent) : StatUpgradeHandlerThree.getRequiredAmount(currentSpent);
+
+        // --- REPLICATED FEATSCREEN COLOR CHECK ---
+        // Directly polling the inventory count during the render frame
+        int currentInventoryCount = this.minecraft.player.getInventory().countItem(currentItem);
+        boolean hasEnough = currentInventoryCount >= amountNeeded;
+        int costTextColor = hasEnough ? INK_GREEN : INK_RED;
+
         g.pose().pushPose();
         g.pose().translate(x, pointsY, 0);
         g.pose().scale(0.8f, 0.8f, 0.8f);
-        g.drawString(this.font, "Points: " + spent + "/" + max, 0, 0, spent < max ? INK_GREEN : INK_GOLD, false);
+
+        // Points display
+        g.drawString(this.font, "Points: " + currentSpent + "/" + max, 0, 0, INK_GREEN, false);
+
+        // Cost text display using the calculated color
         g.pose().translate(0, 11, 0);
-        g.drawString(this.font, "Cost: x" + amount, 0, 0, hasEnough ? INK_GREEN : INK_RED, false);
+        g.drawString(this.font, "Cost: x" + amountNeeded, 0, 0, costTextColor, false);
         g.pose().popPose();
 
-        int itemX = x + 32 + (amount > 9 ? 5 : 0);
-        g.renderFakeItem(new ItemStack(item), itemX + 1, costY - 5);
+        // Render the item icon
+        int itemX = x + 32 + (amountNeeded > 9 ? 5 : 0);
+        g.renderFakeItem(new ItemStack(currentItem), itemX + 1, costY - 5);
 
+        // Tooltip logic
         int relMx = mx - leftPos;
         int relMy = my - topPos;
         if (relMx >= itemX && relMx <= itemX + 16 && relMy >= costY - 5 && relMy <= costY + 11) {
-            g.renderTooltip(this.font, new ItemStack(item), relMx, relMy);
+            g.renderTooltip(this.font, new ItemStack(currentItem), relMx, relMy);
         }
     }
 
@@ -254,36 +282,36 @@ public class StatScreen extends AbstractContainerScreen<StatMenu> {
 
         switch(name) {
             case "Strength" -> {
-                addScalingLine(lines, "Attack Damage", "+0.012", 0xE0701B);
-                addScalingLine(lines, "Potency", "+0.1", 0xE0701B);
-                addScalingLine(lines, "Melee Potency", "+0.25", 0xE0701B);
-                addScalingLine(lines, "Armor", "+0.12", 0x5555FF);
+                addScalingLine(lines, "Attack Damage", "+0.006", 0xE0701B);
+                addScalingLine(lines, "Potency", "+0.06", 0xE0701B);
+                addScalingLine(lines, "Melee Potency", "+0.12", 0xE0701B);
+                addScalingLine(lines, "Armor", "+0.075", 0x5555FF);
             }
             case "Dexterity" -> {
-                addScalingLine(lines, "Projectile Potency", "+0.125", 0xE0701B);
-                addScalingLine(lines, "Accuracy", "+0.25", 0xE0701B);
-                addScalingLine(lines, "Haste", "+0.15", 0xE0701B);
-                addScalingLine(lines, "Nock Haste", "+0.1", 0xE0701B);
-                addScalingLine(lines, "Movement Speed", "+0.3%", 0xD6C97A);
+                addScalingLine(lines, "Projectile Potency", "+0.075", 0xE0701B);
+                addScalingLine(lines, "Accuracy", "+0.11", 0xE0701B);
+                addScalingLine(lines, "Haste", "+0.05", 0xE0701B);
+                addScalingLine(lines, "Nock Haste", "+0.05", 0xE0701B);
+                addScalingLine(lines, "Movement Speed", "+0.125%", 0xD6C97A);
             }
             case "Fortitude" -> {
-                addScalingLine(lines, "Armor", "+0.18", 0x5555FF);
-                addScalingLine(lines, "Toughness", "+0.12", 0x5555FF);
-                addScalingLine(lines, "Knockback Resist", "+0.2%", 0x5555FF);
+                addScalingLine(lines, "Armor", "+0.1", 0x5555FF);
+                addScalingLine(lines, "Toughness", "+0.05", 0x5555FF);
+                addScalingLine(lines, "Knockback Resist", "+0.15%", 0x5555FF);
             }
             case "Constitution" -> {
-                addScalingLine(lines, "Potency", "+0.175", 0xE0701B);
-                addScalingLine(lines, "Health", "+0.06", 0x5555FF);
+                addScalingLine(lines, "Potency", "+0.04", 0xE0701B);
+                addScalingLine(lines, "Health", "+0.035", 0x5555FF);
                 addScalingLine(lines, "Debuff Resist", "+0.05%", 0x5555FF);
-                addScalingLine(lines, "Rejuvenation", "+0.125", 0x5BB450);
+                addScalingLine(lines, "Rejuvenation", "+0.2", 0x5BB450);
             }
             case "Perception" -> {
-                addScalingLine(lines, "Precision", "+0.35", 0xE0701B);
-                addScalingLine(lines, "Armor", "+0.04", 0x5555FF);
+                addScalingLine(lines, "Precision", "+0.32", 0xE0701B);
+                addScalingLine(lines, "Armor", "+0.05", 0x5555FF);
             }
             case "Wisdom" -> {
-                addScalingLine(lines, "Debuff Resist", "+0.125", 0x5555FF);
-                addScalingLine(lines, "Restoration", "+0.18", 0x5BB450);
+                addScalingLine(lines, "Debuff Resist", "+0.1%", 0x5555FF);
+                addScalingLine(lines, "Restoration", "+0.25", 0x5BB450);
                 addScalingLine(lines, "Amplification", "+0.25", 0x5BB450);
             }
         }
@@ -291,49 +319,48 @@ public class StatScreen extends AbstractContainerScreen<StatMenu> {
         lines.add(Component.literal("Milestones:").withStyle(ChatFormatting.GOLD));
 
         if (name.equals("Strength")) {
-            lines.add(getMilestoneComp(30, "+8 Potency", currentVal));
-            lines.add(getMilestoneComp(40, "+3 Armor", currentVal));
-            lines.add(getMilestoneComp(50, "+12 Haste", currentVal));
-            lines.add(getMilestoneComp(60, "+5 Melee Accuracy", currentVal));
-            lines.add(getMilestoneComp(60, "+7 Precision", currentVal));
-            lines.add(getMilestoneComp(70, "+18% Potency & +5 Armor", currentVal));
-            lines.add(getMilestoneComp(80, "+0.5 Attack Damage & +5 Armor", currentVal));
+            lines.add(getMilestoneComp(30, "+2 Potency", currentVal));
+            lines.add(getMilestoneComp(40, "+1 Armor", currentVal));
+            lines.add(getMilestoneComp(50, "+3.5 Melee Haste", currentVal));
+            lines.add(getMilestoneComp(60, "+6 Precision & Melee Accuracy", currentVal));
+            lines.add(getMilestoneComp(70, "+8% Potency & +1.25 Armor", currentVal));
+            lines.add(getMilestoneComp(80, "+1 Attack Damage", currentVal));
         } else if (name.equals("Fortitude")) {
-            lines.add(getMilestoneComp(30, "+3.5 Armor", currentVal));
-            lines.add(getMilestoneComp(40, "+1.75 Health", currentVal));
-            lines.add(getMilestoneComp(50, "+10% Armor", currentVal));
-            lines.add(getMilestoneComp(60, "+6 Toughness", currentVal));
-            lines.add(getMilestoneComp(70, "+2 Health & +10% KB Res", currentVal));
-            lines.add(getMilestoneComp(80, "+5 Armor & Toughness", currentVal));
+            lines.add(getMilestoneComp(30, "+1.25 Armor", currentVal));
+            lines.add(getMilestoneComp(40, "+0.6 Health", currentVal));
+            lines.add(getMilestoneComp(50, "+6% Armor", currentVal));
+            lines.add(getMilestoneComp(60, "+2.5 Toughness", currentVal));
+            lines.add(getMilestoneComp(70, "+0.8 Health & +10% KB Res", currentVal));
+            lines.add(getMilestoneComp(80, "+1.5 Armor & Toughness", currentVal));
         } else if (name.equals("Dexterity")) {
-            lines.add(getMilestoneComp(30, "+8 Accuracy", currentVal));
-            lines.add(getMilestoneComp(40, "+9 Precision", currentVal));
-            lines.add(getMilestoneComp(50, "+8% Movement Speed & +8 Precision", currentVal));
-            lines.add(getMilestoneComp(60, "+10 Nock Haste & +4 Accuracy", currentVal));
-            lines.add(getMilestoneComp(70, "+8% Melee Haste & +15% Projectile Potency", currentVal));
-            lines.add(getMilestoneComp(80, "+7.5 Potency & Nock Haste", currentVal));
+            lines.add(getMilestoneComp(30, "+3.25 Accuracy", currentVal));
+            lines.add(getMilestoneComp(40, "+3.25 Precision", currentVal));
+            lines.add(getMilestoneComp(50, "+12% Movement Speed & +3.125 Precision", currentVal));
+            lines.add(getMilestoneComp(60, "+3.25 Nock Haste & Accuracy", currentVal));
+            lines.add(getMilestoneComp(70, "+4% Melee Haste & +7.5% Projectile Potency", currentVal));
+            lines.add(getMilestoneComp(80, "+4 Potency & Nock Haste", currentVal));
         } else if (name.equals("Constitution")) {
-            lines.add(getMilestoneComp(30, "+1.8 Max Health", currentVal));
-            lines.add(getMilestoneComp(40, "+6.25 Potency", currentVal));
-            lines.add(getMilestoneComp(50, "+2.5 Toughness & +1.25 Health", currentVal));
-            lines.add(getMilestoneComp(50, "+12 Rejuvenation", currentVal));
-            lines.add(getMilestoneComp(60, "+15 Rejuvenation & +2 Health", currentVal));
-            lines.add(getMilestoneComp(70, "+13.5% Armor", currentVal));
-            lines.add(getMilestoneComp(80, "+14 Potency", currentVal));
+            lines.add(getMilestoneComp(30, "+0.6 Max Health", currentVal));
+            lines.add(getMilestoneComp(40, "+2 Potency", currentVal));
+            lines.add(getMilestoneComp(50, "+1 Toughness & +0.25 Health", currentVal));
+            lines.add(getMilestoneComp(50, "+5 Rejuvenation", currentVal));
+            lines.add(getMilestoneComp(60, "+4 Rejuvenation & +0.6 Health", currentVal));
+            lines.add(getMilestoneComp(70, "+8% Armor", currentVal));
+            lines.add(getMilestoneComp(80, "+4.5 Potency", currentVal));
         } else if (name.equals("Perception")) {
-            lines.add(getMilestoneComp(30, "+3 Armor", currentVal));
-            lines.add(getMilestoneComp(40, "+12% Potency", currentVal));
-            lines.add(getMilestoneComp(50, "+15 Precision", currentVal));
-            lines.add(getMilestoneComp(60, "+1 Entity Reach & +10% Precision", currentVal));
-            lines.add(getMilestoneComp(70, "+12% Armor", currentVal));
-            lines.add(getMilestoneComp(80, "+16% Precision", currentVal));
+            lines.add(getMilestoneComp(30, "+1 Armor", currentVal));
+            lines.add(getMilestoneComp(40, "+7.5% Potency", currentVal));
+            lines.add(getMilestoneComp(50, "+5 Precision", currentVal));
+            lines.add(getMilestoneComp(60, "+1 Entity Reach & +8% Precision", currentVal));
+            lines.add(getMilestoneComp(70, "+7% Armor", currentVal));
+            lines.add(getMilestoneComp(80, "+10% Precision", currentVal));
         } else if (name.equals("Wisdom")) {
-            lines.add(getMilestoneComp(10, "+8 Restoration", currentVal));
-            lines.add(getMilestoneComp(20, "+10 Amplification", currentVal));
+            lines.add(getMilestoneComp(10, "+3 Restoration", currentVal));
+            lines.add(getMilestoneComp(20, "+4.5 Amplification", currentVal));
             lines.add(getMilestoneComp(30, "+10 Debuff Resist", currentVal));
-            lines.add(getMilestoneComp(40, "+15% Restoration", currentVal));
-            lines.add(getMilestoneComp(50, "+5 Armor & +10 Amplification", currentVal));
-            lines.add(getMilestoneComp(60, "+5 Restoration & +16% Amplification", currentVal));
+            lines.add(getMilestoneComp(40, "+12% Restoration", currentVal));
+            lines.add(getMilestoneComp(50, "+3 Armor & +5 Amplification", currentVal));
+            lines.add(getMilestoneComp(60, "+4 Restoration & +12% Amplification", currentVal));
         }
 
         graphics.renderComponentTooltip(this.font, lines, x, y);

@@ -4,10 +4,12 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import static net.cold.coldsmod.stat.AttributeApplier.recalculateDynamicBonuses;
+import java.util.Collections;
+import java.util.List;
+
 
 public class EntwinedOfferingActive extends MobEffect {
     public EntwinedOfferingActive() {
@@ -17,16 +19,21 @@ public class EntwinedOfferingActive extends MobEffect {
     @Override
     public void addAttributeModifiers(@NotNull LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
         super.addAttributeModifiers(pLivingEntity, pAttributeMap, pAmplifier);
-        if (pLivingEntity instanceof Player player) {
-            recalculateDynamicBonuses(player);
-        }
+//        if (pLivingEntity instanceof Player player) {
+//            recalcArmor(player);
+//        }
     }
 
     @Override
     public void removeAttributeModifiers(@NotNull LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
         super.removeAttributeModifiers(pLivingEntity, pAttributeMap, pAmplifier);
-        if (pLivingEntity instanceof Player player) {
-            recalculateDynamicBonuses(player);
-        }
+//        if (pLivingEntity instanceof Player player) {
+//            recalcArmor(player);
+//        }
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

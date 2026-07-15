@@ -27,8 +27,8 @@ public class BlessingUnlockSyncPacket {
             if (mc.player != null) {
                 mc.player.getPersistentData().merge(this.data);
 
-                if (mc.screen instanceof BlessingScreen screen) {
-                    screen.init(mc, screen.width, screen.height);
+                if (mc.screen instanceof BlessingScreen blessingScreen) {
+                    blessingScreen.refreshFromPacket();
                 }
             }
         });

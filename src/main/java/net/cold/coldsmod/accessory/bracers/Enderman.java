@@ -60,12 +60,11 @@ public class Enderman {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+1 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("-25% Swim Speed").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+1 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+8% Potency").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("-32% Swim Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal("+0.5 Block Reach").withStyle(style -> style.withColor(0xD6C97A)));
-            tooltip.add(Component.literal("+0.125 Entity Reach").withStyle(style -> style.withColor(0xD6C97A)));
-            tooltip.add(Component.literal("+3% Mining Speed").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+0.25 Entity Reach").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
         }
@@ -83,12 +82,12 @@ public class Enderman {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+4 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("-25% Swim Speed").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+2 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+11.25% Potency").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+7% Accuracy").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("-32% Swim Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal("+1 Block Reach").withStyle(style -> style.withColor(0xD6C97A)));
-            tooltip.add(Component.literal("+0.25 Entity Reach").withStyle(style -> style.withColor(0xD6C97A)));
-            tooltip.add(Component.literal("+6% Mining Speed").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+0.5 Entity Reach").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
         }
@@ -106,12 +105,13 @@ public class Enderman {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+8 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+6 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("-25% Swim Speed").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+3 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+13.5% Potency").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+10% Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+9% Accuracy").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("-32% Swim Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal("+1.5 Block Reach").withStyle(style -> style.withColor(0xD6C97A)));
-            tooltip.add(Component.literal("+0.375 Entity Reach").withStyle(style -> style.withColor(0xD6C97A)));
-            tooltip.add(Component.literal("+9% Mining Speed").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+0.75 Entity Reach").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
         }
@@ -129,12 +129,14 @@ public class Enderman {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("When Equipped:").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.literal("+10 Fortitude").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("+8 Insight").withStyle(ChatFormatting.DARK_AQUA));
-            tooltip.add(Component.literal("-25% Swim Speed").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+4 Insight").withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.literal("+2.85 Toughness").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.literal("+15.5% Potency").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+11% Haste").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("+11% Accuracy").withStyle(style -> style.withColor(0xEC3700)));
+            tooltip.add(Component.literal("-32% Swim Speed").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal("+2 Block Reach").withStyle(style -> style.withColor(0xD6C97A)));
-            tooltip.add(Component.literal("+0.5 Entity Reach").withStyle(style -> style.withColor(0xD6C97A)));
-            tooltip.add(Component.literal("+12% Mining Speed").withStyle(style -> style.withColor(0xD6C97A)));
+            tooltip.add(Component.literal("+1 Entity Reach").withStyle(style -> style.withColor(0xD6C97A)));
             tooltip.add(Component.literal(""));
             tooltip.add(Component.literal("End of Time").withStyle(ChatFormatting.LIGHT_PURPLE));
         }

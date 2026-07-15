@@ -6,8 +6,11 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 import static net.cold.coldsmod.stat.AttributeApplier.removeModifier;
@@ -27,5 +30,10 @@ public class QuantumLeapActive extends MobEffect {
         removeModifier(pLivingEntity, ModAttributes.MELEE_POTENCY.get(), QUANTUM_UUID);
         removeModifier(pLivingEntity, ModAttributes.PROJECTILE_POTENCY.get(), QUANTUM_UUID);
         removeModifier(pLivingEntity, Attributes.MOVEMENT_SPEED, QUANTUM_UUID);
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }

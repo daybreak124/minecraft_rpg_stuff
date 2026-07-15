@@ -6,7 +6,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -22,8 +21,8 @@ import java.util.UUID;
 import static net.cold.coldsmod.stat.AttributeApplier.*;
 
 public class StatUpgradeHandler {
-    public static final int BASE_POINTS = 120;
-    public static final int ATTRIBUTE_MAX_LEVEL = 50;
+    public static final int BASE_POINTS = 90;
+    public static final int ATTRIBUTE_MAX_LEVEL = 45;
     private static final ResourceLocation VANILLA_TABS = new ResourceLocation("minecraft", "textures/gui/container/creative_inventory/tabs.png");
     public static final UUID ATTRIBUTE_UPGRADE = UUID.fromString("4a221b-221d-5374-a711-998760de");
 
@@ -56,31 +55,33 @@ public class StatUpgradeHandler {
 
         int totalPoints = getTotalPointsSpent(player);
         if (totalPoints >= BASE_POINTS) {
-            player.sendSystemMessage(Component.literal("§cLimit reached."));
             return;
         }
 
         Item shard = getRequiredShard(totalPoints);
-        int amountNeeded = getRequiredAmount(currentLevel);
+        int amountNeeded = getRequiredAmount(totalPoints);
         if (!hasAndRemoveItem(player, shard, amountNeeded)) {
-            player.sendSystemMessage(Component.literal("§cMissing items."));
             return;
         }
 
         int newLevel = currentLevel + 1;
         setPointsSpent(player, attribute, newLevel);
 
-        // APPLY AS MODIFIER (Not Base Value)
         applyModifier(player, attribute, newLevel, ATTRIBUTE_UPGRADE);
+
+
 
         String attrId = ForgeRegistries.ATTRIBUTES.getKey(attribute).toString();
         ModMessages.sendToPlayer(new StatsSyncPacket(attrId, newLevel, true, false), player);
 
+        player.containerMenu.broadcastChanges();
+        player.inventoryMenu.slotsChanged(player.getInventory());
 
         refreshPerPointStats(player);
         refreshMilestones(player);
         recalculateDynamicBonuses(player);
         // applyCrossbowTag(player);
+        recalcAS(player);
     }
 
     public static void tryDowngrade(ServerPlayer player, Attribute attribute) {
@@ -103,12 +104,17 @@ public class StatUpgradeHandler {
         applyModifier(player, attribute, newLevel, ATTRIBUTE_UPGRADE);
 
         String attrId = ForgeRegistries.ATTRIBUTES.getKey(attribute).toString();
+
         ModMessages.sendToPlayer(new StatsSyncPacket(attrId, newLevel, true, false), player);
+
+        player.containerMenu.broadcastChanges();
+        player.inventoryMenu.slotsChanged(player.getInventory());
 
         refreshPerPointStats(player);
         refreshMilestones(player);
         recalculateDynamicBonuses(player);
         // applyCrossbowTag(player);
+        recalcAS(player);
     }
 
     public static Item getRequiredShard(int level) {
@@ -116,10 +122,11 @@ public class StatUpgradeHandler {
     }
 
     public static int getRequiredAmount(int level) {
-        if (level < 10) return 1;
-        if (level < 30) return 2;
-        if (level < 55) return 3;
-        if (level < 85) return 5;
+        if (level < 20) return 1;
+        if (level < 40) return 2;
+        if (level < 60) return 3;
+        if (level <= 80) return 4;
+        if (level <= 120) return 5;
         return 8;
     }
 

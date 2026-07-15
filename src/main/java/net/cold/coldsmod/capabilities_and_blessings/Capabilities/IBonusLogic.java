@@ -8,5 +8,5 @@ import javax.annotation.Nullable;
 
 @FunctionalInterface
 public interface IBonusLogic {
-    void execute(Player player, @Nullable LivingEntity victim, Level level, float[] data);
+    void execute(Player player, @Nullable LivingEntity victim, Level level, float[] data, PlayerBonusCache cache);
 }

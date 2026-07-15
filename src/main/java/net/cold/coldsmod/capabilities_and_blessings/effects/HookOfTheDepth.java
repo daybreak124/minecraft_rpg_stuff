@@ -5,7 +5,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.Collections;
+import java.util.List;
 
 public class HookOfTheDepth extends MobEffect {
     public HookOfTheDepth() {
@@ -69,5 +73,10 @@ public class HookOfTheDepth extends MobEffect {
 
         entity.hurtMarked = true;
         entity.fallDistance = 0;
+    }
+
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        return Collections.emptyList();
     }
 }
